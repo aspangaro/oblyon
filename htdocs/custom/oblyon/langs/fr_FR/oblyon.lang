@@ -1,0 +1,76 @@
+# < Oblyon Control Panel - French translation >
+# Copyright (C) 2015	  Nicolas Rivera	 <nrivera.pro@gmail.com>
+# Copyright (C) 2015-2016 Alexandre Spangaro <aspangaro@zendsi.com>
+#
+Module113900Name = Oblyon
+Module113900Desc = Panneau d'options qui vous permet de personnaliser le thème Oblyon
+
+Theme1 = Oblyon Green 
+Theme2 = Oblyon Blue
+
+#
+# Menus
+#
+OblyonMenusTitle = Configurateur Oblyon - Editeur de menus
+OblyonSuccessMessage = Thème Oblyon détecté, vous pouvez à présent le personnaliser.
+OblyonErrorMessage = Vous devez utiliser le thème Oblyon pour accéder à sa personnalisation.
+OblyonMenusErrorMessage = Vous devez utiliser le menu Oblyon pour accéder à sa personnalisation. Vérifier votre gestionnaire de menu.
+LeftMenu = Menu Gauche
+TopMenu = Menu Haut
+InvertMenus = Intervertir les menus
+FullsizeTopBar = Largeur maximale
+FullsizeTopBarWarning = Utilisez un nombre d'entrées menu limité. 
+ShowCompanyName = Afficher le nom de l'entreprise
+StickyTopBar = Barre adhésive 
+StickyTopBarWarning = Expérimental. Utilisez un nombre d'entrées menu limité.
+StickyTopBarInvertedWarning = Certains modules ne sont pas pris en charge avec cette fonctionnalité.
+HideLeftMenu = Masquer le menu gauche
+OpenEffect = Effet d'ouverture menu
+EffectLeftMenuSlide = Slide
+EffectLeftMenuPush = Push
+HideTopIcons = Masquer les icônes
+HideLeftIcons = Masquer les icônes
+# <3.7
+EldyOldIcons = Utiliser vieux icônes Eldy
+EldyOldIconsWarning = Expérimental
+# >3.7 
+EldyIcons = Utiliser icônes Eldy
+EldyIconsWarning = Expérimental
+LogoSize = Taille du logo (Petit/Grand)
+LogoPadding = Marges du logo
+NoPaddingLogo = Non
+PaddingLogo = Oui
+ShowLeftMenu = Afficher/Cacher Menu Gauche
+
+#
+# Colors page
+#
+OblyonColorsTitle = Configurateur Oblyon - Couleurs
+Colors=Couleurs
+OBLYON_COLOR_MAIN=Couleur principale
+OBLYON_COLOR_LOGO_BCKGRD=Couleur de fond du logo
+OBLYON_COLOR_LOGIN_BCKGRD=Couleur de fond de la page logo
+OBLYON_COLOR_BCKGRD=Couleur de fond
+OBLYON_COLOR_TOPMENU_BCKGRD=Couleur de fond du menu haut
+OBLYON_COLOR_TOPMENU_BCKGRD_HOVER=Couleur de fond du menu haut au dessus
+OBLYON_COLOR_TOPMENU_TXT=Couleur de texte du menu haut
+OBLYON_COLOR_LEFTMENU_BCKGRD=Couleur de fond du menu gauche
+OBLYON_COLOR_LEFTMENU_BCKGRD_HOVER=Couleur de fond du menu gauche au dessus
+OBLYON_COLOR_LEFTMENU_TXT=Couleur de texte du menu gauche
+OBLYON_COLOR_BLINE=Couleur de fond des lignes
+RestoreDefaultColors=Retablir couleurs par défaut
+DefaultsColorsMsg=Couleurs par défaut rétabli
+OblyonGreen=Oblyon vert
+OblyonBlue=Oblyon bleu
+ThemeOblyonGreenApplied=Thème vert Oblyon appliqué
+ThemeOblyonBlueApplied=Thème bleu Oblyon appliqué
+
+#
+# About page
+#
+ThemeOblyonAboutTitle = Configurateur Oblyon - A propos
+OblyonAbout = A propos
+Authors=Auteurs
+OldAuthors=Ancien auteurs
+AboutMessage = Un bug, un problème d'affichage ou une idée d'amélioration ? Envoyez un email à <a href="mailto:aspangaro@zendsi.com">aspangaro@zendsi.com</a>.
+LicenseMessage = Thème Oblyon mis à disposition selon les termes de la <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">licence Creative Commons Attribution - Pas d’Utilisation Commerciale 4.0 International</a>.<br><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Licence Creative Commons" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a>

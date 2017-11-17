@@ -1,0 +1,71 @@
+# < Oblyon Control Panel - English translation >
+# Copyright (C) 2015	Nicolas Rivera	<nrivera.pro@gmail.com>
+# Copyright (C) 2015    Alexandre Spangaro <aspangaro@zendsi.com>
+#
+Module113900Name = Oblyon
+Module113900Desc = Options panel allows you to personalize the Oblyon theme 
+
+#
+# Menus
+#
+OblyonMenusTitle = Oblyon Configurator - Menus Editor
+OblyonSuccessMessage = Oblyon theme detected, you can now personalize it.
+OblyonErrorMessage = You must use the Oblyon theme in order to personalize it.
+OblyonMenusErrorMessage = You must use the Oblyon menus in order to personalize it. Please check your current menu manager.
+LeftMenu = Left Menu
+TopMenu = Top Menu
+InvertMenus = Invert Menus
+FullsizeTopBar = Fullsize Top Bar
+FullsizeTopBarWarning = Use a limited number of menu entries.
+ShowCompanyName = Show Company Name
+StickyTopBar = Sticky Top Bar 
+StickyTopBarWarning = Experimental. Use a limited number of menu entries.
+StickyTopBarInvertedWarning = Certain modules are not supported with this feature. 
+HideLeftMenu = Hide Left Menu
+OpenEffect = Opening Effect
+EffectLeftMenuSlide = Slide
+EffectLeftMenuPush = Push
+HideTopIcons = Hide Top Icons
+HideLeftIcons = Hide Left Icons
+# <3.7
+EldyOldIcons = Eldy Old Icons
+EldyOldIconsWarning = Experimental 
+# >3.7 
+EldyIcons = Eldy Icons
+EldyIconsWarning = Experimental
+LogoSize = Logo Size (Small/Big)
+LogoPadding = Logo Paddings
+NoPaddingLogo = No
+PaddingLogo = Yes
+ShowLeftMenu = Show/Hide Left Menu
+
+#
+# Colors page
+#
+OblyonColorsTitle = Oblyon Configurator - Colors
+Colors=Colors
+OBLYON_COLOR_MAIN=Maincolor
+OBLYON_COLOR_BCKGRD=Background color
+OBLYON_COLOR_LOGO_BCKGRD=Logo background color
+OBLYON_COLOR_TOPMENU_BCKGRD=Topmenu background color
+OBLYON_COLOR_TOPMENU_BCKGRD_HOVER=Topmenu background hover color
+OBLYON_COLOR_TOPMENU_TXT=Topmenu color text
+OBLYON_COLOR_LEFTMENU_BCKGRD=Leftmenu background color
+OBLYON_COLOR_LEFTMENU_BCKGRD_HOVER=Leftmenu background hover color
+OBLYON_COLOR_LEFTMENU_TXT=leftmenu color text
+OBLYON_COLOR_BLINE=Lines background hover color
+RestoreDefaultColors=Restore default colors
+DefaultsColorsMsg=Default colors restored
+OblyonGreen=Oblyon Green
+ThemeOblyonGreenApplied=Oblyon green template applied
+OblyonBlue=Oblyon Blue
+ThemeOblyonBlueApplied=Oblyon blue template applied
+
+#
+# About page
+#
+ThemeOblyonAboutTitle = Oblyon Configurator - About
+OblyonAbout = About
+Authors=Authors
+AboutMessage = A bug, a display issue or an improvement idea? Send an email to: <a href="mailto:aspangaro@zendsi.com">aspangaro@zendsi.com</a>.
+LicenseMessage = Theme Oblyon is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.<br><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a>
