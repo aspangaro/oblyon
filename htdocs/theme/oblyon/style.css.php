@@ -4498,6 +4498,7 @@ div.liste_titre {
 	font-weight: normal;
 	/* border-bottom: 1px solid #FDFFFF;*/
 	white-space: normal;
+	padding-left: 5px;
 }
 
 table td.liste_titre a:link, 
