@@ -4128,7 +4128,7 @@ div.tabs {
 	clear: both;
 	font-weight: normal;
 	height: 100%;
-	margin: 15px 0 4px 6px;
+	margin: 15px 0 -4px 6px;
 	padding: 0 6px 3px 0;
 	text-align: <?php print $left; ?>;
 }
@@ -4162,8 +4162,6 @@ a.tabTitle {
 	white-space: nowrap;
 }
 
-a.tabTitle img { vertical-align: bottom; }
-
 a.tab:link, 
 a.tab:visited, 
 a.tab:hover,
@@ -4171,6 +4169,8 @@ a.tab#active {
 	background-color: #e5e5e5;
 	margin: 0 .3em;
 	padding: 5px 12px 5px;
+	border: 1px solid #e5e5e5;
+	border-bottom: none;
 	text-decoration: none;
 	white-space: nowrap;
 	<?php if ($usecss3) { ?>
@@ -4185,9 +4185,6 @@ a.tab#active {
 a.tab#active, 
 a.tab.tabactive {
 	background-color: #fcfcfc;
-	bottom: -1px;
-	border: 1px solid #e5e5e5;
-	border-bottom: none;
 	box-shadow: 0 -1px 0 rgba(0,0,0, .04);
 	-webkit-box-shadow: 0 -1px 0 rgba(0,0,0, .04);
 	font-weight: 500;
