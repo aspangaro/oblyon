@@ -4667,7 +4667,7 @@ div.tabBar .noborder {
 }
 .boxstats130 {
 	width: 135px;
-	height: 48px;
+	min-height: 48px;
 	padding: 3px
 }
 @media only screen and (max-width: 767px)
