@@ -4467,6 +4467,14 @@ form.liste_titre_sel {
 	white-space: normal;
 }
 
+div.liste_titre a, 
+tr.liste_titre a, 
+tr.liste_titre_sel a, 
+form.liste_titre a, 
+form.liste_titre_sel a {
+	color: #f8f8f8;
+}
+
 div.liste_titre_bydiv {
 	border-top-width: <?php echo $borderwith ?>px;
 	border-top-color: rgb(<?php echo $colortopbordertitle1 ?>);
@@ -4590,7 +4598,6 @@ tr.liste_titre_sel td,
 td.liste_titre_sel, 
 form.liste_titre_sel div {
 	background-color: #333;
-	border: 1px solid #333;
 	color: #f7f7f7;
 	font-weight: normal;
 	text-decoration: none;
