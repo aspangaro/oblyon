@@ -165,7 +165,7 @@ function __construct($db) {
 	$r ++;
 	$this->const [$r] [0] = "OBLYON_COLOR_TOPMENU_BCKGRD_HOVER";
 	$this->const [$r] [1] = "chaine";
-	$this->const [$r] [2] = "#0083a2";
+	$this->const [$r] [2] = "#444444";
 	$this->const [$r] [3] = 'Oblyon background topmenu hover color';
 	$this->const [$r] [4] = 1;
 	$this->const [$r] [5] = 'allentities';
@@ -174,7 +174,7 @@ function __construct($db) {
 	$r ++;
 	$this->const [$r] [0] = "OBLYON_COLOR_TOPMENU_TXT";
 	$this->const [$r] [1] = "chaine";
-	$this->const [$r] [2] = "#f4f4f4";
+	$this->const [$r] [2] = "#F4F4F4";
 	$this->const [$r] [3] = 'Oblyon topmenu text color';
 	$this->const [$r] [4] = 1;
 	$this->const [$r] [5] = 'allentities';
@@ -201,7 +201,7 @@ function __construct($db) {
 	$r ++;
 	$this->const [$r] [0] = "OBLYON_COLOR_LEFTMENU_TXT";
 	$this->const [$r] [1] = "chaine";
-	$this->const [$r] [2] = "#f4f4f4";
+	$this->const [$r] [2] = "#F4F4F4";
 	$this->const [$r] [3] = 'Oblyon leftmenu leftmenu hover color';
 	$this->const [$r] [4] = 1;
 	$this->const [$r] [5] = 'allentities';
