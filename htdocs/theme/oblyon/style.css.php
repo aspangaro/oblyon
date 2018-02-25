@@ -43,6 +43,7 @@ if (! defined('NOREQUIREAJAX'))	 define('NOREQUIREAJAX','1');
 session_cache_limiter(FALSE);
 
 require_once '../../main.inc.php';
+require_once DOL_DOCUMENT_ROOT.'/core/lib/functions2.lib.php';
 
 // Load user to have $user->conf loaded (not done into main because of NOLOGIN constant defined)
 if (empty($user->id) && ! empty($_SESSION['dol_login'])) $user->fetch('',$_SESSION['dol_login']);
@@ -4455,13 +4456,21 @@ tr.liste_titre_sel,
 form.liste_titre, 
 form.liste_titre_sel {
 	background-color: <?php print $maincolor; ?>;
-	color: #f8f8f8;
+	color: #333;
 	font-family: <?php print $fontboxtitle; ?>;
 	font-size: 1em;
 	font-weight: normal;
 	line-height: 1em;
 	text-align: <?php echo $left; ?>;
 	white-space: normal;
+}
+
+div.liste_titre a, 
+tr.liste_titre a, 
+tr.liste_titre_sel a, 
+form.liste_titre a, 
+form.liste_titre_sel a {
+	color: #f8f8f8;
 }
 
 div.liste_titre_bydiv {
@@ -4487,6 +4496,7 @@ div.liste_titre {
 	font-weight: normal;
 	/* border-bottom: 1px solid #FDFFFF;*/
 	white-space: normal;
+	padding-left: 5px;
 }
 
 table td.liste_titre a:link, 
@@ -4587,7 +4597,6 @@ tr.liste_titre_sel td,
 td.liste_titre_sel, 
 form.liste_titre_sel div {
 	background-color: #333;
-	border: 1px solid #333;
 	color: #f7f7f7;
 	font-weight: normal;
 	text-decoration: none;
