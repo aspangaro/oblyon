@@ -83,7 +83,7 @@ if (! empty($conf->global->MAIN_OVERWRITE_THEME_RES)) { $path='/'.$conf->global-
 
 $maincolor= $conf->global->OBLYON_COLOR_MAIN; // default value: #0083a2
 $navlinkcolor= '#f4f4f4'; 	// default value: #eee
-$topmenu_hover= '#2ea2cc';	// default value: #2ea2cc
+$topmenu_hover= $maincolor;	// default value: #
 $bgnavtop = $conf->global->OBLYON_COLOR_TOPMENU_BCKGRD; // default value: #333					//	for main navigation
 $bgnavtop_txt = $conf->global->OBLYON_COLOR_TOPMENU_TXT; // default value: #ffffff				//	for main navigation
 $bgnavtop_hover = $conf->global->OBLYON_COLOR_TOPMENU_BCKGRD_HOVER;	// default value: #444		//	for main navigation
@@ -1826,7 +1826,7 @@ div.ficheaddleft {
 
 #tmenu_tooltip .tmenu li:hover .main-nav__link,
 .main-nav__item:hover .main-nav__link {
-	color: #2ea2cc;
+	color: <?php print $topmenu_hover; ?>;
 }
 
 .main-nav__link {
@@ -1981,15 +1981,15 @@ li.item-heading:hover > .sec-nav__link {
 }
 
 .sec-nav.is-inverted li.item-heading:hover .caret--top {
-	border-top-color: #2ea2cc;
+	border-top-color: <?php print $maincolor; ?>;
 }
  
 .sec-nav__sub-list .item-level2:hover .caret--left {
-	border-left-color: #2ea2cc;
+	border-left-color: <?php print $maincolor; ?>;
 }
 
 .sec-nav__sub-list .item-level2:hover .caret--right {
-	border-right-color: #2ea2cc;
+	border-right-color: <?php print $maincolor; ?>;
 }
 
 
@@ -2744,7 +2744,7 @@ div.login a:hover {
 
 .pushy-active .pushy-btn {
 	background-color: #444;
-	color: #2ea2cc;
+	color: <?php print $maincolor; ?>;
 }
 
 <?php } ?> /* end HIDE_LEFTMENU */

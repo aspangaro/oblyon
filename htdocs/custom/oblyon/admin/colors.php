@@ -118,7 +118,7 @@ if ($action == 'settheme') {
 		dolibarr_set_const($db, "OBLYON_COLOR_MAIN", '#0083a2','chaine',0,'',$conf->entity);
 		dolibarr_set_const($db, "OBLYON_COLOR_TOPMENU_BCKGRD", '#333','chaine',0,'',$conf->entity);
 		dolibarr_set_const($db, "OBLYON_COLOR_TOPMENU_TXT", '#f4f4f4','chaine',0,'',$conf->entity);
-		dolibarr_set_const($db, "OBLYON_COLOR_TOPMENU_BCKGRD_HOVER", '#0083a2','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "OBLYON_COLOR_TOPMENU_BCKGRD_HOVER", '#444','chaine',0,'',$conf->entity);
 		dolibarr_set_const($db, "OBLYON_COLOR_LEFTMENU_BCKGRD", '#333','chaine',0,'',$conf->entity);
 		dolibarr_set_const($db, "OBLYON_COLOR_LEFTMENU_TXT", '#f4f4f4','chaine',0,'',$conf->entity);
 		dolibarr_set_const($db, "OBLYON_COLOR_LEFTMENU_BCKGRD_HOVER", '#444','chaine',0,'',$conf->entity);
