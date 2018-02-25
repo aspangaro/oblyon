@@ -85,11 +85,23 @@ $maincolor= $conf->global->OBLYON_COLOR_MAIN; // default value: #0083a2
 $navlinkcolor= '#f4f4f4'; 	// default value: #eee
 $topmenu_hover= '#2ea2cc';	// default value: #2ea2cc
 $bgnavtop = $conf->global->OBLYON_COLOR_TOPMENU_BCKGRD; // default value: #333					//	for main navigation
-$bgnavtop_txt = $conf->global->OBLYON_COLOR_TOPMENU_TXT; // default value: #ffffff				//	for main navigation
+$bgnavtop_txt = $conf->global->OBLYON_COLOR_TOPMENU_TXT; // default value: #f4f4f4				//	for main navigation
 $bgnavtop_hover = $conf->global->OBLYON_COLOR_TOPMENU_BCKGRD_HOVER;	// default value: #444		//	for main navigation
 $bgnavleft = $conf->global->OBLYON_COLOR_LEFTMENU_BCKGRD; // default value: #333				//	for left navigation
-$bgnavleft_txt = $conf->global->OBLYON_COLOR_LEFTMENU_TXT; // default value: #ffffff			//	for left navigation
+$bgnavleft_txt = $conf->global->OBLYON_COLOR_LEFTMENU_TXT; // default value: #f4f4f4			//	for left navigation
 $bgnavleft_hover = $conf->global->OBLYON_COLOR_LEFTMENU_BCKGRD_HOVER;	// default value: #444	//	for left navigation
+
+if ($conf->global->MAIN_MENU_INVERT)
+{
+	$bgnav = $bgnavtop;
+	$bgnav_hover = $bgnavtop_hover;
+}
+else 
+{
+	$bgnav = $bgnavleft;
+	$bgnav_hover = $bgnavleft_hover;
+}
+
 $bgotherbox= '#f4f4f4';	 // default value: #E6E6E6		//	Other information boxes on home page
 $bgbutton_hover= '#197489';	// default value: #197489
 $logo_background_color = $conf->global->OBLYON_COLOR_LOGO_BCKGRD; //default value : #ffffff
@@ -2044,11 +2056,9 @@ li.item-heading:hover > .sec-nav__link {
  */
 div.login_block {
 	<?php if ($conf->global->MAIN_MENU_INVERT) { ?>
-		height: 80px;
-		line-height: 40px;
+		height: 40px;
 	<?php } else { ?>
-		height: 108px;
-		line-height: 54px;
+		height: 54px;
 	<?php } ?>
 	margin-right: 10px;
 	<?php if ( $conf->global->OBLYON_STICKY_TOPBAR ) { ?>
@@ -2081,10 +2091,8 @@ div.login_block_user a {
 	font-weight: 500;
 	<?php if ($conf->global->MAIN_MENU_INVERT) { ?>
 		height: 40px;
-		line-height: 40px;
 	<?php } else { ?>
 		height: 54px;
-		line-height: 54px;
 	<?php } ?>
 	max-width: 150px;
 	overflow: hidden;
@@ -2099,15 +2107,16 @@ div.login_block_user a {
 }
 
 div.login_block_user > .classfortooltip.login_block_elem2 {
-	height: 54px;
-	line-height: 54px;
+	<?php if ($conf->global->MAIN_MENU_INVERT) { ?>
+		height: 40px;
+	<?php } else { ?>
+		height: 54px;
+	<?php } ?>
 }
 
 .login_block_other {
 	background: <?php print $bgnav; ?>;
 	display: none;
-	height: 80px;
-	line-height: 40px;
 	position: absolute;
 	right: 0;
 	<?php if ($conf->global->MAIN_MENU_INVERT) { ?>
@@ -2115,14 +2124,12 @@ div.login_block_user > .classfortooltip.login_block_elem2 {
 	<?php } else { ?>
 		top: 54px;
 	<?php } ?>
+	height: 40px;
+	line-height: 40px;
 }
 
 .login_block:hover > .login_block_other {
 	display: block;
-}
-
-.login_block:hover > .login_block_user {
-	background-color: <?php print $bgnav_hover; ?>;
 }
 
 .login_block_user a img.loginphoto {
@@ -2133,6 +2140,7 @@ div.login_block_user > .classfortooltip.login_block_elem2 {
 	float: <?php print $left; ?>;
 	background-color: <?php print $bgnavtop; ?>;
 	padding: 0;
+	height: 40px;
 }
 
 .login_block_elem a,
