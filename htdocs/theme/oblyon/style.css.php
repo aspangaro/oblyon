@@ -43,6 +43,7 @@ if (! defined('NOREQUIREAJAX'))	 define('NOREQUIREAJAX','1');
 session_cache_limiter(FALSE);
 
 require_once '../../main.inc.php';
+require_once DOL_DOCUMENT_ROOT.'/core/lib/functions2.lib.php';
 
 // Load user to have $user->conf loaded (not done into main because of NOLOGIN constant defined)
 if (empty($user->id) && ! empty($_SESSION['dol_login'])) $user->fetch('',$_SESSION['dol_login']);
@@ -83,7 +84,7 @@ if (! empty($conf->global->MAIN_OVERWRITE_THEME_RES)) { $path='/'.$conf->global-
 
 $maincolor= $conf->global->OBLYON_COLOR_MAIN; // default value: #0083a2
 $navlinkcolor= '#f4f4f4'; 	// default value: #eee
-$topmenu_hover= '#2ea2cc';	// default value: #2ea2cc
+$topmenu_hover= $maincolor;	// default value: #
 $bgnavtop = $conf->global->OBLYON_COLOR_TOPMENU_BCKGRD; // default value: #333					//	for main navigation
 $bgnavtop_txt = $conf->global->OBLYON_COLOR_TOPMENU_TXT; // default value: #f4f4f4				//	for main navigation
 $bgnavtop_hover = $conf->global->OBLYON_COLOR_TOPMENU_BCKGRD_HOVER;	// default value: #444		//	for main navigation
@@ -1838,7 +1839,7 @@ div.ficheaddleft {
 
 #tmenu_tooltip .tmenu li:hover .main-nav__link,
 .main-nav__item:hover .main-nav__link {
-	color: #2ea2cc;
+	color: <?php print $topmenu_hover; ?>;
 }
 
 .main-nav__link {
@@ -1993,15 +1994,15 @@ li.item-heading:hover > .sec-nav__link {
 }
 
 .sec-nav.is-inverted li.item-heading:hover .caret--top {
-	border-top-color: #2ea2cc;
+	border-top-color: <?php print $maincolor; ?>;
 }
  
 .sec-nav__sub-list .item-level2:hover .caret--left {
-	border-left-color: #2ea2cc;
+	border-left-color: <?php print $maincolor; ?>;
 }
 
 .sec-nav__sub-list .item-level2:hover .caret--right {
-	border-right-color: #2ea2cc;
+	border-right-color: <?php print $maincolor; ?>;
 }
 
 
@@ -2752,7 +2753,7 @@ div.login a:hover {
 
 .pushy-active .pushy-btn {
 	background-color: #444;
-	color: #2ea2cc;
+	color: <?php print $maincolor; ?>;
 }
 
 <?php } ?> /* end HIDE_LEFTMENU */
@@ -4136,7 +4137,7 @@ div.tabs {
 	clear: both;
 	font-weight: normal;
 	height: 100%;
-	margin: 15px 0 4px 6px;
+	margin: 15px 0 -4px 6px;
 	padding: 0 6px 3px 0;
 	text-align: <?php print $left; ?>;
 }
@@ -4170,8 +4171,6 @@ a.tabTitle {
 	white-space: nowrap;
 }
 
-a.tabTitle img { vertical-align: bottom; }
-
 a.tab:link, 
 a.tab:visited, 
 a.tab:hover,
@@ -4179,6 +4178,8 @@ a.tab#active {
 	background-color: #e5e5e5;
 	margin: 0 .3em;
 	padding: 5px 12px 5px;
+	border: 1px solid #e5e5e5;
+	border-bottom: none;
 	text-decoration: none;
 	white-space: nowrap;
 	<?php if ($usecss3) { ?>
@@ -4193,9 +4194,6 @@ a.tab#active {
 a.tab#active, 
 a.tab.tabactive {
 	background-color: #fcfcfc;
-	bottom: -1px;
-	border: 1px solid #e5e5e5;
-	border-bottom: none;
 	box-shadow: 0 -1px 0 rgba(0,0,0, .04);
 	-webkit-box-shadow: 0 -1px 0 rgba(0,0,0, .04);
 	font-weight: 500;
@@ -4466,13 +4464,21 @@ tr.liste_titre_sel,
 form.liste_titre, 
 form.liste_titre_sel {
 	background-color: <?php print $maincolor; ?>;
-	color: #f8f8f8;
+	color: #333;
 	font-family: <?php print $fontboxtitle; ?>;
 	font-size: 1em;
 	font-weight: normal;
 	line-height: 1em;
 	text-align: <?php echo $left; ?>;
 	white-space: normal;
+}
+
+div.liste_titre a, 
+tr.liste_titre a, 
+tr.liste_titre_sel a, 
+form.liste_titre a, 
+form.liste_titre_sel a {
+	color: #f8f8f8;
 }
 
 div.liste_titre_bydiv {
@@ -4498,6 +4504,7 @@ div.liste_titre {
 	font-weight: normal;
 	/* border-bottom: 1px solid #FDFFFF;*/
 	white-space: normal;
+	padding-left: 5px;
 }
 
 table td.liste_titre a:link, 
@@ -4598,7 +4605,6 @@ tr.liste_titre_sel td,
 td.liste_titre_sel, 
 form.liste_titre_sel div {
 	background-color: #333;
-	border: 1px solid #333;
 	color: #f7f7f7;
 	font-weight: normal;
 	text-decoration: none;
@@ -4675,7 +4681,7 @@ div.tabBar .noborder {
 }
 .boxstats130 {
 	width: 135px;
-	height: 48px;
+	min-height: 48px;
 	padding: 3px
 }
 @media only screen and (max-width: 767px)
