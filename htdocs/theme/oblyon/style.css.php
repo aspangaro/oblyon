@@ -2127,6 +2127,7 @@ div.login_block_user > .classfortooltip.login_block_elem2 {
 	<?php } ?>
 	height: 40px;
 	line-height: 40px;
+	min-width: 120px;
 }
 
 .login_block:hover > .login_block_other {
