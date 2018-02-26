@@ -1763,7 +1763,6 @@ div.ficheaddleft {
 		height: <?php print $heightmenu; ?>px;
 	<?php } ?>
 	display: block;
-	height: 40px;
 	margin: 0;
 	padding: 0;
 	position: relative;
