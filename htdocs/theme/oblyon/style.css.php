@@ -2458,6 +2458,7 @@ div.login a:hover {
 
 .sec-nav .sec-nav__link.is-disabled {
 	cursor: not-allowed;
+	display: none;
 }
 
  
