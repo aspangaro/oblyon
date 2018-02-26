@@ -2130,6 +2130,10 @@ div.login_block_user > .classfortooltip.login_block_elem2 {
 	min-width: 120px;
 }
 
+.login_block_other .inline-block {
+	width: 40px;
+}
+
 .login_block:hover > .login_block_other {
 	display: block;
 }
