@@ -1864,7 +1864,6 @@ div.ficheaddleft {
  
 .main-nav__link.is-disabled {
 	cursor: not-allowed;
-	display: none;
 	opacity: .6;
 }
 .main-nav__link.is-disabled:hover {
@@ -2457,7 +2456,6 @@ div.login a:hover {
 
 .sec-nav .sec-nav__link.is-disabled {
 	cursor: not-allowed;
-	display: none;
 }
 
  
