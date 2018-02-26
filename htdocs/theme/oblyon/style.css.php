@@ -2080,6 +2080,7 @@ div.login_block_user{
 	clear: left;
 	float: <?php print $left; ?>;
 	padding-right: 15px;
+	min-width: 120px;
 }
 
 div.login_block_user .login a,
