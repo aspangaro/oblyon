@@ -6694,7 +6694,6 @@ div.pagination li span:focus {
 	color: #000;
 	background-color: #eee;
 	border-color: #ddd;
-	padding-top: 8px;
 }
 div.pagination li .active a,
 div.pagination li .active span,
