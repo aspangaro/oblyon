@@ -1800,7 +1800,6 @@ div.ficheaddleft {
 		line-height: 54px;
 	<?php } else { ?>
 		height: 54px;
-		min-width: 66px;
 	<?php } ?>
 }
 
@@ -1866,6 +1865,7 @@ div.ficheaddleft {
  
 .main-nav__link.is-disabled {
 	cursor: not-allowed;
+	display: none;
 	opacity: .6;
 }
 .main-nav__link.is-disabled:hover {
@@ -6961,6 +6961,15 @@ img.loginphoto {
 	#tooltip {
 		position: absolute;
 		width: <?php print dol_size(350,'width'); ?>px;
+	}
+
+	#tmenu_tooltip .main-nav__item {
+		max-width: 66px;
+	}
+
+	.main-nav__link {
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 }
 
