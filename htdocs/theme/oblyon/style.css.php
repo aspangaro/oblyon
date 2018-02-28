@@ -6892,6 +6892,7 @@ dl.dropdown {
 	padding: 0 3px 2px 0;
 }
 .dropdown dd ul {
+	color: #333;
 	background-color: #FFF;
 	border: 1px solid #888;
 	display:none;
