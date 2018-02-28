@@ -104,7 +104,37 @@ else
 }
 
 $bgotherbox= '#f4f4f4';	 // default value: #E6E6E6		//	Other information boxes on home page
+
 $bgbutton_hover= '#197489';	// default value: #197489
+if (!empty($maincolor))
+{
+	$colorlength = strlen($maincolor);
+
+	$matches = array();
+	if ($colorlength == 4)
+	{
+		// Format #RGB
+		preg_match('/([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1})/', $maincolor, $matches);
+	} elseif ($colorlength == 7)
+	{
+		// Format #RRGGBB
+		preg_match('/([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})/', $maincolor, $matches);
+	}
+
+	if (!empty($matches))
+	{
+		$maincolor_variant = array();
+		// 20% darker
+		$variation = -50;
+		for ($i=1; $i < sizeof($matches); $i++) { 
+			$maincolor_variant[$i-1] = max(0 , min(hexdec($matches[$i]) + $variation, 255));
+		}
+
+		$bgbutton_hover = '#'.colorArrayToHex($maincolor_variant);
+	}
+
+}
+
 $logo_background_color = $conf->global->OBLYON_COLOR_LOGO_BCKGRD; //default value : #ffffff
 $bgcolor = $conf->global->OBLYON_COLOR_BCKGRD; // default value : #f4f4f4
 $colorblinepairhover = $conf->global->OBLYON_COLOR_BLINE; // default value : #
@@ -6670,7 +6700,6 @@ div.pagination li span:focus {
 	color: #000;
 	background-color: #eee;
 	border-color: #ddd;
-	padding-top: 8px;
 }
 div.pagination li .active a,
 div.pagination li .active span,
