@@ -4498,7 +4498,7 @@ tr.liste_titre_sel,
 form.liste_titre, 
 form.liste_titre_sel {
 	background-color: <?php print $maincolor; ?>;
-	color: #333;
+	color: #f4f4f4;
 	font-family: <?php print $fontboxtitle; ?>;
 	font-size: 1em;
 	font-weight: normal;
@@ -4512,7 +4512,7 @@ tr.liste_titre a,
 tr.liste_titre_sel a, 
 form.liste_titre a, 
 form.liste_titre_sel a {
-	color: #f8f8f8;
+	color: #ffffff;
 }
 
 div.liste_titre_bydiv {
