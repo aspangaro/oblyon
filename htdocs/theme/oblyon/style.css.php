@@ -104,7 +104,37 @@ else
 }
 
 $bgotherbox= '#f4f4f4';	 // default value: #E6E6E6		//	Other information boxes on home page
+
 $bgbutton_hover= '#197489';	// default value: #197489
+if (!empty($maincolor))
+{
+	$colorlength = strlen($maincolor);
+
+	$matches = array();
+	if ($colorlength == 4)
+	{
+		// Format #RGB
+		preg_match('/([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1})/', $maincolor, $matches);
+	} elseif ($colorlength == 7)
+	{
+		// Format #RRGGBB
+		preg_match('/([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})/', $maincolor, $matches);
+	}
+
+	if (!empty($matches))
+	{
+		$maincolor_variant = array();
+		// 20% darker
+		$variation = -50;
+		for ($i=1; $i < sizeof($matches); $i++) { 
+			$maincolor_variant[$i-1] = max(0 , min(hexdec($matches[$i]) + $variation, 255));
+		}
+
+		$bgbutton_hover = '#'.colorArrayToHex($maincolor_variant);
+	}
+
+}
+
 $logo_background_color = $conf->global->OBLYON_COLOR_LOGO_BCKGRD; //default value : #ffffff
 $bgcolor = $conf->global->OBLYON_COLOR_BCKGRD; // default value : #f4f4f4
 $colorblinepairhover = $conf->global->OBLYON_COLOR_BLINE; // default value : #
@@ -1763,7 +1793,6 @@ div.ficheaddleft {
 		height: <?php print $heightmenu; ?>px;
 	<?php } ?>
 	display: block;
-	height: 40px;
 	margin: 0;
 	padding: 0;
 	position: relative;
@@ -1800,7 +1829,6 @@ div.ficheaddleft {
 		line-height: 54px;
 	<?php } else { ?>
 		height: 54px;
-		min-width: 66px;
 	<?php } ?>
 }
 
@@ -2080,6 +2108,7 @@ div.login_block_user{
 	clear: left;
 	float: <?php print $left; ?>;
 	padding-right: 15px;
+	min-width: 120px;
 }
 
 div.login_block_user .login a,
@@ -2127,6 +2156,11 @@ div.login_block_user > .classfortooltip.login_block_elem2 {
 	<?php } ?>
 	height: 40px;
 	line-height: 40px;
+	min-width: 120px;
+}
+
+.login_block_other .inline-block {
+	width: 40px;
 }
 
 .login_block:hover > .login_block_other {
@@ -4464,7 +4498,7 @@ tr.liste_titre_sel,
 form.liste_titre, 
 form.liste_titre_sel {
 	background-color: <?php print $maincolor; ?>;
-	color: #333;
+	color: #f4f4f4;
 	font-family: <?php print $fontboxtitle; ?>;
 	font-size: 1em;
 	font-weight: normal;
@@ -4478,7 +4512,7 @@ tr.liste_titre a,
 tr.liste_titre_sel a, 
 form.liste_titre a, 
 form.liste_titre_sel a {
-	color: #f8f8f8;
+	color: #ffffff;
 }
 
 div.liste_titre_bydiv {
@@ -6664,7 +6698,6 @@ div.pagination li span:focus {
 	color: #000;
 	background-color: #eee;
 	border-color: #ddd;
-	padding-top: 8px;
 }
 div.pagination li .active a,
 div.pagination li .active span,
@@ -6954,13 +6987,87 @@ img.loginphoto {
 {
 	padding: 0 4px 0 4px;
 }
+
+
+/* rule to reduce inverted top menu */
+@media only screen and (max-width: 1200px)
+{
+	#tmenu_tooltipinvert .sec-nav__item {
+		max-width: 160px;
+	}
+	#tmenu_tooltipinvert .sec-nav__item .icon {
+		font-size: 20px;
+		padding: 0 5px;
+	}
+	.sec-nav__link {
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+}
+
+/* rule to reduce inverted top menu */
+@media only screen and (max-width: 1024px)
+{
+	#tmenu_tooltipinvert .sec-nav__item {
+		max-width: 120px;
+	}
+	#tmenu_tooltipinvert .sec-nav__item .icon {
+		font-size: 24px;
+		padding: 0 5px;
+	}
+	.sec-nav__sub-item {
+		overflow-wrap: break-word;
+	}
+
+
+	div.vmenu {
+		min-width: 170px;
+		width: 170px;
+	}
+	.vmenusearchselectcombo {
+		width: 150px;
+	}
+	.sec-nav.is-inverted {
+		margin-left: 170px;
+	}
+}
+
+/* rule to reduce inverted top menu */
+@media only screen and (max-width: 905px)
+{
+	#tmenu_tooltipinvert .sec-nav__item {
+		max-width: 90px;
+	}
+}
+
+/* rule to reduce top menu */
 @media only screen and (max-width: 767px)
 {
-	.imgopensurveywizard { width:95%; height: auto; }
+	#tmenu_tooltip .main-nav__item {
+		max-width: 66px;
+	}
+	.main-nav__link {
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
 
-	#tooltip {
-		position: absolute;
-		width: <?php print dol_size(350,'width'); ?>px;
+	#tmenu_tooltipinvert .sec-nav__item {
+		max-width: 80px;
+	}
+	#tmenu_tooltipinvert .sec-nav__item .icon {
+		font-size: 28px;
+		padding: 0 10px;
+	}
+
+	div.vmenu {
+		min-width: 130px;
+		width: 130px;
+	}
+	.vmenusearchselectcombo {
+		width: auto;
+	}
+	.sec-nav.is-inverted {
+		margin-left: 130px;
 	}
 }
 
