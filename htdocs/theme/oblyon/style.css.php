@@ -2080,6 +2080,7 @@ div.login_block_user{
 	clear: left;
 	float: <?php print $left; ?>;
 	padding-right: 15px;
+	min-width: 120px;
 }
 
 div.login_block_user .login a,
@@ -2127,6 +2128,11 @@ div.login_block_user > .classfortooltip.login_block_elem2 {
 	<?php } ?>
 	height: 40px;
 	line-height: 40px;
+	min-width: 120px;
+}
+
+.login_block_other .inline-block {
+	width: 40px;
 }
 
 .login_block:hover > .login_block_other {
