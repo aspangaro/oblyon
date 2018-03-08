@@ -7018,18 +7018,6 @@ img.loginphoto {
 	.sec-nav__sub-item {
 		overflow-wrap: break-word;
 	}
-
-
-	div.vmenu {
-		min-width: 170px;
-		width: 170px;
-	}
-	.vmenusearchselectcombo {
-		width: 150px;
-	}
-	.sec-nav.is-inverted {
-		margin-left: 170px;
-	}
 }
 
 /* rule to reduce inverted top menu */
@@ -7057,17 +7045,6 @@ img.loginphoto {
 	#tmenu_tooltipinvert .sec-nav__item .icon {
 		font-size: 28px;
 		padding: 0 10px;
-	}
-
-	div.vmenu {
-		min-width: 130px;
-		width: 130px;
-	}
-	.vmenusearchselectcombo {
-		width: auto;
-	}
-	.sec-nav.is-inverted {
-		margin-left: 130px;
 	}
 }
 
