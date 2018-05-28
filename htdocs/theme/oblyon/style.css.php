@@ -5368,10 +5368,8 @@ li.cal_event {
 
 .conteneur {
 	background-color: #fcfcfc!important;
-	border: 1px solid #e5e5e5;
 	box-shadow: 0 1px 1px rgba(0,0,0, .04);
 	-webkit-box-shadow: 0 1px 1px rgba(0,0,0, .04);
-	width: 940px !important;
 }
 
 .conteneur_img_gauche {
@@ -5407,24 +5405,46 @@ li.cal_event {
 
 .menu_choix1,
 .menu_choix2 {
+	padding: 0;
 	font-size: 1.3em!important;
 	width: initial!important;
 }
 
 .menu_choix1 a,
 .menu_choix2 a {
+	border: 1px solid #eee;
+	border-radius: 5px;
+	margin: 5px;
+	padding: 14px 5px 14px 54px;
+	height: 38px;
 	width: initial!important;
+}
+
+.menu_choix1 a:hover,
+.menu_choix1 a:focus,
+.menu_choix2 a:hover,
+.menu_choix2 a:focus {
+	background-color: <?php echo $bgbutton_hover;?>;
+}
+
+.menu_choix1 a {
+    background: url("<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/cashdesk/new.png',1); ?>") top left no-repeat;
+}
+
+.menu_choix2 a {
+    background: url("<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/cashdesk/gescom.png',1); ?>") top left no-repeat;
 }
 
 .menu_choix1 a span,
 .menu_choix2 a span{
+	color: #eee;
 	display: inline-block;
 	padding: 13px 0;
 }
 
-.menu_choix1 a:hover,
-.menu_choix2 a:hover {
-	color: #333!important;
+.menu_choix1 a:hover span,
+.menu_choix2 a:hover span {
+	color: #fcfcfc!important;
 }
 
 .menu_choix0 {
@@ -5536,6 +5556,35 @@ p.titre {
 }
 
 
+/* Force values for small screen 767 */
+@media only screen and (max-width: 767px)
+{
+	.menu li.menu_choix1, .menu li.menu_choix2 {
+		padding: 15px 0 5px 0;
+		margin: 0 5px;
+	}
+
+	.menu_choix1 a, .menu_choix2 a {
+		background-size: 36px 36px;
+		height: 30px;
+		padding: 8px 38px 8px 0;
+	}
+
+	.menu_choix1 a span.hideonsmartphone,
+	.menu_choix2 a span.hideonsmartphone {
+		display: none;
+	}
+    .liste_articles {
+    	margin-right: 0 !important;
+	}
+	
+	/* Do not force width for cashdesk */
+	.cadre_facturation .maxwidthonsmartphone {
+		max-width: none;
+	}
+}
+
+
 /* 
  * Buttons
  */
@@ -5543,26 +5592,29 @@ p.titre {
 .bouton_ajout_article {
 	background-color: #f8f8f8!important;
 	background-image: none!important;
-	border: 1px solid #33cc66!important;
-	box-shadow: inset 0 1px 0 rgba(51, 204, 102, .6);
-	-webkit-box-shadow: inset 0 1px 0 rgba(51, 204, 102, .6);
-	color: #33cc66;
+	border: 1px solid <?php print $maincolor; ?>!important;
+	color: <?php print $maincolor; ?>;
+	box-shadow: inset 0 1px 0 rgba(170, 200, 210, .6);
+	-webkit-box-shadow: inset 0 1px 0 rgba(170, 200, 210, .6);
 	cursor: pointer;
 	display: block;
 	font-weight: bold!important;
 	margin: 15px auto 0 !important;
-	padding: 15px !important;
 	text-decoration: none;
 	text-transform: uppercase;
 	width: initial !important;
 	white-space: nowrap;
 }
 
-.bouton_ajout_article:hover {
-	background-color: #33cc66!important;
+.bouton_ajout_article:hover, 
+.bouton_ajout_article:active, 
+.bouton_ajout_article:focus {
+	background-color: <?php print $maincolor; ?>!important;
 	background-image: none!important;
-	border-color: #33cc66;
+	border-color: <?php print $maincolor; ?>;
 	color: #f7f7f7;
+	-webkit-box-shadow: none;
+	box-shadow: none;
 }
 
 .bouton_mode_reglement,
@@ -5570,8 +5622,8 @@ p.titre {
 	background-color: #f8f8f8!important;
 	background-image: none!important;
 	border: 1px solid #c0c0c0!important;
-	box-shadow: inset 0 1px 0 rgba(170, 200, 210, .6);
 	-webkit-box-shadow: inset 0 1px 0 rgba(170, 200, 210, .6);
+	box-shadow: inset 0 1px 0 rgba(170, 200, 210, .6);
 	color: #434956;
 	cursor: pointer;
 	font-weight: bold;
@@ -5580,18 +5632,16 @@ p.titre {
 }
 
 .bouton_mode_reglement:hover,
-.bouton_validation:hover {
-	background-image: none!important;
-	border-color: <?php print $maincolor; ?>;
-	-webkit-box-shadow: inset 0 5px 0 rgba(51, 204, 102, .6);
-	box-shadow: inset 0 5px 0 rgba(51, 204, 102, .6);
-}
-
 .bouton_mode_reglement:active, 
-.bouton_mode_reglement:focus{
-	background-color: #33cc66!important;
-	border-color: #33cc66;
-	color: #f7f7f7;
+.bouton_mode_reglement:focus,
+.bouton_validation:hover,
+.bouton_validation:active, 
+.bouton_validation:focus {
+	background-image: none!important;
+	border: 1px solid <?php print $maincolor; ?>!important;
+	color: <?php print $maincolor; ?>;
+	-webkit-box-shadow: inset 0 5px 0 <?php print $maincolor; ?>88;
+	box-shadow: inset 0 5px 0 <?php print $maincolor; ?>88;
 }
 
 .bouton_mode_reglement_disabled {
