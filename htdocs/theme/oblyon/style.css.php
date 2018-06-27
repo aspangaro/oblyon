@@ -2089,7 +2089,7 @@ div.login_block {
 	<?php } else { ?>
 		height: 54px;
 	<?php } ?>
-	margin-right: 10px;
+	padding-right: 10px;
 	<?php if ( $conf->global->OBLYON_STICKY_TOPBAR ) { ?>
 		position: fixed;
 	<?php } else { ?>
@@ -2103,11 +2103,21 @@ div.login_block {
 	<?php } ?>
 }
 
+<?php if (empty($conf->dol_optimize_smallscreen)) { ?>
+div.login_block:after {
+	content: '\e614';
+	color: <?php print $bgnavtop_txt; ?>;
+	font-family: 'oblyon-icons' !important;
+	font-size: 20px;
+    line-height: 50px;
+}
+<?php } ?> /* end test if not phone */
+
 /* db v3.5 */ 
 div.login_block_user{
 	clear: left;
 	float: <?php print $left; ?>;
-	padding-right: 15px;
+	margin-right: 10px;
 	min-width: 120px;
 }
 
@@ -2156,7 +2166,7 @@ div.login_block_user > .classfortooltip.login_block_elem2 {
 	<?php } ?>
 	height: 40px;
 	line-height: 40px;
-	min-width: 120px;
+	margin-right: 10px;
 }
 
 .login_block_other .inline-block {
