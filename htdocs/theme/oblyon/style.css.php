@@ -4289,6 +4289,16 @@ div.tabBar ul li {
 	margin-<?php print $left; ?>: 30px !important;
 }
 
+div.popuptabset {
+	background-color: #e5e5e5;
+	padding: 5px;
+	border: 1px solid #e5e5e5;
+}
+
+div.popuptab {
+	margin: .3em;
+}
+
 @media only screen and (max-width: 570px)
 {
 	
