@@ -2807,7 +2807,6 @@ div.login a:hover {
 		#Oblyon Main and Sec Nav Icons
 \*------------------------------------*/
 
-<?php if (empty($conf->dol_optimize_smallscreen)) { ?>
 .main-nav .icon {
 	<?php if ( $conf->global->OBLYON_HIDE_TOPICONS && !$conf->global->MAIN_MENU_INVERT ) { ?>
 		display: none;
@@ -3142,8 +3141,6 @@ div.login a:hover {
 .icon--reports:before {
 	content: '\e605';
 }
-
-<?php } ?> /* end test if not phone */
 
 
 /*------------------------------------*\
