@@ -2962,7 +2962,6 @@ div.login a:hover {
 	content: '\e611';
 }
 
-.icon--billing:before,
 .icon--billing:before {
 	content: '\e625';
 }
