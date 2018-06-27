@@ -2109,7 +2109,11 @@ div.login_block:after {
 	color: <?php print $bgnavtop_txt; ?>;
 	font-family: 'oblyon-icons' !important;
 	font-size: 20px;
-    line-height: 50px;
+	<?php if ($conf->global->MAIN_MENU_INVERT) { ?>
+    	line-height: 40px;
+	<?php } else { ?>
+    	line-height: 55px;
+	<?php } ?>
 }
 <?php } ?> /* end test if not phone */
 
