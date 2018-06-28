@@ -565,6 +565,16 @@ td.hidden {
 	display: none;
 }
 
+.optiongrey, .opacitymedium {
+	opacity: 0.5;
+}
+.opacityhigh {
+	opacity: 0.2;
+}
+.opacitytransp {
+	opacity: 0;
+}
+
 /* ============================================================================== */
 /*	Module website 																  */
 /* ============================================================================== */
