@@ -1569,7 +1569,7 @@ td.showDragHandle {
 
 /* coming feature -****
  #id-left {
-	<?php if ($conf->global->OBLYON_FIX_LEFTMENU) { ?>
+	<?php if ( $conf->global->OBLYON_HIDE_LEFTMENU ) { ?>
 		<?php if ( $conf->global->OBLYON_STICKY_TOPBAR ) { ?>
 			<?php if ( $conf->global->MAIN_MENU_INVERT ) { ?>
 				height: calc(100% - 40px);
@@ -1760,7 +1760,7 @@ div.ficheaddleft {
 			position: relative;
 		<?php } ?>
 		/*
-		<?php //if ($conf->global->OBLYON_FIX_LEFTMENU && !$conf->global->OBLYON_STICKY_TOPBAR ) { ?>
+		<?php //if ($conf->global->OBLYON_HIDE_LEFTMENU && !$conf->global->OBLYON_STICKY_TOPBAR ) { ?>
 			margin-left: 210px;
 		<?php //} ?>*/
 	<?php } ?>
@@ -1910,9 +1910,15 @@ div.ficheaddleft {
  
 #tmenu_tooltipinvert .pushy-btn,
 #tmenu_tooltip .pushy-btn { /* for v3.5 */
-	font-size: 20px !important;
-	height: 40px;
-	line-height: 40px;
+	<?php if ($conf->global->MAIN_MENU_INVERT) { ?>
+		font-size: 40px !important;
+		height: 40px;
+		line-height: 40px;
+	<?php } else { ?>
+		font-size: 54px !important;
+		height: 54px;
+		line-height: 54px;
+	<?php } ?>
 }
 
  
@@ -2103,7 +2109,7 @@ div.login_block {
 	<?php } ?>
 }
 
-<?php if (empty($conf->dol_optimize_smallscreen)) { ?>
+<?php if ( !empty($conf->dol_optimize_smallscreen) ) { ?>
 div.login_block:after {
 	content: '\e614';
 	color: <?php print $bgnavtop_txt; ?>;
@@ -2377,15 +2383,14 @@ div.login a:hover {
  */
 
 .db-menu__society {
-	background-color: #333;
 	margin: 0; 
 	padding: 0;
 }
 
 .db-menu__society h1 {
 	color: #fff;
-	font-size: 15px;
-	font-weight: 500;
+	font-size: 1.5em;
+	font-weight: bold;
 	margin: 0;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -2492,16 +2497,16 @@ div.login a:hover {
 }
 
 .sec-nav__sub-list .item-level1 {
-	padding: 0.3em 1em;
+	padding: 0.3em 0.8em;
 }
 
 .sec-nav__sub-list .item-level2 {
-	padding: 0.2em 1.2em;
+	padding: 0.2em 1em;
 }
 
 .sec-nav__sub-item.is-disabled {
 	opacity: .6;
-	padding: 0.3em 1em;
+	padding: 0.3em 0.8em;
 }
 
 .sec-nav .sec-nav__link.is-disabled {
@@ -2787,6 +2792,8 @@ div.login a:hover {
 
 
 .pushy-btn {
+	background-color: <?php print $bgnavtop; ?>;
+	color: <?php print $bgnavtop_txt; ?>;
 	color: #eee;
 	display: inline-block;
 	float: <?php print $left; ?>;
@@ -2797,10 +2804,13 @@ div.login a:hover {
 	cursor: pointer;
 }
 
-.pushy-btn:hover { background-color: #444; }
+.pushy-btn:hover {
+	background-color: <?php print $bgnavtop_hover; ?>;
+	color: <?php print $maincolor; ?>;
+}
 
 .pushy-active .pushy-btn {
-	background-color: #444;
+	background-color: <?php print $bgnavtop_hover; ?>;
 	color: <?php print $maincolor; ?>;
 }
 
