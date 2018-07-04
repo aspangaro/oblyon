@@ -1564,7 +1564,7 @@ td.showDragHandle {
 	<?php if ( !$conf->global->OBLYON_FULLSIZE_TOPBAR ) { ?>
 		position: relative;
 	<?php } ?>
-	z-index: 980;
+	z-index: 999;
 }
 
 /* coming feature -****
@@ -1586,6 +1586,10 @@ td.showDragHandle {
 		position: fixed;
 	<?php } ?>
 }*/
+
+#id-top {
+    background-color: #333333;
+}
 
 <?php if ( DOL_VERSION >= "4.0.0" ) { ?>
 	div.fiche {
@@ -1738,6 +1742,8 @@ div.ficheaddleft {
 	<?php if (GETPOST("optioncss") == 'print') { ?>
 		display: none;
 	<?php } else { ?>
+		display: inline-table;
+		width: 100%;
 		background-color: <?php print $bgnavtop; ?>;
 		<?php if ( $conf->global->OBLYON_STICKY_TOPBAR && $usecss3) { ?>
 			box-shadow: 0 1px 2px rgba(0, 0, 0, .4) !important; 
@@ -1759,10 +1765,11 @@ div.ficheaddleft {
 		<?php } else { ?>
 			position: relative;
 		<?php } ?>
-		/*
 		<?php //if ($conf->global->OBLYON_HIDE_LEFTMENU && !$conf->global->OBLYON_STICKY_TOPBAR ) { ?>
+			/*
 			margin-left: 210px;
-		<?php //} ?>*/
+			*/
+		<?php //} ?>
 	<?php } ?>
 }
 
@@ -1926,6 +1933,7 @@ div.ficheaddleft {
 	<?php if (GETPOST("optioncss") == 'print') { ?>
 	display: none;
 	<?php } else { ?>
+	display: inline-table;
 	background-color: <?php print $bgnavleft; ?>; 
 	<?php if ( $conf->global->OBLYON_STICKY_TOPBAR && $usecss3) { ?>
 	box-shadow: 0 1px 2px rgba(0, 0, 0, .4); 
@@ -2128,7 +2136,6 @@ div.login_block_user{
 	clear: left;
 	float: <?php print $left; ?>;
 	margin-right: 10px;
-	min-width: 120px;
 }
 
 div.login_block_user .login a,
@@ -2177,6 +2184,11 @@ div.login_block_user > .classfortooltip.login_block_elem2 {
 	height: 40px;
 	line-height: 40px;
 	margin-right: 10px;
+	<?php if ( empty($conf->dol_optimize_smallscreen) ) { ?>
+		min-width: 120px;
+	<?php } else { ?>
+		min-width: 80px;
+	<?php } ?>
 }
 
 .login_block_other .inline-block {
@@ -2562,7 +2574,7 @@ div.login a:hover {
 	text-align: <?php print $left; ?>;
 }
 
-.blockvmenusearch a:hover { color: <?php print $bgnavleft_hover; ?>; }
+.blockvmenusearch a:hover { color: <?php print $maincolor; ?>; }
 
 
 /**
@@ -7098,7 +7110,11 @@ img.loginphoto {
 		width: 150px;
 	}
 	.sec-nav.is-inverted {
-		margin-left: 170px;
+		<?php if( $conf->global->OBLYON_SHOW_COMPNAME || $conf->global->OBLYON_FULLSIZE_TOPBAR ) { ?>
+			margin-<?php print $left; ?>: 10px;
+		<?php } else { ?>
+			margin-<?php print $left; ?>: 170px;
+		<?php } ?>
 	}
 }
 
@@ -7137,7 +7153,11 @@ img.loginphoto {
 		width: auto;
 	}
 	.sec-nav.is-inverted {
-		margin-left: 130px;
+		<?php if( $conf->global->OBLYON_SHOW_COMPNAME || $conf->global->OBLYON_FULLSIZE_TOPBAR ) { ?>
+			margin-<?php print $left; ?>: 5px;
+		<?php } else { ?>
+			margin-<?php print $left; ?>: 130px;
+		<?php } ?>
 	}
 }
 
@@ -7196,7 +7216,7 @@ img.loginphoto {
 	.usertextatoplogin {
 		display: none;
 	}
-	div#tmenu_tooltip {
+	div#tmenu_tooltip, #tmenu_tooltipinvert {
 	<?php if (GETPOST("optioncss") == 'print') {	?>
 		display:none;
 	<?php } else { ?>
@@ -7204,7 +7224,7 @@ img.loginphoto {
 	<?php } ?>
 	}
 	div.login_block {
-		top: 4px;
+		top: 1px;
 		max-width: 82px;
 	}
 	li.tmenu, li.tmenusel {
