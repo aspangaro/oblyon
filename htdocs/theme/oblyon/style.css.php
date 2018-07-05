@@ -3613,6 +3613,10 @@ td.photo {
 	<?php } ?>
 }
 
+<?php
+}	// End test if not phone
+?>
+
 <?php if ( $conf->global->OBLYON_ELDY_ICONS ) { ?>
 	.mainmenu.home{
 		background-image: url(<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/menus/home.png',1); ?>);
@@ -3851,10 +3855,6 @@ foreach($mainmenuusedarray as $val) {
 	}
 }
 //End of part to add more div class css
-?>
-
-<?php
-}	// End test if not phone
 ?>
 
 
