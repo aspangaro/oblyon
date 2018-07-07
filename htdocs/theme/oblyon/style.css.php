@@ -1535,7 +1535,7 @@ td.showDragHandle {
 #id-left,
 .side-nav {
 	display: table-cell;
-	<?php if ($conf->global->OBLYON_HIDE_LEFTMENU) { ?>
+	<?php if ($conf->global->OBLYON_HIDE_LEFTMENU || $conf->dol_optimize_smallscreen) { ?>
 		float: left;
 	<?php } else { ?>
 		float: none;
@@ -1560,7 +1560,7 @@ td.showDragHandle {
 #id-right { width: 100%; }
 
 #id-left {
-	<?php if ( !$conf->global->OBLYON_HIDE_LEFTMENU ) { ?>
+	<?php if ( !$conf->global->OBLYON_HIDE_LEFTMENU && !$conf->dol_optimize_smallscreen ) { ?>
 		<?php if ( $conf->global->MAIN_MENU_INVERT ) { ?>
 			<?php if( $conf->global->OBLYON_SHOW_COMPNAME || $conf->global->OBLYON_FULLSIZE_TOPBAR ) { ?>
 				padding-top: 40px;
@@ -1574,12 +1574,12 @@ td.showDragHandle {
 	<?php if ( !$conf->global->OBLYON_FULLSIZE_TOPBAR ) { ?>
 		position: relative;
 	<?php } ?>
-	z-index: 980;
+	z-index: 999;
 }
 
 /* coming feature -****
  #id-left {
-	<?php if ($conf->global->OBLYON_FIX_LEFTMENU) { ?>
+	<?php if ( $conf->global->OBLYON_HIDE_LEFTMENU || $conf->dol_optimize_smallscreen ) { ?>
 		<?php if ( $conf->global->OBLYON_STICKY_TOPBAR ) { ?>
 			<?php if ( $conf->global->MAIN_MENU_INVERT ) { ?>
 				height: calc(100% - 40px);
@@ -1597,10 +1597,14 @@ td.showDragHandle {
 	<?php } ?>
 }*/
 
+#id-top {
+    background-color: #333333;
+}
+
 <?php if ( DOL_VERSION >= "4.0.0" ) { ?>
 	div.fiche {
 		margin-<?php print $left; ?>: <?php print (GETPOST("optioncss") == 'print'?6:($dol_hide_leftmenu?'6':'10')); ?>px;
-		<?php if (!$conf->global->OBLYON_HIDE_LEFTMENU) { ?>
+		<?php if ( !$conf->global->OBLYON_HIDE_LEFTMENU && !$conf->dol_optimize_smallscreen ) { ?>
 			margin-<?php print $right; ?>: <?php print (GETPOST("optioncss") == 'print'?8:(empty($conf->dol_optimize_smallscreen)?'12':'6')); ?>px;
 		<?php } else { ?>
 			margin-<?php print $right; ?>: <?php print (GETPOST("optioncss") == 'print'?6:((empty($conf->global->MAIN_MENU_USE_JQUERY_LAYOUT))?($dol_hide_topmenu?'4':'20'):'24')); ?>px;
@@ -1610,7 +1614,7 @@ td.showDragHandle {
 <?php } else { ?>
 	div.fiche {
 		margin-<?php print $left; ?>: <?php print (GETPOST("optioncss") == 'print'?6:((empty($conf->global->MAIN_MENU_USE_JQUERY_LAYOUT))?($dol_hide_topmenu?'4':'20'):'24')); ?>px;
-		<?php if (!$conf->global->OBLYON_HIDE_LEFTMENU) { ?>
+		<?php if ( !$conf->global->OBLYON_HIDE_LEFTMENU && !$conf->dol_optimize_smallscreen ) { ?>
 		margin-<?php print $right; ?>: <?php print (GETPOST("optioncss") == 'print'?8:(empty($conf->dol_optimize_smallscreen)?'15':'4')); ?>px;
 		<?php } else { ?>
 		margin-<?php print $right; ?>: <?php print (GETPOST("optioncss") == 'print'?6:((empty($conf->global->MAIN_MENU_USE_JQUERY_LAYOUT))?($dol_hide_topmenu?'4':'20'):'24')); ?>px;
@@ -1748,6 +1752,8 @@ div.ficheaddleft {
 	<?php if (GETPOST("optioncss") == 'print') { ?>
 		display: none;
 	<?php } else { ?>
+		display: inline-table;
+		width: 100%;
 		background-color: <?php print $bgnavtop; ?>;
 		<?php if ( $conf->global->OBLYON_STICKY_TOPBAR && $usecss3) { ?>
 			box-shadow: 0 1px 2px rgba(0, 0, 0, .4) !important; 
@@ -1769,10 +1775,11 @@ div.ficheaddleft {
 		<?php } else { ?>
 			position: relative;
 		<?php } ?>
-		/*
-		<?php //if ($conf->global->OBLYON_FIX_LEFTMENU && !$conf->global->OBLYON_STICKY_TOPBAR ) { ?>
+		<?php //if (( $conf->global->OBLYON_HIDE_LEFTMENU || $conf->dol_optimize_smallscreen ) && !$conf->global->OBLYON_STICKY_TOPBAR ) { ?>
+			/*
 			margin-left: 210px;
-		<?php //} ?>*/
+			*/
+		<?php //} ?>
 	<?php } ?>
 }
 
@@ -1920,9 +1927,15 @@ div.ficheaddleft {
  
 #tmenu_tooltipinvert .pushy-btn,
 #tmenu_tooltip .pushy-btn { /* for v3.5 */
-	font-size: 20px !important;
-	height: 40px;
-	line-height: 40px;
+	<?php if ($conf->global->MAIN_MENU_INVERT) { ?>
+		font-size: 40px !important;
+		height: 40px;
+		line-height: 40px;
+	<?php } else { ?>
+		font-size: 54px !important;
+		height: 54px;
+		line-height: 54px;
+	<?php } ?>
 }
 
  
@@ -1930,6 +1943,7 @@ div.ficheaddleft {
 	<?php if (GETPOST("optioncss") == 'print') { ?>
 	display: none;
 	<?php } else { ?>
+	display: inline-table;
 	background-color: <?php print $bgnavleft; ?>; 
 	<?php if ( $conf->global->OBLYON_STICKY_TOPBAR && $usecss3) { ?>
 	box-shadow: 0 1px 2px rgba(0, 0, 0, .4); 
@@ -1956,7 +1970,7 @@ div.ficheaddleft {
 
 .sec-nav.is-inverted {
 	display: inline-block;
-	<?php if( !$conf->global->OBLYON_FULLSIZE_TOPBAR && !$conf->global->OBLYON_SHOW_COMPNAME && !$conf->global->OBLYON_HIDE_LEFTMENU ) { ?>
+	<?php if( !$conf->global->OBLYON_FULLSIZE_TOPBAR && !$conf->global->OBLYON_SHOW_COMPNAME && !$conf->global->OBLYON_HIDE_LEFTMENU && !$conf->dol_optimize_smallscreen ) { ?>
 		margin-<?php print $left; ?>: 200px;
 	<?php } else { ?>
 		margin-<?php print $left; ?>: 10px;
@@ -2099,7 +2113,7 @@ div.login_block {
 	<?php } else { ?>
 		height: 54px;
 	<?php } ?>
-	margin-right: 10px;
+	padding-right: 10px;
 	<?php if ( $conf->global->OBLYON_STICKY_TOPBAR ) { ?>
 		position: fixed;
 	<?php } else { ?>
@@ -2113,12 +2127,25 @@ div.login_block {
 	<?php } ?>
 }
 
+<?php if ( !empty($conf->dol_optimize_smallscreen) ) { ?>
+div.login_block:after {
+	content: '\e614';
+	color: <?php print $bgnavtop_txt; ?>;
+	font-family: 'oblyon-icons' !important;
+	font-size: 20px;
+	<?php if ($conf->global->MAIN_MENU_INVERT) { ?>
+    	line-height: 40px;
+	<?php } else { ?>
+    	line-height: 55px;
+	<?php } ?>
+}
+<?php } ?> /* end test if not phone */
+
 /* db v3.5 */ 
 div.login_block_user{
 	clear: left;
 	float: <?php print $left; ?>;
-	padding-right: 15px;
-	min-width: 120px;
+	margin-right: 10px;
 }
 
 div.login_block_user .login a,
@@ -2166,7 +2193,12 @@ div.login_block_user > .classfortooltip.login_block_elem2 {
 	<?php } ?>
 	height: 40px;
 	line-height: 40px;
-	min-width: 120px;
+	margin-right: 10px;
+	<?php if ( empty($conf->dol_optimize_smallscreen) ) { ?>
+		min-width: 120px;
+	<?php } else { ?>
+		min-width: 80px;
+	<?php } ?>
 }
 
 .login_block_other .inline-block {
@@ -2373,15 +2405,14 @@ div.login a:hover {
  */
 
 .db-menu__society {
-	background-color: #333;
 	margin: 0; 
 	padding: 0;
 }
 
 .db-menu__society h1 {
 	color: #fff;
-	font-size: 15px;
-	font-weight: 500;
+	font-size: 1.5em;
+	font-weight: bold;
 	margin: 0;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -2488,16 +2519,16 @@ div.login a:hover {
 }
 
 .sec-nav__sub-list .item-level1 {
-	padding: 0.3em 1em;
+	padding: 0.3em 0.8em;
 }
 
 .sec-nav__sub-list .item-level2 {
-	padding: 0.2em 1.2em;
+	padding: 0.2em 1em;
 }
 
 .sec-nav__sub-item.is-disabled {
 	opacity: .6;
-	padding: 0.3em 1em;
+	padding: 0.3em 0.8em;
 }
 
 .sec-nav .sec-nav__link.is-disabled {
@@ -2553,7 +2584,7 @@ div.login a:hover {
 	text-align: <?php print $left; ?>;
 }
 
-.blockvmenusearch a:hover { color: <?php print $bgnavleft_hover; ?>; }
+.blockvmenusearch a:hover { color: <?php print $maincolor; ?>; }
 
 
 /**
@@ -2654,7 +2685,7 @@ div.login a:hover {
 \*------------------------------------*/
 
 #id-left {
-	<?php if ( $conf->global->OBLYON_HIDE_LEFTMENU ) { ?>
+	<?php if ( $conf->global->OBLYON_HIDE_LEFTMENU || $conf->dol_optimize_smallscreen ) { ?>
 		position: absolute;
 		<?php if ( $conf->global->MAIN_MENU_INVERT ) { ?>
 			top: 40px;
@@ -2684,7 +2715,7 @@ div.login a:hover {
 	<?php } ?>
 }
 
-<?php if ($conf->global->OBLYON_HIDE_LEFTMENU) { ?>
+<?php if ( $conf->global->OBLYON_HIDE_LEFTMENU || $conf->dol_optimize_smallscreen ) { ?>
 #id-left, #id-container, .push {
 	<?php if ( $conf->global->OBLYON_EFFECT_LEFTMENU == "push" ) { ?>*
 		-webkit-transition: -webkit-transform .3s cubic-bezier(.16, .68, .43, .99);
@@ -2783,6 +2814,8 @@ div.login a:hover {
 
 
 .pushy-btn {
+	background-color: <?php print $bgnavtop; ?>;
+	color: <?php print $bgnavtop_txt; ?>;
 	color: #eee;
 	display: inline-block;
 	float: <?php print $left; ?>;
@@ -2793,10 +2826,13 @@ div.login a:hover {
 	cursor: pointer;
 }
 
-.pushy-btn:hover { background-color: #444; }
+.pushy-btn:hover {
+	background-color: <?php print $bgnavtop_hover; ?>;
+	color: <?php print $maincolor; ?>;
+}
 
 .pushy-active .pushy-btn {
-	background-color: #444;
+	background-color: <?php print $bgnavtop_hover; ?>;
 	color: <?php print $maincolor; ?>;
 }
 
@@ -2807,7 +2843,6 @@ div.login a:hover {
 		#Oblyon Main and Sec Nav Icons
 \*------------------------------------*/
 
-<?php if (empty($conf->dol_optimize_smallscreen)) { ?>
 .main-nav .icon {
 	<?php if ( $conf->global->OBLYON_HIDE_TOPICONS && !$conf->global->MAIN_MENU_INVERT ) { ?>
 		display: none;
@@ -3142,8 +3177,6 @@ div.login a:hover {
 	content: '\e605';
 }
 
-<?php } ?> /* end test if not phone */
-
 
 /*------------------------------------*\
 		#Top Menu (eldy style) 
@@ -3411,7 +3444,7 @@ div.vmenu {
 	<?php if (empty($conf->dol_optimize_smallscreen)) { ?>
 		min-width: 200px;
 		max-width: 220px;
-		<?php if ( $conf->global->OBLYON_HIDE_LEFTMENU ) { ?>
+		<?php if ( $conf->global->OBLYON_HIDE_LEFTMENU || $conf->dol_optimize_smallscreen ) { ?>
 			width: 200px;
 		<?php } else { ?>
 			width: 100%;
@@ -3589,6 +3622,10 @@ td.photo {
 		display: block;
 	<?php } ?>
 }
+
+<?php
+}	// End test if not phone
+?>
 
 <?php if ( $conf->global->OBLYON_ELDY_ICONS ) { ?>
 	.mainmenu.home{
@@ -3828,10 +3865,6 @@ foreach($mainmenuusedarray as $val) {
 	}
 }
 //End of part to add more div class css
-?>
-
-<?php
-}	// End test if not phone
 ?>
 
 
@@ -7080,6 +7113,21 @@ img.loginphoto {
 	.sec-nav__sub-item {
 		overflow-wrap: break-word;
 	}
+
+	div.vmenu {
+		min-width: 170px;
+		width: 170px;
+	}
+	.vmenusearchselectcombo {
+		width: 150px;
+	}
+	.sec-nav.is-inverted {
+		<?php if( $conf->global->OBLYON_SHOW_COMPNAME || $conf->global->OBLYON_FULLSIZE_TOPBAR ) { ?>
+			margin-<?php print $left; ?>: 10px;
+		<?php } else { ?>
+			margin-<?php print $left; ?>: 170px;
+		<?php } ?>
+	}
 }
 
 /* rule to reduce inverted top menu */
@@ -7107,6 +7155,21 @@ img.loginphoto {
 	#tmenu_tooltipinvert .sec-nav__item .icon {
 		font-size: 28px;
 		padding: 0 10px;
+	}
+
+	div.vmenu {
+		min-width: 130px;
+		width: 130px;
+	}
+	.vmenusearchselectcombo {
+		width: auto;
+	}
+	.sec-nav.is-inverted {
+		<?php if( $conf->global->OBLYON_SHOW_COMPNAME || $conf->global->OBLYON_FULLSIZE_TOPBAR ) { ?>
+			margin-<?php print $left; ?>: 5px;
+		<?php } else { ?>
+			margin-<?php print $left; ?>: 130px;
+		<?php } ?>
 	}
 }
 
@@ -7165,7 +7228,7 @@ img.loginphoto {
 	.usertextatoplogin {
 		display: none;
 	}
-	div#tmenu_tooltip {
+	div#tmenu_tooltip, #tmenu_tooltipinvert {
 	<?php if (GETPOST("optioncss") == 'print') {	?>
 		display:none;
 	<?php } else { ?>
@@ -7173,7 +7236,7 @@ img.loginphoto {
 	<?php } ?>
 	}
 	div.login_block {
-		top: 4px;
+		top: 1px;
 		max-width: 82px;
 	}
 	li.tmenu, li.tmenusel {

@@ -95,7 +95,7 @@ function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$fo
 		}
 	}
 	
-	if ( empty($conf->global->MAIN_MENU_INVERT) && $conf->global->OBLYON_HIDE_LEFTMENU ) {
+	if ( empty($conf->global->MAIN_MENU_INVERT) && ($conf->global->OBLYON_HIDE_LEFTMENU || $conf->dol_optimize_smallscreen) ) {
 	print '<div class="pushy-btn" title="'.$langs->trans("ShowLeftMenu").'">&#8801;</div>';
 	}
 
@@ -572,7 +572,7 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 	$mainmenu=($forcemainmenu?$forcemainmenu:$_SESSION["mainmenu"]);
 	$leftmenu=($forceleftmenu?'':(empty($_SESSION["leftmenu"])?'none':$_SESSION["leftmenu"]));
 
-	if ( !empty($conf->global->MAIN_MENU_INVERT) && $conf->global->OBLYON_HIDE_LEFTMENU ) {
+	if ( !empty($conf->global->MAIN_MENU_INVERT) && ($conf->global->OBLYON_HIDE_LEFTMENU || $conf->dol_optimize_smallscreen) ) {
 	print '<div class="pushy-btn" title="'.$langs->trans("ShowLeftMenu").'">&#8801;</div>';
 	}
 
