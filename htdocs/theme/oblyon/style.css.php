@@ -1525,7 +1525,7 @@ td.showDragHandle {
 #id-left,
 .side-nav {
 	display: table-cell;
-	<?php if ($conf->global->OBLYON_HIDE_LEFTMENU) { ?>
+	<?php if ($conf->global->OBLYON_HIDE_LEFTMENU || $conf->dol_optimize_smallscreen) { ?>
 		float: left;
 	<?php } else { ?>
 		float: none;
@@ -1550,7 +1550,7 @@ td.showDragHandle {
 #id-right { width: 100%; }
 
 #id-left {
-	<?php if ( !$conf->global->OBLYON_HIDE_LEFTMENU ) { ?>
+	<?php if ( !$conf->global->OBLYON_HIDE_LEFTMENU && !$conf->dol_optimize_smallscreen ) { ?>
 		<?php if ( $conf->global->MAIN_MENU_INVERT ) { ?>
 			<?php if( $conf->global->OBLYON_SHOW_COMPNAME || $conf->global->OBLYON_FULLSIZE_TOPBAR ) { ?>
 				padding-top: 40px;
@@ -1569,7 +1569,7 @@ td.showDragHandle {
 
 /* coming feature -****
  #id-left {
-	<?php if ( $conf->global->OBLYON_HIDE_LEFTMENU ) { ?>
+	<?php if ( $conf->global->OBLYON_HIDE_LEFTMENU || $conf->dol_optimize_smallscreen ) { ?>
 		<?php if ( $conf->global->OBLYON_STICKY_TOPBAR ) { ?>
 			<?php if ( $conf->global->MAIN_MENU_INVERT ) { ?>
 				height: calc(100% - 40px);
@@ -1594,7 +1594,7 @@ td.showDragHandle {
 <?php if ( DOL_VERSION >= "4.0.0" ) { ?>
 	div.fiche {
 		margin-<?php print $left; ?>: <?php print (GETPOST("optioncss") == 'print'?6:($dol_hide_leftmenu?'6':'10')); ?>px;
-		<?php if (!$conf->global->OBLYON_HIDE_LEFTMENU) { ?>
+		<?php if ( !$conf->global->OBLYON_HIDE_LEFTMENU && !$conf->dol_optimize_smallscreen ) { ?>
 			margin-<?php print $right; ?>: <?php print (GETPOST("optioncss") == 'print'?8:(empty($conf->dol_optimize_smallscreen)?'12':'6')); ?>px;
 		<?php } else { ?>
 			margin-<?php print $right; ?>: <?php print (GETPOST("optioncss") == 'print'?6:((empty($conf->global->MAIN_MENU_USE_JQUERY_LAYOUT))?($dol_hide_topmenu?'4':'20'):'24')); ?>px;
@@ -1604,7 +1604,7 @@ td.showDragHandle {
 <?php } else { ?>
 	div.fiche {
 		margin-<?php print $left; ?>: <?php print (GETPOST("optioncss") == 'print'?6:((empty($conf->global->MAIN_MENU_USE_JQUERY_LAYOUT))?($dol_hide_topmenu?'4':'20'):'24')); ?>px;
-		<?php if (!$conf->global->OBLYON_HIDE_LEFTMENU) { ?>
+		<?php if ( !$conf->global->OBLYON_HIDE_LEFTMENU && !$conf->dol_optimize_smallscreen ) { ?>
 		margin-<?php print $right; ?>: <?php print (GETPOST("optioncss") == 'print'?8:(empty($conf->dol_optimize_smallscreen)?'15':'4')); ?>px;
 		<?php } else { ?>
 		margin-<?php print $right; ?>: <?php print (GETPOST("optioncss") == 'print'?6:((empty($conf->global->MAIN_MENU_USE_JQUERY_LAYOUT))?($dol_hide_topmenu?'4':'20'):'24')); ?>px;
@@ -1765,7 +1765,7 @@ div.ficheaddleft {
 		<?php } else { ?>
 			position: relative;
 		<?php } ?>
-		<?php //if ($conf->global->OBLYON_HIDE_LEFTMENU && !$conf->global->OBLYON_STICKY_TOPBAR ) { ?>
+		<?php //if (( $conf->global->OBLYON_HIDE_LEFTMENU || $conf->dol_optimize_smallscreen ) && !$conf->global->OBLYON_STICKY_TOPBAR ) { ?>
 			/*
 			margin-left: 210px;
 			*/
@@ -1960,7 +1960,7 @@ div.ficheaddleft {
 
 .sec-nav.is-inverted {
 	display: inline-block;
-	<?php if( !$conf->global->OBLYON_FULLSIZE_TOPBAR && !$conf->global->OBLYON_SHOW_COMPNAME && !$conf->global->OBLYON_HIDE_LEFTMENU ) { ?>
+	<?php if( !$conf->global->OBLYON_FULLSIZE_TOPBAR && !$conf->global->OBLYON_SHOW_COMPNAME && !$conf->global->OBLYON_HIDE_LEFTMENU && !$conf->dol_optimize_smallscreen ) { ?>
 		margin-<?php print $left; ?>: 200px;
 	<?php } else { ?>
 		margin-<?php print $left; ?>: 10px;
@@ -2675,7 +2675,7 @@ div.login a:hover {
 \*------------------------------------*/
 
 #id-left {
-	<?php if ( $conf->global->OBLYON_HIDE_LEFTMENU ) { ?>
+	<?php if ( $conf->global->OBLYON_HIDE_LEFTMENU || $conf->dol_optimize_smallscreen ) { ?>
 		position: absolute;
 		<?php if ( $conf->global->MAIN_MENU_INVERT ) { ?>
 			top: 40px;
@@ -2705,7 +2705,7 @@ div.login a:hover {
 	<?php } ?>
 }
 
-<?php if ($conf->global->OBLYON_HIDE_LEFTMENU) { ?>
+<?php if ( $conf->global->OBLYON_HIDE_LEFTMENU || $conf->dol_optimize_smallscreen ) { ?>
 #id-left, #id-container, .push {
 	<?php if ( $conf->global->OBLYON_EFFECT_LEFTMENU == "push" ) { ?>*
 		-webkit-transition: -webkit-transform .3s cubic-bezier(.16, .68, .43, .99);
@@ -3434,7 +3434,7 @@ div.vmenu {
 	<?php if (empty($conf->dol_optimize_smallscreen)) { ?>
 		min-width: 200px;
 		max-width: 220px;
-		<?php if ( $conf->global->OBLYON_HIDE_LEFTMENU ) { ?>
+		<?php if ( $conf->global->OBLYON_HIDE_LEFTMENU || $conf->dol_optimize_smallscreen ) { ?>
 			width: 200px;
 		<?php } else { ?>
 			width: 100%;
