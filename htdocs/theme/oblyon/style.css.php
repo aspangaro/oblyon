@@ -565,6 +565,16 @@ td.hidden {
 	display: none;
 }
 
+.optiongrey, .opacitymedium {
+	opacity: 0.5;
+}
+.opacityhigh {
+	opacity: 0.2;
+}
+.opacitytransp {
+	opacity: 0;
+}
+
 /* ============================================================================== */
 /*	Module website 																  */
 /* ============================================================================== */
@@ -4321,6 +4331,16 @@ div.tabBar ul li {
 	margin-<?php print $left; ?>: 30px !important;
 }
 
+div.popuptabset {
+	background-color: #e5e5e5;
+	padding: 5px;
+	border: 1px solid #e5e5e5;
+}
+
+div.popuptab {
+	margin: .3em;
+}
+
 @media only screen and (max-width: 570px)
 {
 	
@@ -4408,8 +4428,7 @@ div.noborder {
 	width: 100%;
 }
 
-table.noborder[summary="list_of_modules"] tr.pair, 
-table.noborder[summary="list_of_modules"] tr.impair	{ line-height: 2.2em; }
+table.noborder[summary="list_of_modules"] tr.oddeven { line-height: 2.2em; }
 
 table.noborder tr, div.noborder form {
 	line-height: 1.8em;
@@ -4492,10 +4511,7 @@ table.liste {
 	width: 100%;
 }
 
-table.liste .impair td, table.liste .pair td { padding: 5px 10px; }
-
-/*table.liste .impair td:first-child, table.liste .pair td:first-child { padding: 5px 0 5px 10px; }
-table.liste .impair td:last-child, table.liste .pair td:last-child { padding: 5px 10px 5px 0; }*/
+table.liste .oddeven td { padding: 5px 10px; }
 
 table .liste_titre td { padding: 2px; }
 
@@ -6854,69 +6870,66 @@ ul.noborder li:nth-child(odd):not(.liste_titre) {
 }
 
 
-/* Set the color for hover lines */
-.oddeven:hover, .evenodd:hover, .impair:hover, .pair:hover
+/* Prepare to remove class pair - impair */
+
+.noborder > tbody > tr:nth-child(even):not(.liste_titre), .liste > tbody > tr:nth-child(even):not(.liste_titre) {
+	background: #<?php echo colorArrayToHex(colorStringToArray($colorbacklineimpair1)); ?>;
+}
+.noborder > tbody > tr:nth-child(even):not(:last-child) td:not(.liste_titre), .liste > tbody > tr:nth-child(even):not(:last-child) td:not(.liste_titre) {
+	border-bottom: 1px solid #ddd;
+}
+
+.noborder > tbody > tr:nth-child(odd):not(.liste_titre), .liste > tbody > tr:nth-child(odd):not(.liste_titre) {
+	background: #<?php echo colorArrayToHex(colorStringToArray($colorbacklinepair1)); ?>;
+}
+.noborder > tbody > tr:nth-child(odd):not(:last-child) td:not(.liste_titre), .liste > tbody > tr:nth-child(odd):not(:last-child) td:not(.liste_titre) {
+	border-bottom: 1px solid #ddd;
+}
+
+ul.noborder li:nth-child(even):not(.liste_titre) {
+	background-color: #<?php echo colorArrayToHex(colorStringToArray($colorbacklinepair1)); ?>;
+}
+
+.oddeven:hover, .evenodd:hover
 {
 <?php if ($colorbacklinepairhover) { ?>
 	background: rgb(<?php echo $colorbacklinepairhover; ?>) !important;
 <?php } ?>
 }
 
-.oddeven, .evenodd, .impair, .nohover .impair:hover, tr.impair td.nohover
+.oddeven, .evenodd
 {
 	font-family: <?php print $fontlist ?>;
 	border: 0px;
 	margin-bottom: 1px;
 	color: #202020;
 }
-.impair, .nohover .impair:hover, tr.impair td.nohover
-{
-	background: #<?php echo colorArrayToHex(colorStringToArray($colorbacklineimpair1)); ?>;
-}
 #GanttChartDIV {
 	background: #<?php echo colorArrayToHex(colorStringToArray($colorbacklineimpair1)); ?>;
 }
 
-.oddeven, .evenodd, .pair, .nohover .pair:hover, tr.pair td.nohover {
-	font-family: <?php print $fontlist ?>;
-	margin-bottom: 1px;
-	color: #202020;
-}
-.pair, .nohover .pair:hover, tr.pair td.nohover {
-	background-color: #<?php echo colorArrayToHex(colorStringToArray($colorbacklinepair1)); ?>;
-}
 table.dataTable tr.oddeven {
 	background-color: #<?php echo colorArrayToHex(colorStringToArray($colorbacklinepair1)); ?> !important;
 }
 
 /* For no hover style */
-td.oddeven, table.nohover tr.impair, table.nohover tr.pair, table.nohover tr.impair td, table.nohover tr.pair td, tr.nohover td, form.nohover, form.nohover:hover {
+td.oddeven, tr.nohover td, form.nohover, form.nohover:hover {
 	background-color: #<?php echo colorArrayToHex(colorStringToArray($colorbacklineimpair1)); ?> !important;
 	background: #<?php echo colorArrayToHex(colorStringToArray($colorbacklineimpair1)); ?> !important;
 }
-td.evenodd, tr.nohoverpair td {
+td.evenodd {
 	background-color: #<?php echo colorArrayToHex(colorStringToArray($colorbacklinepair1)); ?> !important;
 	background: #<?php echo colorArrayToHex(colorStringToArray($colorbacklinepair1)); ?> !important;
 }
 .trforbreak td {
 	background-color: #<?php echo colorArrayToHex(colorStringToArray($colorbacklinebreak)); ?> !important;
 }
+.trforbreak td, table.noborder tr.trforbreak td a:link {
+	color: #fff;
+}
 
 table.dataTable td {
 	padding: 5px 2px 5px 3px !important;
-}
-tr.pair td, tr.impair td, form.impair div.tagtd, form.pair div.tagtd, div.impair div.tagtd, div.pair div.tagtd, div.liste_titre div.tagtd {
-	padding: 5px 2px 5px 3px;
-	border-bottom: 1px solid #eee;
-}
-form.pair, form.impair {
-	font-weight: normal;
-}
-tr.pair:last-of-type td, tr.impair:last-of-type td {
-	border-bottom: 0px !important;
-}
-tr.pair td .nobordernopadding tr td, tr.impair td .nobordernopadding tr td {
-	border-bottom: 0px !important;
 }
 
 div.arearef {
@@ -7100,7 +7113,6 @@ img.loginphoto {
 	.sec-nav__sub-item {
 		overflow-wrap: break-word;
 	}
-
 
 	div.vmenu {
 		min-width: 170px;
