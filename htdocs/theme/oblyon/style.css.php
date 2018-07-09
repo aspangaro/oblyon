@@ -565,16 +565,6 @@ td.hidden {
 	display: none;
 }
 
-.optiongrey, .opacitymedium {
-	opacity: 0.5;
-}
-.opacityhigh {
-	opacity: 0.2;
-}
-.opacitytransp {
-	opacity: 0;
-}
-
 /* ============================================================================== */
 /*	Module website 																  */
 /* ============================================================================== */
@@ -1535,7 +1525,7 @@ td.showDragHandle {
 #id-left,
 .side-nav {
 	display: table-cell;
-	<?php if ($conf->global->OBLYON_HIDE_LEFTMENU) { ?>
+	<?php if ($conf->global->OBLYON_HIDE_LEFTMENU || $conf->dol_optimize_smallscreen) { ?>
 		float: left;
 	<?php } else { ?>
 		float: none;
@@ -1560,7 +1550,7 @@ td.showDragHandle {
 #id-right { width: 100%; }
 
 #id-left {
-	<?php if ( !$conf->global->OBLYON_HIDE_LEFTMENU ) { ?>
+	<?php if ( !$conf->global->OBLYON_HIDE_LEFTMENU && !$conf->dol_optimize_smallscreen ) { ?>
 		<?php if ( $conf->global->MAIN_MENU_INVERT ) { ?>
 			<?php if( $conf->global->OBLYON_SHOW_COMPNAME || $conf->global->OBLYON_FULLSIZE_TOPBAR ) { ?>
 				padding-top: 40px;
@@ -1574,12 +1564,12 @@ td.showDragHandle {
 	<?php if ( !$conf->global->OBLYON_FULLSIZE_TOPBAR ) { ?>
 		position: relative;
 	<?php } ?>
-	z-index: 980;
+	z-index: 999;
 }
 
 /* coming feature -****
  #id-left {
-	<?php if ($conf->global->OBLYON_FIX_LEFTMENU) { ?>
+	<?php if ( $conf->global->OBLYON_HIDE_LEFTMENU || $conf->dol_optimize_smallscreen ) { ?>
 		<?php if ( $conf->global->OBLYON_STICKY_TOPBAR ) { ?>
 			<?php if ( $conf->global->MAIN_MENU_INVERT ) { ?>
 				height: calc(100% - 40px);
@@ -1597,10 +1587,14 @@ td.showDragHandle {
 	<?php } ?>
 }*/
 
+#id-top {
+    background-color: #333333;
+}
+
 <?php if ( DOL_VERSION >= "4.0.0" ) { ?>
 	div.fiche {
 		margin-<?php print $left; ?>: <?php print (GETPOST("optioncss") == 'print'?6:($dol_hide_leftmenu?'6':'10')); ?>px;
-		<?php if (!$conf->global->OBLYON_HIDE_LEFTMENU) { ?>
+		<?php if ( !$conf->global->OBLYON_HIDE_LEFTMENU && !$conf->dol_optimize_smallscreen ) { ?>
 			margin-<?php print $right; ?>: <?php print (GETPOST("optioncss") == 'print'?8:(empty($conf->dol_optimize_smallscreen)?'12':'6')); ?>px;
 		<?php } else { ?>
 			margin-<?php print $right; ?>: <?php print (GETPOST("optioncss") == 'print'?6:((empty($conf->global->MAIN_MENU_USE_JQUERY_LAYOUT))?($dol_hide_topmenu?'4':'20'):'24')); ?>px;
@@ -1610,7 +1604,7 @@ td.showDragHandle {
 <?php } else { ?>
 	div.fiche {
 		margin-<?php print $left; ?>: <?php print (GETPOST("optioncss") == 'print'?6:((empty($conf->global->MAIN_MENU_USE_JQUERY_LAYOUT))?($dol_hide_topmenu?'4':'20'):'24')); ?>px;
-		<?php if (!$conf->global->OBLYON_HIDE_LEFTMENU) { ?>
+		<?php if ( !$conf->global->OBLYON_HIDE_LEFTMENU && !$conf->dol_optimize_smallscreen ) { ?>
 		margin-<?php print $right; ?>: <?php print (GETPOST("optioncss") == 'print'?8:(empty($conf->dol_optimize_smallscreen)?'15':'4')); ?>px;
 		<?php } else { ?>
 		margin-<?php print $right; ?>: <?php print (GETPOST("optioncss") == 'print'?6:((empty($conf->global->MAIN_MENU_USE_JQUERY_LAYOUT))?($dol_hide_topmenu?'4':'20'):'24')); ?>px;
@@ -1748,6 +1742,8 @@ div.ficheaddleft {
 	<?php if (GETPOST("optioncss") == 'print') { ?>
 		display: none;
 	<?php } else { ?>
+		display: inline-table;
+		width: 100%;
 		background-color: <?php print $bgnavtop; ?>;
 		<?php if ( $conf->global->OBLYON_STICKY_TOPBAR && $usecss3) { ?>
 			box-shadow: 0 1px 2px rgba(0, 0, 0, .4) !important; 
@@ -1769,10 +1765,11 @@ div.ficheaddleft {
 		<?php } else { ?>
 			position: relative;
 		<?php } ?>
-		/*
-		<?php //if ($conf->global->OBLYON_FIX_LEFTMENU && !$conf->global->OBLYON_STICKY_TOPBAR ) { ?>
+		<?php //if (( $conf->global->OBLYON_HIDE_LEFTMENU || $conf->dol_optimize_smallscreen ) && !$conf->global->OBLYON_STICKY_TOPBAR ) { ?>
+			/*
 			margin-left: 210px;
-		<?php //} ?>*/
+			*/
+		<?php //} ?>
 	<?php } ?>
 }
 
@@ -1920,9 +1917,15 @@ div.ficheaddleft {
  
 #tmenu_tooltipinvert .pushy-btn,
 #tmenu_tooltip .pushy-btn { /* for v3.5 */
-	font-size: 20px !important;
-	height: 40px;
-	line-height: 40px;
+	<?php if ($conf->global->MAIN_MENU_INVERT) { ?>
+		font-size: 40px !important;
+		height: 40px;
+		line-height: 40px;
+	<?php } else { ?>
+		font-size: 54px !important;
+		height: 54px;
+		line-height: 54px;
+	<?php } ?>
 }
 
  
@@ -1930,6 +1933,7 @@ div.ficheaddleft {
 	<?php if (GETPOST("optioncss") == 'print') { ?>
 	display: none;
 	<?php } else { ?>
+	display: inline-table;
 	background-color: <?php print $bgnavleft; ?>; 
 	<?php if ( $conf->global->OBLYON_STICKY_TOPBAR && $usecss3) { ?>
 	box-shadow: 0 1px 2px rgba(0, 0, 0, .4); 
@@ -1956,7 +1960,7 @@ div.ficheaddleft {
 
 .sec-nav.is-inverted {
 	display: inline-block;
-	<?php if( !$conf->global->OBLYON_FULLSIZE_TOPBAR && !$conf->global->OBLYON_SHOW_COMPNAME && !$conf->global->OBLYON_HIDE_LEFTMENU ) { ?>
+	<?php if( !$conf->global->OBLYON_FULLSIZE_TOPBAR && !$conf->global->OBLYON_SHOW_COMPNAME && !$conf->global->OBLYON_HIDE_LEFTMENU && !$conf->dol_optimize_smallscreen ) { ?>
 		margin-<?php print $left; ?>: 200px;
 	<?php } else { ?>
 		margin-<?php print $left; ?>: 10px;
@@ -2099,7 +2103,7 @@ div.login_block {
 	<?php } else { ?>
 		height: 54px;
 	<?php } ?>
-	margin-right: 10px;
+	padding-right: 10px;
 	<?php if ( $conf->global->OBLYON_STICKY_TOPBAR ) { ?>
 		position: fixed;
 	<?php } else { ?>
@@ -2113,12 +2117,25 @@ div.login_block {
 	<?php } ?>
 }
 
+<?php if ( !empty($conf->dol_optimize_smallscreen) ) { ?>
+div.login_block:after {
+	content: '\e614';
+	color: <?php print $bgnavtop_txt; ?>;
+	font-family: 'oblyon-icons' !important;
+	font-size: 20px;
+	<?php if ($conf->global->MAIN_MENU_INVERT) { ?>
+    	line-height: 40px;
+	<?php } else { ?>
+    	line-height: 55px;
+	<?php } ?>
+}
+<?php } ?> /* end test if not phone */
+
 /* db v3.5 */ 
 div.login_block_user{
 	clear: left;
 	float: <?php print $left; ?>;
-	padding-right: 15px;
-	min-width: 120px;
+	margin-right: 10px;
 }
 
 div.login_block_user .login a,
@@ -2166,7 +2183,12 @@ div.login_block_user > .classfortooltip.login_block_elem2 {
 	<?php } ?>
 	height: 40px;
 	line-height: 40px;
-	min-width: 120px;
+	margin-right: 10px;
+	<?php if ( empty($conf->dol_optimize_smallscreen) ) { ?>
+		min-width: 120px;
+	<?php } else { ?>
+		min-width: 80px;
+	<?php } ?>
 }
 
 .login_block_other .inline-block {
@@ -2373,15 +2395,14 @@ div.login a:hover {
  */
 
 .db-menu__society {
-	background-color: #333;
 	margin: 0; 
 	padding: 0;
 }
 
 .db-menu__society h1 {
 	color: #fff;
-	font-size: 15px;
-	font-weight: 500;
+	font-size: 1.5em;
+	font-weight: bold;
 	margin: 0;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -2488,16 +2509,16 @@ div.login a:hover {
 }
 
 .sec-nav__sub-list .item-level1 {
-	padding: 0.3em 1em;
+	padding: 0.3em 0.8em;
 }
 
 .sec-nav__sub-list .item-level2 {
-	padding: 0.2em 1.2em;
+	padding: 0.2em 1em;
 }
 
 .sec-nav__sub-item.is-disabled {
 	opacity: .6;
-	padding: 0.3em 1em;
+	padding: 0.3em 0.8em;
 }
 
 .sec-nav .sec-nav__link.is-disabled {
@@ -2553,7 +2574,7 @@ div.login a:hover {
 	text-align: <?php print $left; ?>;
 }
 
-.blockvmenusearch a:hover { color: <?php print $bgnavleft_hover; ?>; }
+.blockvmenusearch a:hover { color: <?php print $maincolor; ?>; }
 
 
 /**
@@ -2654,7 +2675,7 @@ div.login a:hover {
 \*------------------------------------*/
 
 #id-left {
-	<?php if ( $conf->global->OBLYON_HIDE_LEFTMENU ) { ?>
+	<?php if ( $conf->global->OBLYON_HIDE_LEFTMENU || $conf->dol_optimize_smallscreen ) { ?>
 		position: absolute;
 		<?php if ( $conf->global->MAIN_MENU_INVERT ) { ?>
 			top: 40px;
@@ -2684,7 +2705,7 @@ div.login a:hover {
 	<?php } ?>
 }
 
-<?php if ($conf->global->OBLYON_HIDE_LEFTMENU) { ?>
+<?php if ( $conf->global->OBLYON_HIDE_LEFTMENU || $conf->dol_optimize_smallscreen ) { ?>
 #id-left, #id-container, .push {
 	<?php if ( $conf->global->OBLYON_EFFECT_LEFTMENU == "push" ) { ?>*
 		-webkit-transition: -webkit-transform .3s cubic-bezier(.16, .68, .43, .99);
@@ -2783,6 +2804,8 @@ div.login a:hover {
 
 
 .pushy-btn {
+	background-color: <?php print $bgnavtop; ?>;
+	color: <?php print $bgnavtop_txt; ?>;
 	color: #eee;
 	display: inline-block;
 	float: <?php print $left; ?>;
@@ -2793,10 +2816,13 @@ div.login a:hover {
 	cursor: pointer;
 }
 
-.pushy-btn:hover { background-color: #444; }
+.pushy-btn:hover {
+	background-color: <?php print $bgnavtop_hover; ?>;
+	color: <?php print $maincolor; ?>;
+}
 
 .pushy-active .pushy-btn {
-	background-color: #444;
+	background-color: <?php print $bgnavtop_hover; ?>;
 	color: <?php print $maincolor; ?>;
 }
 
@@ -2807,7 +2833,6 @@ div.login a:hover {
 		#Oblyon Main and Sec Nav Icons
 \*------------------------------------*/
 
-<?php if (empty($conf->dol_optimize_smallscreen)) { ?>
 .main-nav .icon {
 	<?php if ( $conf->global->OBLYON_HIDE_TOPICONS && !$conf->global->MAIN_MENU_INVERT ) { ?>
 		display: none;
@@ -3142,8 +3167,6 @@ div.login a:hover {
 	content: '\e605';
 }
 
-<?php } ?> /* end test if not phone */
-
 
 /*------------------------------------*\
 		#Top Menu (eldy style) 
@@ -3411,7 +3434,7 @@ div.vmenu {
 	<?php if (empty($conf->dol_optimize_smallscreen)) { ?>
 		min-width: 200px;
 		max-width: 220px;
-		<?php if ( $conf->global->OBLYON_HIDE_LEFTMENU ) { ?>
+		<?php if ( $conf->global->OBLYON_HIDE_LEFTMENU || $conf->dol_optimize_smallscreen ) { ?>
 			width: 200px;
 		<?php } else { ?>
 			width: 100%;
@@ -3589,6 +3612,10 @@ td.photo {
 		display: block;
 	<?php } ?>
 }
+
+<?php
+}	// End test if not phone
+?>
 
 <?php if ( $conf->global->OBLYON_ELDY_ICONS ) { ?>
 	.mainmenu.home{
@@ -3828,10 +3855,6 @@ foreach($mainmenuusedarray as $val) {
 	}
 }
 //End of part to add more div class css
-?>
-
-<?php
-}	// End test if not phone
 ?>
 
 
@@ -4298,16 +4321,6 @@ div.tabBar ul li {
 	margin-<?php print $left; ?>: 30px !important;
 }
 
-div.popuptabset {
-	background-color: #e5e5e5;
-	padding: 5px;
-	border: 1px solid #e5e5e5;
-}
-
-div.popuptab {
-	margin: .3em;
-}
-
 @media only screen and (max-width: 570px)
 {
 	
@@ -4395,7 +4408,8 @@ div.noborder {
 	width: 100%;
 }
 
-table.noborder[summary="list_of_modules"] tr.oddeven { line-height: 2.2em; }
+table.noborder[summary="list_of_modules"] tr.pair, 
+table.noborder[summary="list_of_modules"] tr.impair	{ line-height: 2.2em; }
 
 table.noborder tr, div.noborder form {
 	line-height: 1.8em;
@@ -4478,7 +4492,10 @@ table.liste {
 	width: 100%;
 }
 
-table.liste .oddeven td { padding: 5px 10px; }
+table.liste .impair td, table.liste .pair td { padding: 5px 10px; }
+
+/*table.liste .impair td:first-child, table.liste .pair td:first-child { padding: 5px 0 5px 10px; }
+table.liste .impair td:last-child, table.liste .pair td:last-child { padding: 5px 10px 5px 0; }*/
 
 table .liste_titre td { padding: 2px; }
 
@@ -6837,66 +6854,69 @@ ul.noborder li:nth-child(odd):not(.liste_titre) {
 }
 
 
-/* Prepare to remove class pair - impair */
-
-.noborder > tbody > tr:nth-child(even):not(.liste_titre), .liste > tbody > tr:nth-child(even):not(.liste_titre) {
-	background: #<?php echo colorArrayToHex(colorStringToArray($colorbacklineimpair1)); ?>;
-}
-.noborder > tbody > tr:nth-child(even):not(:last-child) td:not(.liste_titre), .liste > tbody > tr:nth-child(even):not(:last-child) td:not(.liste_titre) {
-	border-bottom: 1px solid #ddd;
-}
-
-.noborder > tbody > tr:nth-child(odd):not(.liste_titre), .liste > tbody > tr:nth-child(odd):not(.liste_titre) {
-	background: #<?php echo colorArrayToHex(colorStringToArray($colorbacklinepair1)); ?>;
-}
-.noborder > tbody > tr:nth-child(odd):not(:last-child) td:not(.liste_titre), .liste > tbody > tr:nth-child(odd):not(:last-child) td:not(.liste_titre) {
-	border-bottom: 1px solid #ddd;
-}
-
-ul.noborder li:nth-child(even):not(.liste_titre) {
-	background-color: #<?php echo colorArrayToHex(colorStringToArray($colorbacklinepair1)); ?>;
-}
-
-.oddeven:hover, .evenodd:hover
+/* Set the color for hover lines */
+.oddeven:hover, .evenodd:hover, .impair:hover, .pair:hover
 {
 <?php if ($colorbacklinepairhover) { ?>
 	background: rgb(<?php echo $colorbacklinepairhover; ?>) !important;
 <?php } ?>
 }
 
-.oddeven, .evenodd
+.oddeven, .evenodd, .impair, .nohover .impair:hover, tr.impair td.nohover
 {
 	font-family: <?php print $fontlist ?>;
 	border: 0px;
 	margin-bottom: 1px;
 	color: #202020;
 }
+.impair, .nohover .impair:hover, tr.impair td.nohover
+{
+	background: #<?php echo colorArrayToHex(colorStringToArray($colorbacklineimpair1)); ?>;
+}
 #GanttChartDIV {
 	background: #<?php echo colorArrayToHex(colorStringToArray($colorbacklineimpair1)); ?>;
 }
 
+.oddeven, .evenodd, .pair, .nohover .pair:hover, tr.pair td.nohover {
+	font-family: <?php print $fontlist ?>;
+	margin-bottom: 1px;
+	color: #202020;
+}
+.pair, .nohover .pair:hover, tr.pair td.nohover {
+	background-color: #<?php echo colorArrayToHex(colorStringToArray($colorbacklinepair1)); ?>;
+}
 table.dataTable tr.oddeven {
 	background-color: #<?php echo colorArrayToHex(colorStringToArray($colorbacklinepair1)); ?> !important;
 }
 
 /* For no hover style */
-td.oddeven, tr.nohover td, form.nohover, form.nohover:hover {
+td.oddeven, table.nohover tr.impair, table.nohover tr.pair, table.nohover tr.impair td, table.nohover tr.pair td, tr.nohover td, form.nohover, form.nohover:hover {
 	background-color: #<?php echo colorArrayToHex(colorStringToArray($colorbacklineimpair1)); ?> !important;
 	background: #<?php echo colorArrayToHex(colorStringToArray($colorbacklineimpair1)); ?> !important;
 }
-td.evenodd {
+td.evenodd, tr.nohoverpair td {
 	background-color: #<?php echo colorArrayToHex(colorStringToArray($colorbacklinepair1)); ?> !important;
 	background: #<?php echo colorArrayToHex(colorStringToArray($colorbacklinepair1)); ?> !important;
 }
 .trforbreak td {
 	background-color: #<?php echo colorArrayToHex(colorStringToArray($colorbacklinebreak)); ?> !important;
 }
-.trforbreak td, table.noborder tr.trforbreak td a:link {
-	color: #fff;
-}
 
 table.dataTable td {
 	padding: 5px 2px 5px 3px !important;
+}
+tr.pair td, tr.impair td, form.impair div.tagtd, form.pair div.tagtd, div.impair div.tagtd, div.pair div.tagtd, div.liste_titre div.tagtd {
+	padding: 5px 2px 5px 3px;
+	border-bottom: 1px solid #eee;
+}
+form.pair, form.impair {
+	font-weight: normal;
+}
+tr.pair:last-of-type td, tr.impair:last-of-type td {
+	border-bottom: 0px !important;
+}
+tr.pair td .nobordernopadding tr td, tr.impair td .nobordernopadding tr td {
+	border-bottom: 0px !important;
 }
 
 div.arearef {
@@ -7080,6 +7100,22 @@ img.loginphoto {
 	.sec-nav__sub-item {
 		overflow-wrap: break-word;
 	}
+
+
+	div.vmenu {
+		min-width: 170px;
+		width: 170px;
+	}
+	.vmenusearchselectcombo {
+		width: 150px;
+	}
+	.sec-nav.is-inverted {
+		<?php if( $conf->global->OBLYON_SHOW_COMPNAME || $conf->global->OBLYON_FULLSIZE_TOPBAR ) { ?>
+			margin-<?php print $left; ?>: 10px;
+		<?php } else { ?>
+			margin-<?php print $left; ?>: 170px;
+		<?php } ?>
+	}
 }
 
 /* rule to reduce inverted top menu */
@@ -7107,6 +7143,21 @@ img.loginphoto {
 	#tmenu_tooltipinvert .sec-nav__item .icon {
 		font-size: 28px;
 		padding: 0 10px;
+	}
+
+	div.vmenu {
+		min-width: 130px;
+		width: 130px;
+	}
+	.vmenusearchselectcombo {
+		width: auto;
+	}
+	.sec-nav.is-inverted {
+		<?php if( $conf->global->OBLYON_SHOW_COMPNAME || $conf->global->OBLYON_FULLSIZE_TOPBAR ) { ?>
+			margin-<?php print $left; ?>: 5px;
+		<?php } else { ?>
+			margin-<?php print $left; ?>: 130px;
+		<?php } ?>
 	}
 }
 
@@ -7165,7 +7216,7 @@ img.loginphoto {
 	.usertextatoplogin {
 		display: none;
 	}
-	div#tmenu_tooltip {
+	div#tmenu_tooltip, #tmenu_tooltipinvert {
 	<?php if (GETPOST("optioncss") == 'print') {	?>
 		display:none;
 	<?php } else { ?>
@@ -7173,7 +7224,7 @@ img.loginphoto {
 	<?php } ?>
 	}
 	div.login_block {
-		top: 4px;
+		top: 1px;
 		max-width: 82px;
 	}
 	li.tmenu, li.tmenusel {
