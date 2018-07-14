@@ -65,7 +65,7 @@ function __construct($db) {
 	$this->description = "Thème Oblyon";
 
 	// Possible values for version are: 'development', 'experimental', 'dolibarr' or version
-	$this->version = '7.0.0';
+	$this->version = '6.0.0';
 
 	$this->editor_name = "ZenDSI";
 
