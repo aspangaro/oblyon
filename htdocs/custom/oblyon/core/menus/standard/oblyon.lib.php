@@ -337,39 +337,39 @@ function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$fo
 
 	$num = count($newTabMenu);
 	for($i = 0; $i < $num; $i++) {
-	$idsel=(empty($newTabMenu[$i]['mainmenu'])?'none':$newTabMenu[$i]['mainmenu']);
+		$idsel=(empty($newTabMenu[$i]['mainmenu'])?'none':$newTabMenu[$i]['mainmenu']);
 
-	$showmode=dol_oblyon_showmenu($type_user,$newTabMenu[$i],$listofmodulesforexternal);
-	if ($showmode == 1) {
-		$url = $shorturl = $newTabMenu[$i]['url'];
-		if (! preg_match("/^(http:\/\/|https:\/\/)/i",$newTabMenu[$i]['url']))
-		{
-			$param='';
-			if (! preg_match('/mainmenu/i',$url) || ! preg_match('/leftmenu/i',$url)) {
-			if (! preg_match('/\?/',$url)) $param.='?';
-			else $param.='&';
-			$param.='mainmenu='.$newTabMenu[$i]['mainmenu'].'&amp;leftmenu=';
+		$showmode=dol_oblyon_showmenu($type_user,$newTabMenu[$i],$listofmodulesforexternal);
+		if ($showmode == 1) {
+			$url = $shorturl = $newTabMenu[$i]['url'];
+			if (! preg_match("/^(http:\/\/|https:\/\/)/i",$newTabMenu[$i]['url']))
+			{
+				$param='';
+				if (! preg_match('/mainmenu/i',$url) || ! preg_match('/leftmenu/i',$url)) {
+				if (! preg_match('/\?/',$url)) $param.='?';
+				else $param.='&';
+				$param.='mainmenu='.$newTabMenu[$i]['mainmenu'].'&amp;leftmenu=';
+				}
+				//$url.="idmenu=".$newTabMenu[$i]['rowid'];	// Already done by menuLoad
+				$url = dol_buildpath($url,1).$param;
+				$shorturl = $newTabMenu[$i]['url'].$param;
 			}
-			//$url.="idmenu=".$newTabMenu[$i]['rowid'];	// Already done by menuLoad
-			$url = dol_buildpath($url,1).$param;
-			$shorturl = $newTabMenu[$i]['url'].$param;
+			$url=preg_replace('/__LOGIN__/',$user->login,$url);
+			$shorturl=preg_replace('/__LOGIN__/',$user->login,$shorturl);
+			$url=preg_replace('/__USERID__/',$user->id,$url);
+			$shorturl=preg_replace('/__USERID__/',$user->id,$shorturl);
+
+			// Define the class (top menu selected or not)
+			if (! empty($_SESSION['idmenu']) && $newTabMenu[$i]['rowid'] == $_SESSION['idmenu']) $itemsel=TRUE;
+			else if (! empty($_SESSION["mainmenu"]) && $newTabMenu[$i]['mainmenu'] == $_SESSION["mainmenu"]) $itemsel=TRUE;
+			else $itemsel=FALSE;
 		}
-		$url=preg_replace('/__LOGIN__/',$user->login,$url);
-		$shorturl=preg_replace('/__LOGIN__/',$user->login,$shorturl);
-		$url=preg_replace('/__USERID__/',$user->id,$url);
-		$shorturl=preg_replace('/__USERID__/',$user->id,$shorturl);
+		else if ($showmode == 2) $itemsel=FALSE;
 
-		// Define the class (top menu selected or not)
-		if (! empty($_SESSION['idmenu']) && $newTabMenu[$i]['rowid'] == $_SESSION['idmenu']) $itemsel=TRUE;
-		else if (! empty($_SESSION["mainmenu"]) && $newTabMenu[$i]['mainmenu'] == $_SESSION["mainmenu"]) $itemsel=TRUE;
-		else $itemsel=FALSE;
-	}
-	else if ($showmode == 2) $itemsel=FALSE;
-
-	if (empty($noout)) print_start_menu_entry($idsel,$itemsel,$showmode);
-	if (empty($noout)) print_text_menu_entry($newTabMenu[$i]['titre'], $showmode, $url, $id, $idsel, ($newTabMenu[$i]['target']?$newTabMenu[$i]['target']:$atarget));
-	if (empty($noout)) print_end_menu_entry($showmode);
-	$menu->add($shorturl, $newTabMenu[$i]['titre'], 0, $showmode, ($newTabMenu[$i]['target']?$newTabMenu[$i]['target']:$atarget), ($newTabMenu[$i]['mainmenu']?$newTabMenu[$i]['mainmenu']:$newTabMenu[$i]['rowid']), '');
+		if (empty($noout)) print_start_menu_entry($idsel,$itemsel,$showmode);
+		if (empty($noout)) print_text_menu_entry($newTabMenu[$i]['titre'], $showmode, $url, $id, $idsel, ($newTabMenu[$i]['target']?$newTabMenu[$i]['target']:$atarget));
+		if (empty($noout)) print_end_menu_entry($showmode);
+		$menu->add($shorturl, $newTabMenu[$i]['titre'], 0, $showmode, ($newTabMenu[$i]['target']?$newTabMenu[$i]['target']:$atarget), ($newTabMenu[$i]['mainmenu']?$newTabMenu[$i]['mainmenu']:$newTabMenu[$i]['rowid']), '');
 	}
 
 	// Sort on position
@@ -522,7 +522,7 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 	}
 	print '</div>';
 	}
-	
+
 	// Show logo company
 	if (empty($conf->global->MAIN_MENU_INVERT) && empty($noout) && ! empty($conf->global->MAIN_SHOW_LOGO)) {
 	if (empty($conf->dol_optimize_smallscreen)) { 
@@ -554,17 +554,24 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 	print '</div>';
 	}
 
-	if(DOL_VERSION >='3.9.0')
+	if (is_array($moredata) && ! empty($moredata['searchform']))	// searchform can contains select2 code or link to show old search form or link to switch on search page
 	{
-		if (is_array($moredata) && ! empty($moredata['searchform']))
-		{
-			print "\n";
-			print "<!-- Begin SearchForm -->\n";
-			print '<div id="blockvmenusearch" class="blockvmenusearch">'."\n";
-			print $moredata['searchform'];
-			print '</div>'."\n";
-			print "<!-- End SearchForm -->\n";
-		}
+		print "\n";
+		print "<!-- Begin SearchForm -->\n";
+		print '<div id="blockvmenusearch" class="blockvmenusearch">'."\n";
+		print $moredata['searchform'];
+		print '</div>'."\n";
+		print "<!-- End SearchForm -->\n";
+	}
+
+	if (is_array($moredata) && ! empty($moredata['bookmarks']))
+	{
+		print "\n";
+		print "<!-- Begin Bookmarks -->\n";
+		print '<div id="blockvmenubookmarks" class="blockvmenubookmarks">'."\n";
+		print $moredata['bookmarks'];
+		print '</div>'."\n";
+		print "<!-- End Bookmarks -->\n";
 	}
 
 	/**
