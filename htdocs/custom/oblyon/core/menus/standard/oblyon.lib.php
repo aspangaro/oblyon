@@ -366,21 +366,7 @@ function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$fo
 		}
 		else if ($showmode == 2) $itemsel=FALSE;
 
-		if (empty($noout)) print_start_menu_entry($idsel,$itemsel,$showmode);
-		if (empty($noout)) print_text_menu_entry($newTabMenu[$i]['titre'], $showmode, $url, $id, $idsel, ($newTabMenu[$i]['target']?$newTabMenu[$i]['target']:$atarget));
-		if (empty($noout)) print_end_menu_entry($showmode);
 		$menu->add($shorturl, $newTabMenu[$i]['titre'], 0, $showmode, ($newTabMenu[$i]['target']?$newTabMenu[$i]['target']:$atarget), ($newTabMenu[$i]['mainmenu']?$newTabMenu[$i]['mainmenu']:$newTabMenu[$i]['rowid']), '');
-	}
-
-	// Sort on position
-	$menu->liste = dol_sort_array($menu->liste, 'position');
-
-	// Output menu entries
-	foreach($menu->liste as $menkey => $menuval)
-	{
-		if (empty($noout)) print_start_menu_entry($menuval['idsel'],$menuval['classname'],$menuval['enabled']);
-		if (empty($noout)) print_text_menu_entry($menuval['titre'], $menuval['enabled'], (($menuval['url']!='#' && !preg_match('/^(http:\/\/|https:\/\/)/i', $menuval['url'])) ? DOL_URL_ROOT:'').$menuval['url'], $menuval['id'], $menuval['idsel'], $menuval['classname'], ($menuval['target']?$menuval['target']:$atarget));
-		if (empty($noout)) print_end_menu_entry($menuval['enabled']);
 	}
 
 	$showmode=1;
