@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (C) 2015-2016	Nicolas Rivera		<nrivera.pro@gmail.com>
- * Copyright (C) 2015-2017	Alexandre Spangaro	<aspangaro@zendsi.com> 
+ * Copyright (C) 2015-2018	Alexandre Spangaro	<aspangaro@zendsi.com> 
  *
  * Copyright (C) 2003      Rodolphe Quiedeville <rodolphe@quiedeville.org>
  * Copyright (C) 2004-2012 Laurent Destailleur  <eldy@users.sourceforge.net>
@@ -35,13 +35,12 @@ include_once DOL_DOCUMENT_ROOT .'/core/modules/DolibarrModules.class.php';
  */
 
 class modOblyon extends DolibarrModules {
-  
-  /**
-   * Constructor. Define names, constants, directories, boxes, permissions
-   *
-   * @param  DoliDB  $db  Database handler
-   */
-  
+
+/**
+ * Constructor. Define names, constants, directories, boxes, permissions
+ *
+ * @param  DoliDB  $db  Database handler
+ */
 function __construct($db) {
 	global $langs,$conf;
 
@@ -65,7 +64,7 @@ function __construct($db) {
 	$this->description = "Thème Oblyon";
 
 	// Possible values for version are: 'development', 'experimental', 'dolibarr' or version
-	$this->version = '6.0.0';
+	$this->version = '8.0.0';
 
 	$this->editor_name = "ZenDSI";
 
@@ -73,7 +72,7 @@ function __construct($db) {
 
 	// Key used in llx_const table to save module status enabled/disabled (where MYMODULE is value of property name of module in uppercase)
 	$this->const_name = 'MAIN_MODULE_'.strtoupper($this->name);
-  
+
 	// Where to store the module in setup page (0=common,1=interface,2=others,3=very specific)
 	$this->special = 1;
 
@@ -234,62 +233,62 @@ function __construct($db) {
 	$this->dictionnaries=array();
 }
 
-  /**
-   * Function called when module is enabled.
-   * The init function add constants, boxes, permissions and menus (defined in constructor) into Dolibarr database.
-   * It also creates data directories
-   *
-   * @param   string	$options  Options when enabling module ('', 'noboxes')
-   * @return  int  1 if OK, 0 if KO
-   */
-  function init($options='') {
-    $sql = array();
+	/**
+	 * Function called when module is enabled.
+	 * The init function add constants, boxes, permissions and menus (defined in constructor) into Dolibarr database.
+	 * It also creates data directories
+	 *
+	 * @param   string	$options  Options when enabling module ('', 'noboxes')
+	 * @return  int  1 if OK, 0 if KO
+	 */
+	function init($options='') {
+		$sql = array();
 
-    $result=$this->load_tables();
+		$result=$this->load_tables();
 
-	// delete old menu manager
-	if (file_exists(dol_buildpath('/core/menus/standard/oblyon_menu.php'))) unlink(dol_buildpath('/core/menus/standard/oblyon_menu.php'));
-	if (file_exists(dol_buildpath('/core/menus/standard/oblyon.lib.php'))) unlink(dol_buildpath('/core/menus/standard/oblyon.lib.php'));
-	
-	dolibarr_set_const($this->db,'MAIN_THEME','oblyon');
-	
-    return $this->_init($sql, $options);
-  }
+		// delete old menu manager
+		if (file_exists(dol_buildpath('/core/menus/standard/oblyon_menu.php'))) unlink(dol_buildpath('/core/menus/standard/oblyon_menu.php'));
+		if (file_exists(dol_buildpath('/core/menus/standard/oblyon.lib.php'))) unlink(dol_buildpath('/core/menus/standard/oblyon.lib.php'));
 
-  /**
-   * Function called when module is disabled.
-   * Remove from database constants, boxes and permissions from Dolibarr database.
-   * Data directories are not deleted
-   *
-   * @param  string	$options  Options when enabling module ('', 'noboxes')
-   * @return  int  1 if OK, 0 if KO
-   */
-  function remove($options='') {
-    $sql = array();
+		dolibarr_set_const($this->db,'MAIN_THEME','oblyon');
 
-	dolibarr_set_const($this->db,'MAIN_THEME','eldy');
-	dolibarr_set_const($this->db,'MAIN_MENU_INVERT',0);
-	
-	dolibarr_del_const($this->db,'MAIN_MENU_STANDARD_FORCED');
-	dolibarr_del_const($this->db,'MAIN_MENUFRONT_STANDARD_FORCED');
-	dolibarr_del_const($this->db,'MAIN_MENU_SMARTPHONE_FORCED');
-	dolibarr_del_const($this->db,'MAIN_MENUFRONT_SMARTPHONE_FORCED');
+		return $this->_init($sql, $options);
+	}
+
+	/**
+	 * Function called when module is disabled.
+	 * Remove from database constants, boxes and permissions from Dolibarr database.
+	 * Data directories are not deleted
+	 *
+	 * @param  string	$options  Options when enabling module ('', 'noboxes')
+	 * @return  int  1 if OK, 0 if KO
+	 */
+	function remove($options='') {
+		$sql = array();
+
+		dolibarr_set_const($this->db,'MAIN_THEME','eldy');
+		dolibarr_set_const($this->db,'MAIN_MENU_INVERT',0);
 		
-    return $this->_remove($sql, $options);
-  }
+		dolibarr_del_const($this->db,'MAIN_MENU_STANDARD_FORCED');
+		dolibarr_del_const($this->db,'MAIN_MENUFRONT_STANDARD_FORCED');
+		dolibarr_del_const($this->db,'MAIN_MENU_SMARTPHONE_FORCED');
+		dolibarr_del_const($this->db,'MAIN_MENUFRONT_SMARTPHONE_FORCED');
+			
+		return $this->_remove($sql, $options);
+	}
 
 
-  /**
-   * Create tables, keys and data required by module
-   * Files llx_table1.sql, llx_table1.key.sql llx_data.sql with create table, create keys
-   * and create data commands must be stored in directory /oblyon/sql/
-   * This function is called by this->init
-   *
-   * @return  int  <=0 if KO, >0 if OK
-   */
-  function load_tables() {
-    return $this->_load_tables('/oblyon/sql/');
-  }
+	/**
+	 * Create tables, keys and data required by module
+	 * Files llx_table1.sql, llx_table1.key.sql llx_data.sql with create table, create keys
+	 * and create data commands must be stored in directory /oblyon/sql/
+	 * This function is called by this->init
+	 *
+	 * @return  int  <=0 if KO, >0 if OK
+	 */
+	function load_tables() {
+		return $this->_load_tables('/oblyon/sql/');
+	}
 }
 
 ?>
