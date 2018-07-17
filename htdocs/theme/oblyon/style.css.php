@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (C) 2013-2016	Nicolas Rivera			<nrivera.pro@gmail.com>
- * Copyright (C) 2015-2017	Alexandre Spangaro		<aspangaro@zendsi.com>
+ * Copyright (C) 2015-2018	Alexandre Spangaro		<aspangaro@zendsi.com>
  *
  * Copyright (C) 2004-2013	Laurent Destailleur		<eldy@users.sourceforge.net>
  * Copyright (C) 2006		Rodolphe Quiedeville	<rodolphe@quiedeville.org>
@@ -40,7 +40,7 @@ if (! defined('NOREQUIREMENU'))	 define('NOREQUIREMENU',1);
 if (! defined('NOREQUIREHTML'))	 define('NOREQUIREHTML',1);
 if (! defined('NOREQUIREAJAX'))	 define('NOREQUIREAJAX','1');
 
-session_cache_limiter(FALSE);
+session_cache_limiter(false);
 
 require_once '../../main.inc.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/functions2.lib.php';
@@ -54,9 +54,6 @@ header('Content-type: text/css');
 // each Dolibarr page access.
 if (empty($dolibarr_nocache)) header('Cache-Control: max-age=3600, public, must-revalidate');
 else header('Cache-Control: no-cache');
-
-// On the fly GZIP compression for all pages (if browser support it). Must set the bit 3 of constant to 1.
-if (isset($conf->global->MAIN_OPTIMIZE_SPEED) && ($conf->global->MAIN_OPTIMIZE_SPEED & 0x04)) { ob_start("ob_gzhandler"); }
 
 if (GETPOST('lang')) $langs->setDefaultLang(GETPOST('lang'));	// If language was forced on URL
 if (GETPOST('theme')) $conf->theme=GETPOST('theme');	// If theme was forced on URL
@@ -160,6 +157,9 @@ $dol_optimize_smallscreen=$conf->dol_optimize_smallscreen;
 $dol_no_mouse_hover=$conf->dol_no_mouse_hover;
 $dol_use_jmobile=$conf->dol_use_jmobile;
 
+$useboldtitle=(isset($conf->global->THEME_ELDY_USEBOLDTITLE)?$conf->global->THEME_ELDY_USEBOLDTITLE:1);
+$borderwidth=2;
+
 // Define reference colors
 // Example: Light grey: $colred=235;$colgreen=235;$colblue=235;
 // Example: Pink:			 $colred=230;$colgreen=210;$colblue=230;
@@ -190,8 +190,8 @@ $colorbacktabactive=($colred-15).','.($colgreen-15).','.($colblue-15);
 $colorbacklineimpair1=(244+round($isred/3)).','.(244+round($isgreen/3)).','.(244+round($isblue/3));		// line impair
 $colorbacklineimpair2=(250+round($isred/3)).','.(250+round($isgreen/3)).','.(250+round($isblue/3));		// line impair
 $colorbacklineimpairhover=(230+round(($isred+$isgreen+$isblue)/9)).','.(230+round(($isred+$isgreen+$isblue)/9)).','.(230+round(($isred+$isgreen+$isblue)/9));		// line impair
-$colorbacklinepair1='255,255,255';		// line pair
-$colorbacklinepair2='255,255,255';		// line pair
+$colorbacklinepair1='248,248,248';		// line pair
+$colorbacklinepair2='246,246,246';		// line pair
 $colorbacklinepairhover=(230+round(($isred+$isgreen+$isblue)/9)).','.(230+round(($isred+$isgreen+$isblue)/9)).','.(230+round(($isred+$isgreen+$isblue)/9));
 //$colorbackbody='#fff url(.$img_head.) 0 0 no-repeat;';
 $colorbackbody='#fcfcfc';
@@ -382,7 +382,7 @@ body {
 /**
  * Headings
  */
- 
+
 h1, h2, h3, h4, h5, h6 {
 	font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
 	font-weight: normal;
@@ -425,6 +425,8 @@ div.floatright
 	display:inline-block;
 }
 
+th a, .thumbstat, a.tab { font-weight: bold !important; }
+
 th .button {
 	-moz-box-shadow: none !important;
 	-webkit-box-shadow: none !important;
@@ -458,6 +460,9 @@ th .button {
 .soixantepercent {
 	width: 60%;
 }
+.quatrevingtquinzepercent {
+	width: 95%;
+}
 textarea.centpercent {
 	width: 96%;
 }
@@ -477,8 +482,23 @@ textarea.centpercent {
 .nowrap {
 	white-space: <?php print ($dol_optimize_smallscreen?'normal':'nowrap'); ?>;
 }
-.nowraponall {
+.liste_titre .nowrap {
 	white-space: nowrap;
+}
+.nowraponall {	/* no wrap on all devices */
+	white-space: nowrap;
+}
+.wrapimp {
+	white-space: normal !important;
+}
+.wordwrap {
+	word-wrap: break-word;
+}
+.wordbreak {
+	word-break: break-all;
+}
+.bold {
+	font-weight: bold !important;
 }
 .nobold {
 	font-weight: normal !important;
@@ -497,6 +517,9 @@ textarea.centpercent {
 }
 .paddingright2 {
 	padding-<?php print $right; ?>: 2px;
+}
+.cursordefault {
+	cursor: default;
 }
 .cursorpointer {
 	cursor: pointer;
@@ -700,9 +723,19 @@ textarea.cke_source:focus
 	box-shadow: none;
 }
 
-.liste_titre input[name=monthvalid], .liste_titre input[name=search_ordermonth], .liste_titre input[name=search_deliverymonth],
+.liste_titre input[name=month_date_when], .liste_titre input[name=monthvalid], .liste_titre input[name=search_ordermonth], .liste_titre input[name=search_deliverymonth],
 .liste_titre input[name=search_smonth], .liste_titre input[name=search_month], .liste_titre input[name=search_emonth], .liste_titre input[name=smonth], .liste_titre input[name=month],
-.liste_titre input[name=month_lim], .liste_titre input[name=month_create] {
+.liste_titre input[name=month_lim], .liste_titre input[name=month_start], .liste_titre input[name=month_end], .liste_titre input[name=month_create],
+.liste_titre input[name=search_month_lim], .liste_titre input[name=search_month_start], .liste_titre input[name=search_month_end], .liste_titre input[name=search_month_create],
+.liste_titre input[name=search_month_create], .liste_titre input[name=search_month_start], .liste_titre input[name=search_month_end],
+.liste_titre input[name=day_date_when], .liste_titre input[name=dayvalid], .liste_titre input[name=search_orderday], .liste_titre input[name=search_deliveryday],
+.liste_titre input[name=search_sday], .liste_titre input[name=search_day], .liste_titre input[name=search_eday], .liste_titre input[name=sday], .liste_titre input[name=day], .liste_titre select[name=day],
+.liste_titre input[name=day_lim], .liste_titre input[name=day_start], .liste_titre input[name=day_end], .liste_titre input[name=day_create],
+.liste_titre input[name=search_day_lim], .liste_titre input[name=search_day_start], .liste_titre input[name=search_day_end], .liste_titre input[name=search_day_create],
+.liste_titre input[name=search_day_create], .liste_titre input[name=search_day_start], .liste_titre input[name=search_day_end],
+.liste_titre input[name=search_day_date_when], .liste_titre input[name=search_month_date_when], .liste_titre input[name=search_year_date_when],
+.liste_titre input[name=search_dtstartday], .liste_titre input[name=search_dtendday], .liste_titre input[name=search_dtstartmonth], .liste_titre input[name=search_dtendmonth]
+{
 	margin-right: 4px;
 }
 input, input.flat, textarea, textarea.flat, form.flat select, select, select.flat, .dataTables_length label select {
@@ -726,9 +759,10 @@ input, textarea, select {
 } 
 <?php } ?> /* end if (empty($dol_use_jmobile)) */
 
-select.flat, 
-form.flat select {
+select.flat, form.flat select {
 	font-weight: normal;
+	font-size: unset;
+	height: 2em;
 }
 
 input:disabled, 
@@ -754,7 +788,7 @@ input.buttongen {
 	vertical-align: middle;
 }
 input.buttonpayment {
-	min-width: 290px;
+	min-width: 320px;
 	margin-bottom: 15px;
 	background-image: none;
 	line-height: 24px;
@@ -763,6 +797,7 @@ input.buttonpayment {
 	padding-left: 30px;
 	text-align: <?php echo $left; ?>;
 	border: 2px solid #666666;
+	white-space: normal;
 }
 input.buttonpaymentcb {
 	background-image: url(<?php echo dol_buildpath($path.'/theme/common/credit_card.png',1) ?>);
@@ -813,13 +848,18 @@ td.onholidaymorning, td.onholidayafternoon {
 td.onholidayallday {
 	background-color: #f4eede;
 }
-
-span.timesheetalreadyrecorded input {
-	/*font-size: smaller;*/
-	border: none;
-	/*background:	transparent;*/
+td.actionbuttons a {
+	padding-left: 6px;
 }
-
+td.leftborder, td.hide0 {
+	border-left: 1px solid #ccc;
+}
+td.leftborder, td.hide6 {
+	border-right: 1px solid #ccc;
+}
+td.rightborder {
+	border-right: 1px solid #ccc;
+}
 textarea:disabled {
 	background-color: #ddd;
 }
@@ -984,9 +1024,13 @@ th .button {
  
 div.divButAction { margin-bottom: 1.5em; }
 
+a.butActionNew>span.fa-plus-circle { padding-left: 6px; font-size: 1.5em; }
+a.butActionNewRefused>span.fa-plus-circle { padding-left: 6px; font-size: 1.5em; }
+
 .butAction,
 .butActionDelete,
-.butActionRefused {
+.butActionRefused,
+.butActionNewRefused {
 	background-color: #f8f8f8;
 	color: #444;
 	font-weight: 500;
@@ -1001,6 +1045,7 @@ div.divButAction { margin-bottom: 1.5em; }
 }
 
 .butAction:hover,
+.butActionNew:hover,
 .butActionDelete:hover,
 .butActionRefused:hover {
 	color: #f7f7f7;
@@ -1092,36 +1137,56 @@ div.ok {
 	color: #114466;
 }
 
+/* Warning message */
 div.warning {
-	background-color: rgb(255, 218, 135);
-	border: 1px solid #d8c59a;
-	color: #222;
-	margin: .5em 0em;
-	padding: 1.2em 1.5em;
+	border-<?php print $left; ?>: solid 5px #d8c59a;
+	padding-top: 8px;
+	padding-left: 10px;
+	padding-right: 4px;
+	padding-bottom: 8px;
+	margin: 0.5em 0em 0.5em 0em;
+	background: rgb(255, 218, 135);
 }
 
+/* Error message */
 div.error {
-	background-color: #f07b6e;
-	border: 1px solid #e0796e;
-	box-shadow: 0 1px 1px rgba(0,0,0, .04);
-	-webkit-box-shadow: 0 1px 1px rgba(0,0,0, .04);
-	color: #f4f4f4; 
-	font-weight: bold;
-	margin: .5em 0em;
-	padding: 1.2em 1.5em;
+	border-<?php print $left; ?>: solid 5px #e0796e;
+	padding-top: 8px;
+	padding-left: 10px;
+	padding-right: 4px;
+	padding-bottom: 8px;
+	margin: 0.5em 0em 0.5em 0em;
+	background: #f07b6e;
 }
 
 /* Info admin */
 div.info {
-	background-color: #f07b6e;
-	border: 1px solid #e0796e; 
-	box-shadow: 0 1px 1px rgba(0,0,0, .04);
-	-webkit-box-shadow: 0 1px 1px rgba(0,0,0, .04);
-	color: #222;
-	margin: .5em 0em;
-	padding: 1.2em 1.5em;
+	border-<?php print $left; ?>: solid 5px #e0796e;
+	padding-top: 8px;
+	padding-left: 10px;
+	padding-right: 4px;
+	padding-bottom: 8px;
+	margin: 0.5em 0em 0.5em 0em;
+	background: f07b6e;
 }
 
+/*
+ *  External web site
+ */
+
+.framecontent {
+	width: 100%;
+	height: 100%;
+}
+
+.framecontent iframe {
+	width: 100%;
+	height: 100%;
+}
+
+/*
+ *  Other
+ */
 .movable {
 	cursor: move;
 }
@@ -1147,6 +1212,13 @@ div.divsearchfield {
 	margin-bottom: 4px;
 	padding-left: 2px;
 }
+.divsearchfieldfilter {
+	text-overflow: clip;
+	overflow: auto;
+	white-space: nowrap;
+	padding-bottom: 5px;
+	opacity: 0.6;
+}
 div.confirmmessage {
 	padding-top: 6px;
 }
@@ -1169,12 +1241,21 @@ div.myavailability {
 	padding-bottom: 4px;
 }
 .checkallactions {
-	vertical-align: top;
-	margin-top: 6px;
-	margin-left: 4px;
+	margin-top: 2px;		/* left must be same than right to keep checkbox centered */
+	margin-left: 2px;		/* left must be same than right to keep checkbox centered */
+	vertical-align: middle;
+}
+select.flat.selectlimit {
+	max-width: 62px;
 }
 .selectlimit, .marginrightonly {
 	margin-right: 10px !important;
+}
+.marginleftonly {
+	margin-left: 10px !important;
+}
+.nomarginleft {
+	margin-left: 0px !important;
 }
 .selectlimit, .selectlimit:focus {
 	border-left: none !important;
@@ -1239,6 +1320,10 @@ div.myavailability {
 .amountremaintopayback {
 	font-weight: bold;
 }
+.amountpaymentneutral {
+	font-weight: bold;
+	font-size: 1.4em;
+}
 .savingdocmask {
 	margin-top: 6px;
 	margin-bottom: 12px;
@@ -1257,6 +1342,12 @@ div.myavailability {
 	border: 1px solid #ccc;
 	box-shadow: 1px 1px 25px #aaa;
 	max-width: calc(100% - 56px);
+}
+.fa-file-text-o, .fa-file-code-o, .fa-file-powerpoint-o, .fa-file-excel-o, .fa-file-word-o, .fa-file-o, .fa-file-image-o, .fa-file-video-o, .fa-file-audio-o, .fa-file-archive-o, .fa-file-pdf-o {
+	color: #505;
+}
+.fa-trash, .fa-crop, .fa-pencil {
+	font-size: 1.4em;
 }
 
 /* DOL_XXX for future usage (when left menu has been removed). If we do not use datatable */
@@ -1294,11 +1385,10 @@ div.fiche>form>div.div-table-responsive {
 	flex: 1 1 150px;
 }
 .thumbstat, .thumbstat150 {
-	/* flex-grow: 1; */
-	/* flex-shrink: 1; */
+	flex-grow: 1;
+	flex-shrink: 1;
 	/* flex-basis: 140px; */
-	display: inline;
-	width: 100%;
+	min-width: 150px;
 	justify-content: flex-start;
 	align-self: flex-start;
 }
@@ -1320,7 +1410,9 @@ select.selectarrowonleft option {
 /* rule for not too small screen only */
 @media only screen and (min-width: <?php echo round($nbtopmenuentries * $fontsize * 3.4, 0) + 7; ?>px)
 {
+	.width25  { width: 25px; }
 	.width50  { width: 50px; }
+	.width75  { width: 75px; }
 	.width100 { width: 100px; }
 	.width200 { width: 200px; }
 	.minwidth100 { min-width: 100px; }
@@ -1336,7 +1428,10 @@ select.selectarrowonleft option {
 	.minwidth400imp { min-width: 400px !important; }
 	.minwidth500imp { min-width: 500px !important; }
 }
+.widthauto { width: auto; }
+.width25  { width: 25px; }
 .width50  { width: 50px; }
+.width75  { width: 75px; }
 .width100 { width: 100px; }
 .width200 { width: 200px; }
 .maxwidth25  { max-width: 25px; }
@@ -1423,10 +1518,16 @@ select.selectarrowonleft option {
 		width: 95%;
 	}
 
+	select {
+		padding-top: 4px;
+		padding-bottom: 5px;
+	}
+
 	input, input[type=text], input[type=password], select, textarea	 {
 		min-width: 20px;
 		min-height: 1.4em;
 		line-height: 1.4em;
+		font-size: <?php print $fontsize+3; ?>px;
 		/* padding: .4em .1em; */
 		/* border-bottom: 1px solid #BBB; */
 		/* max-width: inherit; why this */
@@ -1481,6 +1582,18 @@ select.selectarrowonleft option {
 	div.statusref {
 		padding-right: 10px;
 	}
+
+	div.statusref img {
+		padding-right: 3px !important;
+	}
+
+	div.statusrefbis {
+		padding-right: 3px !important;
+	}
+
+	input.buttonpayment {
+		min-width: 300px;
+	}
 }
 .linkobject { cursor: pointer; }
 <?php if (GETPOST('optioncss','aZ09') == 'print') { ?>
@@ -1519,6 +1632,17 @@ td.showDragHandle {
 
 #id-container {
 	table-layout: fixed;
+}
+
+.login_block_getinfo {
+	text-align: center;
+}
+.login_block_getinfo div.login_block_user {
+	display: block;
+}
+.login_block_getinfo .atoplogin, .login_block_getinfo .atoplogin:hover {
+	color: #333 !important;
+	font-weight: normal !important;
 }
 
 #id-right, 
@@ -1588,30 +1712,18 @@ td.showDragHandle {
 }*/
 
 #id-top {
-    background-color: #333333;
+	background-color: #333333;
 }
 
-<?php if ( DOL_VERSION >= "4.0.0" ) { ?>
-	div.fiche {
-		margin-<?php print $left; ?>: <?php print (GETPOST("optioncss") == 'print'?6:($dol_hide_leftmenu?'6':'10')); ?>px;
-		<?php if ( !$conf->global->OBLYON_HIDE_LEFTMENU && !$conf->dol_optimize_smallscreen ) { ?>
-			margin-<?php print $right; ?>: <?php print (GETPOST("optioncss") == 'print'?8:(empty($conf->dol_optimize_smallscreen)?'12':'6')); ?>px;
-		<?php } else { ?>
-			margin-<?php print $right; ?>: <?php print (GETPOST("optioncss") == 'print'?6:((empty($conf->global->MAIN_MENU_USE_JQUERY_LAYOUT))?($dol_hide_topmenu?'4':'20'):'24')); ?>px;
-		<?php } ?>
-		<?php if (! empty($conf->dol_hide_leftmenu) && ! empty($conf->dol_hide_topmenu)) print 'margin-top: 4px;'; ?>
-	}
-<?php } else { ?>
-	div.fiche {
-		margin-<?php print $left; ?>: <?php print (GETPOST("optioncss") == 'print'?6:((empty($conf->global->MAIN_MENU_USE_JQUERY_LAYOUT))?($dol_hide_topmenu?'4':'20'):'24')); ?>px;
-		<?php if ( !$conf->global->OBLYON_HIDE_LEFTMENU && !$conf->dol_optimize_smallscreen ) { ?>
-		margin-<?php print $right; ?>: <?php print (GETPOST("optioncss") == 'print'?8:(empty($conf->dol_optimize_smallscreen)?'15':'4')); ?>px;
-		<?php } else { ?>
+div.fiche {
+	margin-<?php print $left; ?>: <?php print (GETPOST("optioncss") == 'print'?6:($dol_hide_leftmenu?'6':'10')); ?>px;
+	<?php if ( !$conf->global->OBLYON_HIDE_LEFTMENU && !$conf->dol_optimize_smallscreen ) { ?>
+		margin-<?php print $right; ?>: <?php print (GETPOST("optioncss") == 'print'?8:(empty($conf->dol_optimize_smallscreen)?'12':'6')); ?>px;
+	<?php } else { ?>
 		margin-<?php print $right; ?>: <?php print (GETPOST("optioncss") == 'print'?6:((empty($conf->global->MAIN_MENU_USE_JQUERY_LAYOUT))?($dol_hide_topmenu?'4':'20'):'24')); ?>px;
-		<?php } ?>
-		<?php if (! empty($conf->dol_hide_topmenu) && ! empty($conf->dol_hide_topmenu)) print 'margin-top: 4px;'; ?>
-	}
-<?php } ?>
+	<?php } ?>
+	<?php if (! empty($conf->dol_hide_leftmenu) && ! empty($conf->dol_hide_topmenu)) print 'margin-top: 4px;'; ?>
+}
 
 div.fichecenter {
 	clear: both;	/* This is to have div fichecenter that are true rectangles */
@@ -1642,6 +1754,12 @@ div.fichehalfright {
 div.ficheaddleft {
 	<?php if ($conf->browser->layout != 'phone') { print "padding-".$left.": 16px;\n"; }
 	else print "margin-top: 10px;\n"; ?>
+}
+div.firstcolumn div.box {
+	padding-right: 10px;
+}
+div.secondcolumn div.box {
+	padding-left: 10px;
 }
 
 /* Force values for small screen */
@@ -1681,23 +1799,40 @@ div.ficheaddleft {
 		<?php print "padding-".$left.": 0px;\n"; ?>
 		margin-top: 10px;
 	}
+	div.firstcolumn div.box {
+		padding-right: 0px;
+	}
+	div.secondcolumn div.box {
+		padding-left: 0px;
+	}
 }
 
 .containercenter {
 	display : table;
 	margin : 0px auto;
 }
-
 #pictotitle {
 	margin-right: 8px;
 	margin-bottom: 4px;
 }
- 
+.pictoobjectwidth {
+	width: 14px;
+}
 .pictosubstatus {
 	padding-left: 2px;
 	padding-right: 2px;
 }
-
+.pictostatus {
+	width: 15px;
+	vertical-align: middle;
+	margin-top: -3px
+}
+.pictowarning, .pictopreview {
+	padding-<?php echo $left; ?>: 3px;
+}
+.pictowarning {
+	vertical-align: text-bottom;
+}
 /*------------------------------------*\
 		#Top Menu
 \*------------------------------------*/
@@ -2309,7 +2444,7 @@ img.login, img.printer, img.help, img.entity {
 
 }
 
-.userimgatoplogin img.userphoto {		/* size for user photo in login bar */
+.userimgatoplogin img.userphoto, .userimgatoplogin img.userphoto {		/* size for user photo in login bar */
 	border-radius: 8px;
 	width: 16px;
 	height: 16px;
@@ -3466,10 +3601,11 @@ div.vmenu {
 	<?php } ?>
 }
 
-a.vmenu:link, 
-a.vmenu:visited, 
-a.vmenu:hover, 
-a.vmenu:active { 
+a.vmenu:link,
+a.vmenu:visited,
+a.vmenu:hover,
+a.vmenu:active,
+span.vmenu {
 	font-size:<?php print $fontsize; ?>px; 
 	font-weight: normal; 
 	text-align: <?php print $left; ?>; 
@@ -3701,10 +3837,6 @@ td.photo {
 		background-image: url(<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/menus/tools.png',1); ?>);
 	}
 
-	.mainmenu.shop {
-		background-image: url(<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/menus/shop.png',1); ?>);
-	}
-
 	.mainmenu.webservices {
 	}
 
@@ -3805,8 +3937,9 @@ td.photo {
 
 <?php
 // Add here more div for other menu entries. moduletomainmenu=array('module name'=>'name of class for div')
-$moduletomainmenu=array('user'=>'','syslog'=>'','societe'=>'companies','projet'=>'project','propale'=>'commercial','commande'=>'commercial','produit'=>'products','service'=>'products','stock'=>'products','don'=>'accountancy','tax'=>'accountancy','banque'=>'accountancy','facture'=>'accountancy','compta'=>'accountancy','accounting'=>'accountancy','adherent'=>'members','import'=>'tools','export'=>'tools','mailing'=>'tools','contrat'=>'commercial','ficheinter'=>'commercial','deplacement'=>'commercial','fournisseur'=>'companies','ftp'=>'','externalsite'=>'','barcode'=>'','fckeditor'=>'','categorie'=>'','opensurvey' => '', 'bittorrent'=>'', 'cron'=>'', 'scanner'=>'', 'reports'=>'');
+$moduletomainmenu=array('user'=>'','syslog'=>'','societe'=>'companies','projet'=>'project','propale'=>'commercial','commande'=>'commercial','produit'=>'products','service'=>'products','stock'=>'products','don'=>'accountancy','tax'=>'accountancy','banque'=>'accountancy','facture'=>'accountancy','compta'=>'accountancy','accounting'=>'accountancy','adherent'=>'members','import'=>'tools','export'=>'tools','mailing'=>'tools','contrat'=>'commercial','ficheinter'=>'commercial','ticket'=>'ticket','deplacement'=>'commercial','fournisseur'=>'companies','ftp'=>'','externalsite'=>'','barcode'=>'','fckeditor'=>'','categorie'=>'','opensurvey' => '', 'bittorrent'=>'', 'cron'=>'', 'scanner'=>'', 'reports'=>'');
 $mainmenuused='home';
+
 foreach($conf->modules as $val) {
 	$mainmenuused.=','.(isset($moduletomainmenu[$val])?$moduletomainmenu[$val]:$val);
 }
@@ -3814,10 +3947,14 @@ foreach($conf->modules as $val) {
 $mainmenuusedarray=array_unique(explode(',',$mainmenuused));
 
 $generic=1;
-$divalreadydefined=array('home','companies','product','products','commercial','accountancy','project','tools','members','shop','agenda','holiday','bookmark','cashdesk','ecm','geoipmaxmind','gravatar','clicktodial','paypal','webservices','websites');
-
-foreach($mainmenuusedarray as $val) {
+// Put here list of menu entries when the div.mainmenu.menuentry was previously defined
+$divalreadydefined=array('home','companies','products','commercial','externalsite','accountancy','project','tools','members','agenda','ftp','holiday','hrm','bookmark','cashdesk','ecm','geoipmaxmind','gravatar','clicktodial','paypal','stripe','webservices','website');
+// Put here list of menu entries we are sure we don't want
+$divnotrequired=array('multicurrency','salaries','ticket','margin','opensurvey','paybox','expensereport','incoterm','prelevement','propal','workflow','notification','supplier_proposal','cron','product','productbatch','expedition');
+foreach($mainmenuusedarray as $val)
+{
 	if (empty($val) || in_array($val,$divalreadydefined)) continue;
+	if (in_array($val,$divnotrequired)) continue;
 	//print "XXX".$val;
 
 	// Search img file in module dir
@@ -4424,7 +4561,9 @@ table.noborder th:first-child { padding-<?php print $left; ?>: 10px; }
 table.noborder th:last-child { padding-<?php print $right; ?>: 10px; }
 
 /* table content all pages */
-table.noborder td { padding: 3px; }
+table.noborder td, div.noborder form, div.noborder form div, table.tableforservicepart1 td, table.tableforservicepart2 td {
+ 	padding: 4px 6px 4px 6px;			/* t r b l */
+ }
 
 table.noborder td:first-child { padding-<?php print $left; ?>: 10px !important; }
 
@@ -4548,7 +4687,7 @@ form.liste_titre_sel a {
 }
 
 div.liste_titre_bydiv {
-	border-top-width: <?php echo $borderwith ?>px;
+	border-top-width: <?php echo $borderwidth ?>px;
 	border-top-color: rgb(<?php echo $colortopbordertitle1 ?>);
 	border-top-style: solid;
 	border-collapse: collapse;
@@ -4717,24 +4856,41 @@ div.tabBar .noborder {
 	-moz-box-shadow: 0 0 0 #ddd !important;
 	-webkit-box-shadow: 0 0 0 #ddd !important;
 }
+div .tdtop {
+	vertical-align: top !important;
+	padding-top: 5px !important;
+	padding-bottom: 0px !important;
+}
 
+#tablelines tr.liste_titre td, .paymenttable tr.liste_titre td, .margintable tr.liste_titre td, .tableforservicepart1 tr.liste_titre td {
+	border-bottom: 1px solid #AAA !important;
+}
+#tablelines tr td {
+	height: unset;
+}
 
 /*------------------------------------*\
 		#Boxes 
 \*------------------------------------*/
 
-.ficheaddleft div.boxstats {
+.box {
+	overflow-x: auto;
+	min-height: 40px;
+}
+/*.ficheaddleft div.boxstats, .ficheaddright div.boxstats {
 	border: none;
 }
+*/
 .boxstatsborder {
-	border: 1px solid #CCC !important;
+	/* border: 1px solid #CCC !important; */
 }
 .boxstats, .boxstats130 {
 	display: inline-block;
-	margin: 3px;
-	border: 1px solid #CCC;
+	margin: 8px;
+	/* border: 1px solid #CCC; */
 	text-align: center;
 	border-radius: 2px;
+	background: #eee;
 }
 .boxstats, .boxstats130, .boxstatscontent {
 	white-space: nowrap;
@@ -4744,6 +4900,7 @@ div.tabBar .noborder {
 .boxstats {
 	padding: 3px;
 	width: 100px;
+	min-height: 40px;
 }
 .boxstats130 {
 	width: 135px;
@@ -4752,18 +4909,24 @@ div.tabBar .noborder {
 }
 @media only screen and (max-width: 767px)
 {
+	.boxstats, .boxstats130 {
+		margin: 3px;
+		border: 1px solid #ddd;
+		box-shadow: none;
+		background: #ddd;
+	}
 	.thumbstat {
 		flex: 1 1 110px;
 	}
 	.thumbstat150 {
 		flex: 1 1 110px;
 	}
-	.boxstats, .boxstats130 {
-		width: 90px;
-	}
 	.dashboardlineindicator {
 		float: left;
 		padding-left: 5px;
+	}
+	.boxstats130 {
+		width: 148px;
 	}
 	.boxstats {
 		width: 100px;
@@ -4774,7 +4937,11 @@ div.tabBar .noborder {
 }
 span.boxstatstext {
 	line-height: 18px;
-	opacity: 0.7;
+	color: #000;
+	/* opacity: 0.7; */		/* a bug if browser make z-index infintie when opacity is set so we disable it */
+}
+.boxstatsindicator.thumbstat150 {	/* If we remove this, box position is ko on ipad */
+	display: inline-flex;
 }
 span.boxstatsindicator {
 	font-size: 110%;
@@ -4816,6 +4983,10 @@ span.dashboardlineko {
 .tdboxstats {
 	text-align: center;
 }
+.boxworkingboard .tdboxstats {
+	padding-left: 1px !important;
+	padding-right: 1px !important;
+}
 a.valignmiddle.dashboardlineindicator {
 	line-height: 30px;
 }
@@ -4849,6 +5020,13 @@ img.boxhandle, img.boxclose {
 	border-bottom: none !important;
 }
 
+div.colorback
+{
+	background: rgb(<?php echo $colorbacktitle; ?>);
+	padding: 10px;
+	margin-top: 5px;
+}
+
 .formboxfilter {
 	vertical-align: middle;
 	margin-bottom: 6px;
@@ -4872,6 +5050,10 @@ img.boxhandle, img.boxclose {
 		#Other 
 \*------------------------------------*/
 
+div.boximport {
+	min-height: unset;
+}
+
 .product_line_stock_ok { color: #33cc66; }
 .product_line_stock_too_low { color: #f07b6e; }
 
@@ -4886,6 +5068,10 @@ div.dolgraph div.legend, div.dolgraph div.legend div { background-color: rgba(25
 div.dolgraph div.legend table tbody tr { height: auto; }
 td.legendColorBox { padding: 2px 2px 2px 0 !important; }
 td.legendLabel { padding: 2px 2px 2px 0 !important; }
+
+label.radioprivate {
+	white-space: nowrap;
+}
 
 .photo {
 	border: 0px;
@@ -4933,10 +5119,7 @@ div.titre {
 	font-weight: bold;
 }
 
-#dolpaymenttable {
-	font-size: 13px; 
-	width: 600px;
-}
+#dolpaymenttable { min-width: 320px; font-size: 16px; }	/* Width must have min to make stripe input area visible */
 
 #tablepublicpayment { 
 	border: 1px solid #ccc !important; 
@@ -5073,6 +5256,13 @@ table.valid img { vertical-align: sub; }
 /*------------------------------------*\
 		#Calendar Module 
 \*------------------------------------*/
+
+.ui-datepicker-calendar .ui-state-default, .ui-datepicker-calendar .ui-widget-content .ui-state-default,
+.ui-datepicker-calendar .ui-widget-header .ui-state-default, .ui-datepicker-calendar .ui-button,
+html .ui-datepicker-calendar .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:active
+{
+	border: unset;
+}
 
 img.datecallink { padding-right: 2px !important; }
 
@@ -5232,133 +5422,113 @@ table.dp {
 	vertical-align: middle;
 }
 
+/*------------------------------------*\
+		#Website Module 
+\*------------------------------------*/
+
+.phptag {
+	background: #ddd; border: 1px solid #ccc; border-radius: 4px;
+}
+
+.nobordertransp {
+	border: 0px;
+	background-color: transparent;
+	background-image: none;
+}
+.websitebar {
+	border-bottom: 1px solid #ccc;
+	background: #eee;
+}
+.websitebar .button, .websitebar .buttonDelete
+{
+	padding: 2px 4px 2px 4px !important;
+	margin: 2px 4px 2px 4px  !important;
+	line-height: normal;
+}
+.websiteselection {
+	display: inline-block;
+	padding-left: 10px;
+	vertical-align: middle;
+}
+.websitetools {
+	float: right;
+}
+.websiteselection, .websitetools {
+	margin-top: 3px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+
+.websiteinputurl {
+	display: inline-block;
+	vertical-align: top;
+}
+.websiteiframenoborder {
+	border: 0px;
+}
+span.websitebuttonsitepreview img, a.websitebuttonsitepreview img {
+	width: 26px;
+	display: inline-block;
+}
+span.websitebuttonsitepreviewdisabled img, a.websitebuttonsitepreviewdisabled img {
+	opacity: 0.2;
+}
+.websiteiframenoborder {
+	border: 0px;
+}
+.websitehelp {
+	vertical-align: middle;
+	float: right;
+	padding-top: 8px;
+}
 
 /*------------------------------------*\
 		#Agenda Module 
 \*------------------------------------*/
 
-table.cal_month		{ border-spacing: 0; }
-
-.cal_current_month { 
-	border-top: 0; 
-	border-left: solid 1px #e0e0e0; 
-	border-right: 0; 
-	border-bottom: solid 1px #e0e0e0; 
+.dayevent .tagtr:first-of-type {
+	height: 24px;
 }
+.agendacell { height: 60px; }
 
-.cal_other_month { 
-	border-top: 0; 
-	border-left: solid 1px #c0c0c0; 
-	border-right: 0; 
-	border-bottom: solid 1px #c0c0c0; 
+table.cal_month    { border-spacing: 0px; }
+table.cal_month td:first-child  { border-left: 0px; }
+table.cal_month td:last-child   { border-right: 0px; }
+.cal_current_month { border-top: 0; border-left: solid 1px #E0E0E0; border-right: 0; border-bottom: solid 1px #E0E0E0; }
+.cal_current_month_peruserleft { border-top: 0; border-left: solid 2px #6C7C7B; border-right: 0; border-bottom: solid 1px #E0E0E0; }
+.cal_current_month_oneday { border-right: solid 1px #E0E0E0; }
+.cal_other_month   { border-top: 0; border-left: solid 1px #C0C0C0; border-right: 0; border-bottom: solid 1px #C0C0C0; }
+.cal_other_month_peruserleft { border-top: 0; border-left: solid 2px #6C7C7B !important; border-right: 0; }
+.cal_current_month_right { border-right: solid 1px #E0E0E0; }
+.cal_other_month_right   { border-right: solid 1px #C0C0C0; }
+.cal_other_month   { /* opacity: 0.6; */ background: #EAEAEA; padding-<?php print $left; ?>: 2px; padding-<?php print $right; ?>: 1px; padding-top: 0px; padding-bottom: 0px; }
+.cal_past_month    { /* opacity: 0.6; */ background: #EEEEEE; padding-<?php print $left; ?>: 2px; padding-<?php print $right; ?>: 1px; padding-top: 0px; padding-bottom: 0px; }
+.cal_current_month { background: #FFFFFF; border-left: solid 1px #E0E0E0; padding-<?php print $left; ?>: 2px; padding-<?php print $right; ?>: 1px; padding-top: 0px; padding-bottom: 0px; }
+.cal_current_month_peruserleft { background: #FFFFFF; border-left: solid 2px #6C7C7B; padding-<?php print $left; ?>: 2px; padding-<?php print $right; ?>: 1px; padding-top: 0px; padding-bottom: 0px; }
+.cal_today         { background: #FDFDF0; border-left: solid 1px #E0E0E0; border-bottom: solid 1px #E0E0E0; padding-<?php print $left; ?>: 2px; padding-<?php print $right; ?>: 1px; padding-top: 0px; padding-bottom: 0px; }
+.cal_today_peruser { background: #FDFDF0; border-right: solid 1px #E0E0E0; border-bottom: solid 1px #E0E0E0; padding-<?php print $left; ?>: 2px; padding-<?php print $right; ?>: 1px; padding-top: 0px; padding-bottom: 0px; }
+.cal_today_peruser_peruserleft { background: #FDFDF0; border-left: solid 2px #6C7C7B; border-right: solid 1px #E0E0E0; border-bottom: solid 1px #E0E0E0; padding-<?php print $left; ?>: 2px; padding-<?php print $right; ?>: 1px; padding-top: 0px; padding-bottom: 0px; }
+.cal_past          { }
+.cal_peruser       { padding: 0px; }
+.cal_impair        { background: #F8F8F8; }
+.cal_today_peruser_impair { background: #F8F8F0; }
+.peruser_busy      { background: #CC8888; }
+.peruser_notbusy   { background: #EEDDDD; opacity: 0.5; }
+table.cal_event    { border: none; border-collapse: collapse; margin-bottom: 1px; -webkit-border-radius: 3px; border-radius: 3px; min-height: 20px;	}
+table.cal_event td { border: none; padding-<?php print $left; ?>: 2px; padding-<?php print $right; ?>: 2px; padding-top: 0px; padding-bottom: 0px; }
+table.cal_event td.cal_event { padding: 4px 4px !important; }
+table.cal_event td.cal_event_right { padding: 4px 4px !important; }
+.cal_event              { font-size: 1em; }
+.cal_event a:link       { color: #111111; font-weight: normal !important; }
+.cal_event a:visited    { color: #111111; font-weight: normal !important; }
+.cal_event a:active     { color: #111111; font-weight: normal !important; }
+.cal_event_busy a:hover { color: #111111; font-weight: normal !important; color:rgba(255,255,255,.75); }
+.cal_event_busy      { }
+.cal_peruserviewname { max-width: 140px; height: 22px; }
+
+.topmenuimage {
+	background-size: 28px auto;
 }
-
-.cal_current_month_right { border-right: solid 1px #e0e0e0; }
-
-.cal_other_month_right { border-right: solid 1px #c0c0c0; }
-
-.cal_other_month {	
-	background-color: #eaeaea; 
-	opacity: .6;
-	padding-<?php print $left; ?>: 2px; 
-	padding-<?php print $right; ?>: 1px; 
-	padding-top: 0; 
-	padding-bottom: 0; 
-}
-
-.cal_past_month {	
-	background-color: #eee; 
-	opacity: .6;
-	padding-<?php print $left; ?>: 2px;
-	padding-<?php print $right; ?>: 1px;
-	padding-top: 0; 
-	padding-bottom: 0; 
-}
-
-.cal_current_month { 
-	background-color: #fff; 
-	border-left: solid 1px #e0e0e0; 
-	padding-<?php print $left; ?>: 2px; 
-	padding-<?php print $right; ?>: 1px; 
-	padding-top: 0; 
-	padding-bottom: 0; 
-}
-
-.cal_today { 
-	background-color: #fff; 
-	border: solid 2px #6C7C7B; 
-	padding-<?php print $left; ?>: 2px; 
-	padding-<?php print $right; ?>: 1px; 
-	padding-top: 0; 
-	padding-bottom: 0; 
-}
-
-.cal_past { 
-}
-
-table.cal_event { 
-	background: -webkit-gradient(linear, left top, left bottom, from(#006aac), to(#00438d));
-	border: none; 
-	border-collapse: 
-	box-shadow: inset 0 1px 0 rgba(255, 255, 255, .25), 0 1px 2px rgba(0, 0, 0, .25);
-	-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .25), 0 1px 2px rgba(0, 0, 0, .25);
-	moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .25), 0 1px 2px rgba(0, 0, 0, .25);
-	collapse; 
-	margin-bottom: 1px;
-}
-
-table.cal_event td { 
-	border: none; 
-	padding-<?php print $left; ?>: 2px; 
-	padding-<?php print $right; ?>: 2px; 
-	padding-top: 0; 
-	padding-bottom: 0; 
-}
-
-ul.cal_event {
-	border: none; 
-	list-style-type: none; 
-	margin: 0 auto; 
-	padding-right: 2px;
-	padding-top: 1px;
-	padding-left: 0; 
-	padding-start: 0; 
-	-khtml-padding-start: 0; 
-	-o-padding-start: 0; 
-	-moz-padding-start: 0; 
-	-webkit-padding-start: 0; 
-}
-
-li.cal_event { 
-	border: none; 
-	list-style-type: none; 
-}
-
-.cal_event a:link { 
-	color: #111; 
-	font-size: 11px; 
-	font-weight: normal !important; 
-}
-
-.cal_event a:visited { 
-	color: #111; 
-	font-size: 11px; 
-	font-weight: normal !important; 
-}
-
-.cal_event a:active { 
-	color: #111; 
-	font-size: 11px; 
-	font-weight: normal !important; 
-}
-
-.cal_event a:hover { 
-	color: #111; 
-	color: rgba(255,255,255, .75);
-	font-size: 11px; 
-	font-weight: normal !important; 
-}
-
 
 /*------------------------------------*\
 		#Holiday Module 
@@ -5719,6 +5889,8 @@ p.titre {
  * Ajax - Liste deroulante de l'autocompletion
  */
 
+.ui-widget-content { border: solid 1px rgba(0,0,0,.3); background: #fff !important; }
+
 .ui-autocomplete-loading { 
 	background: white url(<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/working.gif',1); ?>) right center no-repeat; 
 }
@@ -5750,6 +5922,14 @@ p.titre {
 	padding: 2px;
 }
 
+/**
+ * Gantt
+ */
+
+td.gtaskname {
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
 
 /**
  * jQuery - jeditable
@@ -6150,6 +6330,55 @@ div.scroll2 {
 	width: <?php print isset($_SESSION['dol_screenwidth'])?max($_SESSION['dol_screenwidth']-830,450):'450'; ?>px !important;
 }
 
+.gtaskname div, .gtaskname {
+	font-size: unset !important;
+}
+
+div.gantt, .gtaskheading, .gmajorheading, .gminorheading, .gminorheadingwkend {
+	font-size: unset !important;
+	font-weight: normal !important;
+	color: #000 !important;
+}
+
+div.gTaskInfo {
+	background: #f0f0f0 !important;
+}
+
+.gtaskblue {
+	background: rgb(108,152,185) !important;
+}
+
+.gtaskgreen {
+	background: rgb(160,173,58) !important;
+}
+
+td.gtaskname {
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+td.gminorheadingwkend {
+	color: #888 !important;
+}
+
+td.gminorheading {
+	color: #666 !important;
+}
+.glistlbl, .glistgrid {
+	width: 582px !important;
+}
+
+.gtaskname div, .gtaskname {
+	min-width: 250px !important;
+	max-width: 250px !important;
+	width: 250px !important;
+}
+
+.gpccomplete div, .gpccomplete {
+	min-width: 40px !important;
+	max-width: 40px !important;
+	width: 40px !important;
+}
 
 /**
  * jFileTree
@@ -6686,13 +6915,304 @@ ul.ulmenu {
 	border-bottom: none !important;
 }
 
+/**
+ * Public
+ */
+/* The theme for public pages */
+.public_body {
+	margin: 20px;
+}
+.public_border {
+	border: 1px solid #888;
+}
+
+::-webkit-scrollbar {
+	width: 12px;
+}
+::-webkit-scrollbar-button {
+	background: #aaa
+}
+::-webkit-scrollbar-track-piece {
+	background: #fff
+}
+::-webkit-scrollbar-thumb {
+	background: #ddd
+}​
+
+/**
+ * Ticket module
+ */
+#cd-timeline {
+	position: relative;
+	padding: 2em 0;
+	margin-bottom: 2em;
+}
+#cd-timeline::before {
+	/* this is the vertical line */
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 18px;
+	height: 100%;
+	width: 4px;
+	background: #d7e4ed;
+}
+@media only screen and (min-width: 1170px) {
+	#cd-timeline {
+		margin-bottom: 3em;
+	}
+	#cd-timeline::before {
+		left: 50%;
+		margin-left: -2px;
+	}
+}
+
+.cd-timeline-block {
+	position: relative;
+	margin: 2em 0;
+}
+.cd-timeline-block:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+.cd-timeline-block:first-child {
+	margin-top: 0;
+}
+.cd-timeline-block:last-child {
+	margin-bottom: 0;
+}
+@media only screen and (min-width: 1170px) {
+	.cd-timeline-block {
+		margin: 4em 0;
+	}
+	.cd-timeline-block:first-child {
+		margin-top: 0;
+	}
+	.cd-timeline-block:last-child {
+		margin-bottom: 0;
+	}
+}
+
+.cd-timeline-img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	box-shadow: 0 0 0 4px white, inset 0 2px 0 rgba(0, 0, 0, 0.08), 0 3px 0 4px rgba(0, 0, 0, 0.05);
+	background: #d7e4ed;
+}
+.cd-timeline-img img {
+	display: block;
+	width: 24px;
+	height: 24px;
+	position: relative;
+	left: 50%;
+	top: 50%;
+	margin-left: -12px;
+	margin-top: -12px;
+}
+.cd-timeline-img.cd-picture {
+	background: #75ce66;
+}
+.cd-timeline-img.cd-movie {
+	background: #c03b44;
+}
+.cd-timeline-img.cd-location {
+	background: #f0ca45;
+}
+@media only screen and (min-width: 1170px) {
+	.cd-timeline-img {
+		width: 60px;
+		height: 60px;
+		left: 50%;
+		margin-left: -30px;
+		/* Force Hardware Acceleration in WebKit */
+		-webkit-transform: translateZ(0);
+		-webkit-backface-visibility: hidden;
+	}
+	.cssanimations .cd-timeline-img.is-hidden {
+		visibility: hidden;
+	}
+	.cssanimations .cd-timeline-img.bounce-in {
+		visibility: visible;
+		-webkit-animation: cd-bounce-1 0.6s;
+		-moz-animation: cd-bounce-1 0.6s;
+		animation: cd-bounce-1 0.6s;
+	}
+}
+
+@-webkit-keyframes cd-bounce-1 {
+	0% {
+		opacity: 0;
+		-webkit-transform: scale(0.5);
+	}
+
+	60% {
+		opacity: 1;
+		-webkit-transform: scale(1.2);
+	}
+
+	100% {
+		-webkit-transform: scale(1);
+	}
+}
+@-moz-keyframes cd-bounce-1 {
+	0% {
+		opacity: 0;
+		-moz-transform: scale(0.5);
+	}
+
+	60% {
+		opacity: 1;
+		-moz-transform: scale(1.2);
+	}
+
+	100% {
+		-moz-transform: scale(1);
+	}
+}
+@keyframes cd-bounce-1 {
+	0% {
+		opacity: 0;
+		-webkit-transform: scale(0.5);
+		-moz-transform: scale(0.5);
+		-ms-transform: scale(0.5);
+		-o-transform: scale(0.5);
+		transform: scale(0.5);
+	}
+
+	60% {
+		opacity: 1;
+		-webkit-transform: scale(1.2);
+		-moz-transform: scale(1.2);
+		-ms-transform: scale(1.2);
+		-o-transform: scale(1.2);
+		transform: scale(1.2);
+	}
+
+	100% {
+		-webkit-transform: scale(1);
+		-moz-transform: scale(1);
+		-ms-transform: scale(1);
+		-o-transform: scale(1);
+		transform: scale(1);
+	}
+}
+.cd-timeline-content {
+	position: relative;
+	margin-left: 60px;
+	background: white;
+	border-radius: 0.25em;
+	padding: 1em;
+	background-image: -o-linear-gradient(bottom, rgba(0,0,0,0.1) 0%, rgba(230,230,230,0.4) 100%);
+	background-image: -moz-linear-gradient(bottom, rgba(0,0,0,0.1) 0%, rgba(230,230,230,0.4) 100%);
+	background-image: -webkit-linear-gradient(bottom, rgba(0,0,0,0.1) 0%, rgba(230,230,230,0.4) 100%);
+	background-image: -ms-linear-gradient(bottom, rgba(0,0,0,0.1) 0%, rgba(230,230,230,0.4) 100%);
+	background-image: linear-gradient(bottom, rgba(0,0,0,0.1) 0%, rgba(230,230,230,0.4) 100%);
+}
+.cd-timeline-content:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+.cd-timeline-content h2 {
+	color: #303e49;
+}
+.cd-timeline-content .cd-date {
+	font-size: 13px;
+	font-size: 0.8125rem;
+}
+.cd-timeline-content .cd-date {
+	display: inline-block;
+}
+.cd-timeline-content p {
+	margin: 1em 0;
+	line-height: 1.6;
+}
+
+.cd-timeline-content .cd-date {
+	float: left;
+	padding: .2em 0;
+	opacity: .7;
+}
+.cd-timeline-content::before {
+	content: '';
+	position: absolute;
+	top: 16px;
+	right: 100%;
+	height: 0;
+	width: 0;
+	border: 7px solid transparent;
+	border-right: 7px solid white;
+}
+@media only screen and (min-width: 768px) {
+	.cd-timeline-content h2 {
+		font-size: 20px;
+		font-size: 1.25rem;
+	}
+	.cd-timeline-content {
+		font-size: 16px;
+		font-size: 1rem;
+	}
+	.cd-timeline-content .cd-read-more, .cd-timeline-content .cd-date {
+		font-size: 14px;
+		font-size: 0.875rem;
+	}
+}
+@media only screen and (min-width: 1170px) {
+	.cd-timeline-content {
+		margin-left: 0;
+		padding: 1.6em;
+		width: 43%;
+	}
+	.cd-timeline-content::before {
+		top: 24px;
+		left: 100%;
+		border-color: transparent;
+		border-left-color: white;
+	}
+	.cd-timeline-content .cd-read-more {
+		float: left;
+	}
+	.cd-timeline-content .cd-date {
+	position: absolute;
+		width: 55%;
+		left: 115%;
+		top: 6px;
+		font-size: 16px;
+		font-size: 1rem;
+	}
+	.cd-timeline-block:nth-child(even) .cd-timeline-content {
+		float: right;
+	}
+	.cd-timeline-block:nth-child(even) .cd-timeline-content::before {
+		top: 24px;
+		left: auto;
+		right: 100%;
+		border-color: transparent;
+		border-right-color: white;
+	}
+	.cd-timeline-block:nth-child(even) .cd-timeline-content .cd-read-more {
+		float: right;
+	}
+	.cd-timeline-block:nth-child(even) .cd-timeline-content .cd-date {
+		left: auto;
+		right: 115%;
+		text-align: right;
+	}
+
+}
+
 /* Pagination */
 div.refidpadding {
 	padding-top: 3px;
 }
 div.refid {
 	font-weight: bold;
-	color: #766;
+	color: rgb(<?php print $colortexttitlenotab; ?>);
 	font-size: 160%;
 }
 div.refidno	{
@@ -6757,10 +7277,6 @@ div.pagination li.litext a {
 div.pagination li.noborder a:hover {
 	border: none;
 	background-color: transparent;
-}
-div.pagination li a,
-div.pagination li span {
-	background-color: #fff;
 }
 div.pagination li:first-child a,
 div.pagination li:first-child span {
@@ -6936,8 +7452,20 @@ div.divphotoref {
 div.statusref {
 	float: right;
 	padding-right: 12px;
-	margin-top: 6px;
+	margin-top: 8px;
 	margin-bottom: 10px;
+	clear: both;
+}
+div.statusref img {
+	padding-left: 8px;
+	padding-right: 9px;
+	vertical-align: text-bottom;
+	width: 18px;
+}
+div.statusrefbis {
+	padding-left: 8px;
+	padding-right: 9px;
+	vertical-align: text-bottom;
 }
 img.photoref {
 	border: 1px solid #CCC;
@@ -7006,6 +7534,9 @@ dl.dropdown {
 	display:inline-block;
 	padding: 0 3px 2px 0;
 }
+.dropdown span.value {
+	display:none;
+}
 .dropdown dd ul {
 	color: #333;
 	background-color: #FFF;
@@ -7016,16 +7547,14 @@ dl.dropdown {
 	position:absolute;
 	top:2px;
 	list-style:none;
-	max-height: 270px;
+	max-height: 264px;
 	overflow: auto;
-}
-.dropdown span.value {
-	display:none;
 }
 .dropdown dd ul li {
 	white-space: nowrap;
 	font-weight: normal;
 	padding: 2px;
+	color: #000;
 }
 .dropdown dd ul li input[type="checkbox"] {
 	margin-right: 3px;
@@ -7166,27 +7695,25 @@ img.loginphoto {
 @media only screen and (max-width: <?php echo round($nbtopmenuentries * $fontsize * 6.7, 0) + 8; ?>px)
 {
 	div.tmenucenter {
-			max-width: <?php echo round($fontsize * 4); ?>px;	/* size of viewport */
-			white-space: nowrap;
-			overflow: hidden;
-			text-overflow: ellipsis;
-			color: #<?php echo $colortextbackhmenu; ?>;
+		max-width: <?php echo round($fontsize * 4); ?>px;	/* size of viewport */
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		color: #<?php echo $colortextbackhmenu; ?>;
 	}
 	.mainmenuaspan {
-			/*display: none;*/
-			font-size: 10px;
-		}
-		.topmenuimage {
-			background-size: 26px auto;
-			margin-top: 0px;
+		font-size: 12px;
 	}
-
-		li.tmenu, li.tmenusel {
-			min-width: 32px;
-		}
-		div.mainmenu {
-			min-width: auto;
-		}
+	.topmenuimage {
+		background-size: 26px auto;
+		margin-top: 0px;
+	}
+	li.tmenu, li.tmenusel {
+		min-width: 32px;
+	}
+	div.mainmenu {
+		min-width: auto;
+	}
 	div.tmenuleft {
 		display: none;
 	}
@@ -7200,8 +7727,9 @@ img.loginphoto {
 		text-overflow: clip;
 	}
 	.mainmenuaspan {
-		/*display: none;*/
 		font-size: 10px;
+		padding-left: 0;
+		padding-right: 0;
 	}
 	.topmenuimage {
 		background-size: 20px auto;
