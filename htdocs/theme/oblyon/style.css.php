@@ -1598,7 +1598,7 @@ td.showDragHandle {
 }*/
 
 #id-top {
-    background-color: #333333;
+    background-color: <?php print $bgnavtop; ?>;
 }
 
 <?php if ( DOL_VERSION >= "4.0.0" ) { ?>
