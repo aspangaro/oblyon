@@ -1598,30 +1598,19 @@ td.showDragHandle {
 }*/
 
 #id-top {
-    background-color: <?php print $bgnavtop; ?>;
+	background-color: <?php print $bgnavtop; ?>;
 }
 
-<?php if ( DOL_VERSION >= "4.0.0" ) { ?>
-	div.fiche {
-		margin-<?php print $left; ?>: <?php print (GETPOST("optioncss") == 'print'?6:($dol_hide_leftmenu?'6':'10')); ?>px;
-		<?php if ( !$conf->global->OBLYON_HIDE_LEFTMENU && !$conf->dol_optimize_smallscreen ) { ?>
-			margin-<?php print $right; ?>: <?php print (GETPOST("optioncss") == 'print'?8:(empty($conf->dol_optimize_smallscreen)?'12':'6')); ?>px;
-		<?php } else { ?>
-			margin-<?php print $right; ?>: <?php print (GETPOST("optioncss") == 'print'?6:((empty($conf->global->MAIN_MENU_USE_JQUERY_LAYOUT))?($dol_hide_topmenu?'4':'20'):'24')); ?>px;
-		<?php } ?>
-		<?php if (! empty($conf->dol_hide_leftmenu) && ! empty($conf->dol_hide_topmenu)) print 'margin-top: 4px;'; ?>
-	}
-<?php } else { ?>
-	div.fiche {
-		margin-<?php print $left; ?>: <?php print (GETPOST("optioncss") == 'print'?6:((empty($conf->global->MAIN_MENU_USE_JQUERY_LAYOUT))?($dol_hide_topmenu?'4':'20'):'24')); ?>px;
-		<?php if ( !$conf->global->OBLYON_HIDE_LEFTMENU && !$conf->dol_optimize_smallscreen ) { ?>
-		margin-<?php print $right; ?>: <?php print (GETPOST("optioncss") == 'print'?8:(empty($conf->dol_optimize_smallscreen)?'15':'4')); ?>px;
-		<?php } else { ?>
+
+div.fiche {
+	margin-<?php print $left; ?>: <?php print (GETPOST("optioncss") == 'print'?6:($dol_hide_leftmenu?'6':'10')); ?>px;
+	<?php if ( !$conf->global->OBLYON_HIDE_LEFTMENU && !$conf->dol_optimize_smallscreen ) { ?>
+		margin-<?php print $right; ?>: <?php print (GETPOST("optioncss") == 'print'?8:(empty($conf->dol_optimize_smallscreen)?'12':'6')); ?>px;
+	<?php } else { ?>
 		margin-<?php print $right; ?>: <?php print (GETPOST("optioncss") == 'print'?6:((empty($conf->global->MAIN_MENU_USE_JQUERY_LAYOUT))?($dol_hide_topmenu?'4':'20'):'24')); ?>px;
-		<?php } ?>
-		<?php if (! empty($conf->dol_hide_topmenu) && ! empty($conf->dol_hide_topmenu)) print 'margin-top: 4px;'; ?>
-	}
-<?php } ?>
+	<?php } ?>
+	<?php if (! empty($conf->dol_hide_leftmenu) && ! empty($conf->dol_hide_topmenu)) print 'margin-top: 4px;'; ?>
+}
 
 div.fichecenter {
 	clear: both;	/* This is to have div fichecenter that are true rectangles */
@@ -2563,12 +2552,8 @@ div.login a:hover {
 	box-shadow: 0 0 1px rgba(0,0,0, .04);
 	-webkit-box-shadow: 0 0 1px rgba(0,0,0, .04);
 	clear: both;
-	<?php if ( DOL_VERSION >= "3.9.0" ) { ?>
-		padding: 10px;
-	<?php } else { ?>
-		padding: 10px 10px 20px 10px;
-	<?php } ?>
-	text-decoration: none;	
+	padding: 10px;
+	text-decoration: none;
 }
 
 .blockvmenusearch .menu_titre {
