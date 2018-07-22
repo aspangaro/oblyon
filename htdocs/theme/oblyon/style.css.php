@@ -2694,7 +2694,7 @@ div.login a:hover {
  
 .blockvmenusearch {
 	background-color: <?php print $bgnavleft; ?>;
-	/*border-bottom: 1px solid #D5D5D5;*/
+	border-bottom: 1px solid <?php print $bgnavleft_hover; ?>;
 	box-shadow: 0 0 1px rgba(0,0,0, .04);
 	-webkit-box-shadow: 0 0 1px rgba(0,0,0, .04);
 	clear: both;
@@ -2703,7 +2703,7 @@ div.login a:hover {
 	<?php } else { ?>
 		padding: 10px 10px 20px 10px;
 	<?php } ?>
-	text-decoration: none;	
+	text-decoration: none;
 }
 
 .blockvmenusearch .menu_titre {
@@ -2727,14 +2727,21 @@ div.login a:hover {
  */
  
  .blockvmenubookmarks {
-	background-color: #fff;
-	border-bottom: 1px solid #e5e5e5;
-	padding: 5px;
-	padding-bottom: 10px;
+	background-color: <?php print $bgnavleft; ?>;
+	border-bottom: 1px solid <?php print $bgnavleft_hover; ?>;
+	box-shadow: 0 0 1px rgba(0,0,0, .04);
+	-webkit-box-shadow: 0 0 1px rgba(0,0,0, .04);
+	clear: both;
+	<?php if ( DOL_VERSION >= "3.9.0" ) { ?>
+		padding: 10px;
+	<?php } else { ?>
+		padding: 10px 10px 20px 10px;
+	<?php } ?>
+	text-decoration: none;
 }
 
-.blockvmenubookmarks .menu_titre { 
-	margin: 5px;
+.blockvmenubookmarks .menu_titre {
+	margin: 8px 0 1px 0;
 	text-align: <?php print $left; ?>; 
 }
 
@@ -3693,11 +3700,11 @@ a.vsmenu img{
 div.blockvmenuimpair:first-child { padding: 0; }
 
 .vmenu .menu_top {
-	margin-top: 10px;
+	margin-top: 2.5px;
 }
 
 .vmenu .menu_end {
-	margin-bottom: 15px;
+	margin-bottom: 5px;
 }
 
 
@@ -4898,12 +4905,12 @@ div .tdtop {
 }
 */
 .boxstatsborder {
-	/* border: 1px solid #CCC !important; */
+	border: 1px solid #CCC !important;
 }
 .boxstats, .boxstats130 {
 	display: inline-block;
 	margin: 8px;
-	/* border: 1px solid #CCC; */
+	border: 1px solid #CCC;
 	text-align: center;
 	border-radius: 2px;
 	background: #eee;
@@ -4954,7 +4961,6 @@ div .tdtop {
 span.boxstatstext {
 	line-height: 18px;
 	color: #000;
-	/* opacity: 0.7; */		/* a bug if browser make z-index infintie when opacity is set so we disable it */
 }
 .boxstatsindicator.thumbstat150 {	/* If we remove this, box position is ko on ipad */
 	display: inline-flex;
@@ -6806,7 +6812,9 @@ a span.select2-chosen
 	overflow: hidden;
 }
 
-
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+	color: #999;
+}
 
 /**
  * JMobile
