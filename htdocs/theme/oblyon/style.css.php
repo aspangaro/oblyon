@@ -588,6 +588,16 @@ td.hidden {
 	display: none;
 }
 
+.opacityhigh {
+	opacity: 0.8;
+}
+.optiongrey, .opacitymedium {
+	opacity: 0.5;
+}
+.opacitytransp {
+	opacity: 0;
+}
+
 /* ============================================================================== */
 /*	Module website 																  */
 /* ============================================================================== */
@@ -1688,7 +1698,7 @@ td.showDragHandle {
 	<?php if ( !$conf->global->OBLYON_FULLSIZE_TOPBAR ) { ?>
 		position: relative;
 	<?php } ?>
-	z-index: 999;
+	z-index: 990;
 }
 
 /* coming feature -****
@@ -1712,7 +1722,7 @@ td.showDragHandle {
 }*/
 
 #id-top {
-	background-color: #333333;
+	background-color: <?php print $bgnavtop; ?>;
 }
 
 div.fiche {
@@ -1891,7 +1901,7 @@ div.secondcolumn div.box {
 		<?php } ?>
 		margin: 0;
 		padding-<?php print $right; ?>: 160px;
-		z-index: 990;
+		z-index: 999;
 		<?php if ( $conf->global->OBLYON_STICKY_TOPBAR ) { ?>
 			position: fixed;
 			top: 0;
@@ -2684,7 +2694,7 @@ div.login a:hover {
  
 .blockvmenusearch {
 	background-color: <?php print $bgnavleft; ?>;
-	/*border-bottom: 1px solid #D5D5D5;*/
+	border-bottom: 1px solid <?php print $bgnavleft_hover; ?>;
 	box-shadow: 0 0 1px rgba(0,0,0, .04);
 	-webkit-box-shadow: 0 0 1px rgba(0,0,0, .04);
 	clear: both;
@@ -2693,7 +2703,7 @@ div.login a:hover {
 	<?php } else { ?>
 		padding: 10px 10px 20px 10px;
 	<?php } ?>
-	text-decoration: none;	
+	text-decoration: none;
 }
 
 .blockvmenusearch .menu_titre {
@@ -2717,14 +2727,21 @@ div.login a:hover {
  */
  
  .blockvmenubookmarks {
-	background-color: #fff;
-	border-bottom: 1px solid #e5e5e5;
-	padding: 5px;
-	padding-bottom: 10px;
+	background-color: <?php print $bgnavleft; ?>;
+	border-bottom: 1px solid <?php print $bgnavleft_hover; ?>;
+	box-shadow: 0 0 1px rgba(0,0,0, .04);
+	-webkit-box-shadow: 0 0 1px rgba(0,0,0, .04);
+	clear: both;
+	<?php if ( DOL_VERSION >= "3.9.0" ) { ?>
+		padding: 10px;
+	<?php } else { ?>
+		padding: 10px 10px 20px 10px;
+	<?php } ?>
+	text-decoration: none;
 }
 
-.blockvmenubookmarks .menu_titre { 
-	margin: 5px;
+.blockvmenubookmarks .menu_titre {
+	margin: 8px 0 1px 0;
 	text-align: <?php print $left; ?>; 
 }
 
@@ -3683,11 +3700,11 @@ a.vsmenu img{
 div.blockvmenuimpair:first-child { padding: 0; }
 
 .vmenu .menu_top {
-	margin-top: 10px;
+	margin-top: 2.5px;
 }
 
 .vmenu .menu_end {
-	margin-bottom: 15px;
+	margin-bottom: 5px;
 }
 
 
@@ -4458,6 +4475,16 @@ div.tabBar ul li {
 	margin-<?php print $left; ?>: 30px !important;
 }
 
+div.popuptabset {
+	background-color: #e5e5e5;
+	padding: 5px;
+	border: 1px solid #e5e5e5;
+}
+
+div.popuptab {
+	margin: .3em;
+}
+
 @media only screen and (max-width: 570px)
 {
 	
@@ -4545,8 +4572,7 @@ div.noborder {
 	width: 100%;
 }
 
-table.noborder[summary="list_of_modules"] tr.pair, 
-table.noborder[summary="list_of_modules"] tr.impair	{ line-height: 2.2em; }
+table.noborder[summary="list_of_modules"] tr.oddeven { line-height: 2.2em; }
 
 table.noborder tr, div.noborder form {
 	line-height: 1.8em;
@@ -4631,10 +4657,7 @@ table.liste {
 	width: 100%;
 }
 
-table.liste .impair td, table.liste .pair td { padding: 5px 10px; }
-
-/*table.liste .impair td:first-child, table.liste .pair td:first-child { padding: 5px 0 5px 10px; }
-table.liste .impair td:last-child, table.liste .pair td:last-child { padding: 5px 10px 5px 0; }*/
+table.liste .oddeven td { padding: 5px 10px; }
 
 table .liste_titre td { padding: 2px; }
 
@@ -4882,12 +4905,12 @@ div .tdtop {
 }
 */
 .boxstatsborder {
-	/* border: 1px solid #CCC !important; */
+	border: 1px solid #CCC !important;
 }
 .boxstats, .boxstats130 {
 	display: inline-block;
 	margin: 8px;
-	/* border: 1px solid #CCC; */
+	border: 1px solid #CCC;
 	text-align: center;
 	border-radius: 2px;
 	background: #eee;
@@ -4938,7 +4961,6 @@ div .tdtop {
 span.boxstatstext {
 	line-height: 18px;
 	color: #000;
-	/* opacity: 0.7; */		/* a bug if browser make z-index infintie when opacity is set so we disable it */
 }
 .boxstatsindicator.thumbstat150 {	/* If we remove this, box position is ko on ipad */
 	display: inline-flex;
@@ -6790,7 +6812,9 @@ a span.select2-chosen
 	overflow: hidden;
 }
 
-
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+	color: #999;
+}
 
 /**
  * JMobile
@@ -7369,70 +7393,67 @@ ul.noborder li:nth-child(odd):not(.liste_titre) {
 	background-color: rgb(<?php echo $colorbacklinepair2; ?>) !important;
 }
 
+/* Prepare to remove class pair - impair */
 
-/* Set the color for hover lines */
-.oddeven:hover, .evenodd:hover, .impair:hover, .pair:hover
+.noborder > tbody > tr:nth-child(even):not(.liste_titre), .liste > tbody > tr:nth-child(even):not(.liste_titre) {
+	background: #<?php echo colorArrayToHex(colorStringToArray($colorbacklineimpair1)); ?>;
+}
+.noborder > tbody > tr:nth-child(even):not(:last-child) td:not(.liste_titre), .liste > tbody > tr:nth-child(even):not(:last-child) td:not(.liste_titre) {
+	border-bottom: 1px solid #ddd;
+}
+
+.noborder > tbody > tr:nth-child(odd):not(.liste_titre), .liste > tbody > tr:nth-child(odd):not(.liste_titre) {
+	background: #<?php echo colorArrayToHex(colorStringToArray($colorbacklinepair1)); ?>;
+}
+.noborder > tbody > tr:nth-child(odd):not(:last-child) td:not(.liste_titre), .liste > tbody > tr:nth-child(odd):not(:last-child) td:not(.liste_titre) {
+	border-bottom: 1px solid #ddd;
+}
+
+ul.noborder li:nth-child(even):not(.liste_titre) {
+	background-color: #<?php echo colorArrayToHex(colorStringToArray($colorbacklinepair1)); ?>;
+}
+
+.oddeven:hover, .evenodd:hover
 {
 <?php if ($colorbacklinepairhover) { ?>
 	background: rgb(<?php echo $colorbacklinepairhover; ?>) !important;
 <?php } ?>
 }
 
-.oddeven, .evenodd, .impair, .nohover .impair:hover, tr.impair td.nohover
+.oddeven, .evenodd
 {
 	font-family: <?php print $fontlist ?>;
 	border: 0px;
 	margin-bottom: 1px;
 	color: #202020;
 }
-.impair, .nohover .impair:hover, tr.impair td.nohover
-{
-	background: #<?php echo colorArrayToHex(colorStringToArray($colorbacklineimpair1)); ?>;
-}
+
 #GanttChartDIV {
 	background: #<?php echo colorArrayToHex(colorStringToArray($colorbacklineimpair1)); ?>;
 }
 
-.oddeven, .evenodd, .pair, .nohover .pair:hover, tr.pair td.nohover {
-	font-family: <?php print $fontlist ?>;
-	margin-bottom: 1px;
-	color: #202020;
-}
-.pair, .nohover .pair:hover, tr.pair td.nohover {
-	background-color: #<?php echo colorArrayToHex(colorStringToArray($colorbacklinepair1)); ?>;
-}
 table.dataTable tr.oddeven {
 	background-color: #<?php echo colorArrayToHex(colorStringToArray($colorbacklinepair1)); ?> !important;
 }
 
 /* For no hover style */
-td.oddeven, table.nohover tr.impair, table.nohover tr.pair, table.nohover tr.impair td, table.nohover tr.pair td, tr.nohover td, form.nohover, form.nohover:hover {
+td.oddeven, tr.nohover td, form.nohover, form.nohover:hover {
 	background-color: #<?php echo colorArrayToHex(colorStringToArray($colorbacklineimpair1)); ?> !important;
 	background: #<?php echo colorArrayToHex(colorStringToArray($colorbacklineimpair1)); ?> !important;
 }
-td.evenodd, tr.nohoverpair td {
+td.evenodd {
 	background-color: #<?php echo colorArrayToHex(colorStringToArray($colorbacklinepair1)); ?> !important;
 	background: #<?php echo colorArrayToHex(colorStringToArray($colorbacklinepair1)); ?> !important;
 }
 .trforbreak td {
 	background-color: #<?php echo colorArrayToHex(colorStringToArray($colorbacklinebreak)); ?> !important;
 }
+.trforbreak td, table.noborder tr.trforbreak td a:link {
+	color: #fff;
+}
 
 table.dataTable td {
 	padding: 5px 2px 5px 3px !important;
-}
-tr.pair td, tr.impair td, form.impair div.tagtd, form.pair div.tagtd, div.impair div.tagtd, div.pair div.tagtd, div.liste_titre div.tagtd {
-	padding: 5px 2px 5px 3px;
-	border-bottom: 1px solid #eee;
-}
-form.pair, form.impair {
-	font-weight: normal;
-}
-tr.pair:last-of-type td, tr.impair:last-of-type td {
-	border-bottom: 0px !important;
-}
-tr.pair td .nobordernopadding tr td, tr.impair td .nobordernopadding tr td {
-	border-bottom: 0px !important;
 }
 
 div.arearef {
@@ -7629,7 +7650,6 @@ img.loginphoto {
 	.sec-nav__sub-item {
 		overflow-wrap: break-word;
 	}
-
 
 	div.vmenu {
 		min-width: 170px;

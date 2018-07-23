@@ -53,32 +53,32 @@ function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$fo
 
 	// Show logo company
 	if (!empty($conf->global->MAIN_MENU_INVERT) && empty($noout) && ! empty($conf->global->MAIN_SHOW_LOGO)) {
-	if (empty($conf->dol_optimize_smallscreen)) { 
-		$mysoc->logo=$conf->global->MAIN_INFO_SOCIETE_LOGO;
-		if (! empty($mysoc->logo) && is_readable($conf->mycompany->dir_output.'/logos/'.$mysoc->logo)) {
-			$urllogo=DOL_URL_ROOT.'/viewimage.php?cache=1&amp;modulepart=companylogo&amp;file='.urlencode($mysoc->logo);
-			$title=$langs->trans("Home");
+		if (empty($conf->dol_optimize_smallscreen)) {
+			$mysoc->logo=$conf->global->MAIN_INFO_SOCIETE_LOGO;
+			if (! empty($mysoc->logo) && is_readable($conf->mycompany->dir_output.'/logos/'.$mysoc->logo)) {
+				$urllogo=DOL_URL_ROOT.'/viewimage.php?cache=1&amp;modulepart=companylogo&amp;file='.urlencode($mysoc->logo);
+				$title=$langs->trans("Home");
+			} else {
+				$urllogo=DOL_URL_ROOT.'/theme/dolibarr_logo.png';
+				$title=$langs->trans("GoIntoSetupToChangeLogo");
+			}
 		} else {
-			$urllogo=DOL_URL_ROOT.'/theme/dolibarr_logo.png';
-			$title=$langs->trans("GoIntoSetupToChangeLogo");
+			$mysoc->logo_mini=$conf->global->MAIN_INFO_SOCIETE_LOGO_MINI;
+			if (! empty($mysoc->logo_mini) && is_readable($conf->mycompany->dir_output.'/logos/thumbs/'.$mysoc->logo_mini)) {
+				$urllogo=DOL_URL_ROOT.'/viewimage.php?cache=1&amp;modulepart=companylogo&amp;file='.urlencode('thumbs/'.$mysoc->logo_mini);
+				$title=$langs->trans("Home");
+			} else {
+				$urllogo=DOL_URL_ROOT.'/theme/dolibarr_logo.png';
+				$title=$langs->trans("GoIntoSetupToChangeLogo");
+			}
 		}
-	} else {
-		$mysoc->logo_mini=$conf->global->MAIN_INFO_SOCIETE_LOGO_MINI;
-		if (! empty($mysoc->logo_mini) && is_readable($conf->mycompany->dir_output.'/logos/thumbs/'.$mysoc->logo_mini)) {
-			$urllogo=DOL_URL_ROOT.'/viewimage.php?cache=1&amp;modulepart=companylogo&amp;file='.urlencode('thumbs/'.$mysoc->logo_mini);
-			$title=$langs->trans("Home");
-		} else {
-			$urllogo=DOL_URL_ROOT.'/theme/dolibarr_logo.png';
-			$title=$langs->trans("GoIntoSetupToChangeLogo");
-		}
-	}
 
-	print "\n".'<!-- Show logo on menu -->'."\n";
-	print '<div class="db-menu__logo">';
-	print '<a class="db-menu__logo__link	text-center" href="'.DOL_URL_ROOT.'" alt="'.dol_escape_htmltag($title).'" title="'.dol_escape_htmltag($title).'">';
-	print '<img class="db-menu__logo__img" src="'.$urllogo.'" alt="Logo">';
-	print '</a>'."\n";
-	print '</div>';
+		print "\n".'<!-- Show logo on menu -->'."\n";
+		print '<div class="db-menu__logo">';
+		print '<a class="db-menu__logo__link	text-center" href="'.DOL_URL_ROOT.'" alt="'.dol_escape_htmltag($title).'" title="'.dol_escape_htmltag($title).'">';
+		print '<img class="db-menu__logo__img" src="'.$urllogo.'" alt="Logo">';
+		print '</a>'."\n";
+		print '</div>';
 	}
 
 	if(DOL_VERSION >='3.9.0')
@@ -96,7 +96,7 @@ function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$fo
 	}
 	
 	if ( empty($conf->global->MAIN_MENU_INVERT) && ($conf->global->OBLYON_HIDE_LEFTMENU || $conf->dol_optimize_smallscreen) ) {
-	print '<div class="pushy-btn" title="'.$langs->trans("ShowLeftMenu").'">&#8801;</div>';
+		print '<div class="pushy-btn" title="'.$langs->trans("ShowLeftMenu").'">&#8801;</div>';
 	}
 
 	if (empty($noout)) print_start_menu_array();
@@ -342,7 +342,7 @@ function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$fo
 		$showmode=dol_oblyon_showmenu($type_user,$newTabMenu[$i],$listofmodulesforexternal);
 		if ($showmode == 1) {
 			$url = $shorturl = $newTabMenu[$i]['url'];
-			if (! preg_match("/^(http:\/\/|https:\/\/)/i",$newTabMenu[$i]['url']))
+			if (! preg_match("/^(http:\/\/|https:\/\/)/i",$url))
 			{
 				$param='';
 				if (! preg_match('/mainmenu/i',$url) || ! preg_match('/leftmenu/i',$url)) {
@@ -366,7 +366,17 @@ function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$fo
 		}
 		else if ($showmode == 2) $itemsel=FALSE;
 
-		$menu->add($shorturl, $newTabMenu[$i]['titre'], 0, $showmode, ($newTabMenu[$i]['target']?$newTabMenu[$i]['target']:$atarget), ($newTabMenu[$i]['mainmenu']?$newTabMenu[$i]['mainmenu']:$newTabMenu[$i]['rowid']), '');
+		if (empty($noout)) print_start_menu_entry($idsel,$itemsel,$showmode);
+		if (empty($noout)) print_text_menu_entry($newTabMenu[$i]['titre'], $showmode, $url, $id, $idsel, ($newTabMenu[$i]['target']?$newTabMenu[$i]['target']:$atarget));
+		if (empty($noout)) print_end_menu_entry($showmode);
+		$menu->add(
+			$shorturl, 
+			$newTabMenu[$i]['titre'], 
+			0, $showmode, 
+			($newTabMenu[$i]['target'] ? $newTabMenu[$i]['target'] : $atarget), 
+			($newTabMenu[$i]['mainmenu'] ? $newTabMenu[$i]['mainmenu'] : $newTabMenu[$i]['rowid']), 
+			''
+		);
 	}
 
 	$showmode=1;
