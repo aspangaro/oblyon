@@ -3093,7 +3093,7 @@ div.login a:hover {
 	content: '\e608';
 }
 
-.icon--websites:before {
+.icon--websites:before, .icon--website:before {
 	content: '\e608';
 }
 
@@ -3319,6 +3319,10 @@ div.login a:hover {
 	content: '\e605';
 }
 
+/* Generic modules */
+.icon--generic:before {
+	content: '\e902';
+}
 
 /*------------------------------------*\
 		#Top Menu (eldy style) 
@@ -3967,7 +3971,7 @@ $generic=1;
 // Put here list of menu entries when the div.mainmenu.menuentry was previously defined
 $divalreadydefined=array('home','companies','products','commercial','externalsite','accountancy','project','tools','members','agenda','ftp','holiday','hrm','bookmark','cashdesk','ecm','geoipmaxmind','gravatar','clicktodial','paypal','stripe','webservices','website');
 // Put here list of menu entries we are sure we don't want
-$divnotrequired=array('multicurrency','salaries','ticket','margin','opensurvey','paybox','expensereport','incoterm','prelevement','propal','workflow','notification','supplier_proposal','cron','product','productbatch','expedition');
+$divnotrequired=array('multicurrency','salaries','margin','opensurvey','paybox','expensereport','incoterm','prelevement','propal','workflow','notification','supplier_proposal','cron','product','productbatch','expedition');
 foreach($mainmenuusedarray as $val)
 {
 	if (empty($val) || in_array($val,$divalreadydefined)) continue;
@@ -3984,27 +3988,25 @@ foreach($mainmenuusedarray as $val)
 			break;
 		}
 	}
-	//Img file not found
-	if (! $found) {
+
+	if ( $found || $conf->global->OBLYON_ELDY_ICONS || $conf->global->OBLYON_ELDY_OLD_ICONS ) {
+		print ".mainmenu.".$val.", .icon--".$val." {\n";
+
 		if ( $conf->global->OBLYON_ELDY_ICONS ) {
 			$url=dol_buildpath($path.'/theme/'.$theme.'/img/menus/generic'.$generic.'.png',1);
 			if ($generic < 4) $generic++;
 		} else if ( $conf->global->OBLYON_ELDY_OLD_ICONS ) {
 			$url=dol_buildpath($path.'/theme/'.$theme.'/img/old-menus/generic'.$generic.'.png',1);
 			if ($generic < 4) $generic++;
-		} else {
-			$url=dol_buildpath($path.'/theme/'.$theme.'/img/menus/generic.svg',1);
 		}
 
-		$found=1;
+		print "  background: url(".$url.") no-repeat center;\n";
+		print "  background-size: 22px;\n";
+		print "}\n";
+	} else {
 		print "/* A mainmenu entry but img file ".$val.".png not found (check /".$val."/img/".$val.".png), so we use a generic one */\n";
-	}
-
-	if ($found) {
-		print ".mainmenu.".$val.",\n";
-		print ".icon--".$val." {\n";
-		print "	background: url(".$url.") no-repeat center;\n";
-		print " background-size: 22px;\n";
+		print ".mainmenu.".$val.":before, .icon--".$val.":before {\n";
+		print "  content: '\\e902';\n";
 		print "}\n";
 	}
 }
