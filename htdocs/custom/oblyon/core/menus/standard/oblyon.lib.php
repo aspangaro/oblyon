@@ -210,6 +210,25 @@ function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$fo
 			$menu->add('/compta/index.php?mainmenu=billing&amp;leftmenu=', $langs->trans("MenuFinancial"), 0, $showmode, $atarget, "billing", '');
 	}
 
+	// Bank
+	$tmpentry=array('enabled'=>(! empty($conf->banque->enabled) || ! empty($conf->prelevement->enabled)),
+	'perms'=>(! empty($user->rights->banque->lire) || ! empty($user->rights->prelevement->lire)),
+	'module'=>'banque|prelevement');
+	$showmode=dol_oblyon_showmenu($type_user, $tmpentry, $listofmodulesforexternal);
+	if ($showmode) {
+		$langs->load("compta");
+		$langs->load("banks");
+
+		if ($_SESSION["mainmenu"] && $_SESSION["mainmenu"] == "bank") { $itemsel=TRUE; $_SESSION['idmenu']=''; }
+		else $itemsel=FALSE;
+		$idsel='bank';
+
+		if (empty($noout)) print_start_menu_entry($idsel,$itemsel,$showmode);
+		if (empty($noout)) print_text_menu_entry($langs->trans("MenuBankCash"), $showmode, DOL_URL_ROOT.'/compta/bank/list.php?mainmenu=bank&amp;leftmenu=', $id, $idsel, $atarget);
+		if (empty($noout)) print_end_menu_entry($showmode);
+		$menu->add('/compta/bank/list.php?mainmenu=bank&amp;leftmenu=', $langs->trans("MenuBankCash"), 0, $showmode, $atarget, "bank", '');
+	}
+
 	// Accoutancy
 	$menuqualified=0;
 	if (! empty($conf->comptabilite->enabled)) $menuqualified++;
@@ -232,25 +251,6 @@ function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$fo
 		if (empty($noout)) print_text_menu_entry($langs->trans("MenuAccountancy"), $showmode, DOL_URL_ROOT.'/accountancy/index.php?mainmenu=accountancy&amp;leftmenu=', $id, $idsel, $atarget);
 		if (empty($noout)) print_end_menu_entry($showmode);
 		$menu->add('/accountancy/index.php?mainmenu=accountancy&amp;leftmenu=', $langs->trans("MenuAccountancy"), 0, $showmode, $atarget, "accountancy", '');
-	}
-
-	// Bank
-	$tmpentry=array('enabled'=>(! empty($conf->banque->enabled) || ! empty($conf->prelevement->enabled)),
-	'perms'=>(! empty($user->rights->banque->lire) || ! empty($user->rights->prelevement->lire)),
-	'module'=>'banque|prelevement');
-	$showmode=dol_oblyon_showmenu($type_user, $tmpentry, $listofmodulesforexternal);
-	if ($showmode) {
-		$langs->load("compta");
-		$langs->load("banks");
-
-		if ($_SESSION["mainmenu"] && $_SESSION["mainmenu"] == "bank") { $itemsel=TRUE; $_SESSION['idmenu']=''; }
-		else $itemsel=FALSE;
-		$idsel='bank';
-
-		if (empty($noout)) print_start_menu_entry($idsel,$itemsel,$showmode);
-		if (empty($noout)) print_text_menu_entry($langs->trans("MenuBankCash"), $showmode, DOL_URL_ROOT.'/compta/bank/list.php?mainmenu=bank&amp;leftmenu=', $id, $idsel, $atarget);
-		if (empty($noout)) print_end_menu_entry($showmode);
-		$menu->add('/compta/bank/list.php?mainmenu=bank&amp;leftmenu=', $langs->trans("MenuBankCash"), 0, $showmode, $atarget, "bank", '');
 	}
 
 	// Projects

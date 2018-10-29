@@ -3809,6 +3809,10 @@ td.photo {
 		background-image: url(<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/menus/commercial.png',1); ?>);
 	}
 
+	.mainmenu.billing {
+		background-image: url(<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/menus/money.png',1); ?>);
+	}
+
 	.mainmenu.ecm {
 		background-image: url(<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/menus/ecm.png',1); ?>);
 	}
@@ -3897,6 +3901,10 @@ td.photo {
 
 	.mainmenu.commercial {
 		background-image: url(<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/old-menus/commercial.png',1); ?>);
+	}
+
+	.mainmenu.billing {
+		background-image: url(<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/old-menus/money.png',1); ?>);
 	}
 
 	.mainmenu.ecm {
