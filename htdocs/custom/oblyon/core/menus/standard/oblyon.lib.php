@@ -268,7 +268,20 @@ function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$fo
 		if (empty($noout)) print_start_menu_entry($idsel,$itemsel,$showmode);
 		if (empty($noout)) print_text_menu_entry($langs->trans("Projects"), $showmode, DOL_URL_ROOT.'/projet/index.php?mainmenu=project&amp;leftmenu=', $id, $idsel, $atarget);
 		if (empty($noout)) print_end_menu_entry($showmode);
-		$menu->add('/projet/index.php?mainmenu=project&amp;leftmenu=', $langs->trans("Projects"), 0, $showmode, $atarget, "project", '');
+		$title = $langs->trans("LeadsOrProjects");	// Leads and opportunities by default
+		$showmodel = $showmodep = $showmode;
+		if (empty($conf->global->PROJECT_USE_OPPORTUNITIES))
+		{
+			$title = $langs->trans("Projects");
+			$showmodel = 0;
+		}
+		if ($conf->global->PROJECT_USE_OPPORTUNITIES == 2) {
+			$title = $langs->trans("Leads");
+			$showmodep = 0;
+		}
+		$menu->add('/projet/index.php?mainmenu=project&amp;leftmenu=', $title, 0, $showmode, $atarget, "project", '', 70, $id, $idsel, $classname);
+		//$menu->add('/projet/index.php?mainmenu=project&amp;leftmenu=&search_opp_status=openedopp', $langs->trans("ListLeads"), 0, $showmodel & $conf->global->PROJECT_USE_OPPORTUNITIES, $atarget, "project", '', 70, $id, $idsel, $classname);
+		//$menu->add('/projet/index.php?mainmenu=project&amp;leftmenu=&search_opp_status=notopenedopp', $langs->trans("ListProjects"), 0, $showmodep, $atarget, "project", '', 70, $id, $idsel, $classname);
 	}
 
 	// HRM
@@ -1405,8 +1418,7 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 				'perms'=>(! empty($user->rights->projet->lire)),
 				'module'=>'projet');
 				$showmode=isVisibleToUserType($type_user, $tmpentry, $listofmodulesforexternal);
-
-				$titleboth=$langs->trans("LeadsOrProjects");
+ 				$titleboth=$langs->trans("LeadsOrProjects");
 				$titlenew = $langs->trans("NewLeadOrProject");	// Leads and opportunities by default
 				if ($conf->global->PROJECT_USE_OPPORTUNITIES == 0)
 				{
