@@ -3228,7 +3228,8 @@ div.login a:hover {
 	content: '\e627';
 }
 
-.icon--mailing:before {
+.icon--mailing:before,
+.icon--email_templates:before {
 	content: '\e628';
 }
 
