@@ -1821,8 +1821,9 @@ div.secondcolumn div.box {
 	display : table;
 	margin : 0px auto;
 }
-#pictotitle {
-	margin-right: 8px;
+
+#pictotitle, .pictotitle {
+	margin-<?php echo $right; ?>: 8px;
 	margin-bottom: 4px;
 }
 .pictoobjectwidth {
