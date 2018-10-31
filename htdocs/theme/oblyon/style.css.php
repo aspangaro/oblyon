@@ -3256,7 +3256,8 @@ div.login a:hover {
 	content: '\e631';
 }
 
-.icon--tripsandexpenses:before {
+.icon--tripsandexpenses:before, 
+.icon--expensereport:before {
 	content: '\e632';
 }
 
