@@ -425,7 +425,7 @@ div.floatright
 	display:inline-block;
 }
 
-th a, .thumbstat, a.tab { font-weight: bold !important; }
+/* th a, .thumbstat, a.tab { font-weight: bold !important; } */
 
 th .button {
 	-moz-box-shadow: none !important;
@@ -2270,9 +2270,9 @@ div.login_block:after {
 	font-family: 'oblyon-icons' !important;
 	font-size: 20px;
 	<?php if ($conf->global->MAIN_MENU_INVERT) { ?>
-    	line-height: 40px;
+		line-height: 40px;
 	<?php } else { ?>
-    	line-height: 55px;
+		line-height: 55px;
 	<?php } ?>
 }
 <?php } ?> /* end test if not phone */
@@ -4402,7 +4402,7 @@ a.tab:hover,
 a.tab#active {
 	background-color: #e5e5e5;
 	margin: 0 .3em;
-	padding: 5px 12px 5px;
+	padding: 10px 12px 10px;
 	border: 1px solid #e5e5e5;
 	border-bottom: none;
 	text-decoration: none;
@@ -5657,11 +5657,11 @@ table.cal_event td.cal_event_right { padding: 4px 4px !important; }
 }
 
 .menu_choix1 a {
-    background: url("<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/cashdesk/new.png',1); ?>") top left no-repeat;
+	background: url("<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/cashdesk/new.png',1); ?>") top left no-repeat;
 }
 
 .menu_choix2 a {
-    background: url("<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/cashdesk/gescom.png',1); ?>") top left no-repeat;
+	background: url("<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/cashdesk/gescom.png',1); ?>") top left no-repeat;
 }
 
 .menu_choix1 a span,
@@ -5803,8 +5803,8 @@ p.titre {
 	.menu_choix2 a span.hideonsmartphone {
 		display: none;
 	}
-    .liste_articles {
-    	margin-right: 0 !important;
+	.liste_articles {
+		margin-right: 0 !important;
 	}
 	
 	/* Do not force width for cashdesk */
