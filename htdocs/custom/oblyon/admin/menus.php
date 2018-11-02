@@ -278,7 +278,7 @@ print '</tr>';
 // Use Eldy icons
 if(empty($conf->global->MAIN_MENU_INVERT))
 {
-    if($conf->global->OBLYON_ELDY_OLD_ICONS)
+    if($conf->global->OBLYON_ELDY_OLD_ICONS || $conf->global->OBLYON_HIDE_LEFTICONS)
 	{
 		$conf->global->OBLYON_ELDY_ICONS = FALSE;
     }
@@ -299,7 +299,7 @@ if(empty($conf->global->MAIN_MENU_INVERT))
     } 
 	else
 	{
-		if ( $conf->global->OBLYON_ELDY_OLD_ICONS) {
+		if ( $conf->global->OBLYON_ELDY_OLD_ICONS || $conf->global->OBLYON_HIDE_LEFTICONS ) {
 			print '<td><a href="#" class="tmenudisabled">';
 			print img_picto ( $langs->trans ( "Disabled" ), 'switch_off' );
 			print "</a></td>\n";
@@ -317,7 +317,7 @@ if(empty($conf->global->MAIN_MENU_INVERT))
 // Use old Eldy icons
 if(empty($conf->global->MAIN_MENU_INVERT))
 {
-    if($conf->global->OBLYON_ELDY_ICONS)
+    if($conf->global->OBLYON_ELDY_ICONS || $conf->global->OBLYON_HIDE_LEFTICONS)
 	{
 		$conf->global->OBLYON_ELDY_OLD_ICONS = FALSE;
     }
@@ -338,7 +338,7 @@ if(empty($conf->global->MAIN_MENU_INVERT))
     }
 	else
 	{
-		if ( $conf->global->OBLYON_ELDY_ICONS) {
+		if ( $conf->global->OBLYON_ELDY_ICONS || $conf->global->OBLYON_HIDE_LEFTICONS ) {
 			print '<td><a href="#" class="tmenudisabled">';
 			print img_picto ( $langs->trans ( "Disabled" ), 'switch_off' );
 			print "</a></td>\n";
@@ -451,7 +451,7 @@ print '</tr>';
 // Use Eldy icons
 if(! empty($conf->global->MAIN_MENU_INVERT))
 {
-    if($conf->global->OBLYON_ELDY_OLD_ICONS)
+    if($conf->global->OBLYON_ELDY_OLD_ICONS || $conf->global->OBLYON_HIDE_LEFTICONS)
 	{
 		$conf->global->OBLYON_ELDY_ICONS = FALSE;
     }
@@ -472,7 +472,7 @@ if(! empty($conf->global->MAIN_MENU_INVERT))
     } 
 	else
 	{
-		if ( $conf->global->OBLYON_ELDY_OLD_ICONS) {
+		if ( $conf->global->OBLYON_ELDY_OLD_ICONS || $conf->global->OBLYON_HIDE_LEFTICONS ) {
 			print '<td><a href="#" class="tmenudisabled">';
 			print img_picto($langs->trans("Disabled"), 'switch_off');
 			print "</a></td>\n";
@@ -490,7 +490,7 @@ if(! empty($conf->global->MAIN_MENU_INVERT))
 // Use old Eldy icons
 if(! empty($conf->global->MAIN_MENU_INVERT))
 {
-	if($conf->global->OBLYON_ELDY_ICONS)
+	if($conf->global->OBLYON_ELDY_ICONS || $conf->global->OBLYON_HIDE_LEFTICONS)
 	{
 		$conf->global->OBLYON_ELDY_OLD_ICONS = FALSE;
 	}
@@ -510,7 +510,7 @@ if(! empty($conf->global->MAIN_MENU_INVERT))
 	}
 	else
 	{
-		if($conf->global->OBLYON_ELDY_ICONS)
+		if($conf->global->OBLYON_ELDY_ICONS || $conf->global->OBLYON_HIDE_LEFTICONS)
 		{
 			print '<td><a href="#" class="tmenudisabled">';
 			print img_picto($langs->trans("Disabled"), 'switch_off');

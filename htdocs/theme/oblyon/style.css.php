@@ -29,16 +29,19 @@
  *	\brief		File for CSS style sheet Oblyon
  */
 
+print '/*'."\n";
+print 'Oblyon theme for Dolibarr'."\n";
+
 //if (! defined('NOREQUIREUSER')) define('NOREQUIREUSER','1');	// Not disabled because need to load personalized language
-//if (! defined('NOREQUIREDB'))	 define('NOREQUIREDB','1');		// Not disabled to increase speed. Language code is found on url.
-if (! defined('NOREQUIRESOC'))		define('NOREQUIRESOC','1');
+//if (! defined('NOREQUIREDB'))   define('NOREQUIREDB','1');		// Not disabled to increase speed. Language code is found on url.
+if (! defined('NOREQUIRESOC'))    define('NOREQUIRESOC','1');
 //if (! defined('NOREQUIRETRAN')) define('NOREQUIRETRAN','1');	// Not disabled because need to do translations
-if (! defined('NOCSRFCHECK'))		 define('NOCSRFCHECK',1);
-if (! defined('NOTOKENRENEWAL'))	define('NOTOKENRENEWAL',1);
-if (! defined('NOLOGIN'))				 define('NOLOGIN',1);	// File must be accessed by logon page so without login
-if (! defined('NOREQUIREMENU'))	 define('NOREQUIREMENU',1);
-if (! defined('NOREQUIREHTML'))	 define('NOREQUIREHTML',1);
-if (! defined('NOREQUIREAJAX'))	 define('NOREQUIREAJAX','1');
+if (! defined('NOCSRFCHECK'))     define('NOCSRFCHECK',1);
+if (! defined('NOTOKENRENEWAL'))  define('NOTOKENRENEWAL',1);
+if (! defined('NOLOGIN'))         define('NOLOGIN',1);	// File must be accessed by logon page so without login
+if (! defined('NOREQUIREMENU'))   define('NOREQUIREMENU',1);
+if (! defined('NOREQUIREHTML'))   define('NOREQUIREHTML',1);
+if (! defined('NOREQUIREAJAX'))   define('NOREQUIREAJAX','1');
 
 session_cache_limiter(false);
 
@@ -256,21 +259,41 @@ if (! empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED))
 
 // Set text color to black or white
 $tmppart=explode(',',$colorbackhmenu1);
-$tmpval=(! empty($tmppart[1]) ? $tmppart[1] : '')+(! empty($tmppart[2]) ? $tmppart[2] : '')+(! empty($tmppart[3]) ? $tmppart[3] : '');
+$tmpval=
+	(! empty($tmppart[0]) ? $tmppart[0] : 0)
+	+ (! empty($tmppart[1]) ? $tmppart[1] : 0)
+	+ (! empty($tmppart[2]) ? $tmppart[2] : 0);
 if ($tmpval <= 360) $colortextbackhmenu='FFF';
 else $colortextbackhmenu = '444';
+print 'colortextbackhmenu='.$colortextbackhmenu."\n";
+
 $tmppart=explode(',',$colorbackvmenu1);
-$tmpval=(! empty($tmppart[1]) ? $tmppart[1] : '')+(! empty($tmppart[2]) ? $tmppart[2] : '')+(! empty($tmppart[3]) ? $tmppart[3] : '');
+$tmpval=
+	(! empty($tmppart[0]) ? $tmppart[0] : 0)
+	+ (! empty($tmppart[1]) ? $tmppart[1] : 0)
+	+ (! empty($tmppart[2]) ? $tmppart[2] : 0);
 if ($tmpval <= 360) { $colortextbackvmenu = $bgnavleft_txt; }
 else { $colortextbackvmenu = $bgnavleft_txt; }
+print 'colortextbackvmenu='.$colortextbackvmenu."\n";
+
 $tmppart=explode(',',$colorbacktitle1);
-$tmpval=(! empty($tmppart[1]) ? $tmppart[1] : '')+(! empty($tmppart[2]) ? $tmppart[2] : '')+(! empty($tmppart[3]) ? $tmppart[3] : '');
+$tmpval=
+	(! empty($tmppart[0]) ? $tmppart[0] : 0)
+	+ (! empty($tmppart[1]) ? $tmppart[1] : 0)
+	+ (! empty($tmppart[2]) ? $tmppart[2] : 0);
 if ($tmpval <= 360) { $colortexttitle='FFF'; $colorshadowtitle='000'; }
 else { $colortexttitle='444'; $colorshadowtitle='FFF'; }
+print 'colortexttitle='.$colortexttitle."\n";
+print 'colorshadowtitle='.$colorshadowtitle."\n";
+
 $tmppart=explode(',',$colorbacktabcard1);
-$tmpval=(! empty($tmppart[1]) ? $tmppart[1] : '')+(! empty($tmppart[2]) ? $tmppart[2] : '')+(! empty($tmppart[3]) ? $tmppart[3] : '');
+$tmpval=
+	(! empty($tmppart[0]) ? $tmppart[0] : 0)
+	+ (! empty($tmppart[1]) ? $tmppart[1] : 0)
+	+ (! empty($tmppart[2]) ? $tmppart[2] : 0);
 if ($tmpval <= 340) { $colortextbacktab='FFF'; }
 else { $colortextbacktab='444'; }
+print 'colortextbacktab='.$colortextbacktab."\n";
 
 
 $usecss3=true;
@@ -278,7 +301,6 @@ if ($conf->browser->name == 'ie' && round($conf->browser->version,2) < 10) $usec
 elseif ($conf->browser->name == 'iceweasel') $usecss3=false;
 elseif ($conf->browser->name == 'epiphany')	$usecss3=false;
 
-print '/*'."\n";
 print 'colred='.$colred.' colgreen='.$colgreen.' colblue='.$colblue."\n";
 print 'isred='.$isred.' isgreen='.$isgreen.' isblue='.$isblue."\n";
 print 'colorbacklineimpair1='.$colorbacklineimpair1."\n";
@@ -553,7 +575,7 @@ a:hover {
 	cursor: pointer; 
 }
 
-a:hover { 
+a:hover, a:focus { 
 	color: <?php print $maincolor; ?>;
 	text-decoration: underline; 
 }
@@ -941,12 +963,7 @@ input:-moz-placeholder {
 	<?php } ?>
 }
 
-.button:focus	{
-	/* border: 1px solid #c0c0c0; */
-	color: #eee;
-}
-
-.button:hover	 {
+.button:hover, .button:focus {
 	background-color: <?php print $bgbutton_hover; ?>; 
 	border-color: <?php print $maincolor; ?>;
 	box-shadow: inset 0 1px 0 rgba(235,235,235, .6);
@@ -1515,7 +1532,7 @@ select.selectarrowonleft option {
 		white-space: nowrap;
 	}
 	div.fiche {
-			margin-top: <?php print ($dol_hide_topmenu?'12':'6'); ?>px !important;
+		margin-top: <?php print ($dol_hide_topmenu?'12':'6'); ?>px !important;
 	}
 	div.titre {
 		line-height: 2em;
@@ -1685,12 +1702,10 @@ td.showDragHandle {
 
 #id-left {
 	<?php if ( !$conf->global->OBLYON_HIDE_LEFTMENU && !$conf->dol_optimize_smallscreen ) { ?>
-		<?php if ( $conf->global->MAIN_MENU_INVERT ) { ?>
-			<?php if( $conf->global->OBLYON_SHOW_COMPNAME || $conf->global->OBLYON_FULLSIZE_TOPBAR ) { ?>
+		<?php if ( $conf->global->OBLYON_STICKY_TOPBAR ) { ?>
+			<?php if ( $conf->global->MAIN_MENU_INVERT ) { ?>
 				padding-top: 40px;
-			<?php } ?>
-		<?php } else { ?>
-			<?php if ( $conf->global->OBLYON_STICKY_TOPBAR ) { ?>
+			<?php } else { ?>
 				padding-top: 54px;
 			<?php } ?>
 		<?php } ?>
@@ -1698,11 +1713,15 @@ td.showDragHandle {
 	<?php if ( !$conf->global->OBLYON_FULLSIZE_TOPBAR ) { ?>
 		position: relative;
 	<?php } ?>
-	z-index: 990;
+	<?php if(!$conf->global->OBLYON_HIDE_LEFTMENU && !$conf->dol_optimize_smallscreen && (!$conf->global->OBLYON_FULLSIZE_TOPBAR || !$conf->global->OBLYON_SHOW_COMPNAME)) { ?>
+		z-index: 990;
+	<?php } else { ?>
+		z-index: 970;
+	<?php } ?>
 }
 
 /* coming feature -****
- #id-left {
+#id-left {
 	<?php if ( $conf->global->OBLYON_HIDE_LEFTMENU || $conf->dol_optimize_smallscreen ) { ?>
 		<?php if ( $conf->global->OBLYON_STICKY_TOPBAR ) { ?>
 			<?php if ( $conf->global->MAIN_MENU_INVERT ) { ?>
@@ -1723,6 +1742,7 @@ td.showDragHandle {
 
 #id-top {
 	background-color: <?php print $bgnavtop; ?>;
+	z-index: 980;
 }
 
 div.fiche {
@@ -1776,7 +1796,7 @@ div.secondcolumn div.box {
 @media only screen and (max-width: 900px)
 {
 	div.fiche {
-		margin-<?php print $left; ?>: <?php print (GETPOST("optioncss") == 'print'?6:((empty($conf->global->MAIN_MENU_USE_JQUERY_LAYOUT))?($dol_hide_leftmenu?'6':'20'):'24')); ?>px;
+		margin-<?php print $left; ?>: <?php print (GETPOST("optioncss") == 'print'?6:((empty($conf->global->MAIN_MENU_USE_JQUERY_LAYOUT))?($dol_hide_leftmenu?'6':'10'):'12')); ?>px;
 		margin-<?php print $right; ?>: <?php print (GETPOST("optioncss") == 'print'?8:6); ?>px;
 		<?php if (! empty($conf->dol_hide_leftmenu) && ! empty($conf->dol_hide_topmenu)) print 'margin-top: 4px;'; ?>
 	}
@@ -1883,22 +1903,29 @@ div.secondcolumn div.box {
 /*
  * Main Navigation
  */
- 
+
 #tmenu_tooltip {
 	<?php if (GETPOST("optioncss") == 'print') { ?>
 		display: none;
 	<?php } else { ?>
-		display: inline-table;
+		display: block;
+		overflow: auto;
 		width: 100%;
 		background-color: <?php print $bgnavtop; ?>;
-		<?php if ( $conf->global->OBLYON_STICKY_TOPBAR && $usecss3) { ?>
+		<?php if ( $usecss3 ) { ?>
+			<?php if ( $conf->global->OBLYON_STICKY_TOPBAR ) { ?>
 			box-shadow: 0 1px 2px rgba(0, 0, 0, .4) !important; 
 			-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .4) !important;
+			-webkit-animation: fade 500ms;
+			<?php } ?>
+		transition: max-height .2s ease-in-out;
+		-moz-transition: max-height .2s ease-in-out;
+		-webkit-transition: max-height .2s ease-in-out;
 		<?php } ?>
 		<?php if ( $conf->global->MAIN_MENU_INVERT ) { ?>
-			height: 40px;
+		max-height: 40px;
 		<?php } else { ?>
-			height: 54px;
+		max-height: 54px;
 		<?php } ?>
 		margin: 0;
 		padding-<?php print $right; ?>: 160px;
@@ -1911,12 +1938,11 @@ div.secondcolumn div.box {
 		<?php } else { ?>
 			position: relative;
 		<?php } ?>
-		<?php //if (( $conf->global->OBLYON_HIDE_LEFTMENU || $conf->dol_optimize_smallscreen ) && !$conf->global->OBLYON_STICKY_TOPBAR ) { ?>
-			/*
-			margin-left: 210px;
-			*/
-		<?php //} ?>
 	<?php } ?>
+}
+
+#tmenu_tooltip:hover {
+	max-height: 540px;
 }
 
 .main-nav {
@@ -2019,7 +2045,8 @@ div.secondcolumn div.box {
 }*/
 
 #tmenu_tooltip .tmenu li:hover .main-nav__link,
-.main-nav__item:hover .main-nav__link {
+.main-nav__item:hover .main-nav__link,
+.main-nav__item .main-nav__link:focus {
 	color: <?php print $topmenu_hover; ?>;
 }
 
@@ -2080,28 +2107,37 @@ div.secondcolumn div.box {
 	display: none;
 	<?php } else { ?>
 	display: inline-table;
-	background-color: <?php print $bgnavleft; ?>; 
-	<?php if ( $conf->global->OBLYON_STICKY_TOPBAR && $usecss3) { ?>
-	box-shadow: 0 1px 2px rgba(0, 0, 0, .4); 
-	-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .4);
+    overflow: auto;
+	width: 100%;
+	background-color: <?php print $bgnavleft; ?>;
+	<?php if ( $usecss3 ) { ?>
+		<?php if ( $conf->global->OBLYON_STICKY_TOPBAR ) { ?>
+		box-shadow: 0 1px 2px rgba(0, 0, 0, .4) !important; 
+		-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .4) !important;
+		-webkit-animation: fade 500ms;
 		<?php } ?>
-		height: 40px;
-		<?php print $left; ?>: 0;
-		margin: 0;
-		padding-<?php print $right; ?>: 160px;
-		top: 0;
-		width: 100%;
-		<?php if ($conf->global->OBLYON_STICKY_TOPBAR) { ?>
-			position: fixed;
-		<?php } else { ?>
-			position: absolute;
-		<?php } ?>
-		<?php if($conf->global->OBLYON_SHOW_COMPNAME || $conf->global->OBLYON_FULLSIZE_TOPBAR ) { ?> 
-			z-index: 990;
-		<?php } else { ?>
-			z-index: 970;
-		<?php } ?>
+	transition: max-height .2s ease-in-out;
+	-moz-transition: max-height .2s ease-in-out;
+	-webkit-transition: max-height .2s ease-in-out;
 	<?php } ?>
+	max-height: 40px;
+	<?php print $left; ?>: 0;
+	margin: 0;
+	padding-<?php print $right; ?>: 160px;
+	z-index: 999;
+	<?php if ($conf->global->OBLYON_STICKY_TOPBAR) { ?>
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+	<?php } else { ?>
+		position: relative;
+	<?php } ?>
+	<?php } ?>
+}
+
+#tmenu_tooltipinvert:hover {
+	max-height: 400px;
 }
 
 .sec-nav.is-inverted {
@@ -2122,13 +2158,18 @@ div.secondcolumn div.box {
 	z-index: 40;
 }
 
+.sec-nav.is-inverted .sec-nav__item.item-heading:hover {
+	background-color: <?php print $bgnavleft_hover; ?>; 
+}
+
 .sec-nav.is-inverted .sec-nav__link {
 	font-size: 13px;
 	white-space: nowrap;
 }
 
-.sec-nav.is-inverted .sec-nav__link:hover {
-	background-color: <?php print $bgnavleft_hover; ?>; 
+.sec-nav.is-inverted .sec-nav__link:hover,
+.sec-nav.is-inverted .sec-nav__link:focus {
+	color: <?php print $maincolor; ?>;
 }
 
 .sec-nav.is-inverted .sec-nav__item.item-heading > .sec-nav__link,
@@ -2159,6 +2200,7 @@ li.item-heading:hover > .sec-nav__link {
 	height: 0;
 	vertical-align: baseline;
 	width: 0;
+	padding-bottom: 2px;
 }
 
 .caret--top {
@@ -2200,11 +2242,12 @@ li.item-heading:hover > .sec-nav__link {
 
 .sec-nav.is-inverted .sec-nav__sub-list { 
 	background-color: <?php print $bgnavleft; ?>;
-	/*box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.055);*/
+	box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.055);
 	display: none;
 	opacity: 0;
 	padding-top: 0;
 	padding-bottom: 5px;
+	padding-inline-start: 0;
 	-webkit-transiton: opacity 0.2s;
 	-moz-transition: opacity 0.2s;
 	-ms-transition: opacity 0.2s;
@@ -2347,12 +2390,13 @@ table.login_table_securitycode tr td {
 }
 
 div.login_block {
+	background-color: <?php print $bgnavtop; ?>;
 	<?php if ($conf->global->MAIN_MENU_INVERT) { ?>
 		height: 40px;
 	<?php } else { ?>
 		height: 54px;
 	<?php } ?>
-	padding-right: 10px;
+	padding-right: 20px;
 	<?php if ( $conf->global->OBLYON_STICKY_TOPBAR ) { ?>
 		position: fixed;
 	<?php } else { ?>
@@ -2366,7 +2410,6 @@ div.login_block {
 	<?php } ?>
 }
 
-<?php if ( !empty($conf->dol_optimize_smallscreen) ) { ?>
 div.login_block:after {
 	content: '\e614';
 	color: <?php print $bgnavtop_txt; ?>;
@@ -2378,13 +2421,16 @@ div.login_block:after {
 		line-height: 55px;
 	<?php } ?>
 }
-<?php } ?> /* end test if not phone */
+
+div.login_block:hover:after {
+	color: <?php print $maincolor; ?>;
+}
 
 /* db v3.5 */ 
 div.login_block_user{
 	clear: left;
 	float: <?php print $left; ?>;
-	margin-right: 10px;
+	margin-right: 15px;
 }
 
 div.login_block_user .login a,
@@ -2430,7 +2476,7 @@ div.login_block_user > .classfortooltip.login_block_elem2 {
 	<?php } else { ?>
 		top: 54px;
 	<?php } ?>
-	height: 40px;
+	height: 42px;
 	line-height: 40px;
 	margin-right: 10px;
 	<?php if ( empty($conf->dol_optimize_smallscreen) ) { ?>
@@ -2438,10 +2484,20 @@ div.login_block_user > .classfortooltip.login_block_elem2 {
 	<?php } else { ?>
 		min-width: 80px;
 	<?php } ?>
+	
+	<?php if ( $usecss3) { ?>
+	box-shadow: -2px 2px 2px 0px rgba(0, 0, 0, .4);
+	-webkit-box-shadow: -2px 2px 2px 0px rgba(0, 0, 0, .4);
+	border-radius: 0 0 5px 5px;
+	<?php } ?>
 }
 
 .login_block_other .inline-block {
 	width: 40px;
+	
+	<?php if ( $usecss3) { ?>
+	border-radius: 0 0 5px 5px;
+	<?php } ?>
 }
 
 .login_block:hover > .login_block_other {
@@ -2600,7 +2656,10 @@ img.userphotosmall {		/* size for user photo in lists */
 
 .login_block td.classfortooltip { height: 40px; }
 
-.login_block .classfortooltip:hover { background-color: <?php print $bgnavtop_hover; ?>; }
+.login_block .classfortooltip:hover, 
+.login_block .classfortooltip:focus {
+	background-color: <?php print $bgnavtop_hover; ?>;
+}
 
 div.login_block table { display: inline; }
 
@@ -2744,7 +2803,8 @@ div.login a:hover {
 	<?php } ?>
 }
 
-.sec-nav .sec-nav__link:hover {
+.sec-nav .sec-nav__link:hover,
+.sec-nav .sec-nav__link:focus {
 	color: <?php print $maincolor; ?>;
 }
  
@@ -2755,6 +2815,7 @@ div.login a:hover {
 .sec-nav__sub-list { 
 	background-color: <?php print $bgnav; ?>;
 	padding-top: 5px;
+	padding-inline-start: 1.5em;
 }
 
 .sec-nav__sub-list .item-level1 {
@@ -2785,6 +2846,8 @@ div.login a:hover {
 		padding-<?php print $left; ?>: 10px;
 		font-weight: 500;
 	<?php } ?>
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .main-nav.is-inverted { 
@@ -2945,7 +3008,8 @@ div.login a:hover {
 			box-shadow: 0 1px 2px rgba(0, 0, 0, .4); 
 			-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .4);
 		<?php } ?>
-		overflow: auto;
+		max-width: 365px;
+		overflow: hidden;
 		-webkit-overflow-scrolling: touch;
 		<?php if ( $conf->global->OBLYON_EFFECT_LEFTMENU == "push" && $usecss3 ) { ?>
 			<?php print $left; ?>: 0;
@@ -2956,7 +3020,7 @@ div.login a:hover {
 			-o-transform: translate3d(-200px,0,0);
 			transform: translate3d(-200px,0,0);
 		<?php } else { ?>
-			<?php print $left; ?>: -240px;
+			<?php print $left; ?>: -370px;
 		<?php } ?>
 	<?php } ?>
 }
@@ -2985,6 +3049,9 @@ div.login a:hover {
 	<?php } ?>
 }
 
+/** 
+ * Coming Feature: OVERLAY when LEFTMENU hidden
+ */
 /*.pushy-active .site-overlay {
 	display: block;
 	position: fixed;
@@ -3692,7 +3759,7 @@ div.vmenu {
 	padding: 0;
 	padding-bottom: 0;
 	position: relative;
-	z-index: 20;
+	z-index: 5;
 	<?php if (empty($conf->dol_optimize_smallscreen)) { ?>
 		min-width: 200px;
 		max-width: 220px;
@@ -3915,6 +3982,10 @@ td.photo {
 		background-image: url(<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/menus/commercial.png',1); ?>);
 	}
 
+	.mainmenu.billing {
+		background-image: url(<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/menus/money.png',1); ?>);
+	}
+
 	.mainmenu.ecm {
 		background-image: url(<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/menus/ecm.png',1); ?>);
 	}
@@ -4003,6 +4074,10 @@ td.photo {
 
 	.mainmenu.commercial {
 		background-image: url(<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/old-menus/commercial.png',1); ?>);
+	}
+
+	.mainmenu.billing {
+		background-image: url(<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/old-menus/money.png',1); ?>);
 	}
 
 	.mainmenu.ecm {
@@ -4542,7 +4617,7 @@ a.tab {
 	font-weight: normal;
 }
 
-a.tab:hover {
+a.tab:hover, a.tab:focus {
 	background-color: rgb(222, 222, 222);
 	color: <?php print $maincolor; ?>;
 }
@@ -5063,7 +5138,7 @@ div .tdtop {
 		width: 100px;
 	}
 }
-.boxstats:hover {
+.boxstats:hover, .boxstats:focus {
 	box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.20);
 }
 span.boxstatstext {
@@ -5299,14 +5374,16 @@ div.table-val-border-col {
 a.normal:link,
 a.normal:visited, 
 a.normal:active, 
-a.normal:hover { 
+a.normal:hover, 
+a.normal:focus {
 	font-weight: normal; 
 }
 
 a.impayee:link, 
 a.impayee:visited,
 a.impayee:active, 
-a.impayee:hover { 
+a.impayee:hover, 
+a.impayee:focus {
 	color: #500; 
 	font-weight: bold; 
 }
@@ -5435,7 +5512,7 @@ table.dp {
 /* Barre titre */
 .dpHead,
 .tpHead,
-.tpHour td:Hover .tpHead {
+.tpHour td:hover .tpHead {
 	background-color: #333;
 	color: #f7f7f7;
 	cursor: auto;
@@ -5496,8 +5573,8 @@ table.dp {
 	font-weight: bold; 
 }
 
-.dpReg:Hover,
-.dpToday:Hover{
+.dpReg:hover,
+.dpToday:hover{
 	background-color: #333;
 	color: #f7f7f7;
 }
@@ -5520,7 +5597,7 @@ table.dp {
 	cursor: pointer;
 }
 
-.tpHour td:Hover {
+.tpHour td:hover {
 	background-color: black;
 	color: white;
 }
@@ -5529,7 +5606,7 @@ table.dp {
 	margin-top: 5px;
 }
 
-.tpMinute td:Hover {
+.tpMinute td:hover {
 	background-color: black; 
 	color: white;
 }
@@ -5652,7 +5729,8 @@ table.cal_event td.cal_event_right { padding: 4px 4px !important; }
 .cal_event a:link       { color: #111111; font-weight: normal !important; }
 .cal_event a:visited    { color: #111111; font-weight: normal !important; }
 .cal_event a:active     { color: #111111; font-weight: normal !important; }
-.cal_event_busy a:hover { color: #111111; font-weight: normal !important; color:rgba(255,255,255,.75); }
+.cal_event_busy a:hover,
+.cal_event_busy a:focus { color: #111111; font-weight: normal !important; color:rgba(255,255,255,.75); }
 .cal_event_busy      { }
 .cal_peruserviewname { max-width: 140px; height: 22px; }
 
@@ -5775,7 +5853,9 @@ table.cal_event td.cal_event_right { padding: 4px 4px !important; }
 }
 
 .menu_choix1 a:hover span,
-.menu_choix2 a:hover span {
+.menu_choix1 a:focus span,
+.menu_choix2 a:hover span,
+.menu_choix2 a:focus span {
 	color: #fcfcfc!important;
 }
 
@@ -5794,7 +5874,8 @@ table.cal_event td.cal_event_right { padding: 4px 4px !important; }
 	font-weight: bold!important;
 }
 
-.menu_choix0 a:hover {
+.menu_choix0 a:hover,
+.menu_choix0 a:focus {
 	color: #222;
 	text-decoration: underline;
 }
@@ -5835,7 +5916,8 @@ p.titre {
 	color: #eee!important;
 }
 
-.cadre_article p a:hover {
+.cadre_article p a:hover,
+.cadre_article p a:focus {
 		text-decoration: underline;
 }
 
@@ -5861,7 +5943,8 @@ p.titre {
 	white-space: nowrap;
 }
 
-.bouton_login input:hover {
+.bouton_login input:hover,
+.bouton_login input:focus {
 	background-color: #00708b !important; 
 }
 
@@ -6192,14 +6275,16 @@ A.color:visited {
 	width: 10px;
 }
 
-A.color:hover {
+A.color:hover,
+A.color:focus {
 	border: 1px outset white;
 }
 
 A.none, 
 A.none:active, 
 A.none:visited, 
-A.none:hover {
+A.none:hover, 
+A.none:focus {
 	border: 1px solid #b3c5cc;
 	cursor: default;
 	display: block;
@@ -6391,7 +6476,8 @@ span.cke_skin_kama {
 .cke_wrapper.cke_ltr { background-color: #444!important; }
 
 .cke_skin_kama a.cke_toolbox_collapser, 
-.cke_skin_kama a:hover.cke_toolbox_collapser {
+.cke_skin_kama a:hover.cke_toolbox_collapser, 
+.cke_skin_kama a:focus.cke_toolbox_collapser {
 	background-color: #eee!important;
 	border: none!important;
 }
@@ -6399,7 +6485,8 @@ span.cke_skin_kama {
 .cke_skin_kama .cke_toolgroup, 
 .cke_skin_kama .cke_rcombo a, 
 .cke_skin_kama .cke_rcombo a:active, 
-.cke_skin_kama .cke_rcombo a:hover {
+.cke_skin_kama .cke_rcombo a:hover, 
+.cke_skin_kama .cke_rcombo a:focus {
 	background-color: #eee!important;
 	background-image: none!important;
 	background-repeat: no-repeat!important;
@@ -6410,7 +6497,8 @@ span.cke_skin_kama {
 }
 
 .cke_skin_kama a.cke_toolbox_collapser_min, 
-.cke_skin_kama a:hover.cke_toolbox_collapser_min {	
+.cke_skin_kama a:hover.cke_toolbox_collapser_min, 
+.cke_skin_kama a:focus.cke_toolbox_collapser_min {	
 }
 
 .cke_editor table, 
@@ -6586,7 +6674,8 @@ ul.ecmjqft a:active {
 	font-weight: bold !important;
 }
 
-ul.ecmjqft a:hover {
+ul.ecmjqft a:hover,
+ul.ecmjqft a:focus {
 	text-decoration: underline;
 }
 
@@ -6637,7 +6726,8 @@ div.ecmjqft {
 	top: 14px !important; 
 } 
  
-.jnotify-container .jnotify-notification a.jnotify-close:hover { 
+.jnotify-container .jnotify-notification a.jnotify-close:hover,
+.jnotify-container .jnotify-notification a.jnotify-close:focus { 
 	color: #fff !important;
 } 
 
@@ -6783,14 +6873,16 @@ table.dataTable tr.odd td.sorting_1, table.dataTable tr.even td.sorting_1 {
 .paging_full_numbers {
 	height: inherit !important;
 }
-.paging_full_numbers a.paginate_active:hover, .paging_full_numbers a.paginate_button:hover {
+.paging_full_numbers a.paginate_active:hover, .paging_full_numbers a.paginate_button:hover,
+.paging_full_numbers a.paginate_active:focus, .paging_full_numbers a.paginate_button:focus {
 	background-color: #DDD !important;
 }
 .paging_full_numbers, .paging_full_numbers a.paginate_active, .paging_full_numbers a.paginate_button {
 	background-color: #FFF !important;
 	border-radius: inherit !important;
 }
-.paging_full_numbers a.paginate_button_disabled:hover {
+.paging_full_numbers a.paginate_button_disabled:hover,
+.paging_full_numbers a.paginate_button_disabled:focus {
 	background-color: #FFF !important;
 }
 .paginate_button, .paginate_active {
@@ -6938,6 +7030,7 @@ li.ui-li-divider .ui-link {
 
 a.ui-link, 
 a.ui-link:hover, 
+a.ui-link:focus, 
 .ui-btn:hover, 
 span.ui-btn-text:hover, 
 span.ui-btn-inner:hover {
@@ -7406,6 +7499,7 @@ div.pagination li.litext a {
 	padding-left: 4px;
 	font-weight: bold;
 }
+div.pagination li.noborder a:focus,
 div.pagination li.noborder a:hover {
 	border: none;
 	background-color: transparent;
@@ -7695,7 +7789,8 @@ dl.dropdown {
 .dropdown dd ul li span {
 	color: #888;
 }
-.dropdown dd ul li a:hover {
+.dropdown dd ul li a:hover,
+.dropdown dd ul li a:focus {
 	background-color:#fff;
 }
 
@@ -7749,7 +7844,7 @@ img.loginphoto {
 @media only screen and (max-width: 1024px)
 {
 	#tmenu_tooltipinvert .sec-nav__item {
-		max-width: 120px;
+		max-width: 140px;
 	}
 	#tmenu_tooltipinvert .sec-nav__item .icon {
 		font-size: 24px;
@@ -7761,13 +7856,15 @@ img.loginphoto {
 
 	div.vmenu {
 		min-width: 170px;
-		width: 170px;
+		max-width: 100%;
 	}
+
 	.vmenusearchselectcombo {
-		width: 150px;
+		min-width: 150px;
+		max-width: 100%;
 	}
 	.sec-nav.is-inverted {
-		<?php if( $conf->global->OBLYON_SHOW_COMPNAME || $conf->global->OBLYON_FULLSIZE_TOPBAR ) { ?>
+		<?php if( $conf->global->OBLYON_SHOW_COMPNAME || $conf->global->OBLYON_FULLSIZE_TOPBAR || $conf->dol_optimize_smallscreen ) { ?>
 			margin-<?php print $left; ?>: 10px;
 		<?php } else { ?>
 			margin-<?php print $left; ?>: 170px;
@@ -7779,7 +7876,7 @@ img.loginphoto {
 @media only screen and (max-width: 905px)
 {
 	#tmenu_tooltipinvert .sec-nav__item {
-		max-width: 90px;
+		max-width: 120px;
 	}
 }
 
@@ -7795,7 +7892,7 @@ img.loginphoto {
 	}
 
 	#tmenu_tooltipinvert .sec-nav__item {
-		max-width: 80px;
+		max-width: 100px;
 	}
 	#tmenu_tooltipinvert .sec-nav__item .icon {
 		font-size: 28px;
@@ -7804,13 +7901,13 @@ img.loginphoto {
 
 	div.vmenu {
 		min-width: 130px;
-		width: 130px;
 	}
+
 	.vmenusearchselectcombo {
-		width: auto;
+		min-width: 110px;
 	}
 	.sec-nav.is-inverted {
-		<?php if( $conf->global->OBLYON_SHOW_COMPNAME || $conf->global->OBLYON_FULLSIZE_TOPBAR ) { ?>
+		<?php if( $conf->global->OBLYON_SHOW_COMPNAME || $conf->global->OBLYON_FULLSIZE_TOPBAR || $conf->dol_optimize_smallscreen ) { ?>
 			margin-<?php print $left; ?>: 5px;
 		<?php } else { ?>
 			margin-<?php print $left; ?>: 130px;
@@ -7869,19 +7966,28 @@ img.loginphoto {
 @media only screen and (max-width: 570px)
 {
 	/* Reduce login top right info */
-	.usertextatoplogin {
+	.usertext.atoplogin {
 		display: none;
 	}
 	div#tmenu_tooltip, #tmenu_tooltipinvert {
 	<?php if (GETPOST("optioncss") == 'print') {	?>
 		display:none;
 	<?php } else { ?>
-		padding-<?php echo $right; ?>: 78px;
+		padding-<?php echo $right; ?>: 92px;
 	<?php } ?>
 	}
 	div.login_block {
-		top: 1px;
-		max-width: 82px;
+		top: 0px;
+		max-width: 96px;
+	}
+	div.login_block_other {
+		min-width: 40px;
+		margin-right: 6px;
+		height: auto;
+	}
+	div.login_block_other .inline-block {
+		display: block;
+		width: auto;
 	}
 	li.tmenu, li.tmenusel {
 		min-width: 30px;
