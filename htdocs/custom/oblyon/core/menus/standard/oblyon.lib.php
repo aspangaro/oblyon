@@ -93,6 +93,16 @@ function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$fo
 			print "<!-- End SearchForm -->\n";
 			print '$&nbsp;';
 		}
+
+		if (is_array($moredata) && ! empty($moredata['bookmarks']))
+		{
+			print "\n";
+			print "<!-- Begin Bookmarks -->\n";
+			print '<div id="blockvmenubookmarks" class="blockvmenubookmarks">'."\n";
+			print $moredata['bookmarks'];
+			print '</div>'."\n";
+			print "<!-- End Bookmarks -->\n";
+		}
 	}
 	
 	if ( empty($conf->global->MAIN_MENU_INVERT) && ($conf->global->OBLYON_HIDE_LEFTMENU || $conf->dol_optimize_smallscreen) ) {
@@ -1727,7 +1737,7 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 		$url=preg_replace('/__LOGIN__/',$user->login,$url);
 		$url=preg_replace('/__USERID__/',$user->id,$url);
 
-		print '<!-- Process menu entry with mainmenu='.$menu_array[$i]['mainmenu'].', leftmenu='.$menu_array[$i]['leftmenu'].', level='.$menu_array[$i]['level'].', enabled='.$menu_array[$i]['enabled'].' -->'."\n";		
+		//print '<!-- Process menu entry with mainmenu='.$menu_array[$i]['mainmenu'].', leftmenu='.$menu_array[$i]['leftmenu'].', level='.$menu_array[$i]['level'].', enabled='.$menu_array[$i]['enabled'].' -->'."\n";
 
 		// Level Menu = 0
 		if ($level == 0){
