@@ -252,30 +252,6 @@ function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$fo
 		$menu->add('/compta/bank/list.php?mainmenu=bank&amp;leftmenu=', $langs->trans("MenuBankCash"), 0, $showmode, $atarget, "bank", '');
 	}
 
-	// Accoutancy
-	$menuqualified=0;
-	if (! empty($conf->comptabilite->enabled)) $menuqualified++;
-	if (! empty($conf->accounting->enabled)) $menuqualified++;
-	if (! empty($conf->asset->enabled)) $menuqualified++;
-	$tmpentry=array(
-		'enabled'=>$menuqualified,
-		'perms'=>(! empty($user->rights->compta->resultat->lire) || ! empty($user->rights->accounting->mouvements->lire)),
-		'module'=>'comptabilite|accounting');
-	$showmode=dol_oblyon_showmenu($type_user, $tmpentry, $listofmodulesforexternal);
-	if ($showmode) {
-		$langs->load("compta");
-		$langs->load("accountancy");
-
-		if ($_SESSION["mainmenu"] && $_SESSION["mainmenu"] == "accoutancy") { $itemsel=TRUE; $_SESSION['idmenu']=''; }
-		else $itemsel=FALSE;
-		$idsel='accountancy';
-
-		if (empty($noout)) print_start_menu_entry($idsel,$itemsel,$showmode);
-		if (empty($noout)) print_text_menu_entry($langs->trans("MenuAccountancy"), $showmode, DOL_URL_ROOT.'/accountancy/index.php?mainmenu=accountancy&amp;leftmenu=', $id, $idsel, $atarget);
-		if (empty($noout)) print_end_menu_entry($showmode);
-		$menu->add('/accountancy/index.php?mainmenu=accountancy&amp;leftmenu=', $langs->trans("MenuAccountancy"), 0, $showmode, $atarget, "accountancy", '');
-	}
-
 	// Projects
 	$tmpentry=array('enabled'=>(! empty($conf->projet->enabled)),
 	'perms'=>(! empty($user->rights->projet->lire)),
@@ -327,6 +303,30 @@ function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$fo
 			print_end_menu_entry($showmode);
 			$menu->add('/hrm/index.php?mainmenu=hrm&amp;leftmenu=', $langs->trans("HRM"), 0, $showmode, $atarget, "hrm", '');
 		}
+	}
+
+	// Accoutancy
+	$menuqualified=0;
+	if (! empty($conf->comptabilite->enabled)) $menuqualified++;
+	if (! empty($conf->accounting->enabled)) $menuqualified++;
+	if (! empty($conf->asset->enabled)) $menuqualified++;
+	$tmpentry=array(
+		'enabled'=>$menuqualified,
+		'perms'=>(! empty($user->rights->compta->resultat->lire) || ! empty($user->rights->accounting->mouvements->lire)),
+		'module'=>'comptabilite|accounting|asset');
+	$showmode=dol_oblyon_showmenu($type_user, $tmpentry, $listofmodulesforexternal);
+	if ($showmode) {
+		$langs->load("compta");
+		$langs->load("accountancy");
+
+		if ($_SESSION["mainmenu"] && $_SESSION["mainmenu"] == "accoutancy") { $itemsel=TRUE; $_SESSION['idmenu']=''; }
+		else $itemsel=FALSE;
+		$idsel='accountancy';
+
+		if (empty($noout)) print_start_menu_entry($idsel,$itemsel,$showmode);
+		if (empty($noout)) print_text_menu_entry($langs->trans("MenuAccountancy"), $showmode, DOL_URL_ROOT.'/accountancy/index.php?mainmenu=accountancy&amp;leftmenu=', $id, $idsel, $atarget);
+		if (empty($noout)) print_end_menu_entry($showmode);
+		$menu->add('/accountancy/index.php?mainmenu=accountancy&amp;leftmenu=', $langs->trans("MenuAccountancy"), 0, $showmode, $atarget, "accountancy", '');
 	}
 
 	// Tools

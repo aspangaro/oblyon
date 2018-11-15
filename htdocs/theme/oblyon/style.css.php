@@ -553,12 +553,13 @@ textarea.centpercent {
 	cursor: not-allowed;
 }
 
+/*
 .text-center, .center { text-align: center; }
 .text-left, .left { text-align: <?php print $left; ?>; }
 .text-right, .right { text-align: <?php print $right; ?>; }
 .text-justify { text-align: justify; }
 .text-nowrap, .nowrap { white-space: nowrap;}
-
+*/
 
 /**
  * Links
@@ -7690,15 +7691,28 @@ div.statusrefbis {
 	padding-right: 9px;
 	vertical-align: text-bottom;
 }
-img.photoref {
+img.photoref, div.photoref {
 	border: 1px solid #CCC;
-	-moz-box-shadow: 3px 3px 4px #DDD;
-	-webkit-box-shadow: 3px 3px 4px #DDD;
-	box-shadow: 3px 3px 4px #DDD;
 	padding: 4px;
 	height: 80px;
 	width: 80px;
-	object-fit: contain
+	object-fit: contain;
+}
+img.fitcontain {
+	object-fit: contain;
+}
+div.photoref {
+	display:table-cell;
+	vertical-align:middle;
+	text-align:center;
+}
+img.photorefnoborder {
+	padding: 2px;
+	height: 48px;
+	width: 48px;
+	object-fit: contain;
+	border: 1px solid #AAA;
+	border-radius: 100px;
 }
 .underrefbanner {
 }
@@ -8007,6 +8021,30 @@ img.loginphoto {
 	#tooltip {
 		position: absolute;
 		width: <?php print dol_size(300,'width'); ?>px;
+	}
+
+	select {
+		width: 98%;
+		min-width: 0 !important;
+	}
+	div.divphotoref {
+		padding-right: 5px;
+	}
+	img.photoref, div.photoref {
+		border: none;
+		-webkit-box-shadow: none;
+		box-shadow: none;
+		padding: 4px;
+		height: 20px;
+		width: 20px;
+		object-fit: contain;
+	}
+
+	.titlefield {
+		width: auto !important;		/* We want to ignor the 30%, try to use more if you can */
+	}
+	.tableforfield>tr>td:first-child {
+		max-width: 100px;			/* but no more than 100px */
 	}
 }
 
