@@ -58,6 +58,9 @@ header('Content-type: text/css');
 if (empty($dolibarr_nocache)) header('Cache-Control: max-age=3600, public, must-revalidate');
 else header('Cache-Control: no-cache');
 
+// On the fly GZIP compression for all pages (if browser support it). Must set the bit 3 of constant to 1.
+if (isset($conf->global->MAIN_OPTIMIZE_SPEED) && ($conf->global->MAIN_OPTIMIZE_SPEED & 0x04)) { ob_start("ob_gzhandler"); }
+
 if (GETPOST('lang')) $langs->setDefaultLang(GETPOST('lang'));	// If language was forced on URL
 if (GETPOST('theme')) $conf->theme=GETPOST('theme');	// If theme was forced on URL
 $langs->load("main",0,1);
@@ -3488,7 +3491,7 @@ li.tmenu:hover {
 
 /* Liens menu vertical */
 
-div.,
+div.tmenudisabled,
 a.tmenudisabled {
 	cursor: not-allowed;
 	opacity: .6;
@@ -3924,6 +3927,10 @@ td.photo {
 
 	.mainmenu.tools {
 		background-image: url(<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/menus/tools.png',1); ?>);
+	}
+
+	.mainmenu.shop {
+		background-image: url(<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/menus/shop.png',1); ?>);
 	}
 
 	.mainmenu.webservices {
