@@ -2010,19 +2010,19 @@ div.secondcolumn div.box {
 	<?php } ?>
 }
 
-.main-nav__item.is-sel {
+.main-nav__item.tmenusel {
 	background-color: <?php print $bgnavtop_hover; ?>;
 }
 
-.main-nav__item.is-sel .main-nav__link {
+.main-nav__item.tmenusel .main-nav__link {
 	font-weight: bold !important;
 }
 
-.main-nav__item.is-sel:hover {
+.main-nav__item.tmenusel:hover {
 	color: #fff;
 }
 
-.main-nav__item.is-sel .main-nav__link:hover {
+.main-nav__item.tmenusel .main-nav__link:hover {
 	color: #fff;
 	font-weight: bold;
 }
@@ -3420,7 +3420,6 @@ else
 		display: block;
 		font-size: 13px;
 		font-weight: normal;
-		height: <?php print ($heightmenu+1); ?>px;
 		margin: 0;
 		padding: 0;
 		position: relative;
@@ -3443,9 +3442,7 @@ else
 
 li.tmenu, 
 li.tmenusel {
-	height: <?php print $heightmenu; ?>px;
 	display: block;
-	height: 40px;
 	margin: 0;
 	padding: 0;
 	position: relative;
@@ -3491,7 +3488,7 @@ li.tmenu:hover {
 
 /* Liens menu vertical */
 
-div.tmenudisabled,
+div.,
 a.tmenudisabled {
 	cursor: not-allowed;
 	opacity: .6;
@@ -4829,6 +4826,9 @@ table.noborder tr th a:active {
 }
 
 table.noborder tr td a:hover { color: #222; }
+
+table.noborder tr td a.button,
+table.noborder tr td a.button:hover { color: #fff; }
 
 tr.liste_titre td, 
 tr.liste_titre th { text-align: <?php print $left; ?>; }
