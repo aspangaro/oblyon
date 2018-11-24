@@ -74,9 +74,9 @@ function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$fo
 		}
 
 		print "\n".'<!-- Show logo on menu -->'."\n";
-		print '<div class="db-menu__logo">';
-		print '<a class="db-menu__logo__link	text-center" href="'.DOL_URL_ROOT.'" alt="'.dol_escape_htmltag($title).'" title="'.dol_escape_htmltag($title).'">';
-		print '<img class="db-menu__logo__img" src="'.$urllogo.'" alt="Logo">';
+		print '<div class="blockvmenulogo db-menu__logo">';
+		print '<a class="center db-menu__logo__link	text-center" href="'.DOL_URL_ROOT.'" alt="'.dol_escape_htmltag($title).'" title="'.dol_escape_htmltag($title).'">';
+		print '<img class="menu_contenu db-menu__logo__img" src="'.$urllogo.'" alt="Logo">';
 		print '</a>'."\n";
 		print '</div>';
 	}
@@ -415,10 +415,6 @@ function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$fo
 		);
 	}
 
-	$showmode=1;
-	if (empty($noout)) print_start_menu_entry('','class="tmenuend"',$showmode);
-	if (empty($noout)) print_end_menu_entry($showmode);
-
 	if (empty($noout)) print_end_menu_array();
 
 	return 0;
@@ -432,8 +428,8 @@ function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$fo
  */
 function print_start_menu_array() {
 	global $conf;
-	print '<nav class="db-nav	main-nav'.(empty($conf->global->MAIN_MENU_INVERT)?"":"	is-inverted").'">';
-	print '<ul class="main-nav__list">';
+	print '<nav class="tmenudiv db-nav main-nav'.(empty($conf->global->MAIN_MENU_INVERT)?'':' is-inverted').'">';
+	print '<ul class="tmenu main-nav__list">';
 }
 
 /**
@@ -446,7 +442,7 @@ function print_start_menu_array() {
  */
 function print_start_menu_entry($idsel,$itemsel,$showmode) {
 	if ($showmode) {
-	print '<li class="main-nav__item'.(($itemsel)?'	is-sel':'').'" id="mainmenutd_'.$idsel.'">';
+		print '<li class="tmenu main-nav__item'.(($itemsel)?' tmenusel is-sel':'').'" id="mainmenutd_'.$idsel.'">';
 	}
 }
 
@@ -468,24 +464,24 @@ function print_text_menu_entry($text, $showmode, $url, $id, $idsel, $atarget)
 
 	if ($showmode == 1)
 	{
-		print '<a class="main-nav__link	main-nav__'.$idsel.'" href="'.$url.'"'.($atarget?' target="'.$atarget.'"':'').'>';
+		print '<a class="tmenu main-nav__link	main-nav__'.$idsel.'" href="'.$url.'"'.($atarget?' target="'.$atarget.'"':'').'>';
 		if ($conf->global->OBLYON_ELDY_ICONS || $conf->global->OBLYON_ELDY_OLD_ICONS)
 		{
-			print '<i class="'.$id.'	'.$idsel.'"></i> ';
+			print '<i class="tmenuimage '.$id.' '.$idsel.'"></i> ';
 		} else {
-			print '<i class="icon	icon--'.$idsel.'"></i> ';
+			print '<i class="tmenuimage icon icon--'.$idsel.'"></i> ';
 		}
 		print $text;
 		print '</a>';
 	}
 	if ($showmode == 2)
 	{
-		print '<a class="main-nav__link is-disabled" id="mainmenua_'.$idsel.'" href="#" title="'.dol_escape_htmltag($langs->trans("NotAllowed")).'">';
+		print '<a class="tmenu main-nav__link is-disabled" id="mainmenua_'.$idsel.'" href="#" title="'.dol_escape_htmltag($langs->trans("NotAllowed")).'">';
 		if ($conf->global->OBLYON_ELDY_ICONS || $conf->global->OBLYON_ELDY_OLD_ICONS)
 		{
-			print '<i class="'.$id.'	'.$idsel.'"></i> ';
+			print '<i class="tmenuimage '.$id.' '.$idsel.'"></i> ';
 		} else {
-			print '<i class="icon	icon--'.$idsel.'"></i> ';
+			print '<i class="tmenuimage icon icon--'.$idsel.'"></i> ';
 		}
 		print $text;
 		print '</a>';
@@ -548,7 +544,7 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 	}
 
 	if ($conf->global->OBLYON_SHOW_COMPNAME && $conf->global->MAIN_INFO_SOCIETE_NOM) {
-		print '<div class="db-menu__society	center">';
+		print '<div class="menu_contenu db-menu__society center">';
 		if ($conf->global->MAIN_MENU_INVERT) {
 			print '<h1><a class="db-menu__society__link" href="'.DOL_URL_ROOT.'" title="'.$langs->trans("Home").'">'.$conf->global->MAIN_INFO_SOCIETE_NOM.'</a></h1>';
 		} else {
@@ -581,9 +577,9 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 
 		
 		print "\n".'<!-- Show logo on menu -->'."\n";
-		print '<div class="db-menu__logo">';
-		print '<a class="db-menu__logo__link	text-center" href="'.DOL_URL_ROOT.'" alt="'.dol_escape_htmltag($title).'" title="'.dol_escape_htmltag($title).'">';
-		print '<img src="'.$urllogo.'" class="db-menu__logo__img" alt="Logo">';
+		print '<div class="blockvmenulogo db-menu__logo">';
+		print '<a class="center db-menu__logo__link text-center" href="'.DOL_URL_ROOT.'" alt="'.dol_escape_htmltag($title).'" title="'.dol_escape_htmltag($title).'">';
+		print '<img src="'.$urllogo.'" class="menu_contenu db-menu__logo__img" alt="Logo">';
 		print '</a>'."\n";
 		print '</div>';
 	}
@@ -1720,8 +1716,8 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 	$alt=0; 
 	$num=count($menu_array);
 
-	print '<nav class="db-nav	sec-nav'.$invert.'">'."\n";
-	print '<ul class="sec-nav__list">'."\n";
+	print '<nav class="menu_contenu db-nav sec-nav'.$invert.'">'."\n";
+	print '<ul class="blockvmenu sec-nav__list">'."\n";
 
 	for ($i = 0; $i < $num; $i++) {
 		$showmenu=true;
@@ -1735,9 +1731,9 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 		$tabstring='';
 		$tabul=($menu_array[$i]['level'] - 1);
 		if ($tabul > 0) {
-		for ($j=0; $j < $tabul; $j++) {
-			$tabstring.='<span class="caret	'.($langs->trans("DIRECTION")=='ltr'?'caret--left':'caret--right').'"></span> ';
-		}
+			for ($j=0; $j < $tabul; $j++) {
+				$tabstring.='<span class="caret	'.($langs->trans("DIRECTION")=='ltr'?'caret--left':'caret--right').'"></span> ';
+			}
 		}
 
 		// For external modules
@@ -1764,16 +1760,16 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 		// Level Menu = 0
 		if ($level == 0){
 			if ($menu_array[$i]['enabled']) {
-				print '<li class="sec-nav__item	item-heading">';
-				print '<a class="sec-nav__link" href="'.$url.'"'.($menu_array[$i]['target']?' target="'.$menu_array[$i]['target'].'"':'').'>';
-				print (!empty($menu_array[$i]['leftmenu'])?'<i class="icon	icon--'.$menu_array[$i]['leftmenu'].'"></i>': '').$menu_array[$i]['titre'].' '.(!empty($conf->global->MAIN_MENU_INVERT) && !empty($menu_array[$i+1]['level'])?'<span class="caret	caret--top"></span>':'');
+				print '<li class="menu_titre menu_contenu sec-nav__item item-heading">';
+				print '<a class="vmenu sec-nav__link" href="'.$url.'"'.($menu_array[$i]['target']?' target="'.$menu_array[$i]['target'].'"':'').'>';
+				print (!empty($menu_array[$i]['leftmenu'])?'<i class="icon icon--'.$menu_array[$i]['leftmenu'].'"></i>': '').$menu_array[$i]['titre'].' '.(!empty($conf->global->MAIN_MENU_INVERT) && !empty($menu_array[$i+1]['level'])?'<span class="caret	caret--top"></span>':'');
 				print '</a>'."\n";
 			} else if ($showmenu) {
-				print '<li class="sec-nav__item	is-disabled"><a class="sec-nav__link	is-disabled" href="#" title="'.dol_escape_htmltag($langs->trans("NotAllowed")).'">'.$menu_array[$i]['titre'].'</a>'."\n";
+				print '<li class="sec-nav__item is-disabled"><a class="tmenudisabled sec-nav__link	is-disabled" href="#" title="'.dol_escape_htmltag($langs->trans("NotAllowed")).'">'.$menu_array[$i]['titre'].'</a>'."\n";
 			}
 
 			if (!empty($menu_array[$i+1]['level'])) {
-				print '<ul class="sec-nav__sub-list">'; 
+				print '<ul class="blockvmenu sec-nav__sub-list">'; 
 			}
 		}
 
@@ -1781,12 +1777,12 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 		if ($level > 0) {
 
 		if ($menu_array[$i]['enabled']) {
-			print '<li class="sec-nav__sub-item	item-level'.$menu_array[$i]['level'].'">';
-			if ($menu_array[$i]['url']) print '<a class="sec-nav__link" href="'.$url.'"'.($menu_array[$i]['target']?' target="'.$menu_array[$i]['target'].'"':'').'>'.$tabstring;
+			print '<li class="menu_contenu sec-nav__sub-item item-level'.$menu_array[$i]['level'].'">';
+			if ($menu_array[$i]['url']) print '<a class="vsmenu sec-nav__link" href="'.$url.'"'.($menu_array[$i]['target']?' target="'.$menu_array[$i]['target'].'"':'').'>'.$tabstring;
 			print $menu_array[$i]['titre'];
 			if ($menu_array[$i]['url']) print '</a>';
 		} else if ($showmenu) {
-			print '<li class="sec-nav__sub-item	is-disabled"><a class="sec-nav__link	is-disabled" href="#" title="'.dol_escape_htmltag($langs->trans("NotAllowed")).'">'.$tabstring. '' .$menu_array[$i]['titre'].'</a>'."\n";
+			print '<li class="sec-nav__sub-item	is-disabled"><a class="vsmenu tmenudisabled sec-nav__link is-disabled" href="#" title="'.dol_escape_htmltag($langs->trans("NotAllowed")).'">'.$tabstring. '' .$menu_array[$i]['titre'].'</a>'."\n";
 		}
 
 		if ( empty($menu_array[$i+1]['level']) ) { 

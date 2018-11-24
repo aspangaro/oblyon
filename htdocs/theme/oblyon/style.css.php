@@ -58,6 +58,9 @@ header('Content-type: text/css');
 if (empty($dolibarr_nocache)) header('Cache-Control: max-age=3600, public, must-revalidate');
 else header('Cache-Control: no-cache');
 
+// On the fly GZIP compression for all pages (if browser support it). Must set the bit 3 of constant to 1.
+if (isset($conf->global->MAIN_OPTIMIZE_SPEED) && ($conf->global->MAIN_OPTIMIZE_SPEED & 0x04)) { ob_start("ob_gzhandler"); }
+
 if (GETPOST('lang')) $langs->setDefaultLang(GETPOST('lang'));	// If language was forced on URL
 if (GETPOST('theme')) $conf->theme=GETPOST('theme');	// If theme was forced on URL
 $langs->load("main",0,1);
@@ -2012,19 +2015,19 @@ div.secondcolumn div.box {
 	<?php } ?>
 }
 
-.main-nav__item.is-sel {
+.main-nav__item.tmenusel {
 	background-color: <?php print $bgnavtop_hover; ?>;
 }
 
-.main-nav__item.is-sel .main-nav__link {
+.main-nav__item.tmenusel .main-nav__link {
 	font-weight: bold !important;
 }
 
-.main-nav__item.is-sel:hover {
+.main-nav__item.tmenusel:hover {
 	color: #fff;
 }
 
-.main-nav__item.is-sel .main-nav__link:hover {
+.main-nav__item.tmenusel .main-nav__link:hover {
 	color: #fff;
 	font-weight: bold;
 }
@@ -3527,7 +3530,6 @@ else
 		display: block;
 		font-size: 13px;
 		font-weight: normal;
-		height: <?php print ($heightmenu+1); ?>px;
 		margin: 0;
 		padding: 0;
 		position: relative;
@@ -3550,9 +3552,7 @@ else
 
 li.tmenu, 
 li.tmenusel {
-	height: <?php print $heightmenu; ?>px;
 	display: block;
-	height: 40px;
 	margin: 0;
 	padding: 0;
 	position: relative;
@@ -4034,6 +4034,10 @@ td.photo {
 
 	.mainmenu.tools {
 		background-image: url(<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/menus/tools.png',1); ?>);
+	}
+
+	.mainmenu.shop {
+		background-image: url(<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/menus/shop.png',1); ?>);
 	}
 
 	.mainmenu.webservices {
@@ -4936,6 +4940,9 @@ table.noborder tr th a:active {
 }
 
 table.noborder tr td a:hover { color: #222; }
+
+table.noborder tr td a.button,
+table.noborder tr td a.button:hover { color: #fff; }
 
 tr.liste_titre td, 
 tr.liste_titre th { text-align: <?php print $left; ?>; }
