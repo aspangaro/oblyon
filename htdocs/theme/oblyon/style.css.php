@@ -29,9 +29,6 @@
  *	\brief		File for CSS style sheet Oblyon
  */
 
-print '/*'."\n";
-print 'Oblyon theme for Dolibarr'."\n";
-
 //if (! defined('NOREQUIREUSER')) define('NOREQUIREUSER','1');	// Not disabled because need to load personalized language
 //if (! defined('NOREQUIREDB'))   define('NOREQUIREDB','1');		// Not disabled to increase speed. Language code is found on url.
 if (! defined('NOREQUIRESOC'))    define('NOREQUIRESOC','1');
@@ -70,6 +67,9 @@ $left=($langs->trans("DIRECTION")=='rtl'?'right':'left');
 $path='';			// This value may be used in future for external module to overwrite theme
 $theme='oblyon';	// Value of theme
 if (! empty($conf->global->MAIN_OVERWRITE_THEME_RES)) { $path='/'.$conf->global->MAIN_OVERWRITE_THEME_RES; $theme=$conf->global->MAIN_OVERWRITE_THEME_RES; }
+
+print '/*'."\n";
+print 'Oblyon theme for Dolibarr'."\n";
 
 /*------------------------------------*\
 		#Oblyon styles
