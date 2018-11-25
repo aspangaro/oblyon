@@ -201,7 +201,16 @@ function __construct($db) {
 	$this->const [$r] [0] = "OBLYON_COLOR_LEFTMENU_TXT";
 	$this->const [$r] [1] = "chaine";
 	$this->const [$r] [2] = "#F4F4F4";
-	$this->const [$r] [3] = 'Oblyon leftmenu leftmenu hover color';
+	$this->const [$r] [3] = 'Oblyon foreground leftmenu color';
+	$this->const [$r] [4] = 1;
+	$this->const [$r] [5] = 'allentities';
+	$this->const [$r] [6] = 0;
+
+	$r ++;
+	$this->const [$r] [0] = "OBLYON_EFFECT_LEFTMENU";
+	$this->const [$r] [1] = "chaine";
+	$this->const [$r] [2] = "slide";
+	$this->const [$r] [3] = 'Oblyon leftmenu effect behavior';
 	$this->const [$r] [4] = 1;
 	$this->const [$r] [5] = 'allentities';
 	$this->const [$r] [6] = 0;
