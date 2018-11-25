@@ -2926,7 +2926,7 @@ div.login a:hover {
 
 <?php if ( $conf->global->OBLYON_HIDE_LEFTMENU || $conf->dol_optimize_smallscreen ) { ?>
 #id-left, #id-container, .push {
-	<?php if ( $conf->global->OBLYON_EFFECT_LEFTMENU == "push" ) { ?>*
+	<?php if ( $conf->global->OBLYON_EFFECT_LEFTMENU == "push" ) { ?>
 		-webkit-transition: -webkit-transform .3s cubic-bezier(.16, .68, .43, .99);
 		-moz-transition: -moz-transform .3s cubic-bezier(.16, .68, .43, .99);
 		-o-transition: -o-transform .3s cubic-bezier(.16, .68, .43, .99);
