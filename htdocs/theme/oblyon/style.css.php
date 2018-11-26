@@ -2614,7 +2614,7 @@ div.login a:hover {
  
 .blockvmenusearch {
 	background-color: <?php print $bgnavleft; ?>;
-	/*border-bottom: 1px solid #D5D5D5;*/
+	border-bottom: 1px solid <?php print $bgnavleft_hover; ?>;
 	box-shadow: 0 0 1px rgba(0,0,0, .04);
 	-webkit-box-shadow: 0 0 1px rgba(0,0,0, .04);
 	clear: both;
@@ -2643,8 +2643,8 @@ div.login a:hover {
  */
  
  .blockvmenubookmarks {
-	background-color: #fff;
-	border-bottom: 1px solid #e5e5e5;
+	background-color: <?php print $bgnavleft; ?>;
+	border-bottom: 1px solid <?php print $bgnavleft_hover; ?>;
 	padding: 5px;
 	padding-bottom: 10px;
 }
