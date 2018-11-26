@@ -1690,18 +1690,17 @@ td.showDragHandle {
 #id-right {
 	<?php if (GETPOST("optioncss") == 'print') { ?>
 		padding-top: 10px;
-	<?php } else if ($conf->global->MAIN_MENU_INVERT) { ?>
-		padding-top: 52px;
-	<?php } else { ?>
-		<?php if ($conf->global->OBLYON_STICKY_TOPBAR) { ?>
-			padding-top: 64px;
+	<?php } else if ($conf->global->OBLYON_STICKY_TOPBAR) { ?>
+		<?php if ($conf->global->MAIN_MENU_INVERT) { ?>
+			padding-top: 52px;
 		<?php } else { ?>
-			padding-top: 10px;
+			padding-top: 64px;
 		<?php } ?>
+	<?php } else { ?>
+		padding-top: 10px;
 	<?php } ?>
+	width: 100%;
 }
-
-#id-right { width: 100%; }
 
 #id-left {
 	<?php if ( !$conf->global->OBLYON_HIDE_LEFTMENU && !$conf->dol_optimize_smallscreen ) { ?>
@@ -2895,31 +2894,34 @@ div.login a:hover {
 #id-left {
 	<?php if ( $conf->global->OBLYON_HIDE_LEFTMENU || $conf->dol_optimize_smallscreen ) { ?>
 		position: absolute;
-		<?php if ( $conf->global->MAIN_MENU_INVERT ) { ?>
-			top: 40px;
-		<?php } else if ($conf->global->OBLYON_EFFECT_LEFTMENU == "slide") { ?>
-			 top: 54px;
+		<?php if ( empty($conf->global->OBLYON_STICKY_TOPBAR) && $conf->global->OBLYON_EFFECT_LEFTMENU == "push" ) { ?>
+			top: 0;
 		<?php } else { ?>
-			 top: 0;
+			<?php if ( $conf->global->MAIN_MENU_INVERT ) { ?>
+				top: 40px;
+			<?php } else { ?>
+				top: 54px;
+			<?php } ?>
 		<?php } ?>
+
 		background-color: <?php print $bgnav; ?>;
 		<?php if ( $usecss3) { ?>
 			box-shadow: 0 1px 2px rgba(0, 0, 0, .4); 
 			-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .4);
 		<?php } ?>
-		max-width: 365px;
+		max-width: 265px;
 		overflow: hidden;
 		-webkit-overflow-scrolling: touch;
 		<?php if ( $conf->global->OBLYON_EFFECT_LEFTMENU == "push" && $usecss3 ) { ?>
 			<?php print $left; ?>: 0;
 			
-			-webkit-transform: translate3d(-200px,0,0);
-			-moz-transform: translate3d(-200px,0,0);
-			-ms-transform: translate3d(-200px,0,0);
-			-o-transform: translate3d(-200px,0,0);
-			transform: translate3d(-200px,0,0);
+			-webkit-transform: translate3d(-265px,0,0);
+			-moz-transform: translate3d(-265px,0,0);
+			-ms-transform: translate3d(-265px,0,0);
+			-o-transform: translate3d(-265px,0,0);
+			transform: translate3d(-265px,0,0);
 		<?php } else { ?>
-			<?php print $left; ?>: -370px;
+			<?php print $left; ?>: -270px;
 		<?php } ?>
 	<?php } ?>
 }
@@ -2940,11 +2942,11 @@ div.login a:hover {
 
 .container-push {
 	<?php if ( $conf->global->OBLYON_EFFECT_LEFTMENU == "push" ) { ?>
-		-webkit-transform: translate3d(200px,0,0);
-		-moz-transform: translate3d(200px,0,0);
-		-ms-transform: translate3d(200px,0,0);
-		-o-transform: translate3d(200px,0,0);
-		transform: translate3d(200px,0,0);
+		-webkit-transform: translate3d(265px,0,0);
+		-moz-transform: translate3d(265px,0,0);
+		-ms-transform: translate3d(265px,0,0);
+		-o-transform: translate3d(265px,0,0);
+		transform: translate3d(265px,0,0);
 	<?php } ?>
 }
 
@@ -3656,9 +3658,9 @@ div.vmenu {
 	z-index: 5;
 	<?php if (empty($conf->dol_optimize_smallscreen)) { ?>
 		min-width: 200px;
-		max-width: 220px;
+		max-width: 260px;
 		<?php if ( $conf->global->OBLYON_HIDE_LEFTMENU || $conf->dol_optimize_smallscreen ) { ?>
-			width: 200px;
+			width: 260px;
 		<?php } else { ?>
 			width: 100%;
 		<?php } ?>
