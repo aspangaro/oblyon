@@ -1,6 +1,6 @@
 <?php
-/* Copyright (C) 2015      Nicolas Rivera       <nrivera.pro@gmail.com>
- * Copyright (C) 2015-2016 Alexandre Spangaro   <aspangaro@zendsi.com>
+/* Copyright (C) 2015       Nicolas Rivera      <nrivera.pro@gmail.com>
+ * Copyright (C) 2015-2019  Open-DSI            <support@open-dsi.fr>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -35,6 +35,7 @@ dol_include_once('/oblyon/lib/php-markdown/markdown.php');
 
 // Langs
 $langs->load("oblyon@oblyon");
+$langs->load("opendsi@oblyon");
 
 // Access control
 if (! $user->admin)
@@ -67,14 +68,9 @@ print '<tr class="liste_titre"><td colspan="2">' . $langs->trans("Authors") . '<
 print '</tr>';
 
 // Alexandre Spangaro
-print '<tr><td class="titlefield center"><img src="../img/asilib.png"></td>';
-print '<td><b>Alexandre Spangaro</b>&nbsp;-&nbsp;Comptable / développeur';
-print '<br>Asilib - Votre gestion informatique en toute liberté !<br>' . $langs->trans("Email") . ' : aspangaro@zendsi.com';
-print '<br><a target="_blank" title="Twitter" alt="Twitter" href="http://twitter.com/alexspangaro"><img src="../img/tweet.png" width="20"></a>&nbsp;<a target="_blank" title="Linkedin" alt="Linkedin" href="https://fr.linkedin.com/in/aspangaro"><img src="../img/link.png" width="20"></a>';
-print '<br>&nbsp;';
-print '</td></tr>';
-
-print '</table>';
+print '<td width="310px"><img src="../img/opendsi_dolibarr_preferred_partner.png" /></td>'."\n";
+print '<td align="left" valign="top"><p>'.$langs->trans("OpenDsiAboutDesc").'</p></td>'."\n";
+print '</tr></table>'."\n";
 
 print '<br>';
 

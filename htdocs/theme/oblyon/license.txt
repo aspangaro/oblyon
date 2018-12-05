@@ -1,5 +1,5 @@
 Oblyon theme and Oblyon configurator 
-by Alexandre Spangaro are licensed under a CC BY-NC 4.0 license.
+by Open-DSI are licensed under a CC BY-NC 4.0 license.
 
 You are free to:
 	Share — copy and redistribute the material in any medium or format

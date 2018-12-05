@@ -1,6 +1,6 @@
 <?php
 /* Copyright (C) 2013-2015  Nicolas Rivera      <nrivera.pro@gmail.com>
- * Copyright (C) 2015       Alexandre Spangaro  <aspangaro@zendsi.com> 
+ * Copyright (C) 2015-2019  Open-DSI            <support@open-dsi.fr> 
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

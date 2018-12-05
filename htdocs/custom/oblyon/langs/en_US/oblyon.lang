@@ -1,6 +1,6 @@
 # < Oblyon Control Panel - English translation >
-# Copyright (C) 2015	Nicolas Rivera	<nrivera.pro@gmail.com>
-# Copyright (C) 2015    Alexandre Spangaro <aspangaro@zendsi.com>
+# Copyright (C) 2015       Nicolas Rivera   <nrivera.pro@gmail.com>
+# Copyright (C) 2015-2019  Open-DSI         <support@open-dsi.fr>
 #
 Module113900Name = Oblyon
 Module113900Desc = Options panel allows you to personalize the Oblyon theme 
@@ -67,5 +67,4 @@ ThemeOblyonBlueApplied=Oblyon blue template applied
 ThemeOblyonAboutTitle = Oblyon Configurator - About
 OblyonAbout = About
 Authors=Authors
-AboutMessage = A bug, a display issue or an improvement idea? Send an email to: <a href="mailto:aspangaro@zendsi.com">aspangaro@zendsi.com</a>.
 LicenseMessage = Theme Oblyon is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.<br><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a>

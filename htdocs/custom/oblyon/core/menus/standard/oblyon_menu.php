@@ -1,8 +1,8 @@
 <?php
-/* Copyright (C) 2005-2013  Laurent Destailleur	<eldy@users.sourceforge.net>
- * Copyright (C) 2007-2009  Regis Houssin		<regis.houssin@capnetworks.com>
- * Copyright (C) 2013-2015  Nicolas Rivera		<nrivera.pro@gmail.com>
- * Copyright (C) 2015-2016	Alexandre Spangaro	<aspangaro@zendsi.com>
+/* Copyright (C) 2005-2013  Laurent Destailleur <eldy@users.sourceforge.net>
+ * Copyright (C) 2007-2009  Regis Houssin       <regis.houssin@capnetworks.com>
+ * Copyright (C) 2013-2015  Nicolas Rivera      <nrivera.pro@gmail.com>
+ * Copyright (C) 2015-2019  Open-DSI            <support@open-dsi.fr>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

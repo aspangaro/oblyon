@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright (C) 2015-2016	Nicolas Rivera		<nrivera.pro@gmail.com>
- * Copyright (C) 2015-2018	Alexandre Spangaro	<aspangaro@zendsi.com> 
+ * Copyright (C) 2015-2016  Nicolas Rivera      <nrivera.pro@gmail.com>
+ * Copyright (C) 2015-2018  Open-DSI            <support@open-dsi.fr>
  *
  * Copyright (C) 2003      Rodolphe Quiedeville <rodolphe@quiedeville.org>
  * Copyright (C) 2004-2012 Laurent Destailleur  <eldy@users.sourceforge.net>

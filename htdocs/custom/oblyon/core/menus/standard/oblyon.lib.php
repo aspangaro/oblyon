@@ -1,11 +1,11 @@
 <?php
 /**
- * Copyright (C) 2013-2016	Nicolas Rivera		<nrivera.pro@gmail.com>
- * Copyright (C) 2015-2017	Alexandre Spangaro	<aspangaro@zendsi.com>
+ * Copyright (C) 2013-2016  Nicolas Rivera      <nrivera.pro@gmail.com>
+ * Copyright (C) 2015-2019  Open-DSI            <support@open-dsi.fr>
  *
- * Copyright (C) 2010-2013	Laurent Destailleur	<eldy@users.sourceforge.net>
- * Copyright (C) 2010		Regis Houssin		<regis.houssin@capnetworks.com>
- * Copyright (C) 2012-2013	Juanjo Menent		<jmenent@2byte.es>
+ * Copyright (C) 2010-2013  Laurent Destailleur <eldy@users.sourceforge.net>
+ * Copyright (C) 2010       Regis Houssin       <regis.houssin@capnetworks.com>
+ * Copyright (C) 2012-2013  Juanjo Menent       <jmenent@2byte.es>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
