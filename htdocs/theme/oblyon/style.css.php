@@ -1394,7 +1394,7 @@ select.flat.selectlimit {
 	min-height: 0.01%;
 }
 .div-table-responsive {
-	line-height: 100%;
+	line-height: 120%;
 }
 /* Style used for full page tables with field selector and no content after table (priority before previous for such tables) */
 div.fiche>form>div.div-table-responsive, div.fiche>form>div.div-table-responsive-no-min {
@@ -2105,13 +2105,12 @@ div.secondcolumn div.box {
 	<?php } ?>
 }
 
- 
 #tmenu_tooltipinvert {
 	<?php if (GETPOST("optioncss") == 'print') { ?>
 	display: none;
 	<?php } else { ?>
 	display: inline-table;
-    overflow: auto;
+	overflow: auto;
 	width: 100%;
 	background-color: <?php print $bgnavleft; ?>;
 	<?php if ( $usecss3 ) { ?>
@@ -2163,7 +2162,7 @@ div.secondcolumn div.box {
 }
 
 .sec-nav.is-inverted .sec-nav__item.item-heading:hover {
-	background-color: <?php print $bgnavleft_hover; ?>; 
+	background-color: <?php print $bgnavleft_hover; ?>;
 }
 
 .sec-nav.is-inverted .sec-nav__link {
@@ -2194,6 +2193,10 @@ div.secondcolumn div.box {
 
 li.item-heading:hover > .sec-nav__link {
 	background-color: <?php print $bgnavleft_hover; ?>;
+	color: <?php print $bgnavleft_txt; ?>;
+}
+
+li.sec-nav__sub-item {
 	color: <?php print $bgnavleft_txt; ?>;
 }
 
@@ -2274,6 +2277,7 @@ li.item-heading:hover > .sec-nav__link {
 .sec-nav.is-inverted .sec-nav__sub-list .item-level1 .sec-nav__link {
 	display: block;
 	padding: 0.6em 1em;
+	
 }
 
 .sec-nav.is-inverted .sec-nav__sub-list .item-level2 .sec-nav__link {
@@ -3368,6 +3372,10 @@ div.login a:hover {
 
 .icon--paypal:before {
 	content: '\e61e';
+}
+
+.icon--stripe:before {
+	content: '\e61b'; /* TO DO : Add icon Stripe in oblyon-icons.eot */
 }
 
 .icon--google:before {
