@@ -2049,6 +2049,10 @@ li.item-heading:hover > .sec-nav__link {
 	color: <?php print $bgnavleft_txt; ?>;
 }
 
+li.sec-nav__sub-item {
+	color: <?php print $bgnavleft_txt; ?>;
+}
+
 .caret {
 	content: '';
 	color: inherit;
@@ -5113,6 +5117,31 @@ table.valid img { vertical-align: sub; }
 
 .validtitre { font-weight: bold; }
 
+/*------------------------------------*\
+		#Tooltips 
+\*------------------------------------*/
+
+/* For tooltip using dialog */
+.ui-dialog.highlight.ui-widget.ui-widget-content.ui-front {
+    z-index: 3000;
+}
+
+div.ui-tooltip {
+	max-width: <?php print dol_size(600,'width'); ?>px !important;
+}
+
+.mytooltip {
+	width: <?php print dol_size(450,'width'); ?>px;
+	border-top: solid 1px #BBBBBB;
+	border-<?php print $left; ?>: solid 1px #BBBBBB;
+	border-<?php print $right; ?>: solid 1px #444444;
+	border-bottom: solid 1px #444444;
+	padding: 5px 20px;
+	border-radius: 0;
+	box-shadow: 0 0 4px grey;
+	margin: 2px;
+	font-stretch: condensed;
+}
 
 /*------------------------------------*\
 		#Calc Module 
@@ -7033,20 +7062,49 @@ div.statusref {
 	margin-top: 6px;
 	margin-bottom: 10px;
 }
-img.photoref {
+div.statusref img {
+	padding-left: 8px;
+	padding-right: 9px;
+	vertical-align: text-bottom;
+}
+div.statusrefbis {
+	padding-left: 8px;
+	padding-right: 9px;
+	vertical-align: text-bottom;
+}
+img.photoref, div.photoref {
 	border: 1px solid #CCC;
-	-moz-box-shadow: 3px 3px 4px #DDD;
 	-webkit-box-shadow: 3px 3px 4px #DDD;
 	box-shadow: 3px 3px 4px #DDD;
 	padding: 4px;
 	height: 80px;
 	width: 80px;
-	object-fit: contain
+	object-fit: contain;
+}
+img.fitcontain {
+	object-fit: contain;
+}
+div.photoref {
+	display:table-cell;
+	vertical-align:middle;
+	text-align:center;
+}
+img.photorefnoborder {
+	padding: 2px;
+	height: 48px;
+	width: 48px;
+	object-fit: contain;
+	border: 1px solid #AAA;
+	border-radius: 100px;
 }
 .underrefbanner {
 }
 .underbanner {
 	border-bottom: 2px solid #888;
+}
+.tdhrthin {
+	margin: 0;
+	padding-bottom: 0 !important;
 }
 
 .badge {
