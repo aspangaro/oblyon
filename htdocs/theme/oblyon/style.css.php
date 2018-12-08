@@ -5648,7 +5648,6 @@ table.dp {
 /*------------------------------------*\
 		#Website Module 
 \*------------------------------------*/
-
 .phptag {
 	background: #ddd; border: 1px solid #ccc; border-radius: 4px;
 }
@@ -5657,6 +5656,8 @@ table.dp {
 	border: 0px;
 	background-color: transparent;
 	background-image: none;
+	color: #000 !important;
+	text-shadow: none;
 }
 .websitebar {
 	border-bottom: 1px solid #ccc;
