@@ -2306,7 +2306,7 @@ div.login_block {
 	<?php } ?>
 	top: 0;
 	<?php print $right; ?>: 0px;
-	z-index: 10;
+	z-index: 100;
 	<?php if (GETPOST("optioncss") == 'print') { ?>
 		display: none;
 	<?php } ?>
@@ -2439,8 +2439,8 @@ div.login_block_user > .classfortooltip.login_block_elem2 {
 }
 
 .login_block_elem a:hover,
-.login_block td.classfortooltip a:hover { 
-	color: <?php echo $topmenu_hover; ?>; 
+.login_block td.classfortooltip a:hover {
+	color: <?php echo $topmenu_hover; ?>;
 }
 
 /*
