@@ -2763,11 +2763,7 @@ div.login a:hover {
 	box-shadow: 0 0 1px rgba(0,0,0, .04);
 	-webkit-box-shadow: 0 0 1px rgba(0,0,0, .04);
 	clear: both;
-	<?php if ( DOL_VERSION >= "3.9.0" ) { ?>
-		padding: 10px;
-	<?php } else { ?>
-		padding: 10px 10px 20px 10px;
-	<?php } ?>
+	padding: 10px;
 	text-decoration: none;
 }
 
@@ -2797,11 +2793,7 @@ div.login a:hover {
 	box-shadow: 0 0 1px rgba(0,0,0, .04);
 	-webkit-box-shadow: 0 0 1px rgba(0,0,0, .04);
 	clear: both;
-	<?php if ( DOL_VERSION >= "3.9.0" ) { ?>
-		padding: 10px;
-	<?php } else { ?>
-		padding: 10px 10px 20px 10px;
-	<?php } ?>
+	padding: 10px;
 	text-decoration: none;
 }
 
