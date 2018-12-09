@@ -2435,7 +2435,7 @@ div.login_block {
 	<?php } ?>
 	top: 0;
 	<?php print $right; ?>: 0px;
-	z-index: 10;
+	z-index: 100;
 	<?php if (GETPOST("optioncss") == 'print') { ?>
 		display: none;
 	<?php } ?>
