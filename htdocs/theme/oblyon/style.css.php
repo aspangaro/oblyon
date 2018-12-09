@@ -1718,9 +1718,9 @@ td.showDragHandle {
 		position: relative;
 	<?php } ?>
 	<?php if(!$conf->global->OBLYON_HIDE_LEFTMENU && !$conf->dol_optimize_smallscreen && (!$conf->global->OBLYON_FULLSIZE_TOPBAR || !$conf->global->OBLYON_SHOW_COMPNAME)) { ?>
-		z-index: 990;
+		z-index: 92;
 	<?php } else { ?>
-		z-index: 970;
+		z-index: 90;
 	<?php } ?>
 }
 
@@ -1746,7 +1746,7 @@ td.showDragHandle {
 
 #id-top {
 	background-color: <?php print $bgnavtop; ?>;
-	z-index: 980;
+	z-index: 91;
 }
 
 div.fiche {
@@ -1933,7 +1933,7 @@ div.secondcolumn div.box {
 		<?php } ?>
 		margin: 0;
 		padding-<?php print $right; ?>: 160px;
-		z-index: 999;
+		z-index: 95;
 		<?php if ( $conf->global->OBLYON_STICKY_TOPBAR ) { ?>
 			position: fixed;
 			top: 0;
@@ -2127,7 +2127,7 @@ div.secondcolumn div.box {
 	<?php print $left; ?>: 0;
 	margin: 0;
 	padding-<?php print $right; ?>: 160px;
-	z-index: 999;
+	z-index: 95;
 	<?php if ($conf->global->OBLYON_STICKY_TOPBAR) { ?>
 		position: fixed;
 		top: 0;
@@ -2198,6 +2198,29 @@ li.item-heading:hover > .sec-nav__link {
 
 li.sec-nav__sub-item {
 	color: <?php print $bgnavleft_txt; ?>;
+}
+
+/*------------------------------------*\
+		#Tooltips 
+\*------------------------------------*/
+/* For tooltip using dialog */
+.ui-dialog.highlight.ui-widget.ui-widget-content.ui-front {
+    z-index: 3000;
+}
+div.ui-tooltip {
+	max-width: <?php print dol_size(600,'width'); ?>px !important;
+}
+.mytooltip {
+	width: <?php print dol_size(450,'width'); ?>px;
+	border-top: solid 1px #BBBBBB;
+	border-<?php print $left; ?>: solid 1px #BBBBBB;
+	border-<?php print $right; ?>: solid 1px #444444;
+	border-bottom: solid 1px #444444;
+	padding: 5px 20px;
+	border-radius: 0;
+	box-shadow: 0 0 4px grey;
+	margin: 2px;
+	font-stretch: condensed;
 }
 
 .caret {
@@ -2412,7 +2435,7 @@ div.login_block {
 	<?php } ?>
 	top: 0;
 	<?php print $right; ?>: 0px;
-	z-index: 1000;
+	z-index: 10;
 	<?php if (GETPOST("optioncss") == 'print') { ?>
 		display: none;
 	<?php } ?>
@@ -2873,11 +2896,7 @@ div.login a:hover {
 	box-shadow: 0 0 1px rgba(0,0,0, .04);
 	-webkit-box-shadow: 0 0 1px rgba(0,0,0, .04);
 	clear: both;
-	<?php if ( DOL_VERSION >= "3.9.0" ) { ?>
-		padding: 10px;
-	<?php } else { ?>
-		padding: 10px 10px 20px 10px;
-	<?php } ?>
+	padding: 10px;
 	text-decoration: none;
 }
 
@@ -2907,11 +2926,7 @@ div.login a:hover {
 	box-shadow: 0 0 1px rgba(0,0,0, .04);
 	-webkit-box-shadow: 0 0 1px rgba(0,0,0, .04);
 	clear: both;
-	<?php if ( DOL_VERSION >= "3.9.0" ) { ?>
-		padding: 10px;
-	<?php } else { ?>
-		padding: 10px 10px 20px 10px;
-	<?php } ?>
+	padding: 10px;
 	text-decoration: none;
 }
 
@@ -3067,7 +3082,7 @@ div.login a:hover {
 	right: 0;
 	bottom: 0;
 	left: 0;
-	z-index: 9998;
+	z-index: 99;
 	background-color: rgba(0,0,0,0.5);
 	-webkit-animation: fade 500ms;
 	-moz-animation: fade 500ms;
@@ -6111,7 +6126,7 @@ p.titre {
 	padding: 2px;
 	position: absolute;
 	width: <?php print dol_size(450,'width'); ?>px;
-	z-index: 2000;	
+	z-index: 97;
 }
 
 
@@ -7735,7 +7750,10 @@ img.photorefnoborder {
 .underbanner {
 	border-bottom: 2px solid #888;
 }
-
+.tdhrthin {
+	margin: 0;
+	padding-bottom: 0 !important;
+}
 .badge {
 	display: inline-block;
 	min-width: 10px;
