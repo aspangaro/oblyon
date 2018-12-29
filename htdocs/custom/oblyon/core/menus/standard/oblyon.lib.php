@@ -428,8 +428,9 @@ function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$fo
  */
 function print_start_menu_array() {
 	global $conf;
+
 	print '<nav class="tmenudiv db-nav main-nav'.(empty($conf->global->MAIN_MENU_INVERT)?'':' is-inverted').'">';
-	print '<ul class="tmenu main-nav__list">';
+	print '<ul role="navigation" class="tmenu main-nav__list">';
 }
 
 /**
