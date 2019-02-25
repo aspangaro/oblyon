@@ -1473,17 +1473,23 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 				$newmenu->add("/user/index.php?leftmenu=hrm&mode=employee&contextpage=employeelist", $langs->trans("List"), 1,$user->rights->hrm->employee->read);
 			}
 
-			// Leave/Holiday/Vacation module
-			if (! empty($conf->holiday->enabled)) {
-				$langs->load("holiday");
+            // Leave/Holiday/Vacation module
+            if (! empty($conf->holiday->enabled))
+            {
+                $langs->load("holiday");
+                $langs->load("trips");
 
-				$newmenu->add("/holiday/list.php?leftmenu=hrm", $langs->trans("CPTitreMenu"), 0, $user->rights->holiday->read, '', $mainmenu, 'hrm');
-				$newmenu->add("/holiday/card.php?action=request", $langs->trans("MenuAddCP"), 1,$user->rights->holiday->write);
-				$newmenu->add("/holiday/list.php?leftmenu=hrm", $langs->trans("List"), 1,$user->rights->holiday->read);
-				$newmenu->add("/holiday/list.php?select_statut=2&leftmenu=hrm", $langs->trans("ListToApprove"), 2, $user->rights->holiday->read);
-				$newmenu->add("/holiday/define_holiday.php?action=request", $langs->trans("MenuConfCP"), 1, $user->rights->holiday->define_holiday);
-				$newmenu->add("/holiday/view_log.php?action=request", $langs->trans("MenuLogCP"), 1, $user->rights->holiday->view_log);
-			}
+                $newmenu->add("/holiday/list.php?leftmenu=hrm", $langs->trans("CPTitreMenu"), 0, $user->rights->holiday->read, '', $mainmenu, 'hrm');
+                $newmenu->add("/holiday/card.php?action=request", $langs->trans("New"), 1,$user->rights->holiday->write);
+                $newmenu->add("/holiday/list.php?leftmenu=hrm", $langs->trans("List"), 1,$user->rights->holiday->read);
+                if ($usemenuhider || empty($leftmenu) || $leftmenu=="hrm") $newmenu->add("/holiday/list.php?search_statut=1&leftmenu=hrm", $langs->trans("DraftCP"), 2, $user->rights->holiday->read);
+                if ($usemenuhider || empty($leftmenu) || $leftmenu=="hrm") $newmenu->add("/holiday/list.php?search_statut=2&leftmenu=hrm", $langs->trans("ToReviewCP"), 2, $user->rights->holiday->read);
+                if ($usemenuhider || empty($leftmenu) || $leftmenu=="hrm") $newmenu->add("/holiday/list.php?search_statut=3&leftmenu=hrm", $langs->trans("ApprovedCP"), 2, $user->rights->holiday->read);
+                if ($usemenuhider || empty($leftmenu) || $leftmenu=="hrm") $newmenu->add("/holiday/list.php?search_statut=4&leftmenu=hrm", $langs->trans("CancelCP"), 2, $user->rights->holiday->read);
+                if ($usemenuhider || empty($leftmenu) || $leftmenu=="hrm") $newmenu->add("/holiday/list.php?search_statut=5&leftmenu=hrm", $langs->trans("RefuseCP"), 2, $user->rights->holiday->read);
+                $newmenu->add("/holiday/define_holiday.php?action=request", $langs->trans("MenuConfCP"), 1, $user->rights->holiday->read);
+                $newmenu->add("/holiday/view_log.php?action=request", $langs->trans("MenuLogCP"), 1, $user->rights->holiday->define_holiday);
+            }
 
 			// Trips and expenses (old module)
 			if (! empty($conf->deplacement->enabled)) {
