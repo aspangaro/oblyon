@@ -705,7 +705,7 @@ input[type=url],
 select {
 	border-color: #ddd;
 	box-shadow: inset 0 1px 2px rgba(0,0,0, .07);
-	padding: 4px 8px;
+	padding: 1px;
 }
 
 input, input.flat, textarea, textarea.flat, form.flat select, select, select.flat, .dataTables_length label select {
