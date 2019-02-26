@@ -103,7 +103,7 @@ $head = oblyon_admin_prepare_head();
 dol_fiche_head ( $head, 'menus', $langs->trans ( "Module113900Name" ), 0, "oblyon@oblyon" );
 
 // Alert
-if (!MAIN_MODULE_OBLYON && $conf->theme!="oblyon")
+if (!defined('MAIN_MODULE_OBLYON') && $conf->theme!="oblyon")
 {
   print '<div class="bloc_warning">';
   print img_warning().' '.$langs->trans('OblyonErrorMessage');    
