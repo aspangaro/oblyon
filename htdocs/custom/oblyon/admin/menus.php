@@ -36,8 +36,7 @@ require_once(DOL_DOCUMENT_ROOT.'/core/class/html.formother.class.php');
 require_once '../lib/oblyon.lib.php';
 
 // Translations
-$langs->load("admin");
-$langs->load("oblyon@oblyon");
+$langs->loadLangs(array("admin","oblyon@oblyon");
 
 $action=GETPOST('action','alpha');
 
@@ -103,7 +102,7 @@ $head = oblyon_admin_prepare_head();
 dol_fiche_head ( $head, 'menus', $langs->trans ( "Module113900Name" ), 0, "oblyon@oblyon" );
 
 // Alert
-if (!MAIN_MODULE_OBLYON && $conf->theme!="oblyon")
+if (!defined('MAIN_MODULE_OBLYON') && $conf->theme!="oblyon")
 {
   print '<div class="bloc_warning">';
   print img_warning().' '.$langs->trans('OblyonErrorMessage');    
