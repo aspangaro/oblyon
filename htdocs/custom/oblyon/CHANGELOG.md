@@ -1,5 +1,8 @@
 ## Changelog ##
 
+### Version 8.0.1 - 2019 04 06
+ - Add install / usage info and move changelog to module
+
 ### Version 8.0 - 2018 10 29
  - Standardize code & update - Compatibility with Dolibarr 8.0
 
