@@ -1,9 +1,16 @@
 ## Changelog ##
 
+### Version 9.0.1 - 2019 04 06
+ - Update author for Mathieu -> Monogramm
+ - Fix issue in admin menu display
+
 ### Version 9.0 - 2018 12 05
  - Standardize code & update - Compatibility with Dolibarr 9.0
  - Update copyright for Alexandre -> Open-DSI
  - Some improvement to display menu
+
+### Version 8.0.1 - 2019 04 06
+ - Add install / usage info and move changelog to module
 
 ### Version 8.0 - 2018 10 29
  - Standardize code & update - Compatibility with Dolibarr 8.0
