@@ -29,9 +29,6 @@
  *  \brief		File for CSS style sheet Oblyon
  */
 
-print '/*'."\n";
-print 'Oblyon theme for Dolibarr'."\n";
-
 //if (! defined('NOREQUIREUSER')) define('NOREQUIREUSER','1');	// Not disabled because need to load personalized language
 //if (! defined('NOREQUIREDB'))   define('NOREQUIREDB','1');		// Not disabled to increase speed. Language code is found on url.
 if (! defined('NOREQUIRESOC'))    define('NOREQUIRESOC','1');
@@ -70,6 +67,9 @@ $left=($langs->trans("DIRECTION")=='rtl'?'right':'left');
 $path='';			// This value may be used in future for external module to overwrite theme
 $theme='oblyon';	// Value of theme
 if (! empty($conf->global->MAIN_OVERWRITE_THEME_RES)) { $path='/'.$conf->global->MAIN_OVERWRITE_THEME_RES; $theme=$conf->global->MAIN_OVERWRITE_THEME_RES; }
+
+print '/*'."\n";
+print 'Oblyon theme for Dolibarr'."\n";
 
 /*------------------------------------*\
 		#Oblyon styles
@@ -1691,18 +1691,17 @@ td.showDragHandle {
 #id-right {
 	<?php if (GETPOST("optioncss") == 'print') { ?>
 		padding-top: 10px;
-	<?php } else if ($conf->global->MAIN_MENU_INVERT) { ?>
-		padding-top: 52px;
-	<?php } else { ?>
-		<?php if ($conf->global->OBLYON_STICKY_TOPBAR) { ?>
-			padding-top: 64px;
+	<?php } else if ($conf->global->OBLYON_STICKY_TOPBAR) { ?>
+		<?php if ($conf->global->MAIN_MENU_INVERT) { ?>
+			padding-top: 52px;
 		<?php } else { ?>
-			padding-top: 10px;
+			padding-top: 64px;
 		<?php } ?>
+	<?php } else { ?>
+		padding-top: 10px;
 	<?php } ?>
+	width: 100%;
 }
-
-#id-right { width: 100%; }
 
 #id-left {
 	<?php if ( !$conf->global->OBLYON_HIDE_LEFTMENU && !$conf->dol_optimize_smallscreen ) { ?>
@@ -2200,29 +2199,6 @@ li.sec-nav__sub-item {
 	color: <?php print $bgnavleft_txt; ?>;
 }
 
-/*------------------------------------*\
-		#Tooltips 
-\*------------------------------------*/
-/* For tooltip using dialog */
-.ui-dialog.highlight.ui-widget.ui-widget-content.ui-front {
-    z-index: 3000;
-}
-div.ui-tooltip {
-	max-width: <?php print dol_size(600,'width'); ?>px !important;
-}
-.mytooltip {
-	width: <?php print dol_size(450,'width'); ?>px;
-	border-top: solid 1px #BBBBBB;
-	border-<?php print $left; ?>: solid 1px #BBBBBB;
-	border-<?php print $right; ?>: solid 1px #444444;
-	border-bottom: solid 1px #444444;
-	padding: 5px 20px;
-	border-radius: 0;
-	box-shadow: 0 0 4px grey;
-	margin: 2px;
-	font-stretch: condensed;
-}
-
 .caret {
 	content: '';
 	color: inherit;
@@ -2568,8 +2544,8 @@ div.login_block_user > .classfortooltip.login_block_elem2 {
 }
 
 .login_block_elem a:hover,
-.login_block td.classfortooltip a:hover { 
-	color: <?php echo $topmenu_hover; ?>; 
+.login_block td.classfortooltip a:hover {
+	color: <?php echo $topmenu_hover; ?>;
 }
 
 /*
@@ -3019,38 +2995,41 @@ div.login a:hover {
 #id-left {
 	<?php if ( $conf->global->OBLYON_HIDE_LEFTMENU || $conf->dol_optimize_smallscreen ) { ?>
 		position: absolute;
-		<?php if ( $conf->global->MAIN_MENU_INVERT ) { ?>
-			top: 40px;
-		<?php } else if ($conf->global->OBLYON_EFFECT_LEFTMENU == "slide") { ?>
-			 top: 54px;
+		<?php if ( empty($conf->global->OBLYON_STICKY_TOPBAR) && $conf->global->OBLYON_EFFECT_LEFTMENU == "push" ) { ?>
+			top: 0;
 		<?php } else { ?>
-			 top: 0;
+			<?php if ( $conf->global->MAIN_MENU_INVERT ) { ?>
+				top: 40px;
+			<?php } else { ?>
+				top: 54px;
+			<?php } ?>
 		<?php } ?>
+
 		background-color: <?php print $bgnav; ?>;
 		<?php if ( $usecss3) { ?>
 			box-shadow: 0 1px 2px rgba(0, 0, 0, .4); 
 			-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .4);
 		<?php } ?>
-		max-width: 365px;
+		max-width: 265px;
 		overflow: hidden;
 		-webkit-overflow-scrolling: touch;
 		<?php if ( $conf->global->OBLYON_EFFECT_LEFTMENU == "push" && $usecss3 ) { ?>
 			<?php print $left; ?>: 0;
 			
-			-webkit-transform: translate3d(-200px,0,0);
-			-moz-transform: translate3d(-200px,0,0);
-			-ms-transform: translate3d(-200px,0,0);
-			-o-transform: translate3d(-200px,0,0);
-			transform: translate3d(-200px,0,0);
+			-webkit-transform: translate3d(-265px,0,0);
+			-moz-transform: translate3d(-265px,0,0);
+			-ms-transform: translate3d(-265px,0,0);
+			-o-transform: translate3d(-265px,0,0);
+			transform: translate3d(-265px,0,0);
 		<?php } else { ?>
-			<?php print $left; ?>: -370px;
+			<?php print $left; ?>: -270px;
 		<?php } ?>
 	<?php } ?>
 }
 
 <?php if ( $conf->global->OBLYON_HIDE_LEFTMENU || $conf->dol_optimize_smallscreen ) { ?>
 #id-left, #id-container, .push {
-	<?php if ( $conf->global->OBLYON_EFFECT_LEFTMENU == "push" ) { ?>*
+	<?php if ( $conf->global->OBLYON_EFFECT_LEFTMENU == "push" ) { ?>
 		-webkit-transition: -webkit-transform .3s cubic-bezier(.16, .68, .43, .99);
 		-moz-transition: -moz-transform .3s cubic-bezier(.16, .68, .43, .99);
 		-o-transition: -o-transform .3s cubic-bezier(.16, .68, .43, .99);
@@ -3064,11 +3043,11 @@ div.login a:hover {
 
 .container-push {
 	<?php if ( $conf->global->OBLYON_EFFECT_LEFTMENU == "push" ) { ?>
-		-webkit-transform: translate3d(200px,0,0);
-		-moz-transform: translate3d(200px,0,0);
-		-ms-transform: translate3d(200px,0,0);
-		-o-transform: translate3d(200px,0,0);
-		transform: translate3d(200px,0,0);
+		-webkit-transform: translate3d(265px,0,0);
+		-moz-transform: translate3d(265px,0,0);
+		-ms-transform: translate3d(265px,0,0);
+		-o-transform: translate3d(265px,0,0);
+		transform: translate3d(265px,0,0);
 	<?php } ?>
 }
 
@@ -3786,9 +3765,9 @@ div.vmenu {
 	z-index: 5;
 	<?php if (empty($conf->dol_optimize_smallscreen)) { ?>
 		min-width: 200px;
-		max-width: 220px;
+		max-width: 260px;
 		<?php if ( $conf->global->OBLYON_HIDE_LEFTMENU || $conf->dol_optimize_smallscreen ) { ?>
-			width: 200px;
+			width: 260px;
 		<?php } else { ?>
 			width: 100%;
 		<?php } ?>
@@ -5453,6 +5432,28 @@ table.valid img { vertical-align: sub; }
 
 .validtitre { font-weight: bold; }
 
+/*------------------------------------*\
+		#Tooltips 
+\*------------------------------------*/
+/* For tooltip using dialog */
+.ui-dialog.highlight.ui-widget.ui-widget-content.ui-front {
+	z-index: 97;
+}
+div.ui-tooltip {
+	max-width: <?php print dol_size(600,'width'); ?>px !important;
+}
+.mytooltip {
+	width: <?php print dol_size(450,'width'); ?>px;
+	border-top: solid 1px #BBBBBB;
+	border-<?php print $left; ?>: solid 1px #BBBBBB;
+	border-<?php print $right; ?>: solid 1px #444444;
+	border-bottom: solid 1px #444444;
+	padding: 5px 20px;
+	border-radius: 0;
+	box-shadow: 0 0 4px grey;
+	margin: 2px;
+	font-stretch: condensed;
+}
 
 /*------------------------------------*\
 		#Calc Module 
@@ -7724,6 +7725,8 @@ div.statusrefbis {
 }
 img.photoref, div.photoref {
 	border: 1px solid #CCC;
+	-webkit-box-shadow: 3px 3px 4px #DDD;
+	box-shadow: 3px 3px 4px #DDD;
 	padding: 4px;
 	height: 80px;
 	width: 80px;
