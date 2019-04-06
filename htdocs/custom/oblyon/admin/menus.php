@@ -36,7 +36,7 @@ require_once(DOL_DOCUMENT_ROOT.'/core/class/html.formother.class.php');
 require_once '../lib/oblyon.lib.php';
 
 // Translations
-$langs->loadLangs(array("admin","oblyon@oblyon");
+$langs->loadLangs(array("admin","oblyon@oblyon"));
 
 $action=GETPOST('action','alpha');
 
