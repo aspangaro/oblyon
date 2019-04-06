@@ -56,7 +56,7 @@ function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$fo
 		if (empty($conf->dol_optimize_smallscreen)) {
 			$mysoc->logo=$conf->global->MAIN_INFO_SOCIETE_LOGO;
 			if (! empty($mysoc->logo) && is_readable($conf->mycompany->dir_output.'/logos/'.$mysoc->logo)) {
-				$urllogo=DOL_URL_ROOT.'/viewimage.php?cache=1&amp;modulepart=companylogo&amp;file='.urlencode($mysoc->logo);
+				$urllogo=DOL_URL_ROOT.'/viewimage.php?cache=1&amp;modulepart=mycompany&amp;file='.urlencode('logos/'.$mysoc->logo);
 				$title=$langs->trans("Home");
 			} else {
 				$urllogo=DOL_URL_ROOT.'/theme/dolibarr_logo.png';
@@ -65,7 +65,7 @@ function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$fo
 		} else {
 			$mysoc->logo_mini=$conf->global->MAIN_INFO_SOCIETE_LOGO_MINI;
 			if (! empty($mysoc->logo_mini) && is_readable($conf->mycompany->dir_output.'/logos/thumbs/'.$mysoc->logo_mini)) {
-				$urllogo=DOL_URL_ROOT.'/viewimage.php?cache=1&amp;modulepart=companylogo&amp;file='.urlencode('thumbs/'.$mysoc->logo_mini);
+				$urllogo=DOL_URL_ROOT.'/viewimage.php?cache=1&amp;modulepart=mycompany&amp;file='.urlencode('logos/thumbs/'.$mysoc->logo_mini);
 				$title=$langs->trans("Home");
 			} else {
 				$urllogo=DOL_URL_ROOT.'/theme/dolibarr_logo.png';
@@ -559,7 +559,7 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 		if (empty($conf->dol_optimize_smallscreen)) {
 			$mysoc->logo=$conf->global->MAIN_INFO_SOCIETE_LOGO;
 			if (! empty($mysoc->logo) && is_readable($conf->mycompany->dir_output.'/logos/'.$mysoc->logo)) {
-				$urllogo=DOL_URL_ROOT.'/viewimage.php?cache=1&amp;modulepart=companylogo&amp;file='.urlencode($mysoc->logo);
+				$urllogo=DOL_URL_ROOT.'/viewimage.php?cache=1&amp;modulepart=mycompany&amp;file='.urlencode('logos/'.$mysoc->logo);
 				$title=$langs->trans("Home");
 			} else {
 				$urllogo=DOL_URL_ROOT.'/theme/dolibarr_logo.png';
@@ -568,7 +568,7 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 		} else {
 			$mysoc->logo_mini=$conf->global->MAIN_INFO_SOCIETE_LOGO_MINI;
 			if (! empty($mysoc->logo_mini) && is_readable($conf->mycompany->dir_output.'/logos/thumbs/'.$mysoc->logo_mini)) {
-				$urllogo=DOL_URL_ROOT.'/viewimage.php?cache=1&amp;modulepart=companylogo&amp;file='.urlencode('thumbs/'.$mysoc->logo_mini);
+				$urllogo=DOL_URL_ROOT.'/viewimage.php?cache=1&amp;modulepart=mycompany&amp;file='.urlencode('logos/thumbs/'.$mysoc->logo_mini);
 				$title=$langs->trans("Home");
 			} else {
 				$urllogo=DOL_URL_ROOT.'/theme/dolibarr_logo.png';
