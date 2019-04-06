@@ -5977,8 +5977,10 @@ p.titre {
 }
 
 .bouton_login input:hover,
-.bouton_login input:focus {
-	background-color: #00708b !important; 
+.bouton_login input:focus,
+.bouton_login input:active {
+	background-color: #00708b !important;
+	padding: 1em;
 }
 
 .principal {
