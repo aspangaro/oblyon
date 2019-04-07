@@ -91,7 +91,7 @@ function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$fo
 			print $moredata['searchform'];
 			print '</div>'."\n";
 			print "<!-- End SearchForm -->\n";
-			print '$&nbsp;';
+			print '&nbsp;';
 		}
 
 		if (is_array($moredata) && ! empty($moredata['bookmarks']))
