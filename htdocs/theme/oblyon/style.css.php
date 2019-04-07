@@ -5719,30 +5719,36 @@ table.cal_event td.cal_event_right { padding: 4px 4px !important; }
 
  
 .menu_principal {
-	background-color: <?php print $maincolor; ?>!important;
-	background-image: none!important;
+	background-color: <?php print $bgnavtop; ?> !important;
+	background-image: none !important;
 	margin: 0 0 20px !important;
-	width: 100%!important;
+	width: 100% !important;
+	height: 90px !important;
 }
 
-.menu {
+.menu_principal .logopos {
+	padding-top: 5px !important;
+	max-height: 80px !important;
+}
+
+.menu_principal .menu {
 	padding: 15px 0!important;
 }
 
-.menu li {
+.menu_principal .menu li {
 	line-height: 1.5em;
-	margin: 0 20px;
+	margin: 0 10px;
 }
 
-.menu_choix1,
-.menu_choix2 {
+.menu_principal .menu_choix1,
+.menu_principal .menu_choix2 {
 	padding: 0;
 	font-size: 1.3em!important;
 	width: initial!important;
 }
 
-.menu_choix1 a,
-.menu_choix2 a {
+.menu_principal .menu_choix1 a,
+.menu_principal .menu_choix2 a {
 	border: 1px solid #eee;
 	border-radius: 5px;
 	margin: 5px;
@@ -5751,57 +5757,58 @@ table.cal_event td.cal_event_right { padding: 4px 4px !important; }
 	width: initial!important;
 }
 
-.menu_choix1 a:hover,
-.menu_choix1 a:focus,
-.menu_choix2 a:hover,
-.menu_choix2 a:focus {
+.menu_principal .menu_choix1 a:hover,
+.menu_principal .menu_choix1 a:focus,
+.menu_principal .menu_choix2 a:hover,
+.menu_principal .menu_choix2 a:focus {
 	background-color: <?php echo $bgbutton_hover;?>;
 }
 
-.menu_choix1 a {
+.menu_principal .menu_choix1 a {
     background: url("<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/cashdesk/new.png',1); ?>") top left no-repeat;
 }
 
-.menu_choix2 a {
+.menu_principal .menu_choix2 a {
     background: url("<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/cashdesk/gescom.png',1); ?>") top left no-repeat;
 }
 
-.menu_choix1 a span,
-.menu_choix2 a span{
+.menu_principal .menu_choix1 a span,
+.menu_principal .menu_choix2 a span{
 	color: #eee;
 	display: inline-block;
 	padding: 13px 0;
 }
 
-.menu_choix1 a:hover span,
-.menu_choix1 a:focus span,
-.menu_choix2 a:hover span,
-.menu_choix2 a:focus span {
-	color: #fcfcfc!important;
+.menu_principal .menu_choix1 a:hover span,
+.menu_principal .menu_choix1 a:focus span,
+.menu_principal .menu_choix2 a:hover span,
+.menu_principal .menu_choix2 a:focus span {
+	color: #fcfcfc !important;
 }
 
-.menu_choix0 {
-	color: #eee!important;
-	float: right!important;
-	font-style: normal!important;
+.menu_principal .menu_choix0 {
+	color: #eee !important;
+	float: right !important;
+	font-style: normal !important;
 	font-size: 13px !important;
 	margin-right: 20px !important;
-	text-align: left!important;
-	width: 235px !important;
+	text-align: left !important;
+	min-width: 235px !important;
+	max-width: 50% !important;
 }
 
-.menu_choix0 a {
+.menu_principal .menu_choix0 a {
 	color: #333;
 	font-weight: bold!important;
 }
 
-.menu_choix0 a:hover,
-.menu_choix0 a:focus {
+.menu_principal .menu_choix0 a:hover,
+.menu_principal .menu_choix0 a:focus {
 	color: #222;
 	text-decoration: underline;
 }
 
-.menu_choix0 a img {
+.menu_principal .menu_choix0 a img {
 	vertical-align: sub;
 }
 
@@ -5867,7 +5874,7 @@ p.titre {
 .bouton_login input:hover,
 .bouton_login input:focus,
 .bouton_login input:active {
-	background-color: #00708b !important;
+	background-color: $bgbutton_hover !important;
 	padding: 1em;
 }
 
@@ -5883,6 +5890,16 @@ p.titre {
 .cadre_facturation {
 	border: 2px solid #e6e6e6 !important;
 	background-color: #fff;
+	padding: 1em;
+}
+
+.cadre_facturation table {
+    width: 100%;
+	margin: 0.5em 0;
+}
+
+.cadre_facturation table tr td {
+    padding: 0.5em;
 }
 
 .select_tva select {
@@ -5897,28 +5914,42 @@ p.titre {
 /* Force values for small screen 767 */
 @media only screen and (max-width: 767px)
 {
-	.menu li.menu_choix1, .menu li.menu_choix2 {
+	.menu_principal .menu {
+		padding: 8px 0 !important;
+	}
+
+	.menu_principal .menu li.menu_choix1,
+	.menu_principal .menu li.menu_choix2 {
 		padding: 15px 0 5px 0;
 		margin: 0 5px;
 	}
 
-	.menu_choix1 a, .menu_choix2 a {
+	.menu_principal .menu_choix1 a,
+	.menu_principal .menu_choix2 a {
 		background-size: 36px 36px;
 		height: 30px;
 		padding: 8px 38px 8px 0;
 	}
 
-	.menu_choix1 a span.hideonsmartphone,
-	.menu_choix2 a span.hideonsmartphone {
+	.menu_principal .menu_choix1 a span.hideonsmartphone,
+	.menu_principal .menu_choix2 a span.hideonsmartphone {
 		display: none;
 	}
     .liste_articles {
     	margin-right: 0 !important;
 	}
-	
+
+	.menu_principal .menu_choix0 {
+		max-width: 66% !important;
+	}
+
+	.menu_principal .menu_choix0 select {
+		width: auto;
+	}
+
 	/* Do not force width for cashdesk */
 	.cadre_facturation .maxwidthonsmartphone {
-		max-width: none;
+		max-width: fit-content;
 	}
 }
 
