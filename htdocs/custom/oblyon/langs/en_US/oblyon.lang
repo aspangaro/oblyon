@@ -47,19 +47,26 @@ Colors=Colors
 OBLYON_COLOR_MAIN=Maincolor
 OBLYON_COLOR_BCKGRD=Background color
 OBLYON_COLOR_LOGO_BCKGRD=Logo background color
+OBLYON_COLOR_LOGIN_BCKGRD=Login background color
+OBLYON_COLOR_BLINE=Lines background color
+OBLYON_COLOR_FLINE=Lines text color
+OBLYON_COLOR_FLINE_HOVER=Lines text hover color
 OBLYON_COLOR_TOPMENU_BCKGRD=Topmenu background color
 OBLYON_COLOR_TOPMENU_BCKGRD_HOVER=Topmenu background hover color
 OBLYON_COLOR_TOPMENU_TXT=Topmenu color text
 OBLYON_COLOR_LEFTMENU_BCKGRD=Leftmenu background color
 OBLYON_COLOR_LEFTMENU_BCKGRD_HOVER=Leftmenu background hover color
 OBLYON_COLOR_LEFTMENU_TXT=leftmenu color text
-OBLYON_COLOR_BLINE=Lines background hover color
 RestoreDefaultColors=Restore default colors
 DefaultsColorsMsg=Default colors restored
 OblyonGreen=Oblyon Green
 ThemeOblyonGreenApplied=Oblyon green template applied
+OblyonDark=Oblyon Dark
+ThemeOblyonDarkApplied=Oblyon dark template applied
 OblyonBlue=Oblyon Blue
 ThemeOblyonBlueApplied=Oblyon blue template applied
+OblyonNight=Oblyon Night
+ThemeOblyonNightApplied=Oblyon night template applied
 
 #
 # About page

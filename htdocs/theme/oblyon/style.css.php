@@ -147,7 +147,11 @@ if (!empty($maincolor))
 
 $logo_background_color = $conf->global->OBLYON_COLOR_LOGO_BCKGRD; //default value : #ffffff
 $bgcolor = $conf->global->OBLYON_COLOR_BCKGRD; // default value : #f4f4f4
-$colorblinepairhover = $conf->global->OBLYON_COLOR_BLINE; // default value : #
+$login_bgcolor = $conf->global->OBLYON_COLOR_LOGIN_BCKGRD; // default value : #f4f4f4
+
+$colorbline = $conf->global->OBLYON_COLOR_BLINE; // default value : #FFFFFF
+$colorfline = $conf->global->OBLYON_COLOR_FLINE; // default value : #444444
+$colorfline_hover = $conf->global->OBLYON_COLOR_FLINE_HOVER; // default value : #222222
 
 /**
  * Define Fonts
@@ -175,9 +179,9 @@ $borderwidth=2;
 
 // Define reference colors
 // Example: Light grey: $colred=235;$colgreen=235;$colblue=235;
-// Example: Pink:			 $colred=230;$colgreen=210;$colblue=230;
-// Example: Green:			$colred=210;$colgreen=230;$colblue=210;
-// Example: Ocean:			$colred=220;$colgreen=220;$colblue=240;
+// Example: Pink:		$colred=230;$colgreen=210;$colblue=230;
+// Example: Green:		$colred=210;$colgreen=230;$colblue=210;
+// Example: Ocean:		$colred=220;$colgreen=220;$colblue=240;
 //$conf->global->THEME_ELDY_ENABLE_PERSONALIZED=0;
 //$user->conf->THEME_ELDY_ENABLE_PERSONALIZED=0;
 //var_dump($user->conf->THEME_ELDY_RGB);
@@ -188,7 +192,7 @@ $colblue =empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED)?(empty($conf->globa
 // Colors
 $isred=max(0,(2*$colred-$colgreen-$colblue)/2);				// 0 - 255
 $isgreen=max(0,(2*$colgreen-$colred-$colblue)/2);			// 0 - 255
-$isblue=max(0,(2*$colblue-$colred-$colgreen)/2);			 // 0 - 255
+$isblue=max(0,(2*$colblue-$colred-$colgreen)/2);			// 0 - 255
 
 $colorbackhmenu1=($colred-3).','.($colgreen-3).','.($colblue-3);				 // topmenu
 $colorbackhmenu2=($colred+5).','.($colgreen+5).','.($colblue+5);
@@ -397,19 +401,27 @@ html, body {
 body {
 	<?php print 'direction: '.$langs->trans("DIRECTION").";\n"; ?>
 	<?php if (GETPOST("optioncss") == 'print') {	?>
-		background-color: #fff;
+	background-color: #fff !important;
 	<?php } else { ?>
-		background-color: <?php print $bgcolor; ?>;
+	background-color: <?php print $bgcolor; ?> !important;
 	<?php } ?>
-		color: #333;
-		font-family: <?php print $fontlist; ?>, sans-serif;
+	color: <?php echo $colorfline; ?> !important;
+	font-family: <?php print $fontlist; ?>, sans-serif;
 	<?php if (empty($dol_use_jmobile) || 1==1) { ?>
-		font-size: <?php print $fontsize; ?>px;
+	font-size: <?php print $fontsize; ?>px;
 	<?php } ?>
 	-webkit-font-smoothing: subpixel-antialiased;
 	margin: 0;
 }
 
+
+body.bodylogin {
+	<?php if (GETPOST("optioncss") == 'print') {	?>
+	background-color: #fff;
+	<?php } else { ?>
+	background-color: <?php print $login_bgcolor; ?>;
+	<?php } ?>
+}
 
 /**
  * Headings
@@ -419,7 +431,7 @@ h1, h2, h3, h4, h5, h6 {
 	font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
 	font-weight: normal;
 	font-style: normal;
-	color: #222;
+	color: <?php echo $colorfline; ?>;
 	text-rendering: optimizeLegibility;
 	margin-top: 0.2rem;
 	margin-bottom: 0.5rem;
@@ -575,7 +587,7 @@ textarea.centpercent {
  */
 
 a { 
-	color: #444; /* @new */
+	color: <?php echo $colorfline; ?>; /* @new */
 	font-family: <?php print $fontlist; ?>; 
 	font-weight: normal;
 	text-decoration: none;	
@@ -736,7 +748,7 @@ input[type=tel],
 input[type=url], 
 .titlewrap input, 
 select {
-	border-color: #ddd;
+	border-color: rgba(0,0,0, .24);
 	box-shadow: inset 0 1px 2px rgba(0,0,0, .07);
 	padding: 1px;
 }
@@ -795,7 +807,7 @@ input, input.flat, textarea, textarea.flat, form.flat select, select, select.fla
 }
 
 input, textarea, select {
-	border-color: #ddd;
+	border-color: rgba(0,0,0, .24);
 	box-shadow: inset 0 1px 2px rgba(0,0,0, .07);
 	margin:3px 10px 3px 0;
 } 
@@ -1034,9 +1046,9 @@ div.noborder .button { padding: .4em .8em; }
 	border-radius: 0 5px 0 5px;
 	-moz-border-radius: 0 5px 0 5px;
 	-webkit-border-radius: 0 5px 0 5px;
-	box-shadow: 4px 4px 4px #ddd;
-	-moz-box-shadow: 4px 4px 4px #ddd;
-	-webkit-box-shadow: 4px 4px 4px #ddd;
+	box-shadow: 4px 4px 4px rgba(0,0,0, .24);
+	-moz-box-shadow: 4px 4px 4px rgba(0,0,0, .24);
+	-webkit-box-shadow: 4px 4px 4px rgba(0,0,0, .24);
 	margin: 0em .5em;
 	padding: .1em .7em;
 }
@@ -1068,8 +1080,8 @@ a.butActionNewRefused>span.fa-plus-circle { padding-left: 6px; font-size: 1.5em;
 .butActionDelete,
 .butActionRefused,
 .butActionNewRefused {
-	background-color: #f8f8f8;
-	color: #444;
+	background-color: <?php echo $colorbline; ?>;
+	color: <?php echo $colorfline; ?>;
 	font-weight: 500;
 	margin: 0 <?php echo ($dol_optimize_smallscreen?'.3':'.5'); ?>em;
 	padding: .3em <?php echo ($dol_optimize_smallscreen?'.4':'.7'); ?>em;
@@ -1124,10 +1136,10 @@ a.butActionNewRefused>span.fa-plus-circle { padding-left: 6px; font-size: 1.5em;
 .butActionRefused {
 	font-weight: normal !important;
 	background-color: #ddd;
-	border: 1px solid #aaa;
+	border: 1px solid rgba(0,0,0, .12);
 	-webkit-box-shadow: inset 0 1px 0 rgba(170, 170, 170, .6);
 	box-shadow: inset 0 1px 0 rgba(170, 170, 170, .6);
-	color: #444;
+	color: <?php echo $colorfline; ?>;
 	opacity: .6;
 }
 
@@ -1229,7 +1241,7 @@ div.info {
 }
 .borderrightlight
 {
-	border-right: 1px solid #DDD;
+	border-right: 1px solid rgba(0,0,0, .24);
 }
 #formuserfile {
 	margin-top: 4px;
@@ -1678,7 +1690,7 @@ td.showDragHandle {
 	display: block;
 }
 .login_block_getinfo .atoplogin, .login_block_getinfo .atoplogin:hover {
-	color: #333 !important;
+	color: <?php echo $colorfline; ?> !important;
 	font-weight: normal !important;
 }
 
@@ -2856,13 +2868,13 @@ div.login a:hover {
 .blockvmenubookmarks a:link, 
 .blockvmenubookmarks a:visited, 
 .blockvmenubookmarks a:active{
-	color: #333;
+	color: <?php echo $colorfline; ?>;
 	font-family: <?php print $fontmenubookmarks; ?>;
 	font-size:<?php print $fontsize; ?>px;
 }
 
 .blockvmenubookmarks a.vmenu:link, 
-.blockvmenubookmarks a.vmenu:visited { color: #333; }
+.blockvmenubookmarks a.vmenu:visited { color: <?php echo $colorfline; ?>; }
 
 .blockvmenubookmarks a.vmenu:hover,
 .blockvmenubookmarks a.vsmenu:hover { color: <?php print $maincolor; ?>; }
@@ -2893,7 +2905,7 @@ div.login a:hover {
 .blockvmenuhelp a.help:link, 
 .blockvmenuhelp a.help:visited, 
 .blockvmenuhelp a.help:active { 
-	color: #333; 
+	color: <?php echo $colorfline; ?>; 
 	font-size: <?php print $fontsizesmaller; ?>px; 
 	font-weight: normal; 
 	text-align: <?php print $left; ?>;
@@ -4160,8 +4172,8 @@ input#securitycode {
 
 .login_table {
 	margin: 0px auto;	/* Center */
-	background-color: #fcfcfc;
-	border: 1px solid #eee; 
+	background-color: <?php echo $colorbline; ?>;
+	border: 1px solid rgba(0,0,0, .16); 
 	box-shadow: 0 1px 1px rgba(0,0,0, .04);
 	-webkit-box-shadow: 0 1px 1px rgba(0,0,0, .04);
 	max-width: 540px;
@@ -4182,7 +4194,7 @@ table.login_table tr td table.none tr td {
 }
 
 #img_securitycode {
-	border: 1px solid #ddd;
+	border: 1px solid rgba(0,0,0, .24);
 }
 
 #img_logo {
@@ -4480,11 +4492,11 @@ div.tabs {
 }
 
 div.tabBar {
-	background-color: #fcfcfc;
-	border: 1px solid #e5e5e5;
+	background-color: <?php echo $colorbline; ?>;
+	border: 1px solid rgba(0,0,0, .16);
 	box-shadow: 0 1px 1px rgba(0,0,0, .04);
 	-webkit-box-shadow: 0 1px 1px rgba(0,0,0, .04);
-	color: #444;
+	color: <?php echo $colorfline; ?>;
 	margin-bottom: 10px;
 	padding-top: 8px;
 	padding-left: <?php echo ($dol_optimize_smallscreen?'4':'8'); ?>px;
@@ -4512,10 +4524,10 @@ a.tab:link,
 a.tab:visited, 
 a.tab:hover,
 a.tab#active {
-	background-color: #e5e5e5;
+	background-color: rgba(0,0,0, .04);
 	margin: 0 .3em;
 	padding: 5px 12px 5px;
-	border: 1px solid #e5e5e5;
+	border: 1px solid rgba(0,0,0, .16);
 	border-bottom: none;
 	text-decoration: none;
 	white-space: nowrap;
@@ -4530,7 +4542,7 @@ a.tab#active {
 
 a.tab#active, 
 a.tab.tabactive {
-	background-color: #fcfcfc;
+	background-color: <?php echo $colorbline; ?>;
 	box-shadow: 0 -1px 0 rgba(0,0,0, .04);
 	-webkit-box-shadow: 0 -1px 0 rgba(0,0,0, .04);
 	font-weight: 500;
@@ -4538,8 +4550,8 @@ a.tab.tabactive {
 }
 
 a.tab.tabactive:hover {
-	background-color: #fcfcfc;
-	border: 1px solid #e5e5e5;
+	background-color: <?php echo $colorbline; ?>;
+	border: 1px solid rgba(0,0,0, .16);
 	border-bottom: none;
 	box-shadow: 0 -1px 0 rgba(0,0,0, .04);
 	-webkit-box-shadow: 0 -1px 0 rgba(0,0,0, .04);
@@ -4547,12 +4559,12 @@ a.tab.tabactive:hover {
 }
 
 a.tab {
-	color: #444;
+	color: <?php echo $colorfline; ?>;
 	font-weight: normal;
 }
 
 a.tab:hover, a.tab:focus {
-	background-color: rgb(222, 222, 222);
+	background-color: rgba(0,0,0, .16);
 	color: <?php print $maincolor; ?>;
 }
 
@@ -4563,8 +4575,8 @@ a.tabimage {
 }
 
 td.tab {
-	background-color: #fcfcfc;
-	border: 1px solid #e5e5e5!important;
+	background-color: <?php echo $colorbline; ?>;
+	border: 1px solid rgba(0,0,0, .16) !important;
 	box-shadow: 0 1px 1px rgba(0,0,0, .04);
 	-webkit-box-shadow: 0 1px 1px rgba(0,0,0, .04);
 	margin: 5px;
@@ -4572,7 +4584,7 @@ td.tab {
 }
 
 table.notopnoleft td.liste_titre {
-	border: 1px solid #e5e5e5!important;
+	border: 1px solid rgba(0,0,0, .16) !important;
 	box-shadow: 0 1px 1px rgba(0,0,0, .04);
 	-webkit-box-shadow: 0 1px 1px rgba(0,0,0, .04);
 	margin: 0 0 2px 0;
@@ -4593,7 +4605,7 @@ div.tabBar ul li {
 }
 
 div.popuptabset {
-	background-color: #e5e5e5;
+	background-color: <?php echo $colorbline; ?>;
 	padding: 5px;
 	border: 1px solid #e5e5e5;
 }
@@ -4679,11 +4691,11 @@ td.border {
 table.noborder, 
 table.formdoc, 
 div.noborder {
-	border: 1px solid #e5e5e5;
+	border: 1px solid rgba(0,0,0, .16);
 	border-collapse: separate !important;
 	border-spacing: 0;
-	box-shadow: 0 1px 1px rgba(0,0,0, .04);
-	-webkit-box-shadow: 0 1px 1px rgba(0,0,0, .04);
+	box-shadow: 0 1px 1px rgba(0,0,0, .08);
+	-webkit-box-shadow: 0 1px 1px rgba(0,0,0, .08);
 	margin: 0 0 2px 0;
 	/*padding: 1px 2px 1px 2px;*/
 	width: 100%;
@@ -4765,7 +4777,7 @@ table.nobordernopadding td {
 
 /* For lists */
 table.liste {
-	border-bottom-color: #bbb;
+	border-bottom-color: rgba(0,0,0, .42);
 	border-bottom-style: solid;
 	border-bottom-width: 1px;
 	border-collapse: collapse;
@@ -4864,11 +4876,11 @@ table.noborder tr td a:active,
 table.noborder tr th a:link, 
 table.noborder tr th a:visited, 
 table.noborder tr th a:active { 
-	color: #333;
+	color: <?php echo $colorfline; ?>;
 	font-family: <?php echo $fontboxtitle; ?>;
 }
 
-table.noborder tr td a:hover { color: #222; }
+table.noborder tr td a:hover { color: <?php echo $colorfline_hover; ?>; }
 
 table.noborder tr td a.button,
 table.noborder tr td a.button:hover { color: #fff; }
@@ -4973,14 +4985,14 @@ input.liste_titre {
 
 tr.liste_total, 
 form.liste_total {
-	background-color: #fcfcfc;
+	background-color: <?php echo $colorbline; ?>;
 }
 
 tr.liste_total td, 
 form.liste_total div {
 	height: 20px;
-	border-top: 1px solid #eee;
-	color: #326;
+	border-top: 1px solid rgba(0,0,0, .42);
+	color: <?php echo $maincolor; ?>;
 	font-weight: normal;
 	white-space: normal;
 	padding: 0 5px 0 5px;
@@ -4995,9 +5007,9 @@ form.liste_total td[align=right] {
 /* Disable shadows */
 .noshadow,
 div.tabBar .noborder {
-	box-shadow: 0 0 0 #ddd !important;
-	-moz-box-shadow: 0 0 0 #ddd !important;
-	-webkit-box-shadow: 0 0 0 #ddd !important;
+	box-shadow: 0 0 0 rgba(0,0,0, .24) !important;
+	-moz-box-shadow: 0 0 0 rgba(0,0,0, .24) !important;
+	-webkit-box-shadow: 0 0 0 rgba(0,0,0, .24) !important;
 }
 div .tdtop {
 	vertical-align: top !important;
@@ -5054,7 +5066,7 @@ div .tdtop {
 {
 	.boxstats, .boxstats130 {
 		margin: 3px;
-		border: 1px solid #ddd;
+		border: 1px solid rgba(0,0,0, .24);
 		box-shadow: none;
 		background: #ddd;
 	}
@@ -5117,7 +5129,6 @@ span.dashboardlineko {
 .boxtable {
 	margin-bottom: 8px !important;
 	border-bottom-width: 1px;
-	background-color: #fff;
 }
 .boxtablenobottom {
 	border-bottom-width: 0 !important;
@@ -5199,7 +5210,7 @@ div.boximport {
 .product_line_stock_ok { color: #33cc66; }
 .product_line_stock_too_low { color: #f07b6e; }
 
-.fieldrequired { color: #333; font-weight: bold; }
+.fieldrequired { color: <?php echo $colorfline; ?>; font-weight: bold; }
 
 .widthpictotitle { width: 40px; text-align: <?php echo $left; ?>; }
 
@@ -5444,7 +5455,7 @@ img.datecallink { padding-right: 2px !important; }
 }
 
 table.dp {
-	background-color: #fcfcfc;
+	background-color: <?php echo $colorbline; ?>;
 	border-collapse: collapse;
 	border-spacing: 0;
 	box-shadow: 0 1px 1px rgba(0,0,0, .04);
@@ -5546,13 +5557,13 @@ table.dp {
 }
 
 .tpHour{
-	border-top: 1px solid #ddd;
-	border-right: 1px solid #ddd;
+	border-top: 1px solid rgba(0,0,0, .24);
+	border-right: 1px solid rgba(0,0,0, .24);
 }
 
 .tpHour td {
-	border-left: 1px solid #ddd; 
-	border-bottom: 1px solid #ddd; 
+	border-left: 1px solid rgba(0,0,0, .24); 
+	border-bottom: 1px solid rgba(0,0,0, .24); 
 	cursor: pointer;
 }
 
@@ -5736,7 +5747,7 @@ table.cal_event td.cal_event_right { padding: 4px 4px !important; }
 \*------------------------------------*/
 
 .conteneur {
-	background-color: #fcfcfc!important;
+	background-color: <?php echo $colorbline; ?> !important;
 	box-shadow: 0 1px 1px rgba(0,0,0, .04);
 	-webkit-box-shadow: 0 1px 1px rgba(0,0,0, .04);
 }
@@ -5836,13 +5847,13 @@ table.cal_event td.cal_event_right { padding: 4px 4px !important; }
 }
 
 .menu_principal .menu_choix0 a {
-	color: #333;
+	color: <?php echo $colorfline; ?>;
 	font-weight: bold!important;
 }
 
 .menu_principal .menu_choix0 a:hover,
 .menu_principal .menu_choix0 a:focus {
-	color: #222;
+	color: <?php echo $colorfline_hover; ?>;
 	text-decoration: underline;
 }
 
@@ -5857,7 +5868,7 @@ table.cal_event td.cal_event_right { padding: 4px 4px !important; }
 
 .liste_articles_bas {
 	background-color: #333;		
-	border: 1px solid #e5e5e5 !important;
+	border: 1px solid rgba(0,0,0, .24) !important;
 	color: #eee;
 	padding-bottom: 15px;
 }
@@ -5889,7 +5900,7 @@ p.titre {
 
 .cadre_prix_total {
 	background-color: #f6f6f6;
-	border: 1px solid #ddd!important;
+	border: 1px solid rgba(0,0,0, .24) !important;
 	color: #33cc66 !important;
 	margin-left: 23px !important;
 	margin-right: 23px !important;
@@ -5926,8 +5937,9 @@ p.titre {
 }
 
 .cadre_facturation {
-	border: 2px solid #e6e6e6 !important;
-	background-color: #fff;
+	border: 2px solid rgba(0,0,0, .32) !important;
+	background-color: <?php echo $colorbline; ?>;
+	color: <?php echo $colorfline; ?>;
 	padding: 1em;
 }
 
@@ -5938,6 +5950,10 @@ p.titre {
 
 .cadre_facturation table tr td {
     padding: 0.5em;
+}
+
+.cadre_facturation .label1 {
+	color: <?php echo $colorfline; ?>;
 }
 
 .select_tva select {
@@ -5997,7 +6013,7 @@ p.titre {
  */
  
 .bouton_ajout_article {
-	background-color: #f8f8f8!important;
+	background-color: <?php echo $colorbline; ?> !important;
 	background-image: none!important;
 	border: 1px solid <?php print $maincolor; ?>!important;
 	color: <?php print $maincolor; ?>;
@@ -6623,7 +6639,7 @@ ul.filedirelem {
 }
 
 ul.filedirelem li {
-	border: solid 1px #ddd;
+	border: solid 1px rgba(0,0,0, .24);
 	display: block;
 	float: <?php print $left; ?>;
 	height: 120px;
@@ -6654,7 +6670,7 @@ ul.ecmjqft li {
 }
 
 ul.ecmjqft a {
-	color: #333;
+	color: <?php echo $colorfline; ?>;
 	display: inline-block !important;
 	font-weight:normal;
 	line-height: 20px;	
@@ -6782,7 +6798,7 @@ div.jnotify-background {
 	box-shadow: 0 0 2px #555!important;
 	-webkit-box-shadow: 0 0 2px #555!important;
 	-moz-box-shadow: 0 0 2px rgba(85, 85, 85, .94)!important;
-	color: #222!important;
+	color: <?php echo $colorfline_hover; ?> !important;
 	font-size: 12px;
 	line-height: 1.3em;
 	padding: .7em 1.2em!important;
@@ -6878,7 +6894,7 @@ table.dataTable tr.odd td.sorting_1, table.dataTable tr.even td.sorting_1 {
 	background-color: #FFF !important;
 }
 .paginate_button, .paginate_active {
-	border: 1px solid #ddd !important;
+	border: 1px solid rgba(0,0,0, .24) !important;
 	padding: 6px 12px !important;
 	margin-left: -1px !important;
 	line-height: 1.42857143 !important;
@@ -6968,7 +6984,7 @@ a span.select2-chosen
 	margin: 0 0 2px 3px;
 	position: relative;
 	line-height: 13px;
-	color: #333;
+	color: <?php echo $colorfline; ?>;
 	cursor: default;
 	border: 1px solid #aaa;
 	border-radius: 3px;
@@ -7435,7 +7451,7 @@ div.refid {
 div.refidno	{
 	padding-top: 2px;
 	font-weight: normal;
-	color: #444;
+	color: <?php echo $colorfline; ?>;
 	font-size: <?php print $fontsize ?>px;
 	line-height: 21px;
 }
@@ -7513,7 +7529,7 @@ div.pagination li a:focus,
 div.pagination li span:focus {
 	color: #000;
 	background-color: #eee;
-	border-color: #ddd;
+	border-color: rgba(0,0,0, .24);
 }
 div.pagination li .active a,
 div.pagination li .active span,
@@ -7536,7 +7552,7 @@ div.pagination .disabled a:focus {
 	color: #777;
 	cursor: not-allowed;
 	background-color: #fff;
-	border-color: #ddd;
+	border-color: rgba(0,0,0, .24);
 }
 div.pagination li.pagination .active {
 	text-decoration: underline;
@@ -7562,7 +7578,7 @@ div.pagination li.paginationafterarrows {
 	font-family: <?php print $fontlist ?>;
 	border: 0px;
 	margin-bottom: 1px;
-	color: #202020;
+	color: <?php echo $colorfline; ?>;
 	min-height: 18px;
 }
 
@@ -7575,7 +7591,7 @@ div.pagination li.paginationafterarrows {
 	font-family: <?php print $fontlist ?>;
 	border: 0px;
 	margin-bottom: 1px;
-	color: #202020;
+	color: <?php echo $colorfline; ?>;
 }
 */
 
@@ -7593,14 +7609,14 @@ ul.noborder li:nth-child(odd):not(.liste_titre) {
 	background: #<?php echo colorArrayToHex(colorStringToArray($colorbacklineimpair1)); ?>;
 }
 .noborder > tbody > tr:nth-child(even):not(:last-child) td:not(.liste_titre), .liste > tbody > tr:nth-child(even):not(:last-child) td:not(.liste_titre) {
-	border-bottom: 1px solid #ddd;
+	border-bottom: 1px solid rgba(0,0,0, .24);
 }
 
 .noborder > tbody > tr:nth-child(odd):not(.liste_titre), .liste > tbody > tr:nth-child(odd):not(.liste_titre) {
 	background: #<?php echo colorArrayToHex(colorStringToArray($colorbacklinepair1)); ?>;
 }
 .noborder > tbody > tr:nth-child(odd):not(:last-child) td:not(.liste_titre), .liste > tbody > tr:nth-child(odd):not(:last-child) td:not(.liste_titre) {
-	border-bottom: 1px solid #ddd;
+	border-bottom: 1px solid rgba(0,0,0, .24);
 }
 
 ul.noborder li:nth-child(even):not(.liste_titre) {
@@ -7619,7 +7635,7 @@ ul.noborder li:nth-child(even):not(.liste_titre) {
 	font-family: <?php print $fontlist ?>;
 	border: 0px;
 	margin-bottom: 1px;
-	color: #202020;
+	color: <?php echo $colorfline; ?>;
 }
 
 #GanttChartDIV {
@@ -7675,7 +7691,7 @@ div.statusref img {
 	padding-left: 8px;
 	padding-right: 9px;
 	vertical-align: text-bottom;
-	width: 18px;
+	width: 32px;
 }
 div.statusrefbis {
 	padding-left: 8px;
@@ -7683,9 +7699,9 @@ div.statusrefbis {
 	vertical-align: text-bottom;
 }
 img.photoref, div.photoref {
-	border: 1px solid #CCC;
-	-webkit-box-shadow: 3px 3px 4px #DDD;
-	box-shadow: 3px 3px 4px #DDD;
+	border: 1px solid rgba(0,0,0, .22);
+	-webkit-box-shadow: 3px 3px 4px rgba(0,0,0, .24);
+	box-shadow: 3px 3px 4px rgba(0,0,0, .24);
 	padding: 4px;
 	height: 80px;
 	width: 80px;
@@ -7771,7 +7787,7 @@ dl.dropdown {
 	display:none;
 }
 .dropdown dd ul {
-	color: #333;
+	color: <?php echo $colorfline; ?>;
 	background-color: #FFF;
 	border: 1px solid #888;
 	display:none;
