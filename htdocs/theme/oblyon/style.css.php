@@ -97,13 +97,20 @@ $bgnavleft_hover = $conf->global->OBLYON_COLOR_LEFTMENU_BCKGRD_HOVER;	// default
 
 if ($conf->global->MAIN_MENU_INVERT)
 {
-	$bgnav = $bgnavtop;
-	$bgnav_hover = $bgnavtop_hover;
-}
-else 
-{
+	// TODO Switch colors?
+	/*
 	$bgnav = $bgnavleft;
+	$bgnav_txt = $bgnavtop_txt;
 	$bgnav_hover = $bgnavleft_hover;
+
+	$bgnavleft = $bgnavtop;
+	$bgnavleft_txt = $bgnavtop_txt;
+	$bgnavleft_hover = $bgnavtop_hover;
+
+	$bgnavtop = $bgnav;
+	$bgnavtop_txt = $bgnav_txt;
+	$bgnavtop_hover = $bgnav_hover;
+	*/
 }
 
 $bgotherbox= '#f4f4f4';	 // default value: #E6E6E6		//	Other information boxes on home page
@@ -140,7 +147,11 @@ if (!empty($maincolor))
 
 $logo_background_color = $conf->global->OBLYON_COLOR_LOGO_BCKGRD; //default value : #ffffff
 $bgcolor = $conf->global->OBLYON_COLOR_BCKGRD; // default value : #f4f4f4
-$colorblinepairhover = $conf->global->OBLYON_COLOR_BLINE; // default value : #
+$login_bgcolor = $conf->global->OBLYON_COLOR_LOGIN_BCKGRD; // default value : #f4f4f4
+
+$colorbline = $conf->global->OBLYON_COLOR_BLINE; // default value : #FFFFFF
+$colorfline = $conf->global->OBLYON_COLOR_FLINE; // default value : #444444
+$colorfline_hover = $conf->global->OBLYON_COLOR_FLINE_HOVER; // default value : #222222
 
 /**
  * Define Fonts
@@ -168,9 +179,9 @@ $borderwidth=2;
 
 // Define reference colors
 // Example: Light grey: $colred=235;$colgreen=235;$colblue=235;
-// Example: Pink:			 $colred=230;$colgreen=210;$colblue=230;
-// Example: Green:			$colred=210;$colgreen=230;$colblue=210;
-// Example: Ocean:			$colred=220;$colgreen=220;$colblue=240;
+// Example: Pink:		$colred=230;$colgreen=210;$colblue=230;
+// Example: Green:		$colred=210;$colgreen=230;$colblue=210;
+// Example: Ocean:		$colred=220;$colgreen=220;$colblue=240;
 //$conf->global->THEME_ELDY_ENABLE_PERSONALIZED=0;
 //$user->conf->THEME_ELDY_ENABLE_PERSONALIZED=0;
 //var_dump($user->conf->THEME_ELDY_RGB);
@@ -181,7 +192,7 @@ $colblue =empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED)?(empty($conf->globa
 // Colors
 $isred=max(0,(2*$colred-$colgreen-$colblue)/2);				// 0 - 255
 $isgreen=max(0,(2*$colgreen-$colred-$colblue)/2);			// 0 - 255
-$isblue=max(0,(2*$colblue-$colred-$colgreen)/2);			 // 0 - 255
+$isblue=max(0,(2*$colblue-$colred-$colgreen)/2);			// 0 - 255
 
 $colorbackhmenu1=($colred-3).','.($colgreen-3).','.($colblue-3);				 // topmenu
 $colorbackhmenu2=($colred+5).','.($colgreen+5).','.($colblue+5);
@@ -390,19 +401,27 @@ html, body {
 body {
 	<?php print 'direction: '.$langs->trans("DIRECTION").";\n"; ?>
 	<?php if (GETPOST("optioncss") == 'print') {	?>
-		background-color: #fff;
+	background-color: #fff !important;
 	<?php } else { ?>
-		background-color: <?php print $bgcolor; ?>;
+	background-color: <?php print $bgcolor; ?> !important;
 	<?php } ?>
-		color: #333;
-		font-family: <?php print $fontlist; ?>, sans-serif;
+	color: <?php echo $colorfline; ?> !important;
+	font-family: <?php print $fontlist; ?>, sans-serif;
 	<?php if (empty($dol_use_jmobile) || 1==1) { ?>
-		font-size: <?php print $fontsize; ?>px;
+	font-size: <?php print $fontsize; ?>px;
 	<?php } ?>
 	-webkit-font-smoothing: subpixel-antialiased;
 	margin: 0;
 }
 
+
+body.bodylogin {
+	<?php if (GETPOST("optioncss") == 'print') {	?>
+	background-color: #fff;
+	<?php } else { ?>
+	background-color: <?php print $login_bgcolor; ?>;
+	<?php } ?>
+}
 
 /**
  * Headings
@@ -412,7 +431,7 @@ h1, h2, h3, h4, h5, h6 {
 	font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
 	font-weight: normal;
 	font-style: normal;
-	color: #222;
+	color: <?php echo $colorfline; ?>;
 	text-rendering: optimizeLegibility;
 	margin-top: 0.2rem;
 	margin-bottom: 0.5rem;
@@ -569,7 +588,7 @@ textarea.centpercent {
  */
 
 a { 
-	color: #444; /* @new */
+	color: <?php echo $colorfline; ?>; /* @new */
 	font-family: <?php print $fontlist; ?>; 
 	font-weight: normal;
 	text-decoration: none;	
@@ -730,7 +749,7 @@ input[type=tel],
 input[type=url], 
 .titlewrap input, 
 select {
-	border-color: #ddd;
+	border-color: rgba(0,0,0, .24);
 	box-shadow: inset 0 1px 2px rgba(0,0,0, .07);
 	padding: 1px;
 }
@@ -789,7 +808,7 @@ input, input.flat, textarea, textarea.flat, form.flat select, select, select.fla
 }
 
 input, textarea, select {
-	border-color: #ddd;
+	border-color: rgba(0,0,0, .24);
 	box-shadow: inset 0 1px 2px rgba(0,0,0, .07);
 	margin:3px 10px 3px 0;
 } 
@@ -1028,9 +1047,9 @@ div.noborder .button { padding: .4em .8em; }
 	border-radius: 0 5px 0 5px;
 	-moz-border-radius: 0 5px 0 5px;
 	-webkit-border-radius: 0 5px 0 5px;
-	box-shadow: 4px 4px 4px #ddd;
-	-moz-box-shadow: 4px 4px 4px #ddd;
-	-webkit-box-shadow: 4px 4px 4px #ddd;
+	box-shadow: 4px 4px 4px rgba(0,0,0, .24);
+	-moz-box-shadow: 4px 4px 4px rgba(0,0,0, .24);
+	-webkit-box-shadow: 4px 4px 4px rgba(0,0,0, .24);
 	margin: 0em .5em;
 	padding: .1em .7em;
 }
@@ -1062,8 +1081,8 @@ a.butActionNewRefused>span.fa-plus-circle { padding-left: 6px; font-size: 1.5em;
 .butActionDelete,
 .butActionRefused,
 .butActionNewRefused {
-	background-color: #f8f8f8;
-	color: #444;
+	background-color: <?php echo $colorbline; ?>;
+	color: <?php echo $colorfline; ?>;
 	font-weight: 500;
 	margin: 0 <?php echo ($dol_optimize_smallscreen?'.3':'.5'); ?>em;
 	padding: .3em <?php echo ($dol_optimize_smallscreen?'.4':'.7'); ?>em;
@@ -1118,10 +1137,10 @@ a.butActionNewRefused>span.fa-plus-circle { padding-left: 6px; font-size: 1.5em;
 .butActionRefused {
 	font-weight: normal !important;
 	background-color: #ddd;
-	border: 1px solid #aaa;
+	border: 1px solid rgba(0,0,0, .12);
 	-webkit-box-shadow: inset 0 1px 0 rgba(170, 170, 170, .6);
 	box-shadow: inset 0 1px 0 rgba(170, 170, 170, .6);
-	color: #444;
+	color: <?php echo $colorfline; ?>;
 	opacity: .6;
 }
 
@@ -1223,7 +1242,7 @@ div.info {
 }
 .borderrightlight
 {
-	border-right: 1px solid #DDD;
+	border-right: 1px solid rgba(0,0,0, .24);
 }
 #formuserfile {
 	margin-top: 4px;
@@ -1375,7 +1394,7 @@ select.flat.selectlimit {
 	max-width: calc(100% - 56px);
 }
 .fa-file-text-o, .fa-file-code-o, .fa-file-powerpoint-o, .fa-file-excel-o, .fa-file-word-o, .fa-file-o, .fa-file-image-o, .fa-file-video-o, .fa-file-audio-o, .fa-file-archive-o, .fa-file-pdf-o {
-	color: #505;
+	color: <?php print $maincolor; ?>;
 }
 .fa-trash, .fa-crop, .fa-pencil {
 	font-size: 1.4em;
@@ -1672,7 +1691,7 @@ td.showDragHandle {
 	display: block;
 }
 .login_block_getinfo .atoplogin, .login_block_getinfo .atoplogin:hover {
-	color: #333 !important;
+	color: <?php echo $colorfline; ?> !important;
 	font-weight: normal !important;
 }
 
@@ -2153,7 +2172,7 @@ div.secondcolumn div.box {
 
 .sec-nav.is-inverted .sec-nav__item.item-heading,
 .sec-nav.is-inverted .sec-nav__item.is-disabled {
-	background-color: <?php print $bgnavtop; ?>;
+	background-color: <?php print $bgnavleft; ?>;
 	float: <?php print $left; ?>;
 	position: relative; 
 	padding: 0;
@@ -2397,11 +2416,12 @@ table.login_table_securitycode tr td {
 }
 
 div.login_block {
-	background-color: <?php print $bgnavtop; ?>;
 	<?php if ($conf->global->MAIN_MENU_INVERT) { ?>
-		height: 40px;
+	background-color: <?php print $bgnavleft; ?>;
+	height: 40px;
 	<?php } else { ?>
-		height: 54px;
+	background-color: <?php print $bgnavtop; ?>;
+	height: 54px;
 	<?php } ?>
 	padding-right: 20px;
 	<?php if ( $conf->global->OBLYON_STICKY_TOPBAR ) { ?>
@@ -2474,7 +2494,11 @@ div.login_block_user > .classfortooltip.login_block_elem2 {
 }
 
 .login_block_other {
-	background: <?php print $bgnav; ?>;
+	<?php if ($conf->global->MAIN_MENU_INVERT) { ?>
+	background: <?php print $bgnavleft; ?>;
+	<?php } else { ?>
+	background: <?php print $bgnavtop; ?>;
+	<?php } ?>
 	display: none;
 	position: absolute;
 	right: 0;
@@ -2517,14 +2541,22 @@ div.login_block_user > .classfortooltip.login_block_elem2 {
 
 .login_block_elem {
 	float: <?php print $left; ?>;
+	<?php if ($conf->global->MAIN_MENU_INVERT) { ?>
+	background-color: <?php print $bgnavleft; ?>;
+	<?php } else { ?>
 	background-color: <?php print $bgnavtop; ?>;
+	<?php } ?>
 	padding: 0;
 	height: 40px;
 }
 
 .login_block_elem a,
 .login_block td.classfortooltip a {
+	<?php if ($conf->global->MAIN_MENU_INVERT) { ?>
+	color: <?php print $bgnavleft_txt; ?>;
+	<?php } else { ?>
 	color: <?php print $bgnavtop_txt; ?>;
+	<?php } ?>
 	display: block;
 	font-family: <?php print $fontmainmenu; ?>;
 	height: 40px;
@@ -2665,7 +2697,11 @@ img.userphotosmall {		/* size for user photo in lists */
 
 .login_block .classfortooltip:hover, 
 .login_block .classfortooltip:focus {
+	<?php if ($conf->global->MAIN_MENU_INVERT) { ?>
+	background-color: <?php print $bgnavleft_hover; ?>;
+	<?php } else { ?>
 	background-color: <?php print $bgnavtop_hover; ?>;
+	<?php } ?>
 }
 
 div.login_block table { display: inline; }
@@ -2820,7 +2856,7 @@ div.login a:hover {
 }
 
 .sec-nav__sub-list { 
-	background-color: <?php print $bgnav; ?>;
+	background-color: <?php print $bgnavleft; ?>;
 	padding-top: 5px;
 	padding-inline-start: 1.5em;
 }
@@ -2865,10 +2901,15 @@ div.login a:hover {
 /**
  * Search Block
  */
- 
+
 .blockvmenusearch {
+	<?php if ( $conf->global->MAIN_MENU_INVERT ) { ?>
+	background-color: <?php print $bgnavtop; ?>;
+	border-bottom: 1px solid <?php print $bgnavtop_hover; ?>;
+	<?php } else { ?>
 	background-color: <?php print $bgnavleft; ?>;
 	border-bottom: 1px solid <?php print $bgnavleft_hover; ?>;
+	<?php } ?>
 	box-shadow: 0 0 1px rgba(0,0,0, .04);
 	-webkit-box-shadow: 0 0 1px rgba(0,0,0, .04);
 	clear: both;
@@ -2895,10 +2936,15 @@ div.login a:hover {
 /**
  * Bookmarks Block
  */
- 
+
  .blockvmenubookmarks {
+	<?php if ( $conf->global->MAIN_MENU_INVERT ) { ?>
+	background-color: <?php print $bgnavtop; ?>;
+	border-bottom: 1px solid <?php print $bgnavtop_hover; ?>;
+	<?php } else { ?>
 	background-color: <?php print $bgnavleft; ?>;
 	border-bottom: 1px solid <?php print $bgnavleft_hover; ?>;
+	<?php } ?>
 	box-shadow: 0 0 1px rgba(0,0,0, .04);
 	-webkit-box-shadow: 0 0 1px rgba(0,0,0, .04);
 	clear: both;
@@ -2927,13 +2973,13 @@ div.login a:hover {
 .blockvmenubookmarks a:link, 
 .blockvmenubookmarks a:visited, 
 .blockvmenubookmarks a:active{
-	color: #333;
+	color: <?php echo $colorfline; ?>;
 	font-family: <?php print $fontmenubookmarks; ?>;
 	font-size:<?php print $fontsize; ?>px;
 }
 
 .blockvmenubookmarks a.vmenu:link, 
-.blockvmenubookmarks a.vmenu:visited { color: #333; }
+.blockvmenubookmarks a.vmenu:visited { color: <?php echo $colorfline; ?>; }
 
 .blockvmenubookmarks a.vmenu:hover,
 .blockvmenubookmarks a.vsmenu:hover { color: <?php print $maincolor; ?>; }
@@ -2946,7 +2992,7 @@ div.login a:hover {
 .blockvmenuhelp {
 <?php if (empty($conf->dol_optimize_smallscreen)) { ?>
 	background-color: <?php print $bgcolor ?>;
-	color: <?php print $bgnav ?>;
+	color: <?php print $maincolor ?>;
 	font-family: <?php print $fontmenuhelp; ?>;
 	margin: 0;
 	text-align: center;
@@ -2964,7 +3010,7 @@ div.login a:hover {
 .blockvmenuhelp a.help:link, 
 .blockvmenuhelp a.help:visited, 
 .blockvmenuhelp a.help:active { 
-	color: #333; 
+	color: <?php echo $colorfline; ?>; 
 	font-size: <?php print $fontsizesmaller; ?>px; 
 	font-weight: normal; 
 	text-align: <?php print $left; ?>;
@@ -3005,7 +3051,7 @@ div.login a:hover {
 			<?php } ?>
 		<?php } ?>
 
-		background-color: <?php print $bgnav; ?>;
+		background-color: <?php print $bgnavleft; ?>;
 		<?php if ( $usecss3) { ?>
 			box-shadow: 0 1px 2px rgba(0, 0, 0, .4); 
 			-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .4);
@@ -3585,16 +3631,16 @@ li.tmenusel {
 }
 
 li.tmenu:hover {
-	background-color: <?php print $bgnav_hover; ?>;
+	background-color: <?php print $bgnavtop_hover; ?>;
 	color: <?php print $topmenu_hover; ?>;
 }
 
 #tmenu_tooltip li.tmenu {
-	background-color: <?php print $bgnav; ?>;
+	background-color: <?php print $bgnavtop; ?>;
 }
 
 #tmenu_tooltip li.tmenu:hover {
-	background-color: <?php print $bgnav_hover; ?>;
+	background-color: <?php print $bgnavtop_hover; ?>;
 }
 
 
@@ -3715,7 +3761,7 @@ div.tmenucenter {
 }
 
 #tmenu_tooltipinvert div.menu_titre:hover {
-	background-color: <?php print $bgnav_hover; ?>;
+	background-color: <?php print $bgnavleft_hover; ?>;
 }
 
 #tmenu_tooltipinvert div.menu_titre:hover + div.menu_contenu {
@@ -3756,7 +3802,11 @@ div.tmenucenter {
  */
 
 div.vmenu {
+	<?php if ( $conf->global->MAIN_MENU_INVERT ) { ?>
+	background-color: <?php print $bgnavtop; ?>;
+	<?php } else { ?>
 	background-color: <?php print $bgnavleft; ?>;
+	<?php } ?>
 	float: <?php print $left; ?>;
 	margin-<?php print $right; ?>: 0;
 	padding: 0;
@@ -3787,7 +3837,7 @@ div.vmenu {
 
 .vmenu .blockvmenupair div.menu_titre a, 
 .vmenu .blockvmenuimpair div.menu_titre a {
-	background-color: <?php print $bgnav_hover; ?>;
+	background-color: <?php print $bgnavleft_hover; ?>;
 	color: #eee;
 	display: block;
 	padding: 8px;
@@ -4233,8 +4283,8 @@ input#securitycode {
 
 .login_table {
 	margin: 0px auto;	/* Center */
-	background-color: #fcfcfc;
-	border: 1px solid #eee; 
+	background-color: <?php echo $colorbline; ?>;
+	border: 1px solid rgba(0,0,0, .16); 
 	box-shadow: 0 1px 1px rgba(0,0,0, .04);
 	-webkit-box-shadow: 0 1px 1px rgba(0,0,0, .04);
 	max-width: 540px;
@@ -4255,7 +4305,7 @@ table.login_table tr td table.none tr td {
 }
 
 #img_securitycode {
-	border: 1px solid #ddd;
+	border: 1px solid rgba(0,0,0, .24);
 }
 
 #img_logo {
@@ -4338,11 +4388,12 @@ table.login_table tr td table.none tr td {
 
 .largebutton {
 	background-repeat: repeat-x !important;
-	border: 1px solid #ccc !important;
-	box-shadow: 4px 4px 4px #eee;
-	-moz-box-shadow: 4px 4px 4px #eee;
-	-webkit-box-shadow: 4px 4px 4px #eee;
+	border: 1px solid rgba(0,0,0, .32) !important;
+	box-shadow: 4px 4px 4px rgba(0,0,0, .24);
+	-moz-box-shadow: 4px 4px 4px rgba(0,0,0, .24);
+	-webkit-box-shadow: 4px 4px 4px rgba(0,0,0, .24);
 	padding: 0 4px 0 4px !important;
+	margin-bottom: 1em;
 }
 
 a.toolbarbutton {
@@ -4553,11 +4604,11 @@ div.tabs {
 }
 
 div.tabBar {
-	background-color: #fcfcfc;
-	border: 1px solid #e5e5e5;
+	background-color: <?php echo $colorbline; ?>;
+	border: 1px solid rgba(0,0,0, .16);
 	box-shadow: 0 1px 1px rgba(0,0,0, .04);
 	-webkit-box-shadow: 0 1px 1px rgba(0,0,0, .04);
-	color: #444;
+	color: <?php echo $colorfline; ?>;
 	margin-bottom: 10px;
 	padding-top: 8px;
 	padding-left: <?php echo ($dol_optimize_smallscreen?'4':'8'); ?>px;
@@ -4585,10 +4636,10 @@ a.tab:link,
 a.tab:visited, 
 a.tab:hover,
 a.tab#active {
-	background-color: #e5e5e5;
+	background-color: rgba(0,0,0, .04);
 	margin: 0 .3em;
 	padding: 10px 12px 10px;
-	border: 1px solid #e5e5e5;
+	border: 1px solid rgba(0,0,0, .16);
 	border-bottom: none;
 	text-decoration: none;
 	white-space: nowrap;
@@ -4603,7 +4654,7 @@ a.tab#active {
 
 a.tab#active, 
 a.tab.tabactive {
-	background-color: #fcfcfc;
+	background-color: <?php echo $colorbline; ?>;
 	box-shadow: 0 -1px 0 rgba(0,0,0, .04);
 	-webkit-box-shadow: 0 -1px 0 rgba(0,0,0, .04);
 	font-weight: 500;
@@ -4611,8 +4662,8 @@ a.tab.tabactive {
 }
 
 a.tab.tabactive:hover {
-	background-color: #fcfcfc;
-	border: 1px solid #e5e5e5;
+	background-color: <?php echo $colorbline; ?>;
+	border: 1px solid rgba(0,0,0, .16);
 	border-bottom: none;
 	box-shadow: 0 -1px 0 rgba(0,0,0, .04);
 	-webkit-box-shadow: 0 -1px 0 rgba(0,0,0, .04);
@@ -4620,12 +4671,12 @@ a.tab.tabactive:hover {
 }
 
 a.tab {
-	color: #444;
+	color: <?php echo $colorfline; ?>;
 	font-weight: normal;
 }
 
 a.tab:hover, a.tab:focus {
-	background-color: rgb(222, 222, 222);
+	background-color: rgba(0,0,0, .16);
 	color: <?php print $maincolor; ?>;
 }
 
@@ -4636,8 +4687,8 @@ a.tabimage {
 }
 
 td.tab {
-	background-color: #fcfcfc;
-	border: 1px solid #e5e5e5!important;
+	background-color: <?php echo $colorbline; ?>;
+	border: 1px solid rgba(0,0,0, .16) !important;
 	box-shadow: 0 1px 1px rgba(0,0,0, .04);
 	-webkit-box-shadow: 0 1px 1px rgba(0,0,0, .04);
 	margin: 5px;
@@ -4645,7 +4696,7 @@ td.tab {
 }
 
 table.notopnoleft td.liste_titre {
-	border: 1px solid #e5e5e5!important;
+	border: 1px solid rgba(0,0,0, .16) !important;
 	box-shadow: 0 1px 1px rgba(0,0,0, .04);
 	-webkit-box-shadow: 0 1px 1px rgba(0,0,0, .04);
 	margin: 0 0 2px 0;
@@ -4666,7 +4717,7 @@ div.tabBar ul li {
 }
 
 div.popuptabset {
-	background-color: #e5e5e5;
+	background-color: <?php echo $colorbline; ?>;
 	padding: 5px;
 	border: 1px solid #e5e5e5;
 }
@@ -4752,11 +4803,11 @@ td.border {
 table.noborder, 
 table.formdoc, 
 div.noborder {
-	border: 1px solid #e5e5e5;
+	border: 1px solid rgba(0,0,0, .16);
 	border-collapse: separate !important;
 	border-spacing: 0;
-	box-shadow: 0 1px 1px rgba(0,0,0, .04);
-	-webkit-box-shadow: 0 1px 1px rgba(0,0,0, .04);
+	box-shadow: 0 1px 1px rgba(0,0,0, .08);
+	-webkit-box-shadow: 0 1px 1px rgba(0,0,0, .08);
 	margin: 0 0 2px 0;
 	/*padding: 1px 2px 1px 2px;*/
 	width: 100%;
@@ -4838,9 +4889,7 @@ table.nobordernopadding td {
 
 /* For lists */
 table.liste {
-	border-bottom-color: #bbb;
-	border-bottom-style: solid;
-	border-bottom-width: 1px;
+	border: 1px solid rgba(0,0,0, .42);
 	border-collapse: collapse;
 	margin-bottom: 2px;
 	margin-top: 2px;
@@ -4937,11 +4986,11 @@ table.noborder tr td a:active,
 table.noborder tr th a:link, 
 table.noborder tr th a:visited, 
 table.noborder tr th a:active { 
-	color: #333;
+	color: <?php echo $colorfline; ?>;
 	font-family: <?php echo $fontboxtitle; ?>;
 }
 
-table.noborder tr td a:hover { color: #222; }
+table.noborder tr td a:hover { color: <?php echo $colorfline_hover; ?>; }
 
 table.noborder tr td a.button,
 table.noborder tr td a.button:hover { color: #fff; }
@@ -5046,14 +5095,14 @@ input.liste_titre {
 
 tr.liste_total, 
 form.liste_total {
-	background-color: #fcfcfc;
+	background-color: <?php echo $colorbline; ?>;
 }
 
 tr.liste_total td, 
 form.liste_total div {
 	height: 20px;
-	border-top: 1px solid #eee;
-	color: #326;
+	border-top: 1px solid rgba(0,0,0, .42);
+	color: <?php echo $maincolor; ?>;
 	font-weight: normal;
 	white-space: normal;
 	padding: 0 5px 0 5px;
@@ -5068,9 +5117,9 @@ form.liste_total td[align=right] {
 /* Disable shadows */
 .noshadow,
 div.tabBar .noborder {
-	box-shadow: 0 0 0 #ddd !important;
-	-moz-box-shadow: 0 0 0 #ddd !important;
-	-webkit-box-shadow: 0 0 0 #ddd !important;
+	box-shadow: 0 0 0 rgba(0,0,0, .24) !important;
+	-moz-box-shadow: 0 0 0 rgba(0,0,0, .24) !important;
+	-webkit-box-shadow: 0 0 0 rgba(0,0,0, .24) !important;
 }
 div .tdtop {
 	vertical-align: top !important;
@@ -5127,7 +5176,7 @@ div .tdtop {
 {
 	.boxstats, .boxstats130 {
 		margin: 3px;
-		border: 1px solid #ddd;
+		border: 1px solid rgba(0,0,0, .24);
 		box-shadow: none;
 		background: #ddd;
 	}
@@ -5190,7 +5239,6 @@ span.dashboardlineko {
 .boxtable {
 	margin-bottom: 8px !important;
 	border-bottom-width: 1px;
-	background-color: #fff;
 }
 .boxtablenobottom {
 	border-bottom-width: 0 !important;
@@ -5233,6 +5281,9 @@ img.boxhandle, img.boxclose {
 
 .noborderbottom {
 	border-bottom: none !important;
+	box-shadow: 0 1px 1px rgba(0,0,0, .32) !important;
+	-moz-box-shadow: 0 1px 1px rgba(0,0,0, .32) !important;
+	-webkit-box-shadow: 0 1px 1px rgba(0,0,0, .32) !important;
 }
 
 div.colorback
@@ -5265,6 +5316,10 @@ div.colorback
 		#Other 
 \*------------------------------------*/
 
+.classfortooltip {
+	margin-left: 1em;
+}
+
 div.boximport {
 	min-height: unset;
 }
@@ -5272,7 +5327,7 @@ div.boximport {
 .product_line_stock_ok { color: #33cc66; }
 .product_line_stock_too_low { color: #f07b6e; }
 
-.fieldrequired { color: #333; font-weight: bold; }
+.fieldrequired { color: <?php echo $colorfline; ?>; font-weight: bold; }
 
 .widthpictotitle { width: 40px; text-align: <?php echo $left; ?>; }
 
@@ -5517,7 +5572,7 @@ img.datecallink { padding-right: 2px !important; }
 }
 
 table.dp {
-	background-color: #fcfcfc;
+	background-color: <?php echo $colorbline; ?>;
 	border-collapse: collapse;
 	border-spacing: 0;
 	box-shadow: 0 1px 1px rgba(0,0,0, .04);
@@ -5619,13 +5674,13 @@ table.dp {
 }
 
 .tpHour{
-	border-top: 1px solid #ddd;
-	border-right: 1px solid #ddd;
+	border-top: 1px solid rgba(0,0,0, .24);
+	border-right: 1px solid rgba(0,0,0, .24);
 }
 
 .tpHour td {
-	border-left: 1px solid #ddd; 
-	border-bottom: 1px solid #ddd; 
+	border-left: 1px solid rgba(0,0,0, .24); 
+	border-bottom: 1px solid rgba(0,0,0, .24); 
 	cursor: pointer;
 }
 
@@ -5810,7 +5865,7 @@ table.cal_event td.cal_event_right { padding: 4px 4px !important; }
 \*------------------------------------*/
 
 .conteneur {
-	background-color: #fcfcfc!important;
+	background-color: <?php echo $colorbline; ?> !important;
 	box-shadow: 0 1px 1px rgba(0,0,0, .04);
 	-webkit-box-shadow: 0 1px 1px rgba(0,0,0, .04);
 }
@@ -5831,30 +5886,36 @@ table.cal_event td.cal_event_right { padding: 4px 4px !important; }
 
  
 .menu_principal {
-	background-color: <?php print $maincolor; ?>!important;
-	background-image: none!important;
+	background-color: <?php print $bgnavtop; ?> !important;
+	background-image: none !important;
 	margin: 0 0 20px !important;
-	width: 100%!important;
+	width: 100% !important;
+	height: 90px !important;
 }
 
-.menu {
+.menu_principal .logopos {
+	padding-top: 5px !important;
+	max-height: 80px !important;
+}
+
+.menu_principal .menu {
 	padding: 15px 0!important;
 }
 
-.menu li {
+.menu_principal .menu li {
 	line-height: 1.5em;
-	margin: 0 20px;
+	margin: 0 10px;
 }
 
-.menu_choix1,
-.menu_choix2 {
+.menu_principal .menu_choix1,
+.menu_principal .menu_choix2 {
 	padding: 0;
 	font-size: 1.3em!important;
 	width: initial!important;
 }
 
-.menu_choix1 a,
-.menu_choix2 a {
+.menu_principal .menu_choix1 a,
+.menu_principal .menu_choix2 a {
 	border: 1px solid #eee;
 	border-radius: 5px;
 	margin: 5px;
@@ -5863,57 +5924,58 @@ table.cal_event td.cal_event_right { padding: 4px 4px !important; }
 	width: initial!important;
 }
 
-.menu_choix1 a:hover,
-.menu_choix1 a:focus,
-.menu_choix2 a:hover,
-.menu_choix2 a:focus {
+.menu_principal .menu_choix1 a:hover,
+.menu_principal .menu_choix1 a:focus,
+.menu_principal .menu_choix2 a:hover,
+.menu_principal .menu_choix2 a:focus {
 	background-color: <?php echo $bgbutton_hover;?>;
 }
 
-.menu_choix1 a {
-	background: url("<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/cashdesk/new.png',1); ?>") top left no-repeat;
+.menu_principal .menu_choix1 a {
+    background: url("<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/cashdesk/new.png',1); ?>") top left no-repeat;
 }
 
-.menu_choix2 a {
-	background: url("<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/cashdesk/gescom.png',1); ?>") top left no-repeat;
+.menu_principal .menu_choix2 a {
+    background: url("<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/cashdesk/gescom.png',1); ?>") top left no-repeat;
 }
 
-.menu_choix1 a span,
-.menu_choix2 a span{
+.menu_principal .menu_choix1 a span,
+.menu_principal .menu_choix2 a span{
 	color: #eee;
 	display: inline-block;
 	padding: 13px 0;
 }
 
-.menu_choix1 a:hover span,
-.menu_choix1 a:focus span,
-.menu_choix2 a:hover span,
-.menu_choix2 a:focus span {
-	color: #fcfcfc!important;
+.menu_principal .menu_choix1 a:hover span,
+.menu_principal .menu_choix1 a:focus span,
+.menu_principal .menu_choix2 a:hover span,
+.menu_principal .menu_choix2 a:focus span {
+	color: #fcfcfc !important;
 }
 
-.menu_choix0 {
-	color: #eee!important;
-	float: right!important;
-	font-style: normal!important;
+.menu_principal .menu_choix0 {
+	color: #eee !important;
+	float: right !important;
+	font-style: normal !important;
 	font-size: 13px !important;
 	margin-right: 20px !important;
-	text-align: left!important;
-	width: 235px !important;
+	text-align: left !important;
+	min-width: 235px !important;
+	max-width: 50% !important;
 }
 
-.menu_choix0 a {
-	color: #333;
+.menu_principal .menu_choix0 a {
+	color: <?php echo $colorfline; ?>;
 	font-weight: bold!important;
 }
 
-.menu_choix0 a:hover,
-.menu_choix0 a:focus {
-	color: #222;
+.menu_principal .menu_choix0 a:hover,
+.menu_principal .menu_choix0 a:focus {
+	color: <?php echo $colorfline_hover; ?>;
 	text-decoration: underline;
 }
 
-.menu_choix0 a img {
+.menu_principal .menu_choix0 a img {
 	vertical-align: sub;
 }
 
@@ -5924,7 +5986,7 @@ table.cal_event td.cal_event_right { padding: 4px 4px !important; }
 
 .liste_articles_bas {
 	background-color: #333;		
-	border: 1px solid #e5e5e5 !important;
+	border: 1px solid rgba(0,0,0, .24) !important;
 	color: #eee;
 	padding-bottom: 15px;
 }
@@ -5936,17 +5998,17 @@ p.titre {
 	padding: 8px;
 }
 
-.cadre_article {
-	border-bottom: 1px solid #eee;
+.liste_articles .cadre_article {
+	border-bottom: 1px solid #eee !important;
 	width: 200px !important;
 }
 
-.cadre_article p {
-	color: #eee!important;
+.liste_articles .cadre_article p {
+	color: #eee !important;
 }
 
-.cadre_article p a {
-	color: #eee!important;
+.liste_articles .cadre_article p a {
+	color: #eee !important;
 }
 
 .cadre_article p a:hover,
@@ -5956,7 +6018,7 @@ p.titre {
 
 .cadre_prix_total {
 	background-color: #f6f6f6;
-	border: 1px solid #ddd!important;
+	border: 1px solid rgba(0,0,0, .24) !important;
 	color: #33cc66 !important;
 	margin-left: 23px !important;
 	margin-right: 23px !important;
@@ -5979,7 +6041,7 @@ p.titre {
 .bouton_login input:hover,
 .bouton_login input:focus,
 .bouton_login input:active {
-	background-color: #00708b !important;
+	background-color: $bgbutton_hover !important;
 	padding: 1em;
 }
 
@@ -5993,8 +6055,23 @@ p.titre {
 }
 
 .cadre_facturation {
-	border: 2px solid #e6e6e6 !important;
-	background-color: #fff;
+	border: 2px solid rgba(0,0,0, .32) !important;
+	background-color: <?php echo $colorbline; ?>;
+	color: <?php echo $colorfline; ?>;
+	padding: 1em;
+}
+
+.cadre_facturation table {
+    width: 100%;
+	margin: 0.5em 0;
+}
+
+.cadre_facturation table tr td {
+    padding: 0.5em;
+}
+
+.cadre_facturation .label1 {
+	color: <?php echo $colorfline; ?>;
 }
 
 .select_tva select {
@@ -6009,28 +6086,42 @@ p.titre {
 /* Force values for small screen 767 */
 @media only screen and (max-width: 767px)
 {
-	.menu li.menu_choix1, .menu li.menu_choix2 {
+	.menu_principal .menu {
+		padding: 8px 0 !important;
+	}
+
+	.menu_principal .menu li.menu_choix1,
+	.menu_principal .menu li.menu_choix2 {
 		padding: 15px 0 5px 0;
 		margin: 0 5px;
 	}
 
-	.menu_choix1 a, .menu_choix2 a {
+	.menu_principal .menu_choix1 a,
+	.menu_principal .menu_choix2 a {
 		background-size: 36px 36px;
 		height: 30px;
 		padding: 8px 38px 8px 0;
 	}
 
-	.menu_choix1 a span.hideonsmartphone,
-	.menu_choix2 a span.hideonsmartphone {
+	.menu_principal .menu_choix1 a span.hideonsmartphone,
+	.menu_principal .menu_choix2 a span.hideonsmartphone {
 		display: none;
 	}
 	.liste_articles {
 		margin-right: 0 !important;
 	}
-	
+
+	.menu_principal .menu_choix0 {
+		max-width: 66% !important;
+	}
+
+	.menu_principal .menu_choix0 select {
+		width: auto;
+	}
+
 	/* Do not force width for cashdesk */
 	.cadre_facturation .maxwidthonsmartphone {
-		max-width: none;
+		max-width: fit-content;
 	}
 }
 
@@ -6040,7 +6131,7 @@ p.titre {
  */
  
 .bouton_ajout_article {
-	background-color: #f8f8f8!important;
+	background-color: <?php echo $colorbline; ?> !important;
 	background-image: none!important;
 	border: 1px solid <?php print $maincolor; ?>!important;
 	color: <?php print $maincolor; ?>;
@@ -6638,7 +6729,8 @@ td.gminorheading {
  */
 
 .ecmfiletree {
-	background-color: #fff;
+	background-color: <?php print $colorbacklineimpair1; ?>;
+	color: <?php print $colorfline; ?>;
 	font-weight: normal;
 	height: 99%;
 	padding-left: 2px;
@@ -6646,7 +6738,8 @@ td.gminorheading {
 }
 
 .fileview {
-	background-color: #fff;
+	background-color: <?php print $colorbacklineimpair1; ?>;
+	color: <?php print $colorfline; ?>;
 	font-weight: normal;
 	height: 99%;
 	padding-left: 2px;
@@ -6666,7 +6759,7 @@ ul.filedirelem {
 }
 
 ul.filedirelem li {
-	border: solid 1px #ddd;
+	border: solid 1px rgba(0,0,0, .24);
 	display: block;
 	float: <?php print $left; ?>;
 	height: 120px;
@@ -6680,24 +6773,29 @@ ul.filedirelem li {
 ui-layout-north {
 }
 
-ul.ecmjqft {
+ul.ecmjqft,
+div.tabBar ul.ecmjqft {
 	font-weight: normal;
 	line-height: 16px;
 	margin: 0;
 	padding: 0;
 }
 
-ul.ecmjqft li {
+ul.ecmjqft li,
+div.tabBar ul.ecmjqft li {
 	display: block;
 	list-style: none;
-	margin: 0;
+	margin: 5px 0;
 	padding: 0;
 	padding-left: 20px;
+	padding-right: 120px;
+	position: relative;
 	white-space: nowrap;
 }
 
-ul.ecmjqft a {
-	color: #333;
+ul.ecmjqft a,
+div.tabBar ul.ecmjqft a {
+	color: <?php echo $colorfline; ?>;
 	display: inline-block !important;
 	font-weight:normal;
 	line-height: 20px;	
@@ -6705,16 +6803,19 @@ ul.ecmjqft a {
 	vertical-align: middle;
 }
 
-ul.ecmjqft a:active {
+ul.ecmjqft a:active,
+div.tabBar ul.ecmjqft a:active {
 	font-weight: bold !important;
 }
 
 ul.ecmjqft a:hover,
-ul.ecmjqft a:focus {
+ul.ecmjqft a:focus,
+div.tabBar ul.ecmjqft a:hover,
+div.tabBar ul.ecmjqft a:focus {
 	text-decoration: underline;
 }
 
-div.ecmjqft {
+ul.ecmjqft div.ecmjqft {
 	display: inline-block !important;
 	position:absolute;
 	right:4px;
@@ -6825,7 +6926,7 @@ div.jnotify-background {
 	box-shadow: 0 0 2px #555!important;
 	-webkit-box-shadow: 0 0 2px #555!important;
 	-moz-box-shadow: 0 0 2px rgba(85, 85, 85, .94)!important;
-	color: #222!important;
+	color: <?php echo $colorfline_hover; ?> !important;
 	font-size: 12px;
 	line-height: 1.3em;
 	padding: .7em 1.2em!important;
@@ -6921,7 +7022,7 @@ table.dataTable tr.odd td.sorting_1, table.dataTable tr.even td.sorting_1 {
 	background-color: #FFF !important;
 }
 .paginate_button, .paginate_active {
-	border: 1px solid #ddd !important;
+	border: 1px solid rgba(0,0,0, .24) !important;
 	padding: 6px 12px !important;
 	margin-left: -1px !important;
 	line-height: 1.42857143 !important;
@@ -7011,7 +7112,7 @@ a span.select2-chosen
 	margin: 0 0 2px 3px;
 	position: relative;
 	line-height: 13px;
-	color: #333;
+	color: #444;
 	cursor: default;
 	border: 1px solid #aaa;
 	border-radius: 3px;
@@ -7047,8 +7148,14 @@ a span.select2-chosen
 	overflow: hidden;
 }
 
-.select2-container--default .select2-selection--single .select2-selection__rendered {
-	color: #999;
+.select2-dropdown,
+.select2-container--default .select2-selection--single .select2-selection__rendered,
+.select2-container--default .select2-selection--single .select2-selection__placeholder {
+	color: #444;
+}
+
+.select2-container--default .select2-results__option[aria-selected=true] {
+	color: #222;
 }
 
 /**
@@ -7478,7 +7585,7 @@ div.refid {
 div.refidno	{
 	padding-top: 2px;
 	font-weight: normal;
-	color: #444;
+	color: <?php echo $colorfline; ?>;
 	font-size: <?php print $fontsize ?>px;
 	line-height: 21px;
 }
@@ -7556,7 +7663,7 @@ div.pagination li a:focus,
 div.pagination li span:focus {
 	color: #000;
 	background-color: #eee;
-	border-color: #ddd;
+	border-color: rgba(0,0,0, .24);
 }
 div.pagination li .active a,
 div.pagination li .active span,
@@ -7579,7 +7686,7 @@ div.pagination .disabled a:focus {
 	color: #777;
 	cursor: not-allowed;
 	background-color: #fff;
-	border-color: #ddd;
+	border-color: rgba(0,0,0, .24);
 }
 div.pagination li.pagination .active {
 	text-decoration: underline;
@@ -7605,7 +7712,7 @@ div.pagination li.paginationafterarrows {
 	font-family: <?php print $fontlist ?>;
 	border: 0px;
 	margin-bottom: 1px;
-	color: #202020;
+	color: <?php echo $colorfline; ?>;
 	min-height: 18px;
 }
 
@@ -7618,7 +7725,7 @@ div.pagination li.paginationafterarrows {
 	font-family: <?php print $fontlist ?>;
 	border: 0px;
 	margin-bottom: 1px;
-	color: #202020;
+	color: <?php echo $colorfline; ?>;
 }
 */
 
@@ -7636,14 +7743,14 @@ ul.noborder li:nth-child(odd):not(.liste_titre) {
 	background: #<?php echo colorArrayToHex(colorStringToArray($colorbacklineimpair1)); ?>;
 }
 .noborder > tbody > tr:nth-child(even):not(:last-child) td:not(.liste_titre), .liste > tbody > tr:nth-child(even):not(:last-child) td:not(.liste_titre) {
-	border-bottom: 1px solid #ddd;
+	border-bottom: 1px solid rgba(0,0,0, .24);
 }
 
 .noborder > tbody > tr:nth-child(odd):not(.liste_titre), .liste > tbody > tr:nth-child(odd):not(.liste_titre) {
 	background: #<?php echo colorArrayToHex(colorStringToArray($colorbacklinepair1)); ?>;
 }
 .noborder > tbody > tr:nth-child(odd):not(:last-child) td:not(.liste_titre), .liste > tbody > tr:nth-child(odd):not(:last-child) td:not(.liste_titre) {
-	border-bottom: 1px solid #ddd;
+	border-bottom: 1px solid rgba(0,0,0, .24);
 }
 
 ul.noborder li:nth-child(even):not(.liste_titre) {
@@ -7662,7 +7769,7 @@ ul.noborder li:nth-child(even):not(.liste_titre) {
 	font-family: <?php print $fontlist ?>;
 	border: 0px;
 	margin-bottom: 1px;
-	color: #202020;
+	color: <?php echo $colorfline; ?>;
 }
 
 #GanttChartDIV {
@@ -7718,7 +7825,7 @@ div.statusref img {
 	padding-left: 8px;
 	padding-right: 9px;
 	vertical-align: text-bottom;
-	width: 18px;
+	width: 32px;
 }
 div.statusrefbis {
 	padding-left: 8px;
@@ -7726,9 +7833,9 @@ div.statusrefbis {
 	vertical-align: text-bottom;
 }
 img.photoref, div.photoref {
-	border: 1px solid #CCC;
-	-webkit-box-shadow: 3px 3px 4px #DDD;
-	box-shadow: 3px 3px 4px #DDD;
+	border: 1px solid rgba(0,0,0, .22);
+	-webkit-box-shadow: 3px 3px 4px rgba(0,0,0, .24);
+	box-shadow: 3px 3px 4px rgba(0,0,0, .24);
 	padding: 4px;
 	height: 80px;
 	width: 80px;
@@ -7814,7 +7921,7 @@ dl.dropdown {
 	display:none;
 }
 .dropdown dd ul {
-	color: #333;
+	color: <?php echo $colorfline; ?>;
 	background-color: #FFF;
 	border: 1px solid #888;
 	display:none;

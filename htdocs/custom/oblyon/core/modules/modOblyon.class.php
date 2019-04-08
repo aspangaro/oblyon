@@ -64,7 +64,7 @@ function __construct($db) {
 	$this->description = "Thème Oblyon";
 
 	// Possible values for version are: 'development', 'experimental', 'dolibarr' or version
-	$this->version = '9.0.1';
+	$this->version = '9.1.0';
 
 	$this->editor_name = "ZenDSI";
 
@@ -229,6 +229,42 @@ function __construct($db) {
 	$this->const [$r] [1] = "chaine";
 	$this->const [$r] [2] = "#FFFFFF";
 	$this->const [$r] [3] = 'Oblyon background logo color';
+	$this->const [$r] [4] = 1;
+	$this->const [$r] [5] = 'allentities';
+	$this->const [$r] [6] = 0;
+
+	$r ++;
+	$this->const [$r] [0] = "OBLYON_COLOR_LOGIN_BCKGRD";
+	$this->const [$r] [1] = "chaine";
+	$this->const [$r] [2] = "#F4F4F4";
+	$this->const [$r] [3] = 'Oblyon background login color';
+	$this->const [$r] [4] = 1;
+	$this->const [$r] [5] = 'allentities';
+	$this->const [$r] [6] = 0;
+
+	$r ++;
+	$this->const [$r] [0] = "OBLYON_COLOR_BLINE";
+	$this->const [$r] [1] = "chaine";
+	$this->const [$r] [2] = "#FFFFFF";
+	$this->const [$r] [3] = 'Oblyon background line color';
+	$this->const [$r] [4] = 1;
+	$this->const [$r] [5] = 'allentities';
+	$this->const [$r] [6] = 0;
+
+	$r ++;
+	$this->const [$r] [0] = "OBLYON_COLOR_FLINE";
+	$this->const [$r] [1] = "chaine";
+	$this->const [$r] [2] = "#444444";
+	$this->const [$r] [3] = 'Oblyon text line color';
+	$this->const [$r] [4] = 1;
+	$this->const [$r] [5] = 'allentities';
+	$this->const [$r] [6] = 0;
+
+	$r ++;
+	$this->const [$r] [0] = "OBLYON_COLOR_FLINE_HOVER";
+	$this->const [$r] [1] = "chaine";
+	$this->const [$r] [2] = "#444444";
+	$this->const [$r] [3] = 'Oblyon text line color';
 	$this->const [$r] [4] = 1;
 	$this->const [$r] [5] = 'allentities';
 	$this->const [$r] [6] = 0;

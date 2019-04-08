@@ -5,8 +5,10 @@
 Module113900Name = Oblyon
 Module113900Desc = Panneau d'options qui vous permet de personnaliser le thème Oblyon
 
-Theme1 = Oblyon Green 
-Theme2 = Oblyon Blue
+Theme1 = Oblyon Green
+Theme2 = Oblyon Dark
+Theme3 = Oblyon Blue
+Theme4 = Oblyon Night
 
 #
 # Menus
@@ -48,22 +50,28 @@ ShowLeftMenu = Afficher/Cacher Menu Gauche
 OblyonColorsTitle = Configurateur Oblyon - Couleurs
 Colors=Couleurs
 OBLYON_COLOR_MAIN=Couleur principale
-OBLYON_COLOR_LOGO_BCKGRD=Couleur de fond du logo
-OBLYON_COLOR_LOGIN_BCKGRD=Couleur de fond de la page logo
 OBLYON_COLOR_BCKGRD=Couleur de fond
+OBLYON_COLOR_LOGO_BCKGRD=Couleur de fond du logo
+OBLYON_COLOR_LOGIN_BCKGRD=Couleur de fond de la page de connexion
+OBLYON_COLOR_BLINE=Couleur de fond des lignes
+OBLYON_COLOR_FLINE=Couleur de texte des lignes
+OBLYON_COLOR_FLINE_HOVER=Couleur de texte au dessus des lignes
 OBLYON_COLOR_TOPMENU_BCKGRD=Couleur de fond du menu haut
 OBLYON_COLOR_TOPMENU_BCKGRD_HOVER=Couleur de fond du menu haut au dessus
 OBLYON_COLOR_TOPMENU_TXT=Couleur de texte du menu haut
 OBLYON_COLOR_LEFTMENU_BCKGRD=Couleur de fond du menu gauche
 OBLYON_COLOR_LEFTMENU_BCKGRD_HOVER=Couleur de fond du menu gauche au dessus
 OBLYON_COLOR_LEFTMENU_TXT=Couleur de texte du menu gauche
-OBLYON_COLOR_BLINE=Couleur de fond des lignes
 RestoreDefaultColors=Retablir couleurs par défaut
 DefaultsColorsMsg=Couleurs par défaut rétabli
 OblyonGreen=Oblyon vert
-OblyonBlue=Oblyon bleu
 ThemeOblyonGreenApplied=Thème vert Oblyon appliqué
+OblyonDark=Oblyon noir
+ThemeOblyonDarkApplied=Thème noir Oblyon appliqué
+OblyonBlue=Oblyon bleu
 ThemeOblyonBlueApplied=Thème bleu Oblyon appliqué
+OblyonNight=Oblyon nuit
+ThemeOblyonNightApplied=Thème nuit Oblyon appliqué
 
 #
 # About page

@@ -57,7 +57,9 @@ $colors_options = array (
 	'OBLYON_COLOR_BCKGRD',
 	'OBLYON_COLOR_LOGO_BCKGRD',
 	'OBLYON_COLOR_LOGIN_BCKGRD',
-	'OBLYON_COLOR_BLINE'
+	'OBLYON_COLOR_BLINE',
+	'OBLYON_COLOR_FLINE',
+	'OBLYON_COLOR_FLINE_HOVER'
 );
 
 
@@ -110,21 +112,109 @@ if ($action == 'update') {
 if ($action == 'settheme') {
 	$value = GETPOST('value', 'int');
 
+	// Theme Oblyon Night
+	if ($value == 4) {
+		$_SESSION['dol_resetcache']=dol_print_date(dol_now(),'dayhourlog');
+		$mesg = "<font class='ok'>".$langs->trans("ThemeOblyonNightApplied")."</font>";
+
+		dolibarr_set_const($db, "OBLYON_COLOR_TOPMENU_BCKGRD", '#222222','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "OBLYON_COLOR_TOPMENU_BCKGRD_HOVER", '#333333','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "OBLYON_COLOR_TOPMENU_TXT", '#F4F4F4','chaine',0,'',$conf->entity);
+
+		dolibarr_set_const($db, "OBLYON_COLOR_LEFTMENU_BCKGRD", '#2C2C2C','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "OBLYON_COLOR_LEFTMENU_BCKGRD_HOVER", '#222222','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "OBLYON_COLOR_LEFTMENU_TXT", '#F4F4F4','chaine',0,'',$conf->entity);
+
+		dolibarr_set_const($db, "OBLYON_COLOR_MAIN", '#E09430','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "OBLYON_COLOR_BCKGRD", '#333333','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "OBLYON_COLOR_LOGO_BCKGRD", '#2C2C2C','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "OBLYON_COLOR_LOGIN_BCKGRD", '#333333','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "OBLYON_COLOR_BLINE", '#444444','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "OBLYON_COLOR_FLINE", '#ECECEC','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "OBLYON_COLOR_FLINE_HOVER", '#FCFCFC','chaine',0,'',$conf->entity);
+
+		// Use Eldy customization to improve configuration
+		dolibarr_set_const($db, "THEME_ELDY_ENABLE_PERSONALIZED", '1','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "THEME_ELDY_BACKBODY", '#333333','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "THEME_ELDY_TOPMENU_BACK1", '#222222','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "THEME_ELDY_VERMENU_BACK1", '#2c2c2c','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "THEME_ELDY_TEXTTITLENOTAB", '#fefefe','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "THEME_ELDY_BACKTITLE1", '#e09430','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "THEME_ELDY_TEXTTITLE", '#fcfcfc','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "THEME_ELDY_LINEIMPAIR1", '#3c3c3c','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "THEME_ELDY_LINEPAIR1", '#444444','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "THEME_ELDY_TEXTLINK", '#e09430','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "THEME_ELDY_USE_HOVER", '#222222','chaine',0,'',$conf->entity);
+	}
+
 	// Theme Oblyon Blue
-	if ($value == 2) {
+	if ($value == 3) {
 		$_SESSION['dol_resetcache']=dol_print_date(dol_now(),'dayhourlog');
 		$mesg = "<font class='ok'>".$langs->trans("ThemeOblyonBlueApplied")."</font>";
 
-		dolibarr_set_const($db, "OBLYON_COLOR_MAIN", '#0083a2','chaine',0,'',$conf->entity);
-		dolibarr_set_const($db, "OBLYON_COLOR_TOPMENU_BCKGRD", '#333','chaine',0,'',$conf->entity);
-		dolibarr_set_const($db, "OBLYON_COLOR_TOPMENU_BCKGRD_HOVER", '#444','chaine',0,'',$conf->entity);
-		dolibarr_set_const($db, "OBLYON_COLOR_TOPMENU_TXT", '#f4f4f4','chaine',0,'',$conf->entity);
-		dolibarr_set_const($db, "OBLYON_COLOR_LEFTMENU_BCKGRD", '#333','chaine',0,'',$conf->entity);
-		dolibarr_set_const($db, "OBLYON_COLOR_LEFTMENU_BCKGRD_HOVER", '#444','chaine',0,'',$conf->entity);
-		dolibarr_set_const($db, "OBLYON_COLOR_LEFTMENU_TXT", '#f4f4f4','chaine',0,'',$conf->entity);
-		dolibarr_set_const($db, "OBLYON_COLOR_BCKGRD", '#f4f4f4','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "OBLYON_COLOR_TOPMENU_BCKGRD", '#092D5C','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "OBLYON_COLOR_TOPMENU_BCKGRD_HOVER", '#0D4185','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "OBLYON_COLOR_TOPMENU_TXT", '#F4F4F4','chaine',0,'',$conf->entity);
+
+		dolibarr_set_const($db, "OBLYON_COLOR_LEFTMENU_BCKGRD", '#092D5C','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "OBLYON_COLOR_LEFTMENU_BCKGRD_HOVER", '#0D4185','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "OBLYON_COLOR_LEFTMENU_TXT", '#F4F4F4','chaine',0,'',$conf->entity);
+
+		dolibarr_set_const($db, "OBLYON_COLOR_MAIN", '#E09430','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "OBLYON_COLOR_BCKGRD", '#F4F4F4','chaine',0,'',$conf->entity);
 		dolibarr_set_const($db, "OBLYON_COLOR_LOGO_BCKGRD", '#ffffff','chaine',0,'',$conf->entity);
-		dolibarr_set_const($db, "OBLYON_COLOR_LOGIN_BCKGRD", '#0083a2','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "OBLYON_COLOR_LOGIN_BCKGRD", '#F4F4F4','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "OBLYON_COLOR_BLINE", '#FCFCFC','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "OBLYON_COLOR_FLINE", '#444444','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "OBLYON_COLOR_FLINE_HOVER", '#222222','chaine',0,'',$conf->entity);
+
+		// Disable Eldy customization to ensure display
+		dolibarr_set_const($db, "THEME_ELDY_ENABLE_PERSONALIZED", '0','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "THEME_ELDY_BACKBODY", '','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "THEME_ELDY_TOPMENU_BACK1", '','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "THEME_ELDY_VERMENU_BACK1", '','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "THEME_ELDY_TEXTTITLENOTAB", '','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "THEME_ELDY_BACKTITLE1", '','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "THEME_ELDY_TEXTTITLE", '','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "THEME_ELDY_LINEIMPAIR1", '','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "THEME_ELDY_LINEPAIR1", '','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "THEME_ELDY_TEXTLINK", '','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "THEME_ELDY_USE_HOVER", '','chaine',0,'',$conf->entity);
+	}
+
+	// Theme Oblyon Dark
+	if ($value == 2) {
+		$_SESSION['dol_resetcache']=dol_print_date(dol_now(),'dayhourlog');
+		$mesg = "<font class='ok'>".$langs->trans("ThemeOblyonDarkApplied")."</font>";
+
+		dolibarr_set_const($db, "OBLYON_COLOR_TOPMENU_BCKGRD", '#333333','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "OBLYON_COLOR_TOPMENU_BCKGRD_HOVER", '#444444','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "OBLYON_COLOR_TOPMENU_TXT", '#F4F4F4','chaine',0,'',$conf->entity);
+
+		dolibarr_set_const($db, "OBLYON_COLOR_LEFTMENU_BCKGRD", '#333333','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "OBLYON_COLOR_LEFTMENU_BCKGRD_HOVER", '#444444','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "OBLYON_COLOR_LEFTMENU_TXT", '#F4F4F4','chaine',0,'',$conf->entity);
+
+		dolibarr_set_const($db, "OBLYON_COLOR_MAIN", '#0083A2','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "OBLYON_COLOR_BCKGRD", '#F4F4F4','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "OBLYON_COLOR_LOGO_BCKGRD", '#FFFFFF','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "OBLYON_COLOR_LOGIN_BCKGRD", '#F4F4F4','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "OBLYON_COLOR_BLINE", '#FFFFFF','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "OBLYON_COLOR_FLINE", '#444444','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "OBLYON_COLOR_FLINE_HOVER", '#222222','chaine',0,'',$conf->entity);
+
+		// Disable Eldy customization to ensure display
+		dolibarr_set_const($db, "THEME_ELDY_ENABLE_PERSONALIZED", '0','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "THEME_ELDY_BACKBODY", '','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "THEME_ELDY_TOPMENU_BACK1", '','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "THEME_ELDY_VERMENU_BACK1", '','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "THEME_ELDY_TEXTTITLENOTAB", '','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "THEME_ELDY_BACKTITLE1", '','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "THEME_ELDY_TEXTTITLE", '','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "THEME_ELDY_LINEIMPAIR1", '','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "THEME_ELDY_LINEPAIR1", '','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "THEME_ELDY_TEXTLINK", '','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "THEME_ELDY_USE_HOVER", '','chaine',0,'',$conf->entity);
 	}
 
 	// Theme Oblyon Green
@@ -132,16 +222,34 @@ if ($action == 'settheme') {
 		$_SESSION['dol_resetcache']=dol_print_date(dol_now(),'dayhourlog');
 		$mesg = "<font class='ok'>".$langs->trans("ThemeOblyonGreenApplied")."</font>";
 
-		dolibarr_set_const($db, "OBLYON_COLOR_MAIN", '#0083a2','chaine',0,'',$conf->entity);
 		dolibarr_set_const($db, "OBLYON_COLOR_TOPMENU_BCKGRD", '#34495E','chaine',0,'',$conf->entity);
 		dolibarr_set_const($db, "OBLYON_COLOR_TOPMENU_BCKGRD_HOVER", '#2C3E50','chaine',0,'',$conf->entity);
-		dolibarr_set_const($db, "OBLYON_COLOR_TOPMENU_TXT", '#ffffff','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "OBLYON_COLOR_TOPMENU_TXT", '#FFFFFF','chaine',0,'',$conf->entity);
+
 		dolibarr_set_const($db, "OBLYON_COLOR_LEFTMENU_BCKGRD", '#2ECC71','chaine',0,'',$conf->entity);
 		dolibarr_set_const($db, "OBLYON_COLOR_LEFTMENU_BCKGRD_HOVER", '#29B564','chaine',0,'',$conf->entity);
-		dolibarr_set_const($db, "OBLYON_COLOR_LEFTMENU_TXT", '#ffffff','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "OBLYON_COLOR_LEFTMENU_TXT", '#FFFFFF','chaine',0,'',$conf->entity);
+
+		dolibarr_set_const($db, "OBLYON_COLOR_MAIN", '#0083A2','chaine',0,'',$conf->entity);
 		dolibarr_set_const($db, "OBLYON_COLOR_BCKGRD", '#F5F5F5','chaine',0,'',$conf->entity);
-		dolibarr_set_const($db, "OBLYON_COLOR_LOGO_BCKGRD", '#ffffff','chaine',0,'',$conf->entity);
-		dolibarr_set_const($db, "OBLYON_COLOR_LOGIN_BCKGRD", '#0083a2','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "OBLYON_COLOR_LOGO_BCKGRD", '#FFFFFF','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "OBLYON_COLOR_LOGIN_BCKGRD", '#F4F4F4','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "OBLYON_COLOR_BLINE", '#FFFFFF','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "OBLYON_COLOR_FLINE", '#444444','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "OBLYON_COLOR_FLINE_HOVER", '#222222','chaine',0,'',$conf->entity);
+
+		// Disable Eldy customization to ensure display
+		dolibarr_set_const($db, "THEME_ELDY_ENABLE_PERSONALIZED", '0','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "THEME_ELDY_BACKBODY", '','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "THEME_ELDY_TOPMENU_BACK1", '','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "THEME_ELDY_VERMENU_BACK1", '','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "THEME_ELDY_TEXTTITLENOTAB", '','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "THEME_ELDY_BACKTITLE1", '','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "THEME_ELDY_TEXTTITLE", '','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "THEME_ELDY_LINEIMPAIR1", '','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "THEME_ELDY_LINEPAIR1", '','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "THEME_ELDY_TEXTLINK", '','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "THEME_ELDY_USE_HOVER", '','chaine',0,'',$conf->entity);
 	}
 	
 }
@@ -289,8 +397,14 @@ print '<tr>';
 print '<td align="center"><a title="'.$langs->trans("OblyonGreen").'" href="' . $_SERVER['PHP_SELF'] . '?action=settheme&value=1">';
 print img_picto($langs->trans("Oblyon Green"), 'oblyon_green.png@oblyon', "width='50%'");
 print '</a></td>';
-print '<td align="center"><a title="'.$langs->trans("oblyonBlue").'" href="' . $_SERVER['PHP_SELF'] . '?action=settheme&value=2">';
+print '<td align="center"><a title="'.$langs->trans("OblyonDark").'" href="' . $_SERVER['PHP_SELF'] . '?action=settheme&value=2">';
+print img_picto($langs->trans("Oblyon Dark"), 'oblyon_dark.png@oblyon', "width='50%'");
+print '</a></td>';
+print '<td align="center"><a title="'.$langs->trans("OblyonBlue").'" href="' . $_SERVER['PHP_SELF'] . '?action=settheme&value=3">';
 print img_picto($langs->trans("Oblyon Blue"), 'oblyon_blue.png@oblyon', "width='50%'");
+print '</a></td>';
+print '<td align="center"><a title="'.$langs->trans("OblyonNight").'" href="' . $_SERVER['PHP_SELF'] . '?action=settheme&value=4">';
+print img_picto($langs->trans("Oblyon Night"), 'oblyon_night.png@oblyon', "width='50%'");
 print '</a></td>';
 print '</tr>';
 print '</table>';
