@@ -99,7 +99,7 @@ print $langs->trans("LicenseMessage");
 print '<h2>Bugs / comments</h2>';
 print $langs->trans("AboutMessage");
 
-$buffer = file_get_contents(dol_buildpath('/theme/oblyon/CHANGELOG', 0));
+$buffer = file_get_contents(dol_buildpath('/custom/oblyon/CHANGELOG.md', 0));
 echo Markdown($buffer);
 
 llxFooter();
