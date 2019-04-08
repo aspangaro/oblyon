@@ -141,8 +141,8 @@ if ($action == 'settheme') {
 		dolibarr_set_const($db, "THEME_ELDY_TEXTTITLENOTAB", '#fefefe','chaine',0,'',$conf->entity);
 		dolibarr_set_const($db, "THEME_ELDY_BACKTITLE1", '#e09430','chaine',0,'',$conf->entity);
 		dolibarr_set_const($db, "THEME_ELDY_TEXTTITLE", '#fcfcfc','chaine',0,'',$conf->entity);
-		dolibarr_set_const($db, "THEME_ELDY_LINEIMPAIR1", '#333333','chaine',0,'',$conf->entity);
-		dolibarr_set_const($db, "THEME_ELDY_LINEPAIR1", '#2c2c2c','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "THEME_ELDY_LINEIMPAIR1", '#3c3c3c','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "THEME_ELDY_LINEPAIR1", '#444444','chaine',0,'',$conf->entity);
 		dolibarr_set_const($db, "THEME_ELDY_TEXTLINK", '#e09430','chaine',0,'',$conf->entity);
 		dolibarr_set_const($db, "THEME_ELDY_USE_HOVER", '#222222','chaine',0,'',$conf->entity);
 	}
