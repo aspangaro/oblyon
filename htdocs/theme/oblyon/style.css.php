@@ -97,13 +97,20 @@ $bgnavleft_hover = $conf->global->OBLYON_COLOR_LEFTMENU_BCKGRD_HOVER;	// default
 
 if ($conf->global->MAIN_MENU_INVERT)
 {
-	$bgnav = $bgnavtop;
-	$bgnav_hover = $bgnavtop_hover;
-}
-else 
-{
+	// TODO Switch colors?
+	/*
 	$bgnav = $bgnavleft;
+	$bgnav_txt = $bgnavtop_txt;
 	$bgnav_hover = $bgnavleft_hover;
+
+	$bgnavleft = $bgnavtop;
+	$bgnavleft_txt = $bgnavtop_txt;
+	$bgnavleft_hover = $bgnavtop_hover;
+
+	$bgnavtop = $bgnav;
+	$bgnavtop_txt = $bgnav_txt;
+	$bgnavtop_hover = $bgnav_hover;
+	*/
 }
 
 $bgotherbox= '#f4f4f4';	 // default value: #E6E6E6		//	Other information boxes on home page
@@ -2152,7 +2159,7 @@ div.secondcolumn div.box {
 
 .sec-nav.is-inverted .sec-nav__item.item-heading,
 .sec-nav.is-inverted .sec-nav__item.is-disabled {
-	background-color: <?php print $bgnavtop; ?>;
+	background-color: <?php print $bgnavleft; ?>;
 	float: <?php print $left; ?>;
 	position: relative; 
 	padding: 0;
@@ -2292,11 +2299,12 @@ li.sec-nav__sub-item {
  * Login Block
  */
 div.login_block {
-	background-color: <?php print $bgnavtop; ?>;
 	<?php if ($conf->global->MAIN_MENU_INVERT) { ?>
-		height: 40px;
+	background-color: <?php print $bgnavleft; ?>;
+	height: 40px;
 	<?php } else { ?>
-		height: 54px;
+	background-color: <?php print $bgnavtop; ?>;
+	height: 54px;
 	<?php } ?>
 	padding-right: 20px;
 	<?php if ( $conf->global->OBLYON_STICKY_TOPBAR ) { ?>
@@ -2369,7 +2377,11 @@ div.login_block_user > .classfortooltip.login_block_elem2 {
 }
 
 .login_block_other {
-	background: <?php print $bgnav; ?>;
+	<?php if ($conf->global->MAIN_MENU_INVERT) { ?>
+	background: <?php print $bgnavleft; ?>;
+	<?php } else { ?>
+	background: <?php print $bgnavtop; ?>;
+	<?php } ?>
 	display: none;
 	position: absolute;
 	right: 0;
@@ -2412,14 +2424,22 @@ div.login_block_user > .classfortooltip.login_block_elem2 {
 
 .login_block_elem {
 	float: <?php print $left; ?>;
+	<?php if ($conf->global->MAIN_MENU_INVERT) { ?>
+	background-color: <?php print $bgnavleft; ?>;
+	<?php } else { ?>
 	background-color: <?php print $bgnavtop; ?>;
+	<?php } ?>
 	padding: 0;
 	height: 40px;
 }
 
 .login_block_elem a,
 .login_block td.classfortooltip a {
+	<?php if ($conf->global->MAIN_MENU_INVERT) { ?>
+	color: <?php print $bgnavleft_txt; ?>;
+	<?php } else { ?>
 	color: <?php print $bgnavtop_txt; ?>;
+	<?php } ?>
 	display: block;
 	font-family: <?php print $fontmainmenu; ?>;
 	height: 40px;
@@ -2560,7 +2580,11 @@ img.userphotosmall {		/* size for user photo in lists */
 
 .login_block .classfortooltip:hover, 
 .login_block .classfortooltip:focus {
+	<?php if ($conf->global->MAIN_MENU_INVERT) { ?>
+	background-color: <?php print $bgnavleft_hover; ?>;
+	<?php } else { ?>
 	background-color: <?php print $bgnavtop_hover; ?>;
+	<?php } ?>
 }
 
 div.login_block table { display: inline; }
@@ -2715,7 +2739,7 @@ div.login a:hover {
 }
 
 .sec-nav__sub-list { 
-	background-color: <?php print $bgnav; ?>;
+	background-color: <?php print $bgnavleft; ?>;
 	padding-top: 5px;
 	padding-inline-start: 1.5em;
 }
@@ -2760,10 +2784,15 @@ div.login a:hover {
 /**
  * Search Block
  */
- 
+
 .blockvmenusearch {
+	<?php if ( $conf->global->MAIN_MENU_INVERT ) { ?>
+	background-color: <?php print $bgnavtop; ?>;
+	border-bottom: 1px solid <?php print $bgnavtop_hover; ?>;
+	<?php } else { ?>
 	background-color: <?php print $bgnavleft; ?>;
 	border-bottom: 1px solid <?php print $bgnavleft_hover; ?>;
+	<?php } ?>
 	box-shadow: 0 0 1px rgba(0,0,0, .04);
 	-webkit-box-shadow: 0 0 1px rgba(0,0,0, .04);
 	clear: both;
@@ -2790,10 +2819,15 @@ div.login a:hover {
 /**
  * Bookmarks Block
  */
- 
+
  .blockvmenubookmarks {
+	<?php if ( $conf->global->MAIN_MENU_INVERT ) { ?>
+	background-color: <?php print $bgnavtop; ?>;
+	border-bottom: 1px solid <?php print $bgnavtop_hover; ?>;
+	<?php } else { ?>
 	background-color: <?php print $bgnavleft; ?>;
 	border-bottom: 1px solid <?php print $bgnavleft_hover; ?>;
+	<?php } ?>
 	box-shadow: 0 0 1px rgba(0,0,0, .04);
 	-webkit-box-shadow: 0 0 1px rgba(0,0,0, .04);
 	clear: both;
@@ -2841,7 +2875,7 @@ div.login a:hover {
 .blockvmenuhelp {
 <?php if (empty($conf->dol_optimize_smallscreen)) { ?>
 	background-color: <?php print $bgcolor ?>;
-	color: <?php print $bgnav ?>;
+	color: <?php print $maincolor ?>;
 	font-family: <?php print $fontmenuhelp; ?>;
 	margin: 0;
 	text-align: center;
@@ -2900,7 +2934,7 @@ div.login a:hover {
 			<?php } ?>
 		<?php } ?>
 
-		background-color: <?php print $bgnav; ?>;
+		background-color: <?php print $bgnavleft; ?>;
 		<?php if ( $usecss3) { ?>
 			box-shadow: 0 1px 2px rgba(0, 0, 0, .4); 
 			-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .4);
@@ -3474,16 +3508,16 @@ li.tmenusel {
 }
 
 li.tmenu:hover {
-	background-color: <?php print $bgnav_hover; ?>;
+	background-color: <?php print $bgnavtop_hover; ?>;
 	color: <?php print $topmenu_hover; ?>;
 }
 
 #tmenu_tooltip li.tmenu {
-	background-color: <?php print $bgnav; ?>;
+	background-color: <?php print $bgnavtop; ?>;
 }
 
 #tmenu_tooltip li.tmenu:hover {
-	background-color: <?php print $bgnav_hover; ?>;
+	background-color: <?php print $bgnavtop_hover; ?>;
 }
 
 
@@ -3604,7 +3638,7 @@ div.tmenucenter {
 }
 
 #tmenu_tooltipinvert div.menu_titre:hover {
-	background-color: <?php print $bgnav_hover; ?>;
+	background-color: <?php print $bgnavleft_hover; ?>;
 }
 
 #tmenu_tooltipinvert div.menu_titre:hover + div.menu_contenu {
@@ -3645,7 +3679,11 @@ div.tmenucenter {
  */
 
 div.vmenu {
+	<?php if ( $conf->global->MAIN_MENU_INVERT ) { ?>
+	background-color: <?php print $bgnavtop; ?>;
+	<?php } else { ?>
 	background-color: <?php print $bgnavleft; ?>;
+	<?php } ?>
 	float: <?php print $left; ?>;
 	margin-<?php print $right; ?>: 0;
 	padding: 0;
@@ -3676,7 +3714,7 @@ div.vmenu {
 
 .vmenu .blockvmenupair div.menu_titre a, 
 .vmenu .blockvmenuimpair div.menu_titre a {
-	background-color: <?php print $bgnav_hover; ?>;
+	background-color: <?php print $bgnavleft_hover; ?>;
 	color: #eee;
 	display: block;
 	padding: 8px;
