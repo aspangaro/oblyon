@@ -1393,7 +1393,7 @@ select.flat.selectlimit {
 	max-width: calc(100% - 56px);
 }
 .fa-file-text-o, .fa-file-code-o, .fa-file-powerpoint-o, .fa-file-excel-o, .fa-file-word-o, .fa-file-o, .fa-file-image-o, .fa-file-video-o, .fa-file-audio-o, .fa-file-archive-o, .fa-file-pdf-o {
-	color: #505;
+	color: <?php print $maincolor; ?>;
 }
 .fa-trash, .fa-crop, .fa-pencil {
 	font-size: 1.4em;
@@ -4277,11 +4277,12 @@ table.login_table tr td table.none tr td {
 
 .largebutton {
 	background-repeat: repeat-x !important;
-	border: 1px solid #ccc !important;
-	box-shadow: 4px 4px 4px #eee;
-	-moz-box-shadow: 4px 4px 4px #eee;
-	-webkit-box-shadow: 4px 4px 4px #eee;
+	border: 1px solid rgba(0,0,0, .32) !important;
+	box-shadow: 4px 4px 4px rgba(0,0,0, .24);
+	-moz-box-shadow: 4px 4px 4px rgba(0,0,0, .24);
+	-webkit-box-shadow: 4px 4px 4px rgba(0,0,0, .24);
 	padding: 0 4px 0 4px !important;
+	margin-bottom: 1em;
 }
 
 a.toolbarbutton {
@@ -4777,9 +4778,7 @@ table.nobordernopadding td {
 
 /* For lists */
 table.liste {
-	border-bottom-color: rgba(0,0,0, .42);
-	border-bottom-style: solid;
-	border-bottom-width: 1px;
+	border: 1px solid rgba(0,0,0, .42);
 	border-collapse: collapse;
 	margin-bottom: 2px;
 	margin-top: 2px;
@@ -5171,6 +5170,9 @@ img.boxhandle, img.boxclose {
 
 .noborderbottom {
 	border-bottom: none !important;
+	box-shadow: 0 1px 1px rgba(0,0,0, .32) !important;
+	-moz-box-shadow: 0 1px 1px rgba(0,0,0, .32) !important;
+	-webkit-box-shadow: 0 1px 1px rgba(0,0,0, .32) !important;
 }
 
 div.colorback
@@ -5202,6 +5204,10 @@ div.colorback
 /*------------------------------------*\
 		#Other 
 \*------------------------------------*/
+
+.classfortooltip {
+	margin-left: 1em;
+}
 
 div.boximport {
 	min-height: unset;
@@ -5880,17 +5886,17 @@ p.titre {
 	padding: 8px;
 }
 
-.cadre_article {
-	border-bottom: 1px solid #eee;
+.liste_articles .cadre_article {
+	border-bottom: 1px solid #eee !important;
 	width: 200px !important;
 }
 
-.cadre_article p {
-	color: #eee!important;
+.liste_articles .cadre_article p {
+	color: #eee !important;
 }
 
-.cadre_article p a {
-	color: #eee!important;
+.liste_articles .cadre_article p a {
+	color: #eee !important;
 }
 
 .cadre_article p a:hover,
@@ -6611,7 +6617,8 @@ td.gminorheading {
  */
 
 .ecmfiletree {
-	background-color: #fff;
+	background-color: <?php print $colorbacklineimpair1; ?>;
+	color: <?php print $colorfline; ?>;
 	font-weight: normal;
 	height: 99%;
 	padding-left: 2px;
@@ -6619,7 +6626,8 @@ td.gminorheading {
 }
 
 .fileview {
-	background-color: #fff;
+	background-color: <?php print $colorbacklineimpair1; ?>;
+	color: <?php print $colorfline; ?>;
 	font-weight: normal;
 	height: 99%;
 	padding-left: 2px;
@@ -6653,23 +6661,28 @@ ul.filedirelem li {
 ui-layout-north {
 }
 
-ul.ecmjqft {
+ul.ecmjqft,
+div.tabBar ul.ecmjqft {
 	font-weight: normal;
 	line-height: 16px;
 	margin: 0;
 	padding: 0;
 }
 
-ul.ecmjqft li {
+ul.ecmjqft li,
+div.tabBar ul.ecmjqft li {
 	display: block;
 	list-style: none;
-	margin: 0;
+	margin: 5px 0;
 	padding: 0;
 	padding-left: 20px;
+	padding-right: 120px;
+	position: relative;
 	white-space: nowrap;
 }
 
-ul.ecmjqft a {
+ul.ecmjqft a,
+div.tabBar ul.ecmjqft a {
 	color: <?php echo $colorfline; ?>;
 	display: inline-block !important;
 	font-weight:normal;
@@ -6678,16 +6691,19 @@ ul.ecmjqft a {
 	vertical-align: middle;
 }
 
-ul.ecmjqft a:active {
+ul.ecmjqft a:active,
+div.tabBar ul.ecmjqft a:active {
 	font-weight: bold !important;
 }
 
 ul.ecmjqft a:hover,
-ul.ecmjqft a:focus {
+ul.ecmjqft a:focus,
+div.tabBar ul.ecmjqft a:hover,
+div.tabBar ul.ecmjqft a:focus {
 	text-decoration: underline;
 }
 
-div.ecmjqft {
+ul.ecmjqft div.ecmjqft {
 	display: inline-block !important;
 	position:absolute;
 	right:4px;
@@ -6984,7 +7000,7 @@ a span.select2-chosen
 	margin: 0 0 2px 3px;
 	position: relative;
 	line-height: 13px;
-	color: <?php echo $colorfline; ?>;
+	color: #444;
 	cursor: default;
 	border: 1px solid #aaa;
 	border-radius: 3px;
@@ -7020,8 +7036,14 @@ a span.select2-chosen
 	overflow: hidden;
 }
 
-.select2-container--default .select2-selection--single .select2-selection__rendered {
-	color: #999;
+.select2-dropdown,
+.select2-container--default .select2-selection--single .select2-selection__rendered,
+.select2-container--default .select2-selection--single .select2-selection__placeholder {
+	color: #444;
+}
+
+.select2-container--default .select2-results__option[aria-selected=true] {
+	color: #222;
 }
 
 /**
