@@ -4166,7 +4166,9 @@ body.bodylogin {
 body.bodylogin .login_center {
 	display: table-cell;
 	vertical-align: middle;
+	background: none !important;
 }
+
 body.bodylogin .login_vertical_align {
 	padding: 10px;
 	padding-bottom: 80px;
