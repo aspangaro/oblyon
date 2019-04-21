@@ -12,6 +12,9 @@
  - Update copyright for Alexandre -> Open-DSI
  - Some improvement to display menu
 
+### Version 8.1.1 - 2019 04 21
+ - Fixed: Fix login action display
+
 ### Version 8.1.0 - 2019 04 08
  - Added: Improve cash desk display
  - Added: Improve borders and shadows
