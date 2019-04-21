@@ -754,7 +754,8 @@ select {
 }
 
 input, input.flat, textarea, textarea.flat, form.flat select, select, select.flat, .dataTables_length label select {
-	background-color: #FDFDFD22;
+	background-color: #FDFDFD;
+	color: #444;
 }
 
 textarea:focus, button:focus {
