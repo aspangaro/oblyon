@@ -414,15 +414,6 @@ body {
 	margin: 0;
 }
 
-
-body.bodylogin {
-	<?php if (GETPOST("optioncss") == 'print') {	?>
-	background-color: #fff;
-	<?php } else { ?>
-	background-color: <?php print $login_bgcolor; ?>;
-	<?php } ?>
-}
-
 /**
  * Headings
  */
@@ -945,6 +936,7 @@ input:-webkit-autofill {
 	-webkit-box-shadow: 0 0 0 50px <?php echo empty($dol_use_jmobile)?'#fbffea':'#fff'; ?> inset;
 }
 
+::placeholder,
 ::-webkit-input-placeholder, 
 ::-moz-placeholder,
 :-ms-input-placeholder,
@@ -2312,109 +2304,6 @@ li.sec-nav__sub-item {
 /**
  * Login Block
  */
-.bodylogin
-{
-	background: #f0f0f0;
-	display: table;
-	position: absolute;
-	height: 100%;
-	width: 100%;
-}
-.login_center {
-	display: table-cell;
-	vertical-align: middle;
-}
-.login_vertical_align {
-	padding: 10px;
-	padding-bottom: 80px;
-}
-form#login {
-	padding-bottom: 30px;
-	font-size: 13px;
-	vertical-align: middle;
-}
-.login_table_title {
-	max-width: 530px;
-	color: #aaa !important;
-	padding-bottom: 20px;
-	/* text-shadow: 1px 1px 1px #FFF; */
-}
-.login_table label {
-	text-shadow: 1px 1px 1px #FFF;
-}
-.login_table {
-	margin: 0px auto;  /* Center */
-	padding-left:6px;
-	padding-right:6px;
-	padding-top:16px;
-	padding-bottom:12px;
-	max-width: 560px;
-
-	background-color: #FFFFFF;
-
-	-webkit-box-shadow: 0 4px 23px 5px rgba(0, 0, 0, 0.2), 0 2px 6px rgba(60,60,60,0.15);
-	box-shadow: 0 4px 23px 5px rgba(0, 0, 0, 0.2), 0 2px 6px rgba(60,60,60,0.15);
-
-	border-radius: 4px;
-	border:solid 1px rgba(80,80,80,.4);
-
-	border-top:solid 1px f8f8f8;
-}
-.login_table input#username, .login_table input#password, .login_table input#securitycode{
-	border: none;
-	border-bottom: solid 1px rgba(180,180,180,.4);
-	padding: 5px;
-	margin-left: 18px;
-	margin-top: 5px;
-}
-.login_table input#username:focus, .login_table input#password:focus, .login_table input#securitycode:focus {
-	outline: none !important;
-	/* box-shadow: none;
-	-webkit-box-shadow: 0 0 0 50px #FFF inset;
-	box-shadow: 0 0 0 50px #FFF inset;*/
-}
-.login_main_message {
-	text-align: center;
-	max-width: 570px;
-	margin-bottom: 10px;
-}
-.login_main_message .error {
-	border: 1px solid #caa;
-	padding: 10px;
-}
-div#login_left, div#login_right {
-	display: inline-block;
-	min-width: 245px;
-	padding-top: 10px;
-	padding-left: 16px;
-	padding-right: 16px;
-	text-align: center;
-	vertical-align: middle;
-}
-div#login_right select#entity {
-    margin-top: 10px;
-}
-table.login_table tr td table.none tr td {
-	padding: 2px;
-}
-table.login_table_securitycode {
-	border-spacing: 0px;
-}
-table.login_table_securitycode tr td {
-	padding-left: 0px;
-	padding-right: 4px;
-}
-#securitycode {
-	min-width: 60px;
-}
-#img_securitycode {
-	border: 1px solid #f4f4f4;
-}
-#img_logo, .img_logo {
-	max-width: 170px;
-	max-height: 90px;
-}
-
 div.login_block {
 	<?php if ($conf->global->MAIN_MENU_INVERT) { ?>
 	background-color: <?php print $bgnavleft; ?>;
@@ -4261,59 +4150,158 @@ foreach($mainmenuusedarray as $val)
 		#Login Page
 \*------------------------------------*/
 
-form#login {
+body.bodylogin {
+	<?php if (GETPOST("optioncss") == 'print') {	?>
+	background-color: #fff;
+	<?php } else { ?>
+	background-color: <?php print $login_bgcolor; ?>;
+	<?php } ?>
+	display: table;
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	font-size: 1em;
+}
+
+body.bodylogin .login_center {
+	display: table-cell;
+	vertical-align: middle;
+}
+body.bodylogin .login_vertical_align {
+	padding: 10px;
+	padding-bottom: 80px;
+}
+
+body.bodylogin form#login {
+	padding-bottom: 30px;
 	font-size: 13px;
 	margin-top: <?php echo $dol_optimize_smallscreen?'30':'60'; ?>px;
 	margin-bottom: 30px;
 	vertical-align: middle;
 }
 
-.login_table_title {
-	color: #888;
+body.bodylogin .login_table_title {
+	color: <?php print $maincolor; ?>;
 	max-width: 540px;
+	padding-bottom: 20px;
+	/* text-shadow: 1px 1px 1px #FFF; */
 }
 
-.login_table label {
+body.bodylogin .login_table label {
 	margin: 0 .5em;
+	text-shadow: 1px 1px 1px #FFF;
 }
 
-input#securitycode {
+body.bodylogin .login_table .trinputlogin {
+	font-size: 1.2em;
+    margin: 8px;
+}
+
+body.bodylogin .login_table .tdinputlogin .fa {
+    padding-left: 10px;
+    width: 1em;
+}
+
+body.bodylogin .login_table input#username,
+body.bodylogin .login_table input#password,
+body.bodylogin .login_table input#securitycode {
+	border: none;
+	border-bottom: solid 1px rgba(180,180,180,.4);
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	padding: 5px;
+	margin-left: 18px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	font-size: 1em;
+}
+
+body.bodylogin .login_table input#username:focus,
+body.bodylogin .login_table input#password:focus,
+body.bodylogin .login_table input#securitycode:focus {
+	outline: none !important;
+	/* box-shadow: none;
+	-webkit-box-shadow: 0 0 0 50px #FFF inset;
+	box-shadow: 0 0 0 50px #FFF inset;*/
+}
+
+body.bodylogin input#securitycode {
 	margin-right: .5em;
 }
 
-#captcha_refresh_img {
+body.bodylogin #captcha_refresh_img {
 	margin: .5em;
 }
 
-.login_table {
+body.bodylogin .login_table {
 	margin: 0px auto;	/* Center */
-	background-color: <?php echo $colorbline; ?>;
-	border: 1px solid rgba(0,0,0, .16); 
-	box-shadow: 0 1px 1px rgba(0,0,0, .04);
-	-webkit-box-shadow: 0 1px 1px rgba(0,0,0, .04);
+	padding-left:6px;
+	padding-right:6px;
+	padding-top:16px;
+	padding-bottom:12px;
 	max-width: 540px;
-	padding: 12px 6px;
+
+	background-color: <?php echo $colorbline; ?>;
+
+	-webkit-box-shadow: 0 4px 23px 5px rgba(0, 0, 0, 0.2), 0 2px 6px rgba(60,60,60,0.15);
+	box-shadow: 0 4px 23px 5px rgba(0, 0, 0, 0.2), 0 2px 6px rgba(60,60,60,0.15);
+
+	border-radius: 4px;
+	border: 1px solid rgba(0,0,0, .16);
 }
 
-div#login_left, 
-div#login_right {
+body.bodylogin .login_main_message {
+	text-align: center;
+	max-width: 570px;
+	margin-bottom: 10px;
+}
+
+body.bodylogin .login_main_message .error {
+	border: 1px solid #caa;
+	padding: 10px;
+}
+
+body.bodylogin div#login_left, 
+body.bodylogin div#login_right {
 	display: inline-block;
 	min-width: 250px;
 	padding-top: 10px;
+	padding-left: 16px;
+	padding-right: 16px;
 	text-align: center;
 	vertical-align: middle;
 }
 
-table.login_table tr td table.none tr td {
+body.bodylogin div#login_right select#entity {
+    margin-top: 10px;
+}
+
+body.bodylogin table.login_table tr td table.none tr td {
 	padding: 2px;
 }
 
-#img_securitycode {
+body.bodylogin table.login_table_securitycode {
+	border-spacing: 0px;
+	margin-left: 1em;
+}
+
+body.bodylogin table.login_table_securitycode tr td {
+	padding-left: 0px;
+	padding-right: 4px;
+}
+
+body.bodylogin #securitycode {
+	min-width: 80px;
+}
+
+body.bodylogin #img_securitycode {
 	border: 1px solid rgba(0,0,0, .24);
 }
 
-#img_logo {
+body.bodylogin #img_logo,
+body.bodylogin .img_logo {
 	max-width: 200px;
+	max-height: 100px;
 }
 
 

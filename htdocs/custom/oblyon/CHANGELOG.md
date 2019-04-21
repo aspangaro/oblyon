@@ -1,5 +1,8 @@
 ## Changelog ##
 
+### Version 9.1.1 - 2019 04 22
+ - Improve login page
+
 ### Version 9.1.0 - 2019 04 08
  - Merge 8.1.0
 
