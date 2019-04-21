@@ -2445,6 +2445,10 @@ div.login_block_user > .classfortooltip.login_block_elem2 {
 	height: 40px;
 }
 
+.login_block_elem.classfortooltip {
+	margin: 0;
+}
+
 .login_block_elem a,
 .login_block td.classfortooltip a {
 	<?php if ($conf->global->MAIN_MENU_INVERT) { ?>
