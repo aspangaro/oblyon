@@ -1319,6 +1319,9 @@ select.flat.selectlimit {
 .widthdate {
 	width: 130px;
 }
+.marginleftonly {
+    margin-left: 5px !important;
+}
 /* using a tdoverflowxxx make the min-width not working */
 .tdoverflow {
 	max-width: 0;
@@ -5277,7 +5280,7 @@ tr.box_titre {
 }
 
 tr.box_titre td.boxclose {
-	width: 30px;
+	width: 60px;
 }
 img.boxhandle, img.boxclose {
 	padding-left: 5px;
