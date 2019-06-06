@@ -112,18 +112,8 @@ class MenuManager {
 
 		require_once 'oblyon.lib.php';
 
-		if(DOL_VERSION <'3.9.0')
-		{
-			if ($this->type_user == 1) {
-			  $conf->global->MAIN_SEARCHFORM_SOCIETE=0;
-			  $conf->global->MAIN_SEARCHFORM_CONTACT=0;
-			}
-		}
-		else
-		{
-			$conf->global->MAIN_SEARCHFORM_SOCIETE_DISABLED=0;
-        	$conf->global->MAIN_SEARCHFORM_CONTACT_DISABLED=1;
-		}
+		$conf->global->MAIN_SEARCHFORM_SOCIETE_DISABLED=0;
+       	$conf->global->MAIN_SEARCHFORM_CONTACT_DISABLED=1;
 
 		require_once DOL_DOCUMENT_ROOT.'/core/class/menu.class.php';
 		$this->menu=new Menu();
