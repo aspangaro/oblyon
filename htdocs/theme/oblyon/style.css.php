@@ -40,9 +40,16 @@ if (! defined('NOREQUIREMENU'))   define('NOREQUIREMENU',1);
 if (! defined('NOREQUIREHTML'))   define('NOREQUIREHTML',1);
 if (! defined('NOREQUIREAJAX'))   define('NOREQUIREAJAX','1');
 
-session_cache_limiter(false);
+define('ISLOADEDBYSTEELSHEET', '1');
 
-require_once '../../main.inc.php';
+
+//require __DIR__ . '/theme_vars.inc.php';
+if (defined('THEME_ONLY_CONSTANT')) return;
+
+
+session_cache_limiter('public');
+
+require_once __DIR__.'/../../main.inc.php'; // __DIR__ allow this script to be included in custom themes
 require_once DOL_DOCUMENT_ROOT.'/core/lib/functions2.lib.php';
 
 // Load user to have $user->conf loaded (not done into main because of NOLOGIN constant defined)
@@ -2307,13 +2314,13 @@ li.sec-nav__sub-item {
  */
 div.login_block {
 	<?php if ($conf->global->MAIN_MENU_INVERT) { ?>
-	background-color: <?php print $bgnavleft; ?>;
-	height: 40px;
+	    background-color: <?php print $bgnavleft; ?>;
+	    height: 40px;
 	<?php } else { ?>
-	background-color: <?php print $bgnavtop; ?>;
-	height: 54px;
+	    background-color: <?php print $bgnavtop; ?>;
+	    height: 54px;
 	<?php } ?>
-	padding-right: 20px;
+	    padding-right: 20px;
 	<?php if ( $conf->global->OBLYON_STICKY_TOPBAR ) { ?>
 		position: fixed;
 	<?php } else { ?>
@@ -2343,7 +2350,6 @@ div.login_block:hover:after {
 	color: <?php print $maincolor; ?>;
 }
 
-/* db v3.5 */ 
 div.login_block_user{
 	clear: left;
 	float: <?php print $left; ?>;
@@ -2525,6 +2531,9 @@ div.login_block_user > .classfortooltip.login_block_elem2 {
 	speak: none;
 }
 */
+.atoplogin #dropdown-icon-down, .atoplogin #dropdown-icon-up {
+    font-size: 0.7em;
+}
 
 .login_block_elem img.printer,
 .login_block_elem img.login,
@@ -8188,6 +8197,10 @@ img.loginphoto {
 		max-width: 100px;			/* but no more than 100px */
 	}
 }
+
+<?php
+include dol_buildpath($path.'/theme/'.$theme.'/dropdown.inc.php', 0);
+?>
 
 /* end zlib compression */
 <?php if(extension_loaded('zlib')){ob_end_flush();}?>
