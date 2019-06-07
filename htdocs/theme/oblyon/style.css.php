@@ -3248,6 +3248,7 @@ div.login a:hover {
 }
 
 .icon--cashdesk:before,
+.icon--cashcontrol:before,
 .icon--shop:before,
 .icon--orders:before,
 .icon--orders_suppliers:before {
@@ -3379,7 +3380,8 @@ div.login a:hover {
 	content: '\e62e';
 }
 
-.icon--customers_bills:before {
+.icon--customers_bills:before,
+.icon--members_subscription:before{
 	content: '\e630';
 }
 
@@ -3396,39 +3398,17 @@ div.login a:hover {
 	content: '\e62d';
 }
 
-/* Login Icons */
-/*
-.icon--printer:before {
-	content: '\e640';
-}
-
-.icon--log-out:before {
-	content: '\e641b';
-}
-
-.icon--exit:before {
-	content: '\e641';
-}
-
-.icon--loginphoto:before {
-	content: "\e900";
-}
-.icon--help:before {
-	content: "\e901";
-}
-*/
-
 /* Secondary Nav */
-.icon--setup:before,
-.icon--accountancy_admin:before {
+.icon--setup:before {
 	content: '\e615';
 }
 
-.icon--admintools:before {
+.icon--admintools:before,
+.icon--accountancy_admin:before {
 	content: '\e614';
 }
 
-.icon--modulesadmintools:before {
+.icon--modulesadmintools:before{
 	content: '\e621';
 }
 
