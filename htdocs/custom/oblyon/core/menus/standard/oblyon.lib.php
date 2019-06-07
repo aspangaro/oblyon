@@ -303,7 +303,7 @@ function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$fo
         $idsel='hrm';
 
         if (empty($noout)) print_start_menu_entry($idsel,$itemsel,$showmode);
-        if (empty($noout)) print_text_menu_entry($langs->trans("MenuHRM"), $showmode, DOL_URL_ROOT.'/hrm/index.php?mainmenu=hrm&amp;leftmenu=', $id, $idsel, $atarget);
+        if (empty($noout)) print_text_menu_entry($langs->trans("HRM"), $showmode, DOL_URL_ROOT.'/hrm/index.php?mainmenu=hrm&amp;leftmenu=', $id, $idsel, $atarget);
         if (empty($noout)) print_end_menu_entry($showmode);
         $menu->add('/hrm/index.php?mainmenu=hrm&amp;leftmenu=', $langs->trans("HRM"), 0, $showmode, $atarget, "hrm", '');
 	}
