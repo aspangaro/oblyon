@@ -81,30 +81,26 @@ function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$fo
 		print '</div>';
 	}
 
-	if(DOL_VERSION >='3.9.0')
-	{
-		if (is_array($moredata) && ! empty($moredata['searchform']))
-		{
-			print "\n";
-			print "<!-- Begin SearchForm -->\n";
-			print '<div id="blockvmenusearch" class="blockvmenusearch">'."\n";
-			print $moredata['searchform'];
-			print '</div>'."\n";
-			print "<!-- End SearchForm -->\n";
-			print '&nbsp;';
-		}
+    if (is_array($moredata) && ! empty($moredata['searchform']))	// searchform can contains select2 code or link to show old search form or link to switch on search page
+    {
+        print "\n";
+        print "<!-- Begin SearchForm -->\n";
+        print '<div id="blockvmenusearch" class="blockvmenusearch">'."\n";
+        print $moredata['searchform'];
+        print '</div>'."\n";
+        print "<!-- End SearchForm -->\n";
+    }
 
-		if (is_array($moredata) && ! empty($moredata['bookmarks']))
-		{
-			print "\n";
-			print "<!-- Begin Bookmarks -->\n";
-			print '<div id="blockvmenubookmarks" class="blockvmenubookmarks">'."\n";
-			print $moredata['bookmarks'];
-			print '</div>'."\n";
-			print "<!-- End Bookmarks -->\n";
-		}
-	}
-	
+    if (is_array($moredata) && ! empty($moredata['bookmarks']))
+    {
+        print "\n";
+        print "<!-- Begin Bookmarks -->\n";
+        print '<div id="blockvmenubookmarks" class="blockvmenubookmarks">'."\n";
+        print $moredata['bookmarks'];
+        print '</div>'."\n";
+        print "<!-- End Bookmarks -->\n";
+    }
+
 	if ( empty($conf->global->MAIN_MENU_INVERT) && ($conf->global->OBLYON_HIDE_LEFTMENU || $conf->dol_optimize_smallscreen) ) {
 		print '<div class="pushy-btn" title="'.$langs->trans("ShowLeftMenu").'">&#8801;</div>';
 	}
