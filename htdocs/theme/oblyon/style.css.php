@@ -3210,7 +3210,8 @@ div.login a:hover {
 	content: '\e606';
 }
 
-.icon--cat:before {
+.icon--cat:before,
+.icon--tags:before {
 	content: '\e607';
 }
 
@@ -3365,7 +3366,8 @@ div.login a:hover {
 	content: '\e629';
 }
 
-.icon--import:before {
+.icon--import:before,
+.icon--accountancy_transfer:before {
 	content: '\e62a';
 }
 
@@ -3417,7 +3419,8 @@ div.login a:hover {
 */
 
 /* Secondary Nav */
-.icon--setup:before {
+.icon--setup:before,
+.icon--accountancy_admin:before {
 	content: '\e615';
 }
 
@@ -3448,6 +3451,10 @@ div.login a:hover {
 
 .icon--reports:before {
 	content: '\e605';
+}
+
+.icon--email_templates:before {
+    content: '\e628';
 }
 
 /* Generic modules */
