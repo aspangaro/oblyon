@@ -36,6 +36,7 @@ dol_include_once('/oblyon/lib/php-markdown/markdown.php');
 // Langs
 $langs->load("oblyon@oblyon");
 $langs->load("opendsi@oblyon");
+$langs->load("monogramm@oblyon");
 
 // Access control
 if (! $user->admin)
@@ -65,12 +66,21 @@ dol_fiche_head($head, 'about', $langs->trans("Module113900Name"), 0, 'oblyon@obl
 print '<table class="noborder" width="100%">';
 
 print '<tr class="liste_titre"><td colspan="2">' . $langs->trans("Authors") . '</td>';
-print '</tr>';
+print '</tr>'."\n";
 
 // Alexandre Spangaro
+print '<tr>';
 print '<td width="310px"><img src="../img/opendsi_dolibarr_preferred_partner.png" /></td>'."\n";
 print '<td align="left" valign="top"><p>'.$langs->trans("OpenDsiAboutDesc").'</p></td>'."\n";
-print '</tr></table>'."\n";
+print '</tr>'."\n";
+
+// Mathieu BRUNOT / Monogramm
+print '<tr>';
+print '<td width="310px"><img src="../img/monogramm.png" /></td>'."\n";
+print '<td align="left" valign="top"><p>'.$langs->trans("MonogrammAboutDesc").'</p></td>'."\n";
+print '</tr>'."\n";
+
+print '</table>'."\n";
 
 print '<br>';
 
