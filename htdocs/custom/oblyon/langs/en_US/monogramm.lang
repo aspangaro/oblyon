@@ -1,0 +1,5 @@
+# Dolibarr language file - en_US - monogramm
+CHARSET=UTF-8
+MonogrammFamily=Monogramm
+MonogrammAboutDesc=This module has been developed by <a href="https://www.monogramm.io" target="_blank">Monogramm</a><br><br>For any question or feedback, contact us on <a href="mailto:opensource@monogramm.io">opensource@monogramm.io</a><br><br>For any question, contact us on <a href="mailto:contact@monogramm.io">contact@monogramm.io</a><br>
+MonogrammChangeLog=ChangeLog file
