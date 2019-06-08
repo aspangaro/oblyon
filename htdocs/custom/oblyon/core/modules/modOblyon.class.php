@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (C) 2015-2016  Nicolas Rivera      <nrivera.pro@gmail.com>
- * Copyright (C) 2015-2018  Open-DSI            <support@open-dsi.fr>
+ * Copyright (C) 2015-2019  Open-DSI            <support@open-dsi.fr>
  *
  * Copyright (C) 2003      Rodolphe Quiedeville <rodolphe@quiedeville.org>
  * Copyright (C) 2004-2012 Laurent Destailleur  <eldy@users.sourceforge.net>
@@ -64,11 +64,13 @@ function __construct($db) {
 	$this->description = "Thème Oblyon";
 
 	// Possible values for version are: 'development', 'experimental', 'dolibarr' or version
-	$this->version = '9.1.1';
+	$this->version = '10.0-beta1';
 
-	$this->editor_name = "ZenDSI";
+	$this->editor_name = "Open-DSI | Monogramm";
 
-	$this->editor_url = "https://shop.zendsi.com";
+	$this->editor_url = "https://www.open-dsi.fr";
+
+	$this->editor_email	 = 'support@open-dsi.fr';
 
 	// Key used in llx_const table to save module status enabled/disabled (where MYMODULE is value of property name of module in uppercase)
 	$this->const_name = 'MAIN_MODULE_'.strtoupper($this->name);

@@ -1,5 +1,8 @@
 ## Changelog ##
 
+### Version 10.0 beta 1 - 2019 06 08
+ - Standardize code & update - Compatibility with Dolibarr 10.0
+
 ### Version 9.1.1 - 2019 04 22
  - Improve login page
 
