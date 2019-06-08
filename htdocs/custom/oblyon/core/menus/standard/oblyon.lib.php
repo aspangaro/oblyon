@@ -1436,7 +1436,7 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 				$permtoshowmenu=(! empty($conf->accounting->enabled) || $user->rights->accounting->bind->write || $user->rights->compta->resultat->lire);
 
                 // Transfer in accounting
-                $newmenu->add("/accountancy/index.php?leftmenu=accountancy",$langs->trans("MenuTransferAccountancy"), 0, $permtoshowmenu, '', $mainmenu, 'accountancy_transfer');
+                $newmenu->add("/accountancy/index.php?leftmenu=accountancy",$langs->trans("TransferInAccounting"), 0, $permtoshowmenu, '', $mainmenu, 'accountancy_transfer');
 
                     // Binding
                     if (! empty($conf->facture->enabled))
