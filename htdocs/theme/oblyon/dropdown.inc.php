@@ -115,7 +115,7 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
 }
 
 #topmenu-login-dropdown{
-    padding: 0 5px 0 5px;
+    /* padding: 0 5px 0 5px; */
 }
 #topmenu-login-dropdown a:hover{
     text-decoration: none;

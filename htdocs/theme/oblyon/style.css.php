@@ -2263,6 +2263,13 @@ li.sec-nav__sub-item {
 	border-right-color: <?php print $maincolor; ?>;
 }
 
+.sec-nav__sub-list .item-level3:hover .caret--left {
+    border-left-color: <?php print $maincolor; ?>;
+}
+
+.sec-nav__sub-list .item-level3:hover .caret--right {
+    border-right-color: <?php print $maincolor; ?>;
+}
 
 /**
  * Submenus
@@ -2304,6 +2311,11 @@ li.sec-nav__sub-item {
 .sec-nav.is-inverted .sec-nav__sub-list .item-level2 .sec-nav__link {
 	display: block;
 	padding: 0.5em 1.2em;
+}
+
+.sec-nav.is-inverted .sec-nav__sub-list .item-level3 .sec-nav__link {
+    display: block;
+    padding: 0.4em 1.4em;
 }
 
 .sec-nav.is-inverted .sec-nav__link.is-disabled {
@@ -2764,7 +2776,7 @@ div.login a:hover {
 .sec-nav__sub-list { 
 	background-color: <?php print $bgnavleft; ?>;
 	padding-top: 5px;
-	padding-inline-start: 1.5em;
+	/* padding-inline-start: 1.5em; */
 }
 
 .sec-nav__sub-list .item-level1 {
@@ -2773,6 +2785,10 @@ div.login a:hover {
 
 .sec-nav__sub-list .item-level2 {
 	padding: 0.2em 1em;
+}
+
+.sec-nav__sub-list .item-level3 {
+    padding: 0.2em 1em;
 }
 
 .sec-nav__sub-item.is-disabled {
@@ -6964,63 +6980,61 @@ div.dolEventError h2 {
 	-webkit-box-shadow: 0 0 10px #aaa;
 }
 
-/**
- * Datatable
- */
+/* ============================================================================== */
+/*  Datatable                                                                     */
+/* ============================================================================== */
 
 table.dataTable tr.odd td.sorting_1, table.dataTable tr.even td.sorting_1 {
-	background: none !important;
+    background: none !important;
 }
-.sorting_asc	{ background: url('<?php echo dol_buildpath('/theme/'.$theme.'/img/sort_asc.png',1); ?>') no-repeat center right !important; }
-.sorting_desc { background: url('<?php echo dol_buildpath('/theme/'.$theme.'/img/sort_desc.png',1); ?>') no-repeat center right !important; }
-.sorting_asc_disabled	{ background: url('<?php echo dol_buildpath('/theme/'.$theme.'/img/sort_asc_disabled.png',1); ?>') no-repeat center right !important; }
-.sorting_desc_disabled { background: url('<?php echo dol_buildpath('/theme/'.$theme.'/img/sort_desc_disabled.png',1); ?>') no-repeat center right !important; }
+.sorting_asc  { background: url('<?php echo dol_buildpath('/theme/'.$theme.'/img/sort_asc.png', 1); ?>') no-repeat center right !important; }
+.sorting_desc { background: url('<?php echo dol_buildpath('/theme/'.$theme.'/img/sort_desc.png', 1); ?>') no-repeat center right !important; }
+.sorting_asc_disabled  { background: url('<?php echo dol_buildpath('/theme/'.$theme.'/img/sort_asc_disabled.png', 1); ?>') no-repeat center right !important; }
+.sorting_desc_disabled { background: url('<?php echo dol_buildpath('/theme/'.$theme.'/img/sort_desc_disabled.png', 1); ?>') no-repeat center right !important; }
 .dataTables_paginate {
-	margin-top: 8px;
+    margin-top: 8px;
 }
 .paginate_button_disabled {
-	opacity: 1 !important;
-	color: #888 !important;
-	cursor: default !important;
+    opacity: 1 !important;
+    color: #888 !important;
+    cursor: default !important;
 }
 .paginate_disabled_previous:hover, .paginate_enabled_previous:hover, .paginate_disabled_next:hover, .paginate_enabled_next:hover
 {
-	font-weight: normal;
+    font-weight: normal;
 }
 .paginate_enabled_previous:hover, .paginate_enabled_next:hover
 {
-	text-decoration: underline !important;
+    text-decoration: underline !important;
 }
 .paginate_active
 {
-	text-decoration: underline !important;
+    text-decoration: underline !important;
 }
 .paginate_button
 {
-	font-weight: normal !important;
-	text-decoration: none !important;
+    font-weight: normal !important;
+    text-decoration: none !important;
 }
 .paging_full_numbers {
-	height: inherit !important;
+    height: inherit !important;
 }
-.paging_full_numbers a.paginate_active:hover, .paging_full_numbers a.paginate_button:hover,
-.paging_full_numbers a.paginate_active:focus, .paging_full_numbers a.paginate_button:focus {
-	background-color: #DDD !important;
+.paging_full_numbers a.paginate_active:hover, .paging_full_numbers a.paginate_button:hover {
+    background-color: #DDD !important;
 }
 .paging_full_numbers, .paging_full_numbers a.paginate_active, .paging_full_numbers a.paginate_button {
-	background-color: #FFF !important;
-	border-radius: inherit !important;
+    background-color: #FFF !important;
+    border-radius: inherit !important;
 }
-.paging_full_numbers a.paginate_button_disabled:hover,
-.paging_full_numbers a.paginate_button_disabled:focus {
-	background-color: #FFF !important;
+.paging_full_numbers a.paginate_button_disabled:hover, .paging_full_numbers a.disabled:hover {
+    background-color: #FFF !important;
 }
 .paginate_button, .paginate_active {
-	border: 1px solid rgba(0,0,0, .24) !important;
-	padding: 6px 12px !important;
-	margin-left: -1px !important;
-	line-height: 1.42857143 !important;
-	margin: 0 0 !important;
+    border: 1px solid #ddd !important;
+    padding: 6px 12px !important;
+    margin-left: -1px !important;
+    line-height: 1.42857143 !important;
+    margin: 0 0 !important;
 }
 
 /* For jquery plugin combobox */
