@@ -305,7 +305,7 @@ function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$fo
 		}
 	}
 
-	// Accoutancy
+	// Accountancy
 	$menuqualified=0;
 	if (! empty($conf->comptabilite->enabled)) $menuqualified++;
 	if (! empty($conf->accounting->enabled)) $menuqualified++;
@@ -316,10 +316,9 @@ function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$fo
 		'module'=>'comptabilite|accounting|asset');
 	$showmode=dol_oblyon_showmenu($type_user, $tmpentry, $listofmodulesforexternal);
 	if ($showmode) {
-		$langs->load("compta");
-		$langs->load("accountancy");
+        $langs->loadLangs(array("compta", "accountancy", "assets"));
 
-		if ($_SESSION["mainmenu"] && $_SESSION["mainmenu"] == "accoutancy") { $itemsel=TRUE; $_SESSION['idmenu']=''; }
+		if ($_SESSION["mainmenu"] && $_SESSION["mainmenu"] == "accountancy") { $itemsel=TRUE; $_SESSION['idmenu']=''; }
 		else $itemsel=FALSE;
 		$idsel='accountancy';
 
@@ -962,7 +961,6 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 				}
 			}
 
-
 			// Donations
 			if (! empty($conf->don->enabled))
 			{
@@ -999,7 +997,7 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 						if ($usemenuhider || empty($leftmenu) || preg_match('/^tax_vat/i',$leftmenu)) $newmenu->add("/compta/tva/quadri_detail.php?leftmenu=tax_vat", $langs->trans("ReportByQuarter"), 2, $user->rights->tax->charges->lire);
 						global $mysoc;
 
-						//Local Taxes 1
+						// Local Taxes 1
 						if($mysoc->useLocalTax(1) && (isset($mysoc->localtax1_assuj) && $mysoc->localtax1_assuj=="1"))
 						{
 							$newmenu->add("/compta/localtax/list.php?leftmenu=tax_1_vat&amp;mainmenu=billing&amp;localTaxType=1",$langs->transcountry("LT1",$mysoc->country_code),1,$user->rights->tax->charges->lire);
@@ -1009,7 +1007,7 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 							if ($usemenuhider || empty($leftmenu) || preg_match('/^tax_1_vat/i',$leftmenu)) $newmenu->add("/compta/localtax/clients.php?leftmenu=tax_1_vat&amp;localTaxType=1", $langs->trans("ReportByCustomers"), 2, $user->rights->tax->charges->lire);
 							if ($usemenuhider || empty($leftmenu) || preg_match('/^tax_1_vat/i',$leftmenu)) $newmenu->add("/compta/localtax/quadri_detail.php?leftmenu=tax_1_vat&amp;localTaxType=1", $langs->trans("ReportByQuarter"), 2, $user->rights->tax->charges->lire);
 						}
-						//Local Taxes 2
+						// Local Taxes 2
 						if($mysoc->useLocalTax(2) && (isset($mysoc->localtax2_assuj) && $mysoc->localtax2_assuj=="1"))
 						{
 							$newmenu->add("/compta/localtax/list.php?leftmenu=tax_2_vat&amp;mainmenu=billing&amp;localTaxType=2",$langs->transcountry("LT2",$mysoc->country_code),1,$user->rights->tax->charges->lire);
@@ -1352,11 +1350,9 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 		{
 			$langs->load("companies");
 
-			// Accounting Expert
+			// Accounting (Double entries)
 			if (! empty($conf->accounting->enabled))
 			{
-				$langs->load("accountancy");
-
 				$permtoshowmenu=(! empty($conf->accounting->enabled) || $user->rights->accounting->bind->write || $user->rights->compta->resultat->lire);
 				$newmenu->add("/accountancy/index.php?leftmenu=accountancy",$langs->trans("MenuAccountancy"), 0, $permtoshowmenu, '', $mainmenu, 'accountancy');
 
@@ -1514,8 +1510,6 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 			// Accountancy (simple)
 			if (! empty($conf->comptabilite->enabled))
 			{
-				$langs->load("compta");
-
 				// Bilan, resultats
 				$newmenu->add("/compta/resultat/index.php?leftmenu=report&amp;mainmenu=accountancy",$langs->trans("Reportings"),0,$user->rights->compta->resultat->lire, '', $mainmenu, 'ca');
 
@@ -1553,7 +1547,6 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 			// Assets
 			if (! empty($conf->asset->enabled))
 			{
-				$langs->load("assets");
 				$newmenu->add("/asset/list.php?leftmenu=asset&amp;mainmenu=accountancy",$langs->trans("MenuAssets"), 0, $user->rights->asset->read, '', $mainmenu, 'asset');
 				$newmenu->add("/asset/card.php?action=create",$langs->trans("MenuNewAsset"), 1, $user->rights->asset->write);
 				$newmenu->add("/asset/list.php?leftmenu=asset&amp;mainmenu=accountancy",$langs->trans("MenuListAssets"), 1, $user->rights->asset->read);
@@ -1619,7 +1612,7 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 				if (! empty($conf->global->MEMBER_LINK_TO_HTPASSWDFILE) && ($usemenuhider || empty($leftmenu) || $leftmenu=='none' || $leftmenu=="members" || $leftmenu=="export")) $newmenu->add("/adherents/htpasswd.php?leftmenu=export",$langs->trans("Filehtpasswd"),1,$user->rights->adherent->export);
 				$newmenu->add("/adherents/cartes/carte.php?leftmenu=export",$langs->trans("MembersCards"),1,$user->rights->adherent->export);
 
-				$newmenu->add("/adherents/index.php?leftmenu=members&amp;mainmenu=members",$langs->trans("Subscriptions"),0,$user->rights->adherent->cotisation->lire);
+				$newmenu->add("/adherents/index.php?leftmenu=members&amp;mainmenu=members",$langs->trans("Subscriptions"),0,$user->rights->adherent->cotisation->lire, '', $mainmenu, 'members_subscription');
 				$newmenu->add("/adherents/list.php?leftmenu=members&amp;statut=-1,1&amp;mainmenu=members",$langs->trans("NewSubscription"),1,$user->rights->adherent->cotisation->creer);
 				$newmenu->add("/adherents/subscription/list.php?leftmenu=members",$langs->trans("List"),1,$user->rights->adherent->cotisation->lire);
 				$newmenu->add("/adherents/stats/index.php?leftmenu=members",$langs->trans("MenuMembersStats"),1,$user->rights->adherent->lire);

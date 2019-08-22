@@ -3381,7 +3381,8 @@ div.login a:hover {
 	content: '\e62e';
 }
 
-.icon--customers_bills:before {
+.icon--customers_bills:before,
+.icon--members_subscription:before{
 	content: '\e630';
 }
 
@@ -3425,7 +3426,8 @@ div.login a:hover {
 	content: '\e615';
 }
 
-.icon--admintools:before {
+.icon--admintools:before,
+.icon--accountancy_admin:before {
 	content: '\e614';
 }
 
@@ -3435,6 +3437,10 @@ div.login a:hover {
 
 .icon--users:before {
 	content: '\e600';
+}
+
+.icon--email_templates:before {
+    content: '\e628';
 }
 
 /* External modules */
