@@ -3432,6 +3432,10 @@ div.login a:hover {
 	content: '\e600';
 }
 
+.icon--email_templates:before {
+    content: '\e628';
+}
+
 /* External modules */
 .icon--cron:before {
 	content: '\e62f';
