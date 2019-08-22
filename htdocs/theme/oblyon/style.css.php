@@ -2253,6 +2253,13 @@ li.sec-nav__sub-item {
 	border-right-color: <?php print $maincolor; ?>;
 }
 
+.sec-nav__sub-list .item-level3:hover .caret--left {
+    border-left-color: <?php print $maincolor; ?>;
+}
+
+.sec-nav__sub-list .item-level3:hover .caret--right {
+    border-right-color: <?php print $maincolor; ?>;
+}
 
 /**
  * Submenus
@@ -2294,6 +2301,11 @@ li.sec-nav__sub-item {
 .sec-nav.is-inverted .sec-nav__sub-list .item-level2 .sec-nav__link {
 	display: block;
 	padding: 0.5em 1.2em;
+}
+
+.sec-nav.is-inverted .sec-nav__sub-list .item-level3 .sec-nav__link {
+    display: block;
+    padding: 0.4em 1.4em;
 }
 
 .sec-nav.is-inverted .sec-nav__link.is-disabled {
@@ -2752,7 +2764,7 @@ div.login a:hover {
 .sec-nav__sub-list { 
 	background-color: <?php print $bgnavleft; ?>;
 	padding-top: 5px;
-	padding-inline-start: 1.5em;
+	/* padding-inline-start: 1.5em; */
 }
 
 .sec-nav__sub-list .item-level1 {
@@ -2761,6 +2773,10 @@ div.login a:hover {
 
 .sec-nav__sub-list .item-level2 {
 	padding: 0.2em 1em;
+}
+
+.sec-nav__sub-list .item-level3 {
+    padding: 0.2em 1em;
 }
 
 .sec-nav__sub-item.is-disabled {
