@@ -166,7 +166,7 @@ function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$fo
 			$chaine.=$langs->trans("Products");
 		}
 		if (! empty($conf->product->enabled) && ! empty($conf->service->enabled)) {
-			$chaine.="/";
+			$chaine.=" | ";
 		}
 		if (! empty($conf->service->enabled)) {
 			$chaine.=$langs->trans("Services");
