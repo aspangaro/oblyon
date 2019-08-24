@@ -29,7 +29,7 @@
 require_once DOL_DOCUMENT_ROOT.'/core/class/menubase.class.php';
 
 // Translations
-$langs->load ( "oblyon@oblyon" );
+$langs->load ( "oblyon@oblyon");
 
 /**
  * Core function to output top menu oblyon
@@ -162,6 +162,7 @@ function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$fo
 		$idsel='products';
 
 		$chaine="";
+		/*
 		if (! empty($conf->product->enabled)) {
 			$chaine.=$langs->trans("Products");
 		}
@@ -171,6 +172,8 @@ function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$fo
 		if (! empty($conf->service->enabled)) {
 			$chaine.=$langs->trans("Services");
 		}
+		*/
+		$chaine.=$langs->trans("MenuCatalog");
 
 		if (empty($noout)) print_start_menu_entry($idsel,$itemsel,$showmode);
 		if (empty($noout)) print_text_menu_entry($chaine, $showmode, DOL_URL_ROOT.'/product/index.php?mainmenu=products&amp;leftmenu=', $id, $idsel, $atarget);
