@@ -2335,7 +2335,7 @@ div.login_block {
 	    background-color: <?php print $bgnavtop; ?>;
 	    height: 54px;
 	<?php } ?>
-	    padding-right: 20px;
+	    padding-right: 10px;
 	<?php if ( $conf->global->OBLYON_STICKY_TOPBAR ) { ?>
 		position: fixed;
 	<?php } else { ?>
@@ -2368,7 +2368,7 @@ div.login_block:hover:after {
 div.login_block_user{
 	clear: left;
 	float: <?php print $left; ?>;
-	margin-right: 15px;
+	margin-right: 10px;
 }
 
 div.login_block_user .login a,
@@ -2420,26 +2420,30 @@ div.login_block_user > .classfortooltip.login_block_elem2 {
 	<?php } ?>
 	height: 42px;
 	line-height: 40px;
-	margin-right: 10px;
+	/* margin-right: 10px; */
 	<?php if ( empty($conf->dol_optimize_smallscreen) ) { ?>
 		min-width: 120px;
 	<?php } else { ?>
 		min-width: 80px;
 	<?php } ?>
-	
+
+    /*
 	<?php if ( $usecss3) { ?>
 	box-shadow: -2px 2px 2px 0px rgba(0, 0, 0, .4);
 	-webkit-box-shadow: -2px 2px 2px 0px rgba(0, 0, 0, .4);
 	border-radius: 0 0 5px 5px;
 	<?php } ?>
+	*/
 }
 
 .login_block_other .inline-block {
 	width: 40px;
-	
+
+    /*
 	<?php if ( $usecss3) { ?>
 	border-radius: 0 0 5px 5px;
 	<?php } ?>
+	*/
 }
 
 .login_block:hover > .login_block_other {
