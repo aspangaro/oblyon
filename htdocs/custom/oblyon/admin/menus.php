@@ -210,7 +210,7 @@ else
 }
 print '</tr>';  
 
-// Sticky bar
+// Sticky top bar
 print '<tr '.$bc[$var].'>';
 print '<td>'.$langs->trans('StickyTopBar');
 if($conf->global->OBLYON_STICKY_TOPBAR)
@@ -284,29 +284,25 @@ if(empty($conf->global->MAIN_MENU_INVERT))
 
     print '<tr '.$bc[$var].'>';
     print '<td>'.$langs->trans('EldyIcons');
-    if($conf->global->OBLYON_ELDY_ICONS)
-	{
-		print '<br><span class="warning">'.$langs->trans('EldyIconsWarning').'</span>';
-    } 
     print '</td>';    
     $name='OBLYON_ELDY_ICONS';
     if(! empty($conf->global->OBLYON_ELDY_ICONS))
 	{
         print '<td><a href="' . $_SERVER ['PHP_SELF'] .  '?action=set&name='.$name.'&value=0">';
-        print img_picto ( $langs->trans ( "Enabled" ), 'switch_on' );
+        print img_picto($langs->trans("Enabled"), 'switch_on');
         print "</a></td>\n";
     } 
 	else
 	{
 		if ( $conf->global->OBLYON_ELDY_OLD_ICONS || $conf->global->OBLYON_HIDE_LEFTICONS ) {
 			print '<td><a href="#" class="tmenudisabled">';
-			print img_picto ( $langs->trans ( "Disabled" ), 'switch_off' );
+			print img_picto($langs->trans("Disabled"), 'switch_off');
 			print "</a></td>\n";
 		}
 		else 
 		{
 			print '<td><a href="' . $_SERVER ['PHP_SELF'] .  '?action=set&name='.$name.'&value=1">';
-			print img_picto ( $langs->trans ( "Disabled" ), 'switch_off' );
+			print img_picto($langs->trans("Disabled"), 'switch_off');
 			print "</a></td>\n";
 		}
     }
@@ -323,29 +319,25 @@ if(empty($conf->global->MAIN_MENU_INVERT))
 
 	print '<tr '.$bc[$var].'>';
     print '<td>'.$langs->trans('EldyOldIcons');
-    if ( $conf->global->OBLYON_ELDY_OLD_ICONS )
-	{
-		print '<br><span class="warning">'.$langs->trans('EldyOldIconsWarning').'</span>';
-    } 
     print '</td>';
     $name='OBLYON_ELDY_OLD_ICONS';
     if(! empty($conf->global->OBLYON_ELDY_OLD_ICONS))
 	{
-		print '<td><a href="' . $_SERVER ['PHP_SELF'] .  '?action=set&name='.$name.'&value=0">';
-		print img_picto ( $langs->trans ( "Enabled" ), 'switch_on' );
+		print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name='.$name.'&value=0">';
+		print img_picto($langs->trans("Enabled"), 'switch_on');
 		print "</a></td>\n";
     }
 	else
 	{
 		if ( $conf->global->OBLYON_ELDY_ICONS || $conf->global->OBLYON_HIDE_LEFTICONS ) {
 			print '<td><a href="#" class="tmenudisabled">';
-			print img_picto ( $langs->trans ( "Disabled" ), 'switch_off' );
+			print img_picto($langs->trans("Disabled"), 'switch_off');
 			print "</a></td>\n";
 		} 
 		else
 		{
-			print '<td><a href="' . $_SERVER ['PHP_SELF'] .  '?action=set&name='.$name.'&value=1">';
-			print img_picto ( $langs->trans ( "Disabled" ), 'switch_off' );
+			print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name='.$name.'&value=1">';
+			print img_picto($langs->trans("Disabled"), 'switch_off');
 			print "</a></td>\n";
 		}
     }
@@ -375,6 +367,33 @@ if(empty($conf->global->MAIN_MENU_INVERT))
     }
     print '</tr>';  
 }
+
+// Sticky left bar
+print '<tr '.$bc[$var].'>';
+print '<td>'.$langs->trans('StickyLeftBar');
+if($conf->global->OBLYON_STICKY_LEFTBAR)
+{
+    print '<br><span class="warning">'.img_warning().' '.$langs->trans('StickyLeftBarWarning').'</span>';
+    if($conf->global->MAIN_MENU_INVERT)
+    {
+        print '<br><span class="warning">'.$langs->trans('StickyLeftBarInvertedWarning').'</span>';
+    }
+}
+print '</td>';
+$name='OBLYON_STICKY_LEFTBAR';
+if(! empty($conf->global->OBLYON_STICKY_LEFTBAR))
+{
+    print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name='.$name.'&value=0">';
+    print img_picto($langs->trans("Enabled"), 'switch_on');
+    print "</a></td>\n";
+}
+else
+{
+    print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name='.$name.'&value=1">';
+    print img_picto($langs->trans("Disabled"), 'switch_off');
+    print "</a></td>\n";
+}
+print '</tr>';
 
 // Hide leftmenu
 print '<tr '.$bc[$var].'>';

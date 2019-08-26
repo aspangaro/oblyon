@@ -2438,12 +2438,6 @@ div.login_block_user > .classfortooltip.login_block_elem2 {
 
 .login_block_other .inline-block {
 	width: 40px;
-
-    /*
-	<?php if ( $usecss3) { ?>
-	border-radius: 0 0 5px 5px;
-	<?php } ?>
-	*/
 }
 
 .login_block:hover > .login_block_other {
@@ -3720,9 +3714,9 @@ div.tmenucenter {
 
 div.vmenu {
 	<?php if ( $conf->global->MAIN_MENU_INVERT ) { ?>
-	background-color: <?php print $bgnavtop; ?>;
+	    background-color: <?php print $bgnavtop; ?>;
 	<?php } else { ?>
-	background-color: <?php print $bgnavleft; ?>;
+	    background-color: <?php print $bgnavleft; ?>;
 	<?php } ?>
 	float: <?php print $left; ?>;
 	margin-<?php print $right; ?>: 0;
@@ -8510,14 +8504,14 @@ img.loginphoto {
 	<?php } ?>
 	}
 	div.login_block {
-		top: 0px;
-		max-width: 96px;
+		max-width: 120px;
+        padding-right: 3px;
 	}
-	div.login_block_other {
-		min-width: 40px;
-		margin-right: 6px;
-		height: auto;
-	}
+    div.login_block_other {
+        display: block;
+        width: auto;
+        min-width: 124px;
+    }
 	div.login_block_other .inline-block {
 		display: block;
 		width: auto;

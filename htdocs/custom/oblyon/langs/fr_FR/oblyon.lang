@@ -23,9 +23,13 @@ InvertMenus = Intervertir les menus
 FullsizeTopBar = Largeur maximale
 FullsizeTopBarWarning = Utilisez un nombre d'entrées menu limité. 
 ShowCompanyName = Afficher le nom de l'entreprise
-StickyTopBar = Barre adhésive 
+StickyTopBar = Barre adhésive haute
 StickyTopBarWarning = Expérimental. Utilisez un nombre d'entrées menu limité.
 StickyTopBarInvertedWarning = Certains modules ne sont pas pris en charge avec cette fonctionnalité.
+StickyLeftBar = Barre adhésive gauche
+StickyLeftBarWarning = Expérimental. Utilisez un nombre d'entrées menu limité.
+StickyLeftBarInvertedWarning = Certains modules ne sont pas pris en charge avec cette fonctionnalité.
+
 HideLeftMenu = Masquer le menu gauche
 OpenEffect = Effet d'ouverture menu
 EffectLeftMenuSlide = Slide
