@@ -76,14 +76,14 @@ a.butActionNewRefused>span.fa-plus-circle { padding-left: 6px; font-size: 1.5em;
 .button, .butAction {
     color: #ffffff !important;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-    background-color: #006dcc;
-    background-image: -moz-linear-gradient(top, #0088cc, #0044cc);
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0044cc));
-    background-image: -webkit-linear-gradient(top, #0088cc, #0044cc);
-    background-image: -o-linear-gradient(top, #0088cc, #0044cc);
-    background-image: linear-gradient(to bottom, #0088cc, #0044cc);
+    background-color: <?php print $colorButtonAction1; ?>;
+    background-image: -moz-linear-gradient(top, <?php print $colorButtonAction1; ?>, <?php print $colorButtonAction2; ?>);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(<?php print $colorButtonAction1; ?>), to(<?php print $colorButtonAction2; ?>));
+    background-image: -webkit-linear-gradient(top, <?php print $colorButtonAction1; ?>, <?php print $colorButtonAction2; ?>);
+    background-image: -o-linear-gradient(top, <?php print $colorButtonAction1; ?>, <?php print $colorButtonAction2; ?>);
+    background-image: linear-gradient(to bottom, <?php print $colorButtonAction1; ?>, <?php print $colorButtonAction2; ?>);
     background-repeat: repeat-x;
-    border-color: #0044cc #0044cc #002a80;
+    border-color: <?php print $colorButtonAction2; ?> <?php print $colorButtonAction2; ?> <?php print $colorButtonAction1; ?>;
     border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 }
 .button:disabled, .butAction:disabled {
@@ -108,14 +108,14 @@ button.ui-button {
 .butActionDelete, .buttonDelete {
     color: #ffffff !important;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-    background-color: #cc6d00;
-    background-image: -moz-linear-gradient(top, #cc8800, #cc4400);
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#cc8800), to(#cc4400));
-    background-image: -webkit-linear-gradient(top, #cc8800, #cc4400);
-    background-image: -o-linear-gradient(top, #cc8800, #cc4400);
-    background-image: linear-gradient(to bottom, #cc8800, #cc4400);
+    background-color: <?php print $colorButtonDelete1; ?>;
+    background-image: -moz-linear-gradient(top, <?php print $colorButtonDelete1; ?>, <?php print $colorButtonDelete2; ?>);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(<?php print $colorButtonDelete1; ?>), to(<?php print $colorButtonDelete2; ?>));
+    background-image: -webkit-linear-gradient(top, <?php print $colorButtonDelete1; ?>, <?php print $colorButtonDelete2; ?>);
+    background-image: -o-linear-gradient(top, <?php print $colorButtonDelete1; ?>, <?php print $colorButtonDelete2; ?>);
+    background-image: linear-gradient(to bottom, <?php print $colorButtonDelete1; ?>, <?php print $colorButtonDelete2; ?>);
     background-repeat: repeat-x;
-    border-color: #cc4400 #cc4400 #802a00;
+    border-color: <?php print $colorButtonDelete2; ?> <?php print $colorButtonDelete2; ?> <?php print $colorButtonDelete1; ?>;
     border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 }
 a.butAction:link, a.butAction:visited, a.butAction:hover, a.butAction:active {

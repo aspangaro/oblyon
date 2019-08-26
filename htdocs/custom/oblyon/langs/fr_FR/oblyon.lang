@@ -19,6 +19,7 @@ OblyonErrorMessage = Vous devez utiliser le thème Oblyon pour accéder à sa pe
 OblyonMenusErrorMessage = Vous devez utiliser le menu Oblyon pour accéder à sa personnalisation. Vérifier votre gestionnaire de menu.
 LeftMenu = Menu Gauche
 TopMenu = Menu Haut
+Buttons = Boutons
 InvertMenus = Intervertir les menus
 FullsizeTopBar = Largeur maximale
 FullsizeTopBarWarning = Utilisez un nombre d'entrées menu limité. 
@@ -66,16 +67,20 @@ OBLYON_COLOR_TOPMENU_TXT=Couleur de texte du menu haut
 OBLYON_COLOR_LEFTMENU_BCKGRD=Couleur de fond du menu gauche
 OBLYON_COLOR_LEFTMENU_BCKGRD_HOVER=Couleur de fond du menu gauche au dessus
 OBLYON_COLOR_LEFTMENU_TXT=Couleur de texte du menu gauche
+OBLYON_COLOR_BUTTON_ACTION1=Couleur 1 de fond des boutons
+OBLYON_COLOR_BUTTON_ACTION2=Couleur 2 de fond des boutons
+OBLYON_COLOR_BUTTON_DELETE1=Couleur 1 de fond des boutons dangereux
+OBLYON_COLOR_BUTTON_DELETE2=Couleur 2 de fond des boutons dangereux
 RestoreDefaultColors=Retablir couleurs par défaut
 DefaultsColorsMsg=Couleurs par défaut rétabli
-OblyonGreen=Oblyon vert
-ThemeOblyonGreenApplied=Thème vert Oblyon appliqué
-OblyonDark=Oblyon noir
-ThemeOblyonDarkApplied=Thème noir Oblyon appliqué
-OblyonBlue=Oblyon bleu
-ThemeOblyonBlueApplied=Thème bleu Oblyon appliqué
-OblyonNight=Oblyon nuit
-ThemeOblyonNightApplied=Thème nuit Oblyon appliqué
+OblyonGreen=Oblyon Green
+ThemeOblyonGreenApplied=Thème Oblyon Green appliqué
+OblyonDark=Oblyon Dark
+ThemeOblyonDarkApplied=Thème Oblyon Dark appliqué
+OblyonBlue=Oblyon Blue
+ThemeOblyonBlueApplied=Thème Oblyon Blue appliqué
+OblyonNight=Oblyon Night
+ThemeOblyonNightApplied=Thème Oblyon Night appliqué
 
 #
 # About page

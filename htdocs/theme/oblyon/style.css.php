@@ -102,6 +102,12 @@ $bgnavleft = $conf->global->OBLYON_COLOR_LEFTMENU_BCKGRD; // default value: #333
 $bgnavleft_txt = $conf->global->OBLYON_COLOR_LEFTMENU_TXT; // default value: #f4f4f4			//	for left navigation
 $bgnavleft_hover = $conf->global->OBLYON_COLOR_LEFTMENU_BCKGRD_HOVER;	// default value: #444	//	for left navigation
 
+// For buttons
+$colorButtonAction1 = $conf->global->OBLYON_COLOR_BUTTON_ACTION1;	// default value: #0088cc
+$colorButtonAction2 = $conf->global->OBLYON_COLOR_BUTTON_ACTION2;	// default value: #0044cc
+$colorButtonDelete1 = $conf->global->OBLYON_COLOR_BUTTON_DELETE1;	// default value: #cc8800
+$colorButtonDelete2 = $conf->global->OBLYON_COLOR_BUTTON_DELETE2;	// default value: #cc4400
+
 if ($conf->global->MAIN_MENU_INVERT)
 {
 	// TODO Switch colors?

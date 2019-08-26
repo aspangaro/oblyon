@@ -64,7 +64,7 @@ function __construct($db) {
 	$this->description = "Thème Oblyon";
 
 	// Possible values for version are: 'development', 'experimental', 'dolibarr' or version
-	$this->version = '10.0-beta1';
+	$this->version = '10.0-beta2';
 
 	$this->editor_name = "Open-DSI | Monogramm";
 
@@ -271,6 +271,41 @@ function __construct($db) {
 	$this->const [$r] [5] = 'allentities';
 	$this->const [$r] [6] = 0;
 
+	$r ++;
+	$this->const [$r] [0] = "OBLYON_COLOR_BUTTON_ACTION1";
+	$this->const [$r] [1] = "chaine";
+	$this->const [$r] [2] = "#0088cc";
+	$this->const [$r] [3] = 'Oblyon button action color 1';
+	$this->const [$r] [4] = 1;
+	$this->const [$r] [5] = 'allentities';
+	$this->const [$r] [6] = 0;
+
+	$r ++;
+	$this->const [$r] [0] = "OBLYON_COLOR_BUTTON_ACTION2";
+	$this->const [$r] [1] = "chaine";
+	$this->const [$r] [2] = "#0044cc";
+	$this->const [$r] [3] = 'Oblyon button action color 2';
+	$this->const [$r] [4] = 1;
+	$this->const [$r] [5] = 'allentities';
+	$this->const [$r] [6] = 0;
+
+	$r ++;
+	$this->const [$r] [0] = "OBLYON_COLOR_BUTTON_DELETE1";
+	$this->const [$r] [1] = "chaine";
+	$this->const [$r] [2] = "#cc8800";
+	$this->const [$r] [3] = 'Oblyon button delete color 1';
+	$this->const [$r] [4] = 1;
+	$this->const [$r] [5] = 'allentities';
+	$this->const [$r] [6] = 0;
+
+	$r ++;
+	$this->const [$r] [0] = "OBLYON_COLOR_BUTTON_DELETE2";
+	$this->const [$r] [1] = "chaine";
+	$this->const [$r] [2] = "#cc4400";
+	$this->const [$r] [3] = 'Oblyon button delete color 2';
+	$this->const [$r] [4] = 1;
+	$this->const [$r] [5] = 'allentities';
+	$this->const [$r] [6] = 0;
 
 	// Dictionaries
 	if (! isset($conf->oblyon->enabled)) {

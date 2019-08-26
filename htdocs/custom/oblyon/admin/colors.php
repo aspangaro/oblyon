@@ -52,6 +52,13 @@ $left_colors = array (
 	'OBLYON_COLOR_LEFTMENU_TXT'
 );
 
+$button_colors = array (
+    'OBLYON_COLOR_BUTTON_ACTION1',
+    'OBLYON_COLOR_BUTTON_ACTION2',
+    'OBLYON_COLOR_BUTTON_DELETE1',
+    'OBLYON_COLOR_BUTTON_DELETE2'
+);
+
 $colors_options = array (
 	'OBLYON_COLOR_MAIN',
 	'OBLYON_COLOR_BCKGRD',
@@ -91,6 +98,15 @@ if ($action == 'update') {
 		}
 	}
 
+    foreach ($button_colors as $constname) {
+        $constvalue = GETPOST($constname, 'alpha');
+        $constvalue = '#'.$constvalue;
+
+        if (! dolibarr_set_const($db, $constname, $constvalue, 'chaine', 0, '', $conf->entity)) {
+            $error ++;
+        }
+    }
+
 	foreach ($colors_options as $constname) {
 		$constvalue = GETPOST($constname, 'alpha');
 		$constvalue = '#'.$constvalue;
@@ -124,6 +140,11 @@ if ($action == 'settheme') {
 		dolibarr_set_const($db, "OBLYON_COLOR_LEFTMENU_BCKGRD", '#2C2C2C','chaine',0,'',$conf->entity);
 		dolibarr_set_const($db, "OBLYON_COLOR_LEFTMENU_BCKGRD_HOVER", '#222222','chaine',0,'',$conf->entity);
 		dolibarr_set_const($db, "OBLYON_COLOR_LEFTMENU_TXT", '#F4F4F4','chaine',0,'',$conf->entity);
+
+        dolibarr_set_const($db, "OBLYON_COLOR_BUTTON_ACTION1", '#0088cc','chaine',0,'',$conf->entity);
+        dolibarr_set_const($db, "OBLYON_COLOR_BUTTON_ACTION2", '#0044cc','chaine',0,'',$conf->entity);
+        dolibarr_set_const($db, "OBLYON_COLOR_BUTTON_DELETE1", '#cc8800','chaine',0,'',$conf->entity);
+        dolibarr_set_const($db, "OBLYON_COLOR_BUTTON_DELETE2", '#cc4400','chaine',0,'',$conf->entity);
 
 		dolibarr_set_const($db, "OBLYON_COLOR_MAIN", '#E09430','chaine',0,'',$conf->entity);
 		dolibarr_set_const($db, "OBLYON_COLOR_BCKGRD", '#333333','chaine',0,'',$conf->entity);
@@ -160,6 +181,11 @@ if ($action == 'settheme') {
 		dolibarr_set_const($db, "OBLYON_COLOR_LEFTMENU_BCKGRD_HOVER", '#0D4185','chaine',0,'',$conf->entity);
 		dolibarr_set_const($db, "OBLYON_COLOR_LEFTMENU_TXT", '#F4F4F4','chaine',0,'',$conf->entity);
 
+        dolibarr_set_const($db, "OBLYON_COLOR_BUTTON_ACTION1", '#0088cc','chaine',0,'',$conf->entity);
+        dolibarr_set_const($db, "OBLYON_COLOR_BUTTON_ACTION2", '#0044cc','chaine',0,'',$conf->entity);
+        dolibarr_set_const($db, "OBLYON_COLOR_BUTTON_DELETE1", '#cc8800','chaine',0,'',$conf->entity);
+        dolibarr_set_const($db, "OBLYON_COLOR_BUTTON_DELETE2", '#cc4400','chaine',0,'',$conf->entity);
+
 		dolibarr_set_const($db, "OBLYON_COLOR_MAIN", '#E09430','chaine',0,'',$conf->entity);
 		dolibarr_set_const($db, "OBLYON_COLOR_BCKGRD", '#F4F4F4','chaine',0,'',$conf->entity);
 		dolibarr_set_const($db, "OBLYON_COLOR_LOGO_BCKGRD", '#ffffff','chaine',0,'',$conf->entity);
@@ -195,6 +221,11 @@ if ($action == 'settheme') {
 		dolibarr_set_const($db, "OBLYON_COLOR_LEFTMENU_BCKGRD_HOVER", '#444444','chaine',0,'',$conf->entity);
 		dolibarr_set_const($db, "OBLYON_COLOR_LEFTMENU_TXT", '#F4F4F4','chaine',0,'',$conf->entity);
 
+        dolibarr_set_const($db, "OBLYON_COLOR_BUTTON_ACTION1", '#0088cc','chaine',0,'',$conf->entity);
+        dolibarr_set_const($db, "OBLYON_COLOR_BUTTON_ACTION2", '#0044cc','chaine',0,'',$conf->entity);
+        dolibarr_set_const($db, "OBLYON_COLOR_BUTTON_DELETE1", '#cc8800','chaine',0,'',$conf->entity);
+        dolibarr_set_const($db, "OBLYON_COLOR_BUTTON_DELETE2", '#cc4400','chaine',0,'',$conf->entity);
+
 		dolibarr_set_const($db, "OBLYON_COLOR_MAIN", '#0083A2','chaine',0,'',$conf->entity);
 		dolibarr_set_const($db, "OBLYON_COLOR_BCKGRD", '#F4F4F4','chaine',0,'',$conf->entity);
 		dolibarr_set_const($db, "OBLYON_COLOR_LOGO_BCKGRD", '#FFFFFF','chaine',0,'',$conf->entity);
@@ -229,6 +260,11 @@ if ($action == 'settheme') {
 		dolibarr_set_const($db, "OBLYON_COLOR_LEFTMENU_BCKGRD", '#2ECC71','chaine',0,'',$conf->entity);
 		dolibarr_set_const($db, "OBLYON_COLOR_LEFTMENU_BCKGRD_HOVER", '#29B564','chaine',0,'',$conf->entity);
 		dolibarr_set_const($db, "OBLYON_COLOR_LEFTMENU_TXT", '#FFFFFF','chaine',0,'',$conf->entity);
+
+        dolibarr_set_const($db, "OBLYON_COLOR_BUTTON_ACTION1", '#0088cc','chaine',0,'',$conf->entity);
+        dolibarr_set_const($db, "OBLYON_COLOR_BUTTON_ACTION2", '#0044cc','chaine',0,'',$conf->entity);
+        dolibarr_set_const($db, "OBLYON_COLOR_BUTTON_DELETE1", '#cc8800','chaine',0,'',$conf->entity);
+        dolibarr_set_const($db, "OBLYON_COLOR_BUTTON_DELETE2", '#cc4400','chaine',0,'',$conf->entity);
 
 		dolibarr_set_const($db, "OBLYON_COLOR_MAIN", '#0083A2','chaine',0,'',$conf->entity);
 		dolibarr_set_const($db, "OBLYON_COLOR_BCKGRD", '#F5F5F5','chaine',0,'',$conf->entity);
@@ -412,6 +448,8 @@ print '</table>';
 
 // Colors
 print '<table class="noborder as-settings-colors">';
+
+// Top menu
 print '<tr class="liste_titre">';
 print '<td colspan="2">' . $langs->trans('TopMenu') . '</td>';
 print '</tr>'."\n";
@@ -421,9 +459,7 @@ $num = count($top_colors);
 if ($num)
 {
 	foreach ($top_colors as $key) {
-		$var = ! $var;
-
-		print '<tr ' . $bc[$var] . ' class="value">';
+		print '<tr class="value oddeven">';
 
 		// Param
 		$label = $langs->trans($key);
@@ -436,6 +472,7 @@ if ($num)
 	}
 }
 
+// Left menu
 print '<tr class="liste_titre">';
 print '<td colspan="2">' . $langs->trans('LeftMenu') . '</td>';
 print '</tr>'."\n";
@@ -445,9 +482,7 @@ $num = count($left_colors);
 if ($num)
 {
 	foreach ($left_colors as $key) {
-		$var = ! $var;
-
-		print '<tr ' . $bc[$var] . ' class="value">';
+		print '<tr class="value oddeven">';
 
 		// Param
 		$label = $langs->trans($key);
@@ -460,6 +495,30 @@ if ($num)
 	}
 }
 
+// Buttons
+print '<tr class="liste_titre">';
+print '<td colspan="2">' . $langs->trans('Buttons') . '</td>';
+print '</tr>'."\n";
+
+// Set colors
+$num = count($button_colors);
+if ($num)
+{
+    foreach ($button_colors as $key) {
+        print '<tr class="value oddeven">';
+
+        // Param
+        $label = $langs->trans($key);
+        print '<td width="50%">' . $label . '</td>';
+
+        // Value
+        print '<td>';
+        print '<input type="text" class="color" id="' . $conf->global->$key . '" name="' . $key . '" value="' . $conf->global->$key . '">';
+        print '</td></tr>';
+    }
+}
+
+// Others
 print '<tr class="liste_titre">';
 print '<td colspan="2">' . $langs->trans('Others') . '</td>';
 print '</tr>'."\n";
@@ -469,9 +528,7 @@ $num = count($colors_options);
 if ($num)
 {
 	foreach ($colors_options as $key) {
-		$var = ! $var;
-
-		print '<tr ' . $bc[$var] . ' class="value">';
+		print '<tr class="value oddeven">';
 
 		// Param
 		$label = $langs->trans($key);
@@ -486,21 +543,15 @@ if ($num)
 
 print '</table>'."\n";
 
-// Set default colors
-
-print '
-<br>
-
-<br>
-'."\n";
-
-
 dol_fiche_end();
 
-print '<div class="center"><input type="submit" class="button" value="' . dol_escape_htmltag($langs->trans('Modify')) . '" name="button">';
-print '</form>';
-
+print '<div class="center">';
+print '<input type="submit" class="button" value="' . dol_escape_htmltag($langs->trans('Modify')) . '" name="button">';
 print '</div>';
 
+print '</form>';
+print '<br>';
+
+// End of page
 llxFooter();
 $db->close();
