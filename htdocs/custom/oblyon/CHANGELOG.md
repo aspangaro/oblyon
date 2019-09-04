@@ -1,5 +1,8 @@
 ## Changelog ##
 
+### Version 10.0 beta 3 - 2019 09 04
+ - Fix Icon ticket module is missing
+
 ### Version 10.0 beta 2 - 2019 08 26
  - Standardize code & update - Compatibility with Dolibarr 10.0
  - New Add possibility in admin colors menu to manage colors of the buttons

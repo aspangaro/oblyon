@@ -64,7 +64,7 @@ function __construct($db) {
 	$this->description = "Thème Oblyon";
 
 	// Possible values for version are: 'development', 'experimental', 'dolibarr' or version
-	$this->version = '10.0-beta2';
+	$this->version = '10.0-beta3';
 
 	$this->editor_name = "Open-DSI | Monogramm";
 
