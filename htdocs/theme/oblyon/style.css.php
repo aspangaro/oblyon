@@ -4015,6 +4015,10 @@ td.photo {
 	.mainmenu.google {
 		background-image: url(<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/menus/globe.png',1); ?>);
 	}
+
+    .mainmenu.ticket {
+        background-image: url(<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/menus/ticket.png',1); ?>);
+    }
 <?php } else { ?>
 	.mainmenu.home{
 		background-image: url(<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/old-menus/home.png',1); ?>);
@@ -4109,6 +4113,10 @@ td.photo {
 	.mainmenu.google {
 		background-image: url(<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/old-menus/globe.png',1); ?>);
 	}
+
+    .mainmenu.ticket {
+        background-image: url(<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/old-menus/ticket.png',1); ?>);
+    }
 <?php } ?>
 
 <?php
@@ -7678,15 +7686,34 @@ border-top-right-radius: 6px;
     background: #ddd
 }​
 
-/* ============================================================================== */
-/* Ticket module                                                                  */
-/* ============================================================================== */
-
- #cd-timeline {
-     position: relative;
-     padding: 2em 0;
-     margin-bottom: 2em;
+     /* ============================================================================== */
+     /* Ticket module                                                                  */
+     /* ============================================================================== */
+ .ticketpublicarea {
+     width: 70%;
  }
+.publicnewticketform {
+    margin-top: 25px !important;
+}
+.ticketlargemargin {
+    padding-left: 50px;
+    padding-right: 50px;
+}
+@media only screen and (max-width: 767px)
+{
+    .ticketlargemargin {
+        padding-left: 5px; padding-right: 5px;
+    }
+    .ticketpublicarea {
+        width: 100%;
+    }
+}
+
+#cd-timeline {
+    position: relative;
+    padding: 2em 0;
+    margin-bottom: 2em;
+}
 #cd-timeline::before {
     /* this is the vertical line */
     content: '';

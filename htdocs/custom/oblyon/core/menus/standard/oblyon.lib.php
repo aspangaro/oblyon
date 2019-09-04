@@ -54,7 +54,7 @@ function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$fo
     $menu_invert = $conf->global->MAIN_MENU_INVERT;
 
     // Show logo company
-	if (!empty($conf->global->MAIN_MENU_INVERT) && empty($noout) && ! empty($conf->global->MAIN_SHOW_LOGO)) {
+	if (!empty($menu_invert) && empty($noout) && ! empty($conf->global->MAIN_SHOW_LOGO)) {
 		if (empty($conf->dol_optimize_smallscreen)) {
 			$mysoc->logo=$conf->global->MAIN_INFO_SOCIETE_LOGO;
 			if (! empty($mysoc->logo) && is_readable($conf->mycompany->dir_output.'/logos/'.$mysoc->logo)) {
@@ -103,7 +103,7 @@ function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$fo
         print "<!-- End Bookmarks -->\n";
     }
 
-	if ( empty($conf->global->MAIN_MENU_INVERT) && ($conf->global->OBLYON_HIDE_LEFTMENU || $conf->dol_optimize_smallscreen) ) {
+	if ( empty($menu_invert) && ($conf->global->OBLYON_HIDE_LEFTMENU || $conf->dol_optimize_smallscreen) ) {
 		print '<div class="pushy-btn" title="'.$langs->trans("ShowLeftMenu").'">&#8801;</div>';
 	}
 
@@ -436,7 +436,9 @@ function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$fo
 function print_start_menu_array() {
 	global $conf;
 
-	print '<nav class="tmenudiv db-nav main-nav'.(empty($conf->global->MAIN_MENU_INVERT)?'':' is-inverted').'">';
+    $menu_invert = $conf->global->MAIN_MENU_INVERT;
+
+    print '<nav class="tmenudiv db-nav main-nav'.(empty($menu_invert)?'':' is-inverted').'">';
 	print '<ul role="navigation" class="tmenu main-nav__list">';
 }
 
@@ -545,7 +547,9 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 	$mainmenu=($forcemainmenu?$forcemainmenu:$_SESSION["mainmenu"]);
 	$leftmenu=($forceleftmenu?'':(empty($_SESSION["leftmenu"])?'none':$_SESSION["leftmenu"]));
 
-	$usemenuhider = !empty($conf->global->MAIN_MENU_INVERT) && ($conf->global->OBLYON_HIDE_LEFTMENU || $conf->dol_optimize_smallscreen);
+    $menu_invert = $conf->global->MAIN_MENU_INVERT;
+
+	$usemenuhider = !empty($menu_invert) && ($conf->global->OBLYON_HIDE_LEFTMENU || $conf->dol_optimize_smallscreen);
 
 	if ( $usemenuhider ) {
 		print '<div class="pushy-btn" title="'.$langs->trans("ShowLeftMenu").'">&#8801;</div>';
@@ -553,7 +557,7 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 
 	if ($conf->global->OBLYON_SHOW_COMPNAME && $conf->global->MAIN_INFO_SOCIETE_NOM) {
 		print '<div class="menu_contenu db-menu__society center">';
-		if ($conf->global->MAIN_MENU_INVERT) {
+		if ($menu_invert) {
 			print '<h1><a class="db-menu__society__link" href="'.DOL_URL_ROOT.'" title="'.$langs->trans("Home").'">'.$conf->global->MAIN_INFO_SOCIETE_NOM.'</a></h1>';
 		} else {
 			print '<h1>'. $conf->global->MAIN_INFO_SOCIETE_NOM .'</h1>';
@@ -562,7 +566,7 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 	}
 
 	// Show logo company
-	if (empty($conf->global->MAIN_MENU_INVERT) && empty($noout) && ! empty($conf->global->MAIN_SHOW_LOGO)) {
+	if (empty($menu_invert) && empty($noout) && ! empty($conf->global->MAIN_SHOW_LOGO)) {
 		if (empty($conf->dol_optimize_smallscreen)) {
 			$mysoc->logo=$conf->global->MAIN_INFO_SOCIETE_LOGO;
 			if (! empty($mysoc->logo) && is_readable($conf->mycompany->dir_output.'/logos/'.$mysoc->logo)) {
@@ -679,7 +683,10 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 				$langs->loadLangs(array('admin', 'help'));
 
 				$newmenu->add('/admin/system/dolibarr.php?mainmenu=home&amp;leftmenu=admintools_info', $langs->trans('InfoDolibarr'), 1);
-				if ($usemenuhider || empty($leftmenu) || $leftmenu=='admintools_info') $newmenu->add('/admin/system/modules.php?mainmenu=home&amp;leftmenu=admintools_info', $langs->trans('Modules'), 2);
+
+                if (! empty($menu_invert)) $leftmenu= 'admintools_info';
+
+                if ($usemenuhider || empty($leftmenu) || $leftmenu=='admintools_info') $newmenu->add('/admin/system/modules.php?mainmenu=home&amp;leftmenu=admintools_info', $langs->trans('Modules'), 2);
 				if ($usemenuhider || empty($leftmenu) || $leftmenu=='admintools_info') $newmenu->add('/admin/triggers.php?mainmenu=home&amp;leftmenu=admintools_info', $langs->trans('Triggers'), 2);
 				if ($usemenuhider || empty($leftmenu) || $leftmenu=='admintools_info') $newmenu->add('/admin/system/filecheck.php?mainmenu=home&amp;leftmenu=admintools_info', $langs->trans('FileCheck'), 2);
 				$newmenu->add('/admin/system/browser.php?mainmenu=home&amp;leftmenu=admintools', $langs->trans('InfoBrowser'), 1);
@@ -1811,7 +1818,7 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 	if (! is_array($menu_array)) return 0;
 
 	// Show menu
-	$invert=empty($conf->global->MAIN_MENU_INVERT)?"":"	is-inverted";
+	$invert=empty($menu_invert)?"":"	is-inverted";
 	if (empty($noout)) {
 	$alt=0; 
 	$num=count($menu_array);
@@ -1862,7 +1869,7 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 			if ($menu_array[$i]['enabled']) {
 				print '<li class="menu_titre menu_contenu sec-nav__item item-heading">';
 				print '<a class="vmenu sec-nav__link" href="'.$url.'"'.($menu_array[$i]['target']?' target="'.$menu_array[$i]['target'].'"':'').'>';
-				print (!empty($menu_array[$i]['leftmenu'])?'<i class="icon icon--'.$menu_array[$i]['leftmenu'].'"></i>': '').$menu_array[$i]['titre'].' '.(!empty($conf->global->MAIN_MENU_INVERT) && !empty($menu_array[$i+1]['level'])?'<span class="caret	caret--top"></span>':'');
+				print (!empty($menu_array[$i]['leftmenu'])?'<i class="icon icon--'.$menu_array[$i]['leftmenu'].'"></i>': '').$menu_array[$i]['titre'].' '.(!empty($menu_ivert) && !empty($menu_array[$i+1]['level'])?'<span class="caret	caret--top"></span>':'');
 				print '</a>'."\n";
 			} else if ($showmenu) {
 				print '<li class="sec-nav__item is-disabled"><a class="tmenudisabled sec-nav__link	is-disabled" href="#" title="'.dol_escape_htmltag($langs->trans("NotAllowed")).'">'.$menu_array[$i]['titre'].'</a>'."\n";
