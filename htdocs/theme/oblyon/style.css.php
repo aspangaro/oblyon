@@ -2839,7 +2839,7 @@ div.login a:hover {
 	box-shadow: 0 0 1px rgba(0,0,0, .04);
 	-webkit-box-shadow: 0 0 1px rgba(0,0,0, .04);
 	clear: both;
-	padding: 5px;
+	padding: 10px;
 	text-decoration: none;
 }
 
