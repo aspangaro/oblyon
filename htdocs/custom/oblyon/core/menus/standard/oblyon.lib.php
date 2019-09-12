@@ -686,9 +686,11 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 
                 if (! empty($menu_invert)) $leftmenu= 'admintools_info';
 
-                if ($usemenuhider || empty($leftmenu) || $leftmenu=='admintools_info') $newmenu->add('/admin/system/modules.php?mainmenu=home&amp;leftmenu=admintools_info', $langs->trans('Modules'), 2);
-				if ($usemenuhider || empty($leftmenu) || $leftmenu=='admintools_info') $newmenu->add('/admin/triggers.php?mainmenu=home&amp;leftmenu=admintools_info', $langs->trans('Triggers'), 2);
-				if ($usemenuhider || empty($leftmenu) || $leftmenu=='admintools_info') $newmenu->add('/admin/system/filecheck.php?mainmenu=home&amp;leftmenu=admintools_info', $langs->trans('FileCheck'), 2);
+                if ($usemenuhider || empty($leftmenu) || $leftmenu=='admintools_info') {
+                    $newmenu->add('/admin/system/modules.php?mainmenu=home&amp;leftmenu=admintools_info', $langs->trans('Modules'), 2);
+                    $newmenu->add('/admin/triggers.php?mainmenu=home&amp;leftmenu=admintools_info', $langs->trans('Triggers'), 2);
+                    $newmenu->add('/admin/system/filecheck.php?mainmenu=home&amp;leftmenu=admintools_info', $langs->trans('FileCheck'), 2);
+                }
 				$newmenu->add('/admin/system/browser.php?mainmenu=home&amp;leftmenu=admintools', $langs->trans('InfoBrowser'), 1);
 				$newmenu->add('/admin/system/os.php?mainmenu=home&amp;leftmenu=admintools', $langs->trans('InfoOS'), 1);
 				$newmenu->add('/admin/system/web.php?mainmenu=home&amp;leftmenu=admintools', $langs->trans('InfoWebServer'), 1);
@@ -836,13 +838,15 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 
                 if (! empty($menu_invert)) $leftmenu= 'propals';
 
-				if ($usemenuhider || empty($leftmenu) || $leftmenu=="propals") $newmenu->add("/comm/propal/list.php?leftmenu=propals&viewstatut=0", $langs->trans("PropalsDraft"), 2, $user->rights->propale->lire);
-				if ($usemenuhider || empty($leftmenu) || $leftmenu=="propals") $newmenu->add("/comm/propal/list.php?leftmenu=propals&viewstatut=1", $langs->trans("PropalsOpened"), 2, $user->rights->propale->lire);
-				if ($usemenuhider || empty($leftmenu) || $leftmenu=="propals") $newmenu->add("/comm/propal/list.php?leftmenu=propals&viewstatut=2", $langs->trans("PropalStatusSigned"), 2, $user->rights->propale->lire);
-				if ($usemenuhider || empty($leftmenu) || $leftmenu=="propals") $newmenu->add("/comm/propal/list.php?leftmenu=propals&viewstatut=3", $langs->trans("PropalStatusNotSigned"), 2, $user->rights->propale->lire);
-				if ($usemenuhider || empty($leftmenu) || $leftmenu=="propals") $newmenu->add("/comm/propal/list.php?leftmenu=propals&viewstatut=4", $langs->trans("PropalStatusBilled"), 2, $user->rights->propale->lire);
-				//if ($usemenuhider || empty($leftmenu) || $leftmenu=="propals") $newmenu->add("/comm/propal/list.php?leftmenu=propals&viewstatut=2,3,4", $langs->trans("PropalStatusClosedShort"), 2, $user->rights->propale->lire);
-				$newmenu->add("/comm/propal/stats/index.php?leftmenu=propals", $langs->trans("Statistics"), 1, $user->rights->propale->lire);
+                if ($usemenuhider || empty($leftmenu) || $leftmenu=="propals") {
+                    $newmenu->add("/comm/propal/list.php?leftmenu=propals&viewstatut=0", $langs->trans("PropalsDraft"), 2, $user->rights->propale->lire);
+                    $newmenu->add("/comm/propal/list.php?leftmenu=propals&viewstatut=1", $langs->trans("PropalsOpened"), 2, $user->rights->propale->lire);
+                    $newmenu->add("/comm/propal/list.php?leftmenu=propals&viewstatut=2", $langs->trans("PropalStatusSigned"), 2, $user->rights->propale->lire);
+                    $newmenu->add("/comm/propal/list.php?leftmenu=propals&viewstatut=3", $langs->trans("PropalStatusNotSigned"), 2, $user->rights->propale->lire);
+                    $newmenu->add("/comm/propal/list.php?leftmenu=propals&viewstatut=4", $langs->trans("PropalStatusBilled"), 2, $user->rights->propale->lire);
+                    // $newmenu->add("/comm/propal/list.php?leftmenu=propals&viewstatut=2,3,4", $langs->trans("PropalStatusClosedShort"), 2, $user->rights->propale->lire);
+                }
+                $newmenu->add("/comm/propal/stats/index.php?leftmenu=propals", $langs->trans("Statistics"), 1, $user->rights->propale->lire);
 			}
 
 			// Customers orders
@@ -855,12 +859,14 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 
                 if (! empty($menu_invert)) $leftmenu= 'orders';
 
-				if ($usemenuhider || empty($leftmenu) || $leftmenu=="orders") $newmenu->add("/commande/list.php?leftmenu=orders&viewstatut=0", $langs->trans("StatusOrderDraftShort"), 2, $user->rights->commande->lire);
-				if ($usemenuhider || empty($leftmenu) || $leftmenu=="orders") $newmenu->add("/commande/list.php?leftmenu=orders&viewstatut=1", $langs->trans("StatusOrderValidated"), 2, $user->rights->commande->lire);
-				if ($usemenuhider || empty($leftmenu) || $leftmenu=="orders" && ! empty($conf->expedition->enabled)) $newmenu->add("/commande/list.php?leftmenu=orders&viewstatut=2", $langs->trans("StatusOrderSentShort"), 2, $user->rights->commande->lire);
-				if ($usemenuhider || empty($leftmenu) || $leftmenu=="orders") $newmenu->add("/commande/list.php?leftmenu=orders&viewstatut=3", $langs->trans("StatusOrderDelivered"), 2, $user->rights->commande->lire);
-				//if ($usemenuhider || empty($leftmenu) || $leftmenu=="orders") $newmenu->add("/commande/list.php?leftmenu=orders&viewstatut=4", $langs->trans("StatusOrderProcessed"), 2, $user->rights->commande->lire);
-				if ($usemenuhider || empty($leftmenu) || $leftmenu=="orders") $newmenu->add("/commande/list.php?leftmenu=orders&viewstatut=-1", $langs->trans("StatusOrderCanceledShort"), 2, $user->rights->commande->lire);
+				if ($usemenuhider || empty($leftmenu) || $leftmenu=="orders") {
+                    $newmenu->add("/commande/list.php?leftmenu=orders&viewstatut=0", $langs->trans("StatusOrderDraftShort"), 2, $user->rights->commande->lire);
+                    $newmenu->add("/commande/list.php?leftmenu=orders&viewstatut=1", $langs->trans("StatusOrderValidated"), 2, $user->rights->commande->lire);
+                    if (! empty($conf->expedition->enabled)) $newmenu->add("/commande/list.php?leftmenu=orders&viewstatut=2", $langs->trans("StatusOrderSentShort"), 2, $user->rights->commande->lire);
+                    $newmenu->add("/commande/list.php?leftmenu=orders&viewstatut=3", $langs->trans("StatusOrderDelivered"), 2, $user->rights->commande->lire);
+                    // $newmenu->add("/commande/list.php?leftmenu=orders&viewstatut=4", $langs->trans("StatusOrderProcessed"), 2, $user->rights->commande->lire);
+                    $newmenu->add("/commande/list.php?leftmenu=orders&viewstatut=-1", $langs->trans("StatusOrderCanceledShort"), 2, $user->rights->commande->lire);
+                }
 				$newmenu->add("/commande/stats/index.php?leftmenu=orders", $langs->trans("Statistics"), 1, $user->rights->commande->lire);
 			}
 
@@ -874,35 +880,43 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 
                 if (! empty($menu_invert)) $leftmenu= 'orders_suppliers';
 
-				if ($usemenuhider || empty($leftmenu) || $leftmenu=="orders_suppliers") $newmenu->add("/fourn/commande/list.php?leftmenu=orders_suppliers&statut=0", $langs->trans("StatusOrderDraftShort"), 2, $user->rights->fournisseur->commande->lire);
-				if (($usemenuhider || empty($leftmenu) || $leftmenu=="orders_suppliers") && empty($conf->global->SUPPLIER_ORDER_HIDE_VALIDATED)) $newmenu->add("/fourn/commande/list.php?leftmenu=orders_suppliers&statut=1", $langs->trans("StatusOrderValidated"), 2, $user->rights->fournisseur->commande->lire);
-				if ($usemenuhider || empty($leftmenu) || $leftmenu=="orders_suppliers") $newmenu->add("/fourn/commande/list.php?leftmenu=orders_suppliers&statut=2", $langs->trans("StatusOrderApprovedShort"), 2, $user->rights->fournisseur->commande->lire);
-				if ($usemenuhider || empty($leftmenu) || $leftmenu=="orders_suppliers") $newmenu->add("/fourn/commande/list.php?leftmenu=orders_suppliers&statut=3", $langs->trans("StatusOrderOnProcessShort"), 2, $user->rights->fournisseur->commande->lire);
-				if ($usemenuhider || empty($leftmenu) || $leftmenu=="orders_suppliers") $newmenu->add("/fourn/commande/list.php?leftmenu=orders_suppliers&statut=4", $langs->trans("StatusOrderReceivedPartiallyShort"), 2, $user->rights->fournisseur->commande->lire);
-				if ($usemenuhider || empty($leftmenu) || $leftmenu=="orders_suppliers") $newmenu->add("/fourn/commande/list.php?leftmenu=orders_suppliers&statut=5", $langs->trans("StatusOrderReceivedAll"), 2, $user->rights->fournisseur->commande->lire);
-				if ($usemenuhider || empty($leftmenu) || $leftmenu=="orders_suppliers") $newmenu->add("/fourn/commande/list.php?leftmenu=orders_suppliers&statut=6,7", $langs->trans("StatusOrderCanceled"), 2, $user->rights->fournisseur->commande->lire);
-				if ($usemenuhider || empty($leftmenu) || $leftmenu=="orders_suppliers") $newmenu->add("/fourn/commande/list.php?leftmenu=orders_suppliers&statut=9", $langs->trans("StatusOrderRefused"), 2, $user->rights->fournisseur->commande->lire);
-				// Billed is another field. We should add instead a dedicated filter on list. if ($usemenuhider || empty($leftmenu) || $leftmenu=="orders_suppliers") $newmenu->add("/fourn/commande/list.php?leftmenu=orders_suppliers&billed=1", $langs->trans("StatusOrderBilled"), 2, $user->rights->fournisseur->commande->lire);
-
+                if ($usemenuhider || empty($leftmenu) || $leftmenu=="orders_suppliers") {
+                    $newmenu->add("/fourn/commande/list.php?leftmenu=orders_suppliers&statut=0", $langs->trans("StatusOrderDraftShort"), 2, $user->rights->fournisseur->commande->lire);
+                    if (empty($conf->global->SUPPLIER_ORDER_HIDE_VALIDATED)) $newmenu->add("/fourn/commande/list.php?leftmenu=orders_suppliers&statut=1", $langs->trans("StatusOrderValidated"), 2, $user->rights->fournisseur->commande->lire);
+                    $newmenu->add("/fourn/commande/list.php?leftmenu=orders_suppliers&statut=2", $langs->trans("StatusOrderApprovedShort"), 2, $user->rights->fournisseur->commande->lire);
+                    $newmenu->add("/fourn/commande/list.php?leftmenu=orders_suppliers&statut=3", $langs->trans("StatusOrderOnProcessShort"), 2, $user->rights->fournisseur->commande->lire);
+                    $newmenu->add("/fourn/commande/list.php?leftmenu=orders_suppliers&statut=4", $langs->trans("StatusOrderReceivedPartiallyShort"), 2, $user->rights->fournisseur->commande->lire);
+                    $newmenu->add("/fourn/commande/list.php?leftmenu=orders_suppliers&statut=5", $langs->trans("StatusOrderReceivedAll"), 2, $user->rights->fournisseur->commande->lire);
+                    $newmenu->add("/fourn/commande/list.php?leftmenu=orders_suppliers&statut=6,7", $langs->trans("StatusOrderCanceled"), 2, $user->rights->fournisseur->commande->lire);
+                    $newmenu->add("/fourn/commande/list.php?leftmenu=orders_suppliers&statut=9", $langs->trans("StatusOrderRefused"), 2, $user->rights->fournisseur->commande->lire);
+                    // Billed is another field. We should add instead a dedicated filter on list. $newmenu->add("/fourn/commande/list.php?leftmenu=orders_suppliers&billed=1", $langs->trans("StatusOrderBilled"), 2, $user->rights->fournisseur->commande->lire);
+                }
 				$newmenu->add("/commande/stats/index.php?leftmenu=orders_suppliers&amp;mode=supplier", $langs->trans("Statistics"), 1, $user->rights->fournisseur->commande->lire);
 			}
 
 			// Contract
-			if (! empty($conf->contrat->enabled))
-			{
-				$langs->load("contracts");
-				$newmenu->add("/contrat/index.php?leftmenu=contracts", $langs->trans("ContractsSubscriptions"), 0, $user->rights->contrat->lire, '', $mainmenu, 'contracts', 2000);
-				$newmenu->add("/contrat/card.php?action=create&amp;leftmenu=contracts", $langs->trans("NewContractSubscription"), 1, $user->rights->contrat->creer);
-				$newmenu->add("/contrat/list.php?leftmenu=contracts", $langs->trans("List"), 1, $user->rights->contrat->lire);
-				$newmenu->add("/contrat/services_list.php?leftmenu=contracts", $langs->trans("MenuServices"), 1, $user->rights->contrat->lire);
+			if (! empty($conf->contrat->enabled)) {
+                $langs->load("contracts");
+                $newmenu->add("/contrat/index.php?leftmenu=contracts", $langs->trans("ContractsSubscriptions"), 0,
+                    $user->rights->contrat->lire, '', $mainmenu, 'contracts', 2000);
+                $newmenu->add("/contrat/card.php?action=create&amp;leftmenu=contracts",
+                    $langs->trans("NewContractSubscription"), 1, $user->rights->contrat->creer);
+                $newmenu->add("/contrat/list.php?leftmenu=contracts", $langs->trans("List"), 1,
+                    $user->rights->contrat->lire);
+                $newmenu->add("/contrat/services_list.php?leftmenu=contracts", $langs->trans("MenuServices"), 1,
+                    $user->rights->contrat->lire);
 
-                if (! empty($menu_invert)) $leftmenu= 'contracts';
+                if (!empty($menu_invert)) {
+                    $leftmenu = 'contracts';
+                }
 
-				if ($usemenuhider || empty($leftmenu) || $leftmenu=="contracts") $newmenu->add("/contrat/services.php?leftmenu=contracts&amp;mode=0", $langs->trans("MenuInactiveServices"), 2, $user->rights->contrat->lire);
-				if ($usemenuhider || empty($leftmenu) || $leftmenu=="contracts") $newmenu->add("/contrat/services.php?leftmenu=contracts&amp;mode=4", $langs->trans("MenuRunningServices"), 2, $user->rights->contrat->lire);
-				if ($usemenuhider || empty($leftmenu) || $leftmenu=="contracts") $newmenu->add("/contrat/services.php?leftmenu=contracts&amp;mode=4&amp;filter=expired", $langs->trans("MenuExpiredServices"), 2, $user->rights->contrat->lire);
-				if ($usemenuhider || empty($leftmenu) || $leftmenu=="contracts") $newmenu->add("/contrat/services.php?leftmenu=contracts&amp;mode=5", $langs->trans("MenuClosedServices"), 2, $user->rights->contrat->lire);
-			}
+                if ($usemenuhider || empty($leftmenu) || $leftmenu == "contracts") {
+                    $newmenu->add("/contrat/services.php?leftmenu=contracts&amp;mode=0", $langs->trans("MenuInactiveServices"), 2, $user->rights->contrat->lire);
+                    $newmenu->add("/contrat/services.php?leftmenu=contracts&amp;mode=4", $langs->trans("MenuRunningServices"), 2, $user->rights->contrat->lire);
+                    $newmenu->add("/contrat/services.php?leftmenu=contracts&amp;mode=4&amp;filter=expired", $langs->trans("MenuExpiredServices"), 2, $user->rights->contrat->lire);
+                    $newmenu->add("/contrat/services.php?leftmenu=contracts&amp;mode=5", $langs->trans("MenuClosedServices"), 2, $user->rights->contrat->lire);
+                }
+            }
 
 			// Interventions
 			if (! empty($conf->ficheinter->enabled))
@@ -993,7 +1007,7 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 				{
 					$langs->load("supplier");
 					$newmenu->add("/fourn/commande/list.php?leftmenu=orders&amp;search_status=5&amp;billed=0", $langs->trans("MenuOrdersSupplierToBill"), 0, $user->rights->commande->lire, '', $mainmenu, 'orders');
-					//				  if ($usemenuhider || empty($leftmenu) || $leftmenu=="orders") $newmenu->add("/commande/", $langs->trans("StatusOrderToBill"), 1, $user->rights->commande->lire);
+					// if ($usemenuhider || empty($leftmenu) || $leftmenu=="orders") $newmenu->add("/commande/", $langs->trans("StatusOrderToBill"), 1, $user->rights->commande->lire);
 				}
 			}
 
@@ -1025,9 +1039,12 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 
                     if (! empty($menu_invert)) $leftmenu= 'tax_social';
 
-                    if ($usemenuhider || empty($leftmenu) || preg_match('/^tax_social/i',$leftmenu)) $newmenu->add("/compta/sociales/card.php?leftmenu=tax_social&action=create",$langs->trans("MenuNewSocialContribution"), 2, $user->rights->tax->charges->creer);
-					if ($usemenuhider || empty($leftmenu) || preg_match('/^tax_social/i',$leftmenu)) $newmenu->add("/compta/sociales/list.php?leftmenu=tax_social",$langs->trans("List"),2,$user->rights->tax->charges->lire);
-					if ($usemenuhider || empty($leftmenu) || preg_match('/^tax_social/i',$leftmenu)) $newmenu->add("/compta/sociales/payments.php?leftmenu=tax_social&amp;mainmenu=billing&amp;mode=sconly",$langs->trans("Payments"), 2, $user->rights->tax->charges->lire);
+                    if ($usemenuhider || empty($leftmenu) || preg_match('/^tax_social/i',$leftmenu)) {
+                        $newmenu->add("/compta/sociales/card.php?leftmenu=tax_social&action=create", $langs->trans("MenuNewSocialContribution"), 2, $user->rights->tax->charges->creer);
+                        $newmenu->add("/compta/sociales/list.php?leftmenu=tax_social", $langs->trans("List"), 2, $user->rights->tax->charges->lire);
+                        $newmenu->add("/compta/sociales/payments.php?leftmenu=tax_social&amp;mainmenu=billing&amp;mode=sconly", $langs->trans("Payments"), 2, $user->rights->tax->charges->lire);
+                    }
+
 					// VAT
 					if (empty($conf->global->TAX_DISABLE_VAT_MENUS))
 					{
@@ -1035,11 +1052,14 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 
                         if (! empty($menu_invert)) $leftmenu= 'tax_vat';
 
-						if ($usemenuhider || empty($leftmenu) || preg_match('/^tax_vat/i',$leftmenu)) $newmenu->add("/compta/tva/card.php?leftmenu=tax_vat&action=create",$langs->trans("New"),2,$user->rights->tax->charges->creer);
-						if ($usemenuhider || empty($leftmenu) || preg_match('/^tax_vat/i',$leftmenu)) $newmenu->add("/compta/tva/list.php?leftmenu=tax_vat",$langs->trans("List"),2,$user->rights->tax->charges->lire);
-						if ($usemenuhider || empty($leftmenu) || preg_match('/^tax_vat/i',$leftmenu)) $newmenu->add("/compta/tva/index.php?leftmenu=tax_vat",$langs->trans("ReportByMonth"),2,$user->rights->tax->charges->lire);
-						if ($usemenuhider || empty($leftmenu) || preg_match('/^tax_vat/i',$leftmenu)) $newmenu->add("/compta/tva/clients.php?leftmenu=tax_vat", $langs->trans("ReportByCustomers"), 2, $user->rights->tax->charges->lire);
-						if ($usemenuhider || empty($leftmenu) || preg_match('/^tax_vat/i',$leftmenu)) $newmenu->add("/compta/tva/quadri_detail.php?leftmenu=tax_vat", $langs->trans("ReportByQuarter"), 2, $user->rights->tax->charges->lire);
+                        if ($usemenuhider || empty($leftmenu) || preg_match('/^tax_vat/i',$leftmenu)) {
+                            $newmenu->add("/compta/tva/card.php?leftmenu=tax_vat&action=create",$langs->trans("New"),2,$user->rights->tax->charges->creer);
+                            $newmenu->add("/compta/tva/list.php?leftmenu=tax_vat",$langs->trans("List"),2,$user->rights->tax->charges->lire);
+                            $newmenu->add("/compta/tva/index.php?leftmenu=tax_vat",$langs->trans("ReportByMonth"),2,$user->rights->tax->charges->lire);
+                            $newmenu->add("/compta/tva/clients.php?leftmenu=tax_vat", $langs->trans("ReportByCustomers"), 2, $user->rights->tax->charges->lire);
+                            $newmenu->add("/compta/tva/quadri_detail.php?leftmenu=tax_vat", $langs->trans("ReportByQuarter"), 2, $user->rights->tax->charges->lire);
+                        }
+
 						global $mysoc;
 
 						// Local Taxes 1
@@ -1049,12 +1069,15 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 
                             if (! empty($menu_invert)) $leftmenu= 'tax_1_vat';
 
-							if ($usemenuhider || empty($leftmenu) || preg_match('/^tax_1_vat/i',$leftmenu)) $newmenu->add("/compta/localtax/card.php?leftmenu=tax_1_vat&action=create&amp;localTaxType=1",$langs->trans("New"),2,$user->rights->tax->charges->creer);
-							if ($usemenuhider || empty($leftmenu) || preg_match('/^tax_1_vat/i',$leftmenu)) $newmenu->add("/compta/localtax/list.php?leftmenu=tax_1_vat&amp;localTaxType=1",$langs->trans("List"),2,$user->rights->tax->charges->lire);
-							if ($usemenuhider || empty($leftmenu) || preg_match('/^tax_1_vat/i',$leftmenu)) $newmenu->add("/compta/localtax/index.php?leftmenu=tax_1_vat&amp;localTaxType=1",$langs->trans("ReportByMonth"),2,$user->rights->tax->charges->lire);
-							if ($usemenuhider || empty($leftmenu) || preg_match('/^tax_1_vat/i',$leftmenu)) $newmenu->add("/compta/localtax/clients.php?leftmenu=tax_1_vat&amp;localTaxType=1", $langs->trans("ReportByCustomers"), 2, $user->rights->tax->charges->lire);
-							if ($usemenuhider || empty($leftmenu) || preg_match('/^tax_1_vat/i',$leftmenu)) $newmenu->add("/compta/localtax/quadri_detail.php?leftmenu=tax_1_vat&amp;localTaxType=1", $langs->trans("ReportByQuarter"), 2, $user->rights->tax->charges->lire);
-						}
+                            if ($usemenuhider || empty($leftmenu) || preg_match('/^tax_1_vat/i',$leftmenu)) {
+                                $newmenu->add("/compta/localtax/card.php?leftmenu=tax_1_vat&action=create&amp;localTaxType=1",$langs->trans("New"),2,$user->rights->tax->charges->creer);
+                                $newmenu->add("/compta/localtax/list.php?leftmenu=tax_1_vat&amp;localTaxType=1",$langs->trans("List"),2,$user->rights->tax->charges->lire);
+                                $newmenu->add("/compta/localtax/index.php?leftmenu=tax_1_vat&amp;localTaxType=1",$langs->trans("ReportByMonth"),2,$user->rights->tax->charges->lire);
+                                $newmenu->add("/compta/localtax/clients.php?leftmenu=tax_1_vat&amp;localTaxType=1", $langs->trans("ReportByCustomers"), 2, $user->rights->tax->charges->lire);
+                                $newmenu->add("/compta/localtax/quadri_detail.php?leftmenu=tax_1_vat&amp;localTaxType=1", $langs->trans("ReportByQuarter"), 2, $user->rights->tax->charges->lire);
+                            }
+                        }
+
 						// Local Taxes 2
 						if($mysoc->useLocalTax(2) && (isset($mysoc->localtax2_assuj) && $mysoc->localtax2_assuj=="1"))
 						{
@@ -1062,11 +1085,13 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 
                             if (! empty($menu_invert)) $leftmenu= 'tax_2_vat';
 
-                            if ($usemenuhider || empty($leftmenu) || preg_match('/^tax_2_vat/i',$leftmenu)) $newmenu->add("/compta/localtax/card.php?leftmenu=tax_2_vat&action=create&amp;localTaxType=2",$langs->trans("New"),2,$user->rights->tax->charges->creer);
-							if ($usemenuhider || empty($leftmenu) || preg_match('/^tax_2_vat/i',$leftmenu)) $newmenu->add("/compta/localtax/list.php?leftmenu=tax_2_vat&amp;localTaxType=2",$langs->trans("List"),2,$user->rights->tax->charges->lire);
-							if ($usemenuhider || empty($leftmenu) || preg_match('/^tax_2_vat/i',$leftmenu)) $newmenu->add("/compta/localtax/index.php?leftmenu=tax_2_vat&amp;localTaxType=2",$langs->trans("ReportByMonth"),2,$user->rights->tax->charges->lire);
-							if ($usemenuhider || empty($leftmenu) || preg_match('/^tax_2_vat/i',$leftmenu)) $newmenu->add("/compta/localtax/clients.php?leftmenu=tax_2_vat&amp;localTaxType=2", $langs->trans("ReportByCustomers"), 2, $user->rights->tax->charges->lire);
-							if ($usemenuhider || empty($leftmenu) || preg_match('/^tax_2_vat/i',$leftmenu)) $newmenu->add("/compta/localtax/quadri_detail.php?leftmenu=tax_2_vat&amp;localTaxType=2", $langs->trans("ReportByQuarter"), 2, $user->rights->tax->charges->lire);
+                            if ($usemenuhider || empty($leftmenu) || preg_match('/^tax_2_vat/i',$leftmenu)) {
+                                $newmenu->add("/compta/localtax/card.php?leftmenu=tax_2_vat&action=create&amp;localTaxType=2",$langs->trans("New"),2,$user->rights->tax->charges->creer);
+                                $newmenu->add("/compta/localtax/list.php?leftmenu=tax_2_vat&amp;localTaxType=2",$langs->trans("List"),2,$user->rights->tax->charges->lire);
+                                $newmenu->add("/compta/localtax/index.php?leftmenu=tax_2_vat&amp;localTaxType=2",$langs->trans("ReportByMonth"),2,$user->rights->tax->charges->lire);
+                                $newmenu->add("/compta/localtax/clients.php?leftmenu=tax_2_vat&amp;localTaxType=2", $langs->trans("ReportByCustomers"), 2, $user->rights->tax->charges->lire);
+                                $newmenu->add("/compta/localtax/quadri_detail.php?leftmenu=tax_2_vat&amp;localTaxType=2", $langs->trans("ReportByQuarter"), 2, $user->rights->tax->charges->lire);
+                            }
 						}
 					}
 				}
@@ -1079,10 +1104,12 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 
                     if (! empty($menu_invert)) $leftmenu= 'tax_salary';
 
-					if ($usemenuhider || empty($leftmenu) || preg_match('/^tax_salary/i',$leftmenu)) $newmenu->add("/compta/salaries/card.php?leftmenu=tax_salary&action=create",$langs->trans("NewPayment"),2,$user->rights->salaries->write);
-					if ($usemenuhider || empty($leftmenu) || preg_match('/^tax_salary/i',$leftmenu)) $newmenu->add("/compta/salaries/list.php?leftmenu=tax_salary",$langs->trans("Payments"),2,$user->rights->salaries->read);
-					if ($usemenuhider || empty($leftmenu) || preg_match('/^tax_salary/i',$leftmenu)) $newmenu->add("/compta/salaries/stats/index.php?leftmenu=tax_salary",$langs->trans("Statistics"),2,$user->rights->salaries->read);
-				}
+                    if ($usemenuhider || empty($leftmenu) || preg_match('/^tax_salary/i',$leftmenu)) {
+                        $newmenu->add("/compta/salaries/card.php?leftmenu=tax_salary&action=create",$langs->trans("NewPayment"),2,$user->rights->salaries->write);
+                        $newmenu->add("/compta/salaries/list.php?leftmenu=tax_salary",$langs->trans("Payments"),2,$user->rights->salaries->read);
+                        $newmenu->add("/compta/salaries/stats/index.php?leftmenu=tax_salary",$langs->trans("Statistics"),2,$user->rights->salaries->read);
+                    }
+                }
 
 				// Loan
 				if (! empty($conf->loan->enabled))
@@ -1104,8 +1131,10 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 
                     if (! empty($menu_invert)) $leftmenu= 'tax_various';
 
-					if ($usemenuhider || empty($leftmenu) || preg_match('/^tax_various/i',$leftmenu)) $newmenu->add("/compta/bank/various_payment/card.php?leftmenu=tax_various&action=create",$langs->trans("New"), 2, $user->rights->banque->modifier);
-					if ($usemenuhider || empty($leftmenu) || preg_match('/^tax_various/i',$leftmenu)) $newmenu->add("/compta/bank/various_payment/list.php?leftmenu=tax_various",$langs->trans("List"),2,$user->rights->banque->lire);
+					if ($usemenuhider || empty($leftmenu) || preg_match('/^tax_various/i',$leftmenu)) {
+					    $newmenu->add("/compta/bank/various_payment/card.php?leftmenu=tax_various&action=create",$langs->trans("New"), 2, $user->rights->banque->modifier);
+                        $newmenu->add("/compta/bank/various_payment/list.php?leftmenu=tax_various",$langs->trans("List"),2,$user->rights->banque->lire);
+                    }
 				}
 			}
 		}
@@ -1278,9 +1307,11 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 
                 if (! empty($menu_invert)) $leftmenu= 'sendings';
 
-				if ($usemenuhider || empty($leftmenu) || $leftmenu=="sendings") $newmenu->add("/expedition/list.php?leftmenu=sendings&viewstatut=0", $langs->trans("StatusSendingDraftShort"), 2, $user->rights->expedition->lire);
-				if ($usemenuhider || empty($leftmenu) || $leftmenu=="sendings") $newmenu->add("/expedition/list.php?leftmenu=sendings&viewstatut=1", $langs->trans("StatusSendingValidatedShort"), 2, $user->rights->expedition->lire);
-				if ($usemenuhider || empty($leftmenu) || $leftmenu=="sendings") $newmenu->add("/expedition/list.php?leftmenu=sendings&viewstatut=2", $langs->trans("StatusSendingProcessedShort"), 2, $user->rights->expedition->lire);
+				if ($usemenuhider || empty($leftmenu) || $leftmenu=="sendings") {
+				    $newmenu->add("/expedition/list.php?leftmenu=sendings&viewstatut=0", $langs->trans("StatusSendingDraftShort"), 2, $user->rights->expedition->lire);
+                    $newmenu->add("/expedition/list.php?leftmenu=sendings&viewstatut=1", $langs->trans("StatusSendingValidatedShort"), 2, $user->rights->expedition->lire);
+                    $newmenu->add("/expedition/list.php?leftmenu=sendings&viewstatut=2", $langs->trans("StatusSendingProcessedShort"), 2, $user->rights->expedition->lire);
+                }
 				$newmenu->add("/expedition/stats/index.php?leftmenu=sendings", $langs->trans("Statistics"), 1, $user->rights->expedition->lire);
 			}
 
@@ -1378,11 +1409,13 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 
                 if (! empty($menu_invert)) $leftmenu= 'hrm';
 
-				if ($usemenuhider || empty($leftmenu) || $leftmenu=="hrm") $newmenu->add("/holiday/list.php?search_statut=1&leftmenu=hrm", $langs->trans("DraftCP"), 2, $user->rights->holiday->read);
-				if ($usemenuhider || empty($leftmenu) || $leftmenu=="hrm") $newmenu->add("/holiday/list.php?search_statut=2&leftmenu=hrm", $langs->trans("ToReviewCP"), 2, $user->rights->holiday->read);
-				if ($usemenuhider || empty($leftmenu) || $leftmenu=="hrm") $newmenu->add("/holiday/list.php?search_statut=3&leftmenu=hrm", $langs->trans("ApprovedCP"), 2, $user->rights->holiday->read);
-				if ($usemenuhider || empty($leftmenu) || $leftmenu=="hrm") $newmenu->add("/holiday/list.php?search_statut=4&leftmenu=hrm", $langs->trans("CancelCP"), 2, $user->rights->holiday->read);
-				if ($usemenuhider || empty($leftmenu) || $leftmenu=="hrm") $newmenu->add("/holiday/list.php?search_statut=5&leftmenu=hrm", $langs->trans("RefuseCP"), 2, $user->rights->holiday->read);
+				if ($usemenuhider || empty($leftmenu) || $leftmenu=="hrm") {
+				    $newmenu->add("/holiday/list.php?search_statut=1&leftmenu=hrm", $langs->trans("DraftCP"), 2, $user->rights->holiday->read);
+                    $newmenu->add("/holiday/list.php?search_statut=2&leftmenu=hrm", $langs->trans("ToReviewCP"), 2, $user->rights->holiday->read);
+                    $newmenu->add("/holiday/list.php?search_statut=3&leftmenu=hrm", $langs->trans("ApprovedCP"), 2, $user->rights->holiday->read);
+                    $newmenu->add("/holiday/list.php?search_statut=4&leftmenu=hrm", $langs->trans("CancelCP"), 2, $user->rights->holiday->read);
+                    $newmenu->add("/holiday/list.php?search_statut=5&leftmenu=hrm", $langs->trans("RefuseCP"), 2, $user->rights->holiday->read);
+                }
 				$newmenu->add("/holiday/define_holiday.php?action=request", $langs->trans("MenuConfCP"), 1, $user->rights->holiday->read);
 				$newmenu->add("/holiday/month_report.php", $langs->trans("MenuReportMonth"), 1, $user->rights->holiday->read_all);
 				$newmenu->add("/holiday/view_log.php?action=request", $langs->trans("MenuLogCP"), 1, $user->rights->holiday->define_holiday);
@@ -1406,12 +1439,14 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 
                 if (! empty($menu_invert)) $leftmenu= 'expensereport';
 
-				if ($usemenuhider || empty($leftmenu) || $leftmenu=="expensereport") $newmenu->add("/expensereport/list.php?search_status=0&amp;leftmenu=expensereport&amp;mainmenu=hrm", $langs->trans("Draft"), 2, $user->rights->expensereport->lire);
-				if ($usemenuhider || empty($leftmenu) || $leftmenu=="expensereport") $newmenu->add("/expensereport/list.php?search_status=2&amp;leftmenu=expensereport&amp;mainmenu=hrm", $langs->trans("Validated"), 2, $user->rights->expensereport->lire);
-				if ($usemenuhider || empty($leftmenu) || $leftmenu=="expensereport") $newmenu->add("/expensereport/list.php?search_status=5&amp;leftmenu=expensereport&amp;mainmenu=hrm", $langs->trans("Approved"), 2, $user->rights->expensereport->lire);
-				if ($usemenuhider || empty($leftmenu) || $leftmenu=="expensereport") $newmenu->add("/expensereport/list.php?search_status=6&amp;leftmenu=expensereport&amp;mainmenu=hrm", $langs->trans("Paid"), 2, $user->rights->expensereport->lire);
-				if ($usemenuhider || empty($leftmenu) || $leftmenu=="expensereport") $newmenu->add("/expensereport/list.php?search_status=4&amp;leftmenu=expensereport&amp;mainmenu=hrm", $langs->trans("Canceled"), 2, $user->rights->expensereport->lire);
-				if ($usemenuhider || empty($leftmenu) || $leftmenu=="expensereport") $newmenu->add("/expensereport/list.php?search_status=99&amp;leftmenu=expensereport&amp;mainmenu=hrm", $langs->trans("Refused"), 2, $user->rights->expensereport->lire);
+                if ($usemenuhider || empty($leftmenu) || $leftmenu=="expensereport") {
+                    $newmenu->add("/expensereport/list.php?search_status=0&amp;leftmenu=expensereport&amp;mainmenu=hrm", $langs->trans("Draft"), 2, $user->rights->expensereport->lire);
+                    $newmenu->add("/expensereport/list.php?search_status=2&amp;leftmenu=expensereport&amp;mainmenu=hrm", $langs->trans("Validated"), 2, $user->rights->expensereport->lire);
+                    $newmenu->add("/expensereport/list.php?search_status=5&amp;leftmenu=expensereport&amp;mainmenu=hrm", $langs->trans("Approved"), 2, $user->rights->expensereport->lire);
+                    $newmenu->add("/expensereport/list.php?search_status=6&amp;leftmenu=expensereport&amp;mainmenu=hrm", $langs->trans("Paid"), 2, $user->rights->expensereport->lire);
+                    $newmenu->add("/expensereport/list.php?search_status=4&amp;leftmenu=expensereport&amp;mainmenu=hrm", $langs->trans("Canceled"), 2, $user->rights->expensereport->lire);
+                    $newmenu->add("/expensereport/list.php?search_status=99&amp;leftmenu=expensereport&amp;mainmenu=hrm", $langs->trans("Refused"), 2, $user->rights->expensereport->lire);
+                }
 				$newmenu->add("/expensereport/stats/index.php?leftmenu=expensereport&amp;mainmenu=hrm", $langs->trans("Statistics"), 1, $user->rights->expensereport->lire);
 			}
 
