@@ -215,10 +215,11 @@ function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$fo
 	if (! empty($conf->salaries->enabled)) $menuqualified++;
 	if (! empty($conf->supplier_invoice->enabled)) $menuqualified++;
 	if (! empty($conf->loan->enabled)) $menuqualified++;
+	if (! empty($conf->banque->enabled)) $menuqualified++; // For various payment
 	$tmpentry=array(
 		'enabled'=>$menuqualified,
 		'perms'=>(! empty($user->rights->compta->resultat->lire) || ! empty($user->rights->accounting->plancompte->lire) || ! empty($user->rights->facture->lire) || ! empty($user->rights->don->lire) || ! empty($user->rights->tax->charges->lire) || ! empty($user->rights->salaries->read) || ! empty($user->rights->fournisseur->facture->lire) || ! empty($user->rights->loan->read) || ! empty($user->rights->banque->lire)),
-		'module'=>'facture|supplier_invoice|don|tax|salaries|loan');
+		'module'=>'facture|supplier_invoice|don|tax|salaries|loan|banque');
 	$showmode=dol_oblyon_showmenu($type_user, $tmpentry, $listofmodulesforexternal);
 	if ($showmode) {
 		$langs->load("compta");
@@ -677,7 +678,7 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 
             if (! empty($menu_invert)) $leftmenu= 'admintools';
 
-			if ($usemenuhider || empty($leftmenu) || preg_match('/^admintools/',$leftmenu))
+			if ($usemenuhider || empty($leftmenu) || preg_match('/^(admintools|all)/',$leftmenu))
 			{
 				// Load translation files required by the page
 				$langs->loadLangs(array('admin', 'help'));
@@ -1028,6 +1029,7 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 			if (! empty($conf->tax->enabled) || ! empty($conf->salaries->enabled) || ! empty($conf->loan->enabled) || ! empty($conf->banque->enabled))
 			{
 				global $mysoc;
+                $langs->load("compta");
 
 				$permtoshowmenu=((! empty($conf->tax->enabled) && $user->rights->tax->charges->lire) || (! empty($conf->salaries->enabled) && ! empty($user->rights->salaries->read)) || (! empty($conf->loan->enabled) && $user->rights->loan->read) || (! empty($conf->banque->enabled) && $user->rights->banque->lire));
 				$newmenu->add("/compta/charges/index.php?leftmenu=tax&amp;mainmenu=billing",$langs->trans("MenuSpecialExpenses"), 0, $permtoshowmenu, '', $mainmenu, 'tax');
