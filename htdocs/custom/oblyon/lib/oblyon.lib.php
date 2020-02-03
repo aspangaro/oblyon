@@ -40,11 +40,18 @@ function oblyon_admin_prepare_head()
     $head[$h][1] = $langs->trans("Colors");
     $head[$h][2] = 'colors';
     $h++;
-	
-	$head[$h][0] = dol_buildpath("/oblyon/admin/about.php", 1);
-    $head[$h][1] = $langs->trans("About");
-    $head[$h][2] = 'about';
+
+    $head[$h][0] = dol_buildpath("/oblyon/admin/dashboard.php", 1);
+    $head[$h][1] = $langs->trans("Dashboard");
+    $head[$h][2] = 'dashboard';
     $h++;
+
+    if($conf->global->OBLYON_MAIN_VERSION == "easya") {
+        $head[$h][0] = dol_buildpath("/oblyon/admin/login.php", 1);
+        $head[$h][1] = "Login";
+        $head[$h][2] = 'login';
+        $h++;
+    }
 
     // Show more tabs from modules
     // Entries must be declared in modules descriptor with line
@@ -54,7 +61,14 @@ function oblyon_admin_prepare_head()
     //$this->tabs = array(
     //	'entity:-tabname:Title:@oblyon:/oblyon/mypage.php?id=__ID__'
     //); // to remove a tab
-    complete_head_from_modules($conf, $langs, $object, $head, $h, 'settings');
+    complete_head_from_modules($conf, $langs, $object, $head, $h, 'admin_oblyon');
+
+    if($conf->global->OBLYON_MAIN_VERSION != "easya") {
+        $head[$h][0] = dol_buildpath("/oblyon/admin/about.php", 1);
+        $head[$h][1] = $langs->trans("About");
+        $head[$h][2] = 'about';
+        $h++;
+    }
 
     return $head;
 }

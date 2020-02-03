@@ -9,6 +9,18 @@ Theme1 = Oblyon Green
 Theme2 = Oblyon Dark
 Theme3 = Oblyon Blue
 Theme4 = Oblyon Night
+Theme5 = Oblyon Light
+
+#
+# Easya
+#
+EasyaFamily = Easya Solutions Family ;)
+MenuCatalog=Catalogue
+MenuProjectsOpportunities=Projets | Opportunités
+BankColorizeMovement=Coloration des mouvements bancaires
+BankColorizeMovementDesc=Si cette fonction est activée, vous pouvez définir une couleur de fond spécifique pour les mouvements débiteurs ou créditeurs.
+BankColorizeMovementName1=Couleur de fond pour un mouvement débiteur
+BankColorizeMovementName2=Couleur de fond pour un mouvement créditeur
 
 #
 # Menus
@@ -19,6 +31,7 @@ OblyonErrorMessage = Vous devez utiliser le thème Oblyon pour accéder à sa pe
 OblyonMenusErrorMessage = Vous devez utiliser le menu Oblyon pour accéder à sa personnalisation. Vérifier votre gestionnaire de menu.
 LeftMenu = Menu Gauche
 TopMenu = Menu Haut
+Buttons = Boutons
 InvertMenus = Intervertir les menus
 FullsizeTopBar = Largeur maximale
 FullsizeTopBarWarning = Utilisez un nombre d'entrées menu limité. 
@@ -29,6 +42,8 @@ StickyTopBarInvertedWarning = Certains modules ne sont pas pris en charge avec c
 StickyLeftBar = Barre adhésive gauche
 StickyLeftBarWarning = Expérimental. Utilisez un nombre d'entrées menu limité.
 StickyLeftBarInvertedWarning = Certains modules ne sont pas pris en charge avec cette fonctionnalité.
+OblyonEnableShowLogo=Afficher le logo
+OblyonLogoWidth=Largeur du logo (en px) (Défaut : 260px)
 
 HideLeftMenu = Masquer le menu gauche
 OpenEffect = Effet d'ouverture menu
@@ -36,16 +51,6 @@ EffectLeftMenuSlide = Slide
 EffectLeftMenuPush = Push
 HideTopIcons = Masquer les icônes
 HideLeftIcons = Masquer les icônes
-# <3.7
-EldyOldIcons = Utiliser vieux icônes Eldy
-EldyOldIconsWarning = Expérimental
-# >3.7 
-EldyIcons = Utiliser icônes Eldy
-EldyIconsWarning = Expérimental
-LogoSize = Taille du logo (Petit/Grand)
-LogoPadding = Marges du logo
-NoPaddingLogo = Non
-PaddingLogo = Oui
 ShowLeftMenu = Afficher/Cacher Menu Gauche
 
 #
@@ -59,23 +64,81 @@ OBLYON_COLOR_LOGO_BCKGRD=Couleur de fond du logo
 OBLYON_COLOR_LOGIN_BCKGRD=Couleur de fond de la page de connexion
 OBLYON_COLOR_BLINE=Couleur de fond des lignes
 OBLYON_COLOR_FLINE=Couleur de texte des lignes
-OBLYON_COLOR_FLINE_HOVER=Couleur de texte au dessus des lignes
+OBLYON_COLOR_FLINE_HOVER=Couleur du texte survolé des lignes
 OBLYON_COLOR_TOPMENU_BCKGRD=Couleur de fond du menu haut
-OBLYON_COLOR_TOPMENU_BCKGRD_HOVER=Couleur de fond du menu haut au dessus
+OBLYON_COLOR_TOPMENU_BCKGRD_HOVER=Couleur de fond survolé du menu haut
 OBLYON_COLOR_TOPMENU_TXT=Couleur de texte du menu haut
+OBLYON_COLOR_TOPMENU_TXT_ACTIVE=Couleur du texte actif du menu haut
+OBLYON_COLOR_TOPMENU_TXT_HOVER=Couleur du texte survolé du menu haut
 OBLYON_COLOR_LEFTMENU_BCKGRD=Couleur de fond du menu gauche
-OBLYON_COLOR_LEFTMENU_BCKGRD_HOVER=Couleur de fond du menu gauche au dessus
+OBLYON_COLOR_LEFTMENU_BCKGRD_HOVER=Couleur de fond survolé du menu gauche
 OBLYON_COLOR_LEFTMENU_TXT=Couleur de texte du menu gauche
+OBLYON_COLOR_LEFTMENU_TXT_ACTIVE=Couleur du texte actif du menu gauche
+OBLYON_COLOR_LEFTMENU_TXT_HOVER=Couleur du texte survolé du menu gauche
+OBLYON_COLOR_BUTTON_ACTION1=Couleur 1 de fond des boutons
+OBLYON_COLOR_BUTTON_ACTION2=Couleur 2 de fond des boutons
+OBLYON_COLOR_BUTTON_DELETE1=Couleur 1 de fond des boutons dangereux
+OBLYON_COLOR_BUTTON_DELETE2=Couleur 2 de fond des boutons dangereux
 RestoreDefaultColors=Retablir couleurs par défaut
 DefaultsColorsMsg=Couleurs par défaut rétabli
-OblyonGreen=Oblyon vert
-ThemeOblyonGreenApplied=Thème vert Oblyon appliqué
-OblyonDark=Oblyon noir
-ThemeOblyonDarkApplied=Thème noir Oblyon appliqué
-OblyonBlue=Oblyon bleu
-ThemeOblyonBlueApplied=Thème bleu Oblyon appliqué
-OblyonNight=Oblyon nuit
-ThemeOblyonNightApplied=Thème nuit Oblyon appliqué
+OblyonGreen=Oblyon Green
+ThemeOblyonGreenApplied=Thème Oblyon Green appliqué
+OblyonDark=Oblyon Dark
+ThemeOblyonDarkApplied=Thème Oblyon Dark appliqué
+OblyonBlue=Oblyon Blue
+ThemeOblyonBlueApplied=Thème Oblyon Blue appliqué
+OblyonNight=Oblyon Night
+ThemeOblyonNightApplied=Thème Oblyon Night appliqué
+OblyonLight=Oblyon Light
+ThemeOblyonLightApplied=Thème Oblyon Light appliqué
+
+#
+# Dashboard page
+#
+OblyonDashboardTitle = Configurateur Oblyon - Tableau de bord
+EnableDashboardBlocOrNot=Sélection des blocs du tableau de bord à afficher
+ColorIntensity = Intensité des couleurs
+ColorIntensityDesc = Définir l'intensité sur les couleurs ci-dessous (Défaut -50)
+ColorMoreDarker = Moins intense
+ColorMoreLighter = Plus intense
+OBLYON_INFOXBOX_WEATHER_COLOR = Bloc météo
+OBLYON_INFOXBOX_ACTION_COLOR = Bloc agenda
+OBLYON_INFOXBOX_PROJECT_COLOR = Bloc projet
+OBLYON_INFOXBOX_CUSTOMER_COLOR = Bloc clients
+OBLYON_INFOXBOX_SUPPLIER_COLOR = Bloc fournisseurs
+OBLYON_INFOXBOX_CONTRAT_COLOR = Bloc contrat
+OBLYON_INFOXBOX_BANK_COLOR = Bloc banque
+OBLYON_INFOXBOX_ADHERENT_COLOR = Bloc adhérent
+OBLYON_INFOXBOX_EXPENSEREPORT_COLOR = Bloc note de frais
+OBLYON_INFOXBOX_HOLIDAY_COLOR = Bloc congés payés
+
+#
+# Login page
+#
+OBLYON_COLOR_LOGIN_BCKGRD_RIGHT=Couleur du fond - Partie droite
+OBLYON_COLOR_LOGIN_BCKGRD_LEFT=Couleur de fond - Partie gauche
+OBLYON_COLOR_LOGIN_TXT_RIGHT=Couleur du texte - Partie droite
+OBLYON_COLOR_LOGIN_TXT_LEFT=Couleur du texte - Partie gauche
+OBLYON_COLOR_LOGIN_TXT_INPUT=Couleur du texte des champs de saisie
+OblyonLoginTitle=Configurateur Oblyon - Login
+OblyonLoginLinks=Liens
+OblyonSocialNetwork=Réseaux sociaux
+OBLYON_LOGIN_TXT1=1er lien - Texte
+OBLYON_LOGIN_URL1=1er lien - URL
+OBLYON_LOGIN_FAICON1=1er lien - Icône
+OBLYON_LOGIN_TXT2=2ème lien - Texte
+OBLYON_LOGIN_URL2=2ème lien - URL
+OBLYON_LOGIN_FAICON2=2ème lien - Icône
+OBLYON_LOGIN_TXT3=3ème lien - Texte
+OBLYON_LOGIN_URL3=3ème lien - URL
+OBLYON_LOGIN_FAICON3=3ème lien - Icône
+OBLYON_SOCIAL_TWITTER=URL Twitter
+OBLYON_SOCIAL_FACEBOOK=URL Facebook
+OBLYON_SOCIAL_LINKEDIN=URL LinkedIn
+OBLYON_SOCIAL_INSTAGRAM=Instagram
+OBLYON_SOCIAL_YOUTUBE=YouTube
+OBLYON_SOCIAL_GITHUB=Github
+
 
 #
 # About page
@@ -86,7 +149,3 @@ Authors=Auteurs
 OldAuthors=Ancien auteurs
 LicenseMessage = Thème Oblyon mis à disposition selon les termes de la <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">licence Creative Commons Attribution - Pas d’Utilisation Commerciale 4.0 International</a>.<br><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Licence Creative Commons" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a>
 
-#
-# Others
-#
-MenuCatalog=Catalogue

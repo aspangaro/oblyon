@@ -1,12 +1,23 @@
 ## Changelog ##
 
+### Version 11.0.0 - 2020 02 03
+ - Comptability Dolibarr v11
+ 
+### Version 10.0 beta 3 - 2019 09 04
+ - Fix Icon ticket module is missing
+
+### Version 10.0 beta 2 - 2019 08 26
+ - Standardize code & update - Compatibility with Dolibarr 10.0
+ - New Add possibility in admin colors menu to manage colors of the buttons
+ - WIP New Add Sticky bar for left menu
+ 
 ### Version 10.0 beta 1 - 2019 06 08
  - Standardize code & update - Compatibility with Dolibarr 10.0
 
 ### Version 9.1.2 - 2019 08 22
  - CSS | Add level3 for menu
  - Fix assets menu
- - Add some icons on menu
+ - New Add some icons on menu
  - Fix accountancy menu
 
 ### Version 9.1.1 - 2019 04 22

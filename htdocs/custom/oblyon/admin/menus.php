@@ -71,8 +71,7 @@ if ($action == 'set') {
  
 if ($action == 'setvar'){  
   $res = dolibarr_set_const($db, 'OBLYON_EFFECT_LEFTMENU', GETPOST('OBLYON_EFFECT_LEFTMENU'),'chaine',0,'',$conf->entity);
-  $res = dolibarr_set_const($db, 'OBLYON_LOGO_PADDING', GETPOST('OBLYON_LOGO_PADDING'),'chaine',0,'',$conf->entity);
-  
+
   if (! $res > 0) $error++;
   
   if ($error) {
@@ -95,7 +94,7 @@ llxHeader ( '', $langs->trans('OblyonMenusTitle'));
 
 // subheader
 $linkback = '<a href="' . DOL_URL_ROOT . '/admin/modules.php">' . $langs->trans ( "BackToModuleList" ) . '</a>';
-print_fiche_titre ( $langs->trans ( $page_name ), $linkback );
+print load_fiche_titre($langs->trans($page_name), $linkback);
 
 // Configuration header
 $head = oblyon_admin_prepare_head();
@@ -127,12 +126,10 @@ if (!($conf->global->MAIN_MENU_STANDARD == "oblyon_menu.php" && $conf->global->M
 print '<form name="formmenus" method="POST" action="'.$_SERVER["PHP_SELF"].'">';
 print '<input type="hidden" name="action" value="setvar">';
 
-$var=true;
 print '<table class="noborder" width="100%">';
 
 // Invert menu
-$var=!$var;
-print '<tr '.$bc[$var].'>';
+print '<tr class="oddeven">';
 print '<td>'.$langs->trans('InvertMenus').'</td>';
 $name='MAIN_MENU_INVERT';
 if(! empty($conf->global->MAIN_MENU_INVERT))
@@ -160,7 +157,7 @@ if($conf->global->MAIN_MENU_INVERT) {
     }
 
 	// Fullsize top bar
-    print '<tr '.$bc[$var].'>';
+    print '<tr class="oddeven">';
     print '<td>'.$langs->trans('FullsizeTopBar');
     if(empty($conf->global->OBLYON_FULLSIZE_TOPBAR))
 	{
@@ -192,26 +189,26 @@ if($conf->global->MAIN_MENU_INVERT) {
     print '</tr>';
 }
 
-// Show company name
-print '<tr '.$bc[$var].'>';
-print '<td>'.$langs->trans('ShowCompanyName').'</td>';
-$name='OBLYON_SHOW_COMPNAME';
-if(! empty($conf->global->OBLYON_SHOW_COMPNAME))
+// Show Company Logo
+print '<tr class="oddeven">';
+print '<td>'.$langs->trans('OblyonEnableShowLogo').'</td>';
+$name='MAIN_SHOW_LOGO';
+if(! empty($conf->global->MAIN_SHOW_LOGO))
 {
-    print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name='.$name.'&value=0">';
-    print img_picto ( $langs->trans ( "Enabled" ), 'switch_on' );
+    print '<td><a href="' . $_SERVER ['PHP_SELF'] .  '?action=set&name='.$name.'&value=0">';
+    print img_picto($langs->trans("Enabled"), 'switch_on');
     print "</a></td>\n";
 }
 else
 {
     print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name='.$name.'&value=1">';
-    print img_picto ( $langs->trans ( "Disabled" ), 'switch_off' );
+    print img_picto($langs->trans("Disabled"), 'switch_off');
     print "</a></td>\n";
 }
-print '</tr>';  
+print '</tr>';
 
 // Sticky top bar
-print '<tr '.$bc[$var].'>';
+print '<tr class="oddeven">';
 print '<td>'.$langs->trans('StickyTopBar');
 if($conf->global->OBLYON_STICKY_TOPBAR)
 {
@@ -238,22 +235,12 @@ else
 print '</tr>';
 
 // Hide top icons
-if($conf->global->OBLYON_ELDY_ICONS && $conf->global->MAIN_MENU_INVERT)
-{
-	$conf->global->OBLYON_HIDE_TOPICONS = TRUE;
-}
-  
-if($conf->global->OBLYON_ELDY_OLD_ICONS && $conf->global->MAIN_MENU_INVERT)
-{
-	$conf->global->OBLYON_HIDE_TOPICONS = TRUE;
-} 
-
-print '<tr '.$bc[$var].'>';
+print '<tr class="oddeven">';
 print '<td>'.$langs->trans('HideTopIcons').'</td>';
 $name='OBLYON_HIDE_TOPICONS';
 if(! empty($conf->global->OBLYON_HIDE_TOPICONS))
 {
-    if(($conf->global->OBLYON_ELDY_ICONS || $conf->global->OBLYON_ELDY_OLD_ICONS) && $conf->global->MAIN_MENU_INVERT)
+    if($conf->global->MAIN_MENU_INVERT)
 	{
 		print '<td><a href="#" class="tmenudisabled">';
 		print img_picto ( $langs->trans ( "Enabled" ), 'switch_on' );
@@ -274,102 +261,29 @@ else
 }
 print '</tr>';
 
-// Use Eldy icons
-if(empty($conf->global->MAIN_MENU_INVERT))
-{
-    if($conf->global->OBLYON_ELDY_OLD_ICONS || $conf->global->OBLYON_HIDE_LEFTICONS)
-	{
-		$conf->global->OBLYON_ELDY_ICONS = FALSE;
-    }
-
-    print '<tr '.$bc[$var].'>';
-    print '<td>'.$langs->trans('EldyIcons');
-    print '</td>';    
-    $name='OBLYON_ELDY_ICONS';
-    if(! empty($conf->global->OBLYON_ELDY_ICONS))
-	{
-        print '<td><a href="' . $_SERVER ['PHP_SELF'] .  '?action=set&name='.$name.'&value=0">';
-        print img_picto($langs->trans("Enabled"), 'switch_on');
-        print "</a></td>\n";
-    } 
-	else
-	{
-		if ( $conf->global->OBLYON_ELDY_OLD_ICONS || $conf->global->OBLYON_HIDE_LEFTICONS ) {
-			print '<td><a href="#" class="tmenudisabled">';
-			print img_picto($langs->trans("Disabled"), 'switch_off');
-			print "</a></td>\n";
-		}
-		else 
-		{
-			print '<td><a href="' . $_SERVER ['PHP_SELF'] .  '?action=set&name='.$name.'&value=1">';
-			print img_picto($langs->trans("Disabled"), 'switch_off');
-			print "</a></td>\n";
-		}
-    }
-    print '</tr>';
-}
-
-// Use old Eldy icons
-if(empty($conf->global->MAIN_MENU_INVERT))
-{
-    if($conf->global->OBLYON_ELDY_ICONS || $conf->global->OBLYON_HIDE_LEFTICONS)
-	{
-		$conf->global->OBLYON_ELDY_OLD_ICONS = FALSE;
-    }
-
-	print '<tr '.$bc[$var].'>';
-    print '<td>'.$langs->trans('EldyOldIcons');
-    print '</td>';
-    $name='OBLYON_ELDY_OLD_ICONS';
-    if(! empty($conf->global->OBLYON_ELDY_OLD_ICONS))
-	{
-		print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name='.$name.'&value=0">';
-		print img_picto($langs->trans("Enabled"), 'switch_on');
-		print "</a></td>\n";
-    }
-	else
-	{
-		if ( $conf->global->OBLYON_ELDY_ICONS || $conf->global->OBLYON_HIDE_LEFTICONS ) {
-			print '<td><a href="#" class="tmenudisabled">';
-			print img_picto($langs->trans("Disabled"), 'switch_off');
-			print "</a></td>\n";
-		} 
-		else
-		{
-			print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name='.$name.'&value=1">';
-			print img_picto($langs->trans("Disabled"), 'switch_off');
-			print "</a></td>\n";
-		}
-    }
-    print '</tr>';
-}
-  
 // Left menu
 print '<tr class="liste_titre"><td colspan="2">'.$langs->trans('LeftMenu').'</td></tr>';
 
 // Show company name
-if(empty($conf->global->MAIN_MENU_INVERT))
+print '<tr class="oddeven">';
+print '<td>'.$langs->trans('ShowCompanyName').'</td>';
+$name='OBLYON_SHOW_COMPNAME';
+if(! empty($conf->global->OBLYON_SHOW_COMPNAME))
 {
-	print '<tr '.$bc[$var].'>';
-	print '<td>'.$langs->trans('ShowCompanyName').'</td>';
-    $name='OBLYON_SHOW_COMPNAME';
-    if(! empty($conf->global->OBLYON_SHOW_COMPNAME))
-	{
-		print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name='.$name.'&value=0">';
-		print img_picto($langs->trans("Enabled"), 'switch_on');
-		print "</a></td>\n";
-    } 
-	else 
-	{
-		print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name='.$name.'&value=1">';
-		print img_picto($langs->trans("Disabled"), 'switch_off');
-		print "</a></td>\n";
-    }
-    print '</tr>';  
+    print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name='.$name.'&value=0">';
+	print img_picto($langs->trans("Enabled"), 'switch_on');
+	print "</a></td>\n";
 }
+else
+{
+	print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name='.$name.'&value=1">';
+	print img_picto($langs->trans("Disabled"), 'switch_off');
+	print "</a></td>\n";
+}
+print '</tr>';
 
 // Sticky left bar
-print '<tr '.$bc[$var].'>';
+print '<tr class="oddeven">';
 print '<td>'.$langs->trans('StickyLeftBar');
 if($conf->global->OBLYON_STICKY_LEFTBAR)
 {
@@ -396,7 +310,7 @@ else
 print '</tr>';
 
 // Hide leftmenu
-print '<tr '.$bc[$var].'>';
+print '<tr class="oddeven">';
 print '<td>'.$langs->trans('HideLeftMenu');
 print '</td>';
 $name='OBLYON_HIDE_LEFTMENU';
@@ -421,7 +335,7 @@ if($conf->global->OBLYON_HIDE_LEFTMENU)
 	{
 		$conf->global->OBLYON_EFFECT_LEFTMENU= 'slide';
     }
-    print '<tr '.$bc[$var].'>';
+    print '<tr class="oddeven">';
     print '<td>'.$langs->trans('OpenEffect');
     print '</td>';
     $name='OBLYON_EFFECT_LEFTMENU';
@@ -435,17 +349,17 @@ if($conf->global->OBLYON_HIDE_LEFTMENU)
 }
 
 // Hide left icons
-if($conf->global->OBLYON_ELDY_OLD_ICONS && !$conf->global->MAIN_MENU_INVERT)
+if(! $conf->global->MAIN_MENU_INVERT)
 {
 	$conf->global->OBLYON_HIDE_LEFTICONS = TRUE;
 } 
    
-print '<tr '.$bc[$var].'>';
+print '<tr class="oddeven">';
 print '<td>'.$langs->trans('HideLeftIcons').'</td>';
 $name='OBLYON_HIDE_LEFTICONS';
 if(! empty($conf->global->OBLYON_HIDE_LEFTICONS))
 {
-    if($conf->global->OBLYON_ELDY_OLD_ICONS && !$conf->global->MAIN_MENU_INVERT)
+    if(! $conf->global->MAIN_MENU_INVERT)
 	{
 		print '<td><a href="#" class="tmenudisabled">';
 		print img_picto($langs->trans("Enabled"), 'switch_on');
@@ -466,139 +380,6 @@ else
 }
 print '</tr>';
   
-// Use Eldy icons
-if(! empty($conf->global->MAIN_MENU_INVERT))
-{
-    if($conf->global->OBLYON_ELDY_OLD_ICONS || $conf->global->OBLYON_HIDE_LEFTICONS)
-	{
-		$conf->global->OBLYON_ELDY_ICONS = FALSE;
-    }
-
-    print '<tr '.$bc[$var].'>';
-    print '<td>'.$langs->trans('EldyIcons');
-    if($conf->global->OBLYON_ELDY_ICONS)
-	{
-		print '<br><span class="warning">'.$langs->trans('EldyIconsWarning').'</span>';
-    } 
-    print '</td>';
-    $name='OBLYON_ELDY_ICONS';
-    if(! empty($conf->global->OBLYON_ELDY_ICONS))
-	{
-		print '<td><a href="' . $_SERVER ['PHP_SELF'] .  '?action=set&name='.$name.'&value=0">';
-		print img_picto($langs->trans("Enabled"), 'switch_on');
-		print "</a></td>\n";
-    } 
-	else
-	{
-		if ( $conf->global->OBLYON_ELDY_OLD_ICONS || $conf->global->OBLYON_HIDE_LEFTICONS ) {
-			print '<td><a href="#" class="tmenudisabled">';
-			print img_picto($langs->trans("Disabled"), 'switch_off');
-			print "</a></td>\n";
-		}
-		else
-		{
-			print '<td><a href="' . $_SERVER ['PHP_SELF'] .  '?action=set&name='.$name.'&value=1">';
-			print img_picto($langs->trans("Disabled"), 'switch_off');
-			print "</a></td>\n";
-		}
-    }
-    print '</tr>';
-}
-
-// Use old Eldy icons
-if(! empty($conf->global->MAIN_MENU_INVERT))
-{
-	if($conf->global->OBLYON_ELDY_ICONS || $conf->global->OBLYON_HIDE_LEFTICONS)
-	{
-		$conf->global->OBLYON_ELDY_OLD_ICONS = FALSE;
-	}
-
-	print '<tr '.$bc[$var].'>';
-	print '<td>'.$langs->trans('EldyOldIcons');
-	if ( $conf->global->OBLYON_ELDY_OLD_ICONS ) {
-		print '<br><span class="warning">'.$langs->trans('EldyOldIconsWarning').'</span>';
-	} 
-	print '</td>';
-	$name='OBLYON_ELDY_OLD_ICONS';
-	if (! empty ( $conf->global->OBLYON_ELDY_OLD_ICONS ))
-	{
-		print '<td><a href="' . $_SERVER ['PHP_SELF'] .  '?action=set&name='.$name.'&value=0">';
-		print img_picto($langs->trans("Enabled"), 'switch_on');
-		print "</a></td>\n";
-	}
-	else
-	{
-		if($conf->global->OBLYON_ELDY_ICONS || $conf->global->OBLYON_HIDE_LEFTICONS)
-		{
-			print '<td><a href="#" class="tmenudisabled">';
-			print img_picto($langs->trans("Disabled"), 'switch_off');
-			print "</a></td>\n";
-		}
-		else
-		{
-			print '<td><a href="' . $_SERVER ['PHP_SELF'] .  '?action=set&name='.$name.'&value=1">';
-			print img_picto($langs->trans("Disabled"), 'switch_off');
-			print "</a></td>\n";
-		}
-	}
-	print '</tr>';
-}
-
-// Show Company Logo
-print '<tr '.$bc[$var].'>';
-print '<td>'.$langs->trans('EnableShowLogo').'</td>';
-$name='MAIN_SHOW_LOGO';
-if(! empty($conf->global->MAIN_SHOW_LOGO))
-{
-	print '<td><a href="' . $_SERVER ['PHP_SELF'] .  '?action=set&name='.$name.'&value=0">';
-	print img_picto($langs->trans("Enabled"), 'switch_on');
-	print "</a></td>\n";
-}
-else
-{
-	print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name='.$name.'&value=1">';
-	print img_picto($langs->trans("Disabled"), 'switch_off');
-	print "</a></td>\n";
-}
-print '</tr>';
-
-// Show options for logo when it's on
-if(! empty($conf->global->MAIN_SHOW_LOGO))
-{
-	// Logo size
-	print '<tr '.$bc[$var].'>';
-	print '<td>'.$langs->trans('LogoSize').'</td>';
-	$name='OBLYON_LOGO_SIZE';
-	if(! empty($conf->global->OBLYON_LOGO_SIZE))
-	{
-		print '<td><a href="' . $_SERVER ['PHP_SELF'] .  '?action=set&name='.$name.'&value=0">';
-		print img_picto($langs->trans("Enabled"), 'switch_on');
-		print "</a></td>\n";
-	}
-	else
-	{
-		print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name='.$name.'&value=1">';
-		print img_picto($langs->trans("Disabled"), 'switch_off');
-		print "</a></td>\n";
-	}
-	print '</tr>';
-
-	// Padding logo
-	if ( empty ($conf->global->OBLYON_LOGO_PADDING) )
-	{
-		$conf->global->OBLYON_LOGO_PADDING = "padding";
-	} 
-	print '<tr '.$bc[$var].'>';
-	print '<td>'.$langs->trans('LogoPadding').'</td>';
-	$name='OBLYON_LOGO_PADDING';
-	print '<td>';
-	print '<input type="radio" value="nopadding" id="nopadding" class="flat" name="'.$name.'" '.($conf->global->OBLYON_LOGO_PADDING == "nopadding"?' checked="checked"':'').'"> ';
-	print '<label for="nopadding">'.$langs->trans( 'NoPaddingLogo' ).'</label><br>';       
-	print '<input type="radio" value="padding" id="padding" class="flat" name="'.$name.'" '.($conf->global->OBLYON_LOGO_PADDING == "padding"?' checked="checked"':'').'"> ';
-	print '<label for="padding">'.$langs->trans( 'PaddingLogo' ).'</label><br>';   
-	print '</td>';
-	print '</tr>';
-}
 print '</table>';
 dol_fiche_end();
   

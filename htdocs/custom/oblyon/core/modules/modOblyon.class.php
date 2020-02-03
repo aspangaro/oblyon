@@ -64,9 +64,9 @@ function __construct($db) {
 	$this->description = "Thème Oblyon";
 
 	// Possible values for version are: 'development', 'experimental', 'dolibarr' or version
-	$this->version = '10.0-beta1';
+	$this->version = '11.0.0';
 
-	$this->editor_name = "Open-DSI | Monogramm";
+	$this->editor_name = 'Open-DSI | Monogramm';
 
 	$this->editor_url = "https://www.open-dsi.fr";
 
@@ -101,8 +101,8 @@ function __construct($db) {
 	// Dependencies
 	$this->depends = array();		// List of modules id that must be enabled if this module is enabled
 	$this->requiredby = array();	// List of modules id to disable if this one is disabled
-	$this->phpmin = array(5,4);					// Minimum version of PHP required by module
-	$this->need_dolibarr_version = array(9,0);	// Minimum version of Dolibarr required by module
+	$this->phpmin = array(5,5);					// Minimum version of PHP required by module
+	$this->need_dolibarr_version = array(10,0);	// Minimum version of Dolibarr required by module
 	$this->langfiles = array("oblyon@oblyon");
 
 	// Constants
@@ -271,6 +271,122 @@ function __construct($db) {
 	$this->const [$r] [5] = 'allentities';
 	$this->const [$r] [6] = 0;
 
+	$r ++;
+	$this->const [$r] [0] = "OBLYON_COLOR_BUTTON_ACTION1";
+	$this->const [$r] [1] = "chaine";
+	$this->const [$r] [2] = "#0088cc";
+	$this->const [$r] [3] = 'Oblyon button action color 1';
+	$this->const [$r] [4] = 1;
+	$this->const [$r] [5] = 'allentities';
+	$this->const [$r] [6] = 0;
+
+	$r ++;
+	$this->const [$r] [0] = "OBLYON_COLOR_BUTTON_ACTION2";
+	$this->const [$r] [1] = "chaine";
+	$this->const [$r] [2] = "#0044cc";
+	$this->const [$r] [3] = 'Oblyon button action color 2';
+	$this->const [$r] [4] = 1;
+	$this->const [$r] [5] = 'allentities';
+	$this->const [$r] [6] = 0;
+
+	$r ++;
+	$this->const [$r] [0] = "OBLYON_COLOR_BUTTON_DELETE1";
+	$this->const [$r] [1] = "chaine";
+	$this->const [$r] [2] = "#cc8800";
+	$this->const [$r] [3] = 'Oblyon button delete color 1';
+	$this->const [$r] [4] = 1;
+	$this->const [$r] [5] = 'allentities';
+	$this->const [$r] [6] = 0;
+
+	$r ++;
+	$this->const [$r] [0] = "OBLYON_COLOR_BUTTON_DELETE2";
+	$this->const [$r] [1] = "chaine";
+	$this->const [$r] [2] = "#cc4400";
+	$this->const [$r] [3] = 'Oblyon button delete color 2';
+	$this->const [$r] [4] = 1;
+	$this->const [$r] [5] = 'allentities';
+	$this->const [$r] [6] = 0;
+
+	$r ++;
+	$this->const [$r] [0] = "OBLYON_INFOXBOX_PROJECT_COLOR";
+	$this->const [$r] [1] = "chaine";
+	$this->const [$r] [2] = "#6c6a98";
+	$this->const [$r] [3] = 'Oblyon Dashboard project background color';
+	$this->const [$r] [4] = 1;
+	$this->const [$r] [5] = 'allentities';
+	$this->const [$r] [6] = 0;
+
+	$r ++;
+	$this->const [$r] [0] = "OBLYON_INFOXBOX_ACTION_COLOR";
+	$this->const [$r] [1] = "chaine";
+	$this->const [$r] [2] = "#b46080";
+	$this->const [$r] [3] = 'Oblyon Dashboard action background color';
+	$this->const [$r] [4] = 1;
+	$this->const [$r] [5] = 'allentities';
+	$this->const [$r] [6] = 0;
+
+	$r ++;
+	$this->const [$r] [0] = "OBLYON_INFOXBOX_CUSTOMER_COLOR";
+	$this->const [$r] [1] = "chaine";
+	$this->const [$r] [2] = "#99a17d";
+	$this->const [$r] [3] = 'Oblyon Dashboard customer background color';
+	$this->const [$r] [4] = 1;
+	$this->const [$r] [5] = 'allentities';
+	$this->const [$r] [6] = 0;
+
+	$r ++;
+	$this->const [$r] [0] = "OBLYON_INFOXBOX_SUPPLIER_COLOR";
+	$this->const [$r] [1] = "chaine";
+	$this->const [$r] [2] = "#599caf";
+	$this->const [$r] [3] = 'Oblyon Dashboard supplier background color';
+	$this->const [$r] [4] = 1;
+	$this->const [$r] [5] = 'allentities';
+	$this->const [$r] [6] = 0;
+
+	$r ++;
+	$this->const [$r] [0] = "OBLYON_INFOXBOX_CONTRAT_COLOR";
+	$this->const [$r] [1] = "chaine";
+	$this->const [$r] [2] = "#469686";
+	$this->const [$r] [3] = 'Oblyon Dashboard contract background color';
+	$this->const [$r] [4] = 1;
+	$this->const [$r] [5] = 'allentities';
+	$this->const [$r] [6] = 0;
+
+	$r ++;
+	$this->const [$r] [0] = "OBLYON_INFOXBOX_BANK_COLOR";
+	$this->const [$r] [1] = "chaine";
+	$this->const [$r] [2] = "#469686";
+	$this->const [$r] [3] = 'Oblyon Dashboard bank background color';
+	$this->const [$r] [4] = 1;
+	$this->const [$r] [5] = 'allentities';
+	$this->const [$r] [6] = 0;
+
+	$r ++;
+	$this->const [$r] [0] = "OBLYON_INFOXBOX_ADHERENT_COLOR";
+	$this->const [$r] [1] = "chaine";
+	$this->const [$r] [2] = "#79633f";
+	$this->const [$r] [3] = 'Oblyon Dashboard member background color';
+	$this->const [$r] [4] = 1;
+	$this->const [$r] [5] = 'allentities';
+	$this->const [$r] [6] = 0;
+
+	$r ++;
+	$this->const [$r] [0] = "OBLYON_INFOXBOX_EXPENSEREPORT_COLOR";
+	$this->const [$r] [1] = "chaine";
+	$this->const [$r] [2] = "#79633f";
+	$this->const [$r] [3] = 'Oblyon Dashboard expense report background color';
+	$this->const [$r] [4] = 1;
+	$this->const [$r] [5] = 'allentities';
+	$this->const [$r] [6] = 0;
+
+	$r ++;
+	$this->const [$r] [0] = "OBLYON_INFOXBOX_HOLIDAY_COLOR";
+	$this->const [$r] [1] = "chaine";
+	$this->const [$r] [2] = "#755114";
+	$this->const [$r] [3] = 'Oblyon Dashboard holiday background color';
+	$this->const [$r] [4] = 1;
+	$this->const [$r] [5] = 'allentities';
+	$this->const [$r] [6] = 0;
 
 	// Dictionaries
 	if (! isset($conf->oblyon->enabled)) {
