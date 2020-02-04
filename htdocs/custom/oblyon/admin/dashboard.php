@@ -93,10 +93,10 @@ if ($action == 'update') {
 		}
 	}
 
-    if (empty(GETPOST('THEME_AGRESSIVITY_RATIO'))) {
-        $res = dolibarr_set_const($db, 'THEME_AGRESSIVITY_RATIO', '-50', 'chaine', 0, '', $conf->entity);
+    if (empty(GETPOST('THEME_AGRESSIVENESS_RATIO'))) {
+        $res = dolibarr_set_const($db, 'THEME_AGRESSIVENESS_RATIO', '-50', 'chaine', 0, '', $conf->entity);
     } else {
-        $res = dolibarr_set_const($db, 'THEME_AGRESSIVITY_RATIO', GETPOST('THEME_AGRESSIVITY_RATIO'),'chaine',0,'',$conf->entity);
+        $res = dolibarr_set_const($db, 'THEME_AGRESSIVENESS_RATIO', GETPOST('THEME_AGRESSIVENESS_RATIO'),'chaine',0,'',$conf->entity);
     }
 
     if (! $res > 0) $error++;
@@ -411,8 +411,8 @@ print '</tr>'."\n";
 print '<tr>';
 print '<td width="50%">' . $langs->trans('ColorIntensityDesc') . '</td>';
 print '<td>';
-if (! isset($conf->global->THEME_AGRESSIVITY_RATIO)) $conf->global->THEME_AGRESSIVITY_RATIO=-50;
-print $langs->trans('ColorMoreDarker') . ' -100 <input type="range" name="THEME_AGRESSIVITY_RATIO" id="intensity" value="' . $conf->global->THEME_AGRESSIVITY_RATIO . '" min="-100" max="100"> 100 ' . $langs->trans('ColorMoreLighter');
+if (! isset($conf->global->THEME_AGRESSIVENESS_RATIO)) $conf->global->THEME_AGRESSIVENESS_RATIO=-50;
+print $langs->trans('ColorMoreDarker') . ' -100 <input type="range" name="THEME_AGRESSIVENESS_RATIO" id="intensity" value="' . $conf->global->THEME_AGRESSIVENESS_RATIO . '" min="-100" max="100"> 100 ' . $langs->trans('ColorMoreLighter');
 print '</td></tr>';
 
 // Colors

@@ -3,10 +3,10 @@
 
 .icon {
     /* use !important to prevent issues with browser extensions that change fonts */
-    font-family: 'Font Awesome 5 Pro' !important;
+    font-family: "Font Awesome 5 Free"; !important;
+    font-weight: 900;
     font-style: normal;
     font-variant: normal;
-    font-weight: normal;
     line-height: 1;
     speak: none;
     text-transform: none;
@@ -273,7 +273,7 @@
 /* Compatibility */
 .mainmenu::before{
     /* font part */
-    font-family: "Font Awesome 5 Pro";
+    font-family: "Font Awesome 5 Free";
     font-weight: 900;
     font-style: normal;
     font-variant: normal;

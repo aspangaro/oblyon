@@ -2414,7 +2414,7 @@ div.login_block {
         background-color: <?php print $bgnavtop; ?>;
         height: 54px;
     <?php } ?>
-    padding-right: 10px;
+    /* padding-right: 10px; */
     <?php if ( $conf->global->OBLYON_STICKY_TOPBAR ) { ?>
         position: fixed;
     <?php } else { ?>
@@ -2431,12 +2431,12 @@ div.login_block {
 div.login_block:after {
     /*content: '\f013';*/
     color: <?php print $bgnavtop_txt; ?>;
-    font-family: 'Font Awesome 5 Pro' !important;
+    font-family: "Font Awesome 5 Free"; !important;
     font-size: 20px;
     <?php if ($conf->global->MAIN_MENU_INVERT) { ?>
         line-height: 40px;
     <?php } else { ?>
-        line-height: 55px;
+        line-height: 54px;
     <?php } ?>
 }
 
@@ -2457,7 +2457,7 @@ div.login_block_user a {
         font-size: 13px;
     <?php } ?>
     font-family: <?php print $fontmainmenu; ?>;
-    font-weight: 500;
+    font-weight: 900;
     <?php if ($conf->global->MAIN_MENU_INVERT) { ?>
         height: 40px;
     <?php } else { ?>
@@ -2465,7 +2465,7 @@ div.login_block_user a {
     <?php } ?>
     max-width: 150px;
     overflow: hidden;
-    padding: 0 10px;
+    padding: 0 3px;
     text-overflow: ellipsis;
     <?php if ($usecss3) { ?>
         transition: all .2s ease-in-out;
@@ -2483,36 +2483,34 @@ div.login_block_user > .classfortooltip.login_block_elem2 {
     <?php } ?>
 }
 
+div.login_block_other {
+    display: inline-block;
+    clear: <?php echo $disableimages ? 'none' : 'both'; ?>;
+}
+
 .login_block_other {
-    /* <?php if ($conf->global->MAIN_MENU_INVERT) { ?>
-        background: <?php print $bgnavleft; ?>;
+    <?php if ($conf->global->MAIN_MENU_INVERT) { ?>
+            background: <?php print $bgnavleft; ?> ;
     <?php } else { ?>
-        background: <?php print $bgnavtop; ?>;
-    <?php } ?> */
+            background: <?php print $bgnavtop; ?> ;
+    <?php } ?>
     <?php if ($conf->global->MAIN_MENU_INVERT) { ?>
         display: none;
     <?php } ?>
-    /* position: absolute; */
-    right: 0;
+        /* position: absolute; */
+        right: 0;
     <?php if ($conf->global->MAIN_MENU_INVERT) { ?>
         top: 40px;
         height: 40px;
-        line-height: 40px;
+        line-height: 36px;
     <?php } else { ?>
         top: 54px;
         height: 54px;
-        line-height: 52px;
+        line-height: 50px;
     <?php } ?>
-    /* margin-right: 10px; */
-    <?php if ( empty($conf->dol_optimize_smallscreen) ) { ?>
-        min-width: 121px;
-    <?php } else { ?>
-        min-width: 80px;
-    <?php } ?>
-}
-
-.login_block_other .inline-block {
-    width: 40px;
+    padding-top: 0;
+    text-align: right;
+    margin-right: 3px;
 }
 
 .login_block:hover > .login_block_other {
@@ -2543,37 +2541,65 @@ div.login_block_user > .classfortooltip.login_block_elem2 {
 .login_block td.classfortooltip a {
     <?php if ($conf->global->MAIN_MENU_INVERT) { ?>
         color: <?php print $bgnavleft_txt; ?>;
+        font-size: 16px;
+        height: 40px;
+        line-height: 36px;
     <?php } else { ?>
         color: <?php print $bgnavtop_txt; ?>;
+        font-size: 18px;
+        height: 54px;
+        line-height: 50px;
     <?php } ?>
     display: block;
     font-family: <?php print $fontmainmenu; ?>;
-    height: 40px;
-    line-height: 40px;
-    padding: 0 10px;
+    padding: 0 3px;
     text-decoration: none;
     <?php if ($usecss3) { ?>
         transition: all .2s ease-in-out;
         -moz-transition: all .2s ease-in-out;
         -webkit-transition: all .2s ease-in-out;
     <?php } ?>
-    <?php if ($conf->global->MAIN_MENU_INVERT) { ?>
-        font-size: 16px;
-    <?php } else { ?>
-        font-size: 18px;
-    <?php } ?>
 }
 
 .login_block_elem a:hover,
 .login_block td.classfortooltip a:hover {
-    color: <?php echo $topmenu_hover; ?>;
+    <?php if ($conf->global->MAIN_MENU_INVERT) { ?>
+        color: <?php print $bgnavleft_txt; ?>;
+    <?php } else { ?>
+        color: <?php print $bgnavtop_txt; ?>;
+    <?php } ?>
+}
+
+.atoplogin, .atoplogin:hover {
+    <?php if ($conf->global->MAIN_MENU_INVERT) { ?>
+        color: <?php print $bgnavleft_txt; ?> !important;
+    <?php } else { ?>
+        color: <?php print $bgnavtop_txt; ?> !important;
+    <?php } ?>
+}
+.login_block_getinfo {
+    text-align: center;
+}
+.login_block_getinfo div.login_block_user {
+    display: block;
+}
+.login_block_getinfo .atoplogin, .login_block_getinfo .atoplogin:hover {
+    color: #333 !important;
+    font-weight: normal !important;
+}
+.alogin, .alogin:hover {
+    font-weight: normal !important;
+    padding-top: 2px;
+}
+.alogin:hover, .atoplogin:hover {
+    text-decoration:underline !important;
 }
 
 .atoplogin #dropdown-icon-down, .atoplogin #dropdown-icon-up {
-font-size: 0.7em;
+    font-size: 0.7em;
 }
 
-span.fal.atoplogin, span.fal.atoplogin:hover {
+span.fa.atoplogin, span.fa.atoplogin:hover {
     font-size: 16px;
     text-decoration: none !important;
 }
@@ -2591,23 +2617,25 @@ img.login, img.printer, img.help, img.entity {
     /* padding: 0px 0px 0px 4px; */
     /* margin: 0px 0px 0px 8px; */
     text-decoration: none;
-    color: white;
+    <?php if ($conf->global->MAIN_MENU_INVERT) { ?>
+        color: <?php print $bgnavleft_txt; ?>;
+    <?php } else { ?>
+        color: <?php print $bgnavtop_txt; ?>;
+    <?php } ?>
     font-weight: bold;
-
 }
 
-.userimgatoplogin img.userphoto, .userimgatoplogin img.userphoto {		/* size for user photo in login bar */
-    border-radius: 8px;
-    width: 16px;
-    height: 16px;
+.userimg.atoplogin img.userphoto, .userimgatoplogin img.userphoto {		/* size for user photo in login bar */
+    width: <?php echo $disableimages ? '26' : '32'; ?>px;
+    height: <?php echo $disableimages ? '26' : '32'; ?>px;
+    border-radius: 50%;
     background-size: contain;
-    vertical-align: text-bottom;
-    background-color: #FFF;
+    background-size: contain;
 }
 img.userphoto {				/* size for user photo in lists */
-    border-radius: 0.75em;
-    width: 1.5em;
-    height: 1.5em;
+    border-radius: 0.72em;
+    width: 1.4em;
+    height: 1.4em;
     background-size: contain;
     vertical-align: middle;
 }

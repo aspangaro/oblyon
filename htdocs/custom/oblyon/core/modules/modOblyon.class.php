@@ -101,8 +101,8 @@ function __construct($db) {
 	// Dependencies
 	$this->depends = array();		// List of modules id that must be enabled if this module is enabled
 	$this->requiredby = array();	// List of modules id to disable if this one is disabled
-	$this->phpmin = array(5,5);					// Minimum version of PHP required by module
-	$this->need_dolibarr_version = array(10,0);	// Minimum version of Dolibarr required by module
+	$this->phpmin = array(5,6);					// Minimum version of PHP required by module
+	$this->need_dolibarr_version = array(11,0);	// Minimum version of Dolibarr required by module
 	$this->langfiles = array("oblyon@oblyon");
 
 	// Constants
@@ -166,7 +166,7 @@ function __construct($db) {
 	$r ++;
 	$this->const [$r] [0] = "OBLYON_COLOR_TOPMENU_BCKGRD_HOVER";
 	$this->const [$r] [1] = "chaine";
-	$this->const [$r] [2] = "#444444";
+	$this->const [$r] [2] = "#0083A2";
 	$this->const [$r] [3] = 'Oblyon background topmenu hover color';
 	$this->const [$r] [4] = 1;
 	$this->const [$r] [5] = 'allentities';
@@ -193,7 +193,7 @@ function __construct($db) {
 	$r ++;
 	$this->const [$r] [0] = "OBLYON_COLOR_LEFTMENU_BCKGRD_HOVER";
 	$this->const [$r] [1] = "chaine";
-	$this->const [$r] [2] = "#444444";
+	$this->const [$r] [2] = "#0083A2";
 	$this->const [$r] [3] = 'Oblyon background leftmenu hover color';
 	$this->const [$r] [4] = 1;
 	$this->const [$r] [5] = 'allentities';
@@ -265,7 +265,7 @@ function __construct($db) {
 	$r ++;
 	$this->const [$r] [0] = "OBLYON_COLOR_FLINE_HOVER";
 	$this->const [$r] [1] = "chaine";
-	$this->const [$r] [2] = "#444444";
+	$this->const [$r] [2] = "#222222";
 	$this->const [$r] [3] = 'Oblyon text line color';
 	$this->const [$r] [4] = 1;
 	$this->const [$r] [5] = 'allentities';
@@ -274,7 +274,7 @@ function __construct($db) {
 	$r ++;
 	$this->const [$r] [0] = "OBLYON_COLOR_BUTTON_ACTION1";
 	$this->const [$r] [1] = "chaine";
-	$this->const [$r] [2] = "#0088cc";
+	$this->const [$r] [2] = "#0083A2";
 	$this->const [$r] [3] = 'Oblyon button action color 1';
 	$this->const [$r] [4] = 1;
 	$this->const [$r] [5] = 'allentities';
@@ -283,7 +283,7 @@ function __construct($db) {
 	$r ++;
 	$this->const [$r] [0] = "OBLYON_COLOR_BUTTON_ACTION2";
 	$this->const [$r] [1] = "chaine";
-	$this->const [$r] [2] = "#0044cc";
+	$this->const [$r] [2] = "#0063A2";
 	$this->const [$r] [3] = 'Oblyon button action color 2';
 	$this->const [$r] [4] = 1;
 	$this->const [$r] [5] = 'allentities';
