@@ -4566,17 +4566,40 @@ div .tdtop {
 .boxstats, .boxstats130, .boxstatscontent {
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ".";
+    text-overflow: ellipsis;
 }
 .boxstats {
     width: 100%;
     height: 59px;
     /* padding: 3px; */
 }
-.boxstats130 {
+.boxstats {
+    padding-left: 3px;
+    padding-right: 3px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    width: 118px;
+}
+.tabBar .fichehalfright .boxstats {
+    padding-top: 8px;
+    padding-bottom: 4px;
+}
+.boxstatscontent {
     padding: 3px;
-    width: 135px;
-    min-height: 48px;
+}
+.boxstatsempty {
+    width: 121px;
+    padding-left: 3px;
+    padding-right: 3px;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+.boxstats150empty {
+    width: 158px;
+    padding-left: 3px;
+    padding-right: 3px;
+    margin-left: 8px;
+    margin-right: 8px;
 }
 
 @media only screen and (max-width: 767px)
