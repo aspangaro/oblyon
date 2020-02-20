@@ -13,7 +13,7 @@ html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
+small, strike, sub, sup, tt, var,
 b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
@@ -406,7 +406,7 @@ input#onlinepaymenturl, input#directdownloadlink {
     opacity: 0.7;
 }
 
-div#moretabsList, div#moretabsListaction {
+div#moretabsListaction {
     z-index: 5;
 }
 
@@ -1703,10 +1703,10 @@ td.showDragHandle {
 }
 
 div.fiche {
-	margin-<?php print $left; ?>: <?php print (GETPOST('optioncss', 'aZ09') == 'print'?6:(empty($conf->dol_optimize_smallscreen)?'15':'6')); ?>px;
-	margin-<?php print $right; ?>: <?php print (GETPOST('optioncss', 'aZ09') == 'print'?6:(empty($conf->dol_optimize_smallscreen)?'15':'6')); ?>px;
-	<?php if (! empty($dol_hide_leftmenu)) print 'margin-bottom: 12px;'."\n"; ?>
-	<?php if (! empty($dol_hide_leftmenu)) print 'margin-top: 12px;'."\n"; ?>
+    margin-<?php print $left; ?>: <?php print (GETPOST('optioncss', 'aZ09') == 'print'?8:(empty($conf->dol_optimize_smallscreen)?'14':'6')); ?>px;
+    margin-<?php print $right; ?>: <?php print (GETPOST('optioncss', 'aZ09') == 'print'?6:(empty($conf->dol_optimize_smallscreen)?'14':'6')); ?>px;
+    <?php if (! empty($dol_hide_leftmenu)) print 'margin-bottom: 12px;'."\n"; ?>
+    <?php if (! empty($dol_hide_leftmenu)) print 'margin-top: 12px;'."\n"; ?>
 }
 body.onlinepaymentbody div.fiche {	/* For online payment page */
 	margin: 20px !important;
@@ -1756,9 +1756,8 @@ padding-left: 10px;
 @media only screen and (max-width: 1000px)
 {
     div.fiche {
-        /* margin-<?php print $left; ?>: <?php print (GETPOST('optioncss', 'aZ09') == 'print'?6:($dol_hide_leftmenu?'6':'20')); ?>px; */
-        margin-<?php print $left; ?>: <?php print (GETPOST('optioncss', 'aZ09') == 'print'?8:6); ?>px;
-    	margin-<?php print $right; ?>: <?php print (GETPOST('optioncss', 'aZ09') == 'print'?8:6); ?>px;
+        margin-<?php print $left; ?>: <?php print (GETPOST('optioncss', 'aZ09') == 'print'?6:($dol_hide_leftmenu?'6':'6')); ?>px;
+        margin-<?php print $right; ?>: <?php print (GETPOST('optioncss', 'aZ09') == 'print'?8:6); ?>px;
     }
     div.fichecenter {
         width: 100%;
@@ -8272,10 +8271,6 @@ input#sew_keyword {
 
     #tmenu_tooltipinvert div.menu_contenu {
         display: none;
-    }
-
-    div.fiche {
-        margin: 0 3px 0 3px;
     }
 }
 
