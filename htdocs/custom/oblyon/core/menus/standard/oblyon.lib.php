@@ -917,24 +917,20 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 			// Contract
 			if (! empty($conf->contrat->enabled)) {
                 $langs->load("contracts");
-                $newmenu->add("/contrat/index.php?leftmenu=contracts", $langs->trans("MenuContractsSubscriptions"), 0,
-                    $user->rights->contrat->lire, '', $mainmenu, 'contracts', 2000);
-                $newmenu->add("/contrat/card.php?action=create&amp;leftmenu=contracts",
-                    $langs->trans("NewContractSubscription"), 1, $user->rights->contrat->creer);
-                $newmenu->add("/contrat/list.php?leftmenu=contracts", $langs->trans("List"), 1,
-                    $user->rights->contrat->lire);
-                $newmenu->add("/contrat/services_list.php?leftmenu=contracts", $langs->trans("MenuServices"), 1,
-                    $user->rights->contrat->lire);
+                $newmenu->add("/contrat/index.php?leftmenu=contracts", $langs->trans("MenuContractsSubscriptions"), 0, $user->rights->contrat->lire, '', $mainmenu, 'contracts', 2000);
+                $newmenu->add("/contrat/card.php?action=create&amp;leftmenu=contracts", $langs->trans("NewContractSubscription"), 1, $user->rights->contrat->creer);
+                $newmenu->add("/contrat/list.php?leftmenu=contracts", $langs->trans("List"), 1, $user->rights->contrat->lire);
+                $newmenu->add("/contrat/services_list.php?leftmenu=contracts", $langs->trans("MenuServices"), 1, $user->rights->contrat->lire);
 
                 if (!empty($menu_invert)) {
                     $leftmenu = 'contracts';
                 }
 
                 if ($usemenuhider || empty($leftmenu) || $leftmenu == "contracts") {
-                    $newmenu->add("/contrat/services.php?leftmenu=contracts&amp;mode=0", $langs->trans("MenuInactiveServices"), 2, $user->rights->contrat->lire);
-                    $newmenu->add("/contrat/services.php?leftmenu=contracts&amp;mode=4", $langs->trans("MenuRunningServices"), 2, $user->rights->contrat->lire);
-                    $newmenu->add("/contrat/services.php?leftmenu=contracts&amp;mode=4&amp;filter=expired", $langs->trans("MenuExpiredServices"), 2, $user->rights->contrat->lire);
-                    $newmenu->add("/contrat/services.php?leftmenu=contracts&amp;mode=5", $langs->trans("MenuClosedServices"), 2, $user->rights->contrat->lire);
+                    $newmenu->add("/contrat/services_list.php?leftmenu=contracts&amp;mode=0", $langs->trans("MenuInactiveServices"), 2, $user->rights->contrat->lire);
+                    $newmenu->add("/contrat/services_list.php?leftmenu=contracts&amp;mode=4", $langs->trans("MenuRunningServices"), 2, $user->rights->contrat->lire);
+                    $newmenu->add("/contrat/services_list.php?leftmenu=contracts&amp;mode=4&amp;filter=expired", $langs->trans("MenuExpiredServices"), 2, $user->rights->contrat->lire);
+                    $newmenu->add("/contrat/services_list.php?leftmenu=contracts&amp;mode=5", $langs->trans("MenuClosedServices"), 2, $user->rights->contrat->lire);
                 }
             }
 
