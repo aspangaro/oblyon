@@ -489,24 +489,14 @@ function print_text_menu_entry($text, $showmode, $url, $id, $idsel, $atarget)
 	if ($showmode == 1)
 	{
 		print '<a class="tmenu main-nav__link	main-nav__'.$idsel.'" href="'.$url.'"'.($atarget?' target="'.$atarget.'"':'').'>';
-		if ($conf->global->OBLYON_ELDY_ICONS || $conf->global->OBLYON_ELDY_OLD_ICONS)
-		{
-			print '<i class="tmenuimage '.$id.' '.$idsel.'"></i> ';
-		} else {
-			print '<i class="tmenuimage icon icon--'.$idsel.'"></i> ';
-		}
+		print '<i class="tmenuimage icon icon--'.$idsel.'"></i> ';
 		print $text;
 		print '</a>';
 	}
 	if ($showmode == 2)
 	{
 		print '<a class="tmenu main-nav__link is-disabled" id="mainmenua_'.$idsel.'" href="#" title="'.dol_escape_htmltag($langs->trans("NotAllowed")).'">';
-		if ($conf->global->OBLYON_ELDY_ICONS || $conf->global->OBLYON_ELDY_OLD_ICONS)
-		{
-			print '<i class="tmenuimage '.$id.' '.$idsel.'"></i> ';
-		} else {
-			print '<i class="tmenuimage icon icon--'.$idsel.'"></i> ';
-		}
+		print '<i class="tmenuimage icon icon--'.$idsel.'"></i> ';
 		print $text;
 		print '</a>';
 	}
