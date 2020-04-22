@@ -8,7 +8,7 @@ This theme is actually composed of two things:
 * a custom Dolibarr module (stored in `htdocs/custom`)
 
 To install Oblyon, you must copy the content of the `htdocs` folder into your Dolibarr `htdocs` folder.
-Make sure to install the branch appropraite for your Dolibarr version.
+Make sure to install the appropriate branch for your Dolibarr version.
 
 ## How to use
 
