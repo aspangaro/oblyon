@@ -85,6 +85,8 @@ body {
     margin: 0;
 }
 
+.thumbstat { font-weight: bold !important; }
+
 /**
 * Headings
 */
@@ -363,10 +365,10 @@ td.hidden {
 }
 
 .opacityhigh {
-    opacity: 0.8;
+    opacity: 0.85;
 }
 .optiongrey, .opacitymedium {
-    opacity: 0.5;
+    opacity: 0.7;
 }
 .opacitytransp {
     opacity: 0;
@@ -406,7 +408,7 @@ input#onlinepaymenturl, input#directdownloadlink {
     opacity: 0.7;
 }
 
-div#moretabsListaction {
+div#moretabsList, div#moretabsListaction {
     z-index: 5;
 }
 
@@ -824,11 +826,9 @@ input#onlinepaymenturl, input#directdownloadlink {
     /* margin: .2em .5em; */
     margin: 2px 1px;
     padding: .5em 1em;
-    <?php if ($usecss3) { ?>
-        transition: all .3s ease-in-out;
-        -moz-transition: all .3s ease-in-out;
-        -webkit-transition: all .3s ease-in-out;
-    <?php } ?>
+    transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -webkit-transition: all .3s ease-in-out;
 }
 
 .button:hover, .button:focus {
@@ -932,11 +932,9 @@ a.butActionNewRefused>span.fa-plus-circle { padding-left: 6px; font-size: 1.5em;
     margin: 0 <?php echo ($dol_optimize_smallscreen?'.3':'.5'); ?>em;
     padding: .3em <?php echo ($dol_optimize_smallscreen?'.4':'.7'); ?>em;
     white-space: nowrap;
-    <?php if ($usecss3) { ?>
-        transition: all .3s ease-in-out;
-        -moz-transition: all .3s ease-in-out;
-        -webkit-transition: all .3s ease-in-out;
-    <?php } ?>
+    transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -webkit-transition: all .3s ease-in-out;
 }
 
 .butAction:hover,
@@ -949,34 +947,26 @@ a.butActionNewRefused>span.fa-plus-circle { padding-left: 6px; font-size: 1.5em;
 
 .butAction {
     border: 1px solid <?php print $maincolor; ?>;
-    <?php if ($usecss3) { ?>
-        -webkit-box-shadow: inset 0 1px 0 rgba(170, 200, 210, .6);
-        box-shadow: inset 0 1px 0 rgba(170, 200, 210, .6);
-    <?php } ?>
+    -webkit-box-shadow: inset 0 1px 0 rgba(170, 200, 210, .6);
+    box-shadow: inset 0 1px 0 rgba(170, 200, 210, .6);
 }
 
 .butAction:hover, .butAction:active {
     background-color: <?php print $maincolor; ?>;
-    <?php if ($usecss3) { ?>
-        -webkit-box-shadow: inset 0 1px 0 rgba(235,235,235, .6);
-        box-shadow: inset 0 1px 0 rgba(235,235,235, .6);
-    <?php } ?>
+    -webkit-box-shadow: inset 0 1px 0 rgba(235,235,235, .6);
+    box-shadow: inset 0 1px 0 rgba(235,235,235, .6);
 }
 
 .butActionDelete {
     border: 1px solid #f07b6e;
-    <?php if ($usecss3) { ?>
-        -webkit-box-shadow: inset 0 1px 0 rgba(210, 170, 170, .6);
-        box-shadow: inset 0 1px 0 rgba(210, 170, 170, .6);
-    <?php } ?>
+    -webkit-box-shadow: inset 0 1px 0 rgba(210, 170, 170, .6);
+    box-shadow: inset 0 1px 0 rgba(210, 170, 170, .6);
 }
 
 .butActionDelete:hover, .butActionDelete:active {
     background-color: #f07b6e;
-    <?php if ($usecss3) { ?>
-        -webkit-box-shadow: inset 0 1px 0 rgba(210, 170, 170, .6);
-        box-shadow: inset 0 1px 0 rgba(210, 170, 170, .6);
-    <?php } ?>
+    -webkit-box-shadow: inset 0 1px 0 rgba(210, 170, 170, .6);
+    box-shadow: inset 0 1px 0 rgba(210, 170, 170, .6);
 }
 
 .butActionRefused {
@@ -1267,6 +1257,19 @@ select.flat.selectlimit {
     max-width: 0;
     overflow: auto;
 }
+.divintdwithtwolinesmax {
+    width: 75px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+}
+.twolinesmax {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+}
 .tablelistofcalendars {
     margin-top: 25px !important;
 }
@@ -1351,6 +1354,11 @@ div.fiche {
     flex-flow: row wrap;
     justify-content: flex-start;
 }
+
+.sensiblehtmlcontent * {
+    position: static !important;
+}
+
 .thumbstat {
     flex: 1 1 116px;
 }
@@ -1659,7 +1667,11 @@ td.showDragHandle {
 }
 
 .side-nav {
+<?php if ( $conf->global->MAIN_MENU_INVERT ) { ?>
+    background-color: <?php print $bgnavtop; ?>;
+<?php } else { ?>
     background-color: <?php print $bgnavleft; ?>;
+<?php } ?>
 }
 
 #id-right {
@@ -1703,10 +1715,10 @@ td.showDragHandle {
 }
 
 div.fiche {
-    margin-<?php print $left; ?>: <?php print (GETPOST('optioncss', 'aZ09') == 'print'?8:(empty($conf->dol_optimize_smallscreen)?'14':'6')); ?>px;
-    margin-<?php print $right; ?>: <?php print (GETPOST('optioncss', 'aZ09') == 'print'?6:(empty($conf->dol_optimize_smallscreen)?'14':'6')); ?>px;
-    <?php if (! empty($dol_hide_leftmenu)) print 'margin-bottom: 12px;'."\n"; ?>
-    <?php if (! empty($dol_hide_leftmenu)) print 'margin-top: 12px;'."\n"; ?>
+	margin-<?php print $left; ?>: <?php print (GETPOST('optioncss', 'aZ09') == 'print'?6:(empty($conf->dol_optimize_smallscreen)?'15':'6')); ?>px;
+	margin-<?php print $right; ?>: <?php print (GETPOST('optioncss', 'aZ09') == 'print'?6:(empty($conf->dol_optimize_smallscreen)?'15':'6')); ?>px;
+	<?php if (! empty($dol_hide_leftmenu)) print 'margin-bottom: 12px;'."\n"; ?>
+	<?php if (! empty($dol_hide_leftmenu)) print 'margin-top: 12px;'."\n"; ?>
 }
 body.onlinepaymentbody div.fiche {	/* For online payment page */
 	margin: 20px !important;
@@ -1756,8 +1768,9 @@ padding-left: 10px;
 @media only screen and (max-width: 1000px)
 {
     div.fiche {
-        margin-<?php print $left; ?>: <?php print (GETPOST('optioncss', 'aZ09') == 'print'?6:($dol_hide_leftmenu?'6':'6')); ?>px;
-        margin-<?php print $right; ?>: <?php print (GETPOST('optioncss', 'aZ09') == 'print'?8:6); ?>px;
+        /* margin-<?php print $left; ?>: <?php print (GETPOST('optioncss', 'aZ09') == 'print'?6:($dol_hide_leftmenu?'6':'20')); ?>px; */
+        margin-<?php print $left; ?>: <?php print (GETPOST('optioncss', 'aZ09') == 'print'?8:6); ?>px;
+    	margin-<?php print $right; ?>: <?php print (GETPOST('optioncss', 'aZ09') == 'print'?8:6); ?>px;
     }
     div.fichecenter {
         width: 100%;
@@ -1906,8 +1919,6 @@ div.statusref {
 	clear: both;
 }
 div.statusref img {
-    padding-left: 8px;
-   	padding-right: 9px;
    	vertical-align: text-bottom;
    	width: 18px;
 }
@@ -1969,6 +1980,14 @@ img.photorefnoborder {
     padding: 0 5px 0 5px;
     max-width: 210px;
     text-align: <?php print $left; ?>;
+
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
 }
 
 #tmenu_tooltipinvert .db-menu__society a,
@@ -1982,11 +2001,9 @@ img.photorefnoborder {
     text-decoration: none;
     overflow: hidden;
     text-overflow: ellipsis;
-    <?php if ($usecss3) { ?>
-        transition: all .4s ease-in-out;
-        -moz-transition: all .4s ease-in-out;
-        -webkit-transition: all .4s ease-in-out;
-    <?php } ?>
+    transition: all .4s ease-in-out;
+    -moz-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
 }
 
 #tmenu_tooltipinvert .db-menu__society a:hover,
@@ -2094,39 +2111,39 @@ img.photorefnoborder {
 
 
 #tmenu_tooltip .main-nav__list {
-margin: 0;
-padding: 0;
-text-align: center;
-z-index: 30;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    z-index: 30;
 }
 
 #tmenu_tooltip .main-nav__item {
-display: block;
-float: <?php print $left; ?>;
-position: relative;
-<?php if ( $conf->global->OBLYON_HIDE_TOPICONS ) { ?>
-    height: 54px;
-    line-height: 54px;
-<?php } else { ?>
-    height: 54px;
-<?php } ?>
+    display: block;
+    float: <?php print $left; ?>;
+    position: relative;
+    <?php if ( $conf->global->OBLYON_HIDE_TOPICONS ) { ?>
+        height: 54px;
+        line-height: 54px;
+    <?php } else { ?>
+        height: 54px;
+    <?php } ?>
 }
 
 .main-nav__item.tmenusel {
-background-color: <?php print $bgnavtop_hover; ?>;
+    background-color: <?php print $bgnavtop_hover; ?>;
 }
 
 .main-nav__item.tmenusel .main-nav__link {
-font-weight: bold !important;
+    font-weight: bold !important;
 }
 
 .main-nav__item.tmenusel:hover {
-color: #fff;
+    color: #fff;
 }
 
 .main-nav__item.tmenusel .main-nav__link:hover {
-color: #fff;
-font-weight: bold;
+    color: #fff;
+    font-weight: bold;
 }
 
 
@@ -2148,41 +2165,39 @@ transition: all .2s ease-in-out;
 #tmenu_tooltip .tmenu li:hover .main-nav__link,
 .main-nav__item:hover .main-nav__link,
 .main-nav__item .main-nav__link:focus {
-color: <?php print $topmenu_hover; ?>;
+    color: <?php print $topmenu_hover; ?>;
 }
 
 .main-nav__link {
-color: <?php print $navlinkcolor; ?>;
-display: block;
-font-family: <?php print $fontmainmenu; ?>;
-<?php if ($usecss3) { ?>
+    color: <?php print $navlinkcolor; ?>;
+    display: block;
+    font-family: <?php print $fontmainmenu; ?>;
     transition: all .2s ease-in-out;
     -moz-transition: all .2s ease-in-out;
     -webkit-transition: all .2s ease-in-out;
-<?php } ?>
 }
 
 #tmenu_tooltip .main-nav__link {
-height: 54px;
-<?php if ( $conf->global->OBLYON_HIDE_TOPICONS ) { ?>
-    font-weight: 500;
-    line-height: 54px;
-    padding: 0 8px;
-<?php } else { ?>
-    padding: 0 6px;
-<?php } ?>
+    height: 54px;
+    <?php if ( $conf->global->OBLYON_HIDE_TOPICONS ) { ?>
+        font-weight: 500;
+        line-height: 54px;
+        padding: 0 8px;
+    <?php } else { ?>
+        padding: 0 6px;
+    <?php } ?>
 }
 
 .main-nav__link.is-disabled {
-cursor: not-allowed;
-opacity: .6;
+    cursor: not-allowed;
+    opacity: .6;
 }
 .main-nav__link.is-disabled:hover {
-color: #888;
+    color: #888;
 }
 
 .db-nav .main-nav__link {
-text-decoration: none;
+    text-decoration: none;
 }
 
 /**
@@ -2191,15 +2206,15 @@ text-decoration: none;
 
 #tmenu_tooltipinvert .pushy-btn,
 #tmenu_tooltip .pushy-btn { /* for v3.5 */
-<?php if ($conf->global->MAIN_MENU_INVERT) { ?>
-    font-size: 18px !important;
-    height: 40px;
-    line-height: 40px;
-<?php } else { ?>
-    font-size: 18px !important;
-    height: 54px;
-    line-height: 54px;
-<?php } ?>
+    <?php if ($conf->global->MAIN_MENU_INVERT) { ?>
+        font-size: 18px !important;
+        height: 40px;
+        line-height: 40px;
+    <?php } else { ?>
+        font-size: 18px !important;
+        height: 54px;
+        line-height: 54px;
+    <?php } ?>
 }
 
 #tmenu_tooltipinvert {
@@ -2456,7 +2471,7 @@ div.login_block_user a {
         font-size: 13px;
     <?php } ?>
     font-family: <?php print $fontmainmenu; ?>;
-    font-weight: 900;
+    font-weight: 500;
     <?php if ($conf->global->MAIN_MENU_INVERT) { ?>
         height: 40px;
     <?php } else { ?>
@@ -2466,11 +2481,9 @@ div.login_block_user a {
     overflow: hidden;
     padding: 0 3px;
     text-overflow: ellipsis;
-    <?php if ($usecss3) { ?>
-        transition: all .2s ease-in-out;
-        -moz-transition: all .2s ease-in-out;
-        -webkit-transition: all .2s ease-in-out;
-    <?php } ?>
+    transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
     vertical-align: middle;
 }
 
@@ -2489,15 +2502,15 @@ div.login_block_other {
 
 .login_block_other {
     <?php if ($conf->global->MAIN_MENU_INVERT) { ?>
-            background: <?php print $bgnavleft; ?> ;
+        background: <?php print $bgnavleft; ?>;
     <?php } else { ?>
-            background: <?php print $bgnavtop; ?> ;
+        background: <?php print $bgnavtop; ?>;
     <?php } ?>
     <?php if ($conf->global->MAIN_MENU_INVERT) { ?>
         display: none;
     <?php } ?>
-        /* position: absolute; */
-        right: 0;
+    /* position: absolute; */
+    right: 0;
     <?php if ($conf->global->MAIN_MENU_INVERT) { ?>
         top: 40px;
         height: 40px;
@@ -2553,11 +2566,9 @@ div.login_block_other {
     font-family: <?php print $fontmainmenu; ?>;
     padding: 0 3px;
     text-decoration: none;
-    <?php if ($usecss3) { ?>
-        transition: all .2s ease-in-out;
-        -moz-transition: all .2s ease-in-out;
-        -webkit-transition: all .2s ease-in-out;
-    <?php } ?>
+    transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
 }
 
 .login_block_elem a:hover,
@@ -2570,11 +2581,11 @@ div.login_block_other {
 }
 
 .atoplogin, .atoplogin:hover {
-    <?php if ($conf->global->MAIN_MENU_INVERT) { ?>
-        color: <?php print $bgnavleft_txt; ?> !important;
-    <?php } else { ?>
-        color: <?php print $bgnavtop_txt; ?> !important;
-    <?php } ?>
+<?php if ($conf->global->MAIN_MENU_INVERT) { ?>
+    color: <?php print $bgnavleft_txt; ?> !important;
+<?php } else { ?>
+    color: <?php print $bgnavtop_txt; ?> !important;
+<?php } ?>
 }
 .login_block_getinfo {
     text-align: center;
@@ -2591,14 +2602,14 @@ div.login_block_other {
     padding-top: 2px;
 }
 .alogin:hover, .atoplogin:hover {
-    text-decoration:underline !important;
+    text-decoration:none !important;
 }
 
 .atoplogin #dropdown-icon-down, .atoplogin #dropdown-icon-up {
     font-size: 0.7em;
 }
 
-span.fa.atoplogin, span.fa.atoplogin:hover {
+span.fal.atoplogin, span.fal.atoplogin:hover {
     font-size: 16px;
     text-decoration: none !important;
 }
@@ -2622,13 +2633,13 @@ img.login, img.printer, img.help, img.entity {
         color: <?php print $bgnavtop_txt; ?>;
     <?php } ?>
     font-weight: bold;
+
 }
 
 .userimg.atoplogin img.userphoto, .userimgatoplogin img.userphoto {		/* size for user photo in login bar */
     width: <?php echo $disableimages ? '26' : '32'; ?>px;
     height: <?php echo $disableimages ? '26' : '32'; ?>px;
     border-radius: 50%;
-    background-size: contain;
     background-size: contain;
 }
 img.userphoto {				/* size for user photo in lists */
@@ -2809,11 +2820,9 @@ div.login a:hover {
     font-weight: normal;
     text-align: <?php print $left; ?>;
     text-decoration: none;
-    <?php if ($usecss3) { ?>
-        transition: all .2s ease-in-out;
-        -moz-transition: all .2s ease-in-out;
-        -webkit-transition: all .2s ease-in-out;
-    <?php } ?>
+    transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
 }
 
 .sec-nav .sec-nav__link:hover,
@@ -2988,7 +2997,11 @@ font-size: 14px;
 
 .blockvmenuhelp {
 <?php if (empty($conf->dol_optimize_smallscreen)) { ?>
-    background-color: <?php print $bgnavleft ?>;
+<?php if ( $conf->global->MAIN_MENU_INVERT ) { ?>
+    background-color: <?php print $bgnavtop; ?>;
+<?php } else { ?>
+    background-color: <?php print $bgnavleft; ?>;
+<?php } ?>
     color: <?php print $maincolor ?>;
     font-family: <?php print $fontmenuhelp; ?>;
     margin: 0;
@@ -3314,11 +3327,9 @@ li.tmenusel {
     margin: 0;
     padding: 0;
     position: relative;
-    <?php if ($usecss3) { ?>
-        transition: all .2s ease-in-out;
-        -moz-transition: all .2s ease-in-out;
-        -webkit-transition: all .2s ease-in-out;
-    <?php } ?>
+    transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
 }
 
 #tmenu_tooltip li.tmenu,
@@ -3508,11 +3519,9 @@ li#mainmenutd_companylogo {
     font-size: 13px;
     line-height: 40px;
     padding: 0 9px;
-    <?php if ($usecss3) { ?>
-        transition: all .2s ease-in-out;
-        -moz-transition: all .2s ease-in-out;
-        -webkit-transition: all .2s ease-in-out;
-    <?php } ?>
+    transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
 }
 
 #tmenu_tooltipinvert div.menu_contenu {
@@ -3582,11 +3591,9 @@ div.vmenu {
     color: #eee;
     display: block;
     padding: 8px;
-    <?php if ($usecss3) { ?>
-        transition: all .2s ease-in-out;
-        -moz-transition: all .2s ease-in-out;
-        -webkit-transition: all .2s ease-in-out;
-    <?php } ?>
+    transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
 }
 
 a.vmenu:link,
@@ -4096,6 +4103,11 @@ a.tabTitle {
     white-space: nowrap;
 }
 
+.imgTabTitle {
+    max-height: 14px;
+}
+
+
 a.tab:link,
 a.tab:visited,
 a.tab:hover,
@@ -4107,13 +4119,11 @@ a.tab#active {
     border-bottom: none;
     text-decoration: none;
     white-space: nowrap;
-    <?php if ($usecss3) { ?>
-        box-shadow: 0 0 1px rgba(0,0,0, .04);
-        -webkit-box-shadow: 0 0 1px rgba(0,0,0, .04);
-        transition: all .3s ease-in-out;
-        -moz-transition: all .3s ease-in-out;
-        -webkit-transition: all .3s ease-in-out;
-    <?php } ?>
+    box-shadow: 0 0 1px rgba(0,0,0, .04);
+    -webkit-box-shadow: 0 0 1px rgba(0,0,0, .04);
+    transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -webkit-transition: all .3s ease-in-out;
 }
 
 a.tab#active,
@@ -4200,14 +4210,13 @@ div.popuptab {
 }
 
 /* ============================================================================== */
-/* Boutons actions                                                                */
+/* Buttons for actions                                                            */
 /* ============================================================================== */
 <?php include dol_buildpath($path.'/theme/'.$theme.'/btn.inc.php', 0); ?>
 
-/*------------------------------------*\
-#Tables
-\*------------------------------------*/
-
+/* ============================================================================== */
+/* Tables                                                                         */
+/* ============================================================================== */
 .allwidth {
     width: 100%;
 }
@@ -4850,6 +4859,30 @@ table.notopnoleftnoright div.titre {
 div.titre {
     color: <?php print $maincolor; ?>;
     font-weight: bold;
+    font-size: 1.1em;
+    text-decoration: none;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+table.table-fiche-title .col-title div.titre{
+    line-height: 40px;
+}
+table.table-fiche-title {
+    margin-bottom: 5px;
+}
+
+
+div.backgreypublicpayment { background-color: #f0f0f0; padding: 20px; border-bottom: 1px solid #ddd; }
+.backgreypublicpayment a { color: #222 !important; }
+.poweredbypublicpayment {
+    float: right;
+    top: 8px;
+    right: 8px;
+    position: absolute;
+    font-size: 0.8em;
+    color: #222;
+    opacity: 0.3;
 }
 
 #dolpaymenttable { min-width: 320px; font-size: 16px; }	/* Width must have min to make stripe input area visible */
@@ -6630,17 +6663,17 @@ span#select2-boxbookmark-container, span#select2-boxcombo-container {
 /* ============================================================================== */
 
 .noborderoncategories {
-border: none !important;
-border-radius: 5px !important;
-box-shadow: none;
--webkit-box-shadow: none !important;
-box-shadow: none !important;
+    border: none !important;
+    border-radius: 5px !important;
+    box-shadow: none;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
 }
 span.noborderoncategories a, li.noborderoncategories a {
-line-height: normal;
+    line-height: normal;
 }
 span.noborderoncategories {
-padding: 3px 5px 0px 5px;
+    padding: 3px 5px 3px 5px;
 }
 .categtextwhite, .treeview .categtextwhite.hover {
 color: #fff !important;
@@ -7815,7 +7848,6 @@ div.tabBar .noborder {
 }
 
 /* Prepare to remove class pair - impair */
-
 .noborder > tbody > tr:nth-child(even):not(.liste_titre), .liste > tbody > tr:nth-child(even):not(.liste_titre),
 div:not(.fichecenter):not(.fichehalfleft):not(.fichehalfright):not(.ficheaddleft) > .border > tbody > tr:nth-of-type(even):not(.liste_titre), .liste > tbody > tr:nth-of-type(even):not(.liste_titre),
 div:not(.fichecenter):not(.fichehalfleft):not(.fichehalfright):not(.ficheaddleft) .oddeven.tagtr:nth-of-type(even):not(.liste_titre)
@@ -8271,6 +8303,18 @@ input#sew_keyword {
 
     #tmenu_tooltipinvert div.menu_contenu {
         display: none;
+    }
+
+    div.fiche {
+        margin: 0 3px 0 3px;
+    }
+
+    table.table-fiche-title .col-title div.titre{
+        line-height: unset;
+    }
+
+    input#addedfile {
+        width: 95%;
     }
 }
 

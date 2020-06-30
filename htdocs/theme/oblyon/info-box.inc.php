@@ -12,9 +12,12 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
 	min-height: 90px;
 	background: #fff;
 	width: 100%;
-	box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2), 0px 0px 2px rgba(0, 0, 0, 0.1);
-	border-radius: 2px;
-	margin-bottom: 15px;
+	box-shadow: 0 0 1px rgba(0,0,0,.125),0 1px 3px rgba(0,0,0,.2);
+    border-top-right-radius: 0.25em;
+    border-top-left-radius: 0.50em;
+    border-bottom-left-radius: 0.50em;
+    border-bottom-right-radius: 0.25em;
+    margin-bottom: 15px;
 }
 .info-box.info-box-sm{
     min-height: 80px;
@@ -35,25 +38,25 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
 }
 
 .info-box .progress .progress-bar {
-		float: left;
-		width: 0;
-		height: 100%;
-		font-size: 12px;
-		line-height: 20px;
-		color: #fff;
-		text-align: center;
-		background-color: #337ab7;
-		-webkit-box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);
-		box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);
-		-webkit-transition: width .6s ease;
-		-o-transition: width .6s ease;
-		transition: width .6s ease;
+    float: left;
+    width: 0;
+    height: 100%;
+    font-size: 12px;
+    line-height: 20px;
+    color: #fff;
+    text-align: center;
+    background-color: #337ab7;
+    -webkit-box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);
+    box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);
+    -webkit-transition: width .6s ease;
+    -o-transition: width .6s ease;
+    transition: width .6s ease;
 }
 .info-box-icon {
-	border-top-left-radius: 2px;
+	border-top-left-radius: 0.25em;
 	border-top-right-radius: 0;
 	border-bottom-right-radius: 0;
-	border-bottom-left-radius: 2px;
+	border-bottom-left-radius: 0.25em;
 	display: block;
     overflow: hidden;
 	float: left;
@@ -73,6 +76,10 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
 .info-box-icon > img {
 	max-width: 100%;
 }
+.info-box-module .info-box-icon > img {
+    max-width: 50%;
+}
+
 .info-box-icon-text{
     box-sizing: border-box;
     display: block;
@@ -90,6 +97,34 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
     opacity: 0;
     -webkit-transition: opacity 0.5s, visibility 0s 0.5s;
     transition: opacity 0.5s, visibility 0s 0.5s;
+}
+
+.info-box-icon-version {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 80px;
+    top: 58px;
+    color: #ffffff;
+    background-color: rgba(0,0,0,0.1);
+    cursor: default;
+
+    font-size: 10px;
+    line-height: 22px;
+    padding: 0px 3px;
+    text-align: center;
+    opacity: 1;
+    -webkit-transition: opacity 0.5s, visibility 0s 0.5s;
+    transition: opacity 0.5s, visibility 0s 0.5s;
+}
+.box-flex-item.info-box-module.info-box-module-disabled {
+    opacity: 0.6;
+}
+
+.info-box-actions {
+    position: absolute;
+    right: 0;
+    bottom: 0;
 }
 
 <?php if(empty($conf->global->MAIN_DISABLE_GLOBAL_BOXSTATS) && !empty($conf->global->MAIN_INCLUDE_GLOBAL_STATS_IN_OPENED_DASHBOARD)){ ?>
@@ -223,7 +258,7 @@ if (GETPOSTISSET('THEME_AGRESSIVENESS_RATIO')) $conf->global->THEME_AGRESSIVENES
 .fa-dol-bank_account:before {
 	content: "\f19c";
 }
-.fa-dol-adherent:before {
+.fa-dol-member:before {
 	content: "\f0c0";
 }
 .fa-dol-expensereport:before {

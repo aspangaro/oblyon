@@ -226,6 +226,10 @@
     content: '\f467';
 }
 
+.icon--webhost:before {
+    content: '\f233';
+}
+
 /* Secondary Nav */
 .icon--setup:before {
     content: '\f7d9';

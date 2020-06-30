@@ -6,7 +6,7 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
  * Dropdown
  */
 
-.open>.dropdown-menu{ /*, #topmenu-login-dropdown:hover .dropdown-menu*/
+.open>.dropdown-menu, .dropdown dd ul.open {
     display: block;
 }
 
@@ -108,11 +108,6 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
     max-width: 100%;
 }
 
-#topmenu-global-search-dropdown .dropdown-menu{
-    width: 300px;
-    max-width: 100%;
-}
-
 .dropdown-user-image {
     border-radius: 50%;
     vertical-align: middle;
@@ -161,6 +156,11 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
     max-height: calc(90vh - 110px) ;
     white-space: normal;
 }
+#topmenu-bookmark-dropdown .dropdown-menu > .bookmark-body, #topmenu-bookmark-dropdown .dropdown-body{
+    max-height: 60vh ; /* fallback for browsers without support for calc() */
+    max-height: calc(90vh - 200px) ;
+}
+
 .dropdown-body::-webkit-scrollbar {
     width: 8px;
 }
@@ -173,10 +173,11 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
     -webkit-border-radius: 0;
     border-radius: 0;
+    background: #aaa;
 }
 
-#topmenu-login-dropdown, #topmenu-bookmark-dropdown, #topmenu-global-search-dropdown, #topmenu-tool-dropdown {
-    /* padding: 0 2px 0 2px; */
+#topmenu-login-dropdown, #topmenu-bookmark-dropdown, #topmenu-quickadd-dropdown, #topmenu-global-search-dropdown, #topmenu-tool-dropdown {
+    padding: 0 5px 0 5px;
 }
 #topmenu-login-dropdown a:hover{
     text-decoration: none;
@@ -267,13 +268,13 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
         color: rgba(0,0,0,0.3);
     }
     .dropdown-item.active, .dropdown-item:hover, .dropdown-item:focus  {
-        color: #<?php echo $colortextbackhmenu; ?> !important;
+        color: #000000 !important;
         text-decoration: none;
         background: rgb(<?php echo $colorbackhmenu1 ?>);
     }
     /*
-    * SEARCH
-    */
+     * SEARCH
+     */
     .dropdown-search-input {
         width: 100%;
         padding: 10px 35px 10px 20px;
@@ -299,4 +300,65 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
     }
     .hidden-search-result{
         display: none !important;
+    }
+
+    /*
+     * QUICK ADD
+     */
+    #topmenu-quickadd-dropdown .dropdown-menu {
+        width: 300px !important;
+        color: #444;
+    }
+
+    .quickadd-header {
+        color: #444 !important;
+    }
+
+    div.quickadd {
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        -webkit-justify-content: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-align-content: center;
+        -ms-flex-line-pack: center;
+        align-content: center;
+        -webkit-align-items: flex-start;
+        -ms-flex-align: start;
+        align-items: flex-start;
+    }
+
+    div.quickadd a {
+        color: #444;
+    }
+
+    div.quickadd a:hover, div.quickadd a:active {
+        color: #000000;
+    }
+
+    div.quickaddblock {
+        width: 80px;
+        display: block ruby;
+    }
+
+    div.quickaddblock:hover,
+    div.quickaddblock:active,
+    div.quickaddblock:focus {
+        background: <?php print $maincolor; ?>;
+    }
+
+    /*
+     * Responsive
+     */
+    @media only screen and (max-width: 570px) {
+        #topmenu-login-dropdown, #topmenu-bookmark-dropdown, #topmenu-quickadd-dropdown, #topmenu-global-search-dropdown, #topmenu-tool-dropdown {
+            padding: 0 2px 0 2px;
+        }
     }

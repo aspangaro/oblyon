@@ -334,20 +334,28 @@ else { $colortextbacktab='444'; }
 print 'colortextbacktab='.$colortextbacktab."\n";
 
 
-$usecss3=true;
-if ($conf->browser->name == 'ie' && round($conf->browser->version,2) < 10) $usecss3=false;
-elseif ($conf->browser->name == 'iceweasel') $usecss3=false;
-elseif ($conf->browser->name == 'epiphany')	$usecss3=false;
+if(!empty($conf->global->MAIN_USE_TOP_MENU_SEARCH_DROPDOWN)){ $maxwidthloginblock = $maxwidthloginblock + 55; }
+if(!empty($conf->global->MAIN_USE_TOP_MENU_QUICKADD_DROPDOWN)) { $maxwidthloginblock = $maxwidthloginblock + 55; }
+if(! empty($conf->bookmark->enabled) && !empty($conf->global->MAIN_USE_TOP_MENU_BOOKMARK_DROPDOWN)) { $maxwidthloginblock = $maxwidthloginblock + 55; }
 
-print 'colred='.$colred.' colgreen='.$colgreen.' colblue='.$colblue."\n";
-print 'isred='.$isred.' isgreen='.$isgreen.' isblue='.$isblue."\n";
+
+print '/*'."\n";
+print 'colorbackbody='.$colorbackbody."\n";
+print 'colorbackvmenu1='.$colorbackvmenu1."\n";
+print 'colorbackhmenu1='.$colorbackhmenu1."\n";
+print 'colorbacktitle1='.$colorbacktitle1."\n";
 print 'colorbacklineimpair1='.$colorbacklineimpair1."\n";
 print 'colorbacklineimpair2='.$colorbacklineimpair2."\n";
-print 'colorbacklineimpairhover='.$colorbacklineimpairhover."\n";
 print 'colorbacklinepair1='.$colorbacklinepair1."\n";
 print 'colorbacklinepair2='.$colorbacklinepair2."\n";
 print 'colorbacklinepairhover='.$colorbacklinepairhover."\n";
-print 'usecss3='.$usecss3."\n";
+print 'colorbacklinepairchecked='.$colorbacklinepairchecked."\n";
+print '$colortexttitlenotab='.$colortexttitlenotab."\n";
+print '$colortexttitle='.$colortexttitle."\n";
+print '$colortext='.$colortext."\n";
+print '$colortextlink='.$colortextlink."\n";
+print '$colortextbackhmenu='.$colortextbackhmenu."\n";
+print '$colortextbackvmenu='.$colortextbackvmenu."\n";
 print 'dol_hide_topmenu='.$dol_hide_topmenu."\n";
 print 'dol_hide_leftmenu='.$dol_hide_leftmenu."\n";
 print 'dol_optimize_smallscreen='.$dol_optimize_smallscreen."\n";
