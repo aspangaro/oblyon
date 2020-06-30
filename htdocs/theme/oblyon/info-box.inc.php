@@ -204,32 +204,32 @@ if (GETPOSTISSET('THEME_AGRESSIVENESS_RATIO')) $conf->global->THEME_AGRESSIVENES
     opacity: 0.95;
 }
 
-.bg-infoxbox-project{
+.bg-infobox-project{
 	background-color: <?php print colorAgressiveness($conf->global->OBLYON_INFOXBOX_PROJECT_COLOR, $conf->global->THEME_AGRESSIVENESS_RATIO); ?> !important;
 }
-.bg-infoxbox-propal,
-.bg-infoxbox-facture,
-.bg-infoxbox-commande{
+.bg-infobox-propal,
+.bg-infobox-facture,
+.bg-infobox-commande{
 	background-color: <?php print colorAgressiveness($conf->global->OBLYON_INFOXBOX_CUSTOMER_COLOR, $conf->global->THEME_AGRESSIVENESS_RATIO); ?>  !important;
 }
-.bg-infoxbox-supplier_proposal,
-.bg-infoxbox-invoice_supplier,
-.bg-infoxbox-order_supplier{
+.bg-infobox-supplier_proposal,
+.bg-infobox-invoice_supplier,
+.bg-infobox-order_supplier{
 	background-color: <?php print colorAgressiveness($conf->global->OBLYON_INFOXBOX_SUPPLIER_COLOR, $conf->global->THEME_AGRESSIVENESS_RATIO); ?>  !important;
 }
-.bg-infoxbox-contrat{
+.bg-infobox-contrat{
 	background-color: <?php print colorAgressiveness($conf->global->OBLYON_INFOXBOX_CONTRAT_COLOR, $conf->global->THEME_AGRESSIVENESS_RATIO); ?>  !important;
 }
-.bg-infoxbox-bank_account{
+.bg-infobox-bank_account{
 	background-color: <?php print colorAgressiveness($conf->global->OBLYON_INFOXBOX_BANK_COLOR, $conf->global->THEME_AGRESSIVENESS_RATIO); ?>  !important;
 }
-.bg-infoxbox-adherent{
+.bg-infobox-adherent{
 	background-color: <?php print colorAgressiveness($conf->global->OBLYON_INFOXBOX_ADHERENT_COLOR, $conf->global->THEME_AGRESSIVENESS_RATIO); ?>  !important;
 }
-.bg-infoxbox-expensereport{
+.bg-infobox-expensereport{
 	background-color: <?php print colorAgressiveness($conf->global->OBLYON_INFOXBOX_EXPENSEREPORT_COLOR, $conf->global->THEME_AGRESSIVENESS_RATIO); ?>  !important;
 }
-.bg-infoxbox-holiday{
+.bg-infobox-holiday{
 	background-color: <?php print colorAgressiveness($conf->global->OBLYON_INFOXBOX_HOLIDAY_COLOR, $conf->global->THEME_AGRESSIVENESS_RATIO); ?>  !important;
 }
 
@@ -266,6 +266,9 @@ if (GETPOSTISSET('THEME_AGRESSIVENESS_RATIO')) $conf->global->THEME_AGRESSIVENES
 }
 .fa-dol-holiday:before {
 	content: "\f5ca";
+}
+.fa-dol-ticket:before {
+    content: "\f3ff";
 }
 
 

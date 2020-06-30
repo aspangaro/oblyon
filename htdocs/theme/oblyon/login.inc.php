@@ -155,6 +155,13 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
         color: #<?php echo $colortextbackhmenu; ?>;
         display: inline-block;
     }
+    div.login_block span.aversion {
+    <?php if ( $conf->global->MAIN_MENU_INVERT ) { ?>
+        color: <?php echo $bgnavleft_txt; ?>;
+    <?php } else { ?>
+        color: <?php echo $bgnavtop_txt; ?>;
+    <?php } ?>
+    }
     div.login_block table {
         display: inline;
     }

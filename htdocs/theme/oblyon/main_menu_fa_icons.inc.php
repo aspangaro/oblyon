@@ -249,7 +249,7 @@
 }
 
 .icon--email_templates:before {
-    content: '\f31c';
+    content: '\f674';
 }
 
 .icon--resource:before {
