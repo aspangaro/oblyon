@@ -2430,9 +2430,9 @@ div.login_block {
     <?php } ?>
     /* padding-right: 10px; */
     <?php if ( $conf->global->OBLYON_STICKY_TOPBAR ) { ?>
-        position: fixed;
+        position: fixed !important;
     <?php } else { ?>
-        position: absolute;
+        position: absolute !important;
     <?php } ?>
     top: 0;
     <?php print $right; ?>: 0px;
