@@ -194,6 +194,28 @@ function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$fo
 		$menu->add('/product/index.php?mainmenu=products&amp;leftmenu=', $chaine, 0, $showmode, $atarget, "products", '');
 	}
 
+    // MRP
+    $tmpentry = array(
+        'enabled'=>(!empty($conf->bom->enabled) || !empty($conf->mrp->enabled)),
+        'perms'=>(!empty($user->rights->bom->read) || !empty($user->rights->mrp->read)),
+        'module'=>'bom|mrp'
+    );
+    $showmode=dol_oblyon_showmenu($type_user, $tmpentry, $listofmodulesforexternal);
+    if ($showmode) {
+        $langs->load("mrp");
+
+        if ($_SESSION["mainmenu"] && $_SESSION["mainmenu"] == "mrp") { $itemsel=TRUE; $_SESSION['idmenu']=''; }
+        else $itemsel=FALSE;
+        $idsel='mrp';
+
+        $chaine.=$langs->trans("TMenuMRP");
+
+        if (empty($noout)) print_start_menu_entry($idsel,$itemsel,$showmode);
+        if (empty($noout)) print_text_menu_entry($chaine, $showmode, DOL_URL_ROOT.'/mrp/index.php?mainmenu=mrp&amp;leftmenu=', $id, $idsel, $atarget);
+        if (empty($noout)) print_end_menu_entry($showmode);
+        $menu->add('/mrp/index.php?mainmenu=mrp&amp;leftmenu=', $chaine, 0, $showmode, $atarget, "mrp", '');
+    }
+
 	// Commercial
 	$menuqualified=0;
 	if (! empty($conf->propal->enabled)) $menuqualified++;
@@ -1303,8 +1325,8 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 				}
 			}
 
-			// Expeditions
-			if (! empty($conf->expedition->enabled))
+			// Shipments
+			if (!empty($conf->expedition->enabled))
 			{
 				$langs->load("sendings");
 				$newmenu->add("/expedition/index.php?leftmenu=sendings", $langs->trans("Shipments"), 0, $user->rights->expedition->lire, '', $mainmenu, 'sendings');
@@ -1314,14 +1336,56 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
                 if (! empty($menu_invert)) $leftmenu= 'sendings';
 
 				if ($usemenuhider || empty($leftmenu) || $leftmenu=="sendings") {
-				    $newmenu->add("/expedition/list.php?leftmenu=sendings&viewstatut=0", $langs->trans("StatusSendingDraftShort"), 2, $user->rights->expedition->lire);
-                    $newmenu->add("/expedition/list.php?leftmenu=sendings&viewstatut=1", $langs->trans("StatusSendingValidatedShort"), 2, $user->rights->expedition->lire);
-                    $newmenu->add("/expedition/list.php?leftmenu=sendings&viewstatut=2", $langs->trans("StatusSendingProcessedShort"), 2, $user->rights->expedition->lire);
+                    $newmenu->add("/expedition/list.php?leftmenu=sendings&search_status=0", $langs->trans("StatusSendingDraftShort"), 2, $user->rights->expedition->lire);
+                    $newmenu->add("/expedition/list.php?leftmenu=sendings&search_status=1", $langs->trans("StatusSendingValidatedShort"), 2, $user->rights->expedition->lire);
+                    $newmenu->add("/expedition/list.php?leftmenu=sendings&search_status=2", $langs->trans("StatusSendingProcessedShort"), 2, $user->rights->expedition->lire);
                 }
 				$newmenu->add("/expedition/stats/index.php?leftmenu=sendings", $langs->trans("Statistics"), 1, $user->rights->expedition->lire);
 			}
 
+            // Receptions
+            if (!empty($conf->reception->enabled))
+            {
+                $langs->load("receptions");
+                $newmenu->add("/reception/index.php?leftmenu=receptions", $langs->trans("Receptions"), 0, $user->rights->reception->lire, '', $mainmenu, 'receptions');
+                $newmenu->add("/reception/card.php?action=create2&amp;leftmenu=receptions", $langs->trans("NewReception"), 1, $user->rights->reception->creer);
+                $newmenu->add("/reception/list.php?leftmenu=receptions", $langs->trans("List"), 1, $user->rights->reception->lire);
+
+                if (! empty($menu_invert)) $leftmenu= 'receptions';
+
+                if ($usemenuhider || empty($leftmenu) || $leftmenu == "receptions") {
+                    $newmenu->add("/reception/list.php?leftmenu=receptions&search_status=0", $langs->trans("StatusReceptionDraftShort"), 2, $user->rights->reception->lire);
+                    $newmenu->add("/reception/list.php?leftmenu=receptions&search_status=1", $langs->trans("StatusReceptionValidatedShort"), 2, $user->rights->reception->lire);
+                    $newmenu->add("/reception/list.php?leftmenu=receptions&search_status=2", $langs->trans("StatusReceptionProcessedShort"), 2, $user->rights->reception->lire);
+                }
+                $newmenu->add("/reception/stats/index.php?leftmenu=receptions", $langs->trans("Statistics"), 1, $user->rights->reception->lire);
+            }
 		}
+
+        /*
+         * Menu PRODUCTS-SERVICES MRP
+         */
+        if ($mainmenu == 'mrp')
+        {
+            // BOM
+            if (!empty($conf->bom->enabled) || !empty($conf->mrp->enabled))
+            {
+                $langs->load("mrp");
+
+                $newmenu->add("", $langs->trans("MenuBOM"), 0, $user->rights->bom->read, '', $mainmenu, 'bom');
+                $newmenu->add("/bom/bom_card.php?leftmenu=bom&amp;action=create", $langs->trans("NewBOM"), 1, $user->rights->bom->write, '', $mainmenu, 'bom');
+                $newmenu->add("/bom/bom_list.php?leftmenu=bom", $langs->trans("List"), 1, $user->rights->bom->read, '', $mainmenu, 'bom');
+            }
+
+            if (!empty($conf->mrp->enabled))
+            {
+                $langs->load("mrp");
+
+                $newmenu->add("", $langs->trans("MenuMRP"), 0, $user->rights->mrp->read, '', $mainmenu, 'mo');
+                $newmenu->add("/mrp/mo_card.php?leftmenu=mo&amp;action=create", $langs->trans("NewMO"), 1, $user->rights->mrp->write, '', $mainmenu, 'mo');
+                $newmenu->add("/mrp/mo_list.php?leftmenu=mo", $langs->trans("List"), 1, $user->rights->mrp->read, '', $mainmenu, 'mo');
+            }
+        }
 
 		/*
 		 * Menu PROJECTS
