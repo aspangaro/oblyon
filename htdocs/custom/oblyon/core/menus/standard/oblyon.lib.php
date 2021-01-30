@@ -352,15 +352,16 @@ function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$fo
 	if (! empty($conf->comptabilite->enabled)) $menuqualified++;
 	if (! empty($conf->accounting->enabled)) $menuqualified++;
 	if (! empty($conf->asset->enabled)) $menuqualified++;
+	if (! empty($conf->intracommreport->enabled)) $menuqualified++;
 	$tmpentry=array(
 		'enabled'=>$menuqualified,
-		'perms'=>(! empty($user->rights->compta->resultat->lire) || ! empty($user->rights->accounting->mouvements->lire)),
-		'module'=>'comptabilite|accounting|asset');
+		'perms'=>(! empty($user->rights->compta->resultat->lire) || ! empty($user->rights->accounting->mouvements->lire) || !empty($user->rights->asset->read) || !empty($user->rights->intracommreport->read)),
+		'module'=>'comptabilite|accounting|asset|intracommreport');
 
 	$showmode=dol_oblyon_showmenu($type_user, $tmpentry, $listofmodulesforexternal);
 
 	if ($showmode) {
-        $langs->loadLangs(array("compta", "accountancy", "assets"));
+        $langs->loadLangs(array("compta", "accountancy", "assets", "intracommreport"));
 
 		if ($_SESSION["mainmenu"] && $_SESSION["mainmenu"] == "accountancy") { $itemsel=TRUE; $_SESSION['idmenu']=''; }
 		else $itemsel=FALSE;
@@ -510,7 +511,7 @@ function print_text_menu_entry($text, $showmode, $url, $id, $idsel, $atarget)
 
 	if ($showmode == 1)
 	{
-		print '<a class="tmenu main-nav__link	main-nav__'.$idsel.'" href="'.$url.'"'.($atarget?' target="'.$atarget.'"':'').'>';
+		print '<a class="tmenu main-nav__link main-nav__'.$idsel.'" href="'.$url.'"'.($atarget?' target="'.$atarget.'"':'').' title="'.dol_escape_htmltag($text).'">';
 		print '<i class="tmenuimage icon icon--'.$idsel.'"></i> ';
 		print $text;
 		print '</a>';
@@ -747,7 +748,7 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 
 			    if ($usemenuhider || empty($leftmenu) || $leftmenu=="users")
 				{
-					$newmenu->add("", $langs->trans("Users"), 1, $user->rights->user->user->lire || $user->admin, '', '', '', 0, '', '', 'is-disabled ');
+					$newmenu->add("/user/list.php?leftmenu=users", $langs->trans("Users"), 1, $user->rights->user->user->lire || $user->admin, '', '', '', 0, '', '', 'is-disabled ');
 					$newmenu->add("/user/card.php?leftmenu=users&action=create", $langs->trans("NewUser"),2, ($user->rights->user->user->creer || $user->admin) && !(! empty($conf->multicompany->enabled) && $conf->entity > 1 && $conf->global->MULTICOMPANY_TRANSVERSE_MODE), '', 'home');
 					$newmenu->add("/user/list.php?leftmenu=users", $langs->trans("ListOfUsers"), 2, $user->rights->user->user->lire || $user->admin);
 					$newmenu->add("/user/hierarchy.php?leftmenu=users", $langs->trans("HierarchicView"), 2, $user->rights->user->user->lire || $user->admin);
@@ -756,7 +757,7 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 						$langs->load("categories");
 						$newmenu->add("/categories/index.php?leftmenu=users&type=7", $langs->trans("UsersCategoriesShort"), 2, $user->rights->categorie->lire, '', $mainmenu, 'cat');
 					}
-					$newmenu->add("", $langs->trans("Groups"), 1, ($user->rights->user->user->lire || $user->admin) && !(! empty($conf->multicompany->enabled) && $conf->entity > 1 && $conf->global->MULTICOMPANY_TRANSVERSE_MODE), '', '', '', 0, '', '', 'is-disabled ');
+					$newmenu->add("/user/group/list.php?leftmenu=users", $langs->trans("Groups"), 1, ($user->rights->user->user->lire || $user->admin) && !(! empty($conf->multicompany->enabled) && $conf->entity > 1 && $conf->global->MULTICOMPANY_TRANSVERSE_MODE), '', '', '', 0, '', '', 'is-disabled ');
 					$newmenu->add("/user/group/card.php?leftmenu=users&action=create", $langs->trans("NewGroup"), 2, (($conf->global->MAIN_USE_ADVANCED_PERMS?$user->rights->user->group_advance->write:$user->rights->user->user->creer) || $user->admin) && !(! empty($conf->multicompany->enabled) && $conf->entity > 1 && $conf->global->MULTICOMPANY_TRANSVERSE_MODE));
 					$newmenu->add("/user/group/list.php?leftmenu=users", $langs->trans("ListOfGroups"), 2, (($conf->global->MAIN_USE_ADVANCED_PERMS?$user->rights->user->group_advance->read:$user->rights->user->user->lire) || $user->admin) && !(! empty($conf->multicompany->enabled) && $conf->entity > 1 && $conf->global->MULTICOMPANY_TRANSVERSE_MODE));
 				}
@@ -901,6 +902,16 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
                 }
 				$newmenu->add("/commande/stats/index.php?leftmenu=orders", $langs->trans("Statistics"), 1, $user->rights->commande->lire);
 			}
+
+            // Supplier proposal
+            if (!empty($conf->supplier_proposal->enabled))
+            {
+                $langs->load("supplier_proposal");
+                $newmenu->add("/supplier_proposal/index.php?leftmenu=propals_supplier", $langs->trans("SupplierProposalsShort"), 0, $user->rights->supplier_proposal->lire, '', $mainmenu, 'propals_supplier', 300);
+                $newmenu->add("/supplier_proposal/card.php?action=create&amp;leftmenu=supplier_proposals", $langs->trans("SupplierProposalNew"), 1, $user->rights->supplier_proposal->creer);
+                $newmenu->add("/supplier_proposal/list.php?leftmenu=supplier_proposals", $langs->trans("List"), 1, $user->rights->supplier_proposal->lire);
+                $newmenu->add("/comm/propal/stats/index.php?leftmenu=supplier_proposals&amp;mode=supplier", $langs->trans("Statistics"), 1, $user->rights->supplier_proposal->lire);
+            }
 
 			// Suppliers orders
 			if (! empty($conf->supplier_order->enabled))
@@ -1232,7 +1243,7 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
             // Cash Control
             if (! empty($conf->takepos->enabled) || ! empty($conf->cashdesk->enabled))
             {
-                $permtomakecashfence = ($user->rights->cashdesk->run || $user->rights->takepos->run);
+                $permtomakecashfence = ($user->rights->cashdesk->use ||$user->rights->takepos->use);
                 $newmenu->add("/compta/cashcontrol/cashcontrol_list.php?action=list", $langs->trans("POS"), 0, $permtomakecashfence, '', $mainmenu, 'cashcontrol');
                 $newmenu->add("/compta/cashcontrol/cashcontrol_card.php?action=create", $langs->trans("NewCashFence"), 1, $permtomakecashfence);
                 $newmenu->add("/compta/cashcontrol/cashcontrol_list.php?action=list", $langs->trans("List"), 1, $permtomakecashfence);
@@ -1618,6 +1629,12 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
                                         if ($nature == 'various' || $nature == 'hasnew' || $nature == 'inventory') $nature='';
                                     }
 
+                                    // Remove all type when treasury accounting is on
+                                    if (! empty($conf->treasuryaccounting->enabled))
+                                    {
+                                        if ($nature == 'sells' || $nature == 'purchases' || $nature == 'bank' || $nature == 'expensereports') $nature='';
+                                    }
+
                                     if ($nature)
                                     {
                                         $langs->load('accountancy');
@@ -1640,17 +1657,23 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
                 // Accountancy
                 $newmenu->add("/accountancy/index.php?leftmenu=accountancy",$langs->trans("MenuAccountancy"), 0, $permtoshowmenu, '', $mainmenu, 'accountancy');
 
-                    // General Ledger
-                    $newmenu->add("/accountancy/bookkeeping/list.php?mainmenu=accountancy&amp;leftmenu=accountancy_generalledger",$langs->trans("Bookkeeping"),1,$user->rights->accounting->mouvements->lire);
-
                     // Balance
                     $newmenu->add("/accountancy/bookkeeping/balance.php?mainmenu=accountancy&amp;leftmenu=accountancy_balance",$langs->trans("AccountBalance"),1,$user->rights->accounting->mouvements->lire);
+
+                    // General Ledger
+                    $newmenu->add("/accountancy/bookkeeping/listbyaccount.php?mainmenu=accountancy&amp;leftmenu=accountancy_ledger",$langs->trans("Bookkeeping"),1,$user->rights->accounting->mouvements->lire);
+
+                    // Journals
+                    $newmenu->add("/accountancy/bookkeeping/list.php?mainmenu=accountancy&amp;leftmenu=accountancy_journals",$langs->trans("Journals"),1,$user->rights->accounting->mouvements->lire);
 
                     // Files
                     if (empty($conf->global->ACCOUNTANCY_HIDE_EXPORT_FILES_MENU))
                     {
                         $newmenu->add("/compta/accounting-files.php?mainmenu=accountancy&amp;leftmenu=accountancy_files", $langs->trans("AccountantFiles"), 1, $user->rights->accounting->mouvements->lire);
                     }
+
+                    // Closure
+                    $newmenu->add("/accountancy/closure/index.php?mainmenu=accountancy&amp;leftmenu=accountancy_closure", $langs->trans("MenuAccountancyClosure"), 1, $user->rights->accounting->fiscalyear->write, '', $mainmenu, 'closure');
 
                     // Reports
                     $newmenu->add("/compta/resultat/index.php?mainmenu=accountancy&amp;leftmenu=accountancy_report", $langs->trans("Reportings"), 1, $user->rights->accounting->comptarapport->lire, '', $mainmenu, 'ca');
@@ -1696,13 +1719,11 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 
                 if ($usemenuhider || empty($leftmenu) || preg_match('/accountancy_admin/', $leftmenu)) {
                     $newmenu->add("/accountancy/admin/index.php?mainmenu=accountancy&leftmenu=accountancy_admin", $langs->trans("General"), 1, $user->rights->accounting->chartofaccount, '', $mainmenu, 'accountancy_admin_general', 10);
-
-                    // Fiscal year - Not really yet used. In a future will lock some periods.
-                    $newmenu->add("/accountancy/admin/fiscalyear.php?mainmenu=accountancy&leftmenu=accountancy_admin", $langs->trans("FiscalPeriod"), 1, $user->rights->accounting->fiscalyear->manage, '', $mainmenu, 'fiscalyear', 20);
-
+                    $newmenu->add("/accountancy/admin/fiscalyear.php?mainmenu=accountancy&leftmenu=accountancy_admin", $langs->trans("FiscalPeriod"), 1, $user->rights->accounting->chartofaccount, '', $mainmenu, 'fiscalyear', 20);
                     $newmenu->add("/accountancy/admin/journals_list.php?id=35&mainmenu=accountancy&leftmenu=accountancy_admin", $langs->trans("AccountingJournals"), 1, $user->rights->accounting->chartofaccount, '', $mainmenu, 'accountancy_admin_journal', 30);
                     $newmenu->add("/accountancy/admin/accountmodel.php?id=31&mainmenu=accountancy&leftmenu=accountancy_admin", $langs->trans("Pcg_version"), 1, $user->rights->accounting->chartofaccount, '', $mainmenu, 'accountancy_admin_chartmodel', 40);
                     $newmenu->add("/accountancy/admin/account.php?mainmenu=accountancy&leftmenu=accountancy_admin", $langs->trans("Chartofaccounts"), 1, $user->rights->accounting->chartofaccount, '', $mainmenu, 'accountancy_admin_chart', 41);
+                    $newmenu->add("/accountancy/admin/subaccount.php?mainmenu=accountancy&leftmenu=accountancy_admin", $langs->trans("ChartOfSubaccounts"), 1, $user->rights->accounting->chartofaccount, '', $mainmenu, 'accountancy_admin_chart', 42);
                     $newmenu->add("/accountancy/admin/categories_list.php?id=32&search_country_id=".$mysoc->country_id."&mainmenu=accountancy&leftmenu=accountancy_admin", $langs->trans("AccountingCategory"), 1, $user->rights->accounting->chartofaccount, '', $mainmenu, 'accountancy_admin_chart', 50);
                     $newmenu->add("/accountancy/admin/defaultaccounts.php?mainmenu=accountancy&leftmenu=accountancy_admin", $langs->trans("MenuDefaultAccounts"), 1, $user->rights->accounting->chartofaccount, '', $mainmenu, 'accountancy_admin_default', 60);
                     if (! empty($conf->banque->enabled)) {
@@ -1753,6 +1774,22 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
                     $newmenu->add("/compta/journal/purchasesjournal.php?leftmenu=report", $langs->trans("PurchasesJournal"), 1, $user->rights->compta->resultat->lire, '', '', '', 51);
                 }
                 //if ($leftmenu=="ca") $newmenu->add("/compta/journaux/index.php?leftmenu=ca",$langs->trans("Journaux"),1,$user->rights->compta->resultat->lire||$user->rights->accounting->comptarapport->lire);
+            }
+
+            // Intracomm report
+            if (! empty($conf->intracommreport->enabled))
+            {
+                $langs->load("intracommreport");
+
+                $newmenu->add("/intracommreport/list.php?leftmenu=intracommreport", $langs->trans("MenuIntracommReport"), 0, $user->rights->intracommreport->read, '', $mainmenu, 'intracommreport', 1);
+
+                if (! empty($menu_invert)) $leftmenu= 'intracommreport';
+
+                if ($usemenuhider || empty($leftmenu) || preg_match('/intracommreport/', $leftmenu)) {
+                    // DEB / DES
+                    $newmenu->add("/intracommreport/card.php?action=create&leftmenu=intracommreport", $langs->trans("MenuIntracommReportNew"), 1, $user->rights->intracommreport->write, '', $mainmenu, 'intracommreport', 1);
+                    $newmenu->add("/intracommreport/list.php?leftmenu=intracommreport", $langs->trans("MenuIntracommReportList"), 1, $user->rights->intracommreport->read, '', $mainmenu, 'intracommreport', 1);
+                }
             }
 
 			// Assets
@@ -1829,7 +1866,7 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 				$newmenu->add("/adherents/cartes/carte.php?leftmenu=export",$langs->trans("MembersCards"),1,$user->rights->adherent->export);
 
 				$newmenu->add("/adherents/index.php?leftmenu=members&amp;mainmenu=members",$langs->trans("Subscriptions"),0,$user->rights->adherent->cotisation->lire, '', $mainmenu, 'members_subscription');
-				$newmenu->add("/adherents/list.php?leftmenu=members&amp;statut=-1,1&amp;mainmenu=members",$langs->trans("NewSubscription"),1,$user->rights->adherent->cotisation->creer);
+				// $newmenu->add("/adherents/list.php?leftmenu=members&amp;statut=-1,1&amp;mainmenu=members",$langs->trans("NewSubscription"),1,$user->rights->adherent->cotisation->creer);
 				$newmenu->add("/adherents/subscription/list.php?leftmenu=members",$langs->trans("List"),1,$user->rights->adherent->cotisation->lire);
 				$newmenu->add("/adherents/stats/index.php?leftmenu=members",$langs->trans("MenuMembersStats"),1,$user->rights->adherent->lire);
 

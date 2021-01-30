@@ -24,12 +24,11 @@ span.butAction, span.butActionDelete {
 }
 
 .butAction {
-    background: rgb(225, 231, 225)
-    /* background: rgb(230, 232, 239); */
+    background: <?php print $colorButtonAction1; ?>;
 }
 .butActionRefused, .butAction, .butAction:link, .butAction:visited, .butAction:hover, .butAction:active, .butActionDelete, .butActionDelete:link, .butActionDelete:visited, .butActionDelete:hover, .butActionDelete:active {
     text-decoration: none;
-    text-transform: uppercase;
+    /* text-transform: capitalize; */
     font-weight: bold;
 
     margin: 0em <?php echo ($dol_optimize_smallscreen ? '0.6' : '0.9'); ?>em !important;
@@ -38,20 +37,19 @@ span.butAction, span.butActionDelete {
     display: inline-block;
     text-align: center;
     cursor: pointer;
-    /* color: #fff; */
-    /* background: rgb(<?php echo $colorbackhmenu1 ?>); */
-    color: #444;
-    /* border: 1px solid #aaa; */
-    /* border-color: rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.25); */
+    color: #fff;
+    background: <?php print $colorButtonAction1; ?>;
+    border: 0px;
 
-    border-top-right-radius: 0 !important;
-    border-bottom-right-radius: 0 !important;
-    border-top-left-radius: 0 !important;
-    border-bottom-left-radius: 0 !important;
+    border-top-right-radius: 0.30em !important;
+    border-bottom-right-radius: 0.30em !important;
+    border-top-left-radius: 0.30em !important;
+    border-bottom-left-radius: 0.30em !important;
 }
+
 .butActionNew, .butActionNewRefused, .butActionNew:link, .butActionNew:visited, .butActionNew:hover, .butActionNew:active {
     text-decoration: none;
-    text-transform: uppercase;
+    /* text-transform: capitalize; */
     font-weight: normal;
 
     margin: 0em 0.3em 0 0.3em !important;
@@ -59,6 +57,7 @@ span.butAction, span.butActionDelete {
     font-family: <?php print $fontlist ?>;
     display: inline-block;
     /* text-align: center; New button are on right of screen */
+    background: <?php print $colorButtonAction2; ?>;
     cursor: pointer;
 }
 
@@ -100,8 +99,9 @@ span.butActionNewRefused>span.fa, span.butActionNewRefused>span.fa:hover
 }
 
 .butAction:hover   {
-    -webkit-box-shadow: 0px 0px 6px 1px rgba(50, 50, 50, 0.4), 0px 0px 0px rgba(60,60,60,0.1);
-    box-shadow: 0px 0px 6px 1px rgba(50, 50, 50, 0.4), 0px 0px 0px rgba(60,60,60,0.1);
+    background: <?php print $colorButtonAction2; ?>;
+    -webkit-box-shadow: 0px 1px 4px 1px rgba(50, 50, 50, 0.4), 0px 0px 0px rgba(60,60,60,0.1);
+    box-shadow: 0px 1px 4px 1px rgba(50, 50, 50, 0.4), 0px 0px 0px rgba(60,60,60,0.1);
 }
 .butActionNew:hover   {
     text-decoration: underline;
@@ -109,19 +109,19 @@ span.butActionNewRefused>span.fa, span.butActionNewRefused>span.fa:hover
 }
 
 .butActionDelete, .butActionDelete:link, .butActionDelete:visited, .butActionDelete:hover, .butActionDelete:active, .buttonDelete {
-    background: rgb(234, 228, 225);
-    /* border: 1px solid #633; */
-    color: #633;
+    background: <?php print $colorButtonDelete1; ?>;
+    color: #ffffff;
 }
 
 .butActionDelete:hover {
-    -webkit-box-shadow: 0px 0px 6px 1px rgba(50, 50, 50, 0.4), 0px 0px 0px rgba(60,60,60,0.1);
-    box-shadow: 0px 0px 6px 1px rgba(50, 50, 50, 0.4), 0px 0px 0px rgba(60,60,60,0.1);
+    background: <?php print $colorButtonDelete2; ?>;
+    -webkit-box-shadow: 0px 1px 4px 1px rgba(50, 50, 50, 0.4), 0px 0px 0px rgba(60,60,60,0.1);
+    box-shadow: 0px 1px 4px 1px rgba(50, 50, 50, 0.4), 0px 0px 0px rgba(60,60,60,0.1);
 }
 
 .butActionRefused {
     text-decoration: none !important;
-    text-transform: uppercase;
+    /* text-transform: capitalize; */
     font-weight: bold !important;
 
     white-space: nowrap !important;
@@ -133,14 +133,18 @@ span.butActionNewRefused>span.fa, span.butActionNewRefused>span.fa:hover
     text-align: center;
     cursor: pointer;
     color: #999 !important;
-    border: 1px solid #ccc;
+    background: unset;
+    border: 0px;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
+    -webkit-box-shadow: 0px 1px 4px 1px rgba(50, 50, 50, 0.4), 0px 0px 0px rgba(60,60,60,0.1);
+    box-shadow: 0px 1px 4px 1px rgba(50, 50, 50, 0.4), 0px 0px 0px rgba(60,60,60,0.1);
 }
+
 .butActionNewRefused, .butActionNewRefused:link, .butActionNewRefused:visited, .butActionNewRefused:hover, .butActionNewRefused:active {
     text-decoration: none !important;
-    text-transform: uppercase;
+    /* text-transform: capitalize; */
     font-weight: normal !important;
 
     white-space: nowrap !important;
@@ -205,27 +209,26 @@ TITLE BUTTON
 }
 
 .btnTitle:hover, a.btnTitle:hover {
-	border: 1px solid #bbb;
+	border: 0px;
     border-radius: 3px;
     position: relative;
     margin: 0 0 0 10px;
     text-align: center;
-    /* color: #ffffff;
-    background-color: rgb(<?php print $colortextlink; ?>); */
+    color: #ffffff;
+    background-color: <?php print $colorButtonAction1; ?>;
     font-size: 12px;
     text-decoration: none;
     box-shadow: none;
 }
 
 .btnTitle.refused, a.btnTitle.refused, .btnTitle.refused:hover, a.btnTitle.refused:hover {
-        color: #8a8a8a;
-        cursor: not-allowed;
-        background-color: #fbfbfb;
-        background: repeating-linear-gradient( 45deg, #ffffff, #f1f1f1 4px, #f1f1f1 4px, #f1f1f1 4px );
+    color: #ffffff;
+    cursor: not-allowed;
+    background-color: <?php print $colorButtonDelete1; ?>;
 }
 
 .btnTitle:hover .btnTitle-label{
-    /* color: #ffffff; */
+    color: #ffffff;
 }
 
 .btnTitle.refused .btnTitle-label, .btnTitle.refused:hover .btnTitle-label{
@@ -234,7 +237,7 @@ TITLE BUTTON
 
 .btnTitle>.fa,
 .btnTitle>.fal,
-.btnTitle>.far{
+.btnTitle>.far {
     font-size: 20px;
     display: block;
 }

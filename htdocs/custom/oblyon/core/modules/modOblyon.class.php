@@ -53,9 +53,16 @@ function __construct($db) {
 	// Key text used to identify module (for permissions, menus, etc...)
 	$this->rights_class = 'oblyon';
 
-	// Family can be 'crm','financial','hr','projects','products','ecm','technic','other'
-	// It is used to group modules in module setup page
-	$this->family = "other";
+	$family = (!empty($conf->global->EASYA_VERSION) ? 'easya' : 'opendsi');
+	// Family can be 'crm','financial','hr','projects','products','ecm','technic','interface','other'
+	// It is used to group modules by family in module setup page
+	$this->family = $family;
+	// Module position in the family
+	$this->module_position = 1;
+	// Gives the possibility to the module, to provide his own family info and position of this family (Overwrite $this->family and $this->module_position. Avoid this)
+	$this->familyinfo = array($family => array('position' => '001', 'label' => $langs->trans($family."Family")));
+	// Where to store the module in setup page (0=common,1=interface,2=others,3=very specific)
+	$this->special = 0;
 
 	// Module label (no space allowed), used if translation string 'ModuleXXXName' not found (where XXX is value of numeric property 'numero' of module)
 	$this->name = preg_replace('/^mod/i','',get_class($this));
@@ -64,9 +71,9 @@ function __construct($db) {
 	$this->description = "Thème Oblyon";
 
 	// Possible values for version are: 'development', 'experimental', 'dolibarr' or version
-	$this->version = '12.0.0';
+	$this->version = 'dolibarr';
 
-	$this->editor_name = 'Open-DSI | Monogramm';
+	$this->editor_name = 'Open-DSI';
 
 	$this->editor_url = "https://www.open-dsi.fr";
 
@@ -81,7 +88,11 @@ function __construct($db) {
 	// Name of image file used for this module.
 	// If file is in theme/yourtheme/img directory under name object_pictovalue.png, use this->picto='pictovalue'
 	// If file is in module/img directory under name object_pictovalue.png, use this->picto='pictovalue@module'
-	$this->picto='oblyon@oblyon';
+	if((float)DOL_VERSION <= 11.0) {
+		$this->picto='opendsi@'.strtolower($this->name);
+	} else {
+		$this->picto='opendsi_big@'.strtolower($this->name);
+	}
 
 	// Defined all module parts (triggers, login, substitutions, menus, css, etc...)
 	// for default path (eg: /oblyon/core/xxxxx) (0=disable, 1=enable)
@@ -102,7 +113,7 @@ function __construct($db) {
 	$this->depends = array();		// List of modules id that must be enabled if this module is enabled
 	$this->requiredby = array();	// List of modules id to disable if this one is disabled
 	$this->phpmin = array(5,6);					// Minimum version of PHP required by module
-	$this->need_dolibarr_version = array(11,0);	// Minimum version of Dolibarr required by module
+	$this->need_dolibarr_version = array(13,0);	// Minimum version of Dolibarr required by module
 	$this->langfiles = array("oblyon@oblyon");
 
 	// Constants
@@ -146,6 +157,15 @@ function __construct($db) {
 	$this->const [$r] [6] = 1;
 
 	$r ++;
+	$this->const [$r] [0] = "MAIN_ICON_STYLE";
+	$this->const [$r] [1] = "chaine";
+	$this->const [$r] [2] = "fal";
+	$this->const [$r] [3] = 0;
+	$this->const [$r] [4] = 1;
+	$this->const [$r] [5] = 'current';
+	$this->const [$r] [6] = 1;
+
+	$r ++;
 	$this->const [$r] [0] = "OBLYON_COLOR_MAIN";
 	$this->const [$r] [1] = "chaine";
 	$this->const [$r] [2] = "#0083A2";
@@ -166,7 +186,7 @@ function __construct($db) {
 	$r ++;
 	$this->const [$r] [0] = "OBLYON_COLOR_TOPMENU_BCKGRD_HOVER";
 	$this->const [$r] [1] = "chaine";
-	$this->const [$r] [2] = "#0083A2";
+	$this->const [$r] [2] = "#444444";
 	$this->const [$r] [3] = 'Oblyon background topmenu hover color';
 	$this->const [$r] [4] = 1;
 	$this->const [$r] [5] = 'allentities';
@@ -193,7 +213,7 @@ function __construct($db) {
 	$r ++;
 	$this->const [$r] [0] = "OBLYON_COLOR_LEFTMENU_BCKGRD_HOVER";
 	$this->const [$r] [1] = "chaine";
-	$this->const [$r] [2] = "#0083A2";
+	$this->const [$r] [2] = "#444444";
 	$this->const [$r] [3] = 'Oblyon background leftmenu hover color';
 	$this->const [$r] [4] = 1;
 	$this->const [$r] [5] = 'allentities';
@@ -265,7 +285,7 @@ function __construct($db) {
 	$r ++;
 	$this->const [$r] [0] = "OBLYON_COLOR_FLINE_HOVER";
 	$this->const [$r] [1] = "chaine";
-	$this->const [$r] [2] = "#222222";
+	$this->const [$r] [2] = "#444444";
 	$this->const [$r] [3] = 'Oblyon text line color';
 	$this->const [$r] [4] = 1;
 	$this->const [$r] [5] = 'allentities';
@@ -274,7 +294,7 @@ function __construct($db) {
 	$r ++;
 	$this->const [$r] [0] = "OBLYON_COLOR_BUTTON_ACTION1";
 	$this->const [$r] [1] = "chaine";
-	$this->const [$r] [2] = "#0083A2";
+	$this->const [$r] [2] = "#0088cc";
 	$this->const [$r] [3] = 'Oblyon button action color 1';
 	$this->const [$r] [4] = 1;
 	$this->const [$r] [5] = 'allentities';
@@ -283,7 +303,7 @@ function __construct($db) {
 	$r ++;
 	$this->const [$r] [0] = "OBLYON_COLOR_BUTTON_ACTION2";
 	$this->const [$r] [1] = "chaine";
-	$this->const [$r] [2] = "#0063A2";
+	$this->const [$r] [2] = "#0044cc";
 	$this->const [$r] [3] = 'Oblyon button action color 2';
 	$this->const [$r] [4] = 1;
 	$this->const [$r] [5] = 'allentities';

@@ -291,7 +291,7 @@ body[class*="colorblind-"] .text-success{
 }
 
 .editfielda span.fa-pencil-alt, .editfielda span.fa-trash {
-    color: #ccc !important;
+    /* color: #cccccc !important; */
 }
 .editfielda span.fa-pencil-alt:hover, .editfielda span.fa-trash:hover {
     color: rgb(<?php echo $colortexttitle; ?>) !important;
@@ -436,13 +436,12 @@ hr { border: 0; border-top: 1px solid #ccc; }
     */
 
     background-repeat: repeat-x;
-    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-    border: 1px solid #aaa;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25)
     -webkit-border-radius: 2px;
     border-radius: 1px;
 
     font-weight: bold;
-    text-transform: uppercase;
+    /* text-transform: capitalize; */
     color: #444;
 }
 .button:focus, .buttonDelete:focus  {
@@ -474,6 +473,9 @@ hr { border: 0; border-top: 1px solid #ccc; }
 }
 .button_search:hover, .button_removefilter:hover {
     cursor: pointer;
+}
+td button.liste_titre span {
+    color: #fff;
 }
 /* ============================================================================== */
 /*	Module website 																  */
@@ -812,15 +814,15 @@ input#onlinepaymenturl, input#directdownloadlink {
 .button:link,
 .button:active,
 .button:visited {
-    background-color: <?php print $maincolor; ?>;
+    background-color: <?php print $colorButtonAction1; ?>;
     /* border: 1px solid #c0c0c0; */
-    border-color: <?php print $maincolor; ?>;
+    border-color: <?php print $colorButtonAction1; ?>;
     /* box-shadow: inset 0 1px 0 rgba(235,235,235, .6);
     -webkit-box-shadow: inset 0 1px 0 rgba(235,235,235, .6); */
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    color: #eee;
+    -webkit-border-radius: 0.30em;
+    -moz-border-radius: 0.30em;
+    border-radius: 0.30em;
+    color: #fff;
     cursor: pointer;
     font-size: 14px;
     /* margin: .2em .5em; */
@@ -832,8 +834,8 @@ input#onlinepaymenturl, input#directdownloadlink {
 }
 
 .button:hover, .button:focus {
-    background-color: <?php print $bgbutton_hover; ?>;
-    border-color: <?php print $maincolor; ?>;
+    background-color: <?php print $colorButtonAction2; ?>;
+    border-color: <?php print $colorButtonAction2; ?>;
     box-shadow: inset 0 1px 0 rgba(235,235,235, .6);
     -webkit-box-shadow: inset 0 1px 0 rgba(235,235,235, .6);
     color: #fff;
@@ -946,7 +948,6 @@ a.butActionNewRefused>span.fa-plus-circle { padding-left: 6px; font-size: 1.5em;
 }
 
 .butAction {
-    border: 1px solid <?php print $maincolor; ?>;
     -webkit-box-shadow: inset 0 1px 0 rgba(170, 200, 210, .6);
     box-shadow: inset 0 1px 0 rgba(170, 200, 210, .6);
 }
@@ -1677,7 +1678,7 @@ td.showDragHandle {
 #id-right {
 <?php if (GETPOST("optioncss") == 'print') { ?>
     padding-top: 10px;
-    <?php } else if ($conf->global->OBLYON_STICKY_TOPBAR) { ?>
+    <?php } elseif($conf->global->OBLYON_STICKY_TOPBAR) { ?>
         <?php if ($conf->global->MAIN_MENU_INVERT) { ?>
             padding-top: 52px;
         <?php } else { ?>
@@ -1687,20 +1688,32 @@ td.showDragHandle {
         padding-top: 10px;
     <?php } ?>
     width: 100%;
+    <?php if($conf->global->OBLYON_STICKY_LEFTBAR) { ?>
+        <?php if($conf->global->OBLYON_REDUCE_LEFTMENU) { ?>
+            padding-left: 40px;
+        <?php } else { ?>
+            padding-left: 230px;
+        <?php } ?>
+        width: 100vw;
+    <?php } ?>
 }
 
 #id-left {
-    <?php if ( !$conf->global->OBLYON_HIDE_LEFTMENU && !$conf->dol_optimize_smallscreen ) { ?>
-        <?php if ( $conf->global->OBLYON_STICKY_TOPBAR ) { ?>
-            <?php if ( $conf->global->MAIN_MENU_INVERT ) { ?>
+    <?php if(!$conf->global->OBLYON_HIDE_LEFTMENU && !$conf->dol_optimize_smallscreen) { ?>
+        <?php if($conf->global->OBLYON_STICKY_TOPBAR) { ?>
+            <?php if($conf->global->MAIN_MENU_INVERT) { ?>
                 padding-top: 40px;
             <?php } else { ?>
                 padding-top: 54px;
             <?php } ?>
         <?php } ?>
     <?php } ?>
-    <?php if ( !$conf->global->OBLYON_FULLSIZE_TOPBAR ) { ?>
-        position: relative;
+    <?php if (!$conf->global->OBLYON_FULLSIZE_TOPBAR) { ?>
+        <?php if(!$conf->global->OBLYON_STICKY_LEFTBAR) { ?>
+            position: relative;
+        <?php } else { ?>
+            position: fixed;
+        <?php } ?>
     <?php } ?>
     <?php if(!$conf->global->OBLYON_HIDE_LEFTMENU && !$conf->dol_optimize_smallscreen && (!$conf->global->OBLYON_FULLSIZE_TOPBAR || !$conf->global->OBLYON_SHOW_COMPNAME)) { ?>
         z-index: 92;
@@ -2477,7 +2490,7 @@ div.login_block_user a {
     <?php } else { ?>
         height: 54px;
     <?php } ?>
-    max-width: 150px;
+    max-width: 300px;
     overflow: hidden;
     padding: 0 3px;
     text-overflow: ellipsis;
@@ -2867,7 +2880,7 @@ div.login a:hover {
 */
 
 .main-nav.is-inverted .main-nav__link {
-line-height: 40px;
+line-height: 35px;
 <?php if ( $conf->global->OBLYON_HIDE_LEFTICONS ) { ?>
     padding-<?php print $left; ?>: 10px;
     font-weight: 500;
@@ -2996,19 +3009,19 @@ font-size: 14px;
 */
 
 .blockvmenuhelp {
-<?php if (empty($conf->dol_optimize_smallscreen)) { ?>
-<?php if ( $conf->global->MAIN_MENU_INVERT ) { ?>
-    background-color: <?php print $bgnavtop; ?>;
-<?php } else { ?>
-    background-color: <?php print $bgnavleft; ?>;
-<?php } ?>
-    color: <?php print $maincolor ?>;
-    font-family: <?php print $fontmenuhelp; ?>;
-    margin: 0;
-    text-align: center;
-<?php } else { ?>
-    display: none;
-<?php } ?>
+    <?php if (empty($conf->dol_optimize_smallscreen) || !empty($conf->global->OBLYON_REDUCE_LEFTMENU)) { ?>
+        <?php if ( $conf->global->MAIN_MENU_INVERT ) { ?>
+            background-color: <?php print $bgnavtop; ?>;
+        <?php } else { ?>
+            background-color: <?php print $bgnavleft; ?>;
+        <?php } ?>
+        color: <?php print $maincolor ?>;
+        font-family: <?php print $fontmenuhelp; ?>;
+        margin: 0;
+        text-align: center;
+    <?php } else { ?>
+        display: none;
+    <?php } ?>
 }
 
 .blockvmenuhelp a {
@@ -3051,7 +3064,7 @@ font-size: 14px;
 #id-left {
 <?php if ( $conf->global->OBLYON_HIDE_LEFTMENU || $conf->dol_optimize_smallscreen ) { ?>
     position: absolute;
-    <?php if ( empty($conf->global->OBLYON_STICKY_TOPBAR) && $conf->global->OBLYON_EFFECT_LEFTMENU == "push" ) { ?>
+<?php if ( empty($conf->global->OBLYON_STICKY_TOPBAR) && $conf->global->OBLYON_EFFECT_LEFTMENU == "push" ) { ?>
         top: 0;
     <?php } else { ?>
         <?php if ( $conf->global->MAIN_MENU_INVERT ) { ?>
@@ -3230,8 +3243,8 @@ font-size: 14px;
     display: none;
 <?php } ?>
     float: <?php print $left; ?>;
-    height: 40px;
-    line-height: 40px;
+    height: 35px;
+    line-height: 35px;
     margin: 0;
     position: relative;
     text-align: center;
@@ -3239,7 +3252,7 @@ font-size: 14px;
 }
 
 .main-nav .icon {
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .sec-nav .icon {
@@ -3563,8 +3576,12 @@ div.vmenu {
     position: relative;
     z-index: 5;
     <?php if (empty($conf->dol_optimize_smallscreen)) { ?>
-        min-width: 230px;
-        max-width: 230px;
+        <?php if($conf->global->OBLYON_REDUCE_LEFTMENU) { ?>
+            max-width: 40px;
+        <?php } else { ?>
+            min-width: 230px;
+            max-width: 230px;
+        <?php } ?>
         <?php if ( $conf->global->OBLYON_HIDE_LEFTMENU || $conf->dol_optimize_smallscreen ) { ?>
             width: 230px;
         <?php } else { ?>
@@ -3572,7 +3589,25 @@ div.vmenu {
         <?php } ?>
     <?php } ?>
     min-height: 100vh;
+    -webkit-transition-property: max-width;
+    -webkit-transition-duration: 0.2s;
+    -webkit-transition-timing-function: linear;
+    transition-property: max-width;
+    transition-duration: 0.2s;
+    transition-timing-function: linear;
 }
+
+<?php if (!empty($conf->global->OBLYON_REDUCE_LEFTMENU) && $conf->global->OBLYON_EFFECT_REDUCE_LEFTMENU == "hover") { ?>
+    .vmenu:hover {
+        max-width: 230px;
+        -webkit-transition-property: max-width;
+        -webkit-transition-duration: 0.2s;
+        -webkit-transition-timing-function: linear;
+        transition-property: max-width;
+        transition-duration: 0.2s;
+        transition-timing-function: linear;
+    }
+<?php } ?>
 
 .vmenu {
     <?php if (GETPOST("optioncss") == 'print') { ?>
@@ -3737,7 +3772,7 @@ width: 100%;
 
     if ( $conf->global->OBLYON_HIDE_TOPICONS && !$conf->global->MAIN_MENU_INVERT) { ?>
         display: none;
-    <?php } else if ( $conf->global->OBLYON_HIDE_LEFTICONS && $conf->global->MAIN_MENU_INVERT) { ?>
+    <?php } elseif ( $conf->global->OBLYON_HIDE_LEFTICONS && $conf->global->MAIN_MENU_INVERT) { ?>
         display: none;
     <?php } else { ?>
         display: block;
@@ -3790,7 +3825,7 @@ foreach($mainmenuusedarray as $val)
     } else {
         print "/* A mainmenu entry but img file ".$val.".png not found (check /".$val."/img/".$val.".png), so we use a generic one */\n";
         print ".mainmenu.".$val.":before, .icon--".$val.":before {\n";
-        print "  content: '\\e902';\n";
+        print "  content: '\\f152';\n";
         print "}\n";
     }
 }
@@ -4267,9 +4302,9 @@ table.border {
 }
 
 table.border td {
-    border: 1px solid #f2f2f2;
+    border: 1px solid #E0E0E0;
     border-collapse: collapse;
-    padding: 3px 5px;
+    padding: 5px 2px 5px 2px;
     vertical-align: middle;
 }
 
@@ -4297,7 +4332,7 @@ div.noborder {
 table.noborder[summary="list_of_modules"] tr.oddeven { line-height: 2.2em; }
 
 table.noborder tr, div.noborder form {
-    line-height: 1.8em;
+    line-height: 1.7em;
 }
 
 /* boxes padding */
@@ -4311,6 +4346,7 @@ table.noborder th:last-child { padding-<?php print $right; ?>: 10px; }
 /* table content all pages */
 table.noborder td, div.noborder form, div.noborder form div, table.tableforservicepart1 td, table.tableforservicepart2 td {
     padding: 4px 6px 4px 6px;			/* t r b l */
+    vertical-align: unset;
 }
 
 table.noborder td:first-child { padding-<?php print $left; ?>: 10px !important; }
@@ -4361,10 +4397,20 @@ table.nobordernopadding tr {
     padding: 0;
 }
 
-table.nobordernopadding td {
+table.nobordernopadding tr td {
     border: 0 !important;
-    padding: 0;
-    vertical-align: middle;
+    padding: 0 3px 0 0;
+    vertical-align: unset !important;
+}
+table.border tr td table.nobordernopadding tr td {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+td.borderright {
+    border: none;	/* to erase value for table.nobordernopadding td */
+    border-right-width: 1px !important;
+    border-right-color: #BBB !important;
+    border-right-style: solid !important;
 }
 
 
@@ -4423,10 +4469,12 @@ form.liste_titre_sel {
 
 div.liste_titre a,
 tr.liste_titre a,
+tr.liste_titre th a,
 tr.liste_titre_sel a,
+th.liste_titre_sel a,
 form.liste_titre a,
 form.liste_titre_sel a {
-    color: #ffffff;
+    color: #f4f4f4 !important;
 }
 
 .liste_titre_sel { font-weight: bold!important; }
@@ -6615,7 +6663,7 @@ span#select2-boxbookmark-container, span#select2-boxcombo-container {
 
 /* To emulate select 2 style */
 .select2-container-multi-dolibarr .select2-choices-dolibarr .select2-search-choice-dolibarr {
-    padding: 2px 5px 1px 5px;
+    padding: 3px 5px 3px 5px;
     margin: 0 0 2px 3px;
     position: relative;
     line-height: 13px;
@@ -6756,93 +6804,92 @@ float: left;
 padding-left: 5px
 }
 
-
 /* ============================================================================== */
 /*  Native multiselect with checkbox                                              */
 /* ============================================================================== */
 
 ul.ulselectedfields {
-z-index: 90;			/* To have the select box appears on first plan even when near buttons are decorated by jmobile */
+    z-index: 95;			/* To have the select box appears on first plan even when near buttons are decorated by jmobile */
 }
+
 dl.dropdown {
-margin:0px;
-padding:0px;
-margin-left: 2px;
-margin-right: 2px;
-vertical-align: middle;
-display: inline-block;
+    margin:0px;
+    padding:0px;
+    margin-left: 2px;
+    margin-right: 2px;
+    vertical-align: middle;
+    display: inline-block;
 }
 .dropdown dd, .dropdown dt {
-margin:0px;
-padding:0px;
+    margin:0px;
+    padding:0px;
 }
 .dropdown ul {
-margin: -1px 0 0 0;
-text-align: left;
+    margin: -1px 0 0 0;
+    text-align: <?php echo $left; ?>;
 }
 .dropdown dd {
-position:relative;
+    position:relative;
 }
 .dropdown dt a {
-display:block;
-overflow: hidden;
-border:0;
+    display:block;
+    overflow: hidden;
+    border:0;
 }
 .dropdown dt a span, .multiSel span {
-cursor:pointer;
-display:inline-block;
-padding: 0 3px 2px 0;
+    cursor:pointer;
+    display:inline-block;
+    padding: 0 3px 2px 0;
 }
 .dropdown span.value {
-display:none;
+    display:none;
 }
 .dropdown dd ul {
-background-color: #FFF;
-box-shadow: 1px 1px 10px #aaa;
-display:none;
-right:0px;						/* pop is align on right */
-padding: 0 0 0 0;
-position:absolute;
-top:2px;
-list-style:none;
-max-height: 264px;
-overflow: auto;
+    background-color: #fff;
+    box-shadow: 1px 1px 10px #aaa;
+    display:none;
+    <?php echo $right; ?>:0px;						/* pop is align on right */
+    padding: 0 0 0 0;
+    position:absolute;
+    top:2px;
+    list-style:none;
+    max-height: 264px;
+    overflow: auto;
+    border-radius: 2px;
 }
 .dropdown dd ul li {
-white-space: nowrap;
-font-weight: normal;
-padding: 7px 8px 7px 8px;
-color: #000;
+    white-space: nowrap;
+    font-weight: normal;
+    padding: 7px 8px 7px 8px;
+    color: #505050;
 }
 .dropdown dd ul li:hover {
-background: #eee;
+    background: #eee;
 }
 .dropdown dd ul li input[type="checkbox"] {
-margin-right: 3px;
+    margin-<?php echo $right; ?>: 3px;
 }
 .dropdown dd ul li a, .dropdown dd ul li span {
-padding: 3px;
-display: block;
+    padding: 3px;
+    display: block;
 }
 .dropdown dd ul li span {
-color: #888;
+    color: #888;
 }
 .dropdown dd ul li a:hover {
-background-color: #eee;
+    background-color: #eee;
 }
-
-
 
 /* ============================================================================== */
 /*  Markdown rendering                                                             */
 /* ============================================================================== */
 
 .imgmd {
-width: 90%;
+    width: 90%;
 }
 .moduledesclong h1 {
-padding-top: 10px;
-padding-bottom: 20px;
+    padding-top: 10px;
+    padding-bottom: 20px;
 }
 
 /* ============================================================================== */
@@ -7637,8 +7684,10 @@ table.dataTable tr.oddeven {
 
 /* For no hover style */
 td.oddeven, tr.nohover td, form.nohover, form.nohover:hover {
+    /*
     background-color: #<?php echo colorArrayToHex(colorStringToArray($colorbacklineimpair1)); ?> !important;
     background: #<?php echo colorArrayToHex(colorStringToArray($colorbacklineimpair1)); ?> !important;
+    */
 }
 td.evenodd {
     background-color: #<?php echo colorArrayToHex(colorStringToArray($colorbacklinepair1)); ?> !important;
@@ -7994,8 +8043,9 @@ img.loginphoto {
 /* Compatibility Infrassearch													  */
 /* ============================================================================== */
 input#sew_keyword {
-    background-color: #fff;
-    width: 100%;
+    background-color: #fff !important;
+    width: 100% !important;
+    line-height: 28px;
 }
 
 /* ============================================================================== */
@@ -8040,16 +8090,20 @@ input#sew_keyword {
     }
 
     div.vmenu {
-        min-width: 170px;
+    <?php if($conf->global->OBLYON_REDUCE_LEFTMENU) { ?>
+        max-width: 40px;
+    <?php } else { ?>
+        min-width: 210px;
         max-width: 100%;
+    <?php } ?>
     }
 
     .vmenusearchselectcombo {
-        min-width: 150px;
-        max-width: 100%;
-    }
+         min-width: 150px;
+         max-width: 100%;
+     }
     .sec-nav.is-inverted {
-        <?php if($conf->global->OBLYON_FULLSIZE_TOPBAR || $conf->dol_optimize_smallscreen ) { ?>
+    <?php if($conf->global->OBLYON_FULLSIZE_TOPBAR || $conf->dol_optimize_smallscreen ) { ?>
             margin-<?php print $left; ?>: 10px;
         <?php } else { ?>
             margin-<?php print $left; ?>: 10px;
@@ -8094,7 +8148,11 @@ input#sew_keyword {
     }
 
     div.vmenu {
+    <?php if($conf->global->OBLYON_REDUCE_LEFTMENU) { ?>
+        max-width: 40px;
+    <?php } else { ?>
         min-width: 130px;
+    <?php } ?>
     }
 
     .vmenusearchselectcombo {
@@ -8217,6 +8275,9 @@ input#sew_keyword {
 /* rule to reduce top menu - 3rd reduction */
 @media only screen and (max-width: 570px)
 {
+    #id-right {
+        padding-left: unset;
+    }
     /* Reduce login top right info */
     .usertext.atoplogin {
         display: none;

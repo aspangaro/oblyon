@@ -1,6 +1,6 @@
 # < Oblyon Control Panel - French translation >
 # Copyright (C) 2015       Nicolas Rivera    <nrivera.pro@gmail.com>
-# Copyright (C) 2015-2019  Open-DSI          <support@open-dsi.fr>
+# Copyright (C) 2015-2020  Open-DSI          <support@open-dsi.fr>
 #
 Module113900Name = Oblyon
 Module113900Desc = Panneau d'options qui vous permet de personnaliser le thème Oblyon
@@ -14,7 +14,7 @@ Theme5 = Oblyon Light
 #
 # Easya
 #
-EasyaFamily = Easya Solutions Family ;)
+easyaFamily = Easya Solutions
 MenuCatalog=Catalogue
 MenuProjectsOpportunities=Projets | Opportunités
 BankColorizeMovement=Coloration des mouvements bancaires
@@ -44,14 +44,20 @@ StickyLeftBarWarning = Expérimental. Utilisez un nombre d'entrées menu limité
 StickyLeftBarInvertedWarning = Certains modules ne sont pas pris en charge avec cette fonctionnalité.
 OblyonEnableShowLogo=Afficher le logo
 OblyonLogoWidth=Largeur du logo (en px) (Défaut : 260px)
+ReduceLeftMenu=Menu gauche réduit (Icônes seulement)
 
 HideLeftMenu = Masquer le menu gauche
-OpenEffect = Effet d'ouverture menu
+OpenEffect = Effet d'ouverture menu gauche caché
+OpenEffectReduce = Effet d'ouverture menu gauche réduit
 EffectLeftMenuSlide = Slide
 EffectLeftMenuPush = Push
 HideTopIcons = Masquer les icônes
 HideLeftIcons = Masquer les icônes
 ShowLeftMenu = Afficher/Cacher Menu Gauche
+MicroMenuLeftBarHideLeftIconsWarning = Attention. Incompatible avec l'option "Masquer les icônes" du menu gauche.
+MicroMenuLeftBarCompanyNameWarning = Attention. Incompatible avec l'option "Afficher le nom de l'entreprise".
+EffectMicroMenuHover = Déployé au passage de souris
+EffectMicroMenuOnly = Ne pas déployer
 
 #
 # Colors page
@@ -139,6 +145,18 @@ OBLYON_SOCIAL_INSTAGRAM=Instagram
 OBLYON_SOCIAL_YOUTUBE=YouTube
 OBLYON_SOCIAL_GITHUB=Github
 
+#
+# Icons page
+#
+OblyonIconsTitle = Configurateur Oblyon - Icônes
+Icons = Icônes
+IconsStyle = Style d'îcones
+IconApplied = Style d'icônes appliqué
+Icon1 = Solid
+Icon2 = Regular
+Icon3 = Light
+Icon4 = Thin
+Icon5 = Duotone
 
 #
 # About page

@@ -30,17 +30,25 @@ EffectLeftMenuSlide = Slide
 EffectLeftMenuPush = Push
 HideTopIcons = Hide Top Icons
 HideLeftIcons = Hide Left Icons
-# <3.7
-EldyOldIcons = Eldy Old Icons
-EldyOldIconsWarning = Experimental 
-# >3.7 
-EldyIcons = Eldy Icons
-EldyIconsWarning = Experimental
 LogoSize = Logo Size (Small/Big)
 LogoPadding = Logo Paddings
 NoPaddingLogo = No
 PaddingLogo = Yes
 ShowLeftMenu = Show/Hide Left Menu
+ReduceLeftMenu=Reduce left menu (Icons only)
+
+HideLeftMenu = Masquer le menu gauche
+OpenEffect = Effet d'ouverture menu gauche caché
+OpenEffectReduce = Effet d'ouverture menu gauche réduit
+EffectLeftMenuSlide = Slide
+EffectLeftMenuPush = Push
+HideTopIcons = Masquer les icônes
+HideLeftIcons = Masquer les icônes
+ShowLeftMenu = Afficher/Cacher Menu Gauche
+MicroMenuLeftBarHideLeftIconsWarning = Attention. Incompatible avec l'option "Masquer les icônes" du menu gauche.
+MicroMenuLeftBarCompanyNameWarning = Attention. Incompatible avec l'option "Afficher le nom de l'entreprise".
+EffectMicroMenuHover = Déployé au passage de souris
+EffectMicroMenuOnly = Ne pas déployer
 
 #
 # Colors page
@@ -70,6 +78,19 @@ OblyonBlue=Oblyon Blue
 ThemeOblyonBlueApplied=Oblyon blue template applied
 OblyonNight=Oblyon Night
 ThemeOblyonNightApplied=Oblyon night template applied
+
+#
+# Icons page
+#
+OblyonIconsTitle = Oblyon Configurator - Icons
+Icons = Icons
+IconsStyle = Icons style
+IconApplied = Icons style applied
+Icon1 = Solid
+Icon2 = Regular
+Icon3 = Light
+Icon4 = Thin
+Icon5 = Duotone
 
 #
 # About page
