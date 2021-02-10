@@ -225,8 +225,8 @@ function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$fo
 	if (! empty($conf->contrat->enabled)) $menuqualified++;
 	if (! empty($conf->ficheinter->enabled)) $menuqualified++;
 	$tmpentry=array(
-	'enabled'=>$menuqualified, 
-	'perms'=>(! empty($user->rights->societe->lire) || ! empty($user->rights->societe->contact->lire)), 
+	'enabled'=>$menuqualified,
+	'perms'=>(! empty($user->rights->societe->lire) || ! empty($user->rights->societe->contact->lire)),
 	'module'=>'propal|commande|fournisseur|contrat|ficheinter');
 	$showmode=dol_oblyon_showmenu($type_user, $tmpentry, $listofmodulesforexternal);
 	if ($showmode) {
@@ -450,11 +450,11 @@ function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$fo
 		if (empty($noout)) print_text_menu_entry($newTabMenu[$i]['titre'], $showmode, $url, $id, $idsel, ($newTabMenu[$i]['target']?$newTabMenu[$i]['target']:$atarget));
 		if (empty($noout)) print_end_menu_entry($showmode);
 		$menu->add(
-			$shorturl, 
-			$newTabMenu[$i]['titre'], 
-			0, $showmode, 
-			($newTabMenu[$i]['target'] ? $newTabMenu[$i]['target'] : $atarget), 
-			($newTabMenu[$i]['mainmenu'] ? $newTabMenu[$i]['mainmenu'] : $newTabMenu[$i]['rowid']), 
+			$shorturl,
+			$newTabMenu[$i]['titre'],
+			0, $showmode,
+			($newTabMenu[$i]['target'] ? $newTabMenu[$i]['target'] : $atarget),
+			($newTabMenu[$i]['mainmenu'] ? $newTabMenu[$i]['mainmenu'] : $newTabMenu[$i]['rowid']),
 			''
 		);
 	}
@@ -601,7 +601,7 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
             $logoContainerAdditionalClass = '';
         }
         $title=$langs->trans("GoIntoSetupToChangeLogo");
-		
+
 		print "\n".'<!-- Show logo on menu -->'."\n";
 
         print '<div class="menu_contenu db-menu__society center backgroundforcompanylogo menulogocontainer">';
@@ -1218,7 +1218,7 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 
                     $newmenu->add("/compta/prelevement/create.php?mainmenu=bank", $langs->trans("NewStandingOrder"), 1, $user->rights->prelevement->bons->creer);
 
-                    $newmenu->add("/compta/prelevement/bons.php?mainmenu=bank", $langs->trans("WithdrawalsReceipts"), 1, $user->rights->prelevement->bons->lire);
+                    $newmenu->add("/compta/prelevement/orders_list.php?mainmenu=bank", $langs->trans("WithdrawalsReceipts"), 1, $user->rights->prelevement->bons->lire);
                     $newmenu->add("/compta/prelevement/list.php?mainmenu=bank", $langs->trans("WithdrawalsLines"), 1, $user->rights->prelevement->bons->lire);
                     $newmenu->add("/compta/prelevement/rejets.php?mainmenu=bank", $langs->trans("Rejects"), 1, $user->rights->prelevement->bons->lire);
                     $newmenu->add("/compta/prelevement/stats.php?mainmenu=bank", $langs->trans("Statistics"), 1, $user->rights->prelevement->bons->lire);
@@ -1960,7 +1960,7 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 	// Show menu
 	$invert=empty($menu_invert)?"":"	is-inverted";
 	if (empty($noout)) {
-	$alt=0; 
+	$alt=0;
 	$num=count($menu_array);
 
 	print '<nav class="menu_contenu db-nav sec-nav'.$invert.'">'."\n";
@@ -1969,11 +1969,11 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 	for ($i = 0; $i < $num; $i++) {
 		$showmenu=true;
 		$level= $menu_array[$i]['level'];
-	
+
 		if (! empty($conf->global->MAIN_MENU_HIDE_UNAUTHORIZED) && empty($menu_array[$i]['enabled'])) 	$showmenu=false;
-		
-		$alt++;	
-		
+
+		$alt++;
+
 		// Place tabulation
 		$tabstring='';
 		$tabul=($menu_array[$i]['level'] - 1);
@@ -1989,11 +1989,11 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 		$param = (isset($tmp[1])?$tmp[1]:'');	// params in url of the menu link
 
 		// Complete param to force leftmenu to '' to closed opend menu when we click on a link with no leftmenu defined.
-		if ((! preg_match('/mainmenu/i',$param)) && (! preg_match('/leftmenu/i',$param)) && ! empty($menu_array[$i]['mainmenu'])) 
+		if ((! preg_match('/mainmenu/i',$param)) && (! preg_match('/leftmenu/i',$param)) && ! empty($menu_array[$i]['mainmenu']))
 		{
 			$param.=($param?'&':'').'mainmenu='.$menu_array[$i]['mainmenu'].'&leftmenu=';
 		}
-		if ((! preg_match('/mainmenu/i',$param)) && (! preg_match('/leftmenu/i',$param)) && empty($menu_array[$i]['mainmenu'])) 
+		if ((! preg_match('/mainmenu/i',$param)) && (! preg_match('/leftmenu/i',$param)) && empty($menu_array[$i]['mainmenu']))
 		{
 			$param.=($param?'&':'').'leftmenu=';
 		}
@@ -2016,7 +2016,7 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 			}
 
 			if (!empty($menu_array[$i+1]['level'])) {
-				print '<ul class="blockvmenu sec-nav__sub-list">'; 
+				print '<ul class="blockvmenu sec-nav__sub-list">';
 			}
 		}
 
@@ -2032,10 +2032,10 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 			print '<li class="sec-nav__sub-item	is-disabled"><a class="vsmenu tmenudisabled sec-nav__link is-disabled" href="#" title="'.dol_escape_htmltag($langs->trans("NotAllowed")).'">'.$tabstring. '' .$menu_array[$i]['titre'].'</a>'."\n";
 		}
 
-		if ( empty($menu_array[$i+1]['level']) ) { 
-			print "</ul></li> \n "; 
+		if ( empty($menu_array[$i+1]['level']) ) {
+			print "</ul></li> \n ";
 		} else {
-		 print "</li> \n "; 
+		 print "</li> \n ";
 		}
 		}
 
