@@ -91,6 +91,10 @@
     content: '\f1b2';
 }
 
+.icon--mrp:before {
+    content: '\f1b3';
+}
+
 .icon--companies:before,
 .icon--thirdparties:before {
     content: '\f1ad';
