@@ -208,7 +208,7 @@ function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$fo
         else $itemsel=FALSE;
         $idsel='mrp';
 
-        $chaine.=$langs->trans("TMenuMRP");
+        $chaine=$langs->trans("TMenuMRP");
 
         if (empty($noout)) print_start_menu_entry($idsel,$itemsel,$showmode);
         if (empty($noout)) print_text_menu_entry($chaine, $showmode, DOL_URL_ROOT.'/mrp/index.php?mainmenu=mrp&amp;leftmenu=', $id, $idsel, $atarget);
