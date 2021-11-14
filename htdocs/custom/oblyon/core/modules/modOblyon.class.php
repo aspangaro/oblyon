@@ -68,7 +68,7 @@ function __construct($db) {
 	$this->name = preg_replace('/^mod/i','',get_class($this));
 
 	// Module description, used if translation string 'ModuleXXXDesc' not found (where XXX is value of numeric property 'numero' of module)
-	$this->description = "Thème Oblyon";
+	$this->description = "Thème Oblyon v2";
 
 	// Possible values for version are: 'development', 'experimental', 'dolibarr' or version
 	$this->version = 'dolibarr';
@@ -100,8 +100,11 @@ function __construct($db) {
 	// for specific css file (eg: /oblyon/css/oblyon.css.php)
 	$this->module_parts = array(
 		'menus' => 1, // Set this to 1 if module has its own menus handler directory (core/menus)
-		// 'theme' => 0, // Set this to 1 if module has its own theme directory (core/theme)
-		// 'css' => '/oblyon/css/oblyon.css.php', // Set this to relative path of css file if module has its own css file
+		//'theme' => 1, // Set this to 1 if module has its own theme directory (core/theme)
+		'css' => array('data'=>array(
+			'/custom/oblyon/theme/oblyon/style.css.php'
+			)
+		),
 		'js' => '/oblyon/js/pushy.js', // Set this to relative path of js file if module must load a js on all pages
 	);
 

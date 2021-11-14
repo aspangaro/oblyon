@@ -297,14 +297,17 @@ body[class*="colorblind-"] .text-success{
     color: rgb(<?php echo $colortexttitle; ?>) !important;
 }
 
-.fa-toggle-on, .fa-toggle-off { font-size: 2em; }
+.size15x { font-size: 1.5em !important; }
+.fa-toggle-on, .fa-toggle-off, .size2x { font-size: 2em; }
 .websiteselectionsection .fa-toggle-on, .websiteselectionsection .fa-toggle-off,
-.asetresetmodule .fa-toggle-on, .asetresetmodule .fa-toggle-off {
+.asetresetmodule .fa-toggle-on, .asetresetmodule .fa-toggle-off,
+.tdwebsitesearchresult .fa-toggle-on, .tdwebsitesearchresult .fa-toggle-off
+{
     font-size: 1.5em; vertical-align: text-bottom;
 }
 
 /* Themes for badges */
-<?php include dol_buildpath($path.'/theme/'.$theme.'/badges.inc.php', 0); ?>
+<?php include dol_buildpath('/custom/'.$theme.'/theme/'.$theme.'/badges.inc.php', 0); ?>
 
 /**
 * Links
@@ -2672,12 +2675,12 @@ img.userphotosmall {		/* size for user photo in lists */
 }
 
 .span-icon-user {
-    background-image: url(<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/object_user.png',1); ?>);
+    background-image: url(<?php echo dol_buildpath('/custom/'.$theme.'/theme/'.$theme.'/img/object_user.png',1); ?>);
     background-repeat: no-repeat;
 }
 
 .span-icon-password {
-    background-image: url(<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/lock.png',1); ?>);
+    background-image: url(<?php echo dol_buildpath('/custom/'.$theme.'/theme/'.$theme.'/img/lock.png',1); ?>);
     background-repeat: no-repeat;
 }
 
@@ -3283,7 +3286,7 @@ font-size: 14px;
 /* ============================================================================== */
 /* Fa-icons                                                                       */
 /* ============================================================================== */
-<?php include dol_buildpath($path.'/theme/'.$theme.'/main_menu_fa_icons.inc.php', 0); ?>
+<?php include dol_buildpath('/custom/'.$theme.'/theme/'.$theme.'/main_menu_fa_icons.inc.php', 0); ?>
 
 /*------------------------------------*\
 #Top Menu (eldy style)
@@ -3836,7 +3839,7 @@ foreach($mainmenuusedarray as $val)
 #Login Page
 \*------------------------------------*/
 <?php
-include dol_buildpath($path.'/theme/'.$theme.'/login.inc.php', 0);
+include dol_buildpath('/custom/'.$theme.'/theme/'.$theme.'/login.inc.php', 0);
 ?>
 
 /*------------------------------------*\
@@ -4247,7 +4250,7 @@ div.popuptab {
 /* ============================================================================== */
 /* Buttons for actions                                                            */
 /* ============================================================================== */
-<?php include dol_buildpath($path.'/theme/'.$theme.'/btn.inc.php', 0); ?>
+<?php include dol_buildpath('/custom/'.$theme.'/theme/'.$theme.'/btn.inc.php', 0); ?>
 
 /* ============================================================================== */
 /* Tables                                                                         */
@@ -4889,7 +4892,7 @@ border: 1px solid #f0f0f0;
 
 .nographyet
 {
-    content:url(<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/nographyet.svg',1) ?>);
+    content:url(<?php echo dol_buildpath('/custom/'.$theme.'/theme/'.$theme.'/img/nographyet.svg',1) ?>);
     display: inline-block;
     opacity: 0.1;
     background-repeat: no-repeat;
@@ -5301,7 +5304,7 @@ table.cal_event td.cal_event_right { padding: 4px 4px !important; }
 
 .ui-widget-content { border: solid 1px rgba(0,0,0,.3); background: #fff !important; }
 
-.ui-autocomplete-loading { background: white url(<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/working.gif', 1) ?>) right center no-repeat; }
+.ui-autocomplete-loading { background: white url(<?php echo dol_buildpath('/custom/'.$theme.'/theme/'.$theme.'/img/working.gif', 1) ?>) right center no-repeat; }
 .ui-autocomplete {
     position:absolute;
     width:auto;
@@ -5432,11 +5435,11 @@ table.cal_event td.cal_event_right { padding: 4px 4px !important; }
 }
 
 .menu_principal .menu_choix1 a {
-    background: url("<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/cashdesk/new.png',1); ?>") top left no-repeat;
+    background: url("<?php echo dol_buildpath('/custom/'.$theme.'/theme/'.$theme.'/img/cashdesk/new.png',1); ?>") top left no-repeat;
 }
 
 .menu_principal .menu_choix2 a {
-    background: url("<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/cashdesk/gescom.png',1); ?>") top left no-repeat;
+    background: url("<?php echo dol_buildpath('/custom/'.$theme.'/theme/'.$theme.'/img/cashdesk/gescom.png',1); ?>") top left no-repeat;
 }
 
 .menu_principal .menu_choix1 a span,
@@ -5731,7 +5734,7 @@ p.titre {
 .ui-widget-content { border: solid 1px rgba(0,0,0,.3); background: #fff !important; }
 
 .ui-autocomplete-loading {
-    background: white url(<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/working.gif',1); ?>) right center no-repeat;
+    background: white url(<?php echo dol_buildpath('/custom/'.$theme.'/theme/'.$theme.'/img/working.gif',1); ?>) right center no-repeat;
 }
 
 .ui-autocomplete {
@@ -5781,12 +5784,12 @@ td.gtaskname {
 .editkey_numeric,
 .editkey_select,
 .editkey_autocomplete {
-    background: url(<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/edit.png',1); ?>) right top no-repeat;
+    background: url(<?php echo dol_buildpath('/custom/'.$theme.'/theme/'.$theme.'/img/edit.png',1); ?>) right top no-repeat;
     cursor: pointer;
 }
 
 .editkey_datepicker {
-    background: url(<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/calendar.png',1); ?>) right center no-repeat;
+    background: url(<?php echo dol_buildpath('/custom/'.$theme.'/theme/'.$theme.'/img/calendar.png',1); ?>) right center no-repeat;
     cursor: pointer;
 }
 
@@ -7131,12 +7134,12 @@ border-top-right-radius: 6px;
 /* ============================================================================== */
 
 .menu_choix1 a {
-    background: url('<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/menus/money.png', 1) ?>') top left no-repeat;
+    background: url('<?php echo dol_buildpath('/custom/'.$theme.'/theme/'.$theme.'/img/menus/money.png', 1) ?>') top left no-repeat;
     background-position-y: 15px;
 }
 
 .menu_choix2 a {
-    background: url('<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/menus/home.png', 1) ?>') top left no-repeat;
+    background: url('<?php echo dol_buildpath('/custom/'.$theme.'/theme/'.$theme.'/img/menus/home.png', 1) ?>') top left no-repeat;
     background-position-y: 15px;
 }
 .menu_choix1,.menu_choix2 {
@@ -8012,10 +8015,10 @@ img.loginphoto {
     height: 16px;
 }
 .span-icon-user {
-    background: url(<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/object_user.png',1); ?>) no-repeat scroll 7px 7px;
+    background: url(<?php echo dol_buildpath('/custom/'.$theme.'/theme/'.$theme.'/img/object_user.png',1); ?>) no-repeat scroll 7px 7px;
 }
 .span-icon-password {
-    background-image: url(<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/lock.png',1); ?>);
+    background-image: url(<?php echo dol_buildpath('/custom/'.$theme.'/theme/'.$theme.'/img/lock.png',1); ?>);
     background-repeat: no-repeat;
 }
 
@@ -8380,8 +8383,8 @@ input#sew_keyword {
 }
 
 <?php
-include dol_buildpath($path.'/theme/'.$theme.'/dropdown.inc.php', 0);
-include dol_buildpath($path.'/theme/'.$theme.'/info-box.inc.php', 0);
-include dol_buildpath($path.'/theme/'.$theme.'/progress.inc.php', 0);
-include dol_buildpath($path.'/theme/'.$theme.'/timeline.inc.php', 0);
+include dol_buildpath('/custom/'.$theme.'/theme/'.$theme.'/dropdown.inc.php', 0);
+include dol_buildpath('/custom/'.$theme.'/theme/'.$theme.'/info-box.inc.php', 0);
+include dol_buildpath('/custom/'.$theme.'/theme/'.$theme.'/progress.inc.php', 0);
+include dol_buildpath('/custom/'.$theme.'/theme/'.$theme.'/timeline.inc.php', 0);
 

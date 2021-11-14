@@ -1795,6 +1795,8 @@ function print_left_oblyon_menu($db,$menu_array_before,$menu_array_after,&$tabMe
 			// Assets
 			if (! empty($conf->asset->enabled))
             {
+                $langs->load("assets");
+
                 $newmenu->add("/asset/list.php?leftmenu=asset&amp;mainmenu=accountancy", $langs->trans("MenuAssets"), 0, $user->rights->asset->read, '', $mainmenu, 'asset');
                 $newmenu->add("/asset/card.php?leftmenu=asset&amp;action=create", $langs->trans("MenuNewAsset"), 1, $user->rights->asset->write);
                 $newmenu->add("/asset/list.php?leftmenu=asset&amp;mainmenu=accountancy", $langs->trans("MenuListAssets"), 1, $user->rights->asset->read);

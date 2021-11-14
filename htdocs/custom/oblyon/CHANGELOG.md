@@ -1,5 +1,8 @@
 ## Changelog ##
 
+### Version 14.0.0 - 2021 10 22
+- Comptability Dolibarr v12
+
 ### Version 12.0.0 - 2020 06 30
  - Comptability Dolibarr v12
 
