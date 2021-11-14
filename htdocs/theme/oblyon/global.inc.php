@@ -2455,6 +2455,30 @@ div.login_block {
     <?php } ?>
 }
 
+div.login_block a {
+	color: <?php print $bgnavtop_txt; ?>;
+	display: inline-block;
+}
+div.login_block span.aversion {
+	color: <?php print $bgnavtop_txt; ?>;
+	filter: contrast(0.7);
+}
+div.login_block table {
+	display: inline;
+}
+div.login {
+	white-space:nowrap;
+	font-weight: bold;
+	float: right;
+}
+div.login a {
+	color: <?php print $bgnavtop_txt; ?>;
+}
+div.login a:hover {
+	color: <?php print $maincolor; ?>;
+	text-decoration:underline;
+}
+
 div.login_block:after {
     /*content: '\f013';*/
     color: <?php print $bgnavtop_txt; ?>;
@@ -2607,24 +2631,22 @@ div.login_block_other {
     display: block;
 }
 .login_block_getinfo .atoplogin, .login_block_getinfo .atoplogin:hover {
-    color: #333 !important;
-    font-weight: normal !important;
+	color: #333 !important;
+	font-weight: normal !important;
 }
 .alogin, .alogin:hover {
-    font-weight: normal !important;
-    padding-top: 2px;
+	font-weight: normal !important;
+	padding-top: 2px;
 }
 .alogin:hover, .atoplogin:hover {
-    text-decoration:none !important;
+	text-decoration:underline !important;
 }
-
+span.fa.atoplogin, span.fa.atoplogin:hover {
+	font-size: 16px;
+	text-decoration: none !important;
+}
 .atoplogin #dropdown-icon-down, .atoplogin #dropdown-icon-up {
-    font-size: 0.7em;
-}
-
-span.fal.atoplogin, span.fal.atoplogin:hover {
-    font-size: 16px;
-    text-decoration: none !important;
+	font-size: 0.7em;
 }
 
 .login_block_elem img.printer,
@@ -2654,6 +2676,8 @@ img.login, img.printer, img.help, img.entity {
     height: <?php echo $disableimages ? '26' : '32'; ?>px;
     border-radius: 50%;
     background-size: contain;
+	border: 1px solid;
+	border-color: rgba(255, 255, 255, 0.2);
 }
 img.userphoto {				/* size for user photo in lists */
     border-radius: 0.72em;
@@ -2669,6 +2693,13 @@ img.userphotosmall {		/* size for user photo in lists */
     height: 1.2em;
     background-size: contain;
     vertical-align: middle;
+	background-color: #FFF;
+}
+img.userphoto[alt="Gravatar avatar"], img.photouserphoto.dropdown-user-image[alt="Gravatar avatar"] {
+	background: #fff;
+}
+form[name="addtime"] img.userphoto {
+	border: 1px solid #444;
 }
 
 .span-icon-user {
@@ -4101,13 +4132,21 @@ otherwise color shifts while dragging when bar can't keep up with mouse */
 \*------------------------------------*/
 
 div.tabs {
-    clear: both;
+	text-align: <?php print $left; ?>;
+	margin-top: 15px;
+	margin-left: 6px;
+	margin-bottom: -3px;
+	padding-left: 3px;
+	padding-right: 6px;
+	clear: both;
     font-weight: normal;
     height: 100%;
-    margin: 15px 0 -4px 6px;
-    padding: 0 6px 3px 0;
-    text-align: <?php print $left; ?>;
 }
+
+div.tabsElem {
+	margin-top: 1px;
+	margin-left: 5px;
+}	/* To avoid overlap of tabs when not browser */
 
 div.tabBar {
     background-color: <?php echo $colorbline; ?>;
@@ -4142,43 +4181,6 @@ a.tabTitle {
     max-height: 14px;
 }
 
-
-a.tab:link,
-a.tab:visited,
-a.tab:hover,
-a.tab#active {
-    background-color: rgba(0,0,0, .04);
-    margin: 0 .3em;
-    padding: 10px 12px 10px;
-    border: 1px solid rgba(0,0,0, .16);
-    border-bottom: none;
-    text-decoration: none;
-    white-space: nowrap;
-    box-shadow: 0 0 1px rgba(0,0,0, .04);
-    -webkit-box-shadow: 0 0 1px rgba(0,0,0, .04);
-    transition: all .3s ease-in-out;
-    -moz-transition: all .3s ease-in-out;
-    -webkit-transition: all .3s ease-in-out;
-}
-
-a.tab#active,
-a.tab.tabactive {
-    background-color: <?php echo $colorbline; ?>;
-    box-shadow: 0 -1px 0 rgba(0,0,0, .04);
-    -webkit-box-shadow: 0 -1px 0 rgba(0,0,0, .04);
-    font-weight: 500;
-    position: relative;
-}
-
-a.tab.tabactive:hover {
-    background-color: <?php echo $colorbline; ?>;
-    border: 1px solid rgba(0,0,0, .16);
-    border-bottom: none;
-    box-shadow: 0 -1px 0 rgba(0,0,0, .04);
-    -webkit-box-shadow: 0 -1px 0 rgba(0,0,0, .04);
-    color: <?php print $maincolor; ?>;
-}
-
 a.tab {
     color: <?php echo $colorfline; ?>;
     font-weight: normal;
@@ -4187,6 +4189,7 @@ a.tab {
 a.tab:hover, a.tab:focus {
     background-color: rgba(0,0,0, .16);
     color: <?php print $maincolor; ?>;
+	paddinf
 }
 
 a.tabimage {
@@ -4226,6 +4229,11 @@ div.tabBar ul li {
     margin-<?php print $left; ?>: 30px !important;
 }
 
+/* Payment Screen : Pointer cursor in the autofill image */
+.AutoFillAmount {
+	cursor:pointer;
+}
+
 div.popuptabset {
     background-color: <?php echo $colorbline; ?>;
     padding: 5px;
@@ -4242,6 +4250,93 @@ div.popuptab {
 @media only screen and (max-width: 570px)
 {
 
+}
+
+/* ============================================================================== */
+/* Buttons for actions                                                            */
+/* ============================================================================== */
+
+div.tabsAction {
+	margin: 20px 0em 30px 0em;
+	padding: 0em 0em;
+	text-align: right;
+}
+div.tabsActionNoBottom {
+	margin-bottom: 0px;
+}
+div.tabsAction > a {
+	margin-bottom: 16px !important;
+}
+
+a.tabTitle {
+	color: rgba(0,0,0,0.4) !important;
+	text-shadow:1px 1px 1px #ffffff;
+	font-family: <?php print $fontlist ?>;
+	font-weight: normal !important;
+	padding: 4px 6px 2px 0px;
+	margin-<?php print $right; ?>: 10px;
+	text-decoration: none;
+	white-space: nowrap;
+}
+.tabTitleText {
+	display: none;
+}
+.imgTabTitle {
+	max-height: 14px;
+}
+div.tabs div.tabsElem:first-of-type a.tab {
+	margin-left: 0px !important;
+}
+
+a.tabunactive {
+	color: var(--colortextlink) !important;
+}
+a.tab:link, a.tab:visited, a.tab:hover, a.tab#active {
+	font-family: <?php print $fontlist ?>;
+	padding: 12px 14px 13px;
+	text-decoration: none;
+	white-space: nowrap;
+
+	background-image: none !important;
+}
+
+.tabactive, a.tab#active {
+	background-color: <?php echo $colorbline; ?>;
+	margin: 0 0.2em 0 0.2em !important;
+	text-decoration: none;
+
+	border: 1px solid rgba(0,0,0, .16);
+	border-bottom: none;
+}
+.tabunactive, a.tab#unactive {
+	border: 1px solid rgba(0,0,0, .16);
+	border-bottom: 0px !important;
+}
+a.tabimage {
+	color: #434956;
+	font-family: <?php print $fontlist ?>;
+	text-decoration: none;
+	white-space: nowrap;
+}
+
+td.tab {
+	background: #dee7ec;
+}
+
+span.tabspan {
+	background: #dee7ec;
+	color: #434956;
+	font-family: <?php print $fontlist ?>;
+	padding: 0px 6px;
+	margin: 0em 0.2em;
+	text-decoration: none;
+	white-space: nowrap;
+	-webkit-border-radius:4px 4px 0px 0px;
+	border-radius:4px 4px 0px 0px;
+
+	border-<?php print $right; ?>: 1px solid #555555;
+	border-<?php print $left; ?>: 1px solid #D8D8D8;
+	border-top: 1px solid #D8D8D8;
 }
 
 /* ============================================================================== */
@@ -5171,19 +5266,21 @@ table.dp {
 
 
 /* ============================================================================== */
-/*  Afficher/cacher                                                               */
+/*  Show/Hide                                                                     */
 /* ============================================================================== */
 
 div.visible {
-    display: block;
+	display: block;
 }
 
-div.hidden, td.hidden, img.hidden, span.hidden {
-    display: none;
+div.hidden, td.hidden, img.hidden, span.hidden, div.showifmore {
+	display: none;
 }
-
+.unvisible {
+	visibility: hidden;
+}
 tr.visible {
-    display: block;
+	display: block;
 }
 
 /* ============================================================================== */
@@ -8046,6 +8143,691 @@ input#sew_keyword {
     background-color: #fff !important;
     width: 100% !important;
     line-height: 28px;
+}
+
+/* ============================================================================== */
+/*  Markdown rendering                                                             */
+/* ============================================================================== */
+
+.imgmd {
+	width: 90%;
+}
+.moduledesclong h1 {
+	padding-top: 10px;
+	padding-bottom: 20px;
+}
+
+
+/* ============================================================================== */
+/*  JMobile - Android                                                             */
+/* ============================================================================== */
+
+.searchpage .tagtr .tagtd {
+	padding-bottom: 3px;
+}
+.searchpage .tagtr .tagtd .button {
+	background: unset;
+	border: unset;
+}
+
+li.ui-li-divider .ui-link {
+	color: #FFF !important;
+}
+.ui-btn {
+	margin: 0 2px;
+}
+a.ui-link, a.ui-link:hover, .ui-btn:hover, span.ui-btn-text:hover, span.ui-btn-inner:hover {
+	text-decoration: none !important;
+}
+.ui-body-c {
+	background: #fff;
+}
+
+.ui-btn-inner {
+	min-width: .4em;
+	padding-left: 6px;
+	padding-right: 6px;
+	font-size: <?php print is_numeric($fontsize) ? $fontsize.'px' : $fontsize; ?>;
+	/* white-space: normal; */		/* Warning, enable this break the truncate feature */
+}
+.ui-btn-icon-right .ui-btn-inner {
+	padding-right: 30px;
+}
+.ui-btn-icon-left .ui-btn-inner {
+	padding-left: 30px;
+}
+.ui-select .ui-btn-icon-right .ui-btn-inner {
+	padding-right: 30px;
+}
+.ui-select .ui-btn-icon-left .ui-btn-inner {
+	padding-left: 30px;
+}
+.ui-select .ui-btn-icon-right .ui-icon {
+	right: 8px;
+}
+.ui-btn-icon-left > .ui-btn-inner > .ui-icon, .ui-btn-icon-right > .ui-btn-inner > .ui-icon {
+	margin-top: -10px;
+}
+select {
+	/* display: inline-block; */	/* We can't set this. This disable ability to make */
+	overflow:hidden;
+	white-space: nowrap;			/* Enabling this make behaviour strange when selecting the empty value if this empty value is '' instead of '&nbsp;' */
+	text-overflow: ellipsis;
+}
+.fiche .ui-controlgroup {
+	margin: 0px;
+	padding-bottom: 0px;
+}
+div.ui-controlgroup-controls div.tabsElem
+{
+	margin-top: 2px;
+}
+div.ui-controlgroup-controls div.tabsElem a
+{
+	-webkit-box-shadow: 0 -3px 6px rgba(0,0,0,.2);
+	box-shadow: 0 -3px 6px rgba(0,0,0,.2);
+}
+div.ui-controlgroup-controls div.tabsElem a#active {
+	-webkit-box-shadow: 0 -3px 6px rgba(0,0,0,.3);
+	box-shadow: 0 -3px 6px rgba(0,0,0,.3);
+}
+
+a.tab span.ui-btn-inner
+{
+	border: none;
+	padding: 0;
+}
+
+.ui-link {
+	color: var(--colortext);
+}
+.liste_titre .ui-link {
+	color: var(--colortexttitle) !important;
+}
+
+a.ui-link {
+	word-wrap: break-word;
+}
+
+/* force wrap possible onto field overflow does not works */
+.formdoc .ui-btn-inner
+{
+	white-space: normal;
+	overflow: hidden;
+	text-overflow: clip; /* "hidden" : do not exists as a text-overflow value (https://developer.mozilla.org/fr/docs/Web/CSS/text-overflow) */
+}
+
+/* Warning: setting this may make screen not beeing refreshed after a combo selection */
+/*.ui-body-c {
+	background: #fff;
+}*/
+
+div.ui-radio, div.ui-checkbox
+{
+	display: inline-block;
+	border-bottom: 0px !important;
+}
+.ui-checkbox input, .ui-radio input {
+	height: auto;
+	width: auto;
+	margin: 4px;
+	position: static;
+}
+div.ui-checkbox label+input, div.ui-radio label+input {
+	position: absolute;
+}
+.ui-mobile fieldset
+{
+	padding-bottom: 10px; margin-bottom: 4px; border-bottom: 1px solid #AAAAAA !important;
+}
+
+ul.ulmenu {
+	border-radius: 0;
+	-webkit-border-radius: 0;
+}
+
+.ui-field-contain label.ui-input-text {
+	vertical-align: middle !important;
+}
+.ui-mobile fieldset {
+	border-bottom: none !important;
+}
+
+/* Style for first level menu with jmobile */
+.ui-li .ui-btn-inner a.ui-link-inherit, .ui-li-static.ui-li {
+	padding: 1em 15px;
+	display: block;
+}
+.ui-btn-up-c {
+	font-weight: normal;
+}
+.ui-focus, .ui-btn:focus {
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+.ui-bar-b {
+	/*border: 1px solid #888;*/
+	border: none;
+	background: none;
+	text-shadow: none;
+	color: var(--colortexttitlenotab) !important;
+}
+.ui-bar-b, .lilevel0 {
+	background-repeat: repeat-x;
+	border: none;
+	background: none;
+	text-shadow: none;
+	color: var(--colortexttitlenotab) !important;
+}
+.alilevel0 {
+	font-weight: normal !important;
+}
+
+.ui-li.ui-last-child, .ui-li.ui-field-contain.ui-last-child {
+	border-bottom-width: 0px !important;
+}
+.alilevel0 {
+	color: var(--colortexttitle) !important;
+	background: var(--colorbackmobilemenu);
+}
+.ulmenu {
+	box-shadow: none !important;
+	border-bottom: 1px solid #ccc;
+}
+.ui-btn-icon-right {
+	border-right: 1px solid #ccc !important;
+}
+.ui-body-c {
+	border: 1px solid #ccc;
+	text-shadow: none;
+}
+.ui-btn-up-c, .ui-btn-hover-c {
+	/* border: 1px solid #ccc; */
+	text-shadow: none;
+}
+.ui-body-c .ui-link, .ui-body-c .ui-link:visited, .ui-body-c .ui-link:hover {
+	color: var(--colortextlink);
+}
+.ui-btn-up-c .vsmenudisabled {
+	color: #<?php echo $colorshadowtitle; ?> !important;
+	text-shadow: none !important;
+}
+div.tabsElem a.tab {
+	background: transparent;
+}
+.alilevel1 {
+	color: var(--colortexttitlenotab) !important;
+}
+.lilevel1 {
+	border-top: 2px solid #444;
+	background: #fff ! important;
+}
+.lilevel1 div div a {
+	font-weight: bold !important;
+}
+.lilevel2
+{
+	padding-left: 22px;
+	background: #fff ! important;
+}
+.lilevel3
+{
+	padding-left: 44px;
+	background: #fff ! important;
+}
+.lilevel4
+{
+	padding-left: 66px;
+	background: #fff ! important;
+}
+.lilevel5
+{
+	padding-left: 88px;
+	background: #fff ! important;
+}
+
+
+
+/* ============================================================================== */
+/*  POS                                                                           */
+/* ============================================================================== */
+
+.menu_choix1,.menu_choix2 {
+	font-size: 1.4em;
+	text-align: left;
+	border: 1px solid #666;
+	margin-right: 20px;
+}
+.menu_choix1 a, .menu_choix2 a {
+	display: block;
+	color: #fff;
+	text-decoration: none;
+	padding-top: 18px;
+	padding-left: 10px;
+	font-size: 14px;
+	height: 38px;
+}
+.menu_choix1 a:hover,.menu_choix2 a:hover {
+	color: #6d3f6d;
+}
+.menu li.menu_choix1 {
+	padding-top: 6px;
+	padding-right: 10px;
+	padding-bottom: 2px;
+}
+.menu li.menu_choix2 {
+	padding-top: 6px;
+	padding-right: 10px;
+	padding-bottom: 2px;
+}
+@media only screen and (max-width: 767px)
+{
+	.menu_choix1 a, .menu_choix2 a {
+		background-size: 36px 36px;
+		height: 30px;
+		padding-left: 40px;
+	}
+	.menu li.menu_choix1, .menu li.menu_choix2 {
+		padding-left: 4px;
+		padding-right: 0;
+	}
+	.liste_articles {
+		margin-right: 0 !important;
+	}
+}
+
+
+/* ============================================================================== */
+/*  Public                                                                        */
+/* ============================================================================== */
+
+/* The theme for public pages */
+.public_body {
+	margin: 20px;
+}
+.public_border {
+	border: 1px solid #888;
+}
+
+
+
+/* ============================================================================== */
+/* Ticket module                                                                  */
+/* ============================================================================== */
+
+.ticketpublictable td {
+	height: 28px;
+}
+
+.ticketpublicarea {
+	margin-left: 15%;
+	margin-right: 15%;
+}
+.publicnewticketform {
+	/* margin-top: 25px !important; */
+}
+.ticketlargemargin {
+	padding-left: 50px;
+	padding-right: 50px;
+	padding-top: 30px;
+}
+@media only screen and (max-width: 767px)
+{
+	.ticketlargemargin {
+		padding-left: 5px; padding-right: 5px;
+		padding-top: 10px;
+	}
+	.ticketpublicarea {
+		margin-left: 10px;
+		margin-right: 10px;
+	}
+}
+
+#cd-timeline {
+	position: relative;
+	padding: 2em 0;
+	margin-bottom: 2em;
+}
+#cd-timeline::before {
+	/* this is the vertical line */
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 18px;
+	height: 100%;
+	width: 4px;
+	background: #d7e4ed;
+}
+@media only screen and (min-width: 1170px) {
+	#cd-timeline {
+		margin-bottom: 3em;
+	}
+	#cd-timeline::before {
+		left: 50%;
+		margin-left: -2px;
+	}
+}
+
+.cd-timeline-block {
+	position: relative;
+	margin: 2em 0;
+}
+.cd-timeline-block:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+.cd-timeline-block:first-child {
+	margin-top: 0;
+}
+.cd-timeline-block:last-child {
+	margin-bottom: 0;
+}
+@media only screen and (min-width: 1170px) {
+	.cd-timeline-block {
+		margin: 4em 0;
+	}
+	.cd-timeline-block:first-child {
+		margin-top: 0;
+	}
+	.cd-timeline-block:last-child {
+		margin-bottom: 0;
+	}
+}
+
+.cd-timeline-img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	box-shadow: 0 0 0 4px white, inset 0 2px 0 rgba(0, 0, 0, 0.08), 0 3px 0 4px rgba(0, 0, 0, 0.05);
+	background: #d7e4ed;
+}
+.cd-timeline-img img {
+	display: block;
+	width: 24px;
+	height: 24px;
+	position: relative;
+	left: 50%;
+	top: 50%;
+	margin-left: -12px;
+	margin-top: -12px;
+}
+.cd-timeline-img.cd-picture {
+	background: #75ce66;
+}
+.cd-timeline-img.cd-movie {
+	background: #c03b44;
+}
+.cd-timeline-img.cd-location {
+	background: #f0ca45;
+}
+@media only screen and (min-width: 1170px) {
+	.cd-timeline-img {
+		width: 60px;
+		height: 60px;
+		left: 50%;
+		margin-left: -30px;
+		/* Force Hardware Acceleration in WebKit */
+		-webkit-transform: translateZ(0);
+		-webkit-backface-visibility: hidden;
+	}
+	.cssanimations .cd-timeline-img.is-hidden {
+		visibility: hidden;
+	}
+	.cssanimations .cd-timeline-img.bounce-in {
+		visibility: visible;
+		-webkit-animation: cd-bounce-1 0.6s;
+		-moz-animation: cd-bounce-1 0.6s;
+		animation: cd-bounce-1 0.6s;
+	}
+}
+
+@-webkit-keyframes cd-bounce-1 {
+	0% {
+		opacity: 0;
+		-webkit-transform: scale(0.5);
+	}
+
+	60% {
+		opacity: 1;
+		-webkit-transform: scale(1.2);
+	}
+
+	100% {
+		-webkit-transform: scale(1);
+	}
+}
+@-moz-keyframes cd-bounce-1 {
+	0% {
+		opacity: 0;
+		-moz-transform: scale(0.5);
+	}
+
+	60% {
+		opacity: 1;
+		-moz-transform: scale(1.2);
+	}
+
+	100% {
+		-moz-transform: scale(1);
+	}
+}
+@keyframes cd-bounce-1 {
+	0% {
+		opacity: 0;
+		-webkit-transform: scale(0.5);
+		-moz-transform: scale(0.5);
+		-ms-transform: scale(0.5);
+		-o-transform: scale(0.5);
+		transform: scale(0.5);
+	}
+
+	60% {
+		opacity: 1;
+		-webkit-transform: scale(1.2);
+		-moz-transform: scale(1.2);
+		-ms-transform: scale(1.2);
+		-o-transform: scale(1.2);
+		transform: scale(1.2);
+	}
+
+	100% {
+		-webkit-transform: scale(1);
+		-moz-transform: scale(1);
+		-ms-transform: scale(1);
+		-o-transform: scale(1);
+		transform: scale(1);
+	}
+}
+.cd-timeline-content {
+	position: relative;
+	margin-left: 60px;
+	background: white;
+	border-radius: 0.25em;
+	padding: 1em;
+	background-image: -o-linear-gradient(bottom, rgba(0,0,0,0.1) 0%, rgba(230,230,230,0.4) 100%);
+	background-image: -moz-linear-gradient(bottom, rgba(0,0,0,0.1) 0%, rgba(230,230,230,0.4) 100%);
+	background-image: -webkit-linear-gradient(bottom, rgba(0,0,0,0.1) 0%, rgba(230,230,230,0.4) 100%);
+	background-image: -ms-linear-gradient(bottom, rgba(0,0,0,0.1) 0%, rgba(230,230,230,0.4) 100%);
+	background-image: linear-gradient(bottom, rgba(0,0,0,0.1) 0%, rgba(230,230,230,0.4) 100%);
+}
+.cd-timeline-content:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+.cd-timeline-content h2 {
+	color: #303e49;
+}
+.cd-timeline-content .cd-date {
+	font-size: 13px;
+	font-size: 0.8125rem;
+}
+.cd-timeline-content .cd-date {
+	display: inline-block;
+}
+.cd-timeline-content p {
+	margin: 1em 0;
+	line-height: 1.6;
+}
+
+.cd-timeline-content .cd-date {
+	float: left;
+	padding: .2em 0;
+	opacity: .7;
+}
+.cd-timeline-content::before {
+	content: '';
+	position: absolute;
+	top: 16px;
+	right: 100%;
+	height: 0;
+	width: 0;
+	border: 7px solid transparent;
+	border-right: 7px solid white;
+}
+@media only screen and (min-width: 768px) {
+	.cd-timeline-content h2 {
+		font-size: 20px;
+		font-size: 1.25rem;
+	}
+	.cd-timeline-content {
+		font-size: 16px;
+		font-size: 1rem;
+	}
+	.cd-timeline-content .cd-read-more, .cd-timeline-content .cd-date {
+		font-size: 14px;
+		font-size: 0.875rem;
+	}
+}
+@media only screen and (min-width: 1170px) {
+	.cd-timeline-content {
+		margin-left: 0;
+		padding: 1.6em;
+		width: 43%;
+	}
+	.cd-timeline-content::before {
+		top: 24px;
+		left: 100%;
+		border-color: transparent;
+		border-left-color: white;
+	}
+	.cd-timeline-content .cd-read-more {
+		float: left;
+	}
+	.cd-timeline-content .cd-date {
+		position: absolute;
+		width: 55%;
+		left: 115%;
+		top: 6px;
+		font-size: 16px;
+		font-size: 1rem;
+	}
+	.cd-timeline-block:nth-child(even) .cd-timeline-content {
+		float: right;
+	}
+	.cd-timeline-block:nth-child(even) .cd-timeline-content::before {
+		top: 24px;
+		left: auto;
+		right: 100%;
+		border-color: transparent;
+		border-right-color: white;
+	}
+	.cd-timeline-block:nth-child(even) .cd-timeline-content .cd-read-more {
+		float: right;
+	}
+	.cd-timeline-block:nth-child(even) .cd-timeline-content .cd-date {
+		left: auto;
+		right: 115%;
+		text-align: right;
+	}
+
+}
+
+
+/* ============================================================================== */
+/* CSS style for debugbar                                                         */
+/* ============================================================================== */
+
+div.phpdebugbar * {
+	font-weight: unset;
+}
+span.phpdebugbar-tooltip.phpdebugbar-tooltip-extra-wide, span.phpdebugbar-tooltip.phpdebugbar-tooltip-wide {
+	width: 250px !important;
+}
+.phpdebugbar-indicator span.phpdebugbar-tooltip {
+	opacity: .95 !important;
+}
+a.phpdebugbar-tab.phpdebugbar-active {
+	background-image: unset !important;
+}
+.phpdebugbar-fa-tags:before {
+	content: "\f121";
+	font-weight: 600 !important;
+}
+.phpdebugbar-fa-tasks:before {
+	content: "\f550";
+	font-weight: 600 !important;
+}
+.phpdebugbar-fa-tags, .phpdebugbar-fa-tasks, .phpdebugbar-indicator .fa {
+	font-family: "Font Awesome 5 Free";
+	font-weight: 600;
+}
+div.phpdebugbar-widgets-messages li.phpdebugbar-widgets-list-item span.phpdebugbar-widgets-value.phpdebugbar-widgets-warning:before,
+div.phpdebugbar-widgets-messages li.phpdebugbar-widgets-list-item span.phpdebugbar-widgets-value.phpdebugbar-widgets-error:before,
+div.phpdebugbar-widgets-exceptions a.phpdebugbar-widgets-editor-link:before,
+div.phpdebugbar-widgets-sqlqueries span.phpdebugbar-widgets-database:before,
+div.phpdebugbar-widgets-sqlqueries span.phpdebugbar-widgets-duration:before,
+div.phpdebugbar-widgets-sqlqueries span.phpdebugbar-widgets-memory:before,
+div.phpdebugbar-widgets-sqlqueries span.phpdebugbar-widgets-row-count:before,
+div.phpdebugbar-widgets-sqlqueries span.phpdebugbar-widgets-copy-clipboard:before,
+div.phpdebugbar-widgets-sqlqueries span.phpdebugbar-widgets-stmt-id:before,
+div.phpdebugbar-widgets-templates span.phpdebugbar-widgets-render-time:before,
+div.phpdebugbar-widgets-templates span.phpdebugbar-widgets-memory:before,
+div.phpdebugbar-widgets-templates span.phpdebugbar-widgets-param-count:before,
+div.phpdebugbar-widgets-templates span.phpdebugbar-widgets-type:before,
+div.phpdebugbar-widgets-templates a.phpdebugbar-widgets-editor-link:before
+{
+	font-family: "Font Awesome 5 Free" !important;
+}
+
+/* ============================================================================== */
+/* CSS style used for jCrop                                                       */
+/* ============================================================================== */
+
+.jcrop-holder { background: unset !important; }
+
+
+/* ============================================================================== */
+/* CSS style used for jFlot                                                       */
+/* ============================================================================== */
+
+.dol-xaxis-vertical .flot-x-axis .flot-tick-label.tickLabel {
+	text-orientation: sideways;
+	font-weight: 400;
+	writing-mode: vertical-rl;
+	white-space: nowrap;
+}
+
+/* ============================================================================== */
+/* For copy-paste feature                                                         */
+/* ============================================================================== */
+
+span.clipboardCPValueToPrint {
+	display: inline-block;
+}
+span.clipboardCPValue.hidewithsize {
+	width: 0 !important;
+	display: inline-block;
+	color: transparent;
+	white-space: nowrap;
+}
+
+.clipboardCPShowOnHover .clipboardCPButton {
+	display: none;
 }
 
 /* ============================================================================== */

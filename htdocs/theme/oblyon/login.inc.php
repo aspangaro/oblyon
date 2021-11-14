@@ -152,7 +152,7 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
     <?php } ?>
     }
     div.login_block a {
-        color: #<?php echo $colortextbackhmenu; ?>;
+        color: <?php echo $bgnavleft_txt; ?>;
         display: inline-block;
     }
     div.login_block span.aversion {
@@ -171,10 +171,10 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
         float: right;
     }
     div.login a {
-        color: #<?php echo $colortextbackvmenu; ?>;
+        color: <?php echo $bgnavleft_txt; ?>;
     }
     div.login a:hover {
-        color: #<?php echo $colortextbackvmenu; ?>;
+        color: <?php echo $bgnavleft_txt; ?>;
         text-decoration:underline;
     }
 

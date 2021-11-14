@@ -149,6 +149,13 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
 .info-box-sm .info-box-content{
     margin-left: 80px;
 }
+.info-box-sm .info-box-module-enabled {
+	background: linear-gradient(0.35turn, #fff, #fff, #f6faf8, #e4efe8);
+}
+.info-box-content-warning span.font-status4 {
+	color: #bc9526 !important;
+}
+
 .info-box-number {
 	display: block;
 	font-weight: bold;
@@ -202,6 +209,28 @@ if (GETPOSTISSET('THEME_AGRESSIVENESS_RATIO')) $conf->global->THEME_AGRESSIVENES
 	background-color: #eee !important;
 	<?php } ?>
     opacity: 0.95;
+}
+
+.customer-back {
+	background-color: #55955d !important;
+	color: #FFF !important;
+	padding: 2px;
+	margin: 2px;
+	border-radius: 3px;
+}
+.vendor-back {
+	background-color: #599caf !important;
+	color: #FFF !important;
+	padding: 2px;
+	margin: 2px;
+	border-radius: 3px;
+}
+.user-back {
+	background-color: #79633f !important;
+	color: #FFF !important;
+	padding: 2px;
+	margin: 2px;
+	border-radius: 3px;
 }
 
 .bg-infobox-project{

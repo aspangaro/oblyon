@@ -86,34 +86,38 @@ $colorblind_deuteranopes_textWarning = $textWarning; // currently not tested wit
 
 
 // Badges colors
-$badgePrimary   ='#0083A2';
-$badgeSecondary ='#64dd17';
-$badgeSuccess   ='#28a745';
-$badgeDanger    ='#9f4705';
-$badgeWarning   ='#ffc107';
-$badgeInfo      ='#00a8f3';
-$badgeDark      ='#343a40';
-$badgeLight     ='#f8f9fa';
+$badgePrimary   = '#0083A2';
+$badgeSecondary = '#64dd17';
+$badgeSuccess   = '#28a745';
+$badgeDanger    = '#9f4705';
+$badgeWarning   = '#ffc107';
+$badgeInfo      = '#00a8f3';
+$badgeDark      = '#343a40';
+$badgeLight     = '#f8f9fa';
 
 // badge color ajustement for color blind
-$colorblind_deuteranopes_badgeSuccess   ='#37de5d';  //! text color black
-$colorblind_deuteranopes_badgeSuccess_textColor7='#000';
-$colorblind_deuteranopes_badgeWarning   ='#e4e411';
+$colorblind_deuteranopes_badgeSuccess   = '#37de5d';  //! text color black
+$colorblind_deuteranopes_badgeSuccess_textColor7 = '#000';
+$colorblind_deuteranopes_badgeWarning   = '#e4e411';
 
 /* default color for status : After a quick check, somme status can have opposite function according to objects
 *  So this badges status uses default value according to theme eldy status img
 *  TODO: use color definition vars above for define badges color status X -> example $badgeStatusValidate, $badgeStatusClosed, $badgeStatusActive ....
 */
-$badgeStatus0='#cbd3d3';
-$badgeStatus1='#bc9526';
-$badgeStatus2='#e6f0f0';
-$badgeStatus3='#bca52b';
-$badgeStatus4='#277d1e';
-$badgeStatus5='#cad2d2';
-$badgeStatus6='#cad2d2';
-$badgeStatus7='#baa32b';
-$badgeStatus8='#be3013';
-$badgeStatus9='#e7f0f0';
+$badgeStatus0  = '#cbd3d3'; // draft
+$badgeStatus1  = '#bc9526'; // validated
+$badgeStatus1b = '#bc9526'; // validated
+$badgeStatus2  = '#e6f0f0'; // approved
+$badgeStatus3  = '#bca52b';
+$badgeStatus4  = '#64dd17'; // Old color : #277d1e
+$badgeStatus4b = '#64dd17'; // Old color : #277d1e
+$badgeStatus5  = '#cad2d2';
+$badgeStatus6  = '#cad2d2';
+$badgeStatus7  = '#baa32b';
+$badgeStatus8  = '#be3013';
+$badgeStatus9  = '#e7f0f0';
+$badgeStatus10 = '#993013';
+$badgeStatus11 = '#15a540';
 
 // status color ajustement for color blind
 $colorblind_deuteranopes_badgeStatus4=$colorblind_deuteranopes_badgeStatus7=$colorblind_deuteranopes_badgeSuccess;  //! text color black
