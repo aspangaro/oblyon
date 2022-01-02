@@ -7,7 +7,6 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
 
 .badge {
     display: inline-block;
-    padding: .1em .35em;
     font-size: 80%;
     font-weight: 700 !important;
     line-height: 1;

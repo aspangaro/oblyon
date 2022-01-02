@@ -73,7 +73,7 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
 .tmenu .dropdown-menu, .login_block .dropdown-menu {
     position: absolute;
     right: 0;
-    left: auto;
+    left: -120px;
     line-height:1.3em;
 }
 .tmenu .dropdown-menu, .login_block  .dropdown-menu .user-body {
@@ -306,7 +306,7 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
      * QUICK ADD
      */
     #topmenu-quickadd-dropdown .dropdown-menu {
-        width: 300px !important;
+        width: 335px !important;
         color: #444;
     }
 
@@ -337,14 +337,16 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
 
     div.quickadd a {
         color: #444;
+		height: 60px;
+		width: 110px;
     }
 
     div.quickadd a:hover, div.quickadd a:active {
-        color: #000000;
+        color: <?php print $bgnavtop_txt; ?>;
     }
 
     div.quickaddblock {
-        width: 80px;
+        width: 110px;
         display: block ruby;
     }
 

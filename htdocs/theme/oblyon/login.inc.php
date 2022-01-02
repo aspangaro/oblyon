@@ -14,8 +14,11 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
         font-size: 1em;
     }
     .login_center {
-        display: table-cell;
-        vertical-align: middle;
+		margin-top: 30vw;
+<?php if (empty($conf->global->MAIN_LOGIN_RIGHT)) { ?>
+		display: table-cell;
+		vertical-align: middle;
+<?php } ?>
     }
     .login_vertical_align {
         padding: 10px;
@@ -27,33 +30,36 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
         vertical-align: middle;
     }
     .login_table_title {
-        max-width: 530px;
-        color: #eee !important;
-        padding-bottom: 20px;
-        text-shadow: 1px 1px #444;
+		pointer-events: none;
+		cursor: default;
+<?php if (! empty($conf->global->MAIN_LOGIN_RIGHT)) { ?>
+		margin: 0px calc((50vw - 530px) / 2) 0px auto;
+		width: 530px;
+<?php } ?>
+		max-width: <?php echo empty($conf->global->MAIN_LOGIN_RIGHT) ? '530px' : 'calc(50vw - 70px)'; ?>;
+		color: var(--colorbackhmenu1) !important;
+		padding-bottom: 10px;
     }
+	.login_table_title a {
+		margin: auto;
+	}
     .login_table label {
         text-shadow: 1px 1px 1px #FFF;
     }
     .login_table {
-        margin: 0px auto;  /* Center */
-        padding-left:6px;
-        padding-right:6px;
-        padding-top:16px;
-        padding-bottom:12px;
-        max-width: 560px;
-    <?php
-    if (! empty($conf->global->MAIN_LOGIN_BACKGROUND)) {
-        print '	background-color: rgba(255, 255, 255, 0.9);';
-    } else {
-        print '	background-color: #FFFFFF;';
-    }
-    ?>
+		margin: <?php echo empty($conf->global->MAIN_LOGIN_RIGHT) ? '0px auto' : '0px calc((50vw - 600px) / 2) 0px auto'; ?>;
 
-        -webkit-box-shadow: 0 2px 23px 2px rgba(0, 0, 0, 0.2), 0 2px 6px rgba(60,60,60,0.15);
-        box-shadow: 0 2px 23px 2px rgba(0, 0, 0, 0.2), 0 2px 6px rgba(60,60,60,0.15);
+		padding: 4px;
+		width: 600px;
+		max-width: <?php echo empty($conf->global->MAIN_LOGIN_RIGHT) ? '600px' : '50vw'; ?>;
+<?php if (! empty($conf->global->MAIN_LOGIN_RIGHT)) { ?>
+		width: 600px;
+<?php } ?>
 
-        border-radius: 5px;
+		-webkit-box-shadow: 12px 12px 25px 1px rgba(0, 0, 0, 0.2), 0 2px 6px rgba(60,60,60,0.15);
+		box-shadow: 12px 12px 25px 1px rgba(0, 0, 0, 0.2), 0 2px 6px rgba(60,60,60,0.15);
+
+		border-radius: 4px;
         /*border-top:solid 1px rgba(180,180,180,.4);
         border-left:solid 1px rgba(180,180,180,.4);
         border-right:solid 1px rgba(180,180,180,.4);
@@ -66,6 +72,7 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
         margin-left: 10px;
         margin-top: 5px;
         margin-bottom: 5px;
+		opacity: 0.3;
     }
     .login_table input#username:focus, .login_table input#password:focus, .login_table input#securitycode:focus {
         outline: none !important;
@@ -126,9 +133,10 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
     }
     #securitycode {
         min-width: 60px;
-    }
+		vertical-align: middle;
+   }
     #img_securitycode {
-        border: 1px solid #DDDDDD;
+		vertical-align: middle;
     }
     #img_logo, .img_logo {
         max-width: 170px;

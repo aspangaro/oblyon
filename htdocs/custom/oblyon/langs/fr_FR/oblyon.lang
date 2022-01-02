@@ -58,6 +58,11 @@ MicroMenuLeftBarHideLeftIconsWarning = Attention. Incompatible avec l'option "Ma
 MicroMenuLeftBarCompanyNameWarning = Attention. Incompatible avec l'option "Afficher le nom de l'entreprise".
 EffectMicroMenuHover = Déployé au passage de souris
 EffectMicroMenuOnly = Ne pas déployer
+LoginRight = Décentrer le bloc de connexion sur la droite de l'écran
+CardBehavior = Comportement des fiches
+FixAreaRefAndTabAction = Fixer le bandeau des références et les boutons d'actions pendant le défilement verticale
+General = Paramètres généraux
+OblyonFontSize = Taille du texte de base en pixels (doit être entre 10 et 16)
 
 #
 # Colors page
@@ -68,7 +73,10 @@ OBLYON_COLOR_MAIN=Couleur principale
 OBLYON_COLOR_BCKGRD=Couleur de fond
 OBLYON_COLOR_LOGO_BCKGRD=Couleur de fond du logo
 OBLYON_COLOR_LOGIN_BCKGRD=Couleur de fond de la page de connexion
+OBLYON_COLOR_BTITLE=Couleur de fond des titres
+OBLYON_COLOR_FTITLE=Couleur de texte des titres
 OBLYON_COLOR_BLINE=Couleur de fond des lignes
+OBLYON_COLOR_BLINE_HOVER=Couleur de fond des lignes survolées
 OBLYON_COLOR_FLINE=Couleur de texte des lignes
 OBLYON_COLOR_FLINE_HOVER=Couleur du texte survolé des lignes
 OBLYON_COLOR_TOPMENU_BCKGRD=Couleur de fond du menu haut

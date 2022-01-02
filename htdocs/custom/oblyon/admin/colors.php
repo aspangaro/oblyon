@@ -68,7 +68,10 @@ $colors_options = array (
 	'OBLYON_COLOR_BCKGRD',
 	'OBLYON_COLOR_LOGO_BCKGRD',
 	'OBLYON_COLOR_LOGIN_BCKGRD',
+	'OBLYON_COLOR_BTITLE',
+	'OBLYON_COLOR_FTITLE',
 	'OBLYON_COLOR_BLINE',
+	'OBLYON_COLOR_BLINE_HOVER',
 	'OBLYON_COLOR_FLINE',
 	'OBLYON_COLOR_FLINE_HOVER'
 );
@@ -154,7 +157,10 @@ if ($action == 'settheme') {
 		dolibarr_set_const($db, "OBLYON_COLOR_BCKGRD", '#333333','chaine',0,'',$conf->entity);
 		dolibarr_set_const($db, "OBLYON_COLOR_LOGO_BCKGRD", '#2C2C2C','chaine',0,'',$conf->entity);
 		dolibarr_set_const($db, "OBLYON_COLOR_LOGIN_BCKGRD", '#333333','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "OBLYON_COLOR_BTITLE", '#E09430','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "OBLYON_COLOR_FTITLE", '#F4F4F4','chaine',0,'',$conf->entity);
 		dolibarr_set_const($db, "OBLYON_COLOR_BLINE", '#444444','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "OBLYON_COLOR_BLINE_HOVER", '#F1F1F1','chaine',0,'',$conf->entity);
 		dolibarr_set_const($db, "OBLYON_COLOR_FLINE", '#ECECEC','chaine',0,'',$conf->entity);
 		dolibarr_set_const($db, "OBLYON_COLOR_FLINE_HOVER", '#FCFCFC','chaine',0,'',$conf->entity);
 
@@ -194,7 +200,10 @@ if ($action == 'settheme') {
 		dolibarr_set_const($db, "OBLYON_COLOR_BCKGRD", '#F4F4F4','chaine',0,'',$conf->entity);
 		dolibarr_set_const($db, "OBLYON_COLOR_LOGO_BCKGRD", '#ffffff','chaine',0,'',$conf->entity);
 		dolibarr_set_const($db, "OBLYON_COLOR_LOGIN_BCKGRD", '#F4F4F4','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "OBLYON_COLOR_BTITLE", '#E09430','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "OBLYON_COLOR_FTITLE", '#F4F4F4','chaine',0,'',$conf->entity);
 		dolibarr_set_const($db, "OBLYON_COLOR_BLINE", '#FCFCFC','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "OBLYON_COLOR_BLINE_HOVER", '#F1F1F1','chaine',0,'',$conf->entity);
 		dolibarr_set_const($db, "OBLYON_COLOR_FLINE", '#444444','chaine',0,'',$conf->entity);
 		dolibarr_set_const($db, "OBLYON_COLOR_FLINE_HOVER", '#222222','chaine',0,'',$conf->entity);
 
@@ -234,7 +243,10 @@ if ($action == 'settheme') {
 		dolibarr_set_const($db, "OBLYON_COLOR_BCKGRD", '#F4F4F4','chaine',0,'',$conf->entity);
 		dolibarr_set_const($db, "OBLYON_COLOR_LOGO_BCKGRD", '#FFFFFF','chaine',0,'',$conf->entity);
 		dolibarr_set_const($db, "OBLYON_COLOR_LOGIN_BCKGRD", '#F4F4F4','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "OBLYON_COLOR_BTITLE", '#0083A2','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "OBLYON_COLOR_FTITLE", '#F4F4F4','chaine',0,'',$conf->entity);
 		dolibarr_set_const($db, "OBLYON_COLOR_BLINE", '#FFFFFF','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "OBLYON_COLOR_BLINE_HOVER", '#F1F1F1','chaine',0,'',$conf->entity);
 		dolibarr_set_const($db, "OBLYON_COLOR_FLINE", '#444444','chaine',0,'',$conf->entity);
 		dolibarr_set_const($db, "OBLYON_COLOR_FLINE_HOVER", '#222222','chaine',0,'',$conf->entity);
 
@@ -274,7 +286,10 @@ if ($action == 'settheme') {
 		dolibarr_set_const($db, "OBLYON_COLOR_BCKGRD", '#F5F5F5','chaine',0,'',$conf->entity);
 		dolibarr_set_const($db, "OBLYON_COLOR_LOGO_BCKGRD", '#FFFFFF','chaine',0,'',$conf->entity);
 		dolibarr_set_const($db, "OBLYON_COLOR_LOGIN_BCKGRD", '#F4F4F4','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "OBLYON_COLOR_BTITLE", '#0083A2','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "OBLYON_COLOR_FTITLE", '#F4F4F4','chaine',0,'',$conf->entity);
 		dolibarr_set_const($db, "OBLYON_COLOR_BLINE", '#FFFFFF','chaine',0,'',$conf->entity);
+		dolibarr_set_const($db, "OBLYON_COLOR_BLINE_HOVER", '#F1F1F1','chaine',0,'',$conf->entity);
 		dolibarr_set_const($db, "OBLYON_COLOR_FLINE", '#444444','chaine',0,'',$conf->entity);
 		dolibarr_set_const($db, "OBLYON_COLOR_FLINE_HOVER", '#222222','chaine',0,'',$conf->entity);
 
@@ -291,7 +306,7 @@ if ($action == 'settheme') {
 		dolibarr_set_const($db, "THEME_ELDY_TEXTLINK", '','chaine',0,'',$conf->entity);
 		dolibarr_set_const($db, "THEME_ELDY_USE_HOVER", '','chaine',0,'',$conf->entity);
 	}
-	
+
 }
 
 /*
