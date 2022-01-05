@@ -204,6 +204,10 @@
     content: '\f571';
 }
 
+.icon--propals_supplier:before {
+    content: '\f573';
+}
+
 .icon--suppliers_bills:before {
     content: '\f570';
 }
@@ -214,12 +218,20 @@
 }
 
 .icon--stock:before {
-    content: '\f480';
+    content: '\f49e';
+}
+
+.icon--inventory:before {
+    content: '\f468';
 }
 
 .icon--tripsandexpenses:before,
 .icon--expensereport:before {
     content: '\f63c';
+}
+
+.icon--timespent:before {
+    content: '\f017';
 }
 
 .icon--opensurvey:before {
