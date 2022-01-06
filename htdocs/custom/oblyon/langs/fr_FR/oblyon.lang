@@ -110,21 +110,22 @@ ThemeOblyonLightApplied=Thème Oblyon Light appliqué
 # Dashboard page
 #
 OblyonDashboardTitle = Configurateur Oblyon - Tableau de bord
-EnableDashboardBlocOrNot=Sélection des blocs du tableau de bord à afficher
+OblyonDashboardDisableBlocks=Vignette des objets ouverts (à traiter ou en retard) sur le tableau de bord principal
 ColorIntensity = Intensité des couleurs
 ColorIntensityDesc = Définir l'intensité sur les couleurs ci-dessous (Défaut -50)
 ColorMoreDarker = Moins intense
 ColorMoreLighter = Plus intense
-OBLYON_INFOXBOX_WEATHER_COLOR = Bloc météo
-OBLYON_INFOXBOX_ACTION_COLOR = Bloc agenda
-OBLYON_INFOXBOX_PROJECT_COLOR = Bloc projet
-OBLYON_INFOXBOX_CUSTOMER_COLOR = Bloc clients
-OBLYON_INFOXBOX_SUPPLIER_COLOR = Bloc fournisseurs
-OBLYON_INFOXBOX_CONTRAT_COLOR = Bloc contrat
-OBLYON_INFOXBOX_BANK_COLOR = Bloc banque
-OBLYON_INFOXBOX_ADHERENT_COLOR = Bloc adhérent
-OBLYON_INFOXBOX_EXPENSEREPORT_COLOR = Bloc note de frais
-OBLYON_INFOXBOX_HOLIDAY_COLOR = Bloc congés payés
+OBLYON_INFOXBOX_WEATHER_COLOR = Couleur vignette 'météo'
+OBLYON_INFOXBOX_ACTION_COLOR = Couleur vignette 'agenda'
+OBLYON_INFOXBOX_PROJECT_COLOR = Couleur vignette 'projet'
+OBLYON_INFOXBOX_CUSTOMER_COLOR = Couleur vignette 'clients'
+OBLYON_INFOXBOX_SUPPLIER_COLOR = Couleur vignette 'fournisseurs'
+OBLYON_INFOXBOX_CONTRAT_COLOR = Couleur vignette 'contrat'
+OBLYON_INFOXBOX_BANK_COLOR = Couleur vignette 'banque'
+OBLYON_INFOXBOX_ADHERENT_COLOR = Couleur vignette 'adhérent'
+OBLYON_INFOXBOX_EXPENSEREPORT_COLOR = Couleur vignette 'note de frais'
+OBLYON_INFOXBOX_HOLIDAY_COLOR = Couleur vignette 'congés payés'
+OBLYON_INFOXBOX_TICKET_COLOR = Couleur vignette 'tickets'
 
 #
 # Login page

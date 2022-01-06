@@ -233,6 +233,9 @@ if (GETPOSTISSET('THEME_AGRESSIVENESS_RATIO')) $conf->global->THEME_AGRESSIVENES
 	border-radius: 3px;
 }
 
+.bg-infobox-action{
+    background-color: <?php print colorAgressiveness($conf->global->OBLYON_INFOXBOX_ACTION_COLOR, $conf->global->THEME_AGRESSIVENESS_RATIO); ?> !important;
+}
 .bg-infobox-project{
 	background-color: <?php print colorAgressiveness($conf->global->OBLYON_INFOXBOX_PROJECT_COLOR, $conf->global->THEME_AGRESSIVENESS_RATIO); ?> !important;
 }
@@ -260,6 +263,9 @@ if (GETPOSTISSET('THEME_AGRESSIVENESS_RATIO')) $conf->global->THEME_AGRESSIVENES
 }
 .bg-infobox-holiday{
 	background-color: <?php print colorAgressiveness($conf->global->OBLYON_INFOXBOX_HOLIDAY_COLOR, $conf->global->THEME_AGRESSIVENESS_RATIO); ?>  !important;
+}
+.bg-infobox-ticket {
+    background-color: <?php print colorAgressiveness($conf->global->OBLYON_INFOXBOX_TICKET_COLOR, $conf->global->THEME_AGRESSIVENESS_RATIO); ?>  !important;
 }
 
 

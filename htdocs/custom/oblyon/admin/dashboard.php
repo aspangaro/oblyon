@@ -42,7 +42,7 @@ if (! $user->admin) accessforbidden();
 // Parameters OBLYON_*
 $dashboard_colors = array (
     'OBLYON_INFOXBOX_WEATHER_COLOR',
-    'OBLYON_INFOXBOX_ACTION_COLOR',             // #b46080
+    'OBLYON_INFOXBOX_ACTION_COLOR',             // #b46080 AGENDA
     'OBLYON_INFOXBOX_PROJECT_COLOR',            // #6c6a98
 	'OBLYON_INFOXBOX_CUSTOMER_COLOR',           // #99a17d PROPAL / FACTURE / COMMANDE
 	'OBLYON_INFOXBOX_SUPPLIER_COLOR',           // #599caf SUPPLIER_PROPOSAL / INVOICE_SUPPLIER / ORDER_SUPPLIER
@@ -51,6 +51,7 @@ $dashboard_colors = array (
 	'OBLYON_INFOXBOX_ADHERENT_COLOR',           // #79633f
 	'OBLYON_INFOXBOX_EXPENSEREPORT_COLOR',      // #79633f
 	'OBLYON_INFOXBOX_HOLIDAY_COLOR',            // #755114
+	'OBLYON_INFOXBOX_TICKET_COLOR',             // #755114
 );
 
 
@@ -241,167 +242,90 @@ $(document).ready(function() {
 print '</script>'."\n";
 
 print '<form action="' . $_SERVER["PHP_SELF"] . '" method="post">';
-print '<input type="hidden" name="token" value="' . $_SESSION['newtoken'] . '">';
+print '<input type="hidden" name="token" value="'.newToken().'">';
 print '<input type="hidden" name="action" value="update">';
 
 // Colors
 print '<table class="noborder as-settings-colors">';
 
-if($conf->global->OBLYON_MAIN_VERSION == "easya") {
+if ((float) $conf->global->EASYA_VERSION >= 2022.5 || (float) DOL_VERSION >= 15.0) {
     // Infobox enable
     print '<tr class="liste_titre">';
-    print '<td colspan="2">' . $langs->trans('EnableDashboardBlocOrNot') . '</td>';
+    print '<td colspan="2">' . $langs->trans('OblyonDashboardDisableBlocks') . '</td>';
     print '</tr>' . "\n";
 
-    // InfoxBoxMeteo
-    print '<tr class="oddeven">';
-    print '<td>' . $langs->trans('MAIN_DISABLE_METEO') . '</td>';
-    $name = 'MAIN_DISABLE_METEO';
-    if (!empty($conf->global->MAIN_DISABLE_METEO)) {
-        print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name=' . $name . '&value=0">';
-        print img_picto($langs->trans("Enabled"), 'switch_on');
-        print "</a></td>\n";
-    } else {
-        print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name=' . $name . '&value=1">';
-        print img_picto($langs->trans("Disabled"), 'switch_off');
-        print "</a></td>\n";
-    }
+    print '<tr class="oddeven"><td>' . $langs->trans('DashboardDisableGlobal') . '</td><td>';
+    print ajax_constantonoff("MAIN_DISABLE_GLOBAL_WORKBOARD", array(), $conf->entity, 0, 0, 1, 0, 0, 0, '_red', 'dashboard');
+    print '</td>';
     print '</tr>';
 
-    // InfoxBoxAgenda
-    print '<tr class="oddeven">';
-    print '<td>' . $langs->trans('OBLYON_INFOXBOX_ACTION_COLOR') . '</td>';
-    $name = 'OBLYON_INFOXBOX_AGENDA_ENABLE';
-    if (!empty($conf->global->OBLYON_INFOXBOX_AGENDA_ENABLE)) {
-        print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name=' . $name . '&value=0">';
-        print img_picto($langs->trans("Enabled"), 'switch_on');
-        print "</a></td>\n";
-    } else {
-        print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name=' . $name . '&value=1">';
-        print img_picto($langs->trans("Disabled"), 'switch_off');
-        print "</a></td>\n";
-    }
-    print '</tr>';
+    if (empty($conf->global->MAIN_DISABLE_GLOBAL_WORKBOARD)) {
+        // Block meteo
+        print '<tr class="oddeven"><td>' . $langs->trans('MAIN_DISABLE_METEO') . '</td><td>';
+        print ajax_constantonoff("MAIN_DISABLE_METEO", array(), $conf->entity, 0, 0, 1, 0, 0, 0, '_red', 'dashboard');
+        print '</td>';
+        print '</tr>';
 
-    // InfoxBoxProject
-    print '<tr class="oddeven">';
-    print '<td>' . $langs->trans('OBLYON_INFOXBOX_PROJECT_COLOR') . '</td>';
-    $name = 'OBLYON_INFOXBOX_PROJECT_ENABLE';
-    if (!empty($conf->global->OBLYON_INFOXBOX_PROJECT_ENABLE)) {
-        print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name=' . $name . '&value=0">';
-        print img_picto($langs->trans("Enabled"), 'switch_on');
-        print "</a></td>\n";
-    } else {
-        print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name=' . $name . '&value=1">';
-        print img_picto($langs->trans("Disabled"), 'switch_off');
-        print "</a></td>\n";
-    }
-    print '</tr>';
+        // Block agenda
+        print '<tr class="oddeven"><td>' . $langs->trans('DashboardDisableBlockAgenda') . '</td><td>';
+        print ajax_constantonoff("MAIN_DISABLE_BLOCK_AGENDA", array(), $conf->entity, 0, 0, 1, 0, 0, 0, '_red', 'dashboard');
+        print '</td>';
+        print '</tr>';
 
-    // InfoxBoxCustomer
-    print '<tr class="oddeven">';
-    print '<td>' . $langs->trans('OBLYON_INFOXBOX_CUSTOMER_COLOR') . '</td>';
-    $name = 'OBLYON_INFOXBOX_CUSTOMER_ENABLE';
-    if (!empty($conf->global->OBLYON_INFOXBOX_CUSTOMER_ENABLE)) {
-        print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name=' . $name . '&value=0">';
-        print img_picto($langs->trans("Enabled"), 'switch_on');
-        print "</a></td>\n";
-    } else {
-        print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name=' . $name . '&value=1">';
-        print img_picto($langs->trans("Disabled"), 'switch_off');
-        print "</a></td>\n";
-    }
-    print '</tr>';
+        // Block agenda
+        print '<tr class="oddeven"><td>' . $langs->trans('DashboardDisableBlockProject') . '</td><td>';
+        print ajax_constantonoff("MAIN_DISABLE_BLOCK_PROJECT", array(), $conf->entity, 0, 0, 1, 0, 0, 0, '_red', 'dashboard');
+        print '</td>';
+        print '</tr>';
 
-    // InfoxBoxSupplier
-    print '<tr class="oddeven">';
-    print '<td>' . $langs->trans('OBLYON_INFOXBOX_SUPPLIER_COLOR') . '</td>';
-    $name = 'OBLYON_INFOXBOX_SUPPLIER_ENABLE';
-    if (!empty($conf->global->OBLYON_INFOXBOX_SUPPLIER_ENABLE)) {
-        print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name=' . $name . '&value=0">';
-        print img_picto($langs->trans("Enabled"), 'switch_on');
-        print "</a></td>\n";
-    } else {
-        print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name=' . $name . '&value=1">';
-        print img_picto($langs->trans("Disabled"), 'switch_off');
-        print "</a></td>\n";
-    }
-    print '</tr>';
+        // Block customer
+        print '<tr class="oddeven"><td>' . $langs->trans('DashboardDisableBlockCustomer') . '</td><td>';
+        print ajax_constantonoff("MAIN_DISABLE_BLOCK_CUSTOMER", array(), $conf->entity, 0, 0, 1, 0, 0, 0, '_red', 'dashboard');
+        print '</td>';
+        print '</tr>';
 
-    // InfoxBoxContract
-    print '<tr class="oddeven">';
-    print '<td>' . $langs->trans('OBLYON_INFOXBOX_CONTRAT_COLOR') . '</td>';
-    $name = 'OBLYON_INFOXBOX_CONTRAT_ENABLE';
-    if (!empty($conf->global->OBLYON_INFOXBOX_CONTRAT_ENABLE)) {
-        print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name=' . $name . '&value=0">';
-        print img_picto($langs->trans("Enabled"), 'switch_on');
-        print "</a></td>\n";
-    } else {
-        print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name=' . $name . '&value=1">';
-        print img_picto($langs->trans("Disabled"), 'switch_off');
-        print "</a></td>\n";
-    }
-    print '</tr>';
+        // Block supplier
+        print '<tr class="oddeven"><td>' . $langs->trans('DashboardDisableBlockSupplier') . '</td><td>';
+        print ajax_constantonoff("MAIN_DISABLE_BLOCK_SUPPLIER", array(), $conf->entity, 0, 0, 1, 0, 0, 0, '_red', 'dashboard');
+        print '</td>';
+        print '</tr>';
 
-    // InfoxBoxBank
-    print '<tr class="oddeven">';
-    print '<td>' . $langs->trans('OBLYON_INFOXBOX_BANK_COLOR') . '</td>';
-    $name = 'OBLYON_INFOXBOX_BANK_ENABLE';
-    if (!empty($conf->global->OBLYON_INFOXBOX_BANK_ENABLE)) {
-        print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name=' . $name . '&value=0">';
-        print img_picto($langs->trans("Enabled"), 'switch_on');
-        print "</a></td>\n";
-    } else {
-        print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name=' . $name . '&value=1">';
-        print img_picto($langs->trans("Disabled"), 'switch_off');
-        print "</a></td>\n";
-    }
-    print '</tr>';
+        // Block contract
+        print '<tr class="oddeven"><td>' . $langs->trans('DashboardDisableBlockContract') . '</td><td>';
+        print ajax_constantonoff("MAIN_DISABLE_BLOCK_CONTRACT", array(), $conf->entity, 0, 0, 1, 0, 0, 0, '_red', 'dashboard');
+        print '</td>';
+        print '</tr>';
 
-    // InfoxBoxAdherent
-    print '<tr class="oddeven">';
-    print '<td>' . $langs->trans('OBLYON_INFOXBOX_ADHERENT_COLOR') . '</td>';
-    $name = 'OBLYON_INFOXBOX_ADHERENT_ENABLE';
-    if (!empty($conf->global->OBLYON_INFOXBOX_ADHERENT_ENABLE)) {
-        print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name=' . $name . '&value=0">';
-        print img_picto($langs->trans("Enabled"), 'switch_on');
-        print "</a></td>\n";
-    } else {
-        print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name=' . $name . '&value=1">';
-        print img_picto($langs->trans("Disabled"), 'switch_off');
-        print "</a></td>\n";
-    }
-    print '</tr>';
+        // Block ticket
+        print '<tr class="oddeven"><td>' . $langs->trans('DashboardDisableBlockTicket') . '</td><td>';
+        print ajax_constantonoff("MAIN_DISABLE_BLOCK_TICKET", array(), $conf->entity, 0, 0, 1, 0, 0, 0, '_red', 'dashboard');
+        print '</td>';
+        print '</tr>';
 
-    // InfoxBoxExpenseReport
-    print '<tr class="oddeven">';
-    print '<td>' . $langs->trans('OBLYON_INFOXBOX_EXPENSEREPORT_COLOR') . '</td>';
-    $name = 'OBLYON_INFOXBOX_EXPENSEREPORT_ENABLE';
-    if (!empty($conf->global->OBLYON_INFOXBOX_EXPENSEREPORT_ENABLE)) {
-        print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name=' . $name . '&value=0">';
-        print img_picto($langs->trans("Enabled"), 'switch_on');
-        print "</a></td>\n";
-    } else {
-        print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name=' . $name . '&value=1">';
-        print img_picto($langs->trans("Disabled"), 'switch_off');
-        print "</a></td>\n";
-    }
-    print '</tr>';
+        // Block bank
+        print '<tr class="oddeven"><td>' . $langs->trans('DashboardDisableBlockBank') . '</td><td>';
+        print ajax_constantonoff("MAIN_DISABLE_BLOCK_BANK", array(), $conf->entity, 0, 0, 1, 0, 0, 0, '_red', 'dashboard');
+        print '</td>';
+        print '</tr>';
 
-    // InfoxBoxHoliday
-    print '<tr class="oddeven">';
-    print '<td>' . $langs->trans('OBLYON_INFOXBOX_HOLIDAY_COLOR') . '</td>';
-    $name = 'OBLYON_INFOXBOX_HOLIDAY_ENABLE';
-    if (!empty($conf->global->OBLYON_INFOXBOX_HOLIDAY_ENABLE)) {
-        print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name=' . $name . '&value=0">';
-        print img_picto($langs->trans("Enabled"), 'switch_on');
-        print "</a></td>\n";
-    } else {
-        print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name=' . $name . '&value=1">';
-        print img_picto($langs->trans("Disabled"), 'switch_off');
-        print "</a></td>\n";
+        // Block adherent
+        print '<tr class="oddeven"><td>' . $langs->trans('DashboardDisableBlockAdherent') . '</td><td>';
+        print ajax_constantonoff("MAIN_DISABLE_BLOCK_ADHERENT", array(), $conf->entity, 0, 0, 1, 0, 0, 0, '_red', 'dashboard');
+        print '</td>';
+        print '</tr>';
+
+        // Block expense report
+        print '<tr class="oddeven"><td>' . $langs->trans('DashboardDisableBlockExpenseReport') . '</td><td>';
+        print ajax_constantonoff("MAIN_DISABLE_BLOCK_EXPENSEREPORT", array(), $conf->entity, 0, 0, 1, 0, 0, 0, '_red', 'dashboard');
+        print '</td>';
+        print '</tr>';
+
+        // Block holiday
+        print '<tr class="oddeven"><td>' . $langs->trans('DashboardDisableBlockHoliday') . '</td><td>';
+        print ajax_constantonoff("MAIN_DISABLE_BLOCK_HOLIDAY", array(), $conf->entity, 0, 0, 1, 0, 0, 0, '_red', 'dashboard');
+        print '</td>';
+        print '</tr>';
     }
-    print '</tr>';
 }
 
 // Set Intensity

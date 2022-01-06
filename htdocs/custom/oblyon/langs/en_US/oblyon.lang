@@ -80,6 +80,27 @@ OblyonNight=Oblyon Night
 ThemeOblyonNightApplied=Oblyon night template applied
 
 #
+# Dashboard page
+#
+OblyonDashboardTitle = Oblyon configurator - Dashboard
+OblyonDashboardDisableBlocks=Thumbs of open objects (to process or late) on main dashboard
+ColorIntensity = Color intensity
+ColorIntensityDesc = Set the intensity to the colors below (Default -50)
+ColorMoreDarker = Less intense
+ColorMoreLighter = More intense
+OBLYON_INFOXBOX_WEATHER_COLOR = Thumb color 'weather'
+OBLYON_INFOXBOX_ACTION_COLOR = Thumb color 'agenda'
+OBLYON_INFOXBOX_PROJECT_COLOR = Thumb color 'project'
+OBLYON_INFOXBOX_CUSTOMER_COLOR = Thumb color 'customers'
+OBLYON_INFOXBOX_SUPPLIER_COLOR = Thumb color 'suppliers'
+OBLYON_INFOXBOX_CONTRAT_COLOR = Thumb color 'contract'
+OBLYON_INFOXBOX_BANK_COLOR = Thumb color 'bank'
+OBLYON_INFOXBOX_ADHERENT_COLOR = Thumb color 'members'
+OBLYON_INFOXBOX_EXPENSEREPORT_COLOR = Thumb color 'expense reports'
+OBLYON_INFOXBOX_HOLIDAY_COLOR = Thumb color 'holidays'
+OBLYON_INFOXBOX_TICKET_COLOR = Thumb color 'tickets'
+
+#
 # Icons page
 #
 OblyonIconsTitle = Oblyon Configurator - Icons
