@@ -3,7 +3,7 @@
  * Copyright (C) 2007-2009  Regis Houssin       <regis.houssin@capnetworks.com>
  * Copyright (C) 2013-2015  Nicolas Rivera      <nrivera.pro@gmail.com>
  * Copyright (C) 2015-2019  Open-DSI            <support@open-dsi.fr>
- * 
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
@@ -74,7 +74,7 @@ class MenuManager {
     }
     if (! empty($forcemainmenu)) $mainmenu=$forcemainmenu;
 
-    if (isset($_GET["leftmenu"])) { 
+    if (isset($_GET["leftmenu"])) {
       // On sauve en session le menu principal choisi
       $leftmenu=$_GET["leftmenu"];
       $_SESSION["leftmenu"]=$leftmenu;
@@ -119,7 +119,7 @@ class MenuManager {
 		{
 			if ($mode == 'top')  print_oblyon_menu($this->db,$this->atarget,$this->type_user,$this->tabMenu,$this->menu,0);
 			if ($mode == 'left') print_left_oblyon_menu($this->db,$this->menu_array,$this->menu_array_after,$this->tabMenu,$this->menu,0,'','',$moredata);
-		} 
+		}
 		else
 		{
 			if ($mode == 'top')  print_left_oblyon_menu($this->db,$this->menu_array,$this->menu_array_after,$this->tabMenu,$this->menu,0);
@@ -137,7 +137,7 @@ class MenuManager {
 			print_oblyon_menu($this->db,$this->atarget,$this->type_user,$this->tabMenu,$this->menu,1);
 
 			print '<!-- Generate menu list from menu handler '.$this->name.' -->'."\n";
-			foreach($this->menu->liste as $key => $val) {	
+			foreach($this->menu->liste as $key => $val) {
 			// $val['url','titre','level','enabled'=0|1|2,'target','mainmenu','leftmenu'
 			print '<ul class="ulmenu" data-role="listview" data-inset="true">';
 			print '<li data-role="list-dividerxxx" class="lilevel0">';
@@ -167,7 +167,7 @@ class MenuManager {
 					// We add sub entry
 					print str_pad('',1).'<li data-role="list-dividerxxx" class="lilevel1 ui-btn-icon-right ui-btn">';	 // ui-btn to highlight on clic
 					print '<a href="'.$relurl.'"';
-					//print ' data-ajax="false"'; 
+					//print ' data-ajax="false"';
 					print '>';
 					print str_pad('',12,'&nbsp;');
 					if ($langs->trans(ucfirst($val['mainmenu'])."Dashboard") == ucfirst($val['mainmenu'])."Dashboard") print $langs->trans("Access");	// No translation
@@ -188,7 +188,7 @@ class MenuManager {
 					else print str_pad('',$val2['level']+1).'<li class="lilevel'.($val2['level']+1).'">';	 // ui-btn to highlight on clic
 					if ($relurl2) {
 					  print '<a href="'.$relurl2.'"';
-					  //print ' data-ajax="false"'; 
+					  //print ' data-ajax="false"';
 					  print '>';
 					}
 					print str_pad('',($val2['level']+1)*12,'&nbsp;');
