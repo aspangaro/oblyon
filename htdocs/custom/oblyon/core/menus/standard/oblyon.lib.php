@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (C) 2013-2016  Nicolas Rivera      <nrivera.pro@gmail.com>
- * Copyright (C) 2015-2021  Open-DSI            <support@open-dsi.fr>
+ * Copyright (C) 2015-2022  Open-DSI            <support@open-dsi.fr>
  *
  * Copyright (C) 2010-2013  Laurent Destailleur <eldy@users.sourceforge.net>
  * Copyright (C) 2010       Regis Houssin       <regis.houssin@capnetworks.com>
@@ -42,7 +42,7 @@ $langs->load ( "oblyon@oblyon");
  * @param	int		$noout			Disable output (Initialise &$menu only).
  * @return	void
  */
-function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$forcemainmenu='',$forceleftmenu='',$moredata=null)
+function print_oblyon_menu($db, $atarget, $type_user = 0, &$tabMenu, &$menu, $noout=0, $forcemainmenu='', $forceleftmenu='', $moredata=null)
 {
 	global $user, $conf, $langs, $mysoc;
 	global $dolibarr_main_db_name;

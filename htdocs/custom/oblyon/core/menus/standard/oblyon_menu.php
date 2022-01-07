@@ -101,29 +101,43 @@ class MenuManager {
 
    /**
 	*  Show menu
+    *  Menu defined in sql tables were stored into $this->tabMenu BEFORE this is called.
 	*
-     *	@param	string	$mode			'top', 'left', 'jmobile'
+     *	@param	string	$mode			'top', 'topnb', 'left', 'jmobile' (used to get full xml ul/li menu)
      *  @param	array	$moredata		An array with more data to output
      *  @return int                     0 or nb of top menu entries if $mode = 'topnb'
      */
-    function showmenu($mode, $moredata=null)
+    public function showmenu($mode, $moredata=null)
 	{
 		global $conf, $langs, $user;
 
 		require_once 'oblyon.lib.php';
+
+        if ($this->type_user == 1) {
+            $conf->global->MAIN_SEARCHFORM_SOCIETE_DISABLED = 1;
+            $conf->global->MAIN_SEARCHFORM_CONTACT_DISABLED = 1;
+        }
 
 		require_once DOL_DOCUMENT_ROOT.'/core/class/menu.class.php';
 		$this->menu=new Menu();
 
 		if(empty($conf->global->MAIN_MENU_INVERT))
 		{
-			if ($mode == 'top')  print_oblyon_menu($this->db,$this->atarget,$this->type_user,$this->tabMenu,$this->menu,0);
-			if ($mode == 'left') print_left_oblyon_menu($this->db,$this->menu_array,$this->menu_array_after,$this->tabMenu,$this->menu,0,'','',$moredata);
+			if ($mode == 'top') {
+                print_oblyon_menu($this->db, $this->atarget, $this->type_user, $this->tabMenu, $this->menu, 0, $mode);
+            }
+            if ($mode == 'left') {
+                print_left_oblyon_menu($this->db, $this->menu_array, $this->menu_array_after, $this->tabMenu, $this->menu, 0, '', '', $moredata, $this->type_user);
+            }
 		} 
 		else
 		{
-			if ($mode == 'top')  print_left_oblyon_menu($this->db,$this->menu_array,$this->menu_array_after,$this->tabMenu,$this->menu,0);
-			if ($mode == 'left') print_oblyon_menu($this->db,$this->atarget,$this->type_user,$this->tabMenu,$this->menu,0,'','',$moredata);
+			if ($mode == 'top') {
+                print_left_oblyon_menu($this->db, $this->menu_array, $this->menu_array_after, $this->tabMenu, $this->menu, 0, '', '', $moredata, $this->type_user);
+            }
+			if ($mode == 'left') {
+                print_oblyon_menu($this->db, $this->atarget, $this->type_user, $this->tabMenu, $this->menu, 0, $mode, '', $moredata);
+            }
 		}
 
 		if ($mode == 'topnb')
