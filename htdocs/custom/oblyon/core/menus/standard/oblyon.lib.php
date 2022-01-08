@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (C) 2013-2016  Nicolas Rivera      <nrivera.pro@gmail.com>
- * Copyright (C) 2015-2021  Open-DSI            <support@open-dsi.fr>
+ * Copyright (C) 2015-2022  Open-DSI            <support@open-dsi.fr>
  *
  * Copyright (C) 2010-2013  Laurent Destailleur <eldy@users.sourceforge.net>
  * Copyright (C) 2010       Regis Houssin       <regis.houssin@capnetworks.com>
@@ -42,7 +42,7 @@ $langs->load ( "oblyon@oblyon");
  * @param	int		$noout			Disable output (Initialise &$menu only).
  * @return	void
  */
-function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$forcemainmenu='',$forceleftmenu='',$moredata=null)
+function print_oblyon_menu($db, $atarget, $type_user = 0, &$tabMenu, &$menu, $noout=0, $forcemainmenu='', $forceleftmenu='', $moredata=null)
 {
 	global $user, $conf, $langs, $mysoc;
 	global $dolibarr_main_db_name;
@@ -130,10 +130,12 @@ function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$fo
 	else $itemsel=FALSE;
 	$idsel='home';
 
+    $chaine=$langs->trans("Home");
+
 	if (empty($noout)) print_start_menu_entry($idsel,$itemsel,$showmode);
-	if (empty($noout)) print_text_menu_entry($langs->trans("Home"), 1, DOL_URL_ROOT.'/index.php?mainmenu=home&amp;leftmenu=', $id, $idsel, $atarget);
+	if (empty($noout)) print_text_menu_entry($chaine, 1, DOL_URL_ROOT.'/index.php?mainmenu=home&amp;leftmenu=', $id, $idsel, $atarget);
 	if (empty($noout)) print_end_menu_entry($showmode);
-	$menu->add('/index.php?mainmenu=home&amp;leftmenu=', $langs->trans("Home"), 0, $showmode, $atarget, "home", '');
+	$menu->add('/index.php?mainmenu=home&amp;leftmenu=', $chaine, 0, $showmode, $atarget, "home", '');
 
 	// Members
 	$tmpentry = array(
@@ -141,14 +143,19 @@ function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$fo
 		'perms' => (!empty($user->rights->adherent->lire)),
 		'module' => 'adherent'
 	);
-	$showmode=isVisibleToUserType($type_user, $tmpentry, $listofmodulesforexternal);
+    $showmode=dol_oblyon_showmenu($type_user, $tmpentry, $listofmodulesforexternal);
 	if ($showmode)
 	{
-		$classname="";
-		if ($_SESSION["mainmenu"] && $_SESSION["mainmenu"] == "members") { $classname='class="tmenusel"'; $_SESSION['idmenu']=''; }
-		else $classname = 'class="tmenu"';
+		if ($_SESSION["mainmenu"] && $_SESSION["mainmenu"] == "members") { $itemsel=TRUE; $_SESSION['idmenu']=''; }
+        else $itemsel=FALSE;
 		$idsel='members';
- 		$menu->add('/adherents/index.php?mainmenu=members&amp;leftmenu=', $langs->trans("MenuMembers"), 0, $showmode, $atarget, "members", '', 18, $id, $idsel, $classname);
+
+        $chaine=$langs->trans("MenuMembers");
+
+        if (empty($noout)) print_start_menu_entry($idsel,$itemsel,$showmode);
+        if (empty($noout)) print_text_menu_entry($chaine, 1, DOL_URL_ROOT.'/index.php?mainmenu=home&amp;leftmenu=', $id, $idsel, $atarget);
+        if (empty($noout)) print_end_menu_entry($showmode);
+        $menu->add('/adherents/index.php?mainmenu=members&amp;leftmenu=', $chaine, 0, $showmode, $atarget, "members", '');
 	}
 
 	// Third parties
@@ -163,17 +170,18 @@ function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$fo
 	);
 	$showmode=dol_oblyon_showmenu($type_user, $tmpentry, $listofmodulesforexternal);
 	if ($showmode) {
-		$langs->load("companies");
-		$langs->load("suppliers");
+        $langs->loadLangs(array("companies","suppliers"));
 
 		if ($_SESSION["mainmenu"] && $_SESSION["mainmenu"] == "companies") { $itemsel=TRUE; $_SESSION['idmenu']=''; }
 		else $itemsel=FALSE;
 		$idsel='companies';
 
+        $chaine=$langs->trans("ThirdParties");
+
 		if (empty($noout)) print_start_menu_entry($idsel,$itemsel,$showmode);
-		if (empty($noout)) print_text_menu_entry($langs->trans("ThirdParties"), $showmode, DOL_URL_ROOT.'/societe/index.php?mainmenu=companies&amp;leftmenu=', $id, $idsel, $atarget);
+		if (empty($noout)) print_text_menu_entry($chaine, $showmode, DOL_URL_ROOT.'/societe/index.php?mainmenu=companies&amp;leftmenu=', $id, $idsel, $atarget);
 		if (empty($noout)) print_end_menu_entry($showmode);
-		$menu->add('/societe/index.php?mainmenu=companies&amp;leftmenu=', $langs->trans("ThirdParties"), 0, $showmode, $atarget, "companies", '');
+		$menu->add('/societe/index.php?mainmenu=companies&amp;leftmenu=', $chaine, 0, $showmode, $atarget, "companies", '');
 	}
 
 	// Products-Services
@@ -184,7 +192,7 @@ function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$fo
 	);
 	$showmode=dol_oblyon_showmenu($type_user, $tmpentry, $listofmodulesforexternal);
 	if ($showmode) {
-		$langs->load("products");
+        $langs->loadLangs(array("products"));
 
 		if ($_SESSION["mainmenu"] && $_SESSION["mainmenu"] == "products") { $itemsel=TRUE; $_SESSION['idmenu']=''; }
 		else $itemsel=FALSE;
@@ -218,7 +226,7 @@ function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$fo
 	);
     $showmode=dol_oblyon_showmenu($type_user, $tmpentry, $listofmodulesforexternal);
     if ($showmode) {
-        $langs->load("mrp");
+        $langs->loadLangs(array("mrp"));
 
         if ($_SESSION["mainmenu"] && $_SESSION["mainmenu"] == "mrp") { $itemsel=TRUE; $_SESSION['idmenu']=''; }
         else $itemsel=FALSE;
@@ -238,7 +246,7 @@ function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$fo
 		'module'=>'projet');
 	$showmode=dol_oblyon_showmenu($type_user, $tmpentry, $listofmodulesforexternal);
 	if ($showmode) {
-		$langs->load("projects");
+        $langs->loadLangs(array("projects"));
 
 		if ($_SESSION["mainmenu"] && $_SESSION["mainmenu"] == "project") { $itemsel=TRUE; $_SESSION['idmenu']=''; }
 		else $itemsel=FALSE;
@@ -286,17 +294,19 @@ function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$fo
 	);
 	$showmode=dol_oblyon_showmenu($type_user, $tmpentry, $listofmodulesforexternal);
 	if ($showmode) {
-	$langs->load("commercial");
+        $langs->loadLangs(array("commercial"));
 
-	if ($_SESSION["mainmenu"] && $_SESSION["mainmenu"] == "commercial") { $itemsel=TRUE; $_SESSION['idmenu']=''; }
-	else $itemsel=FALSE;
-	$idsel='commercial';
+        if ($_SESSION["mainmenu"] && $_SESSION["mainmenu"] == "commercial") { $itemsel=TRUE; $_SESSION['idmenu']=''; }
+        else $itemsel=FALSE;
+        $idsel='commercial';
 
-	if (empty($noout)) print_start_menu_entry($idsel,$itemsel,$showmode);
-	if (empty($noout)) print_text_menu_entry($langs->trans("Commercial"), $showmode, DOL_URL_ROOT.'/comm/index.php?mainmenu=commercial&amp;leftmenu=', $id, $idsel, $atarget);
-	if (empty($noout)) print_end_menu_entry($showmode);
-	$menu->add('/comm/index.php?mainmenu=commercial&amp;leftmenu=', $langs->trans("Commercial"), 0, $showmode, $atarget, "commercial", "");
-	}
+        $chaine=$langs->trans("Commercial");
+
+        if (empty($noout)) print_start_menu_entry($idsel,$itemsel,$showmode);
+        if (empty($noout)) print_text_menu_entry($chaine, $showmode, DOL_URL_ROOT.'/comm/index.php?mainmenu=commercial&amp;leftmenu=', $id, $idsel, $atarget);
+        if (empty($noout)) print_end_menu_entry($showmode);
+        $menu->add('/comm/index.php?mainmenu=commercial&amp;leftmenu=', $chaine, 0, $showmode, $atarget, "commercial", "");
+    }
 
 	// Billing - Financial
 	$tmpentry = array(
@@ -318,17 +328,18 @@ function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$fo
 	);
 	$showmode=dol_oblyon_showmenu($type_user, $tmpentry, $listofmodulesforexternal);
 	if ($showmode) {
-		$langs->load("compta");
-		$langs->load("accountancy");
+        $langs->loadLangs(array("compta","accountancy"));
 
 		if ($_SESSION["mainmenu"] && $_SESSION["mainmenu"] == "billing") { $itemsel=TRUE; $_SESSION['idmenu']=''; }
 		else $itemsel=FALSE;
 		$idsel='billing';
 
+        $chaine=$langs->trans("MenuFinancial");
+
 		if (empty($noout)) print_start_menu_entry($idsel,$itemsel,$showmode);
-		if (empty($noout)) print_text_menu_entry($langs->trans("MenuFinancial"), $showmode, DOL_URL_ROOT.'/compta/index.php?mainmenu=billing&amp;leftmenu=', $id, $idsel, $atarget);
+		if (empty($noout)) print_text_menu_entry($chaine, $showmode, DOL_URL_ROOT.'/compta/index.php?mainmenu=billing&amp;leftmenu=', $id, $idsel, $atarget);
 		if (empty($noout)) print_end_menu_entry($showmode);
-			$menu->add('/compta/index.php?mainmenu=billing&amp;leftmenu=', $langs->trans("MenuFinancial"), 0, $showmode, $atarget, "billing", '');
+        $menu->add('/compta/index.php?mainmenu=billing&amp;leftmenu=', $chaine, 0, $showmode, $atarget, "billing", '');
 	}
 
 	// Bank
@@ -339,17 +350,18 @@ function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$fo
 	);
 	$showmode=dol_oblyon_showmenu($type_user, $tmpentry, $listofmodulesforexternal);
 	if ($showmode) {
-		$langs->load("compta");
-		$langs->load("banks");
+        $langs->loadLangs(array("compta","banks"));
 
 		if ($_SESSION["mainmenu"] && $_SESSION["mainmenu"] == "bank") { $itemsel=TRUE; $_SESSION['idmenu']=''; }
 		else $itemsel=FALSE;
 		$idsel='bank';
 
+        $chaine=$langs->trans("MenuBankCash");
+
 		if (empty($noout)) print_start_menu_entry($idsel,$itemsel,$showmode);
-		if (empty($noout)) print_text_menu_entry($langs->trans("MenuBankCash"), $showmode, DOL_URL_ROOT.'/compta/bank/list.php?mainmenu=bank&amp;leftmenu=', $id, $idsel, $atarget);
+		if (empty($noout)) print_text_menu_entry($chaine, $showmode, DOL_URL_ROOT.'/compta/bank/list.php?mainmenu=bank&amp;leftmenu=', $id, $idsel, $atarget);
 		if (empty($noout)) print_end_menu_entry($showmode);
-		$menu->add('/compta/bank/list.php?mainmenu=bank&amp;leftmenu=', $langs->trans("MenuBankCash"), 0, $showmode, $atarget, "bank", '');
+		$menu->add('/compta/bank/list.php?mainmenu=bank&amp;leftmenu=', $chaine, 0, $showmode, $atarget, "bank", '');
 	}
 
 	// Accounting
@@ -361,16 +373,18 @@ function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$fo
 	$showmode=dol_oblyon_showmenu($type_user, $tmpentry, $listofmodulesforexternal);
 
 	if ($showmode) {
-		$langs->loadLangs(array("compta", "accountancy", "assets", "intracommreport"));
+        $langs->loadLangs(array("compta", "accountancy", "assets", "intracommreport"));
 
 		if ($_SESSION["mainmenu"] && $_SESSION["mainmenu"] == "accountancy") { $itemsel=TRUE; $_SESSION['idmenu']=''; }
 		else $itemsel=FALSE;
 		$idsel='accountancy';
 
+        $chaine=$langs->trans("MenuAccountancy");
+
 		if (empty($noout)) print_start_menu_entry($idsel,$itemsel,$showmode);
-		if (empty($noout)) print_text_menu_entry($langs->trans("MenuAccountancy"), $showmode, DOL_URL_ROOT.'/accountancy/index.php?mainmenu=accountancy&amp;leftmenu=', $id, $idsel, $atarget);
+		if (empty($noout)) print_text_menu_entry($chaine, $showmode, DOL_URL_ROOT.'/accountancy/index.php?mainmenu=accountancy&amp;leftmenu=', $id, $idsel, $atarget);
 		if (empty($noout)) print_end_menu_entry($showmode);
-		$menu->add('/accountancy/index.php?mainmenu=accountancy&amp;leftmenu=', $langs->trans("MenuAccountancy"), 0, $showmode, $atarget, "accountancy", '');
+		$menu->add('/accountancy/index.php?mainmenu=accountancy&amp;leftmenu=', $chaine, 0, $showmode, $atarget, "accountancy", '');
 	}
 
 	// HRM
@@ -389,10 +403,12 @@ function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$fo
         else $itemsel=FALSE;
         $idsel='hrm';
 
+        $chaine=$langs->trans("HRM");
+
         if (empty($noout)) print_start_menu_entry($idsel,$itemsel,$showmode);
-        if (empty($noout)) print_text_menu_entry($langs->trans("HRM"), $showmode, DOL_URL_ROOT.'/hrm/index.php?mainmenu=hrm&amp;leftmenu=', $id, $idsel, $atarget);
+        if (empty($noout)) print_text_menu_entry($chaine, $showmode, DOL_URL_ROOT.'/hrm/index.php?mainmenu=hrm&amp;leftmenu=', $id, $idsel, $atarget);
         if (empty($noout)) print_end_menu_entry($showmode);
-        $menu->add('/hrm/index.php?mainmenu=hrm&amp;leftmenu=', $langs->trans("HRM"), 0, $showmode, $atarget, "hrm", '');
+        $menu->add('/hrm/index.php?mainmenu=hrm&amp;leftmenu=', $chaine, 0, $showmode, $atarget, "hrm", '');
 	}
 
 	// Tickets and knowledge base
@@ -411,7 +427,9 @@ function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$fo
 		else $itemsel=FALSE;
 		$idsel='ticket';
 
-		$link = '';
+        $chaine=$langs->trans("Tickets");
+
+        $link = '';
 		if (!empty($conf->ticket->enabled)) {
 			$link = '/ticket/index.php?mainmenu=ticket&amp;leftmenu=';
 		} else {
@@ -419,9 +437,9 @@ function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$fo
 		}
 
 		if (empty($noout)) print_start_menu_entry($idsel,$itemsel,$showmode);
-		if (empty($noout)) print_text_menu_entry($langs->trans("Tickets"), $showmode, DOL_URL_ROOT.$link, $id, $idsel, $atarget);
+		if (empty($noout)) print_text_menu_entry($chaine, $showmode, DOL_URL_ROOT.$link, $id, $idsel, $atarget);
 		if (empty($noout)) print_end_menu_entry($showmode);
-		$menu->add($link, $langs->trans("Tickets"), 0, $showmode, $atarget, "ticket", '');
+		$menu->add($link, $chaine, 0, $showmode, $atarget, "ticket", '');
 	}
 
 	// Tools
@@ -431,37 +449,6 @@ function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$fo
 		'module'=>''
 	);
 	$showmode=dol_oblyon_showmenu($type_user, $tmpentry, $listofmodulesforexternal);
-
-	if ($showmode) {
-		$langs->load("other");
-
-		if ($_SESSION["mainmenu"] && $_SESSION["mainmenu"] == "tools") { $itemsel=TRUE; $_SESSION['idmenu']=''; }
-		else $itemsel=FALSE;
-		$idsel='tools';
-
-		if (empty($noout)) print_start_menu_entry($idsel,$itemsel,$showmode);
-		if (empty($noout)) print_text_menu_entry($langs->trans("Tools"), $showmode, DOL_URL_ROOT.'/core/tools.php?mainmenu=tools&amp;leftmenu=', $id, $idsel, $atarget);
-		if (empty($noout)) print_end_menu_entry($showmode);
-		$menu->add('/core/tools.php?mainmenu=tools&amp;leftmenu=', $langs->trans("Tools"), 0, $showmode, $atarget, "tools", '');
-	}
-
-	// Members
-	$tmpentry=array('enabled'=>(! empty($conf->adherent->enabled)),
-	'perms'=>(! empty($user->rights->adherent->lire)),
-	'module'=>'adherent');
-	$showmode=dol_oblyon_showmenu($type_user, $tmpentry, $listofmodulesforexternal);
-	if ($showmode) {
-
-		if ($_SESSION["mainmenu"] && $_SESSION["mainmenu"] == "members") { $itemsel=TRUE; $_SESSION['idmenu']=''; }
-		else $itemsel=FALSE;
-		$idsel='members';
-
-		if (empty($noout)) print_start_menu_entry($idsel,$itemsel,$showmode);
-		if (empty($noout)) print_text_menu_entry($langs->trans("MenuMembers"), $showmode, DOL_URL_ROOT.'/adherents/index.php?mainmenu=members&amp;leftmenu=', $id, $idsel, $atarget);
-		if (empty($noout)) print_end_menu_entry($showmode);
-		$menu->add('/adherents/index.php?mainmenu=members&amp;leftmenu=', $langs->trans("MenuMembers"), 0, $showmode, $atarget, "members", '');
-	}
-
 
 	// Show personalized menus
 	$menuArbo = new Menubase($db,'oblyon');
@@ -511,6 +498,22 @@ function print_oblyon_menu($db,$atarget,$type_user,&$tabMenu,&$menu,$noout=0,$fo
 			''
 		);
 	}
+
+    // Show menu tools in last position
+    if ($showmode) {
+        $langs->loadLangs(array("other"));
+
+        if ($_SESSION["mainmenu"] && $_SESSION["mainmenu"] == "tools") { $itemsel=TRUE; $_SESSION['idmenu']=''; }
+        else $itemsel=FALSE;
+        $idsel='tools';
+
+        $chaine=$langs->trans("Tools");
+
+        if (empty($noout)) print_start_menu_entry($idsel,$itemsel,$showmode);
+        if (empty($noout)) print_text_menu_entry($chaine, $showmode, DOL_URL_ROOT.'/core/tools.php?mainmenu=tools&amp;leftmenu=', $id, $idsel, $atarget);
+        if (empty($noout)) print_end_menu_entry($showmode);
+        $menu->add('/core/tools.php?mainmenu=tools&amp;leftmenu=', $chaine, 0, $showmode, $atarget, "tools", '');
+    }
 
 	if (empty($noout)) print_end_menu_array();
 
