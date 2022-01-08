@@ -233,10 +233,10 @@ if (GETPOSTISSET('THEME_AGRESSIVENESS_RATIO')) $conf->global->THEME_AGRESSIVENES
 	border-radius: 3px;
 }
 
-.bg-infobox-action{
+.bg-infobox-action {
     background-color: <?php print colorAgressiveness($conf->global->OBLYON_INFOXBOX_ACTION_COLOR, $conf->global->THEME_AGRESSIVENESS_RATIO); ?> !important;
 }
-.bg-infobox-project{
+.bg-infobox-project {
 	background-color: <?php print colorAgressiveness($conf->global->OBLYON_INFOXBOX_PROJECT_COLOR, $conf->global->THEME_AGRESSIVENESS_RATIO); ?> !important;
 }
 .bg-infobox-propal {
@@ -245,7 +245,7 @@ if (GETPOSTISSET('THEME_AGRESSIVENESS_RATIO')) $conf->global->THEME_AGRESSIVENES
 .bg-infobox-facture {
     background-color: <?php print colorAgressiveness($conf->global->OBLYON_INFOXBOX_CUSTOMER_INVOICE_COLOR, $conf->global->THEME_AGRESSIVENESS_RATIO); ?>  !important;
 }
-.bg-infobox-commande{
+.bg-infobox-commande {
 	background-color: <?php print colorAgressiveness($conf->global->OBLYON_INFOXBOX_CUSTOMER_ORDER_COLOR, $conf->global->THEME_AGRESSIVENESS_RATIO); ?>  !important;
 }
 .bg-infobox-supplier_proposal {
@@ -254,22 +254,22 @@ if (GETPOSTISSET('THEME_AGRESSIVENESS_RATIO')) $conf->global->THEME_AGRESSIVENES
 .bg-infobox-invoice_supplier {
     background-color: <?php print colorAgressiveness($conf->global->OBLYON_INFOXBOX_SUPPLIER_INVOICE_COLOR, $conf->global->THEME_AGRESSIVENESS_RATIO); ?>  !important;
 }
-.bg-infobox-order_supplier{
+.bg-infobox-order_supplier {
 	background-color: <?php print colorAgressiveness($conf->global->OBLYON_INFOXBOX_SUPPLIER_ORDER_COLOR, $conf->global->THEME_AGRESSIVENESS_RATIO); ?>  !important;
 }
-.bg-infobox-contrat{
+.bg-infobox-contrat {
 	background-color: <?php print colorAgressiveness($conf->global->OBLYON_INFOXBOX_CONTRAT_COLOR, $conf->global->THEME_AGRESSIVENESS_RATIO); ?>  !important;
 }
-.bg-infobox-bank_account{
+.bg-infobox-bank_account {
 	background-color: <?php print colorAgressiveness($conf->global->OBLYON_INFOXBOX_BANK_COLOR, $conf->global->THEME_AGRESSIVENESS_RATIO); ?>  !important;
 }
-.bg-infobox-adherent{
+.bg-infobox-member {
 	background-color: <?php print colorAgressiveness($conf->global->OBLYON_INFOXBOX_ADHERENT_COLOR, $conf->global->THEME_AGRESSIVENESS_RATIO); ?>  !important;
 }
-.bg-infobox-expensereport{
+.bg-infobox-expensereport {
 	background-color: <?php print colorAgressiveness($conf->global->OBLYON_INFOXBOX_EXPENSEREPORT_COLOR, $conf->global->THEME_AGRESSIVENESS_RATIO); ?>  !important;
 }
-.bg-infobox-holiday{
+.bg-infobox-holiday {
 	background-color: <?php print colorAgressiveness($conf->global->OBLYON_INFOXBOX_HOLIDAY_COLOR, $conf->global->THEME_AGRESSIVENESS_RATIO); ?>  !important;
 }
 .bg-infobox-ticket {
