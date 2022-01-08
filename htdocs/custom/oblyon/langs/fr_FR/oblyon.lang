@@ -63,6 +63,7 @@ CardBehavior = Comportement des fiches
 FixAreaRefAndTabAction = Fixer le bandeau des références et les boutons d'actions pendant le défilement verticale
 General = Paramètres généraux
 OblyonFontSize = Taille du texte de base en pixels (doit être entre 10 et 16)
+MainStatusUseImages = Les différents statuts des éléments seront affichés sous forme d'icone avec ou sans texte explicatif (sinon un libellé coloré sera utilisé)
 
 #
 # Colors page
@@ -93,6 +94,17 @@ OBLYON_COLOR_BUTTON_ACTION1=Couleur 1 de fond des boutons
 OBLYON_COLOR_BUTTON_ACTION2=Couleur 2 de fond des boutons
 OBLYON_COLOR_BUTTON_DELETE1=Couleur 1 de fond des boutons dangereux
 OBLYON_COLOR_BUTTON_DELETE2=Couleur 2 de fond des boutons dangereux
+Eldys = Couleurs de base
+THEME_ELDY_TOPBORDER_TITLE1 = Couleur des bordures de titre
+THEME_ELDY_LINEIMPAIR1 = Couleur de fond 1 des lignes impaires des tables
+THEME_ELDY_LINEIMPAIR2 = Couleur de fond 2 des lignes impaires des tables
+THEME_ELDY_LINEPAIR1 = Couleur de fond 1 des lignes paires des tables
+THEME_ELDY_LINEPAIR2 = Couleur de fond 2 des lignes paires des tables
+THEME_ELDY_LINEBREAK = Couleur des retours à la ligne
+THEME_ELDY_TEXTTITLENOTAB = Couleur du texte des titres (hors tables)
+THEME_ELDY_TEXT = Couleur du texte de base
+THEME_ELDY_TEXTLINK = Couleur des textes de liens
+
 RestoreDefaultColors=Retablir couleurs par défaut
 DefaultsColorsMsg=Couleurs par défaut rétabli
 OblyonGreen=Oblyon Green
@@ -110,22 +122,27 @@ ThemeOblyonLightApplied=Thème Oblyon Light appliqué
 # Dashboard page
 #
 OblyonDashboardTitle = Configurateur Oblyon - Tableau de bord
-OblyonDashboardDisableBlocks=Vignette des objets ouverts (à traiter ou en retard) sur le tableau de bord principal
+EnableDashboardBlocOrNot = Gestion des blocs du tableau de bord (comportement, sélection, etc...)
+DisableGlobalBoxStats = Désactiver le widget des statistiques globales (nombres d'éléments en base de données)
+InfoboxColorOnBackground = Inverser les couleurs des icones et du fond des vignettes
 ColorIntensity = Intensité des couleurs
 ColorIntensityDesc = Définir l'intensité sur les couleurs ci-dessous (Défaut -50)
 ColorMoreDarker = Moins intense
 ColorMoreLighter = Plus intense
-OBLYON_INFOXBOX_WEATHER_COLOR = Couleur vignette 'météo'
-OBLYON_INFOXBOX_ACTION_COLOR = Couleur vignette 'agenda'
-OBLYON_INFOXBOX_PROJECT_COLOR = Couleur vignette 'projet'
-OBLYON_INFOXBOX_CUSTOMER_COLOR = Couleur vignette 'clients'
-OBLYON_INFOXBOX_SUPPLIER_COLOR = Couleur vignette 'fournisseurs'
-OBLYON_INFOXBOX_CONTRAT_COLOR = Couleur vignette 'contrat'
-OBLYON_INFOXBOX_BANK_COLOR = Couleur vignette 'banque'
-OBLYON_INFOXBOX_ADHERENT_COLOR = Couleur vignette 'adhérent'
-OBLYON_INFOXBOX_EXPENSEREPORT_COLOR = Couleur vignette 'note de frais'
-OBLYON_INFOXBOX_HOLIDAY_COLOR = Couleur vignette 'congés payés'
-OBLYON_INFOXBOX_TICKET_COLOR = Couleur vignette 'tickets'
+OBLYON_INFOXBOX_WEATHER_COLOR = Bloc météo
+OBLYON_INFOXBOX_ACTION_COLOR = Bloc agenda
+OBLYON_INFOXBOX_PROJECT_COLOR = Bloc projet
+OBLYON_INFOXBOX_CUSTOMER_PROPAL_COLOR = Bloc devis clients
+OBLYON_INFOXBOX_CUSTOMER_ORDER_COLOR = Bloc commandes clients
+OBLYON_INFOXBOX_CUSTOMER_INVOICE_COLOR = Bloc factures clients
+OBLYON_INFOXBOX_SUPPLIER_PROPAL_COLOR = Bloc demandes de prix fournisseurs
+OBLYON_INFOXBOX_SUPPLIER_ORDER_COLOR = Bloc commandes fournisseurs
+OBLYON_INFOXBOX_SUPPLIER_INVOICE_COLOR = Bloc factures fournisseurs
+OBLYON_INFOXBOX_CONTRAT_COLOR = Bloc contrat
+OBLYON_INFOXBOX_BANK_COLOR = Bloc banque
+OBLYON_INFOXBOX_ADHERENT_COLOR = Bloc adhérent
+OBLYON_INFOXBOX_EXPENSEREPORT_COLOR = Bloc note de frais
+OBLYON_INFOXBOX_HOLIDAY_COLOR = Bloc congés payés
 
 #
 # Login page

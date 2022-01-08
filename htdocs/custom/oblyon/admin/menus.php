@@ -468,6 +468,23 @@ print '<tr class="oddeven">';
 print '<td>'.$langs->trans('OblyonFontSize').'</td>';
 print '<td><input type="number" class="minwidth400" id="OBLYON_FONT_SIZE" name="OBLYON_FONT_SIZE" dir="rtl" min="10" max="16" value="'.(!empty($conf->global->OBLYON_FONT_SIZE) ? $conf->global->OBLYON_FONT_SIZE : '14').'"></td>';
 print '</tr>';
+// Apparence des Statuts
+print '<tr class="oddeven">';
+print '<td>'.$langs->trans('MainStatusUseImages').'</td>';
+$name='MAIN_STATUS_USES_IMAGES';
+if(! empty($conf->global->MAIN_STATUS_USES_IMAGES))
+{
+    print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name='.$name.'&value=0">';
+    print img_picto ( $langs->trans ( "Enabled" ), 'switch_on' );
+    print "</a></td>\n";
+}
+else
+{
+    print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name='.$name.'&value=1">';
+    print img_picto ( $langs->trans ( "Disabled" ), 'switch_off' );
+    print "</a></td>\n";
+}
+print '</tr>';
 
 print '</table>';
 print dol_get_fiche_end();

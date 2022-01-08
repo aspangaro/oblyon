@@ -76,6 +76,18 @@ $colors_options = array (
 	'OBLYON_COLOR_FLINE_HOVER'
 );
 
+$colors_eldy = array (
+	'THEME_ELDY_TOPBORDER_TITLE1',
+	'THEME_ELDY_LINEIMPAIR1',
+	'THEME_ELDY_LINEIMPAIR2',
+	'THEME_ELDY_LINEPAIR1',
+	'THEME_ELDY_LINEPAIR2',
+	'THEME_ELDY_LINEBREAK',
+	'THEME_ELDY_TEXTTITLENOTAB',
+	'THEME_ELDY_TEXT',
+	'THEME_ELDY_TEXTLINK'
+);
+
 
 /*
  * Actions
@@ -122,6 +134,16 @@ if ($action == 'update') {
 			$error ++;
 		}
 	}
+
+	foreach ($colors_eldy as $constname) {
+		$constvalue = GETPOST($constname, 'alpha');
+		$constvalue = '#'.$constvalue;
+
+		if (! dolibarr_set_const($db, $constname, $constvalue, 'chaine', 0, '', $conf->entity)) {
+			$error ++;
+		}
+	}
+
 
 	if (! $error) {
 		setEventMessages($langs->trans("SetupSaved"), null, 'mesgs');
@@ -547,6 +569,29 @@ $num = count($colors_options);
 if ($num)
 {
 	foreach ($colors_options as $key) {
+		print '<tr class="value oddeven">';
+
+		// Param
+		$label = $langs->trans($key);
+		print '<td width="50%">' . $label . '</td>';
+
+		// Value
+		print '<td>';
+		print '<input type="text" class="color" id="' . $conf->global->$key . '" name="' . $key . '" value="' . $conf->global->$key . '">';
+		print '</td></tr>';
+	}
+}
+
+// Eldy colors
+print '<tr class="liste_titre">';
+print '<td colspan="2">' . $langs->trans('Eldys') . '</td>';
+print '</tr>'."\n";
+
+// Set colors
+$num = count($colors_eldy);
+if ($num)
+{
+	foreach ($colors_eldy as $key) {
 		print '<tr class="value oddeven">';
 
 		// Param
