@@ -42,7 +42,7 @@ if (! $user->admin) accessforbidden();
 // Parameters OBLYON_*
 $dashboard_colors = array (
 	'OBLYON_INFOXBOX_WEATHER_COLOR',
-	'OBLYON_INFOXBOX_ACTION_COLOR',				// #b46080
+	'OBLYON_INFOXBOX_ACTION_COLOR',				// #b46080 AGENDA
 	'OBLYON_INFOXBOX_PROJECT_COLOR',			// #6c6a98
 	'OBLYON_INFOXBOX_CUSTOMER_PROPAL_COLOR',	// #99a17d PROPAL
 	'OBLYON_INFOXBOX_CUSTOMER_ORDER_COLOR',	 	// #99a17d COMMANDE
@@ -55,6 +55,7 @@ $dashboard_colors = array (
 	'OBLYON_INFOXBOX_ADHERENT_COLOR',			// #79633f
 	'OBLYON_INFOXBOX_EXPENSEREPORT_COLOR',		// #79633f
 	'OBLYON_INFOXBOX_HOLIDAY_COLOR',			// #755114
+	'OBLYON_INFOXBOX_TICKET_COLOR',             // #755114
 );
 
 
@@ -251,34 +252,29 @@ print '<input type="hidden" name="action" value="update">';
 // Colors
 print '<table class="noborder as-settings-colors">';
 
-	// Infobox enable
-	print '<tr class="liste_titre">';
-	print '<td colspan="2">' . $langs->trans('EnableDashboardBlocOrNot') . '</td>';
-	print '</tr>' . "\n";
+// Infobox enable
+print '<tr class="liste_titre">';
+print '<td colspan="2">' . $langs->trans('OblyonDashboardDisableBlocks') . '</td>';
+print '</tr>' . "\n";
 
-	// Activation des statistiques globales
-	print '<tr class="oddeven"><td>' . $langs->trans('DisableGlobalBoxStats') . '</td><td>';
-	print ajax_constantonoff("MAIN_DISABLE_GLOBAL_BOXSTATS", array(), $conf->entity, 0, 0, 1, 0, 0, 0, '_red', 'dashboard');
-	print '</td>';
-	print '</tr>';
+print '<tr class="oddeven"><td>' . $langs->trans('DashboardDisableGlobal') . '</td><td>';
+print ajax_constantonoff("MAIN_DISABLE_GLOBAL_WORKBOARD", array(), $conf->entity, 0, 0, 1, 0, 0, 0, '_red', 'dashboard');
+print '</td>';
+print '</tr>';
 
-	// Invertion des couleurs de fond et d'icone
- 	print '<tr class="oddeven"><td>' . $langs->trans('InfoboxColorOnBackground') . '</td><td>';
-	print ajax_constantonoff("THEME_INFOBOX_COLOR_ON_BACKGROUND", array(), $conf->entity, 0, 0, 1, 0, 0, 0, '_red', 'dashboard');
-	print '</td>';
-	print '</tr>';
+// Activation des statistiques globales
+print '<tr class="oddeven"><td>' . $langs->trans('DisableGlobalBoxStats') . '</td><td>';
+print ajax_constantonoff("MAIN_DISABLE_GLOBAL_BOXSTATS", array(), $conf->entity, 0, 0, 1, 0, 0, 0, '_red', 'dashboard');
+print '</td>';
+print '</tr>';
+
+// Invertion des couleurs de fond et d'icone
+ print '<tr class="oddeven"><td>' . $langs->trans('InfoboxColorOnBackground') . '</td><td>';
+print ajax_constantonoff("THEME_INFOBOX_COLOR_ON_BACKGROUND", array(), $conf->entity, 0, 0, 1, 0, 0, 0, '_red', 'dashboard');
+print '</td>';
+print '</tr>';
 
 if ((float) $conf->global->EASYA_VERSION >= 2022.5 || (float) DOL_VERSION >= 15.0) {
-	// Infobox enable
-	print '<tr class="liste_titre">';
-	print '<td colspan="2">' . $langs->trans('OblyonDashboardDisableBlocks') . '</td>';
-	print '</tr>' . "\n";
-
-	print '<tr class="oddeven"><td>' . $langs->trans('DashboardDisableGlobal') . '</td><td>';
-	print ajax_constantonoff("MAIN_DISABLE_GLOBAL_WORKBOARD", array(), $conf->entity, 0, 0, 1, 0, 0, 0, '_red', 'dashboard');
-	print '</td>';
-	print '</tr>';
-
 	if (empty($conf->global->MAIN_DISABLE_GLOBAL_WORKBOARD)) {
 		// Block meteo
 		print '<tr class="oddeven"><td>' . $langs->trans('MAIN_DISABLE_METEO') . '</td><td>';
@@ -343,6 +339,12 @@ if ((float) $conf->global->EASYA_VERSION >= 2022.5 || (float) DOL_VERSION >= 15.
 		// Block holiday
 		print '<tr class="oddeven"><td>' . $langs->trans('DashboardDisableBlockHoliday') . '</td><td>';
 		print ajax_constantonoff("MAIN_DISABLE_BLOCK_HOLIDAY", array(), $conf->entity, 0, 0, 1, 0, 0, 0, '_red', 'dashboard');
+		print '</td>';
+		print '</tr>';
+
+		// Block ticket
+		print '<tr class="oddeven"><td>' . $langs->trans('DashboardDisableBlockTicket') . '</td><td>';
+		print ajax_constantonoff("MAIN_DISABLE_BLOCK_TICKET", array(), $conf->entity, 0, 0, 1, 0, 0, 0, '_red', 'dashboard');
 		print '</td>';
 		print '</tr>';
 	}

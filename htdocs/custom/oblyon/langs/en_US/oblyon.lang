@@ -5,6 +5,22 @@
 Module113900Name = Oblyon
 Module113900Desc = Options panel allows you to personalize the Oblyon theme 
 
+Theme1 = Oblyon Green
+Theme2 = Oblyon Dark
+Theme3 = Oblyon Blue
+Theme4 = Oblyon Night
+Theme5 = Oblyon Light
+
+#
+# Easya
+#
+easyaFamily = Easya Solutions
+MenuProjectsOpportunities=Projects | Opportunities
+BankColorizeMovement=Colouring of bank transactions
+BankColorizeMovementDesc=If this function is activated, you can define a specific background color for debit or credit movements.
+BankColorizeMovementName1=Background color for a debit movement
+BankColorizeMovementName2=Background color for a credit movement
+
 #
 # Menus
 #

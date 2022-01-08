@@ -239,15 +239,23 @@ if (GETPOSTISSET('THEME_AGRESSIVENESS_RATIO')) $conf->global->THEME_AGRESSIVENES
 .bg-infobox-project{
 	background-color: <?php print colorAgressiveness($conf->global->OBLYON_INFOXBOX_PROJECT_COLOR, $conf->global->THEME_AGRESSIVENESS_RATIO); ?> !important;
 }
-.bg-infobox-propal,
-.bg-infobox-facture,
-.bg-infobox-commande{
-	background-color: <?php print colorAgressiveness($conf->global->OBLYON_INFOXBOX_CUSTOMER_COLOR, $conf->global->THEME_AGRESSIVENESS_RATIO); ?>  !important;
+.bg-infobox-propal {
+    background-color: <?php print colorAgressiveness($conf->global->OBLYON_INFOXBOX_CUSTOMER_PROPAL_COLOR, $conf->global->THEME_AGRESSIVENESS_RATIO); ?>  !important;
 }
-.bg-infobox-supplier_proposal,
-.bg-infobox-invoice_supplier,
+.bg-infobox-facture {
+    background-color: <?php print colorAgressiveness($conf->global->OBLYON_INFOXBOX_CUSTOMER_INVOICE_COLOR, $conf->global->THEME_AGRESSIVENESS_RATIO); ?>  !important;
+}
+.bg-infobox-commande{
+	background-color: <?php print colorAgressiveness($conf->global->OBLYON_INFOXBOX_CUSTOMER_ORDER_COLOR, $conf->global->THEME_AGRESSIVENESS_RATIO); ?>  !important;
+}
+.bg-infobox-supplier_proposal {
+    background-color: <?php print colorAgressiveness($conf->global->OBLYON_INFOXBOX_SUPPLIER_PROPAL_COLOR, $conf->global->THEME_AGRESSIVENESS_RATIO); ?>  !important;
+}
+.bg-infobox-invoice_supplier {
+    background-color: <?php print colorAgressiveness($conf->global->OBLYON_INFOXBOX_SUPPLIER_INVOICE_COLOR, $conf->global->THEME_AGRESSIVENESS_RATIO); ?>  !important;
+}
 .bg-infobox-order_supplier{
-	background-color: <?php print colorAgressiveness($conf->global->OBLYON_INFOXBOX_SUPPLIER_COLOR, $conf->global->THEME_AGRESSIVENESS_RATIO); ?>  !important;
+	background-color: <?php print colorAgressiveness($conf->global->OBLYON_INFOXBOX_SUPPLIER_ORDER_COLOR, $conf->global->THEME_AGRESSIVENESS_RATIO); ?>  !important;
 }
 .bg-infobox-contrat{
 	background-color: <?php print colorAgressiveness($conf->global->OBLYON_INFOXBOX_CONTRAT_COLOR, $conf->global->THEME_AGRESSIVENESS_RATIO); ?>  !important;

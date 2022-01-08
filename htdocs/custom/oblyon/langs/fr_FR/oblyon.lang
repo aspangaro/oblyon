@@ -15,7 +15,6 @@ Theme5 = Oblyon Light
 # Easya
 #
 easyaFamily = Easya Solutions
-MenuCatalog=Catalogue
 MenuProjectsOpportunities=Projets | Opportunités
 BankColorizeMovement=Coloration des mouvements bancaires
 BankColorizeMovementDesc=Si cette fonction est activée, vous pouvez définir une couleur de fond spécifique pour les mouvements débiteurs ou créditeurs.
@@ -122,27 +121,28 @@ ThemeOblyonLightApplied=Thème Oblyon Light appliqué
 # Dashboard page
 #
 OblyonDashboardTitle = Configurateur Oblyon - Tableau de bord
-EnableDashboardBlocOrNot = Gestion des blocs du tableau de bord (comportement, sélection, etc...)
+OblyonDashboardDisableBlocks=Vignette des objets ouverts (à traiter ou en retard) sur le tableau de bord principal
 DisableGlobalBoxStats = Désactiver le widget des statistiques globales (nombres d'éléments en base de données)
 InfoboxColorOnBackground = Inverser les couleurs des icones et du fond des vignettes
 ColorIntensity = Intensité des couleurs
 ColorIntensityDesc = Définir l'intensité sur les couleurs ci-dessous (Défaut -50)
 ColorMoreDarker = Moins intense
 ColorMoreLighter = Plus intense
-OBLYON_INFOXBOX_WEATHER_COLOR = Bloc météo
-OBLYON_INFOXBOX_ACTION_COLOR = Bloc agenda
-OBLYON_INFOXBOX_PROJECT_COLOR = Bloc projet
-OBLYON_INFOXBOX_CUSTOMER_PROPAL_COLOR = Bloc devis clients
-OBLYON_INFOXBOX_CUSTOMER_ORDER_COLOR = Bloc commandes clients
-OBLYON_INFOXBOX_CUSTOMER_INVOICE_COLOR = Bloc factures clients
-OBLYON_INFOXBOX_SUPPLIER_PROPAL_COLOR = Bloc demandes de prix fournisseurs
-OBLYON_INFOXBOX_SUPPLIER_ORDER_COLOR = Bloc commandes fournisseurs
-OBLYON_INFOXBOX_SUPPLIER_INVOICE_COLOR = Bloc factures fournisseurs
-OBLYON_INFOXBOX_CONTRAT_COLOR = Bloc contrat
-OBLYON_INFOXBOX_BANK_COLOR = Bloc banque
-OBLYON_INFOXBOX_ADHERENT_COLOR = Bloc adhérent
-OBLYON_INFOXBOX_EXPENSEREPORT_COLOR = Bloc note de frais
-OBLYON_INFOXBOX_HOLIDAY_COLOR = Bloc congés payés
+OBLYON_INFOXBOX_WEATHER_COLOR = Couleur vignette 'météo'
+OBLYON_INFOXBOX_ACTION_COLOR = Couleur vignette 'agenda'
+OBLYON_INFOXBOX_PROJECT_COLOR = Couleur vignette 'projet'
+OBLYON_INFOXBOX_CUSTOMER_PROPAL_COLOR = Couleur vignette 'propositions commerciales clients'
+OBLYON_INFOXBOX_CUSTOMER_ORDER_COLOR = Couleur vignette 'commandes clients'
+OBLYON_INFOXBOX_CUSTOMER_INVOICE_COLOR = Couleur vignette 'factures clients'
+OBLYON_INFOXBOX_SUPPLIER_PROPAL_COLOR = Couleur vignette 'demandes de prix fournisseurs'
+OBLYON_INFOXBOX_SUPPLIER_ORDER_COLOR = Couleur vignette 'commandes fournisseurs'
+OBLYON_INFOXBOX_SUPPLIER_INVOICE_COLOR = Couleur vignette 'factures fournisseurs'
+OBLYON_INFOXBOX_CONTRAT_COLOR = Couleur vignette 'contrat'
+OBLYON_INFOXBOX_BANK_COLOR = Couleur vignette 'banque'
+OBLYON_INFOXBOX_ADHERENT_COLOR = Couleur vignette 'adhérent'
+OBLYON_INFOXBOX_EXPENSEREPORT_COLOR = Couleur vignette 'note de frais'
+OBLYON_INFOXBOX_HOLIDAY_COLOR = Couleur vignette 'congés payés'
+OBLYON_INFOXBOX_TICKET_COLOR = Couleur vignette 'tickets'
 
 #
 # Login page
@@ -193,3 +193,7 @@ Authors=Auteurs
 OldAuthors=Ancien auteurs
 LicenseMessage = Thème Oblyon mis à disposition selon les termes de la <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">licence Creative Commons Attribution - Pas d’Utilisation Commerciale 4.0 International</a>.<br><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Licence Creative Commons" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a>
 
+#
+# Others
+#
+MenuCatalog=Catalogue
