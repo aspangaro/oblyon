@@ -4183,8 +4183,8 @@ div.tabsElem {
 
 div.tabsElem:hover,
 div.tabsElem a.tab:hover {
-	background-color: <?php print $bgnavleft_hover; ?>;
-	color: <?php print $bgnavleft_txt_hover; ?>;
+    background-color: rgba(0,0,0, .10);
+    color: <?php print $maincolor; ?>;
 }
 
 div.tabBar {
@@ -4218,7 +4218,7 @@ div.tabsAction {
 
 div.tabactive,
 div.tabactive a.tab {
-	background-color: <?php print $bgnavleft_hover; ?>;
+    background-color: <?php echo $colorbline; ?>;
 	color: <?php print $bgnavleft_txt_active; ?>;
 	height: 38px;
 }
@@ -4242,7 +4242,7 @@ a.tab {
 }
 
 a.tab:hover, a.tab:focus {
-    background-color: rgba(0,0,0, .16);
+    background-color: rgba(0,0,0, .10);
     color: <?php print $maincolor; ?>;
 }
 
@@ -4363,6 +4363,7 @@ a.tab:link, a.tab:visited, a.tab:hover, a.tab#active {
 	border-bottom: none;
 }
 .tabunactive, a.tab#unactive {
+    background-color:rgba(0,0,0, .04);
 	border: 1px solid rgba(0,0,0, .16);
 	border-bottom: 0px !important;
 	height: 38px;
