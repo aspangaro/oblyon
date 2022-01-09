@@ -37,7 +37,7 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
 		width: 530px;
 <?php } ?>
 		max-width: <?php echo empty($conf->global->MAIN_LOGIN_RIGHT) ? '530px' : 'calc(50vw - 70px)'; ?>;
-		color: var(--colorbackhmenu1) !important;
+		color: <?php print $bgnavtop_txt; ?> !important;
 		padding-bottom: 10px;
     }
 	.login_table_title a {
