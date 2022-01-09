@@ -53,6 +53,11 @@ function oblyon_admin_prepare_head()
         $h++;
     }
 
+    $head[$h][0] = dol_buildpath("/oblyon/admin/options.php", 1);
+    $head[$h][1] = $langs->trans("Options");
+    $head[$h][2] = 'options';
+    $h++;
+
     // Show more tabs from modules
     // Entries must be declared in modules descriptor with line
     //$this->tabs = array(
@@ -63,7 +68,7 @@ function oblyon_admin_prepare_head()
     //); // to remove a tab
     complete_head_from_modules($conf, $langs, $object, $head, $h, 'admin_oblyon');
 
-    if($conf->global->OBLYON_MAIN_VERSION != "easya") {
+    if(empty($conf->global->EASYA_VERSION)) {
         $head[$h][0] = dol_buildpath("/oblyon/admin/about.php", 1);
         $head[$h][1] = $langs->trans("About");
         $head[$h][2] = 'about';

@@ -172,6 +172,12 @@ OBLYON_SOCIAL_YOUTUBE=YouTube
 OBLYON_SOCIAL_GITHUB=Github
 
 #
+# Options page
+#
+OblyonOptionsTitle=Options
+OblyonMainUseQuickAddDropdown=Utiliser le menu d'ajout rapide des éléments (En haut à droite)
+
+#
 # Icons page
 #
 OblyonIconsTitle = Configurateur Oblyon - Icônes
