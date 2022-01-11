@@ -142,6 +142,7 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
 }
 
 .info-box-content {
+	min-height: 80px;
 	padding: 5px 10px;
 	margin-left: 90px;
 }
