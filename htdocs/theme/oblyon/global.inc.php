@@ -2511,7 +2511,7 @@ div.login a:hover {
 div.login_block:after {
     /*content: '\f013';*/
     color: <?php print $bgnavtop_txt; ?>;
-    font-family: "Font Awesome 5 Free"; !important;
+    font-family: "<?php echo getDolGlobalString('MAIN_FONTAWESOME_FAMILY', 'Font Awesome 5 Free'); ?>" !important;
     font-size: 20px;
     <?php if ($conf->global->MAIN_MENU_INVERT) { ?>
         line-height: 40px;
@@ -8829,7 +8829,7 @@ a.phpdebugbar-tab.phpdebugbar-active {
 	font-weight: 600 !important;
 }
 .phpdebugbar-fa-tags, .phpdebugbar-fa-tasks, .phpdebugbar-indicator .fa {
-	font-family: "Font Awesome 5 Free";
+	font-family: "<?php echo getDolGlobalString('MAIN_FONTAWESOME_FAMILY', 'Font Awesome 5 Free'); ?>";
 	font-weight: 600;
 }
 div.phpdebugbar-widgets-messages li.phpdebugbar-widgets-list-item span.phpdebugbar-widgets-value.phpdebugbar-widgets-warning:before,
@@ -8847,7 +8847,7 @@ div.phpdebugbar-widgets-templates span.phpdebugbar-widgets-param-count:before,
 div.phpdebugbar-widgets-templates span.phpdebugbar-widgets-type:before,
 div.phpdebugbar-widgets-templates a.phpdebugbar-widgets-editor-link:before
 {
-	font-family: "Font Awesome 5 Free" !important;
+	font-family: "<?php echo getDolGlobalString('MAIN_FONTAWESOME_FAMILY', 'Font Awesome 5 Free'); ?>" !important;
 }
 
 /* ============================================================================== */
