@@ -4167,8 +4167,8 @@ otherwise color shifts while dragging when bar can't keep up with mouse */
 div.tabs {
 	text-align: <?php print $left; ?>;
 	margin-top: 15px;
-	margin-left: 6px;
-	margin-bottom: -3px;
+	/* margin-left: 6px; */
+	margin-bottom: -1px;
 	padding-left: 3px;
 	padding-right: 6px;
 	clear: both;
