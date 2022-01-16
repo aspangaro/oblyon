@@ -36,6 +36,13 @@ function oblyon_admin_prepare_head()
     $head[$h][2] = 'menus';
     $h++;
 
+    if((float) $conf->global->EASYA_VERSION >= 2022.5) {
+        $head[$h][0] = dol_buildpath("/oblyon/admin/icons.php", 1);
+        $head[$h][1] = $langs->trans("Icons");
+        $head[$h][2] = 'icons';
+        $h++;
+    }
+
     $head[$h][0] = dol_buildpath("/oblyon/admin/colors.php", 1);
     $head[$h][1] = $langs->trans("Colors");
     $head[$h][2] = 'colors';
@@ -46,12 +53,14 @@ function oblyon_admin_prepare_head()
     $head[$h][2] = 'dashboard';
     $h++;
 
+    /*
     if($conf->global->OBLYON_MAIN_VERSION == "easya") {
         $head[$h][0] = dol_buildpath("/oblyon/admin/login.php", 1);
         $head[$h][1] = "Login";
         $head[$h][2] = 'login';
         $h++;
     }
+    */
 
     $head[$h][0] = dol_buildpath("/oblyon/admin/options.php", 1);
     $head[$h][1] = $langs->trans("Options");
