@@ -4,7 +4,7 @@
 .icon {
     /* use !important to prevent issues with browser extensions that change fonts */
     font-family: "<?php echo getDolGlobalString('MAIN_FONTAWESOME_FAMILY', 'Font Awesome 5 Free'); ?>" !important;
-    font-weight: 900;
+    font-weight: <?php echo getDolGlobalString('MAIN_FONTAWESOME_WEIGHT', '900'); ?>;
     font-style: normal;
     font-variant: normal;
     line-height: 1;
@@ -294,7 +294,7 @@
 .mainmenu::before{
     /* font part */
     font-family: "<?php echo getDolGlobalString('MAIN_FONTAWESOME_FAMILY', 'Font Awesome 5 Free'); ?>";
-    font-weight: 900;
+    font-weight: <?php echo getDolGlobalString('MAIN_FONTAWESOME_WEIGHT', '900'); ?>;;
     font-style: normal;
     font-variant: normal;
     text-rendering: auto;

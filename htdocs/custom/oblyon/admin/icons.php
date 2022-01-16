@@ -50,26 +50,31 @@ if ($action == 'seticon') {
     if ($value == 1) {
         $mesg = "<font class='ok'>".$langs->trans("IconApplied"). ": " . $langs->trans("Icon1") ."</font>";
         dolibarr_set_const($db, "MAIN_FONTAWESOME_ICON_STYLE", 'fas','chaine',0,'',$conf->entity);
+        dolibarr_set_const($db, "MAIN_FONTAWESOME_WEIGHT", '900','chaine',0,'',$conf->entity);
         $_SESSION['dol_resetcache']=dol_print_date(dol_now(),'dayhourlog');
     }
     if ($value == 2) {
         $mesg = "<font class='ok'>".$langs->trans("IconApplied"). ": " . $langs->trans("Icon2") ."</font>";
         dolibarr_set_const($db, "MAIN_FONTAWESOME_ICON_STYLE", 'far','chaine',0,'',$conf->entity);
+        dolibarr_set_const($db, "MAIN_FONTAWESOME_WEIGHT", '400','chaine',0,'',$conf->entity);
         $_SESSION['dol_resetcache']=dol_print_date(dol_now(),'dayhourlog');
     }
     if ($value == 3) {
         $mesg = "<font class='ok'>".$langs->trans("IconApplied"). ": " . $langs->trans("Icon3") ."</font>";
         dolibarr_set_const($db, "MAIN_FONTAWESOME_ICON_STYLE", 'fal','chaine',0,'',$conf->entity);
+        dolibarr_set_const($db, "MAIN_FONTAWESOME_WEIGHT", '300','chaine',0,'',$conf->entity);
         $_SESSION['dol_resetcache']=dol_print_date(dol_now(),'dayhourlog');
     }
     if ($value == 4) {
-        $mesg = "<font class='ok'>".$langs->trans("Applied"). ": " . $langs->trans("Icon4") ."</font>";
+        $mesg = "<font class='ok'>".$langs->trans("IconApplied"). ": " . $langs->trans("Icon4") ."</font>";
         dolibarr_set_const($db, "MAIN_FONTAWESOME_ICON_STYLE", 'fat','chaine',0,'',$conf->entity);
+        dolibarr_set_const($db, "MAIN_FONTAWESOME_WEIGHT", '100','chaine',0,'',$conf->entity);
         $_SESSION['dol_resetcache']=dol_print_date(dol_now(),'dayhourlog');
     }
     if ($value == 5) {
         $mesg = "<font class='ok'>".$langs->trans("IconApplied"). ": " . $langs->trans("Icon5") ."</font>";
         dolibarr_set_const($db, "MAIN_FONTAWESOME_ICON_STYLE", 'fad','chaine',0,'',$conf->entity);
+        dolibarr_set_const($db, "MAIN_FONTAWESOME_WEIGHT", '900','chaine',0,'',$conf->entity);
         $_SESSION['dol_resetcache']=dol_print_date(dol_now(),'dayhourlog');
     }
 
@@ -111,6 +116,7 @@ print img_picto($langs->trans("Icon3"), 'icon3.png@oblyon', "width='50%'");
 print '<br>'.$langs->trans("Icon3").'</a></td>';
 print '<td align="center"><a title="'.$langs->trans("Icon4").'" href="' . $_SERVER['PHP_SELF'] . '?action=seticon&value=4">';
 print img_picto($langs->trans("Icon4"), 'icon4.png@oblyon', "width='50%'");
+print '<br>'.$langs->trans("Icon4").'</a></td>';
 print '</a></td>';
 print '<td align="center"><a title="'.$langs->trans("Icon5").'" href="' . $_SERVER['PHP_SELF'] . '?action=seticon&value=5">';
 print img_picto($langs->trans("Icon5"), 'icon5.png@oblyon', "width='50%'");

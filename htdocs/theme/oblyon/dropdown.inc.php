@@ -40,7 +40,7 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
     /* font part */
     font-family: "<?php echo getDolGlobalString('MAIN_FONTAWESOME_FAMILY', 'Font Awesome 5 Free'); ?>";
     font-size: 0.7em;
-    font-weight: 900;
+    font-weight: <?php echo getDolGlobalString('MAIN_FONTAWESOME_WEIGHT', '900'); ?>;;
     font-style: normal;
     font-variant: normal;
     text-rendering: auto;
@@ -255,7 +255,7 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
     .dropdown-item::before {
         /* font part */
         font-family: "<?php echo getDolGlobalString('MAIN_FONTAWESOME_FAMILY', 'Font Awesome 5 Free'); ?>";
-        font-weight: 900;
+        font-weight: <?php echo getDolGlobalString('MAIN_FONTAWESOME_WEIGHT', '900'); ?>;;
         font-style: normal;
         font-variant: normal;
         text-rendering: auto;
