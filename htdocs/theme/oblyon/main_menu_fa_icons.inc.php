@@ -118,11 +118,14 @@
     content: '\f508';
 }
 
+.icon--recruitmentjobposition:before {
+    content: '\f47f';
+}
+
 .icon--service:before {
     content: '\f4c4';
 }
 
-.icon--withdraw:before,
 .icon--ticket:before{
     content: '\f3ff';
 }
@@ -135,6 +138,8 @@
     content: '\f07c';
 }
 
+.icon--withdraw:before,
+.icon--banktransfer:before,
 .icon--checks:before {
     content: '\f53c';
 }
