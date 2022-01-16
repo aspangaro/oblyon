@@ -397,7 +397,7 @@ function print_oblyon_menu($db, $atarget, $type_user = 0, &$tabMenu, &$menu, $no
 	$showmode=dol_oblyon_showmenu($type_user, $tmpentry, $listofmodulesforexternal);
 
 	if ($showmode) {
-        $langs->loadLangs(array("holiday"));
+        $langs->loadLangs(array("holiday", "recruitment"));
 
         if ($_SESSION["mainmenu"] && $_SESSION["mainmenu"] == "hrm") { $itemsel=TRUE; $_SESSION['idmenu']=''; }
         else $itemsel=FALSE;
