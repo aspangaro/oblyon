@@ -37,7 +37,7 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
 		width: 530px;
 <?php } ?>
 		max-width: <?php echo empty($conf->global->MAIN_LOGIN_RIGHT) ? '530px' : 'calc(50vw - 70px)'; ?>;
-		color: var(--colorbackhmenu1) !important;
+		color: <?php print $bgnavtop_txt; ?> !important;
 		padding-bottom: 10px;
     }
 	.login_table_title a {
@@ -55,10 +55,15 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
 <?php if (! empty($conf->global->MAIN_LOGIN_RIGHT)) { ?>
 		width: 600px;
 <?php } ?>
-
 		-webkit-box-shadow: 12px 12px 25px 1px rgba(0, 0, 0, 0.2), 0 2px 6px rgba(60,60,60,0.15);
 		box-shadow: 12px 12px 25px 1px rgba(0, 0, 0, 0.2), 0 2px 6px rgba(60,60,60,0.15);
-
+        <?php
+            if (!empty($conf->global->MAIN_LOGIN_BACKGROUND)) {
+                print '	background-color: rgba(255, 255, 255, 0.9);';
+            } else {
+                print '	background-color: #FFFFFF;';
+            }
+        ?>
 		border-radius: 4px;
         /*border-top:solid 1px rgba(180,180,180,.4);
         border-left:solid 1px rgba(180,180,180,.4);
