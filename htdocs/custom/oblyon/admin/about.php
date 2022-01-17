@@ -61,9 +61,11 @@ print load_fiche_titre($langs->trans($page_name), $linkback);
 
 // Configuration header
 $head = oblyon_admin_prepare_head();
-dol_fiche_head($head, 'about', $langs->trans("Module113900Name"), 0, 'oblyon@oblyon');
 
-print '<table class="noborder" width="100%">';
+print dol_get_fiche_head($head, 'options', $langs->trans("Module113900Name"), 0, "opendsi@oblyon");
+
+print '<div class="div-table-responsive-no-min">';
+print '<table summary="edit" class="noborder centpercent editmode tableforfield">';
 
 print '<tr class="liste_titre"><td colspan="2">' . $langs->trans("Authors") . '</td>';
 print '</tr>'."\n";
@@ -74,17 +76,13 @@ print '<td width="310px"><img src="../img/opendsi_dolibarr_preferred_partner.png
 print '<td align="left" valign="top"><p>'.$langs->trans("OpenDsiAboutDesc").'</p></td>'."\n";
 print '</tr>'."\n";
 
-// Mathieu BRUNOT / Monogramm
-print '<tr>';
-print '<td width="310px"><img src="../img/monogramm.png" /></td>'."\n";
-print '<td align="left" valign="top"><p>'.$langs->trans("MonogrammAboutDesc").'</p></td>'."\n";
-print '</tr>'."\n";
-
 print '</table>'."\n";
+print '</div>';
 
 print '<br>';
 
-print '<table class="noborder" width="100%">';
+print '<div class="div-table-responsive-no-min">';
+print '<table summary="edit" class="noborder centpercent editmode tableforfield">';
 
 print '<tr class="liste_titre"><td colspan="2">' . $langs->trans("OldAuthors") . '</td>';
 print '</tr>';
@@ -96,7 +94,14 @@ print '<td><b>Nicolas Rivera</b>&nbsp;-&nbsp;Développeur';
 print '<br>&nbsp;';
 print '</td></tr>';
 
-print '</table>';
+// Mathieu BRUNOT / Monogramm
+print '<tr>';
+print '<td width="310px"><img src="../img/monogramm.png" /></td>'."\n";
+print '<td align="left" valign="top"><p>'.$langs->trans("MonogrammAboutDesc").'</p></td>'."\n";
+print '</tr>'."\n";
+
+print '</table>'."\n";
+print '</div>';
 
 print '<br>';
 

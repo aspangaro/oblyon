@@ -77,7 +77,6 @@ if ($action == 'set') {
 if ($action == 'setvar'){
   $res = dolibarr_set_const($db, 'OBLYON_EFFECT_LEFTMENU', GETPOST('OBLYON_EFFECT_LEFTMENU'),'chaine',0,'',$conf->entity);
   $res = dolibarr_set_const($db, 'OBLYON_EFFECT_REDUCE_LEFTMENU', GETPOST('OBLYON_EFFECT_REDUCE_LEFTMENU'),'chaine',0,'',$conf->entity);
-  $res = dolibarr_set_const($db, 'OBLYON_FONT_SIZE', GETPOST('OBLYON_FONT_SIZE'),'chaine',0,'',$conf->entity);
 
   if (! $res > 0) $error++;
 
@@ -105,7 +104,7 @@ print load_fiche_titre($langs->trans($page_name), $linkback);
 
 // Configuration header
 $head = oblyon_admin_prepare_head();
-dol_fiche_head ( $head, 'menus', $langs->trans ( "Module113900Name" ), 0, "opendsi@oblyon" );
+print dol_get_fiche_head($head, 'menus', $langs->trans ( "Module113900Name" ), 0, "opendsi@oblyon");
 
 // Alert
 if (!defined('MAIN_MODULE_OBLYON') && $conf->theme!="oblyon")
@@ -130,10 +129,12 @@ if (!($conf->global->MAIN_MENU_STANDARD == "oblyon_menu.php" && $conf->global->M
 }
 */
 
-print '<form name="formmenus" method="POST" action="'.$_SERVER["PHP_SELF"].'">';
+print '<form action="'.$_SERVER["PHP_SELF"].'" method="POST">';
+print '<input type="hidden" name="token" value="'.newToken().'" />';
 print '<input type="hidden" name="action" value="setvar">';
 
-print '<table class="noborder" width="100%">';
+print '<div class="div-table-responsive-no-min">';
+print '<table class="noborder centpercent">';
 
 // Invert menu
 print '<tr class="oddeven">';
@@ -423,62 +424,17 @@ if($conf->global->OBLYON_REDUCE_LEFTMENU)
     print '</td>';
     print '</tr>';
 }
-// Login
-print '<tr class="liste_titre"><td colspan="2">'.$langs->trans('OblyonLoginTitle').'</td></tr>';
-// Login box on the right
-print '<tr class="oddeven">';
-print '<td>'.$langs->trans('LoginRight').'</td>';
-$name='MAIN_LOGIN_RIGHT';
-if(! empty($conf->global->MAIN_LOGIN_RIGHT))
-{
-    print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name='.$name.'&value=0">';
-    print img_picto ( $langs->trans ( "Enabled" ), 'switch_on' );
-    print "</a></td>\n";
-}
-else
-{
-    print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name='.$name.'&value=1">';
-    print img_picto ( $langs->trans ( "Disabled" ), 'switch_off' );
-    print "</a></td>\n";
-}
-print '</tr>';
-// Card
-print '<tr class="liste_titre"><td colspan="2">'.$langs->trans('CardBehavior').'</td></tr>';
-// Area ref and tab action fixed
-print '<tr class="oddeven">';
-print '<td>'.$langs->trans('FixAreaRefAndTabAction').'</td>';
-$name='FIX_AREAREF_TABACTION';
-if(! empty($conf->global->FIX_AREAREF_TABACTION))
-{
-    print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name='.$name.'&value=0">';
-    print img_picto ( $langs->trans ( "Enabled" ), 'switch_on' );
-    print "</a></td>\n";
-}
-else
-{
-    print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name='.$name.'&value=1">';
-    print img_picto ( $langs->trans ( "Disabled" ), 'switch_off' );
-    print "</a></td>\n";
-}
-print '</tr>';
-// General
-print '<tr class="liste_titre"><td colspan="2">'.$langs->trans('General').'</td></tr>';
-// FOnt size
-print '<tr class="oddeven">';
-print '<td>'.$langs->trans('OblyonFontSize').'</td>';
-print '<td><input type="number" class="minwidth400" id="OBLYON_FONT_SIZE" name="OBLYON_FONT_SIZE" dir="rtl" min="10" max="16" value="'.(!empty($conf->global->OBLYON_FONT_SIZE) ? $conf->global->OBLYON_FONT_SIZE : '14').'"></td>';
-print '</tr>';
 
-print '</table>';
+print '</table>'."\n";
+print '</div>';
+
 print dol_get_fiche_end();
 
 print '<div class="center">';
-print '<input type="submit" name="button" class="button" value="'.$langs->trans("Save").'">';
+print '<input class="button button-save reposition" type="submit" name="submit" value="'.$langs->trans("Save").'">';
 print '</div>';
 
-print "</form>\n";
-
-print '</table>';
+print '</form>';
 
 llxFooter();
 $db->close();

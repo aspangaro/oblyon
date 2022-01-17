@@ -1,5 +1,5 @@
 <?php
-/* Copyright (C) 2015-2019  Open-DSI            <support@open-dsi.fr>
+/* Copyright (C) 2015-2022  Open-DSI            <support@open-dsi.fr>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -40,7 +40,7 @@ $langs->load("oblyon@oblyon");
 if (! $user->admin) accessforbidden();
 
 // Parameters OBLYON_*
-$dashboard_colors = array (
+$login_colors = array (
     'OBLYON_COLOR_LOGIN_BCKGRD_RIGHT',
     'OBLYON_COLOR_LOGIN_BCKGRD_LEFT',
     'OBLYON_COLOR_LOGIN_TXT_RIGHT',
@@ -59,7 +59,7 @@ $action = GETPOST('action', 'alpha');
 if ($action == 'update') {
 	$error = 0;
 
-	foreach ($dashboard_colors as $constname) {
+	foreach ($login_colors as $constname) {
 		$constvalue = GETPOST($constname, 'alpha');
 		$constvalue = '#'.$constvalue;
 
@@ -94,8 +94,6 @@ if ($action == 'update') {
 	} else {
 		setEventMessages($langs->trans("Error"), null, 'errors');
 	}
-
-	$_SESSION['dol_resetcache']=dol_print_date(dol_now(),'dayhourlog');
 }
 
 if ($action == 'settheme') {
@@ -125,6 +123,8 @@ if ($action == 'settheme') {
     }
 
 }
+
+$_SESSION['dol_resetcache']=dol_print_date(dol_now(),'dayhourlog');
 
 /*
  * View
@@ -261,6 +261,7 @@ print '<input type="hidden" name="token" value="'.newToken().'">';
 print '<input type="hidden" name="action" value="update">';
 
 // Template login
+/* Old Easya 2020 options
 print '<table class="noborder centpercent">';
 print '<tr class="liste_titre">';
 print '<td colspan="2">' . $langs->trans("Themes") . '</td>';
@@ -284,10 +285,10 @@ print '<td colspan="2">' . $langs->trans('Colors') . '</td>';
 print '</tr>'."\n";
 
 // Set colors
-$num = count($dashboard_colors);
+$num = count($login_colors);
 if ($num)
 {
-	foreach ($dashboard_colors as $key) {
+	foreach ($login_colors as $key) {
 		print '<tr class="value oddeven">';
 
 		// Param
@@ -302,8 +303,10 @@ if ($num)
 }
 
 print '</table>'."\n";
+*/
 
 // Links
+/* Old Easya 2020 options
 print '<table class="noborder centpercent">';
 print '<tr class="liste_titre">';
 print '<td colspan="2">' . $langs->trans("OblyonLoginLinks") . '</td>';
@@ -341,8 +344,10 @@ print '<input type="text" class="minwidth400" id="OBLYON_LOGIN_URL3" name="OBLYO
 print '<input type="text" class="minwidth400" id="OBLYON_LOGIN_FAICON3" name="OBLYON_LOGIN_FAICON3" value="' . $conf->global->OBLYON_LOGIN_FAICON3 . '">';
 print "</td>\n";
 print '</tr>';
+*/
 
 // Social Network
+/* Old Easya 2020 options
 print '<table class="noborder centpercent">';
 print '<tr class="liste_titre">';
 print '<td colspan="2">' . $langs->trans("OblyonSocialNetwork") . '</td>';
@@ -390,12 +395,14 @@ print '<input type="text" class="minwidth500" id="OBLYON_SOCIAL_GITHUB" name="OB
 print "</td>\n";
 print '</tr>';
 
-print '</table>';
+print '</table>'."\n";
+print '</div>';
+*/
 
-dol_fiche_end();
+print dol_get_fiche_end();
 
 print '<div class="center">';
-print '<input type="submit" class="button" value="' . dol_escape_htmltag($langs->trans('Modify')) . '" name="button">';
+print '<input class="button button-save reposition" type="submit" name="submit" value="'.$langs->trans("Save").'">';
 print '</div>';
 
 print '</form>';

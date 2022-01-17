@@ -31,7 +31,6 @@ if (! $res) {
 require_once DOL_DOCUMENT_ROOT . '/core/lib/admin.lib.php';
 require_once '../lib/oblyon.lib.php';
 
-
 // Translations
 $langs->loadLangs(array("admin","oblyon@oblyon"));
 
@@ -45,29 +44,22 @@ $mesg="";
 $action = GETPOST('action', 'alpha');
 
 // set bloc
-if ($action == 'set') {
-	$value = GETPOST ( 'value', 'int' );
-	$name = GETPOST ( 'name', 'text' );
+if ($action == 'update') {
+    $res = dolibarr_set_const($db, 'OBLYON_FONT_SIZE', GETPOST('OBLYON_FONT_SIZE','alphanothml'),'chaine',0,'', $conf->entity);
 
-	if ($value == 1) {
-		$res = dolibarr_set_const($db, $name, $value, 'yesno', 0, '', $conf->entity);
-		if (! $res > 0) $error ++;
-	} else {
-		$res = dolibarr_set_const($db, $name, $value, 'yesno', 0, '', $conf->entity);
-		if (! $res > 0) $error ++;
-	}
+    if (! $res > 0) $error++;
 
-	if ($error) {
-		setEventMessage ( 'Error', 'errors' );
-	} else {
-		setEventMessage ( $langs->trans ( 'Save' ), 'mesgs' );
-	}
+    if ($error) {
+        setEventMessage ( 'Error', 'errors' );
+    } else {
+        setEventMessage ( $langs->trans ( 'Save' ), 'mesgs' );
+    }
 }
 
 /*
  * View
  */
-llxHeader('', $langs->trans("OblyonOptionsTitle"),'','','','', '','' );
+llxHeader('', $langs->trans("OblyonOptionsTitle"));
 
 // Subheader
 $linkback = '<a href="' . DOL_URL_ROOT . '/admin/modules.php">'	. $langs->trans("BackToModuleList") . '</a>';
@@ -76,38 +68,68 @@ print load_fiche_titre($langs->trans('OblyonOptionsTitle'), $linkback);
 // Configuration header
 $head = oblyon_admin_prepare_head();
 
-dol_fiche_head($head, 'options', $langs->trans("Module113900Name"), 0, "oblyon@oblyon");
+print dol_get_fiche_head($head, 'options', $langs->trans("Module113900Name"), 0, "opendsi@oblyon");
 
 dol_htmloutput_mesg($mesg);
 
 // Setup page goes here
-print '<form action="' . $_SERVER["PHP_SELF"] . '" method="post">';
-print '<input type="hidden" name="token" value="'.newToken().'">';
+print '<form action="'.$_SERVER["PHP_SELF"].'" method="POST">';
+print '<input type="hidden" name="token" value="'.newToken().'" />';
 print '<input type="hidden" name="action" value="update">';
+print '<input type="hidden" name="page_y" value="">';
 
-print '<table class="noborder">';
+clearstatcache();
 
-// Parameters
+print '<div class="div-table-responsive-no-min">';
+print '<table summary="edit" class="noborder centpercent editmode tableforfield">';
+
+// General
 print '<tr class="liste_titre">';
-print '<td colspan="2">' . $langs->trans('Parameters') . '</td>';
+print '<td colspan="2">' . $langs->trans('General') . '</td>';
 print '</tr>' . "\n";
 
+// Font size
+print '<tr class="oddeven">';
+print '<td>'.$langs->trans('OblyonFontSize').'</td>';
+print '<td><input type="number" class="minwidth400" id="OBLYON_FONT_SIZE" name="OBLYON_FONT_SIZE" dir="rtl" min="10" max="16" value="'.(!empty($conf->global->OBLYON_FONT_SIZE) ? $conf->global->OBLYON_FONT_SIZE : '14').'"></td>';
+print '</tr>';
+
+// Status use images
 print '<tr class="oddeven"><td>' . $langs->trans('MainStatusUseImages') . '</td><td>';
 print ajax_constantonoff("MAIN_STATUS_USES_IMAGES", array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'options');
 print '</td>';
 print '</tr>';
 
+// Quickadd dropdown menu
 print '<tr class="oddeven"><td>' . $langs->trans('OblyonMainUseQuickAddDropdown') . '</td><td>';
 print ajax_constantonoff("MAIN_USE_TOP_MENU_QUICKADD_DROPDOWN", array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'options');
 print '</td>';
 print '</tr>';
 
-print '</table>'."\n";
+// Login
+print '<tr class="liste_titre"><td colspan="2">'.$langs->trans('OblyonLoginTitle').'</td></tr>';
 
-dol_fiche_end();
+// Login box on the right
+print '<tr class="oddeven"><td>' . $langs->trans('LoginRight') . '</td><td>';
+print ajax_constantonoff("MAIN_LOGIN_RIGHT", array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'options');
+print '</td>';
+print '</tr>';
+
+// Card
+print '<tr class="liste_titre"><td colspan="2">'.$langs->trans('CardBehavior').'</td></tr>';
+// Area ref and tab action fixed
+print '<tr class="oddeven"><td>' . $langs->trans('FixAreaRefAndTabAction') . '</td><td>';
+print ajax_constantonoff("FIX_AREAREF_TABACTION", array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'options');
+print '</td>';
+print '</tr>';
+
+print '</table>'."\n";
+print '</div>';
+
+print dol_get_fiche_end();
 
 print '<div class="center">';
-print '<input type="submit" class="button" value="' . dol_escape_htmltag($langs->trans('Modify')) . '" name="button">';
+print '<input class="button button-save reposition" type="submit" name="submit" value="'.$langs->trans("Save").'">';
 print '</div>';
 
 print '</form>';

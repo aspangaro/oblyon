@@ -92,7 +92,7 @@ print load_fiche_titre($langs->trans('OblyonIconsTitle'), $linkback);
 // Configuration header
 $head = oblyon_admin_prepare_head();
 
-dol_fiche_head($head, 'icons', $langs->trans("Module113900Name"), 0, "opendsi@oblyon");
+print dol_get_fiche_head($head, 'icons', $langs->trans("Module113900Name"), 0, "opendsi@oblyon");
 
 dol_htmloutput_mesg($mesg);
 
@@ -100,7 +100,10 @@ dol_htmloutput_mesg($mesg);
 print '<form action="' . $_SERVER["PHP_SELF"] . '" method="post">';
 print '<input type="hidden" name="token" value="' . $_SESSION['newtoken'] . '">';
 
-print '<table class="noborder centpercent">';
+clearstatcache();
+
+print '<div class="div-table-responsive-no-min">';
+print '<table summary="edit" class="noborder centpercent editmode tableforfield">';
 print '<tr class="liste_titre">';
 print '<td colspan="5">' . $langs->trans("IconsStyle") . '</td>';
 print '</tr>';

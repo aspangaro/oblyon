@@ -91,11 +91,11 @@
 	$dol_hide_leftmenu			= $conf->dol_hide_leftmenu;
 	$dol_optimize_smallscreen	= $conf->dol_optimize_smallscreen;
 	$dol_no_mouse_hover			= $conf->dol_no_mouse_hover;
-	dolibarr_set_const($db, 'THEME_ELDY_ENABLE_PERSONALIZED',					1, 'chaine', 0, 'InfraSTheme', $conf->entity);
-	dolibarr_set_const($db, 'MAIN_STATUS_USES_IMAGES',							1, 'chaine', 0, 'InfraSTheme', $conf->entity);
-	dolibarr_set_const($db, 'MAIN_INCLUDE_GLOBAL_STATS_IN_OPENED_DASHBOARD',	1, 'chaine', 0, 'InfraSTheme', $conf->entity);
-	dolibarr_set_const($db, 'MAIN_DISABLE_GLOBAL_BOXSTATS',						0, 'chaine', 0, 'InfraSTheme', $conf->entity);
-	dolibarr_set_const($db, 'THEME_INFOBOX_COLOR_ON_BACKGROUND',				1, 'chaine', 0, 'InfraSTheme', $conf->entity);
+	//dolibarr_set_const($db, 'THEME_ELDY_ENABLE_PERSONALIZED',					1, 'chaine', 0, 'InfraSTheme', $conf->entity);
+	//dolibarr_set_const($db, 'MAIN_STATUS_USES_IMAGES',							1, 'chaine', 0, 'InfraSTheme', $conf->entity);
+	//dolibarr_set_const($db, 'MAIN_INCLUDE_GLOBAL_STATS_IN_OPENED_DASHBOARD',	1, 'chaine', 0, 'InfraSTheme', $conf->entity);
+	//dolibarr_set_const($db, 'MAIN_DISABLE_GLOBAL_BOXSTATS',						0, 'chaine', 0, 'InfraSTheme', $conf->entity);
+	//dolibarr_set_const($db, 'THEME_INFOBOX_COLOR_ON_BACKGROUND',				1, 'chaine', 0, 'InfraSTheme', $conf->entity);
 	$useboldtitle				= (isset($conf->global->THEME_ELDY_USEBOLDTITLE) ? $conf->global->THEME_ELDY_USEBOLDTITLE : 0);
 	// Oblyon
 	$maincolor					= $conf->global->OBLYON_COLOR_MAIN;						// default value: #0083a2

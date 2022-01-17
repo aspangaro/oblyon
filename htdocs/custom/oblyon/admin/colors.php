@@ -343,7 +343,7 @@ print load_fiche_titre($langs->trans('OblyonColorsTitle'), $linkback);
 // Configuration header
 $head = oblyon_admin_prepare_head();
 
-dol_fiche_head($head, 'colors', $langs->trans("Module113900Name"), 0, "oblyon@oblyon");
+print dol_get_fiche_head($head, 'colors', $langs->trans("Module113900Name"), 0, "opendsi@oblyon");
 
 dol_htmloutput_mesg($mesg);
 
@@ -462,11 +462,14 @@ $(document).ready(function() {
 
 print '</script>'."\n";
 
-print '<form action="' . $_SERVER["PHP_SELF"] . '" method="post">';
-print '<input type="hidden" name="token" value="'.newToken().'">';
+print '<form action="'.$_SERVER["PHP_SELF"].'" method="POST">';
+print '<input type="hidden" name="token" value="'.newToken().'" />';
 print '<input type="hidden" name="action" value="update">';
 
-print '<table class="noborder centpercent">';
+clearstatcache();
+
+print '<div class="div-table-responsive-no-min">';
+print '<table summary="edit" class="noborder centpercent editmode tableforfield">';
 print '<tr class="liste_titre">';
 print '<td colspan="5">' . $langs->trans("Themes") . '</td>';
 print '</tr>';
@@ -606,11 +609,12 @@ if ($num)
 }
 
 print '</table>'."\n";
+print '</div>';
 
-dol_fiche_end();
+print dol_get_fiche_end();
 
 print '<div class="center">';
-print '<input type="submit" class="button" value="' . dol_escape_htmltag($langs->trans('Modify')) . '" name="button">';
+print '<input class="button button-save reposition" type="submit" name="submit" value="'.$langs->trans("Save").'">';
 print '</div>';
 
 print '</form>';

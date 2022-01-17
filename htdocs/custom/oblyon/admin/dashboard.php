@@ -111,9 +111,9 @@ if ($action == 'update') {
 	} else {
 		setEventMessages($langs->trans("Error"), null, 'errors');
 	}
-
-	$_SESSION['dol_resetcache']=dol_print_date(dol_now(),'dayhourlog');
 }
+
+$_SESSION['dol_resetcache']=dol_print_date(dol_now(),'dayhourlog');
 
 /*
  * View
@@ -127,7 +127,7 @@ print load_fiche_titre($langs->trans('OblyonDashboardTitle'), $linkback);
 // Configuration header
 $head = oblyon_admin_prepare_head();
 
-dol_fiche_head($head, 'dashboard', $langs->trans("Module113900Name"), 0, "oblyon@oblyon");
+print dol_get_fiche_head($head, 'dashboard', $langs->trans("Module113900Name"), 0, "opendsi@oblyon");
 
 dol_htmloutput_mesg($mesg);
 
@@ -245,12 +245,14 @@ $(document).ready(function() {
 
 print '</script>'."\n";
 
-print '<form action="' . $_SERVER["PHP_SELF"] . '" method="post">';
-print '<input type="hidden" name="token" value="'.newToken().'">';
+print '<form action="'.$_SERVER["PHP_SELF"].'" method="POST">';
+print '<input type="hidden" name="token" value="'.newToken().'" />';
 print '<input type="hidden" name="action" value="update">';
 
-// Colors
-print '<table class="noborder as-settings-colors">';
+clearstatcache();
+
+print '<div class="div-table-responsive-no-min">';
+print '<table summary="edit" class="noborder centpercent editmode tableforfield as-settings-colors">';
 
 // Infobox enable
 print '<tr class="liste_titre">';
@@ -385,11 +387,12 @@ if ($num)
 }
 
 print '</table>'."\n";
+print '</div>';
 
-dol_fiche_end();
+print dol_get_fiche_end();
 
 print '<div class="center">';
-print '<input type="submit" class="button" value="' . dol_escape_htmltag($langs->trans('Modify')) . '" name="button">';
+print '<input class="button button-save reposition" type="submit" name="submit" value="'.$langs->trans("Save").'">';
 print '</div>';
 
 print '</form>';
