@@ -8520,6 +8520,13 @@ div.tabsElem a.tab {
     margin-left: 0;
     margin-right: 0;
 }
+.ticketpublicarea > p {
+        line-height: 3;
+}
+.ticketpublicarea .marginbottomonly
+{
+        margin-bottom: 10px !important;
+}
 .ticketform .bigrounded {
         white-space: normal;
         word-wrap: break-word;
