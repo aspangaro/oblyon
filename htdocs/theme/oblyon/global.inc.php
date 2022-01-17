@@ -8531,6 +8531,10 @@ div.tabsElem a.tab {
         white-space: normal;
         word-wrap: break-word;
 }
+.bigrounded > span {
+    margin: 5px;
+}
+
 .publicnewticketform {
 	/* margin-top: 25px !important; */
 }
