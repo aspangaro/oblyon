@@ -8516,8 +8516,13 @@ div.tabsElem a.tab {
 }
 
 .ticketpublicarea {
-	margin-left: 15%;
-	margin-right: 15%;
+	width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+}
+.ticketform .bigrounded {
+        white-space: normal;
+        word-wrap: break-word;
 }
 .publicnewticketform {
 	/* margin-top: 25px !important; */
