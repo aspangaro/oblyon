@@ -153,7 +153,7 @@ function print_oblyon_menu($db, $atarget, $type_user = 0, &$tabMenu, &$menu, $no
         $chaine=$langs->trans("MenuMembers");
 
         if (empty($noout)) print_start_menu_entry($idsel,$itemsel,$showmode);
-        if (empty($noout)) print_text_menu_entry($chaine, 1, DOL_URL_ROOT.'/index.php?mainmenu=home&amp;leftmenu=', $id, $idsel, $atarget);
+        if (empty($noout)) print_text_menu_entry($chaine, 1, DOL_URL_ROOT.'/adherents/index.php?mainmenu=members&amp;leftmenu=', $id, $idsel, $atarget);
         if (empty($noout)) print_end_menu_entry($showmode);
         $menu->add('/adherents/index.php?mainmenu=members&amp;leftmenu=', $chaine, 0, $showmode, $atarget, "members", '');
 	}
