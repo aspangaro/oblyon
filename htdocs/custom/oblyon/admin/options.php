@@ -37,6 +37,9 @@ $langs->loadLangs(array("admin","oblyon@oblyon"));
 // Access control
 if (! $user->admin) accessforbidden();
 
+// Reset cache
+$_SESSION['dol_resetcache']=dol_print_date(dol_now(),'dayhourlog');
+
 /*
  * Actions
  */
@@ -92,6 +95,12 @@ print '</tr>' . "\n";
 print '<tr class="oddeven">';
 print '<td>'.$langs->trans('OblyonFontSize').'</td>';
 print '<td><input type="number" class="minwidth400" id="OBLYON_FONT_SIZE" name="OBLYON_FONT_SIZE" dir="rtl" min="10" max="16" value="'.(!empty($conf->global->OBLYON_FONT_SIZE) ? $conf->global->OBLYON_FONT_SIZE : '14').'"></td>';
+print '</tr>';
+
+// Status use images
+print '<tr class="oddeven"><td>' . $langs->trans('OblyonDisableVersion') . '</td><td>';
+print ajax_constantonoff("OBLYON_DISABLE_VERSION", array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'options');
+print '</td>';
 print '</tr>';
 
 // Status use images

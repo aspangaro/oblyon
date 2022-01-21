@@ -176,13 +176,14 @@ OBLYON_SOCIAL_GITHUB=Github
 #
 OblyonOptionsTitle=Options
 OblyonMainUseQuickAddDropdown=Utiliser le menu d'ajout rapide des éléments (En haut à droite)
+OblyonDisableVersion=Ne pas afficher le numéro de version de Dolibarr (En haut à droite)
 
 #
 # Icons page
 #
 OblyonIconsTitle = Configurateur Oblyon - Icônes
 Icons = Icônes
-IconsStyle = Style d'îcones
+IconsStyle = Style d'icônes
 IconApplied = Style d'icônes appliqué
 Icon1 = Solid
 Icon2 = Regular

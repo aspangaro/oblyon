@@ -117,6 +117,13 @@ OBLYON_INFOXBOX_HOLIDAY_COLOR = Thumb color 'holidays'
 OBLYON_INFOXBOX_TICKET_COLOR = Thumb color 'tickets'
 
 #
+# Options page
+#
+OblyonOptionsTitle=Options
+OblyonMainUseQuickAddDropdown=Add the quick action menu (in top right)
+OblyonDisableVersion=Don't show the version number of Dolibarr (in top right)
+
+#
 # Icons page
 #
 OblyonIconsTitle = Oblyon Configurator - Icons

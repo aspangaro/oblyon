@@ -2489,8 +2489,16 @@ div.login_block a {
 	display: inline-block;
 }
 div.login_block span.aversion {
-	color: <?php print $bgnavtop_txt; ?>;
-	filter: contrast(0.7);
+    <?php if(!empty($conf->global->OBLYON_DISABLE_VERSION)) { ?>
+        display: none !important;
+    <?php } else { ?>
+        <?php if ( $conf->global->MAIN_MENU_INVERT ) { ?>
+            color: <?php echo $bgnavleft_txt; ?>;
+        <?php } else { ?>
+            color: <?php echo $bgnavtop_txt; ?>;
+        <?php } ?>
+        filter: contrast(0.7);
+    <?php } ?>
 }
 div.login_block table {
 	display: inline;
