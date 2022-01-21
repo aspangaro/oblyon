@@ -3,8 +3,18 @@
 
 .icon {
     /* use !important to prevent issues with browser extensions that change fonts */
-    font-family: "<?php echo getDolGlobalString('MAIN_FONTAWESOME_FAMILY', 'Font Awesome 5 Free'); ?>" !important;
-    font-weight: <?php echo getDolGlobalString('MAIN_FONTAWESOME_WEIGHT', '900'); ?>;
+    font-family: "<?php if(empty($conf->global->MAIN_FONTAWESOME_FAMILY)) {
+                            echo 'Font Awesome 5 Free';
+                        } else {
+                            echo $conf->global->MAIN_FONTAWESOME_FAMILY;
+                        }
+                 ?>" !important;
+    font-weight: <?php if(empty($conf->global->MAIN_FONTAWESOME_WEIGHT)) {
+                            echo 900;
+                        } else {
+                            echo $conf->global->MAIN_FONTAWESOME_WEIGHT;
+                        }
+                  ?>;
     font-style: normal;
     font-variant: normal;
     line-height: 1;
@@ -298,8 +308,18 @@
 /* Compatibility */
 .mainmenu::before{
     /* font part */
-    font-family: "<?php echo getDolGlobalString('MAIN_FONTAWESOME_FAMILY', 'Font Awesome 5 Free'); ?>";
-    font-weight: <?php echo getDolGlobalString('MAIN_FONTAWESOME_WEIGHT', '900'); ?>;;
+    font-family: "<?php if(empty($conf->global->MAIN_FONTAWESOME_FAMILY)) {
+                            echo 'Font Awesome 5 Free';
+                        } else {
+                            echo $conf->global->MAIN_FONTAWESOME_FAMILY;
+                        }
+                 ?>";
+    font-weight: <?php if(empty($conf->global->MAIN_FONTAWESOME_WEIGHT)) {
+                            echo 900;
+                        } else {
+                            echo $conf->global->MAIN_FONTAWESOME_WEIGHT;
+                        }
+                  ?>;
     font-style: normal;
     font-variant: normal;
     text-rendering: auto;

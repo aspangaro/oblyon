@@ -38,9 +38,19 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
 }
 .dropdown-toggle::after {
     /* font part */
-    font-family: "<?php echo getDolGlobalString('MAIN_FONTAWESOME_FAMILY', 'Font Awesome 5 Free'); ?>";
+    font-family: "<?php if(empty($conf->global->MAIN_FONTAWESOME_FAMILY)) {
+                            echo 'Font Awesome 5 Free';
+                        } else {
+                            echo $conf->global->MAIN_FONTAWESOME_FAMILY;
+                        }
+                 ?>";
+    font-weight: <?php if(empty($conf->global->MAIN_FONTAWESOME_WEIGHT)) {
+                            echo 900;
+                        } else {
+                            echo $conf->global->MAIN_FONTAWESOME_WEIGHT;
+                        }
+                  ?>;
     font-size: 0.7em;
-    font-weight: <?php echo getDolGlobalString('MAIN_FONTAWESOME_WEIGHT', '900'); ?>;;
     font-style: normal;
     font-variant: normal;
     text-rendering: auto;
@@ -254,8 +264,18 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
     }
     .dropdown-item::before {
         /* font part */
-        font-family: "<?php echo getDolGlobalString('MAIN_FONTAWESOME_FAMILY', 'Font Awesome 5 Free'); ?>";
-        font-weight: <?php echo getDolGlobalString('MAIN_FONTAWESOME_WEIGHT', '900'); ?>;;
+        font-family: "<?php if(empty($conf->global->MAIN_FONTAWESOME_FAMILY)) {
+                            echo 'Font Awesome 5 Free';
+                        } else {
+                            echo $conf->global->MAIN_FONTAWESOME_FAMILY;
+                        }
+                 ?>";
+        font-weight: <?php if(empty($conf->global->MAIN_FONTAWESOME_WEIGHT)) {
+                            echo 900;
+                        } else {
+                            echo $conf->global->MAIN_FONTAWESOME_WEIGHT;
+                        }
+                  ?>;
         font-style: normal;
         font-variant: normal;
         text-rendering: auto;
