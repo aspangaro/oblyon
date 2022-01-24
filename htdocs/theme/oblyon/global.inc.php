@@ -4231,8 +4231,8 @@ div.tabsAction {
 
 div.tabactive,
 div.tabactive a.tab {
-    background-color: <?php echo $colorbline; ?>;
-	color: <?php print $bgnavleft_txt_active; ?>;
+    background-color: <?php echo $colorbacktabcard1; ?>;
+	color: <?php print $colortextbacktab; ?>;
 	height: 38px;
 }
 

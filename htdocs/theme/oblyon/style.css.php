@@ -139,6 +139,11 @@
 	$colorfline												= $conf->global->OBLYON_COLOR_FLINE;		// default value : #444444
 	$colorfline_hover										= $conf->global->OBLYON_COLOR_FLINE_HOVER;	// default value : #222222
 
+    $conf->global->THEME_ELDY_BACKTABCARD1 = '255,255,255'; // card
+	$conf->global->THEME_ELDY_BACKTABACTIVE = '234,234,234';
+    $colorbacktabcard1                                      = empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? (empty($conf->global->THEME_ELDY_BACKTABCARD1) ? $colorbacktabcard1 : $conf->global->THEME_ELDY_BACKTABCARD1) : (empty($user->conf->THEME_ELDY_BACKTABCARD1) ? $colorbacktabcard1 : $user->conf->THEME_ELDY_BACKTABCARD1);
+    $colorbacktabactive                                     = empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? (empty($conf->global->THEME_ELDY_BACKTABACTIVE) ? $colorbacktabactive : $conf->global->THEME_ELDY_BACKTABACTIVE) : (empty($user->conf->THEME_ELDY_BACKTABACTIVE) ? $colorbacktabactive : $user->conf->THEME_ELDY_BACKTABACTIVE);
+
 
 	// Case of option always editable
 	if (!isset($conf->global->THEME_ELDY_BACKBODY))			$conf->global->THEME_ELDY_BACKBODY			= $colorbackbody;
