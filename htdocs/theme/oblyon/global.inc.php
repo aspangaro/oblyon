@@ -1603,7 +1603,7 @@ select.selectarrowonleft option {
 .linkobject { cursor: pointer; }
 
 table.tableforfield tr>td:first-of-type, div.tableforfield div.tagtr>div.tagtd:first-of-type {
-    color: #666;
+    color: <?php echo $colorfline; ?>;
 }
 
 <?php if (GETPOST('optioncss', 'aZ09') == 'print') { ?>
@@ -5459,6 +5459,10 @@ table.cal_event td.cal_event_right { padding: 4px 4px !important; }
 
 .topmenuimage {
     background-size: 28px auto;
+}
+
+.paginationafterarrows > .button_search > .fa.fa-search{
+    color: rgb(<?php print $colortext; ?>);
 }
 
 /* ============================================================================== */

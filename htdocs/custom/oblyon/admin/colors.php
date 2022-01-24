@@ -491,7 +491,8 @@ print '</table>';
 
 
 // Colors
-print '<table class="noborder as-settings-colors">';
+print '<div class="div-table-responsive-no-min">';
+print '<table summary="edit" class="noborder centpercent editmode tableforfield as-settings-colors">';
 
 // Top menu
 print '<tr class="liste_titre">';
