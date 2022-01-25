@@ -177,6 +177,7 @@ OBLYON_SOCIAL_GITHUB=Github
 OblyonOptionsTitle=Options
 OblyonMainUseQuickAddDropdown=Utiliser le menu d'ajout rapide des éléments (En haut à droite)
 OblyonDisableVersion=Ne pas afficher le numéro de version de Dolibarr (En haut à droite)
+OblyonPaddingRightBottom=Afficher une marge en bas de page sur la partie droite
 
 #
 # Icons page

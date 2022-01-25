@@ -1691,6 +1691,9 @@ td.showDragHandle {
 <?php if (GETPOST("optioncss") == 'print') { ?>
     padding-top: 10px;
     <?php } elseif($conf->global->OBLYON_STICKY_TOPBAR) { ?>
+        <?php if ($conf->global->OBLYON_PADDING_RIGHT_BOTTOM) { ?>
+            padding-bottom: 40px;
+        <?php } ?>
         <?php if ($conf->global->MAIN_MENU_INVERT) { ?>
             padding-top: 52px;
         <?php } else { ?>
