@@ -21,11 +21,8 @@
  * 	\brief		Login color Page < Oblyon Theme Configurator >
  */
 
-// Dolibarr environment
-$res = @include("../../main.inc.php"); // From htdocs directory
-if (! $res) {
-  $res = @include("../../../main.inc.php"); // From "custom" directory
-}
+	// Dolibarr environment *************************
+	require '../config.php';
 
 // Libraries
 require_once DOL_DOCUMENT_ROOT . '/core/lib/admin.lib.php';

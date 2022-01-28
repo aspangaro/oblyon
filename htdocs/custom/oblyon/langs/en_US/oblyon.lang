@@ -3,13 +3,12 @@
 # Copyright (C) 2015-2019  Open-DSI         <support@open-dsi.fr>
 #
 Module113900Name = Oblyon
-Module113900Desc = Options panel allows you to personalize the Oblyon theme 
+Module113900Desc = Options panel allows you to personalize the Oblyon theme
 
-Theme1 = Oblyon Green
-Theme2 = Oblyon Dark
-Theme3 = Oblyon Blue
-Theme4 = Oblyon Night
-Theme5 = Oblyon Light
+OblyonParamAction1                  = Save / Restore all module parameters for
+OblyonParamAction2                  = <br>(after a restore refresh the page (F5) to visualize the result)
+OblyonParamBkup                     = Backup
+OblyonParamRestore                  = Restore
 
 #
 # Easya
@@ -86,14 +85,12 @@ OBLYON_COLOR_LEFTMENU_BCKGRD_HOVER=Leftmenu background hover color
 OBLYON_COLOR_LEFTMENU_TXT=leftmenu color text
 RestoreDefaultColors=Restore default colors
 DefaultsColorsMsg=Default colors restored
-OblyonGreen=Oblyon Green
-ThemeOblyonGreenApplied=Oblyon green template applied
-OblyonDark=Oblyon Dark
-ThemeOblyonDarkApplied=Oblyon dark template applied
-OblyonBlue=Oblyon Blue
-ThemeOblyonBlueApplied=Oblyon blue template applied
-OblyonNight=Oblyon Night
-ThemeOblyonNightApplied=Oblyon night template applied
+ThemeApplied = Template applied
+Oblyongreen = Oblyon Green
+Oblyondark = Oblyon Dark
+Oblyonblue = Oblyon Blue
+Oblyonnight = Oblyon Night
+Oblyonlight = Oblyon Light
 
 #
 # Dashboard page
@@ -101,7 +98,7 @@ ThemeOblyonNightApplied=Oblyon night template applied
 OblyonDashboardTitle = Oblyon configurator - Dashboard
 OblyonDashboardDisableBlocks=Thumbs of open objects (to process or late) on main dashboard
 ColorIntensity = Color intensity
-ColorIntensityDesc = Set the intensity to the colors below (Default -50)
+ColorIntensityDesc = Set the intensity to the colors below (Currently %s)
 ColorMoreDarker = Less intense
 ColorMoreLighter = More intense
 OBLYON_INFOXBOX_WEATHER_COLOR = Thumb color 'weather'
@@ -121,6 +118,7 @@ OBLYON_INFOXBOX_TICKET_COLOR = Thumb color 'tickets'
 #
 OblyonOptionsTitle=Options
 OblyonMainUseQuickAddDropdown=Add the quick action menu (in top right)
+OblyonMainUseBookmarkDropdown=Add the bookmark menu (in top right)
 OblyonDisableVersion=Don't show the version number of Dolibarr (in top right)
 
 #
@@ -130,11 +128,11 @@ OblyonIconsTitle = Oblyon Configurator - Icons
 Icons = Icons
 IconsStyle = Icons style
 IconApplied = Icons style applied
-Icon1 = Solid
-Icon2 = Regular
-Icon3 = Light
-Icon4 = Thin
-Icon5 = Duotone
+Iconfas = Solid
+Iconfar = Regular
+Iconfal = Light
+Iconfat = Thin
+Iconfad = Duotone
 
 #
 # About page

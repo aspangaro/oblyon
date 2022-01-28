@@ -1,440 +1,168 @@
 <?php
-/**
- * Copyright (C) 2015-2016  Nicolas Rivera      <nrivera.pro@gmail.com>
- * Copyright (C) 2015-2019  Open-DSI            <support@open-dsi.fr>
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
- */
+	/************************************************
+	* Copyright (C) 2015-2022	Alexandre Spangaro - <support@open-dsi.fr>	Open-DSI - <https://www.open-dsi.fr>
+	* Copyright (C) 2016-2022	Sylvain Legrand - <contact@infras.fr>	InfraS - <https://www.infras.fr>
+	*
+	* This program is free software: you can redistribute it and/or modify
+	* it under the terms of the GNU General Public License as published by
+	* the Free Software Foundation, either version 3 of the License, or
+	* (at your option) any later version.
+	*
+	* This program is distributed in the hope that it will be useful,
+	* but WITHOUT ANY WARRANTY; without even the implied warranty of
+	* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	* GNU General Public License for more details.
+	*
+	* You should have received a copy of the GNU General Public License
+	* along with this program.  If not, see <http://www.gnu.org/licenses/>.
+	************************************************/
 
-/**
- *	\file       admin/menus.php
- *	\ingroup    oblyon
- *	\brief      Menus Page < Oblyon Theme Configurator >
- */
+	/************************************************
+	* 	\file		../oblyon/admin/menus.php
+	* 	\ingroup	oblyon
+	* 	\brief		Options Page < Oblyon Theme Configurator >
+	************************************************/
 
-// Dolibarr environment
-$res = @include ("../../main.inc.php"); // From htdocs directory
-if (! $res) {
-  $res = @include ("../../../main.inc.php"); // From "custom" directory
-}
+	// Dolibarr environment *************************
+	require '../config.php';
 
-// Libraries
-require_once DOL_DOCUMENT_ROOT."/core/lib/admin.lib.php";
-require_once(DOL_DOCUMENT_ROOT.'/core/class/html.formadmin.class.php');
-require_once(DOL_DOCUMENT_ROOT.'/core/class/html.formother.class.php');
-require_once '../lib/oblyon.lib.php';
+	// Libraries ************************************
+	require_once(DOL_DOCUMENT_ROOT.'/core/class/html.formadmin.class.php');
+	require_once(DOL_DOCUMENT_ROOT.'/core/class/html.formother.class.php');
+	require_once DOL_DOCUMENT_ROOT.'/core/lib/admin.lib.php';
+	require_once DOL_DOCUMENT_ROOT.'/core/lib/files.lib.php';
+	require_once '../lib/oblyon.lib.php';
 
-// Translations
-$langs->loadLangs(array("admin","oblyon@oblyon"));
+	// Translations *********************************
+	$langs->loadLangs(array('admin', 'oblyon@oblyon'));
 
-$action=GETPOST('action','alpha');
+	// Access control *******************************
+	if (! $user->admin)				accessforbidden();
 
-/*
- * Actions
- */
+	// Actions **************************************
+	$action							= GETPOST('action','alpha');
+	$result							= '';
+	$formother						= new FormOther($db);
+	// Sauvegarde / Restauration
+	if ($action == 'bkupParams')	$result	= oblyon_bkup_module ('oblyon');
+	if ($action == 'restoreParams')	$result	= oblyon_restore_module ('oblyon');
+	// On / Off management
+	if (preg_match('/set_(.*)/', $action, $reg)) {
+		$confkey	= $reg[1];
+		$result		= dolibarr_set_const($db, $confkey, GETPOST('value'), 'chaine', 0, 'Oblyon module', $conf->entity);
+	}
+	// Update buttons management
+	if (preg_match('/update_(.*)/', $action, $reg)) {
+		$list									= array ('Gen'	=> array('OBLYON_EFFECT_LEFTMENU', 'OBLYON_EFFECT_REDUCE_LEFTMENU'));
+		$confkey								= $reg[1];
+		$error									= 0;
+		foreach ($list[$confkey] as $constname)	$result	= dolibarr_set_const($db, $constname, GETPOST($constname, 'alpha'), 'chaine', 0, 'Oblyon module', $conf->entity);
+	}
+	// Retour => message Ok ou Ko
+	if ($result == 1)			setEventMessages($langs->trans('SetupSaved'), null, 'mesgs');
+	if ($result == -1)			setEventMessages($langs->trans('Error'), null, 'errors');
+	$_SESSION['dol_resetcache']	= dol_print_date(dol_now(), 'dayhourlog');	// Reset cache
 
-if (preg_match('/^set/',$action)) {
-  // This is to force to add a new param after css urls to force new file loading
-  // This set must be done before calling llxHeader().
-  $_SESSION['dol_resetcache']=dol_print_date(dol_now(),'dayhourlog');
-}
+	// init variables *******************************
+	$result						= !empty($conf->global->MAIN_MENU_INVERT) && ($conf->global->OBLYON_SHOW_COMPNAME || $conf->global->OBLYON_HIDE_LEFTMENU)	? dolibarr_set_const($db, 'OBLYON_FULLSIZE_TOPBAR',			1,			'chaine', 0, 'Oblyon module', $conf->entity) : '';
+	$result						= $conf->global->OBLYON_HIDE_LEFTMENU && empty($conf->global->OBLYON_EFFECT_LEFTMENU)										? dolibarr_set_const($db, 'OBLYON_EFFECT_LEFTMENU',			'slide',	'chaine', 0, 'Oblyon module', $conf->entity) : '';
+	$result						= !empty($conf->global->MAIN_MENU_INVERT) && !empty($conf->global->OBLYON_REDUCE_LEFTMENU)									? dolibarr_set_const($db, 'OBLYON_HIDE_LEFTICONS',			0,			'chaine', 0, 'Oblyon module', $conf->entity) : '';
+	$result						= $conf->global->OBLYON_REDUCE_LEFTMENU && empty($conf->global->OBLYON_EFFECT_REDUCE_LEFTMENU)								? dolibarr_set_const($db, 'OBLYON_EFFECT_REDUCE_LEFTMENU',	'hover',	'chaine', 0, 'Oblyon module', $conf->entity) : '';
 
-if ($action == 'set') {
-  $value = GETPOST ( 'value', 'int' );
-  $name = GETPOST ( 'name', 'text' );
+	// View *****************************************
+	$page_name					= $langs->trans('OblyonMenusTitle');
+	llxHeader('', $page_name);
+	$linkback					= '<a href = "'.DOL_URL_ROOT.'/admin/modules.php">'.$langs->trans('BackToModuleList').'</a>';
+	print load_fiche_titre($page_name, $linkback);
 
-  if ($name == 'OBLYON_REDUCE_LEFTMENU' && $value == 1) {
-      dolibarr_set_const($db, 'OBLYON_HIDE_LEFTICONS', 0, 'yesno', 0, '', $conf->entity);
-      dolibarr_set_const($db, 'OBLYON_SHOW_COMPNAME', 0, 'yesno', 0, '', $conf->entity);
-  }
+	// Configuration header *************************
+	$head						= oblyon_admin_prepare_head();
+	dol_fiche_head($head, 'menus', $langs->trans('Module113900Name'), 0, 'opendsi@oblyon');
 
-  if ($value == 1) {
-    $res = dolibarr_set_const($db, $name, $value, 'yesno', 0, '', $conf->entity);
-    if (! $res > 0) $error ++;
-  } else {
-    $res = dolibarr_set_const($db, $name, $value, 'yesno', 0, '', $conf->entity);
-    if (! $res > 0) $error ++;
-  }
-
-  if ($error) {
-    setEventMessage ( 'Error', 'errors' );
-  } else {
-    setEventMessage ( $langs->trans ( 'Save' ), 'mesgs' );
-  }
-}
-
-if ($action == 'setvar'){
-  $res = dolibarr_set_const($db, 'OBLYON_EFFECT_LEFTMENU', GETPOST('OBLYON_EFFECT_LEFTMENU'),'chaine',0,'',$conf->entity);
-  $res = dolibarr_set_const($db, 'OBLYON_EFFECT_REDUCE_LEFTMENU', GETPOST('OBLYON_EFFECT_REDUCE_LEFTMENU'),'chaine',0,'',$conf->entity);
-
-  if (! $res > 0) $error++;
-
-  if ($error) {
-    setEventMessage ( 'Error', 'errors' );
-  } else {
-    setEventMessage ( $langs->trans ( 'Save' ), 'mesgs' );
-  }
-}
-
-/**
- * View
- */
-
-$formother= new FormOther($db);
-
-$page_name = "OblyonMenusTitle";
-
-//$morejs=array("/oblyon/js/oblyon.js");
-llxHeader ( '', $langs->trans('OblyonMenusTitle'));
-
-// subheader
-$linkback = '<a href="' . DOL_URL_ROOT . '/admin/modules.php">' . $langs->trans ( "BackToModuleList" ) . '</a>';
-print load_fiche_titre($langs->trans($page_name), $linkback);
-
-// Configuration header
-$head = oblyon_admin_prepare_head();
-print dol_get_fiche_head($head, 'menus', $langs->trans ( "Module113900Name" ), 0, "opendsi@oblyon");
-
-// Alert
-if (!defined('MAIN_MODULE_OBLYON') && $conf->theme!="oblyon")
-{
-  print '<div class="bloc_warning">';
-  print img_warning().' '.$langs->trans('OblyonErrorMessage');
-  print '</div>';
-}
-else
-{
-  print '<div class="bloc_success">';
-  print $langs->trans('OblyonSuccessMessage');
-  print '</div>';
-}
-
-/*
-if (!($conf->global->MAIN_MENU_STANDARD == "oblyon_menu.php" && $conf->global->MAIN_MENU_SMARTPHONE == "oblyon_menu.php") || !($conf->global->MAIN_MENUFRONT_STANDARD == "oblyon_menu.php" && $conf->global->MAIN_MENUFRONT_SMARTPHONE == "oblyon_menu.php")) {
-    print '<br>';
-    print '<div class="bloc_warning">';
-    print img_warning().' '.$langs->trans('OblyonMenusErrorMessage');
-    print '</div>';
-}
-*/
-
-print '<form action="'.$_SERVER["PHP_SELF"].'" method="POST">';
-print '<input type="hidden" name="token" value="'.newToken().'" />';
-print '<input type="hidden" name="action" value="setvar">';
-
-print '<div class="div-table-responsive-no-min">';
-print '<table class="noborder centpercent">';
-
-// Invert menu
-print '<tr class="oddeven">';
-print '<td>'.$langs->trans('InvertMenus').'</td>';
-$name='MAIN_MENU_INVERT';
-if(! empty($conf->global->MAIN_MENU_INVERT))
-{
-    print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name='.$name.'&value=0">';
-    print img_picto ( $langs->trans ( "Enabled" ), 'switch_on' );
-    print "</a></td>\n";
-}
-else
-{
-    print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name='.$name.'&value=1">';
-    print img_picto ( $langs->trans ( "Disabled" ), 'switch_off' );
-    print "</a></td>\n";
-}
-print '</tr>';
-
-// Top menu
-print '<tr class="liste_titre"><td colspan="2">'.$langs->trans('TopMenu').'</td></tr>';
-
-// Option only if invert menu is on
-if($conf->global->MAIN_MENU_INVERT) {
-    if($conf->global->OBLYON_SHOW_COMPNAME || $conf->global->OBLYON_HIDE_LEFTMENU)
-	{
-		$conf->global->OBLYON_FULLSIZE_TOPBAR = TRUE;
-    }
-
-	// Fullsize top bar
-    print '<tr class="oddeven">';
-    print '<td>'.$langs->trans('FullsizeTopBar');
-    if(empty($conf->global->OBLYON_FULLSIZE_TOPBAR))
-	{
-		print '<br><span class="warning">'.$langs->trans('FullsizeTopBarWarning').'</span>';
-    }
-    print '</td>';
-    $name='OBLYON_FULLSIZE_TOPBAR';
-    if(! empty($conf->global->OBLYON_FULLSIZE_TOPBAR))
-	{
-		if($conf->global->OBLYON_SHOW_COMPNAME || $conf->global->OBLYON_HIDE_LEFTMENU)
-		{
-			print '<td><a href="#" class="tmenudisabled">';
-			print img_picto($langs->trans( "Enabled" ), 'switch_on');
-			print "</a></td>\n";
-		}
-		else
-		{
-			print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name='.$name.'&value=0">';
-			print img_picto($langs->trans("Enabled"), 'switch_on');
-			print "</a></td>\n";
-		}
-    }
+	// setup page goes here *************************
+	// Alert
+	if (!defined('MAIN_MODULE_OBLYON') && $conf->theme != 'oblyon')
+	  print '	<div class = "bloc_warning centpercent center">'.img_warning().' '.$langs->trans('OblyonErrorMessage').'</div>';
 	else
-	{
-      print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name='.$name.'&value=1">';
-      print img_picto ( $langs->trans ( "Disabled" ), 'switch_off' );
-      print "</a></td>\n";
-    }
-    print '</tr>';
-}
-
-// Show Company Logo
-print '<tr class="oddeven">';
-print '<td>'.$langs->trans('OblyonEnableShowLogo').'</td>';
-$name='MAIN_SHOW_LOGO';
-if(! empty($conf->global->MAIN_SHOW_LOGO))
-{
-    print '<td><a href="' . $_SERVER ['PHP_SELF'] .  '?action=set&name='.$name.'&value=0">';
-    print img_picto($langs->trans("Enabled"), 'switch_on');
-    print "</a></td>\n";
-}
-else
-{
-    print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name='.$name.'&value=1">';
-    print img_picto($langs->trans("Disabled"), 'switch_off');
-    print "</a></td>\n";
-}
-print '</tr>';
-
-// Sticky top bar
-print '<tr class="oddeven">';
-print '<td>'.$langs->trans('StickyTopBar');
-if($conf->global->OBLYON_STICKY_TOPBAR)
-{
-    print '<br><span class="warning">'.img_warning().' '.$langs->trans('StickyTopBarWarning').'</span>';
-    if($conf->global->MAIN_MENU_INVERT)
-	{
-		print '<br><span class="warning">'.$langs->trans('StickyTopBarInvertedWarning').'</span>';
-    }
-}
-print '</td>';
-$name='OBLYON_STICKY_TOPBAR';
-if(! empty($conf->global->OBLYON_STICKY_TOPBAR))
-{
-    print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name='.$name.'&value=0">';
-    print img_picto ( $langs->trans ( "Enabled" ), 'switch_on' );
-    print "</a></td>\n";
-}
-else
-{
-    print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name='.$name.'&value=1">';
-    print img_picto ( $langs->trans ( "Disabled" ), 'switch_off' );
-    print "</a></td>\n";
-}
-print '</tr>';
-
-// Hide top icons
-print '<tr class="oddeven">';
-print '<td>'.$langs->trans('HideTopIcons').'</td>';
-$name='OBLYON_HIDE_TOPICONS';
-if(! empty($conf->global->OBLYON_HIDE_TOPICONS)) {
-    if ($conf->global->MAIN_MENU_INVERT) {
-        print '<td><a href="#" class="tmenudisabled">';
-        print img_picto($langs->trans("Enabled"), 'switch_on');
-        print "</a></td>\n";
-    } else {
-        print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name=' . $name . '&value=0">';
-        print img_picto($langs->trans("Enabled"), 'switch_on');
-        print "</a></td>\n";
-    }
-}
-else
-{
-	print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name='.$name.'&value=1">';
-	print img_picto ( $langs->trans ( "Disabled" ), 'switch_off' );
-	print "</a></td>\n";
-}
-print '</tr>';
-
-// Left menu
-print '<tr class="liste_titre"><td colspan="2">'.$langs->trans('LeftMenu').'</td></tr>';
-
-// Show company name
-print '<tr class="oddeven">';
-print '<td>'.$langs->trans('ShowCompanyName').'</td>';
-$name='OBLYON_SHOW_COMPNAME';
-if(! empty($conf->global->OBLYON_SHOW_COMPNAME))
-{
-    print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name='.$name.'&value=0">';
-	print img_picto($langs->trans("Enabled"), 'switch_on');
-	print "</a></td>\n";
-}
-else
-{
-	print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name='.$name.'&value=1">';
-	print img_picto($langs->trans("Disabled"), 'switch_off');
-	print "</a></td>\n";
-}
-print '</tr>';
-
-// Sticky left bar
-print '<tr class="oddeven">';
-print '<td>'.$langs->trans('StickyLeftBar');
-if($conf->global->OBLYON_STICKY_LEFTBAR)
-{
-    print '<br><span class="warning">'.img_warning().' '.$langs->trans('StickyLeftBarWarning').'</span>';
-    if($conf->global->MAIN_MENU_INVERT)
-    {
-        print '<br><span class="warning">'.$langs->trans('StickyLeftBarInvertedWarning').'</span>';
-    }
-}
-print '</td>';
-$name='OBLYON_STICKY_LEFTBAR';
-if(! empty($conf->global->OBLYON_STICKY_LEFTBAR))
-{
-    print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name='.$name.'&value=0">';
-    print img_picto($langs->trans("Enabled"), 'switch_on');
-    print "</a></td>\n";
-}
-else
-{
-    print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name='.$name.'&value=1">';
-    print img_picto($langs->trans("Disabled"), 'switch_off');
-    print "</a></td>\n";
-}
-print '</tr>';
-
-// Hide leftmenu
-print '<tr class="oddeven">';
-print '<td>'.$langs->trans('HideLeftMenu');
-print '</td>';
-$name='OBLYON_HIDE_LEFTMENU';
-if(! empty($conf->global->OBLYON_HIDE_LEFTMENU))
-{
-	print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name='.$name.'&value=0">';
-	print img_picto($langs->trans("Enabled"), 'switch_on');
-	print "</a></td>\n";
-}
-else
-{
-    print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name='.$name.'&value=1">';
-    print img_picto($langs->trans("Disabled"), 'switch_off');
-    print "</a></td>\n";
-}
-print '</tr>';
-
-// Effect open leftmenu
-if($conf->global->OBLYON_HIDE_LEFTMENU)
-{
-    if(empty($conf->global->OBLYON_EFFECT_LEFTMENU))
-	{
-		$conf->global->OBLYON_EFFECT_LEFTMENU= 'slide';
-    }
-    print '<tr class="oddeven">';
-    print '<td>'.$langs->trans('OpenEffect');
-    print '</td>';
-    $name='OBLYON_EFFECT_LEFTMENU';
-    print '<td>';
-    print '<input type="radio" value="slide" id="slide" class="flat" name="'.$name.'" '.($conf->global->$name == "slide"?' checked="checked"':'').'"> ';
-    print '<label for="slide">'.$langs->trans( 'EffectLeftMenuSlide' ).'</label><br>';
-    print '<input type="radio" value="push" id="push" class="flat" name="'.$name.'" '.($conf->global->$name == "push"?' checked="checked"':'').'"> ';
-    print '<label for="push">'.$langs->trans( 'EffectLeftMenuPush' ).'</label><br>';
-    print '</td>';
-    print '</tr>';
-}
-
-// Hide left icons
-if(!empty($conf->global->MAIN_MENU_INVERT))
-{
-	$conf->global->OBLYON_HIDE_LEFTICONS = TRUE;
-}
-
-print '<tr class="oddeven">';
-print '<td>'.$langs->trans('HideLeftIcons').'</td>';
-$name='OBLYON_HIDE_LEFTICONS';
-if(!empty($conf->global->OBLYON_HIDE_LEFTICONS))
-{
-    if(!empty($conf->global->MAIN_MENU_INVERT) && !empty($conf->global->OBLYON_REDUCE_LEFTMENU))
-	{
-		print '<td><a href="#" class="tmenudisabled">';
-		print img_picto($langs->trans("Disabled"), 'switch_off');
-		print "</a></td>\n";
-    }
-	else
-	{
-		print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name='.$name.'&value=0">';
-		print img_picto($langs->trans("Enabled"), 'switch_on');
-		print "</a></td>\n";
-    }
-}
-else
-{
-    print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name='.$name.'&value=1">';
-    print img_picto($langs->trans("Disabled"), 'switch_off');
-    print "</a></td>\n";
-}
-print '</tr>';
-
-// Micro left menu
-if (!empty($conf->global->MAIN_MENU_INVERT)) {
-    print '<tr class="oddeven">';
-    print '<td>' . $langs->trans('ReduceLeftMenu');
-    if (!empty($conf->global->OBLYON_REDUCE_LEFTMENU)) {
-        print '<br><span class="warning">' . img_warning() . ' ' . $langs->trans('MicroMenuLeftBarHideLeftIconsWarning') . '</span>';
-        print '<br><span class="warning">' . img_warning() . ' ' . $langs->trans('MicroMenuLeftBarCompanyNameWarning') . '</span>';
-    }
-    print '</td>';
-    $name = 'OBLYON_REDUCE_LEFTMENU';
-    if (!empty($conf->global->OBLYON_REDUCE_LEFTMENU)) {
-        print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name=' . $name . '&value=0">';
-        print img_picto($langs->trans("Enabled"), 'switch_on');
-        print "</a></td>\n";
-    } else {
-        print '<td><a href="' . $_SERVER ['PHP_SELF'] . '?action=set&name=' . $name . '&value=1">';
-        print img_picto($langs->trans("Disabled"), 'switch_off');
-        print "</a></td>\n";
-    }
-    print '</tr>';
-}
-// Effect hover leftmenu
-if($conf->global->OBLYON_REDUCE_LEFTMENU)
-{
-    if(empty($conf->global->OBLYON_EFFECT_REDUCE_LEFTMENU))
-    {
-        $conf->global->OBLYON_EFFECT_REDUCE_LEFTMENU = 'hover';
-    }
-    print '<tr class="oddeven">';
-    print '<td>'.$langs->trans('OpenEffect');
-    print '</td>';
-    $name='OBLYON_EFFECT_REDUCE_LEFTMENU';
-    print '<td>';
-    print '<input type="radio" value="hover" id="hover" class="flat" name="'.$name.'" '.($conf->global->$name == "hover"?' checked="checked"':'').'"> ';
-    print '<label for="hover">'.$langs->trans( 'EffectMicroMenuHover').'</label><br>';
-    print '<input type="radio" value="only" id="only" class="flat" name="'.$name.'" '.($conf->global->$name == "only"?' checked="checked"':'').'"> ';
-    print '<label for="only">'.$langs->trans( 'EffectMicroMenuOnly').'</label><br>';
-    print '</td>';
-    print '</tr>';
-}
-
-print '</table>'."\n";
-print '</div>';
-
-print dol_get_fiche_end();
-
-print '<div class="center">';
-print '<input class="button button-save reposition" type="submit" name="submit" value="'.$langs->trans("Save").'">';
-print '</div>';
-
-print '</form>';
-
-llxFooter();
-$db->close();
+	  print '	<div class = "bloc_success centpercent center">'.$langs->trans('OblyonSuccessMessage').'</div>';
+	print '		<script type = "text/javascript">
+					$(document).ready(function() {
+						$(".action").keyup(function(event) {
+							if (event.which === 13)	$("#action").click();
+						});
+					});
+				</script>
+				<form action = "'.$_SERVER['PHP_SELF'].'" method = "POST">
+					<input type = "hidden" name = "token" value = "'.newToken().'" />';
+	// Sauvegarde / Restauration
+	oblyon_print_backup_restore();
+	clearstatcache();
+	print '			<div class = "div-table-responsive-no-min">
+						<table summary = "edit" class = "noborder centpercent editmode tableforfield">';
+	$metas						= array('*', '156px', '300px');
+	oblyon_print_colgroup($metas);
+	$metas						= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'menus');
+	oblyon_print_input('MAIN_MENU_INVERT', 'on_off', $langs->trans('InvertMenus'), '', $metas, 2, 1);	// Invert menu
+	// Top menu
+	oblyon_print_final();
+	$metas						= array(array(3), 'TopMenu');
+	oblyon_print_liste_titre($metas);
+	// Option only if invert menu is on
+	if ($conf->global->MAIN_MENU_INVERT) {
+		$metas		= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'menus');
+		$warning	= empty($conf->global->OBLYON_FULLSIZE_TOPBAR) ? '<br><span class = "warning">'.$langs->trans('FullsizeTopBarWarning').'</span>' : '';
+		oblyon_print_input('OBLYON_FULLSIZE_TOPBAR', 'on_off', $langs->trans('FullsizeTopBar').$warning, '', $metas, 2, 1);	// Fullsize top bar
+	}
+	$metas		= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'menus');
+	oblyon_print_input('MAIN_SHOW_LOGO',		'on_off', $langs->trans('OblyonEnableShowLogo'),	'', $metas, 2, 1);	// Show Company Logo
+	$warning	= !empty($conf->global->OBLYON_STICKY_TOPBAR) ? '<br><span class = "warning">'.$langs->trans('StickyTopBarWarning').'</span>'.(!empty($conf->global->MAIN_MENU_INVERT) ? '<br><span class = "warning">'.$langs->trans('StickyTopBarInvertedWarning').'</span>' : '') : '';
+	oblyon_print_input('OBLYON_STICKY_TOPBAR',	'on_off', $langs->trans('StickyTopBar').$warning,	'', $metas, 2, 1);	// Sticky top bar
+	$metas		= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '_red', 'menus');
+	oblyon_print_input('OBLYON_HIDE_TOPICONS',	'on_off', $langs->trans('HideTopIcons'),			'', $metas, 2, 1);	// Hide top icons
+	// Left menu
+	$metas		= array(array(3), 'LeftMenu');
+	oblyon_print_liste_titre($metas);
+	$metas		= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'menus');
+	oblyon_print_input('OBLYON_SHOW_COMPNAME',	'on_off', $langs->trans('ShowCompanyName'),			'', $metas, 2, 1);	// Show Company name
+	$warning	= !empty($conf->global->OBLYON_STICKY_LEFTBAR) ? '<br><span class = "warning">'.$langs->trans('StickyLeftBarWarning').'</span>'.(!empty($conf->global->MAIN_MENU_INVERT) ? '<br><span class = "warning">'.$langs->trans('StickyLeftBarInvertedWarning').'</span>' : '') : '';
+	oblyon_print_input('OBLYON_STICKY_LEFTBAR',	'on_off', $langs->trans('StickyLeftBar').$warning,	'', $metas, 2, 1);	// Sticky left bar
+	$metas		= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '_red', 'menus');
+	oblyon_print_input('OBLYON_HIDE_LEFTMENU',	'on_off', $langs->trans('HideLeftMenu'),			'', $metas, 2, 1);	// Hide left menu
+	// Effect open leftmenu
+	if($conf->global->OBLYON_HIDE_LEFTMENU) {
+		print '				<tr class = "oddeven">
+								<td colspan = "2">'.$langs->trans('OpenEffect').'</td>
+								<td class = "center">
+									<input type = "radio" value = "slide" id = "slide" class = "flat action" name = "OBLYON_EFFECT_LEFTMENU" '.($conf->global->OBLYON_EFFECT_LEFTMENU == "slide" ? ' checked = "checked"' : '').'">&nbsp;<label for = "slide">'.$langs->trans('EffectLeftMenuSlide').'</label>
+									<br/>
+									<input type = "radio" value = "push" id = "push" class = "flat action" name = "OBLYON_EFFECT_LEFTMENU" '.($conf->global->OBLYON_EFFECT_LEFTMENU == "push" ? ' checked = "checked"' : '').'">&nbsp;<label for = "push">'.$langs->trans('EffectLeftMenuPush').'</label>
+								</td>
+							</tr>';
+	}
+	oblyon_print_input('OBLYON_HIDE_LEFTICONS',		'on_off', $langs->trans('HideLeftIcons'),			'', $metas, 2, 1);	// Hide left icons
+	if (!empty($conf->global->MAIN_MENU_INVERT)) {
+		$metas		= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'menus');
+		$warning	= !empty($conf->global->OBLYON_REDUCE_LEFTMENU) ? '<br><span class = "warning">'.$langs->trans('MicroMenuLeftBarHideLeftIconsWarning').'</span><br><span class = "warning">'.$langs->trans('MicroMenuLeftBarCompanyNameWarning').'</span>' : '';
+		oblyon_print_input('OBLYON_REDUCE_LEFTMENU',	'on_off', $langs->trans('ReduceLeftMenu').$warning,	'', $metas, 2, 1);	// Micro left menu
+		// Effect hover leftmenu
+		if (!empty($conf->global->OBLYON_REDUCE_LEFTMENU)) {
+			print '			<tr class = "oddeven">
+								<td colspan = "2">'.$langs->trans('OpenEffect').'</td>
+								<td class = "center">
+									<input type = "radio" value = "hover" id = "hover" class = "flat action" name = "OBLYON_EFFECT_REDUCE_LEFTMENU" '.($conf->global->OBLYON_EFFECT_REDUCE_LEFTMENU == "hover" ? ' checked = "checked"' : '').'">&nbsp;<label for = "slide">'.$langs->trans('EffectMicroMenuHover').'</label>
+									<br/>
+									<input type = "radio" value = "only" id = "only" class = "flat action" name = "OBLYON_EFFECT_REDUCE_LEFTMENU" '.($conf->global->OBLYON_EFFECT_REDUCE_LEFTMENU == "only" ? ' checked = "checked"' : '').'">&nbsp;<label for = "push">'.$langs->trans('EffectMicroMenuOnly').'</label>
+								</td>
+							</tr>';
+		}
+	}
+	print '				</table>
+					</div>';
+	print dol_get_fiche_end();
+	oblyon_print_btn_action('Gen');
+	print '	</form>
+			<br/>';
+	// End of page
+	llxFooter();
+	$db->close();
+?>

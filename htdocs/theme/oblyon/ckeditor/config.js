@@ -22,6 +22,9 @@ CKEDITOR.editorConfig = function( config )
 	//config.language = 'de';
 	//config.defaultLanguage = 'en';
 	//config.contentsLanguage = 'fr';
+	config.language = 'fr';
+	config.defaultLanguage = 'fr';
+	config.contentsLanguage = 'fr';
 	config.fullPage = false;	// Not a full html page string, just part of it
 	config.dialog_backgroundCoverColor = 'rgb(255, 254, 253)';
 	//config.contentsCss = '/css/mysitestyles.css';
@@ -29,6 +32,10 @@ CKEDITOR.editorConfig = function( config )
 	//config.autoParagraph = false;
 	//config.removeFormatTags = 'b,big,code,del,dfn,em,font,i,ins,kbd';		// See also rules on this.dataProcessor.writer.setRules
 	//config.forcePasteAsPlainText = true;
+	config.font_names = 'Century Gothic/Century Gothic, Futura PT, sans-serif;' + 'Cambria/Cambria, Times, serif;' + config.font_names;
+	config.font_defaultLabel = 'Century Gothic';
+	config.scayt_autoStartup = true;
+	config.scayt_sLang = 'fr_FR';
 	
 	config.toolbar_Full =
 	[

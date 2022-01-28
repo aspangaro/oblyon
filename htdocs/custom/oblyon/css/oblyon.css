@@ -1,0 +1,83 @@
+.paramsHR
+{
+    text-align: center;
+    margin: 5px 0px !important;
+	padding: 0px !important;
+}
+
+.paramsFinal
+{
+    line-height: 1px;
+	border: none !important;
+}
+
+.range-sliders input[type=range]:focus {
+	outline: none;
+}
+
+.range-sliders input[type=range]::-webkit-slider-runnable-track {
+	height: 8px;
+	cursor: pointer;
+	box-shadow: none;
+	background-color: #e6e6e6;
+	border-radius: 4px;
+}
+
+.range-sliders input[type=range]::-moz-range-track {
+	height: 8px;
+	cursor: pointer;
+	box-shadow: none;
+	background-color: #ccc;
+	border-radius: 4px;
+}
+
+.range-sliders input[type=range]::-webkit-slider-thumb {
+	box-shadow: none;
+	border-color: transparent;
+	border-radius: 22px;
+	background-color: #999;
+	cursor: ew-resize;
+	margin-top: -4px;
+}
+
+.range-sliders input[type=range]::-moz-range-thumb {
+	box-shadow: none;
+	height: 30px;
+	width: 30px;
+	border-color: transparent;
+	border-radius: 22px;
+	background-color: #999;
+	cursor: ew-resize;
+	-webkit-appearance: none;
+	margin-top: -4px;
+}
+
+.range-sliders input[type=range]::-moz-focus-outer {
+	border: 0;
+}
+
+.range-sliders .input-slider {
+	border: none;
+	-moz-appearance: textfield;
+}
+
+.range-sliders .input-slider::-webkit-outer-spin-button,
+.range-sliders .input-slider::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+.range-sliders {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.range-sliders .range-slider {
+	width: calc(100% - 120px);
+}
+
+.range-sliders .input-slider {
+	width: 30px;
+}

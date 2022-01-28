@@ -1,136 +1,100 @@
 <?php
-/* Copyright (C) 2015-2019  Open-DSI            <support@open-dsi.fr>
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+	/************************************************
+	* Copyright (C) 2015-2022	Alexandre Spangaro - <support@open-dsi.fr>	Open-DSI - <https://www.open-dsi.fr>
+	* Copyright (C) 2016-2022	Sylvain Legrand - <contact@infras.fr>	InfraS - <https://www.infras.fr>
+	*
+	* This program is free software: you can redistribute it and/or modify
+	* it under the terms of the GNU General Public License as published by
+	* the Free Software Foundation, either version 3 of the License, or
+	* (at your option) any later version.
+	*
+	* This program is distributed in the hope that it will be useful,
+	* but WITHOUT ANY WARRANTY; without even the implied warranty of
+	* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	* GNU General Public License for more details.
+	*
+	* You should have received a copy of the GNU General Public License
+	* along with this program.  If not, see <http://www.gnu.org/licenses/>.
+	************************************************/
 
-/**
- * 	\file		admin/icons.php
- * 	\ingroup	oblyon
- * 	\brief		Icons Page < Oblyon Theme Configurator >
- */
+	/************************************************
+	* 	\file		../oblyon/admin/icons.php
+	* 	\ingroup	oblyon
+	* 	\brief		Options Page < Oblyon Theme Configurator >
+	************************************************/
 
-// Dolibarr environment
-$res = @include("../../main.inc.php"); // From htdocs directory
-if (! $res) {
-  $res = @include("../../../main.inc.php"); // From "custom" directory
-}
+	// Dolibarr environment *************************
+	require '../config.php';
 
-// Libraries
-require_once DOL_DOCUMENT_ROOT . '/core/lib/admin.lib.php';
-require_once '../lib/oblyon.lib.php';
+	// Libraries ************************************
+	require_once DOL_DOCUMENT_ROOT.'/core/lib/admin.lib.php';
+	require_once DOL_DOCUMENT_ROOT.'/core/lib/files.lib.php';
+	require_once '../lib/oblyon.lib.php';
 
+	// Translations *********************************
+	$langs->loadLangs(array('admin', 'oblyon@oblyon'));
 
-// Translations
-$langs->load("admin");
-$langs->load("oblyon@oblyon");
+	// Access control *******************************
+	if (! $user->admin)				accessforbidden();
 
-// Access control
-if (! $user->admin) accessforbidden();
+	// init variables *******************************
+	$list							= array ('fas'	=> '900', 'far'	=> '400', 'fal'	=> '300', 'fat'	=> '100', 'fad'	=> '900');
 
-/*
- * Actions
- */
-$mesg="";
-$action = GETPOST('action', 'alpha');
+	// Actions **************************************
+	$action							= GETPOST('action','alpha');
+	$result							= '';
+	// Sauvegarde / Restauration
+	if ($action == 'bkupParams')	$result	= oblyon_bkup_module ('oblyon');
+	if ($action == 'restoreParams')	$result	= oblyon_restore_module ('oblyon');
+	// links management
+	if (preg_match('/set_(.*)/', $action, $reg)) {
+		$confkey	= $reg[1];
+		$result		= dolibarr_set_const($db, 'MAIN_FONTAWESOME_ICON_STYLE',	$confkey,			'chaine', 0, 'Oblyon module', $conf->entity);
+		$result		= dolibarr_set_const($db, 'MAIN_FONTAWESOME_WEIGHT',		$list[$confkey],	'chaine', 0, 'Oblyon module', $conf->entity);
+	}
+	// Retour => message Ok ou Ko
+	if ($result == 1)						setEventMessages($langs->trans('IconApplied').' : '.$langs->trans('Icon'.$confkey), null, 'mesgs');
+	if ($result == -1)						setEventMessages($langs->trans('Error'), null, 'errors');
+	$_SESSION['dol_resetcache']				= dol_print_date(dol_now(), 'dayhourlog');	// Reset cache
 
-if ($action == 'seticon') {
-	$value = GETPOST('value', 'int');
-    if ($value == 1) {
-        $mesg = "<font class='ok'>".$langs->trans("IconApplied"). ": " . $langs->trans("Icon1") ."</font>";
-        dolibarr_set_const($db, "MAIN_FONTAWESOME_ICON_STYLE", 'fas','chaine',1,'',$conf->entity);
-        dolibarr_set_const($db, "MAIN_FONTAWESOME_WEIGHT", '900','chaine',1,'',$conf->entity);
-        $_SESSION['dol_resetcache']=dol_print_date(dol_now(),'dayhourlog');
-    }
-    if ($value == 2) {
-        $mesg = "<font class='ok'>".$langs->trans("IconApplied"). ": " . $langs->trans("Icon2") ."</font>";
-        dolibarr_set_const($db, "MAIN_FONTAWESOME_ICON_STYLE", 'far','chaine',1,'',$conf->entity);
-        dolibarr_set_const($db, "MAIN_FONTAWESOME_WEIGHT", '400','chaine',1,'',$conf->entity);
-        $_SESSION['dol_resetcache']=dol_print_date(dol_now(),'dayhourlog');
-    }
-    if ($value == 3) {
-        $mesg = "<font class='ok'>".$langs->trans("IconApplied"). ": " . $langs->trans("Icon3") ."</font>";
-        dolibarr_set_const($db, "MAIN_FONTAWESOME_ICON_STYLE", 'fal','chaine',1,'',$conf->entity);
-        dolibarr_set_const($db, "MAIN_FONTAWESOME_WEIGHT", '300','chaine',1,'',$conf->entity);
-        $_SESSION['dol_resetcache']=dol_print_date(dol_now(),'dayhourlog');
-    }
-    if ($value == 4) {
-        $mesg = "<font class='ok'>".$langs->trans("IconApplied"). ": " . $langs->trans("Icon4") ."</font>";
-        dolibarr_set_const($db, "MAIN_FONTAWESOME_ICON_STYLE", 'fat','chaine',1,'',$conf->entity);
-        dolibarr_set_const($db, "MAIN_FONTAWESOME_WEIGHT", '100','chaine',1,'',$conf->entity);
-        $_SESSION['dol_resetcache']=dol_print_date(dol_now(),'dayhourlog');
-    }
-    if ($value == 5) {
-        $mesg = "<font class='ok'>".$langs->trans("IconApplied"). ": " . $langs->trans("Icon5") ."</font>";
-        dolibarr_set_const($db, "MAIN_FONTAWESOME_ICON_STYLE", 'fad','chaine',1,'',$conf->entity);
-        dolibarr_set_const($db, "MAIN_FONTAWESOME_WEIGHT", '900','chaine',1,'',$conf->entity);
-        $_SESSION['dol_resetcache']=dol_print_date(dol_now(),'dayhourlog');
-    }
+	// View *****************************************
+	$page_name								= $langs->trans('OblyonIconsTitle');
+	llxHeader('', $page_name);
+	$linkback								= '<a href = "'.DOL_URL_ROOT.'/admin/modules.php">'.$langs->trans('BackToModuleList').'</a>';
+	print load_fiche_titre($page_name, $linkback);
 
-}
+	// Configuration header *************************
+	$head									= oblyon_admin_prepare_head();
+	dol_fiche_head($head, 'icons', $langs->trans('Module113900Name'), 0, 'opendsi@oblyon');
 
-/*
- * View
- */
-llxHeader('', $langs->trans("OblyonIconsTitle"));
-
-// Subheader
-$linkback = '<a href="' . DOL_URL_ROOT . '/admin/modules.php">'	. $langs->trans("BackToModuleList") . '</a>';
-print load_fiche_titre($langs->trans('OblyonIconsTitle'), $linkback);
-
-// Configuration header
-$head = oblyon_admin_prepare_head();
-
-print dol_get_fiche_head($head, 'icons', $langs->trans("Module113900Name"), 0, "opendsi@oblyon");
-
-dol_htmloutput_mesg($mesg);
-
-// Setup page goes here
-print '<form action="' . $_SERVER["PHP_SELF"] . '" method="post">';
-print '<input type="hidden" name="token" value="' . $_SESSION['newtoken'] . '">';
-
-clearstatcache();
-
-print '<div class="div-table-responsive-no-min">';
-print '<table summary="edit" class="noborder centpercent editmode tableforfield">';
-print '<tr class="liste_titre">';
-print '<td colspan="5">' . $langs->trans("IconsStyle") . '</td>';
-print '</tr>';
-print '<tr>';
-print '<td align="center"><a title="'.$langs->trans("Icon1").'" href="' . $_SERVER['PHP_SELF'] . '?action=seticon&value=1">';
-print img_picto($langs->trans("Icon1"), 'icon1.png@oblyon', "width='50%'");
-print '<br>'.$langs->trans("Icon1").'</a></td>';
-print '<td align="center"><a title="'.$langs->trans("Icon2").'" href="' . $_SERVER['PHP_SELF'] . '?action=seticon&value=2">';
-print img_picto($langs->trans("Icon2"), 'icon2.png@oblyon', "width='50%'");
-print '<br>'.$langs->trans("Icon2").'</a></td>';
-print '<td align="center"><a title="'.$langs->trans("Icon3").'" href="' . $_SERVER['PHP_SELF'] . '?action=seticon&value=3">';
-print img_picto($langs->trans("Icon3"), 'icon3.png@oblyon', "width='50%'");
-print '<br>'.$langs->trans("Icon3").'</a></td>';
-print '<td align="center"><a title="'.$langs->trans("Icon4").'" href="' . $_SERVER['PHP_SELF'] . '?action=seticon&value=4">';
-print img_picto($langs->trans("Icon4"), 'icon4.png@oblyon', "width='50%'");
-print '<br>'.$langs->trans("Icon4").'</a></td>';
-print '</a></td>';
-print '<td align="center"><a title="'.$langs->trans("Icon5").'" href="' . $_SERVER['PHP_SELF'] . '?action=seticon&value=5">';
-print img_picto($langs->trans("Icon5"), 'icon5.png@oblyon', "width='50%'");
-print '<br>'.$langs->trans("Icon5").'</a></td>';
-print '</tr>';
-print '</table>';
-
-print dol_get_fiche_end();
-
-print '<br>';
-
-// End of page
-llxFooter();
-$db->close();
+	// setup page goes here *************************
+	print '	<form action = "'.$_SERVER['PHP_SELF'].'" method = "POST">
+				<input type = "hidden" name = "token" value = "'.newToken().'" />';
+	// Sauvegarde / Restauration
+	oblyon_print_backup_restore();
+	clearstatcache();
+	print '		<div class = "div-table-responsive-no-min">
+					<table summary = "edit" class = "noborder centpercent editmode tableforfield">';
+	$larg									= !empty($list) && count($list) > 0 ? 100 / count($list) : 100;
+	$metas									= array();
+	for ($i = 0; $i < count($list); $i++)	$metas[]	= $larg.'%';
+	oblyon_print_colgroup($metas);
+	$metas									= array(array(count($list)), 'IconsStyle');
+	oblyon_print_liste_titre($metas);
+	print '				<tr>';
+	foreach ($list as $name => $weight)
+		print '				<td class = "center">
+								<a title = "'.$langs->trans('Icon'.$name).'" href = "'.$_SERVER['PHP_SELF'].'?action=set_'.$name.'">'.img_picto($langs->trans('Icon'.$name), 'icon'.$name.'.png@oblyon', 'width = "50%"').'
+									<br/>'.$langs->trans('Icon'.$name).'
+								</a>
+							</td>';
+	print '				</tr>
+					</table>
+				</div>';
+	print dol_get_fiche_end();
+	print '	</form>
+			<br/>';
+	// End of page
+	llxFooter();
+	$db->close();
+?>

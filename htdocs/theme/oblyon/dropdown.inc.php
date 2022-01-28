@@ -132,7 +132,11 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
 }
 
 .dropdown-menu > .user-header{
-    background: rgb(<?php echo $colorbackhmenu1 ?>);
+<?php if ( $conf->global->MAIN_MENU_INVERT ) { ?>
+    background-color: <?php print $bgnavtop; ?>;
+<?php } else { ?>
+    background-color: <?php print $bgnavleft; ?>;
+<?php } ?>
 }
 
 .dropdown-menu .dropdown-header{
@@ -177,7 +181,11 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
 .dropdown-body::-webkit-scrollbar-thumb {
     -webkit-border-radius: 0;
     border-radius: 0;
-    background: rgb(<?php echo $colorbackhmenu1 ?>);
+<?php if ( $conf->global->MAIN_MENU_INVERT ) { ?>
+    background-color: <?php print $bgnavtop; ?>;
+<?php } else { ?>
+    background-color: <?php print $bgnavleft; ?>;
+<?php } ?>
 }
 .dropdown-body::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
@@ -240,7 +248,7 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
 }
 
     .dropdown-menu a.top-menu-dropdown-link {
-        color: rgb(<?php print $colortextlink; ?>) !important;
+        color: <?php echo $colortextlink; ?> !important;
         -webkit-box-shadow: none;
         -moz-box-shadow: none;
         box-shadow: none;
@@ -290,7 +298,11 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
     .dropdown-item.active, .dropdown-item:hover, .dropdown-item:focus  {
         color: #000000 !important;
         text-decoration: none;
-        background: rgb(<?php echo $colorbackhmenu1 ?>);
+<?php if ( $conf->global->MAIN_MENU_INVERT ) { ?>
+    background-color: <?php print $bgnavtop; ?>;
+<?php } else { ?>
+    background-color: <?php print $bgnavleft; ?>;
+<?php } ?>
     }
     /*
      * SEARCH
