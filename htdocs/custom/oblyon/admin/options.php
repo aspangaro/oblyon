@@ -115,6 +115,12 @@ print ajax_constantonoff("MAIN_USE_TOP_MENU_QUICKADD_DROPDOWN", array(), $conf->
 print '</td>';
 print '</tr>';
 
+// Add a padding bottom in page (40px)
+print '<tr class="oddeven"><td>' . $langs->trans('OblyonPaddingRightBottom') . '</td><td>';
+print ajax_constantonoff("OBLYON_PADDING_RIGHT_BOTTOM", array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'options');
+print '</td>';
+print '</tr>';
+
 // Login
 print '<tr class="liste_titre"><td colspan="2">'.$langs->trans('OblyonLoginTitle').'</td></tr>';
 
