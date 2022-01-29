@@ -125,7 +125,7 @@ function __construct($db) {
 	$this->const [$r] [1] = "chaine";
 	$this->const [$r] [2] = "oblyon_menu.php";
 	$this->const [$r] [3] = 0;
-	$this->const [$r] [4] = 1;
+	$this->const [$r] [4] = 0;
 	$this->const [$r] [5] = 'current';
 	$this->const [$r] [6] = 1;
 
@@ -134,7 +134,7 @@ function __construct($db) {
 	$this->const [$r] [1] = "chaine";
 	$this->const [$r] [2] = "oblyon_menu.php";
 	$this->const [$r] [3] = 0;
-	$this->const [$r] [4] = 1;
+	$this->const [$r] [4] = 0;
 	$this->const [$r] [5] = 'current';
 	$this->const [$r] [6] = 1;
 
@@ -143,7 +143,7 @@ function __construct($db) {
 	$this->const [$r] [1] = "chaine";
 	$this->const [$r] [2] = "oblyon_menu.php";
 	$this->const [$r] [3] = 0;
-	$this->const [$r] [4] = 1;
+	$this->const [$r] [4] = 0;
 	$this->const [$r] [5] = 'current';
 	$this->const [$r] [6] = 1;
 
@@ -152,7 +152,7 @@ function __construct($db) {
 	$this->const [$r] [1] = "chaine";
 	$this->const [$r] [2] = "oblyon_menu.php";
 	$this->const [$r] [3] = 0;
-	$this->const [$r] [4] = 1;
+	$this->const [$r] [4] = 0;
 	$this->const [$r] [5] = 'current';
 	$this->const [$r] [6] = 1;
 
@@ -161,7 +161,7 @@ function __construct($db) {
 	$this->const [$r] [1] = "chaine";
 	$this->const [$r] [2] = "fal";
 	$this->const [$r] [3] = 0;
-	$this->const [$r] [4] = 1;
+	$this->const [$r] [4] = 0;
 	$this->const [$r] [5] = 'current';
 	$this->const [$r] [6] = 1;
 
@@ -170,7 +170,7 @@ function __construct($db) {
 	$this->const [$r] [1] = "chaine";
 	$this->const [$r] [2] = "#0083A2";
 	$this->const [$r] [3] = 'Oblyon maincolor';
-	$this->const [$r] [4] = 1;
+	$this->const [$r] [4] = 0;
 	$this->const [$r] [5] = 'current';
 	$this->const [$r] [6] = 0;
 
@@ -179,7 +179,7 @@ function __construct($db) {
 	$this->const [$r] [1] = "chaine";
 	$this->const [$r] [2] = "#333333";
 	$this->const [$r] [3] = 'Oblyon background topmenu color';
-	$this->const [$r] [4] = 1;
+	$this->const [$r] [4] = 0;
 	$this->const [$r] [5] = 'current';
 	$this->const [$r] [6] = 0;
 
@@ -188,7 +188,7 @@ function __construct($db) {
 	$this->const [$r] [1] = "chaine";
 	$this->const [$r] [2] = "#444444";
 	$this->const [$r] [3] = 'Oblyon background topmenu hover color';
-	$this->const [$r] [4] = 1;
+	$this->const [$r] [4] = 0;
 	$this->const [$r] [5] = 'current';
 	$this->const [$r] [6] = 0;
 
@@ -197,7 +197,7 @@ function __construct($db) {
 	$this->const [$r] [1] = "chaine";
 	$this->const [$r] [2] = "#F4F4F4";
 	$this->const [$r] [3] = 'Oblyon topmenu text color';
-	$this->const [$r] [4] = 1;
+	$this->const [$r] [4] = 0;
 	$this->const [$r] [5] = 'current';
 	$this->const [$r] [6] = 0;
 
@@ -206,7 +206,7 @@ function __construct($db) {
 	$this->const [$r] [1] = "chaine";
 	$this->const [$r] [2] = "#333333";
 	$this->const [$r] [3] = 'Oblyon background leftmenu color';
-	$this->const [$r] [4] = 1;
+	$this->const [$r] [4] = 0;
 	$this->const [$r] [5] = 'current';
 	$this->const [$r] [6] = 0;
 
@@ -215,7 +215,7 @@ function __construct($db) {
 	$this->const [$r] [1] = "chaine";
 	$this->const [$r] [2] = "#444444";
 	$this->const [$r] [3] = 'Oblyon background leftmenu hover color';
-	$this->const [$r] [4] = 1;
+	$this->const [$r] [4] = 0;
 	$this->const [$r] [5] = 'current';
 	$this->const [$r] [6] = 0;
 
@@ -224,7 +224,7 @@ function __construct($db) {
 	$this->const [$r] [1] = "chaine";
 	$this->const [$r] [2] = "#F4F4F4";
 	$this->const [$r] [3] = 'Oblyon foreground leftmenu color';
-	$this->const [$r] [4] = 1;
+	$this->const [$r] [4] = 0;
 	$this->const [$r] [5] = 'current';
 	$this->const [$r] [6] = 0;
 
@@ -233,7 +233,7 @@ function __construct($db) {
 	$this->const [$r] [1] = "chaine";
 	$this->const [$r] [2] = "slide";
 	$this->const [$r] [3] = 'Oblyon leftmenu effect behavior';
-	$this->const [$r] [4] = 1;
+	$this->const [$r] [4] = 0;
 	$this->const [$r] [5] = 'current';
 	$this->const [$r] [6] = 0;
 
@@ -242,7 +242,7 @@ function __construct($db) {
 	$this->const [$r] [1] = "chaine";
 	$this->const [$r] [2] = "#F4F4F4";
 	$this->const [$r] [3] = 'Oblyon background color';
-	$this->const [$r] [4] = 1;
+	$this->const [$r] [4] = 0;
 	$this->const [$r] [5] = 'current';
 	$this->const [$r] [6] = 0;
 
@@ -251,7 +251,7 @@ function __construct($db) {
 	$this->const [$r] [1] = "chaine";
 	$this->const [$r] [2] = "#FFFFFF";
 	$this->const [$r] [3] = 'Oblyon background logo color';
-	$this->const [$r] [4] = 1;
+	$this->const [$r] [4] = 0;
 	$this->const [$r] [5] = 'current';
 	$this->const [$r] [6] = 0;
 
@@ -260,7 +260,7 @@ function __construct($db) {
 	$this->const [$r] [1] = "chaine";
 	$this->const [$r] [2] = "#F4F4F4";
 	$this->const [$r] [3] = 'Oblyon background login color';
-	$this->const [$r] [4] = 1;
+	$this->const [$r] [4] = 0;
 	$this->const [$r] [5] = 'current';
 	$this->const [$r] [6] = 0;
 
@@ -269,7 +269,7 @@ function __construct($db) {
 	$this->const [$r] [1] = "chaine";
 	$this->const [$r] [2] = "#FFFFFF";
 	$this->const [$r] [3] = 'Oblyon background line color';
-	$this->const [$r] [4] = 1;
+	$this->const [$r] [4] = 0;
 	$this->const [$r] [5] = 'current';
 	$this->const [$r] [6] = 0;
 
@@ -278,7 +278,7 @@ function __construct($db) {
 	$this->const [$r] [1] = "chaine";
 	$this->const [$r] [2] = "#444444";
 	$this->const [$r] [3] = 'Oblyon text line color';
-	$this->const [$r] [4] = 1;
+	$this->const [$r] [4] = 0;
 	$this->const [$r] [5] = 'current';
 	$this->const [$r] [6] = 0;
 
@@ -287,7 +287,7 @@ function __construct($db) {
 	$this->const [$r] [1] = "chaine";
 	$this->const [$r] [2] = "#444444";
 	$this->const [$r] [3] = 'Oblyon text line color';
-	$this->const [$r] [4] = 1;
+	$this->const [$r] [4] = 0;
 	$this->const [$r] [5] = 'current';
 	$this->const [$r] [6] = 0;
 
@@ -296,7 +296,7 @@ function __construct($db) {
 	$this->const [$r] [1] = "chaine";
 	$this->const [$r] [2] = "#0088cc";
 	$this->const [$r] [3] = 'Oblyon button action color 1';
-	$this->const [$r] [4] = 1;
+	$this->const [$r] [4] = 0;
 	$this->const [$r] [5] = 'current';
 	$this->const [$r] [6] = 0;
 
@@ -305,7 +305,7 @@ function __construct($db) {
 	$this->const [$r] [1] = "chaine";
 	$this->const [$r] [2] = "#0044cc";
 	$this->const [$r] [3] = 'Oblyon button action color 2';
-	$this->const [$r] [4] = 1;
+	$this->const [$r] [4] = 0;
 	$this->const [$r] [5] = 'current';
 	$this->const [$r] [6] = 0;
 
@@ -314,7 +314,7 @@ function __construct($db) {
 	$this->const [$r] [1] = "chaine";
 	$this->const [$r] [2] = "#cc8800";
 	$this->const [$r] [3] = 'Oblyon button delete color 1';
-	$this->const [$r] [4] = 1;
+	$this->const [$r] [4] = 0;
 	$this->const [$r] [5] = 'current';
 	$this->const [$r] [6] = 0;
 
@@ -323,7 +323,7 @@ function __construct($db) {
 	$this->const [$r] [1] = "chaine";
 	$this->const [$r] [2] = "#cc4400";
 	$this->const [$r] [3] = 'Oblyon button delete color 2';
-	$this->const [$r] [4] = 1;
+	$this->const [$r] [4] = 0;
 	$this->const [$r] [5] = 'current';
 	$this->const [$r] [6] = 0;
 
@@ -332,7 +332,7 @@ function __construct($db) {
 	$this->const [$r] [1] = "chaine";
 	$this->const [$r] [2] = "#6c6a98";
 	$this->const [$r] [3] = 'Oblyon Dashboard project background color';
-	$this->const [$r] [4] = 1;
+	$this->const [$r] [4] = 0;
 	$this->const [$r] [5] = 'current';
 	$this->const [$r] [6] = 0;
 
@@ -341,7 +341,7 @@ function __construct($db) {
 	$this->const [$r] [1] = "chaine";
 	$this->const [$r] [2] = "#b46080";
 	$this->const [$r] [3] = 'Oblyon Dashboard action background color';
-	$this->const [$r] [4] = 1;
+	$this->const [$r] [4] = 0;
 	$this->const [$r] [5] = 'current';
 	$this->const [$r] [6] = 0;
 
@@ -350,7 +350,7 @@ function __construct($db) {
 	$this->const [$r] [1] = "chaine";
 	$this->const [$r] [2] = "#99a17d";
 	$this->const [$r] [3] = 'Oblyon Dashboard customer background color';
-	$this->const [$r] [4] = 1;
+	$this->const [$r] [4] = 0;
 	$this->const [$r] [5] = 'current';
 	$this->const [$r] [6] = 0;
 
@@ -359,7 +359,7 @@ function __construct($db) {
 	$this->const [$r] [1] = "chaine";
 	$this->const [$r] [2] = "#599caf";
 	$this->const [$r] [3] = 'Oblyon Dashboard supplier background color';
-	$this->const [$r] [4] = 1;
+	$this->const [$r] [4] = 0;
 	$this->const [$r] [5] = 'current';
 	$this->const [$r] [6] = 0;
 
@@ -368,7 +368,7 @@ function __construct($db) {
 	$this->const [$r] [1] = "chaine";
 	$this->const [$r] [2] = "#469686";
 	$this->const [$r] [3] = 'Oblyon Dashboard contract background color';
-	$this->const [$r] [4] = 1;
+	$this->const [$r] [4] = 0;
 	$this->const [$r] [5] = 'current';
 	$this->const [$r] [6] = 0;
 
@@ -377,7 +377,7 @@ function __construct($db) {
 	$this->const [$r] [1] = "chaine";
 	$this->const [$r] [2] = "#469686";
 	$this->const [$r] [3] = 'Oblyon Dashboard bank background color';
-	$this->const [$r] [4] = 1;
+	$this->const [$r] [4] = 0;
 	$this->const [$r] [5] = 'current';
 	$this->const [$r] [6] = 0;
 
@@ -386,7 +386,7 @@ function __construct($db) {
 	$this->const [$r] [1] = "chaine";
 	$this->const [$r] [2] = "#79633f";
 	$this->const [$r] [3] = 'Oblyon Dashboard member background color';
-	$this->const [$r] [4] = 1;
+	$this->const [$r] [4] = 0;
 	$this->const [$r] [5] = 'current';
 	$this->const [$r] [6] = 0;
 
@@ -395,7 +395,7 @@ function __construct($db) {
 	$this->const [$r] [1] = "chaine";
 	$this->const [$r] [2] = "#79633f";
 	$this->const [$r] [3] = 'Oblyon Dashboard expense report background color';
-	$this->const [$r] [4] = 1;
+	$this->const [$r] [4] = 0;
 	$this->const [$r] [5] = 'current';
 	$this->const [$r] [6] = 0;
 
@@ -404,7 +404,7 @@ function __construct($db) {
 	$this->const [$r] [1] = "chaine";
 	$this->const [$r] [2] = "#755114";
 	$this->const [$r] [3] = 'Oblyon Dashboard holiday background color';
-	$this->const [$r] [4] = 1;
+	$this->const [$r] [4] = 0;
 	$this->const [$r] [5] = 'current';
 	$this->const [$r] [6] = 0;
 
