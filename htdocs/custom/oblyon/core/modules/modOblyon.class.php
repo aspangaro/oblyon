@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (C) 2015-2016  Nicolas Rivera      <nrivera.pro@gmail.com>
- * Copyright (C) 2015-2019  Open-DSI            <support@open-dsi.fr>
+ * Copyright (C) 2015-2022  Alexandre Spangaro  <aspangaro@open-dsi.fr>
  *
  * Copyright (C) 2003      Rodolphe Quiedeville <rodolphe@quiedeville.org>
  * Copyright (C) 2004-2012 Laurent Destailleur  <eldy@users.sourceforge.net>
@@ -77,7 +77,7 @@ function __construct($db) {
 
 	$this->editor_url = "https://www.open-dsi.fr";
 
-	$this->editor_email	 = 'support@open-dsi.fr';
+	$this->editor_email	 = 'aspangaro@open-dsi.fr';
 
 	// Key used in llx_const table to save module status enabled/disabled (where MYMODULE is value of property name of module in uppercase)
 	$this->const_name = 'MAIN_MODULE_'.strtoupper($this->name);
@@ -151,15 +151,6 @@ function __construct($db) {
 	$this->const [$r] [0] = "MAIN_MENUFRONT_SMARTPHONE_FORCED";
 	$this->const [$r] [1] = "chaine";
 	$this->const [$r] [2] = "oblyon_menu.php";
-	$this->const [$r] [3] = 0;
-	$this->const [$r] [4] = 0;
-	$this->const [$r] [5] = 'current';
-	$this->const [$r] [6] = 1;
-
-	$r ++;
-	$this->const [$r] [0] = "MAIN_ICON_STYLE";
-	$this->const [$r] [1] = "chaine";
-	$this->const [$r] [2] = "fal";
 	$this->const [$r] [3] = 0;
 	$this->const [$r] [4] = 0;
 	$this->const [$r] [5] = 'current';
@@ -327,11 +318,21 @@ function __construct($db) {
 	$this->const [$r] [5] = 'current';
 	$this->const [$r] [6] = 0;
 
+	// Dashboard
 	$r ++;
-	$this->const [$r] [0] = "OBLYON_INFOXBOX_PROJECT_COLOR";
+	$this->const [$r] [0] = "THEME_AGRESSIVENESS_RATIO";
 	$this->const [$r] [1] = "chaine";
-	$this->const [$r] [2] = "#6c6a98";
-	$this->const [$r] [3] = 'Oblyon Dashboard project background color';
+	$this->const [$r] [2] = "0";
+	$this->const [$r] [3] = 'Oblyon Dashboard agressiveness ratio';
+	$this->const [$r] [4] = 0;
+	$this->const [$r] [5] = 'current';
+	$this->const [$r] [6] = 0;
+	
+	$r ++;
+	$this->const [$r] [0] = "OBLYON_INFOXBOX_WEATHER_COLOR";
+	$this->const [$r] [1] = "chaine";
+	$this->const [$r] [2] = "#BDBDBD";
+	$this->const [$r] [3] = 'Oblyon Dashboard weather background color';
 	$this->const [$r] [4] = 0;
 	$this->const [$r] [5] = 'current';
 	$this->const [$r] [6] = 0;
@@ -339,26 +340,71 @@ function __construct($db) {
 	$r ++;
 	$this->const [$r] [0] = "OBLYON_INFOXBOX_ACTION_COLOR";
 	$this->const [$r] [1] = "chaine";
-	$this->const [$r] [2] = "#b46080";
+	$this->const [$r] [2] = "#AB4DA1";
 	$this->const [$r] [3] = 'Oblyon Dashboard action background color';
 	$this->const [$r] [4] = 0;
 	$this->const [$r] [5] = 'current';
 	$this->const [$r] [6] = 0;
 
 	$r ++;
-	$this->const [$r] [0] = "OBLYON_INFOXBOX_CUSTOMER_COLOR";
+	$this->const [$r] [0] = "OBLYON_INFOXBOX_PROJECT_COLOR";
 	$this->const [$r] [1] = "chaine";
-	$this->const [$r] [2] = "#99a17d";
-	$this->const [$r] [3] = 'Oblyon Dashboard customer background color';
+	$this->const [$r] [2] = "#6C6A98";
+	$this->const [$r] [3] = 'Oblyon Dashboard project background color';
 	$this->const [$r] [4] = 0;
 	$this->const [$r] [5] = 'current';
 	$this->const [$r] [6] = 0;
 
 	$r ++;
-	$this->const [$r] [0] = "OBLYON_INFOXBOX_SUPPLIER_COLOR";
+	$this->const [$r] [0] = "OBLYON_INFOXBOX_CUSTOMER_PROPAL_COLOR";
 	$this->const [$r] [1] = "chaine";
-	$this->const [$r] [2] = "#599caf";
-	$this->const [$r] [3] = 'Oblyon Dashboard supplier background color';
+	$this->const [$r] [2] = "#49CC29";
+	$this->const [$r] [3] = 'Oblyon Dashboard customer propal background color';
+	$this->const [$r] [4] = 0;
+	$this->const [$r] [5] = 'current';
+	$this->const [$r] [6] = 0;
+
+	$r ++;
+	$this->const [$r] [0] = "OBLYON_INFOXBOX_CUSTOMER_ORDER_COLOR";
+	$this->const [$r] [1] = "chaine";
+	$this->const [$r] [2] = "#49CC29";
+	$this->const [$r] [3] = 'Oblyon Dashboard customer order background color';
+	$this->const [$r] [4] = 0;
+	$this->const [$r] [5] = 'current';
+	$this->const [$r] [6] = 0;
+
+	$r ++;
+	$this->const [$r] [0] = "OBLYON_INFOXBOX_CUSTOMER_INVOICE_COLOR";
+	$this->const [$r] [1] = "chaine";
+	$this->const [$r] [2] = "#49CC29";
+	$this->const [$r] [3] = 'Oblyon Dashboard customer invoice background color';
+	$this->const [$r] [4] = 0;
+	$this->const [$r] [5] = 'current';
+	$this->const [$r] [6] = 0;
+
+	$r ++;
+	$this->const [$r] [0] = "OBLYON_INFOXBOX_SUPPLIER_PROPAL_COLOR";
+	$this->const [$r] [1] = "chaine";
+	$this->const [$r] [2] = "#599CAF";
+	$this->const [$r] [3] = 'Oblyon Dashboard supplier propal background color';
+	$this->const [$r] [4] = 0;
+	$this->const [$r] [5] = 'current';
+	$this->const [$r] [6] = 0;
+
+	$r ++;
+	$this->const [$r] [0] = "OBLYON_INFOXBOX_SUPPLIER_ORDER_COLOR";
+	$this->const [$r] [1] = "chaine";
+	$this->const [$r] [2] = "#599CAF";
+	$this->const [$r] [3] = 'Oblyon Dashboard supplier order background color';
+	$this->const [$r] [4] = 0;
+	$this->const [$r] [5] = 'current';
+	$this->const [$r] [6] = 0;
+
+	$r ++;
+	$this->const [$r] [0] = "OBLYON_INFOXBOX_SUPPLIER_INVOICE_COLOR";
+	$this->const [$r] [1] = "chaine";
+	$this->const [$r] [2] = "#599CAF";
+	$this->const [$r] [3] = 'Oblyon Dashboard supplier invoice background color';
 	$this->const [$r] [4] = 0;
 	$this->const [$r] [5] = 'current';
 	$this->const [$r] [6] = 0;
@@ -366,7 +412,7 @@ function __construct($db) {
 	$r ++;
 	$this->const [$r] [0] = "OBLYON_INFOXBOX_CONTRAT_COLOR";
 	$this->const [$r] [1] = "chaine";
-	$this->const [$r] [2] = "#469686";
+	$this->const [$r] [2] = "#8C5545";
 	$this->const [$r] [3] = 'Oblyon Dashboard contract background color';
 	$this->const [$r] [4] = 0;
 	$this->const [$r] [5] = 'current';
@@ -375,7 +421,7 @@ function __construct($db) {
 	$r ++;
 	$this->const [$r] [0] = "OBLYON_INFOXBOX_BANK_COLOR";
 	$this->const [$r] [1] = "chaine";
-	$this->const [$r] [2] = "#469686";
+	$this->const [$r] [2] = "#3333CC";
 	$this->const [$r] [3] = 'Oblyon Dashboard bank background color';
 	$this->const [$r] [4] = 0;
 	$this->const [$r] [5] = 'current';
@@ -384,7 +430,7 @@ function __construct($db) {
 	$r ++;
 	$this->const [$r] [0] = "OBLYON_INFOXBOX_ADHERENT_COLOR";
 	$this->const [$r] [1] = "chaine";
-	$this->const [$r] [2] = "#79633f";
+	$this->const [$r] [2] = "#79631C";
 	$this->const [$r] [3] = 'Oblyon Dashboard member background color';
 	$this->const [$r] [4] = 0;
 	$this->const [$r] [5] = 'current';
@@ -393,7 +439,7 @@ function __construct($db) {
 	$r ++;
 	$this->const [$r] [0] = "OBLYON_INFOXBOX_EXPENSEREPORT_COLOR";
 	$this->const [$r] [1] = "chaine";
-	$this->const [$r] [2] = "#79633f";
+	$this->const [$r] [2] = "#D1D12A";
 	$this->const [$r] [3] = 'Oblyon Dashboard expense report background color';
 	$this->const [$r] [4] = 0;
 	$this->const [$r] [5] = 'current';
@@ -402,8 +448,17 @@ function __construct($db) {
 	$r ++;
 	$this->const [$r] [0] = "OBLYON_INFOXBOX_HOLIDAY_COLOR";
 	$this->const [$r] [1] = "chaine";
-	$this->const [$r] [2] = "#755114";
+	$this->const [$r] [2] = "#E0A01F";
 	$this->const [$r] [3] = 'Oblyon Dashboard holiday background color';
+	$this->const [$r] [4] = 0;
+	$this->const [$r] [5] = 'current';
+	$this->const [$r] [6] = 0;
+
+	$r ++;
+	$this->const [$r] [0] = "OBLYON_INFOXBOX_TICKET_COLOR";
+	$this->const [$r] [1] = "chaine";
+	$this->const [$r] [2] = "#C93E28";
+	$this->const [$r] [3] = 'Oblyon Dashboard ticket background color';
 	$this->const [$r] [4] = 0;
 	$this->const [$r] [5] = 'current';
 	$this->const [$r] [6] = 0;
