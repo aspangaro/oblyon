@@ -7987,10 +7987,15 @@ div.liste_titre {
 }
 tr.liste_titre_sel th, th.liste_titre_sel, tr.liste_titre_sel td, td.liste_titre_sel, form.liste_titre_sel div
 {
-    font-family: <?php print $fontlist ?>;
-    font-weight: normal;
-    border-bottom: 1px solid #FDFFFF;
-    text-decoration: underline;
+	font-family: <?php print $fontlist ?>;
+	color: <?php print $colorftitle; ?> !important;
+	font-weight: bold;
+	background-color: <?php print colorDarker($colorbtitle, 5); ?>;
+	/* Test
+	text-decoration: underline;
+	border-bottom: 8px solid <?php print $colorftitle; ?> !important;
+	border-radius: 0.25rem;
+	*/
 }
 input.liste_titre {
     background: transparent;
