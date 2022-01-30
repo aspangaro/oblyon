@@ -308,7 +308,6 @@
 			oblyon_print_input($key, 'input', $langs->trans($key), '', $metas, 3, 1);
 		}
 	}
-	}
 	// Others
 	$metas		= array(array(4), 'Others');
 	oblyon_print_liste_titre($metas);
