@@ -58,7 +58,7 @@
 			$this->description		= $langs->trans('Module113900Desc');				// Module description
 			$this->version			= 'dolibarr';										              // Version : 'development', 'experimental', 'dolibarr' or 'dolibarr_deprecated' or version
 			$this->const_name		= 'MAIN_MODULE_'.strtoupper($this->name);			// llx_const table to save module status enabled/disabled
-			$this->special			= 1;												                  // Where to store the module in setup page (0=common,1=interface,2=others,3=very specific)
+			$this->special			= 0;												                  // Where to store the module in setup page (0=common,1=interface,2=others,3=very specific)
 			$this->picto			= 'opendsi_big@'.$this->name;						        // Name of image file used for this module. If in theme => 'pictovalue' ; if in module => 'pictovalue@module' under name object_pictovalue.png
 			$this->module_parts		= array('menus'	=> 1,
 											'js'	=> array('js'	=> '/'.$this->name.'/js/pushy.js'),
