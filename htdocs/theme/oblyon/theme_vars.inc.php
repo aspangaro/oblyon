@@ -30,7 +30,7 @@
 	*              if (is_readable($var_file)) include $var_file;
 	*/
 
-	global $theme_bordercolor, $theme_datacolor, $theme_bgcolor, $theme_bgcoloronglet;
+	global $conf, $theme_bordercolor, $theme_datacolor, $theme_bgcolor, $theme_bgcoloronglet;
 
 	// Define fonts
 	$fontlist			= '"Century Gothic", "Futura PT", sans-serif';

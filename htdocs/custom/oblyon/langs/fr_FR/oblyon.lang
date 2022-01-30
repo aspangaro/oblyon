@@ -5,11 +5,11 @@
 Module113900Name = Oblyon
 Module113900Desc = Panneau d'options qui vous permet de personnaliser le thème Oblyon
 
-Theme1 = Oblyon Green
-Theme2 = Oblyon Dark
-Theme3 = Oblyon Blue
-Theme4 = Oblyon Night
-Theme5 = Oblyon Light
+OblyonParamAction1                  = Sauvegarder / Restaurer l'ensemble des paramètres du module
+OblyonParamAction2                  = <br>(après une restauration rafraichissez la page (F5) pour visualiser le résultat)
+OblyonParamBkup                     = Sauvegarder
+OblyonParamRestore                  = Restaurer
+
 
 #
 # Easya
@@ -106,16 +106,12 @@ THEME_ELDY_TEXTLINK = Couleur des textes de liens
 
 RestoreDefaultColors=Retablir couleurs par défaut
 DefaultsColorsMsg=Couleurs par défaut rétabli
-OblyonGreen=Oblyon Green
-ThemeOblyonGreenApplied=Thème Oblyon Green appliqué
-OblyonDark=Oblyon Dark
-ThemeOblyonDarkApplied=Thème Oblyon Dark appliqué
-OblyonBlue=Oblyon Blue
-ThemeOblyonBlueApplied=Thème Oblyon Blue appliqué
-OblyonNight=Oblyon Night
-ThemeOblyonNightApplied=Thème Oblyon Night appliqué
-OblyonLight=Oblyon Light
-ThemeOblyonLightApplied=Thème Oblyon Light appliqué
+ThemeApplied = Thème appliqué
+Oblyongreen = Oblyon Green
+Oblyondark = Oblyon Dark
+Oblyonblue = Oblyon Blue
+Oblyonnight = Oblyon Night
+Oblyonlight = Oblyon Light
 
 #
 # Dashboard page
@@ -125,7 +121,7 @@ OblyonDashboardDisableBlocks=Vignette des objets ouverts (à traiter ou en retar
 DisableGlobalBoxStats = Désactiver le widget des statistiques globales (nombres d'éléments en base de données)
 InfoboxColorOnBackground = Inverser les couleurs des icones et du fond des vignettes
 ColorIntensity = Intensité des couleurs
-ColorIntensityDesc = Définir l'intensité sur les couleurs ci-dessous (Défaut -50)
+ColorIntensityDesc = Définir l'intensité sur les couleurs ci-dessous (Actuellement %s)
 ColorMoreDarker = Moins intense
 ColorMoreLighter = Plus intense
 OBLYON_INFOXBOX_WEATHER_COLOR = Couleur vignette 'météo'
@@ -176,6 +172,7 @@ OBLYON_SOCIAL_GITHUB=Github
 #
 OblyonOptionsTitle=Options
 OblyonMainUseQuickAddDropdown=Utiliser le menu d'ajout rapide des éléments (En haut à droite)
+OblyonMainUseBookmarkDropdown=Utiliser le menu des marques pages (En haut à droite)
 OblyonDisableVersion=Ne pas afficher le numéro de version de Dolibarr (En haut à droite)
 OblyonPaddingRightBottom=Afficher une marge en bas de page sur la partie droite
 
@@ -186,11 +183,11 @@ OblyonIconsTitle = Configurateur Oblyon - Icônes
 Icons = Icônes
 IconsStyle = Style d'icônes
 IconApplied = Style d'icônes appliqué
-Icon1 = Solid
-Icon2 = Regular
-Icon3 = Light
-Icon4 = Thin
-Icon5 = Duotone
+Iconfas = Solid
+Iconfar = Regular
+Iconfal = Light
+Iconfat = Thin
+Iconfad = Duotone
 
 #
 # About page

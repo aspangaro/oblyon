@@ -160,19 +160,25 @@ th .button {
     vertical-align: text-bottom;
 }
 .centpercent {
-    width: 100%;
+	width: 100%;
+}
+.centpercentwithoutmenu {
+	width: calc(100% - 200px);
 }
 .quatrevingtpercent, .inputsearch {
-    width: 80%;
+	width: 80%;
 }
 .soixantepercent {
-    width: 60%;
+	width: 60%;
 }
 .quatrevingtquinzepercent {
-    width: 95%;
+	width: 95%;
+}
+.quatrevingtpercentminusx {
+	width: calc(80% - 52px);
 }
 textarea.centpercent {
-    width: 96%;
+	width: 96%;
 }
 .small, small {
     font-size: 85%;
@@ -294,7 +300,7 @@ body[class*="colorblind-"] .text-success{
     /* color: #cccccc !important; */
 }
 .editfielda span.fa-pencil-alt:hover, .editfielda span.fa-trash:hover {
-    color: rgb(<?php echo $colortexttitle; ?>) !important;
+    color: <?php print $colorftitle; ?> !important;
 }
 
 .fa-toggle-on, .fa-toggle-off { font-size: 2em; }
@@ -759,7 +765,7 @@ select.flat, form.flat select {
     font-size: unset;
 }
 .optionblue {
-    color: rgb(<?php echo $colortextlink; ?>);
+    color: <?php echo $colortextlink; ?>;
 }
 .select2-results .select2-highlighted.optionblue {
     color: #FFF !important;
@@ -1067,7 +1073,7 @@ div.warning {
     background: #fcf8e3;
 }
 div.warning a, div.info a, div.error a {
-    color: rgb(<?php echo $colortextlink; ?>);
+    color: <?php echo $colortextlink; ?>;
 }
 
 /* Error message */
@@ -1601,11 +1607,11 @@ select.selectarrowonleft option {
     }
 }
 .linkobject { cursor: pointer; }
-
+/*
 table.tableforfield tr>td:first-of-type, div.tableforfield div.tagtr>div.tagtd:first-of-type {
     color: <?php echo $colorfline; ?>;
 }
-
+*/
 <?php if (GETPOST('optioncss', 'aZ09') == 'print') { ?>
 .hideonprint { display: none; }
 <?php } ?>>
@@ -1992,12 +1998,12 @@ img.photorefnoborder {
 .underrefbanner {
 }
 .underbanner {
-	border-bottom: <?php echo $borderwidth ?>px solid <?php print $maincolor; ?>;
+	border-bottom: <?php echo $borderwidth ?>px solid <?php print $colortopbordertitle1; ?>;
 	/* border-bottom: 2px solid rgb(<?php echo $colorbackhmenu1 ?>); */
 }
 .trextrafieldseparator td {
     /* border-bottom: 2px solid rgb(<?php echo $colorbackhmenu1 ?>) !important; */
-    border-bottom: 2px dashed rgb(<?php echo $colortopbordertitle1 ?>) !important;
+    border-bottom: 2px dashed <?php echo $colortopbordertitle1 ?> !important;
 }
 
 .tdhrthin {
@@ -4199,8 +4205,8 @@ div.tabsElem {
 
 div.tabsElem:hover,
 div.tabsElem a.tab:hover {
-    background-color: rgba(0,0,0, .10);
-    color: <?php print $maincolor; ?>;
+	background-color: <?php print $bgnavleft_hover; ?>;
+	color: <?php print $bgnavleft_txt_hover; ?>;
 }
 
 div.tabBar {
@@ -4235,8 +4241,8 @@ div.tabsAction {
 div.tabactive,
 div.tabactive a.tab {
     background-color: <?php echo $colorbacktabcard1; ?>;
-	color: <?php print $colortextbacktab; ?>;
-	height: 38px;
+	  color: <?php print $colortextbacktab; ?>;
+    height: 38px;
 }
 
 a.tabTitle {
@@ -4359,7 +4365,7 @@ div.tabs div.tabsElem:first-of-type a.tab {
 }
 
 a.tabunactive {
-	color: var(--colortextlink) !important;
+	color: <?php echo $colortextlink; ?> !important;
 }
 a.tab:link, a.tab:visited, a.tab:hover, a.tab#active {
 	font-family: <?php print $fontlist ?>;
@@ -4917,7 +4923,7 @@ span.dashboardlineko {
     margin-bottom: 8px !important;
     border-bottom-width: 1px;
 
-    border-top: <?php echo $borderwidth ?>px solid rgb(<?php echo $colortopbordertitle1 ?>);
+    border-top: <?php echo $borderwidth ?>px solid <?php echo $colortopbordertitle1 ?>;
     /* border-top: 2px solid rgb(<?php echo $colorbackhmenu1 ?>) !important; */
 }
 table.noborder.boxtable tr td {
@@ -4951,8 +4957,8 @@ tr.box_titre {
     color: #000 !important;*/
 
     /* TO MATCH ELDY */
-    background: rgb(<?php echo $colorbacktitle1; ?>)
-    color: rgb(<?php echo $colortexttitle; ?>);
+    background: <?php print $colorbtitle; ?>;
+    color: <?php print $colorftitle; ?>;
     font-family: <?php print $fontlist ?>, sans-serif;
     font-weight: <?php echo $useboldtitle?'bold':'normal'; ?>;
     border-bottom: 1px solid #FDFFFF;
@@ -5326,7 +5332,7 @@ table.dp {
 }
 .datenowlink
 {
-    color: rgb(<?php print $colortextlink; ?>);
+    color: <?php echo $colortextlink; ?>;
 }
 
 .categtextwhite, .treeview .categtextwhite.hover {
@@ -7138,10 +7144,10 @@ padding: 0;
 }
 
 .ui-link {
-color: rgb(<?php print $colortext; ?>);
+color: <?php echo $colortext; ?>;
 }
 .liste_titre .ui-link {
-color: rgb(<?php print $colortexttitle; ?>) !important;
+color: <?php print $colorftitle; ?> !important;
 }
 
 a.ui-link {
@@ -7209,14 +7215,14 @@ box-shadow: none;
 border: none;
 background: none;
 text-shadow: none;
-color: rgb(<?php print $colortexttitlenotab; ?>) !important;
+color: <?php echo $colortexttitlenotab; ?> !important;
 }
 .ui-bar-b, .lilevel0 {
 background-repeat: repeat-x;
 border: none;
 background: none;
 text-shadow: none;
-color: rgb(<?php print $colortexttitlenotab; ?>) !important;
+color: <?php echo $colortexttitlenotab; ?> !important;
 }
 .alilevel0 {
 font-weight: normal !important;
@@ -7226,7 +7232,7 @@ font-weight: normal !important;
 border-bottom-width: 0px !important;
 }
 .alilevel0 {
-color: rgb(<?php echo $colortexttitle; ?>) !important;
+color: <?php print $colorftitle; ?> !important;
 }
 .ulmenu {
 box-shadow: none !important;
@@ -7244,7 +7250,7 @@ text-shadow: none;
 text-shadow: none;
 }
 .ui-body-c .ui-link, .ui-body-c .ui-link:visited, .ui-body-c .ui-link:hover {
-color: rgb(<?php print $colortextlink; ?>);
+color: <?php echo $colortextlink; ?>;
 }
 .ui-btn-up-c .vsmenudisabled {
 color: #<?php echo $colorshadowtitle; ?> !important;
@@ -7269,7 +7275,7 @@ border-top-right-radius: 6px;
 }*/
 
 .alilevel1 {
-    color: rgb(<?php print $colortexttitlenotab; ?>) !important;
+    color: <?php echo $colortexttitlenotab; ?> !important;
 }
 .lilevel1 {
     border-top: 2px solid #444;
@@ -7678,7 +7684,7 @@ div.refidpadding {
 }
 div.refid {
     font-weight: bold;
-    color: rgb(<?php print $colortexttitlenotab; ?>);
+    color: <?php echo $colortexttitlenotab; ?>;
     font-size: 160%;
 }
 div.refidno	{
@@ -7773,7 +7779,7 @@ div.pagination li .active span:focus {
     z-index: 2;
     color: #fff;
     cursor: default;
-    background-color: <?php $colorbackhmenu1 ?>;
+    background-color: <?php print $maincolor; ?>;
     border-color: #337ab7;
 }
 div.pagination .disabled span,
@@ -7804,19 +7810,19 @@ div.pagination li.paginationafterarrows {
 /* Set the color for hover lines */
 .oddeven:hover, .evenodd:hover, .impair:hover, .pair:hover
 {
-    background: rgb(<?php echo $colorbacklinepairhover; ?>) !important;		/* Must be background to be stronger than background of odd or even */
+    background: <?php echo $colorbline_hover; ?> !important;		/* Must be background to be stronger than background of odd or even */
 }
 .tredited, .tredited td {
-    background: rgb(<?php echo $colorbacklinepairchecked; ?>) !important;   /* Must be background to be stronger than background of odd or even */
+    background: <?php echo $colorbline_hover; ?> !important;   /* Must be background to be stronger than background of odd or even */
     border-bottom: 0 !important;
 }
 .treditedlinefordate {
-    background: rgb(<?php echo $colorbacklinepairchecked; ?>) !important;   /* Must be background to be stronger than background of odd or even */
+    background: <?php echo $colorbline_hover; ?> !important;   /* Must be background to be stronger than background of odd or even */
     border-bottom: 0px;
 }
-<?php if ($colorbacklinepairchecked) { ?>
+<?php if ($colorbline_hover) { ?>
 .highlight {
-    background: rgb(<?php echo $colorbacklinepairchecked; ?>) !important;   /* Must be background to be stronger than background of odd or even */
+    background: <?php echo $colorbline_hover; ?> !important;   /* Must be background to be stronger than background of odd or even */
 }
 <?php } ?>
 
@@ -7913,7 +7919,7 @@ div.liste_titre {
 }
 div.liste_titre_bydiv {
     border-top-width: <?php echo $borderwidth ?>px;
-    border-top-color: rgb(<?php echo $colortopbordertitle1 ?>);
+    border-top-color: <?php echo $colortopbordertitle1 ?>;
     border-top-style: solid;
 
     border-collapse: collapse;
@@ -7940,13 +7946,13 @@ div.liste_titre_bydiv, .liste_titre div.tagtr, tr.liste_titre, tr.liste_titre_se
     /*font-weight: <?php echo $useboldtitle ? 'bold' : 'normal'; ?>;*/
     font-weight: normal;
 
-    color: rgb(<?php echo $colortexttitle; ?>);
+    color: <?php print $colorftitle; ?>;
     font-family: <?php print $fontlist ?>;
     text-align: <?php echo $left; ?>;
 }
 tr.liste_titre th, tr.liste_titre td, th.liste_titre
 {
-    border-bottom: 1px solid rgb(<?php echo $colortopbordertitle1 ?>);
+    border-bottom: 1px solid <?php echo $colortopbordertitle1 ?>;
 }
 tr.liste_titre:first-child th, tr:first-child th.liste_titre {
     /*    border-bottom: 1px solid #ddd ! important; */
@@ -7964,15 +7970,15 @@ tr.liste_titre th a, th.liste_titre a, tr.liste_titre td a, td.liste_titre a, fo
 }
 tr.liste_titre_topborder td {
     border-top-width: <?php echo $borderwidth; ?>px;
-    border-top-color: rgb(<?php echo $colortopbordertitle1 ?>);
+    border-top-color: <?php echo $colortopbordertitle1 ?>;
     border-top-style: solid;
 }
 .liste_titre td a {
     text-shadow: none !important;
-    color: rgb(<?php echo $colortexttitle; ?>);
+    color: <?php print $colorftitle; ?>;
 }
 .liste_titre td a.notasortlink {
-    color: rgb(<?php echo $colortextlink; ?>);
+    color: <?php echo $colortextlink; ?>;
 }
 .liste_titre td a.notasortlink:hover {
     background: transparent;
@@ -8036,7 +8042,7 @@ table.tableforservicepart1 tr td {
 
 .paymenttable, .margintable {
     /*border-top-width: <?php echo $borderwidth ?>px !important;
-	border-top-color: rgb(<?php echo $colortopbordertitle1 ?>) !important;
+	border-top-color: <?php echo $colortopbordertitle1 ?> !important;
 	border-top-style: solid !important;*/
     border-top: none !important;
     margin: 0px 0px 0px 0px !important;
@@ -8068,7 +8074,7 @@ div.tabBar .noborder {
 }
 
 #tablelines tr.liste_titre td, .paymenttable tr.liste_titre td, .margintable tr.liste_titre td, .tableforservicepart1 tr.liste_titre td {
-    border-bottom: 1px solid rgb(<?php echo $colortopbordertitle1 ?>) !important;
+    border-bottom: 1px solid <?php echo $colortopbordertitle1 ?> !important;
 }
 #tablelines tr td {
     height: unset;
@@ -8079,11 +8085,11 @@ div.tabBar .noborder {
 div:not(.fichecenter):not(.fichehalfleft):not(.fichehalfright):not(.ficheaddleft) > .border > tbody > tr:nth-of-type(even):not(.liste_titre), .liste > tbody > tr:nth-of-type(even):not(.liste_titre),
 div:not(.fichecenter):not(.fichehalfleft):not(.fichehalfright):not(.ficheaddleft) .oddeven.tagtr:nth-of-type(even):not(.liste_titre)
 {
-    background: linear-gradient(bottom, rgb(<?php echo $colorbacklineimpair1; ?>) 85%, rgb(<?php echo $colorbacklineimpair2; ?>) 100%);
-    background: -o-linear-gradient(bottom, rgb(<?php echo $colorbacklineimpair1; ?>) 85%, rgb(<?php echo $colorbacklineimpair2; ?>) 100%);
-    background: -moz-linear-gradient(bottom, rgb(<?php echo $colorbacklineimpair1; ?>) 85%, rgb(<?php echo $colorbacklineimpair2; ?>) 100%);
-    background: -webkit-linear-gradient(bottom, rgb(<?php echo $colorbacklineimpair1; ?>) 85%, rgb(<?php echo $colorbacklineimpair2; ?>) 100%);
-    background: -ms-linear-gradient(bottom, rgb(<?php echo $colorbacklineimpair1; ?>) 85%, rgb(<?php echo $colorbacklineimpair2; ?>) 100%);
+    background: linear-gradient(bottom, <?php echo $colorbacklineimpair1; ?> 85%, <?php echo $colorbacklineimpair2; ?> 100%);
+    background: -o-linear-gradient(bottom, <?php echo $colorbacklineimpair1; ?> 85%, <?php echo $colorbacklineimpair2; ?> 100%);
+    background: -moz-linear-gradient(bottom, <?php echo $colorbacklineimpair1; ?> 85%, <?php echo $colorbacklineimpair2; ?> 100%);
+    background: -webkit-linear-gradient(bottom, <?php echo $colorbacklineimpair1; ?> 85%, <?php echo $colorbacklineimpair2; ?> 100%);
+    background: -ms-linear-gradient(bottom, <?php echo $colorbacklineimpair1; ?> 85%, <?php echo $colorbacklineimpair2; ?> 100%);
 }
 .noborder > tbody > tr:nth-child(even):not(:last-child) td:not(.liste_titre), .liste > tbody > tr:nth-child(even):not(:last-child) td:not(.liste_titre),
 .noborder .oddeven.tagtr:nth-child(even):not(:last-child) .tagtd:not(.liste_titre)
@@ -8095,11 +8101,11 @@ div:not(.fichecenter):not(.fichehalfleft):not(.fichehalfright):not(.ficheaddleft
 div:not(.fichecenter):not(.fichehalfleft):not(.fichehalfright):not(.ficheaddleft) > .border > tbody > tr:nth-of-type(odd):not(.liste_titre), .liste > tbody > tr:nth-of-type(odd):not(.liste_titre),
 div:not(.fichecenter):not(.fichehalfleft):not(.fichehalfright):not(.ficheaddleft) .oddeven.tagtr:nth-of-type(odd):not(.liste_titre)
 {
-    background: linear-gradient(bottom, rgb(<?php echo $colorbacklinepair1; ?>) 85%, rgb(<?php echo $colorbacklinepair2; ?>) 100%);
-    background: -o-linear-gradient(bottom, rgb(<?php echo $colorbacklinepair1; ?>) 85%, rgb(<?php echo $colorbacklinepair2; ?>) 100%);
-    background: -moz-linear-gradient(bottom, rgb(<?php echo $colorbacklinepair1; ?>) 85%, rgb(<?php echo $colorbacklinepair2; ?>) 100%);
-    background: -webkit-linear-gradient(bottom, rgb(<?php echo $colorbacklinepair1; ?>) 85%, rgb(<?php echo $colorbacklinepair2; ?>) 100%);
-    background: -ms-linear-gradient(bottom, rgb(<?php echo $colorbacklinepair1; ?>) 85%, rgb(<?php echo $colorbacklinepair2; ?>) 100%);
+    background: linear-gradient(bottom, <?php echo $colorbacklinepair1; ?> 85%, <?php echo $colorbacklinepair2; ?> 100%);
+    background: -o-linear-gradient(bottom, <?php echo $colorbacklinepair1; ?> 85%, <?php echo $colorbacklinepair2; ?> 100%);
+    background: -moz-linear-gradient(bottom, <?php echo $colorbacklinepair1; ?> 85%, <?php echo $colorbacklinepair2; ?> 100%);
+    background: -webkit-linear-gradient(bottom, <?php echo $colorbacklinepair1; ?> 85%, <?php echo $colorbacklinepair2; ?> 100%);
+    background: -ms-linear-gradient(bottom, <?php echo $colorbacklinepair1; ?> 85%, <?php echo $colorbacklinepair2; ?> 100%);
 }
 .noborder > tbody > tr:nth-child(odd):not(:last-child) td:not(.liste_titre), .liste > tbody > tr:nth-child(odd):not(:last-child) td:not(.liste_titre),
 .noborder .oddeven.tagtr:nth-child(odd):not(:last-child) .tagtd:not(.liste_titre)
@@ -8108,7 +8114,7 @@ div:not(.fichecenter):not(.fichehalfleft):not(.fichehalfright):not(.ficheaddleft
 }
 
 ul.noborder li:nth-child(even):not(.liste_titre) {
-    background-color: rgb(<?php echo $colorbacklinepair2; ?>) !important;
+    background-color: <?php echo $colorbacklinepair2; ?> !important;
 }
 
 /* ============================================================================== */
@@ -8320,10 +8326,10 @@ a.tab span.ui-btn-inner
 }
 
 .ui-link {
-	color: var(--colortext);
+	color: <?php echo $colortext; ?>;
 }
 .liste_titre .ui-link {
-	color: var(--colortexttitle) !important;
+	color: <?php print $colorftitle; ?> !important;
 }
 
 a.ui-link {
@@ -8391,14 +8397,14 @@ ul.ulmenu {
 	border: none;
 	background: none;
 	text-shadow: none;
-	color: var(--colortexttitlenotab) !important;
+	color: <?php echo $colortexttitlenotab; ?> !important;
 }
 .ui-bar-b, .lilevel0 {
 	background-repeat: repeat-x;
 	border: none;
 	background: none;
 	text-shadow: none;
-	color: var(--colortexttitlenotab) !important;
+	color: <?php echo $colortexttitlenotab; ?> !important;
 }
 .alilevel0 {
 	font-weight: normal !important;
@@ -8408,7 +8414,7 @@ ul.ulmenu {
 	border-bottom-width: 0px !important;
 }
 .alilevel0 {
-	color: var(--colortexttitle) !important;
+	color: <?php print $colorftitle; ?> !important;
 	background: var(--colorbackmobilemenu);
 }
 .ulmenu {
@@ -8427,7 +8433,7 @@ ul.ulmenu {
 	text-shadow: none;
 }
 .ui-body-c .ui-link, .ui-body-c .ui-link:visited, .ui-body-c .ui-link:hover {
-	color: var(--colortextlink);
+	color: <?php echo $colortextlink; ?>;
 }
 .ui-btn-up-c .vsmenudisabled {
 	color: #<?php echo $colorshadowtitle; ?> !important;
@@ -8437,7 +8443,7 @@ div.tabsElem a.tab {
 	background: transparent;
 }
 .alilevel1 {
-	color: var(--colortexttitlenotab) !important;
+	color: <?php echo $colortexttitlenotab; ?> !important;
 }
 .lilevel1 {
 	border-top: 2px solid #444;

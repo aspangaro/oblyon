@@ -137,7 +137,7 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
         padding-right: 4px;
     }
     #securitycode {
-        min-width: 60px;
+        width: 120px;
 		vertical-align: middle;
    }
     #img_securitycode {
@@ -167,6 +167,13 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
     div.login_block a {
         color: <?php echo $bgnavleft_txt; ?>;
         display: inline-block;
+    }
+    div.login_block span.aversion {
+    <?php if ( $conf->global->MAIN_MENU_INVERT ) { ?>
+        color: <?php echo $bgnavleft_txt; ?>;
+    <?php } else { ?>
+        color: <?php echo $bgnavtop_txt; ?>;
+    <?php } ?>
     }
     div.login_block table {
         display: inline;

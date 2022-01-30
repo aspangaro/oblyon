@@ -21,22 +21,17 @@
 	* 	\brief		CSS for InfraS theme
 	************************************************/
 
-	//if (! defined('NOREQUIREUSER'))	define('NOREQUIREUSER','1');	// Not disabled because need to load personalized language
-	//if (! defined('NOREQUIREDB'))		define('NOREQUIREDB','1');	// Not disabled to increase speed. Language code is found on url.
 	if (! defined('NOREQUIRESOC'))		define('NOREQUIRESOC', '1');
-	//if (! defined('NOREQUIRETRAN'))	define('NOREQUIRETRAN','1');	// Not disabled because need to do translations
 	if (! defined('NOCSRFCHECK'))		define('NOCSRFCHECK', 1);
 	if (! defined('NOTOKENRENEWAL'))	define('NOTOKENRENEWAL', 1);
 	if (! defined('NOLOGIN'))			define('NOLOGIN', 1);          // File must be accessed by logon page so without login
-	//if (!defined('NOREQUIREMENU'))   define('NOREQUIREMENU',1);  	// We load menu manager class (note that object loaded may have wrong content because NOLOGIN is set and some values depends on login)
 	if (! defined('NOREQUIREHTML'))		define('NOREQUIREHTML', 1);
 	if (! defined('NOREQUIREAJAX'))		define('NOREQUIREAJAX', '1');
 	define('ISLOADEDBYSTEELSHEET', '1');
-	//define('DISABLE_FONT_AWSOME', '1');
-	require __DIR__.'/theme_vars.inc.php';
-	if (defined('THEME_ONLY_CONSTANT'))	return;
 	session_cache_limiter('public');
 	require_once __DIR__.'/../../main.inc.php'; // __DIR__ allow this script to be included in custom themes
+	require __DIR__.'/theme_vars.inc.php';
+	if (defined('THEME_ONLY_CONSTANT'))	return;
 	require_once DOL_DOCUMENT_ROOT.'/core/lib/functions2.lib.php';
 	require_once DOL_DOCUMENT_ROOT.'/core/lib/admin.lib.php';
 
@@ -91,11 +86,7 @@
 	$dol_hide_leftmenu			= $conf->dol_hide_leftmenu;
 	$dol_optimize_smallscreen	= $conf->dol_optimize_smallscreen;
 	$dol_no_mouse_hover			= $conf->dol_no_mouse_hover;
-	//dolibarr_set_const($db, 'THEME_ELDY_ENABLE_PERSONALIZED',					1, 'chaine', 0, 'InfraSTheme', $conf->entity);
-	//dolibarr_set_const($db, 'MAIN_STATUS_USES_IMAGES',							1, 'chaine', 0, 'InfraSTheme', $conf->entity);
-	//dolibarr_set_const($db, 'MAIN_INCLUDE_GLOBAL_STATS_IN_OPENED_DASHBOARD',	1, 'chaine', 0, 'InfraSTheme', $conf->entity);
-	//dolibarr_set_const($db, 'MAIN_DISABLE_GLOBAL_BOXSTATS',						0, 'chaine', 0, 'InfraSTheme', $conf->entity);
-	//dolibarr_set_const($db, 'THEME_INFOBOX_COLOR_ON_BACKGROUND',				1, 'chaine', 0, 'InfraSTheme', $conf->entity);
+	dolibarr_set_const($db, 'THEME_ELDY_ENABLE_PERSONALIZED', 1, 'chaine', 0, 'InfraSTheme', $conf->entity);
 	$useboldtitle				= (isset($conf->global->THEME_ELDY_USEBOLDTITLE) ? $conf->global->THEME_ELDY_USEBOLDTITLE : 0);
 	// Oblyon
 	$maincolor					= $conf->global->OBLYON_COLOR_MAIN;						// default value: #0083a2
@@ -242,42 +233,24 @@
 	if (!empty($conf->global->MAIN_USE_TOP_MENU_SEARCH_DROPDOWN))	$maxwidthloginblock	= $maxwidthloginblock + 55;
 	if (!empty($conf->bookmark->enabled))							$maxwidthloginblock	= $maxwidthloginblock + 55;
 	print '/*'."\n";
-	print 'colorbackbody							= '.$colorbackbody."\n";
-	print 'colorbackvmenu1							= '.$colorbackvmenu1."\n";
-	print 'colorbackhmenu1							= '.$colorbackhmenu1."\n";
-	print 'colortopckeditor							= '.$colortopckeditor."\n";
-	print 'colorbacktitle1							= '.$colorbacktitle1."\n";
 	print 'colorbacklineimpair1						= '.$colorbacklineimpair1."\n";
 	print 'colorbacklineimpair2						= '.$colorbacklineimpair2."\n";
 	print 'colorbacklinepair1						= '.$colorbacklinepair1."\n";
 	print 'colorbacklinepair2						= '.$colorbacklinepair2."\n";
-	print 'colorbacklinepairhover					= '.$colorbacklinepairhover."\n";
-	print 'colorbacklinepairchecked					= '.$colorbacklinepairchecked."\n";
 	print '$colortexttitlenotab						= '.$colortexttitlenotab."\n";
-	print '$colortexttitle							= '.$colortexttitle."\n";
 	print '$colortext								= '.$colortext."\n";
 	print '$colortextlink							= '.$colortextlink."\n";
-	print '$colortextbackhmenu						= '.$colortextbackhmenu."\n";
-	print '$colortextbackvmenu						= '.$colortextbackvmenu."\n";
 	print 'dol_hide_topmenu							= '.$dol_hide_topmenu."\n";
 	print 'dol_hide_leftmenu						= '.$dol_hide_leftmenu."\n";
 	print 'dol_optimize_smallscreen					= '.$dol_optimize_smallscreen."\n";
 	print 'dol_no_mouse_hover						= '.$dol_no_mouse_hover."\n";
 	print 'dol_screenwidth							= '.$_SESSION['dol_screenwidth']."\n";
 	print 'dol_screenheight							= '.$_SESSION['dol_screenheight']."\n";
-	print 'fontsize									= '.$fontsize."\n";
 	print 'nbtopmenuentries							= '.$nbtopmenuentries."\n";
-	print 'fontsizesmaller							= '.$fontsizesmaller."\n";
 	print 'topMenuFontSize							= '.$topMenuFontSize."\n";
 	print 'toolTipBgColor							= '.$toolTipBgColor."\n";
 	print 'toolTipFontColor							= '.$toolTipFontColor."\n";
-	print 'colorBorderInfo							= '.$colorBorderInfo."\n";
-	print 'colorBackInfo							= '.$colorBackInfo."\n";
-	print 'colorBorderWarning						= '.$colorBorderWarning;
-	print 'colorBackWarning							= '.$colorBackWarning."\n";
-	print 'colorBorderError							= '.$colorBorderError."\n";
-	print 'colorBackError							= '.$colorBackError."\n";
-	print 'conf->global->THEME_SATURATE_RATIO		= '.$conf->global->THEME_SATURATE_RATIO." (must be between 0 and 1)\n";
+	print 'conf->global->THEME_AGRESSIVENESS_RATIO	= '.$conf->global->THEME_AGRESSIVENESS_RATIO." (must be between 0 and 1)\n";
 	print '*/'."\n";
 	require __DIR__.'/global.inc.php';
 	if (is_object($db))	$db->close();
