@@ -31,20 +31,22 @@ INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('MAIN_M
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('MAIN_MENU_SMARTPHONE_FORCED',			'__ENTITY__', 'oblyon_menu.php',	'chaine', '0',	'Oblyon module');
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('MAIN_MENUFRONT_SMARTPHONE_FORCED',	'__ENTITY__', 'oblyon_menu.php',	'chaine', '0',	'Oblyon module');
 
-INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_COLOR_MAIN',					'__ENTITY__', '#0083A2',			'chaine', '0',	'Oblyon maincolor');
-INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_COLOR_TOPMENU_BCKGRD',			'__ENTITY__', '#333333',			'chaine', '0',	'Oblyon background topmenu color');
-INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_COLOR_TOPMENU_BCKGRD_HOVER',	'__ENTITY__', '#444444',			'chaine', '0',	'Oblyon background topmenu hover color');
+-- Color - use Oblyon blue by default
+INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_COLOR_MAIN',					'__ENTITY__', '#E09430',			'chaine', '0',	'Oblyon maincolor');
+INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_COLOR_TOPMENU_BCKGRD',			'__ENTITY__', '#092D5C',			'chaine', '0',	'Oblyon background topmenu color');
+INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_COLOR_TOPMENU_BCKGRD_HOVER',	'__ENTITY__', '#0D4185',			'chaine', '0',	'Oblyon background topmenu hover color');
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_COLOR_TOPMENU_TXT',			'__ENTITY__', '#F4F4F4',			'chaine', '0',	'Oblyon topmenu text color');
-INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_COLOR_LEFTMENU_BCKGRD',		'__ENTITY__', '#333333',			'chaine', '0',	'Oblyon background leftmenu color');
-INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_COLOR_LEFTMENU_BCKGRD_HOVER',	'__ENTITY__', '#444444',			'chaine', '0',	'Oblyon background leftmenu hover color');
+INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_COLOR_LEFTMENU_BCKGRD',		'__ENTITY__', '#092D5C',			'chaine', '0',	'Oblyon background leftmenu color');
+INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_COLOR_LEFTMENU_BCKGRD_HOVER',	'__ENTITY__', '#0D4185',			'chaine', '0',	'Oblyon background leftmenu hover color');
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_COLOR_LEFTMENU_TXT',			'__ENTITY__', '#F4F4F4',			'chaine', '0',	'Oblyon foreground leftmenu color');
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_EFFECT_LEFTMENU',				'__ENTITY__', 'slide',				'chaine', '0',	'Oblyon leftmenu effect behavior');
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_COLOR_BCKGRD',					'__ENTITY__', '#F4F4F4',			'chaine', '0',	'Oblyon background color');
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_COLOR_LOGO_BCKGRD',			'__ENTITY__', '#FFFFFF',			'chaine', '0',	'Oblyon background logo color');
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_COLOR_LOGIN_BCKGRD',			'__ENTITY__', '#F4F4F4',			'chaine', '0',	'Oblyon background login color');
-INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_COLOR_BLINE',					'__ENTITY__', '#FFFFFF',			'chaine', '0',	'Oblyon background line color');
+INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_COLOR_BLINE',					'__ENTITY__', '#FCFCFC',			'chaine', '0',	'Oblyon background line color');
+INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_COLOR_BLINE_HOVER',			'__ENTITY__', '#F1F1F1',			'chaine', '0',	'Oblyon background line color hover');
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_COLOR_FLINE',					'__ENTITY__', '#444444',			'chaine', '0',	'Oblyon text line color');
-INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_COLOR_FLINE_HOVER',			'__ENTITY__', '#444444',			'chaine', '0',	'Oblyon text line color');
+INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_COLOR_FLINE_HOVER',			'__ENTITY__', '#222222',			'chaine', '0',	'Oblyon text line color hover');
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_COLOR_BUTTON_ACTION1',			'__ENTITY__', '#0088cc',			'chaine', '0',	'Oblyon button action color 1');
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_COLOR_BUTTON_ACTION2',			'__ENTITY__', '#0044cc',			'chaine', '0',	'Oblyon button action color 2');
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_COLOR_BUTTON_DELETE1',			'__ENTITY__', '#cc8800',			'chaine', '0',	'Oblyon button delete color 1');

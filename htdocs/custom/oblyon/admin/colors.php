@@ -115,7 +115,7 @@
 															'THEME_ELDY_TEXTLINK'					=> '#'
 															),
 										'dark'		=> array('OBLYON_COLOR_TOPMENU_BCKGRD'			=> '#333333',
-															'OBLYON_COLOR_TOPMENU_BCKGRD_HOVER'		=> '#0083A2',
+                                                            'OBLYON_COLOR_TOPMENU_BCKGRD_HOVER'		=> '#0083A2',
 															'OBLYON_COLOR_TOPMENU_TXT'				=> '#F4F4F4',
 															'OBLYON_COLOR_TOPMENU_TXT_ACTIVE'		=> '#',
 															'OBLYON_COLOR_TOPMENU_TXT_HOVER'		=> '#',
@@ -197,8 +197,8 @@
 															'OBLYON_COLOR_BUTTON_DELETE1'			=> '#CC8800',
 															'OBLYON_COLOR_BUTTON_DELETE2'			=> '#CC4400',
 															'OBLYON_COLOR_MAIN'						=> '#E09430',
-															'OBLYON_COLOR_BCKGRD'					=> '#E09430',
-															'OBLYON_COLOR_LOGO_BCKGRD'				=> '#E09430',
+															'OBLYON_COLOR_BCKGRD'					=> '#444444',
+															'OBLYON_COLOR_LOGO_BCKGRD'				=> '#FFFFFF',
 															'OBLYON_COLOR_LOGIN_BCKGRD'				=> '#333333',
 															'OBLYON_COLOR_BTITLE'					=> '#E09430',
 															'OBLYON_COLOR_FTITLE'					=> '#F4F4F4',
@@ -215,7 +215,41 @@
 															'THEME_ELDY_TEXTTITLENOTAB'				=> '#FEFEFE',
 															'THEME_ELDY_TEXT'						=> '#',
 															'THEME_ELDY_TEXTLINK'					=> '#e09430'
-															)
+															),
+                                        'light'		=> array('OBLYON_COLOR_TOPMENU_BCKGRD'			=> '#FFFFFF',
+                                                            'OBLYON_COLOR_TOPMENU_BCKGRD_HOVER'		=> '#D51123',
+                                                            'OBLYON_COLOR_TOPMENU_TXT'				=> '#444444',
+                                                            'OBLYON_COLOR_TOPMENU_TXT_ACTIVE'		=> '#FFFFFF',
+                                                            'OBLYON_COLOR_TOPMENU_TXT_HOVER'		=> '#FFFFFF',
+                                                            'OBLYON_COLOR_LEFTMENU_BCKGRD'			=> '#FFFFFF',
+                                                            'OBLYON_COLOR_LEFTMENU_BCKGRD_HOVER'	=> '#D51123',
+                                                            'OBLYON_COLOR_LEFTMENU_TXT'				=> '#444444',
+                                                            'OBLYON_COLOR_LEFTMENU_TXT_ACTIVE'		=> '#FFFFFF',
+                                                            'OBLYON_COLOR_LEFTMENU_TXT_HOVER'		=> '#FFFFFF',
+                                                            'OBLYON_COLOR_BUTTON_ACTION1'			=> '#0083A2',
+                                                            'OBLYON_COLOR_BUTTON_ACTION2'			=> '#0063A2',
+                                                            'OBLYON_COLOR_BUTTON_DELETE1'			=> '#CC8800',
+                                                            'OBLYON_COLOR_BUTTON_DELETE2'			=> '#CC4400',
+                                                            'OBLYON_COLOR_MAIN'						=> '#D51123',
+                                                            'OBLYON_COLOR_BCKGRD'					=> '#FFFFFF',
+                                                            'OBLYON_COLOR_LOGO_BCKGRD'				=> '#FFFFFF',
+                                                            'OBLYON_COLOR_LOGIN_BCKGRD'				=> '#FFFFFF',
+                                                            'OBLYON_COLOR_BTITLE'					=> '#D51123',
+                                                            'OBLYON_COLOR_FTITLE'					=> '#FFFFFF',
+                                                            'OBLYON_COLOR_BLINE'					=> '#F4F4F4',
+                                                            'OBLYON_COLOR_BLINE_HOVER'				=> '#F1F1F1',
+                                                            'OBLYON_COLOR_FLINE'					=> '#444444',
+                                                            'OBLYON_COLOR_FLINE_HOVER'				=> '#FCFCFC',
+                                                            'THEME_ELDY_TOPBORDER_TITLE1'			=> '#',
+                                                            'THEME_ELDY_LINEIMPAIR1'				=> '#3C3C3C',
+                                                            'THEME_ELDY_LINEIMPAIR2'				=> '#',
+                                                            'THEME_ELDY_LINEPAIR1'					=> '#444444',
+                                                            'THEME_ELDY_LINEPAIR2'					=> '#',
+                                                            'THEME_ELDY_LINEBREAK'					=> '#',
+                                                            'THEME_ELDY_TEXTTITLENOTAB'				=> '#FEFEFE',
+                                                            'THEME_ELDY_TEXT'						=> '#',
+                                                            'THEME_ELDY_TEXTLINK'					=> '#e09430'
+                                                        )
 										);
 
 	// Actions **************************************
@@ -291,39 +325,48 @@
 	print '				</tr>';
 	// Colors
 	// Top menu
-	$metas		= array(array(4), 'TopMenu');
+	$metas		= array(array(5), 'TopMenu');
 	oblyon_print_liste_titre($metas);
 	if (count($listcolor['top'])) {
 		foreach ($listcolor['top'] as $key) {
 			$metas	= array('type' => 'text', 'class' => 'flat quatrevingtpercent color action');
-			oblyon_print_input($key, 'input', $langs->trans($key), '', $metas, 3, 1);
+			oblyon_print_input($key, 'input', $langs->trans($key), '', $metas, 4, 1);
 		}
 	}
 	// Left menu
-	$metas		= array(array(4), 'LeftMenu');
+	$metas		= array(array(5), 'LeftMenu');
 	oblyon_print_liste_titre($metas);
 	if (count($listcolor['left'])) {
 		foreach ($listcolor['left'] as $key) {
 			$metas	= array('type' => 'text', 'class' => 'flat quatrevingtpercent color action');
-			oblyon_print_input($key, 'input', $langs->trans($key), '', $metas, 3, 1);
+			oblyon_print_input($key, 'input', $langs->trans($key), '', $metas, 4, 1);
 		}
 	}
+    // button
+    $metas		= array(array(5), 'Button');
+    oblyon_print_liste_titre($metas);
+    if (count($listcolor['button'])) {
+        foreach ($listcolor['button'] as $key) {
+            $metas	= array('type' => 'text', 'class' => 'flat quatrevingtpercent color action');
+            oblyon_print_input($key, 'input', $langs->trans($key), '', $metas, 4, 1);
+        }
+    }
 	// Others
-	$metas		= array(array(4), 'Others');
+	$metas		= array(array(5), 'Others');
 	oblyon_print_liste_titre($metas);
 	if (count($listcolor['options'])) {
 		foreach ($listcolor['options'] as $key) {
 			$metas	= array('type' => 'text', 'class' => 'flat quatrevingtpercent color action');
-			oblyon_print_input($key, 'input', $langs->trans($key), '', $metas, 3, 1);
+			oblyon_print_input($key, 'input', $langs->trans($key), '', $metas, 4, 1);
 		}
 	}
 	// Eldy
-	$metas		= array(array(4), 'Eldy');
+	$metas		= array(array(5), 'Eldy');
 	oblyon_print_liste_titre($metas);
 	if (count($listcolor['eldy'])) {
 		foreach ($listcolor['eldy'] as $key) {
 			$metas	= array('type' => 'text', 'class' => 'flat quatrevingtpercent color action');
-			oblyon_print_input($key, 'input', $langs->trans($key), '', $metas, 3, 1);
+			oblyon_print_input($key, 'input', $langs->trans($key), '', $metas, 4, 1);
 		}
 	}
 	print '			</table>
