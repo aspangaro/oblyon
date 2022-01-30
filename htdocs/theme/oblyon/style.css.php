@@ -1,6 +1,7 @@
 <?php
 	/************************************************
-	* Copyright (C) 2016-2019	Sylvain Legrand - <contact@infras.fr>	InfraS - <https://www.infras.fr>
+	* Copyright (C) 2015-2022  Alexandre Spangaro <support@open-dsi.fr>
+	* Copyright (C) 2022       Sylvain Legrand    <contact@infras.fr>
 	*
 	* This program is free software: you can redistribute it and/or modify
 	* it under the terms of the GNU General Public License as published by
@@ -17,8 +18,8 @@
 	************************************************/
 
 	/************************************************
-	* 	\file		../theme/infras/style.css.php
-	* 	\brief		CSS for InfraS theme
+	* 	\file		../theme/oblyon/style.css.php
+	* 	\brief		CSS for Oblyon theme
 	************************************************/
 
 	if (! defined('NOREQUIRESOC'))		define('NOREQUIRESOC', '1');
@@ -68,9 +69,15 @@
 	// Important: Following code is to avoid page request by browser and PHP CPU at each Dolibarr page access.
 	if (empty($dolibarr_nocache))					header('Cache-Control: max-age=10800, public, must-revalidate');
 	else											header('Cache-Control: no-cache');
-	if (GETPOST('theme', 'alpha'))					$conf->theme=GETPOST('theme', 'alpha');  // If theme was forced on URL
-	if (GETPOST('lang', 'aZ09'))					$langs->setDefaultLang(GETPOST('lang', 'aZ09'));	// If language was forced on URL
-	if (GETPOST('THEME_DARKMODEENABLED', 'int'))	$conf->global->THEME_DARKMODEENABLED	= GETPOST('THEME_DARKMODEENABLED', 'int'); // If darkmode was forced on URL
+	if (GETPOST('theme', 'aZ09')) {
+        $conf->theme=GETPOST('theme', 'alpha'); // If theme was forced on URL
+	}
+	if (GETPOST('lang', 'aZ09')) {
+        $langs->setDefaultLang(GETPOST('lang', 'aZ09'));    // If language was forced on URL
+	}
+	if (GETPOST('THEME_DARKMODEENABLED', 'int')) {
+        $conf->global->THEME_DARKMODEENABLED	= GETPOST('THEME_DARKMODEENABLED', 'int');  // If darkmode was forced on URL
+	}
 	$langs->load("main", 0, 1);
 	$right											= ($langs->trans("DIRECTION") == 'rtl' ? 'left' : 'right');
 	$left											= ($langs->trans("DIRECTION") == 'rtl' ? 'right' : 'left');
@@ -86,7 +93,7 @@
 	$dol_hide_leftmenu			= $conf->dol_hide_leftmenu;
 	$dol_optimize_smallscreen	= $conf->dol_optimize_smallscreen;
 	$dol_no_mouse_hover			= $conf->dol_no_mouse_hover;
-	dolibarr_set_const($db, 'THEME_ELDY_ENABLE_PERSONALIZED', 1, 'chaine', 0, 'InfraSTheme', $conf->entity);
+	dolibarr_set_const($db, 'THEME_ELDY_ENABLE_PERSONALIZED', 1, 'chaine', 0, 'OblyonTheme', $conf->entity);
 	$useboldtitle				= (isset($conf->global->THEME_ELDY_USEBOLDTITLE) ? $conf->global->THEME_ELDY_USEBOLDTITLE : 0);
 	// Oblyon
 	$maincolor					= $conf->global->OBLYON_COLOR_MAIN;						// default value: #0083a2

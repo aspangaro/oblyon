@@ -1,8 +1,8 @@
 <?php
 	/************************************************
-	* Copyright (C) 2015-2022	 Alexandre Spangaro <support@open-dsi.fr>
-	* Copyright (C) 2022       Sylvain Legrand    <contact@infras.fr>
-  *
+	* Copyright (C) 2015-2022  Alexandre Spangaro   <support@open-dsi.fr>
+	* Copyright (C) 2022       Sylvain Legrand      <contact@infras.fr>
+	*
 	* This program is free software: you can redistribute it and/or modify
 	* it under the terms of the GNU General Public License as published by
 	* the Free Software Foundation, either version 3 of the License, or

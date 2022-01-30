@@ -1,7 +1,7 @@
 <?php
 	/************************************************
-	* Copyright (C) 2015-2022  Alexandre Spangaro <support@open-dsi.fr>
-	* Copyright (C) 2022       Sylvain Legrand    <contact@infras.fr>
+	* Copyright (C) 2015-2022  Alexandre Spangaro   <support@open-dsi.fr>
+	* Copyright (C) 2022       Sylvain Legrand      <contact@infras.fr>
 	*
 	* This program is free software: you can redistribute it and/or modify
 	* it under the terms of the GNU General Public License as published by
@@ -100,6 +100,7 @@
 	oblyon_print_input('MAIN_STATUS_USES_IMAGES',				'on_off', $langs->trans('MainStatusUseImages'),				'', $metas, 2, 1);	// Status use images
 	oblyon_print_input('MAIN_USE_TOP_MENU_QUICKADD_DROPDOWN',	'on_off', $langs->trans('OblyonMainUseQuickAddDropdown'),	'', $metas, 2, 1);	// Quickadd dropdown menu
 	oblyon_print_input('MAIN_USE_TOP_MENU_BOOKMARK_DROPDOWN',	'on_off', $langs->trans('OblyonMainUseBookmarkDropdown'),	'', $metas, 2, 1);	// Bookmark dropdown menu
+	oblyon_print_input('OBLYON_PADDING_RIGHT_BOTTOM',			'on_off', $langs->trans('OblyonPaddingRightBottom'),	'', $metas, 2, 1);	// Bookmark dropdown menu
 	// Login
 	$metas						= array(array(3), 'OblyonLoginTitle');
 	oblyon_print_liste_titre($metas);

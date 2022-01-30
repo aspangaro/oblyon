@@ -1,10 +1,11 @@
 <?php
-	/* Copyright (C) 2004-2017	Laurent Destailleur		<eldy@users.sourceforge.net>
-	* Copyright (C) 2006		Rodolphe Quiedeville	<rodolphe@quiedeville.org>
-	* Copyright (C) 2007-2017	Regis Houssin			<regis.houssin@inodbox.com>
-	* Copyright (C) 2011		Philippe Grand			<philippe.grand@atoo-net.com>
-	* Copyright (C) 2012		Juanjo Menent			<jmenent@2byte.es>
-	* Copyright (C) 2018       Ferran Marcet           <fmarcet@2byte.es>
+	/*
+	* Copyright (C) 2004-2017  Laurent Destailleur  <eldy@users.sourceforge.net>
+	* Copyright (C) 2006       Rodolphe Quiedeville <rodolphe@quiedeville.org>
+	* Copyright (C) 2007-2017  Regis Houssin        <regis.houssin@inodbox.com>
+	* Copyright (C) 2011       Philippe Grand       <philippe.grand@atoo-net.com>
+	* Copyright (C) 2012       Juanjo Menent        <jmenent@2byte.es>
+	* Copyright (C) 2018       Ferran Marcet        <fmarcet@2byte.es>
 	*
 	* This program is free software; you can redistribute it and/or modify
 	* it under the terms of the GNU General Public License as published by
@@ -21,8 +22,8 @@
 	*/
 
 	/**
-	*	\file       htdocs/theme/infras/theme_vars.inc.php
-	*	\brief      File to declare variables of CSS style sheet
+	*  \file       htdocs/theme/oblyon/theme_vars.inc.php
+	*  \brief      File to declare variables of CSS style sheet
 	*  \ingroup    core
 	*
 	*  To include file, do this:
@@ -155,7 +156,7 @@
 	$colorblind_deuteranopes_badgeWarning				= '#e4e411';
 	$colorblind_deuteranopes_badgeDanger				= $badgeDanger; // currently not tested with a color blind people so use default color
 	/* default color for status : After a quick check, somme status can have oposite function according to objects
-	*  So this badges status uses default value according to theme InfraS status img
+	*  So this badges status uses default value according to theme Oblyon status img
 	*  TODO: use color definition vars above for define badges color status X -> exemple $badgeStatusValidate, $badgeStatusClosed, $badgeStatusActive ....
 	*/
 	$badgeStatus0										= '#cbd3d3'; // draft
