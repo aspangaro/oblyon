@@ -1,8 +1,8 @@
 <?php
 	/************************************************
-	* Copyright (C) 2015-2022	Alexandre Spangaro - <support@open-dsi.fr>	Open-DSI - <https://www.open-dsi.fr>
-	* Copyright (C) 2016-2022	Sylvain Legrand - <contact@infras.fr>	InfraS - <https://www.infras.fr>
-	*
+	* Copyright (C) 2015-2022	 Alexandre Spangaro <support@open-dsi.fr>
+	* Copyright (C) 2022       Sylvain Legrand    <contact@infras.fr>
+  *
 	* This program is free software: you can redistribute it and/or modify
 	* it under the terms of the GNU General Public License as published by
 	* the Free Software Foundation, either version 3 of the License, or
@@ -131,7 +131,7 @@
 			oblyon_print_input('MAIN_DISABLE_BLOCK_TICKET',			'on_off', $langs->trans('DashboardDisableBlockTicket'),			'', $metas, 2, 1);	// tickets block
 		}
 	}
-	// Set Intensity
+  // Set Intensity
 	$metas		= array(array(3), 'ColorIntensity');
 	oblyon_print_liste_titre($metas);
 	$metas	= '	<div class = "range-sliders" id = "range-sliders">

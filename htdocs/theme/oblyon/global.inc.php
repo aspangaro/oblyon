@@ -1609,7 +1609,7 @@ select.selectarrowonleft option {
 .linkobject { cursor: pointer; }
 /*
 table.tableforfield tr>td:first-of-type, div.tableforfield div.tagtr>div.tagtd:first-of-type {
-    color: #666;
+    color: <?php echo $colorfline; ?>;
 }
 */
 <?php if (GETPOST('optioncss', 'aZ09') == 'print') { ?>
@@ -1697,6 +1697,9 @@ td.showDragHandle {
 <?php if (GETPOST("optioncss") == 'print') { ?>
     padding-top: 10px;
     <?php } elseif($conf->global->OBLYON_STICKY_TOPBAR) { ?>
+        <?php if ($conf->global->OBLYON_PADDING_RIGHT_BOTTOM) { ?>
+            padding-bottom: 40px;
+        <?php } ?>
         <?php if ($conf->global->MAIN_MENU_INVERT) { ?>
             padding-top: 52px;
         <?php } else { ?>
@@ -4237,9 +4240,9 @@ div.tabsAction {
 
 div.tabactive,
 div.tabactive a.tab {
-	background-color: <?php print $bgnavleft_hover; ?>;
-	color: <?php print $bgnavleft_txt_active; ?>;
-	height: 38px;
+    background-color: <?php echo $colorbacktabcard1; ?>;
+	  color: <?php print $colortextbacktab; ?>;
+    height: 38px;
 }
 
 a.tabTitle {
@@ -5465,6 +5468,10 @@ table.cal_event td.cal_event_right { padding: 4px 4px !important; }
 
 .topmenuimage {
     background-size: 28px auto;
+}
+
+.paginationafterarrows > .button_search > .fa.fa-search{
+    color: rgb(<?php print $colortext; ?>);
 }
 
 /* ============================================================================== */
@@ -7986,10 +7993,15 @@ div.liste_titre {
 }
 tr.liste_titre_sel th, th.liste_titre_sel, tr.liste_titre_sel td, td.liste_titre_sel, form.liste_titre_sel div
 {
-    font-family: <?php print $fontlist ?>;
-    font-weight: normal;
-    border-bottom: 1px solid #FDFFFF;
-    text-decoration: underline;
+	font-family: <?php print $fontlist ?>;
+	color: <?php print $colorftitle; ?> !important;
+	font-weight: bold;
+	background-color: <?php print colorDarker($colorbtitle, 5); ?>;
+	/* Test
+	text-decoration: underline;
+	border-bottom: 8px solid <?php print $colorftitle; ?> !important;
+	border-radius: 0.25rem;
+	*/
 }
 input.liste_titre {
     background: transparent;

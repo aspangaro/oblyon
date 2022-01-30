@@ -120,6 +120,7 @@ OblyonOptionsTitle=Options
 OblyonMainUseQuickAddDropdown=Add the quick action menu (in top right)
 OblyonMainUseBookmarkDropdown=Add the bookmark menu (in top right)
 OblyonDisableVersion=Don't show the version number of Dolibarr (in top right)
+OblyonPaddingRightBottom=Display a margin at the bottom of the page on the right side
 
 #
 # Icons page

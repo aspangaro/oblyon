@@ -1625,7 +1625,7 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
                 $newmenu->add("/accountancy/index.php?leftmenu=accountancy",$langs->trans("TransferInAccounting"), 0, $permtoshowmenu, '', $mainmenu, 'transfer');
 
                     // Binding
-                    if (! empty($conf->facture->enabled))
+                    if (! empty($conf->facture->enabled) && empty($conf->global->ACCOUNTING_DISABLE_BINDING_ON_SALES))
                     {
                         $newmenu->add("/accountancy/customer/index.php?leftmenu=accountancy_dispatch_customer&amp;mainmenu=accountancy",$langs->trans("CustomersVentilation"),1,$user->rights->accounting->bind->write, '', $mainmenu, 'dispatch_customer');
 
@@ -1634,7 +1634,7 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
                         if ($usemenuhider || empty($leftmenu) || preg_match('/accountancy_dispatch_customer/',$leftmenu)) $newmenu->add("/accountancy/customer/list.php?mainmenu=accountancy&amp;leftmenu=accountancy_dispatch_customer",$langs->trans("ToBind"),2,$user->rights->accounting->bind->write);
                         if ($usemenuhider || empty($leftmenu) || preg_match('/accountancy_dispatch_customer/',$leftmenu)) $newmenu->add("/accountancy/customer/lines.php?mainmenu=accountancy&amp;leftmenu=accountancy_dispatch_customer",$langs->trans("Binded"),2,$user->rights->accounting->bind->write);
                     }
-                    if (! empty($conf->supplier_invoice->enabled))
+                    if (! empty($conf->supplier_invoice->enabled) && empty($conf->global->ACCOUNTING_DISABLE_BINDING_ON_PURCHASES))
                     {
                         $newmenu->add("/accountancy/supplier/index.php?leftmenu=accountancy_dispatch_supplier&amp;mainmenu=accountancy",$langs->trans("SuppliersVentilation"),1,$user->rights->accounting->bind->write, '', $mainmenu, 'dispatch_supplier');
 
@@ -1643,7 +1643,7 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
                         if ($usemenuhider || empty($leftmenu) || preg_match('/accountancy_dispatch_supplier/',$leftmenu)) $newmenu->add("/accountancy/supplier/list.php?mainmenu=accountancy&amp;leftmenu=accountancy_dispatch_supplier",$langs->trans("ToBind"),2,$user->rights->accounting->bind->write);
                         if ($usemenuhider || empty($leftmenu) || preg_match('/accountancy_dispatch_supplier/',$leftmenu)) $newmenu->add("/accountancy/supplier/lines.php?mainmenu=accountancy&amp;leftmenu=accountancy_dispatch_supplier",$langs->trans("Binded"),2,$user->rights->accounting->bind->write);
                     }
-                    if (! empty($conf->expensereport->enabled))
+                    if (! empty($conf->expensereport->enabled) && empty($conf->global->ACCOUNTING_DISABLE_BINDING_ON_EXPENSEREPORTS))
                     {
                         $newmenu->add("/accountancy/expensereport/index.php?leftmenu=accountancy_dispatch_expensereport&amp;mainmenu=accountancy",$langs->trans("ExpenseReportsVentilation"),1,$user->rights->accounting->bind->write, '', $mainmenu, 'dispatch_expensereport');
 
@@ -1663,7 +1663,7 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
                         $sql.= " FROM ".MAIN_DB_PREFIX."accounting_journal";
                         $sql.= " WHERE entity = ".$conf->entity;
                         $sql.= " AND active = 1";
-                        $sql.= " ORDER BY label DESC";
+                        $sql.= " ORDER BY nature ASC, label DESC";
 
                         $resql = $db->query($sql);
                         if ($resql)
@@ -1680,13 +1680,27 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
                                     $nature='';
 
                                     // Must match array $sourceList defined into journals_list.php
-                                    if ($objp->nature == 2 && ! empty($conf->facture->enabled)) $nature="sells";
-                                    if ($objp->nature == 3 && ! empty($conf->fournisseur->enabled)) $nature="purchases";
-                                    if ($objp->nature == 4 && ! empty($conf->banque->enabled)) $nature="bank";
-                                    if ($objp->nature == 5 && ! empty($conf->expensereport->enabled)) $nature="expensereports";
-                                    if ($objp->nature == 1) $nature="various";
-                                    if ($objp->nature == 8) $nature="inventory";
-                                    if ($objp->nature == 9) $nature="hasnew";
+                                    if ($objp->nature == 2 && !empty($conf->facture->enabled) && empty($conf->global->ACCOUNTING_DISABLE_BINDING_ON_SALES)) {
+                                        $nature="sells";
+                                    }
+                                    if ($objp->nature == 3 && !empty($conf->fournisseur->enabled) && empty($conf->global->ACCOUNTING_DISABLE_BINDING_ON_PURCHASES)) {
+                                        $nature="purchases";
+                                    }
+                                    if ($objp->nature == 4 && !empty($conf->banque->enabled)) {
+                                        $nature="bank";
+                                    }
+                                    if ($objp->nature == 5 && !empty($conf->expensereport->enabled) && empty($conf->global->ACCOUNTING_DISABLE_BINDING_ON_EXPENSEREPORTS)) {
+                                        $nature="expensereports";
+                                    }
+                                    if ($objp->nature == 1) {
+                                        $nature="various";
+                                    }
+                                    if ($objp->nature == 8) {
+                                        $nature="inventory";
+                                    }
+                                    if ($objp->nature == 9) {
+                                        $nature="hasnew";
+                                    }
 
                                     // To enable when page exists
                                     if (empty($conf->global->ACCOUNTANCY_SHOW_DEVELOP_JOURNAL))
@@ -1711,7 +1725,7 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
                             }
                             else
                             {
-                                // Should not happend. Entries are added
+                                // Should not happened. Entries are added
                                 $newmenu->add('',$langs->trans("NoJournalDefined"), 2, $user->rights->accounting->comptarapport->lire);
                             }
                         }
@@ -1752,9 +1766,10 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
                     }
 
                     $modecompta='CREANCES-DETTES';
-                    if(! empty($conf->accounting->enabled) && ! empty($user->rights->accounting->comptarapport->lire) && $mainmenu == 'accountancy') $modecompta='BOOKKEEPING';	// Not yet implemented. Should be BOOKKEEPINGCOLLECTED
-                    if ($modecompta)
-                    {
+                    if(! empty($conf->accounting->enabled) && ! empty($user->rights->accounting->comptarapport->lire) && $mainmenu == 'accountancy') {
+                        $modecompta='BOOKKEEPING';	// Not yet implemented. Should be BOOKKEEPINGCOLLECTED
+                    }
+                    if ($modecompta) {
                         if ($usemenuhider || empty($leftmenu) || preg_match('/accountancy_report/', $leftmenu)) {
                             $newmenu->add("/compta/stats/index.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ReportTurnover"), 2, $user->rights->accounting->comptarapport->lire);
                             $newmenu->add("/compta/stats/casoc.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ByCompanies"), 3, $user->rights->accounting->comptarapport->lire);
@@ -1766,8 +1781,7 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 
                     $modecompta='RECETTES-DEPENSES';
                     //if (! empty($conf->accounting->enabled) && ! empty($user->rights->accounting->comptarapport->lire) && $mainmenu == 'accountancy') $modecompta='';	// Not yet implemented. Should be BOOKKEEPINGCOLLECTED
-                    if ($modecompta)
-                    {
+                    if ($modecompta) {
                         if ($usemenuhider || empty($leftmenu) || preg_match('/accountancy_report/', $leftmenu)) {
                             $newmenu->add("/compta/stats/index.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ReportTurnoverCollected"), 2, $user->rights->accounting->comptarapport->lire);
                             $newmenu->add("/compta/stats/casoc.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ByCompanies"), 3, $user->rights->accounting->comptarapport->lire);
@@ -1776,6 +1790,29 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
                             //$newmenu->add("/compta/stats/byratecountry.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ByVatRate"),3,$user->rights->accounting->comptarapport->lire);
                         }
                     }
+
+                $modecompta = 'CREANCES-DETTES';
+                if (!empty($conf->accounting->enabled) && !empty($user->rights->accounting->comptarapport->lire) && $mainmenu == 'accountancy') {
+                    $modecompta = 'BOOKKEEPING'; // Not yet implemented.
+                }
+                if ($modecompta && ((!empty($conf->fournisseur->enabled) && empty($conf->global->MAIN_USE_NEW_SUPPLIERMOD)) || !empty($conf->supplier_invoice->enabled))) {
+                    if ($usemenuhider || empty($leftmenu) || preg_match('/accountancy_report/', $leftmenu)) {
+                        $newmenu->add("/compta/stats/supplier_turnover.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ReportPurchaseTurnover"), 2, $user->rights->accounting->comptarapport->lire);
+                        $newmenu->add("/compta/stats/supplier_turnover_by_thirdparty.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ByCompanies"), 3, $user->rights->accounting->comptarapport->lire);
+                        $newmenu->add("/compta/stats/supplier_turnover_by_prodserv.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ByProductsAndServices"), 3, $user->rights->accounting->comptarapport->lire);
+                    }
+                }
+
+                $modecompta = 'RECETTES-DEPENSES';
+                if (!empty($conf->accounting->enabled) && !empty($user->rights->accounting->comptarapport->lire) && $mainmenu == 'accountancy') {
+                    $modecompta = 'BOOKKEEPINGCOLLECTED'; // Not yet implemented.
+                }
+                if ($modecompta && ((!empty($conf->fournisseur->enabled) && empty($conf->global->MAIN_USE_NEW_SUPPLIERMOD)) || !empty($conf->supplier_invoice->enabled))) {
+                    if ($usemenuhider || empty($leftmenu) || preg_match('/accountancy_report/', $leftmenu)) {
+                        $newmenu->add("/compta/stats/supplier_turnover.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ReportPurchaseTurnoverCollected"), 2, $user->rights->accounting->comptarapport->lire);
+                        $newmenu->add("/compta/stats/supplier_turnover_by_thirdparty.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ByCompanies"), 3, $user->rights->accounting->comptarapport->lire);
+                    }
+                }
 
                 // Configuration
                 $newmenu->add("/accountancy/index.php?leftmenu=accountancy_admin", $langs->trans("Setup"), 0, $user->rights->accounting->chartofaccount, '', $mainmenu, 'accountancy_admin', 1);
@@ -1810,8 +1847,12 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
             }
 
 			// Accountancy (simple)
-			if (! empty($conf->comptabilite->enabled))
-			{
+			if (! empty($conf->comptabilite->enabled)) {
+                // Files
+                if (empty($conf->global->ACCOUNTANCY_HIDE_EXPORT_FILES_MENU)) {
+                    $newmenu->add("/compta/accounting-files.php?mainmenu=accountancy&amp;leftmenu=accountancy_files", $langs->trans("AccountantFiles"), 0, $user->rights->compta->resultat->lire, '', $mainmenu, 'files');
+                }
+                
                 // Bilan, resultats
                 $newmenu->add("/compta/resultat/index.php?leftmenu=report&amp;mainmenu=accountancy", $langs->trans("Reportings"), 0, $user->rights->compta->resultat->lire, '', $mainmenu, 'ca');
 
@@ -1822,17 +1863,36 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
                     $newmenu->add("/compta/resultat/clientfourn.php?leftmenu=report", $langs->trans("ByCompanies"), 2, $user->rights->compta->resultat->lire);
                     // $newmenu->add("/compta/resultat/compteres.php?leftmenu=report","Compte de resultat",2,$user->rights->compta->resultat->lire);
                     // $newmenu->add("/compta/resultat/bilan.php?leftmenu=report","Bilan",2,$user->rights->compta->resultat->lire);
-                    $newmenu->add("/compta/stats/index.php?leftmenu=report", $langs->trans("ReportTurnover"), 1, $user->rights->compta->resultat->lire);
 
                     // $newmenu->add("/compta/stats/cumul.php?leftmenu=report","Cumule",2,$user->rights->compta->resultat->lire);
                     // if (! empty($conf->propal->enabled)) {
                     //    $newmenu->add("/compta/stats/prev.php?leftmenu=report","Previsionnel",2,$user->rights->compta->resultat->lire);
                     //    $newmenu->add("/compta/stats/comp.php?leftmenu=report","Transforme",2,$user->rights->compta->resultat->lire);
                     // }
-                    $newmenu->add("/compta/stats/casoc.php?leftmenu=report", $langs->trans("ByCompanies"), 2, $user->rights->compta->resultat->lire);
-                    $newmenu->add("/compta/stats/cabyuser.php?leftmenu=report", $langs->trans("ByUsers"), 2, $user->rights->compta->resultat->lire);
-                    $newmenu->add("/compta/stats/cabyprodserv.php?leftmenu=report", $langs->trans("ByProductsAndServices"), 2, $user->rights->compta->resultat->lire);
-                    $newmenu->add("/compta/stats/byratecountry.php?leftmenu=report", $langs->trans("ByVatRate"), 2, $user->rights->compta->resultat->lire);
+                    $modecompta = 'CREANCES-DETTES';
+                    $newmenu->add("/compta/stats/index.php?leftmenu=report&modecompta=".$modecompta, $langs->trans("ReportTurnover"), 1, $user->rights->compta->resultat->lire);
+                    $newmenu->add("/compta/stats/casoc.php?leftmenu=report&modecompta=".$modecompta, $langs->trans("ByCompanies"), 2, $user->rights->compta->resultat->lire);
+                    $newmenu->add("/compta/stats/cabyuser.php?leftmenu=report&modecompta=".$modecompta, $langs->trans("ByUsers"), 2, $user->rights->compta->resultat->lire);
+                    $newmenu->add("/compta/stats/cabyprodserv.php?leftmenu=report&modecompta=".$modecompta, $langs->trans("ByProductsAndServices"), 2, $user->rights->compta->resultat->lire);
+                    $newmenu->add("/compta/stats/byratecountry.php?leftmenu=report&modecompta=".$modecompta, $langs->trans("ByVatRate"), 2, $user->rights->compta->resultat->lire);
+
+                    $modecompta = 'RECETTES-DEPENSES';
+                    $newmenu->add("/compta/stats/index.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ReportTurnoverCollected"), 1, $user->rights->compta->resultat->lire);
+                    $newmenu->add("/compta/stats/casoc.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ByCompanies"), 2, $user->rights->compta->resultat->lire);
+                    $newmenu->add("/compta/stats/cabyuser.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ByUsers"), 2, $user->rights->compta->resultat->lire);
+
+                    //Achats
+                    $modecompta = 'CREANCES-DETTES';
+                    $newmenu->add("/compta/stats/supplier_turnover.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ReportPurchaseTurnover"), 1, $user->rights->compta->resultat->lire);
+                    $newmenu->add("/compta/stats/supplier_turnover_by_thirdparty.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ByCompanies"), 2, $user->rights->compta->resultat->lire);
+                    $newmenu->add("/compta/stats/supplier_turnover_by_prodserv.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ByProductsAndServices"), 2, $user->rights->compta->resultat->lire);
+
+                    /*
+                    $modecompta = 'RECETTES-DEPENSES';
+                    $newmenu->add("/compta/stats/index.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ReportPurchaseTurnoverCollected"), 1, $user->rights->compta->resultat->lire);
+                    $newmenu->add("/compta/stats/casoc.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ByCompanies"), 2, $user->rights->compta->resultat->lire);
+                    $newmenu->add("/compta/stats/cabyuser.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ByUsers"), 2, $user->rights->compta->resultat->lire);
+                    */
 
                     // Journaux
                     $newmenu->add("/compta/journal/sellsjournal.php?leftmenu=report", $langs->trans("SellsJournal"), 1, $user->rights->compta->resultat->lire, '', '', '', 50);
@@ -1842,8 +1902,7 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
             }
 
             // Intracomm report
-            if (! empty($conf->intracommreport->enabled))
-            {
+            if (! empty($conf->intracommreport->enabled)) {
                 $langs->load("intracommreport");
 
                 $newmenu->add("/intracommreport/list.php?leftmenu=intracommreport", $langs->trans("MenuIntracommReport"), 0, $user->rights->intracommreport->read, '', $mainmenu, 'intracommreport', 1);

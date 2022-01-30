@@ -1,7 +1,7 @@
 <?php
 	/************************************************
-	* Copyright (C) 2015-2022	Alexandre Spangaro - <support@open-dsi.fr>	Open-DSI - <https://www.open-dsi.fr>
-	* Copyright (C) 2016-2022	Sylvain Legrand - <contact@infras.fr>	InfraS - <https://www.infras.fr>
+	* Copyright (C) 2015-2022  Alexandre Spangaro <support@open-dsi.fr>
+  * Copyright (C) 2022       Sylvain Legrand    <contact@infras.fr>
 	*
 	* This program is free software: you can redistribute it and/or modify
 	* it under the terms of the GNU General Public License as published by
@@ -308,14 +308,6 @@
 			oblyon_print_input($key, 'input', $langs->trans($key), '', $metas, 3, 1);
 		}
 	}
-	// Buttons
-	$metas		= array(array(4), 'Buttons');
-	oblyon_print_liste_titre($metas);
-	if (count($listcolor['button'])) {
-		foreach ($listcolor['button'] as $key) {
-			$metas	= array('type' => 'text', 'class' => 'flat quatrevingtpercent color action');
-			oblyon_print_input($key, 'input', $langs->trans($key), '', $metas, 3, 1);
-		}
 	}
 	// Others
 	$metas		= array(array(4), 'Others');

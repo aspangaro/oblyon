@@ -1,7 +1,10 @@
 <?php
 	/************************************************
-	* Copyright (C) 2015-2022	Alexandre Spangaro - <support@open-dsi.fr>	Open-DSI - <https://www.open-dsi.fr>
-	* Copyright (C) 2016-2020	Sylvain Legrand - <contact@infras.fr>	InfraS - <https://www.infras.fr>
+  * Copyright (C) 2003       Rodolphe Quiedeville <rodolphe@quiedeville.org>
+  * Copyright (C) 2004-2012  Laurent Destailleur  <eldy@users.sourceforge.net>
+  * Copyright (C) 2005-2012  Regis Houssin        <regis.houssin@capnetworks.com>
+	* Copyright (C) 2015-2022	 Alexandre Spangaro   <support@open-dsi.fr>
+	* Copyright (C) 2022       Sylvain Legrand      <contact@infras.fr>
 	*
 	* This program is free software: you can redistribute it and/or modify
 	* it under the terms of the GNU General Public License as published by
@@ -41,46 +44,47 @@
 
 			$langs->load('oblyon@oblyon');
 			$this->db				= $db;
-			$this->numero			= 113900;											// Unique Id for module
+			$this->numero			= 113900;											                  // Unique Id for module
 			$this->name				= preg_replace('/^mod/i', '', get_class($this));	// Module label (no space allowed)
 			$this->editor_name		= '<b>Open-DSI</b>';
 			$this->editor_web		= 'https://www.open-dsi.fr';
 			$this->editor_url		= "https://www.open-dsi.fr";
 			$this->editor_email		= 'support@open-dsi.fr';
-			$this->rights_class		= $this->name;										// Key text used to identify module (for permissions, menus, etc...)
+			$this->rights_class		= $this->name;										          // Key text used to identify module (for permissions, menus, etc...)
             $family					= (!empty($conf->global->EASYA_VERSION) ? 'easya' : 'opendsi');
-            $this->family			= $family;											// used to group modules in module setup page
+            $this->family			= $family;											          // used to group modules in module setup page
             $this->familyinfo		= array($family => array('position' => '001', 'label' => $langs->trans($family)));
 			$this->module_position	= 1;
 			$this->description		= $langs->trans('Module113900Desc');				// Module description
-			$this->version			= 'dolibarr';										// Version : 'development', 'experimental', 'dolibarr' or 'dolibarr_deprecated' or version
+			$this->version			= 'dolibarr';										              // Version : 'development', 'experimental', 'dolibarr' or 'dolibarr_deprecated' or version
 			$this->const_name		= 'MAIN_MODULE_'.strtoupper($this->name);			// llx_const table to save module status enabled/disabled
-			$this->special			= 1;												// Where to store the module in setup page (0=common,1=interface,2=others,3=very specific)
-			$this->picto			= 'opendsi_big@'.$this->name;						// Name of image file used for this module. If in theme => 'pictovalue' ; if in module => 'pictovalue@module' under name object_pictovalue.png
+			$this->special			= 1;												                  // Where to store the module in setup page (0=common,1=interface,2=others,3=very specific)
+			$this->picto			= 'opendsi_big@'.$this->name;						        // Name of image file used for this module. If in theme => 'pictovalue' ; if in module => 'pictovalue@module' under name object_pictovalue.png
 			$this->module_parts		= array('menus'	=> 1,
 											'js'	=> array('js'	=> '/'.$this->name.'/js/pushy.js'),
 											'css'	=> array('css'	=> '/'.$this->name.'/css/'.$this->name.'.css')
 											);
-			$this->dirs				= array('/'.$this->name.'/sql');					// Data directories to create when module is enabled. Example: this->dirs = array("/mymodule/temp");
-			$this->config_page_url	= array('menus.php@'.$this->name);					// List of php page, stored into mymodule/admin directory, to use to setup module.
+			$this->dirs				= array('/'.$this->name.'/sql');					      // Data directories to create when module is enabled. Example: this->dirs = array("/mymodule/temp");
+			$this->config_page_url	= array('menus.php@'.$this->name);				// List of php page, stored into mymodule/admin directory, to use to setup module.
 			// Dependencies
-			$this->hidden			= false;											// A condition to hide module
-			$this->depends			= array();											// List of modules id that must be enabled if this module is enabled
-			$this->requiredby		= array();											// List of modules id to disable if this one is disabled
-			$this->conflictwith		= array();											// List of modules id this module is in conflict with
-			$this->phpmin			= array(7, 0);										// Minimum version of PHP required by module
+			$this->hidden			= false;                                        // A condition to hide module
+			$this->depends			= array();                                    // List of modules id that must be enabled if this module is enabled
+			$this->requiredby		= array();                                    // List of modules id to disable if this one is disabled
+			$this->conflictwith		= array();                                  // List of modules id this module is in conflict with
+			$this->phpmin			= array(7, 0);                                  // Minimum version of PHP required by module
+      $this->need_dolibarr_version = array(14,0);                       // Minimum version of Dolibarr required by module
 			$this->langfiles		= array($this->name.'@'.$this->name);
-			$this->const			= array();											// List of particular constants to add when module is enabled
+			$this->const			= array();                                      // List of particular constants to add when module is enabled
 			$this->tabs				= array();
 			if (! isset($conf->oblyon->enabled)) {
 				$conf->oblyon			= new stdClass();
 				$conf->oblyon->enabled	= 0;
 			}
-			$this->dictionaries	= array();												// Dictionaries
-			$this->boxes		= array();												// List of boxes
-			$this->cronjobs		= array();												// List of cron jobs entries to add
-			$this->rights		= array();												// Permission array used by this module
-			$this->menu			= array();												// List of menus to add
+			$this->dictionaries	= array();                                    // Dictionaries
+			$this->boxes		= array();                                        // List of boxes
+			$this->cronjobs		= array();                                      // List of cron jobs entries to add
+			$this->rights		= array();                                        // Permission array used by this module
+			$this->menu			= array();                                        // List of menus to add
 		}
 
 		/************************************************
