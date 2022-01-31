@@ -3143,6 +3143,23 @@ font-size: 14px;
     padding: 10px 0 10px 0;
 }
 
+.helppresent, .helppresent:hover {
+    /* color: #f3e4ac !important; */
+}
+.helppresentcircle {
+    /*
+    color: rgb(<?php echo $colorbackhmenu1 ?>);
+    filter: invert(0.8);
+    */
+    color: <?php print $badgeSecondary; ?>;
+    margin-<?php echo $left ?>: -7px;
+    display: inline-block;
+    margin-top: -10px;
+    font-size: x-small;
+    vertical-align: super;
+    opacity: 0.95;
+}
+
 /*------------------------------------*\
 #Pushy Left Menu
 \*------------------------------------*/
