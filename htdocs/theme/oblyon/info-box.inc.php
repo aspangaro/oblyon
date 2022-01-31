@@ -11,6 +11,9 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
     position: relative;
 	min-height: 90px;
 	background: #fff;
+    <?php if(!empty($conf->global->OBLYON_INFOXBOX_BACKGROUND)) { ?>
+        background: <?php print $conf->global->OBLYON_INFOXBOX_BACKGROUND; ?> !important;
+    <?php } ?>
 	width: 100%;
 	box-shadow: 0 0 1px rgba(0,0,0,.125),0 1px 3px rgba(0,0,0,.2);
     border-top-right-radius: 0.25em;

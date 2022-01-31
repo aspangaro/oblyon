@@ -39,12 +39,13 @@
 
 	// init variables *******************************
 	$result							= empty($conf->global->THEME_AGRESSIVENESS_RATIO) ? dolibarr_set_const($db, 'THEME_AGRESSIVENESS_RATIO', -50, 'chaine', 0, 'Oblyon module', $conf->entity) : '';
-	$listcolor						= array('OBLYON_INFOXBOX_WEATHER_COLOR',
+	$listcolor						= array('OBLYON_INFOXBOX_BACKGROUND',               // #ffffff
+                                            'OBLYON_INFOXBOX_WEATHER_COLOR',            // #bdbdbd
 											'OBLYON_INFOXBOX_ACTION_COLOR',				// #b46080 AGENDA
 											'OBLYON_INFOXBOX_PROJECT_COLOR',			// #6c6a98 PROJECT
-											'OBLYON_INFOXBOX_CUSTOMER_PROPAL_COLOR',	// #99a17d PROPAL
-											'OBLYON_INFOXBOX_CUSTOMER_ORDER_COLOR',	 	// #99a17d ORDER
-											'OBLYON_INFOXBOX_CUSTOMER_INVOICE_COLOR',   // #99a17d INVOICE
+											'OBLYON_INFOXBOX_CUSTOMER_PROPAL_COLOR',	// #99a17d CUSTOMER PROPOSAL
+											'OBLYON_INFOXBOX_CUSTOMER_ORDER_COLOR',	 	// #99a17d CUSTOMER ORDER
+											'OBLYON_INFOXBOX_CUSTOMER_INVOICE_COLOR',   // #99a17d CUSTOMER INVOICE
 											'OBLYON_INFOXBOX_SUPPLIER_PROPAL_COLOR',	// #599caf SUPPLIER PROPOSAL
 											'OBLYON_INFOXBOX_SUPPLIER_ORDER_COLOR',	 	// #599caf SUPPLIER ORDER
 											'OBLYON_INFOXBOX_SUPPLIER_INVOICE_COLOR',   // #599caf SUPPLIER INVOICE

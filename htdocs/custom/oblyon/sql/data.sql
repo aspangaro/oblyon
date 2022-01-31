@@ -52,6 +52,7 @@ INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_COLOR_BUTTON_DELETE1',			'__ENTITY__', '#cc8800',			'chaine', '0',	'Oblyon button delete color 1');
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_COLOR_BUTTON_DELETE2',			'__ENTITY__', '#cc4400',			'chaine', '0',	'Oblyon button delete color 2');
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('THEME_AGRESSIVENESS_RATIO',		    '__ENTITY__', '0',			        'chaine', '0',	'Oblyon dashboard agressiveness ratio');
+INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_INFOXBOX_BACKGROUND',		    '__ENTITY__', '#ffffff',			'chaine', '0',	'Oblyon infobox background color');
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_INFOXBOX_WEATHER_COLOR',		'__ENTITY__', '#bdbdbd',			'chaine', '0',	'Oblyon weather background color');
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_INFOXBOX_ACTION_COLOR',		'__ENTITY__', '#ab4da1',			'chaine', '0',	'Oblyon action background color');
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_INFOXBOX_PROJECT_COLOR',		'__ENTITY__', '#6c6a98',			'chaine', '0',	'Oblyon project background color');

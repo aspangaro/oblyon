@@ -80,7 +80,9 @@
 															'THEME_ELDY_TEXTLINK'
 															)
 										);
-	$listtheme					= array('green'		=> array('OBLYON_COLOR_TOPMENU_BCKGRD'			=> '#34495E',
+	$listtheme					= array('green'		=> array(
+                                                            'OBLYON_INFOXBOX_BACKGROUND'            => '#FFFFFF',
+                                                            'OBLYON_COLOR_TOPMENU_BCKGRD'			=> '#34495E',
 															'OBLYON_COLOR_TOPMENU_BCKGRD_HOVER'		=> '#2C3E50',
 															'OBLYON_COLOR_TOPMENU_TXT'				=> '#FFFFFF',
 															'OBLYON_COLOR_TOPMENU_TXT_ACTIVE'		=> '#',
@@ -114,7 +116,9 @@
 															'THEME_ELDY_TEXT'						=> '#',
 															'THEME_ELDY_TEXTLINK'					=> '#'
 															),
-										'dark'		=> array('OBLYON_COLOR_TOPMENU_BCKGRD'			=> '#333333',
+										'dark'		=> array(
+                                                            'OBLYON_INFOXBOX_BACKGROUND'            => '#FFFFFF',
+                                                            'OBLYON_COLOR_TOPMENU_BCKGRD'			=> '#333333',
                                                             'OBLYON_COLOR_TOPMENU_BCKGRD_HOVER'		=> '#0083A2',
 															'OBLYON_COLOR_TOPMENU_TXT'				=> '#F4F4F4',
 															'OBLYON_COLOR_TOPMENU_TXT_ACTIVE'		=> '#',
@@ -148,7 +152,9 @@
 															'THEME_ELDY_TEXT'						=> '#',
 															'THEME_ELDY_TEXTLINK'					=> '#'
 															),
-										'blue'		=> array('OBLYON_COLOR_TOPMENU_BCKGRD'			=> '#092D5C',
+										'blue'		=> array(
+                                                            'OBLYON_INFOXBOX_BACKGROUND'            => '#FFFFFF',
+                                                            'OBLYON_COLOR_TOPMENU_BCKGRD'			=> '#092D5C',
 															'OBLYON_COLOR_TOPMENU_BCKGRD_HOVER'		=> '#0D4185',
 															'OBLYON_COLOR_TOPMENU_TXT'				=> '#F4F4F4',
 															'OBLYON_COLOR_TOPMENU_TXT_ACTIVE'		=> '#',
@@ -182,7 +188,9 @@
 															'THEME_ELDY_TEXT'						=> '#',
 															'THEME_ELDY_TEXTLINK'					=> '#'
 															),
-										'night'		=> array('OBLYON_COLOR_TOPMENU_BCKGRD'			=> '#222222',
+										'night'		=> array(
+                                                            'OBLYON_INFOXBOX_BACKGROUND'            => '#444444',
+                                                            'OBLYON_COLOR_TOPMENU_BCKGRD'			=> '#222222',
 															'OBLYON_COLOR_TOPMENU_BCKGRD_HOVER'		=> '#333333',
 															'OBLYON_COLOR_TOPMENU_TXT'				=> '#F4F4F4',
 															'OBLYON_COLOR_TOPMENU_TXT_ACTIVE'		=> '#',
@@ -216,7 +224,9 @@
 															'THEME_ELDY_TEXT'						=> '#',
 															'THEME_ELDY_TEXTLINK'					=> '#e09430'
 															),
-                                        'light'		=> array('OBLYON_COLOR_TOPMENU_BCKGRD'			=> '#FFFFFF',
+                                        'light'		=> array(
+                                                            'OBLYON_INFOXBOX_BACKGROUND'            => '#FFFFFF',
+                                                            'OBLYON_COLOR_TOPMENU_BCKGRD'			=> '#FFFFFF',
                                                             'OBLYON_COLOR_TOPMENU_BCKGRD_HOVER'		=> '#D51123',
                                                             'OBLYON_COLOR_TOPMENU_TXT'				=> '#444444',
                                                             'OBLYON_COLOR_TOPMENU_TXT_ACTIVE'		=> '#FFFFFF',
@@ -236,12 +246,12 @@
                                                             'OBLYON_COLOR_LOGIN_BCKGRD'				=> '#FFFFFF',
                                                             'OBLYON_COLOR_BTITLE'					=> '#D51123',
                                                             'OBLYON_COLOR_FTITLE'					=> '#FFFFFF',
-                                                            'OBLYON_COLOR_BLINE'					=> '#F4F4F4',
+                                                            'OBLYON_COLOR_BLINE'					=> '#FFFFFF',
                                                             'OBLYON_COLOR_BLINE_HOVER'				=> '#F1F1F1',
                                                             'OBLYON_COLOR_FLINE'					=> '#444444',
-                                                            'OBLYON_COLOR_FLINE_HOVER'				=> '#FCFCFC',
+                                                            'OBLYON_COLOR_FLINE_HOVER'				=> '#D51123',
                                                             'THEME_ELDY_TOPBORDER_TITLE1'			=> '#',
-                                                            'THEME_ELDY_LINEIMPAIR1'				=> '#3C3C3C',
+                                                            'THEME_ELDY_LINEIMPAIR1'				=> '#F1F1F1',
                                                             'THEME_ELDY_LINEIMPAIR2'				=> '#',
                                                             'THEME_ELDY_LINEPAIR1'					=> '#444444',
                                                             'THEME_ELDY_LINEPAIR2'					=> '#',
