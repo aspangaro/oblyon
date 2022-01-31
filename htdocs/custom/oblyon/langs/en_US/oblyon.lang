@@ -101,6 +101,7 @@ ColorIntensity = Color intensity
 ColorIntensityDesc = Set the intensity to the colors below (Currently %s)
 ColorMoreDarker = Less intense
 ColorMoreLighter = More intense
+OBLYON_INFOXBOX_BACKGROUND = Thumb background color
 OBLYON_INFOXBOX_WEATHER_COLOR = Thumb color 'weather'
 OBLYON_INFOXBOX_ACTION_COLOR = Thumb color 'agenda'
 OBLYON_INFOXBOX_PROJECT_COLOR = Thumb color 'project'

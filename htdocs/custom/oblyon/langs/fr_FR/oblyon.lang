@@ -124,6 +124,7 @@ ColorIntensity = Intensité des couleurs
 ColorIntensityDesc = Définir l'intensité sur les couleurs ci-dessous (Actuellement %s)
 ColorMoreDarker = Moins intense
 ColorMoreLighter = Plus intense
+OBLYON_INFOXBOX_BACKGROUND = Couleur de fond de la vignette
 OBLYON_INFOXBOX_WEATHER_COLOR = Couleur vignette 'météo'
 OBLYON_INFOXBOX_ACTION_COLOR = Couleur vignette 'agenda'
 OBLYON_INFOXBOX_PROJECT_COLOR = Couleur vignette 'projet'
