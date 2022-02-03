@@ -304,7 +304,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 		global $langs;
 
 		print '	<div class = "center">
-					<button class = "button button-save reposition" style = "width: 110px;" type = "submit" value = "update_'.$action.'" id = "action" name = "action">'.$langs->trans('Save').'</button>
+					<button class = "button button-save reposition" type = "submit" value = "update_'.$action.'" id = "action" name = "action">'.$langs->trans('Save').'</button>
 				</div>';
 	}
 

@@ -822,17 +822,18 @@ input#onlinepaymenturl, input#directdownloadlink {
 .button:visited {
     background-color: <?php print $colorButtonAction1; ?>;
     /* border: 1px solid #c0c0c0; */
-    border-color: <?php print $colorButtonAction1; ?>;
-    /* box-shadow: inset 0 1px 0 rgba(235,235,235, .6);
-    -webkit-box-shadow: inset 0 1px 0 rgba(235,235,235, .6); */
-    -webkit-border-radius: 0.30em;
-    -moz-border-radius: 0.30em;
+    /* border-color: <?php print $colorButtonAction1; ?>; */
+    /* box-shadow: inset 0 1px 0 rgba(235,235,235, .6); */
+    /* -webkit-box-shadow: inset 0 1px 0 rgba(235,235,235, .6); */
+    /* -webkit-border-radius: 0.30em; */
+    /* -moz-border-radius: 0.30em; */
+    border: none;
     border-radius: 0.30em;
     color: #fff;
     cursor: pointer;
     font-size: 14px;
-    /* margin: .2em .5em; */
-    margin: 2px 1px;
+    margin: .2em .5em;
+    /* margin: 2px 1px; */
     padding: .5em 1em;
     transition: all .3s ease-in-out;
     -moz-transition: all .3s ease-in-out;
@@ -2208,7 +2209,11 @@ transition: all .2s ease-in-out;
 #tmenu_tooltip .tmenu li:hover .main-nav__link,
 .main-nav__item:hover .main-nav__link,
 .main-nav__item .main-nav__link:focus {
-    color: <?php print $topmenu_hover; ?>;
+    <?php if ($conf->global->MAIN_MENU_INVERT) { ?>
+        color: <?php print $bgnavleft_txt; ?>;
+    <?php } else { ?>
+        color: <?php print $bgnavtop_txt; ?>;
+    <?php } ?>
 }
 
 .main-nav__link {
@@ -2350,7 +2355,7 @@ transition: all .2s ease-in-out;
 
 li.item-heading:hover > .sec-nav__link {
     background-color: <?php print $bgnavleft_hover; ?>;
-    color: <?php print $bgnavleft_txt; ?>;
+    color: <?php print $bgnavleft_txt_hover; ?>;
 }
 
 li.sec-nav__sub-item {
@@ -3492,7 +3497,7 @@ a.tmenudisabled {
 a.tmenu:link,
 a.tmenu:visited,
 a.tmenudisabled {
-    color: <?php print $bgnavtop_txt; ?> !important;
+    color: <?php print $bgnavtop_txt; ?> /*!important*/;
     display: block;
     font-weight: normal;
     /* padding: 0 5px; */
@@ -5349,7 +5354,7 @@ table.dp {
 }
 .datenowlink
 {
-    color: <?php echo $colortextlink; ?>;
+    color: rgb(<?php echo $colortextlink; ?>);
 }
 
 .categtextwhite, .treeview .categtextwhite.hover {
