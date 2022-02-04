@@ -91,7 +91,7 @@
 															'OBLYON_COLOR_LEFTMENU_BCKGRD_HOVER'	=> '#29B564',
 															'OBLYON_COLOR_LEFTMENU_TXT'				=> '#FFFFFF',
 															'OBLYON_COLOR_LEFTMENU_TXT_ACTIVE'		=> '#',
-															'OBLYON_COLOR_LEFTMENU_TXT_HOVER'		=> '#',
+															'OBLYON_COLOR_LEFTMENU_TXT_HOVER'		=> '#222222',
 															'OBLYON_COLOR_BUTTON_ACTION1'			=> '#0088CC',
 															'OBLYON_COLOR_BUTTON_ACTION2'			=> '#0044CC',
 															'OBLYON_COLOR_BUTTON_DELETE1'			=> '#CC8800',
@@ -163,7 +163,7 @@
 															'OBLYON_COLOR_LEFTMENU_BCKGRD_HOVER'	=> '#0D4185',
 															'OBLYON_COLOR_LEFTMENU_TXT'				=> '#F4F4F4',
 															'OBLYON_COLOR_LEFTMENU_TXT_ACTIVE'		=> '#',
-															'OBLYON_COLOR_LEFTMENU_TXT_HOVER'		=> '#',
+                                                            'OBLYON_COLOR_LEFTMENU_TXT_HOVER'		=> '#444444',
 															'OBLYON_COLOR_BUTTON_ACTION1'			=> '#0088CC',
 															'OBLYON_COLOR_BUTTON_ACTION2'			=> '#0044CC',
 															'OBLYON_COLOR_BUTTON_DELETE1'			=> '#CC8800',
@@ -199,7 +199,7 @@
 															'OBLYON_COLOR_LEFTMENU_BCKGRD_HOVER'	=> '#222222',
 															'OBLYON_COLOR_LEFTMENU_TXT'				=> '#F4F4F4',
 															'OBLYON_COLOR_LEFTMENU_TXT_ACTIVE'		=> '#',
-															'OBLYON_COLOR_LEFTMENU_TXT_HOVER'		=> '#',
+															'OBLYON_COLOR_LEFTMENU_TXT_HOVER'		=> '#FFFFFF',
 															'OBLYON_COLOR_BUTTON_ACTION1'			=> '#0088CC',
 															'OBLYON_COLOR_BUTTON_ACTION2'			=> '#0044CC',
 															'OBLYON_COLOR_BUTTON_DELETE1'			=> '#CC8800',
@@ -258,7 +258,7 @@
                                                             'THEME_ELDY_LINEBREAK'					=> '#',
                                                             'THEME_ELDY_TEXTTITLENOTAB'				=> '#FEFEFE',
                                                             'THEME_ELDY_TEXT'						=> '#',
-                                                            'THEME_ELDY_TEXTLINK'					=> '#e09430'
+                                                            'THEME_ELDY_TEXTLINK'					=> '#444444'
                                                         )
 										);
 
