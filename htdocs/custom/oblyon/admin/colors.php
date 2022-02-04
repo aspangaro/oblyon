@@ -127,7 +127,7 @@
 															'OBLYON_COLOR_LEFTMENU_BCKGRD_HOVER'	=> '#0083A2',
 															'OBLYON_COLOR_LEFTMENU_TXT'				=> '#F4F4F4',
 															'OBLYON_COLOR_LEFTMENU_TXT_ACTIVE'		=> '#',
-															'OBLYON_COLOR_LEFTMENU_TXT_HOVER'		=> '#',
+															'OBLYON_COLOR_LEFTMENU_TXT_HOVER'		=> '#FFFFFF',
 															'OBLYON_COLOR_BUTTON_ACTION1'			=> '#0083A2',
 															'OBLYON_COLOR_BUTTON_ACTION2'			=> '#0063A2',
 															'OBLYON_COLOR_BUTTON_DELETE1'			=> '#CC8800',
