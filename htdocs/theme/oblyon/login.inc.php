@@ -77,7 +77,6 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
         margin-left: 10px;
         margin-top: 5px;
         margin-bottom: 5px;
-		opacity: 0.3;
     }
     .login_table input#username:focus, .login_table input#password:focus, .login_table input#securitycode:focus {
         outline: none !important;
