@@ -218,7 +218,7 @@
 	$colortexttitlenotab					= join(',', colorStringToArray($colortexttitlenotab));
 	$colortexttitle							= join(',', colorStringToArray($colortexttitle));
 	$colortext								= join(',', colorStringToArray($colortext));
-	$colortextlink							= join(',', colorStringToArray($colortextlink));
+//	$colortextlink							= join(',', colorStringToArray($colortextlink));
 	if ($colorBorderInfo != '')				$colorBorderInfo			= join(',', colorStringToArray($colorBorderInfo));
 	if ($colorBackInfo != '')				$colorBackInfo				= join(',', colorStringToArray($colorBackInfo));
 	if ($colorBorderWarning != '')			$colorBorderWarning			= join(',', colorStringToArray($colorBorderWarning));
