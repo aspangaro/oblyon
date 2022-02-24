@@ -294,12 +294,13 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
         color: rgba(0,0,0,0.3);
     }
     .dropdown-item.active, .dropdown-item:hover, .dropdown-item:focus, .dropdown-menu a.top-menu-dropdown-link:hover   {
-        color: <?php echo (isset($colorfline_hover)) ? $colorfline_hover : 'white' ?> !important;
         text-decoration: none;
 <?php if ( $conf->global->MAIN_MENU_INVERT ) { ?>
     background-color: <?php print $bgnavtop; ?>;
+    color: <?php echo (isset($bgnavtop_txt)) ? $bgnavtop_txt : 'white' ?> !important;
 <?php } else { ?>
     background-color: <?php print $bgnavleft; ?>;
+    color: <?php echo (isset($bgnavleft_txt)) ? $bgnavleft_txt : 'white' ?> !important;
 <?php } ?>
     }
     /*
