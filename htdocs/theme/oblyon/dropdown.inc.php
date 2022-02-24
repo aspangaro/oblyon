@@ -11,7 +11,6 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
 }
 
 .dropdown-menu {
-    border-color: #eee;
     position: absolute;
     top: 100%;
     left: 0;
@@ -23,10 +22,9 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
     font-size: 14px;
     text-align: left;
     list-style: none;
-    background-color: #fff;
+    background-color: <?php print (isset($bgcolor)) ? $bgcolor : '#fff' ?>;
     -webkit-background-clip: padding-box;
     background-clip: padding-box;
-    border: 1px solid #ccc;
     border: 1px solid rgba(0,0,0,.15);
     border-radius: 4px;
     -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
@@ -203,7 +201,7 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
 
 #topmenuloginmoreinfo-btn, #topmenulogincompanyinfo-btn {
     display: block;
-    text-aling: right;
+    text-align: right;
     color:#666;
     cursor: pointer;
 }
@@ -248,7 +246,7 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
 }
 
     .dropdown-menu a.top-menu-dropdown-link {
-        color: <?php echo $colortextlink; ?> !important;
+        color: <?php echo (isset($colorfline)) ? $colorfline : '#212529' ?> !important;
         -webkit-box-shadow: none;
         -moz-box-shadow: none;
         box-shadow: none;
@@ -262,7 +260,7 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
         padding: .25rem 1.5rem .25rem 1rem;
         clear: both;
         font-weight: 400;
-        color: #212529  !important;
+        color: <?php echo (isset($colorfline)) ? $colorfline : '#212529' ?> !important;
         text-align: inherit;
         background-color: transparent;
         border: 0;
@@ -295,13 +293,14 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
         content: "\f0da";
         color: rgba(0,0,0,0.3);
     }
-    .dropdown-item.active, .dropdown-item:hover, .dropdown-item:focus  {
-        color: #000000 !important;
+    .dropdown-item.active, .dropdown-item:hover, .dropdown-item:focus, .dropdown-menu a.top-menu-dropdown-link:hover   {
         text-decoration: none;
 <?php if ( $conf->global->MAIN_MENU_INVERT ) { ?>
     background-color: <?php print $bgnavtop; ?>;
+    color: <?php echo (isset($bgnavtop_txt)) ? $bgnavtop_txt : 'white' ?> !important;
 <?php } else { ?>
     background-color: <?php print $bgnavleft; ?>;
+    color: <?php echo (isset($bgnavleft_txt)) ? $bgnavleft_txt : 'white' ?> !important;
 <?php } ?>
     }
     /*
@@ -314,7 +313,7 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
         font-size: 14px;
         line-height: 16px;
         box-sizing: border-box;
-        color: #575756;
+        color: <?php echo (isset($colorfline)) ? $colorfline : '#575756' ?>;
         background-color: transparent;
         background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3C/svg%3E");
         background-repeat: no-repeat;
@@ -327,7 +326,7 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
         transform-style: preserve-3d;
     }
     .dropdown-search-input::placeholder {
-        color: color(#575756 a(0.8));
+        color: color(<?php echo (isset($colorfline)) ? $colorfline : '#575756' ?> a(0.8));
         letter-spacing: 1.5px;
     }
     .hidden-search-result{
