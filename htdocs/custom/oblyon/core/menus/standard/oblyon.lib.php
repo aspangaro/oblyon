@@ -1705,7 +1705,7 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
                                     // To enable when page exists
                                     if (empty($conf->global->ACCOUNTANCY_SHOW_DEVELOP_JOURNAL))
                                     {
-                                        if ($nature == 'various' || $nature == 'hasnew' || $nature == 'inventory') $nature='';
+                                        if ($nature == 'hasnew' || $nature == 'inventory') $nature='';
                                     }
 
                                     // Remove all type when treasury accounting is on
