@@ -51,9 +51,10 @@
 			$this->editor_url		= "https://www.open-dsi.fr";
 			$this->editor_email		= 'support@open-dsi.fr';
 			$this->rights_class		= $this->name;								// Key text used to identify module (for permissions, menus, etc...)
-            $family					= (!empty($conf->global->EASYA_VERSION) ? 'easya' : 'opendsi');
-            $this->family			= $family;									// used to group modules in module setup page
-            $this->familyinfo		= array($family => array('position' => '001', 'label' => $langs->trans($family)));
+			$family					= (!empty($conf->global->EASYA_VERSION) ? 'easya' : 'opendsi');
+			$this->family			= $family;									// used to group modules in module setup page
+			$this->module_position	= 10;
+			$this->familyinfo		= array($family => array('position' => '001', 'label' => $langs->trans($family . "Family")));
 			$this->module_position	= 1;
 			$this->description		= $langs->trans('Module113900Desc');	// Module description
 			$this->version			= 'dolibarr';								// Version : 'development', 'experimental', 'dolibarr' or 'dolibarr_deprecated' or version
