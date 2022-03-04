@@ -2552,7 +2552,7 @@ div.login_block:hover:after {
 }
 
 div.login_block_user{
-    clear: left;
+    /*clear: left;*/
     float: <?php print $left; ?>;
     margin-right: 0px;
 }
