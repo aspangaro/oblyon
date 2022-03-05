@@ -206,8 +206,10 @@ SET FOREIGN_KEY_CHECKS = 1;
 						$row[$j]	= '\''.$row[$j].'\'';
 					}
 					if ($j == 1)	$row[$j]	= '\'__ENTITY__\'';
-					$onDuplicate	= $db->type == 'pgsql' ? ' ON CONFLICT ('.$duplicate[2].') DO UPDATE SET ' : ' ON DUPLICATE KEY UPDATE ';
-					$duplicateValue .= $j == $duplicate[0] ? $onDuplicate.$duplicate[1].' = '.$row[$j] : '';
+					if (!empty($duplicate)) {
+						$onDuplicate	= $db->type == 'pgsql' ? ' ON CONFLICT ('.$duplicate[2].') DO UPDATE SET ' : ' ON DUPLICATE KEY UPDATE ';
+						$duplicateValue .= $j == $duplicate[0] ? $onDuplicate.$duplicate[1].' = '.$row[$j] : '';
+					}
 				}
 				$sqlnewtable	.= implode(', ', $row).')'.$duplicateValue.';
 ';
@@ -252,7 +254,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 		oblyon_print_colgroup($metas);
 		print '		<tr>
 						<td colspan = "2" align = "center" style = "font-size: 14px;">
-							<a href = "/document.php?modulepart=oblyon&file=sql/update.'.$conf->entity.'">'.$langs->trans('OblyonParamAction1').' <b><FONT color = "#D51123">'.$langs->trans('Module113900Name').'</FONT></b> <FONT size = "2">'.$langs->trans('OblyonParamAction2').'</FONT></a>
+							<a href = "'.DOL_URL_ROOT.'/document.php?modulepart=oblyon&file=sql/update.'.$conf->entity.'">'.$langs->trans('OblyonParamAction1').' <b><FONT color = "#D51123">'.$langs->trans('Module113900Name').'</FONT></b> <FONT size = "2">'.$langs->trans('OblyonParamAction2').'</FONT></a>
 						</td>
 						<td align = "center"><button class = "butActionBackup" type = "submit" value = "bkupParams" name = "action">'.$langs->trans('OblyonParamBkup').'</button></td>
 						<td align = "center"><button class = "butActionBackup" type = "submit" value = "restoreParams" name = "action">'.$langs->trans('OblyonParamRestore').'</button></td>
