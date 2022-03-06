@@ -20,7 +20,6 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
     position: relative;
     margin: 0 0 30px 0;
     padding: 0;
-    list-style: none;
 }
 .timeline:before {
     content: '';
@@ -37,6 +36,7 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
     position: relative;
     margin-right: 0;
     margin-bottom: 15px;
+    list-style: none;
 }
 .timeline > li:before,
 .timeline > li:after {
