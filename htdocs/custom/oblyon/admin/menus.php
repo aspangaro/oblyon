@@ -77,7 +77,7 @@
 
 	// Configuration header *************************
 	$head						= oblyon_admin_prepare_head();
-	dol_fiche_head($head, 'menus', $langs->trans('Module113900Name'), 0, 'opendsi@oblyon');
+	print dol_get_fiche_head($head, 'menus', $langs->trans('Module113900Name'), 0, 'opendsi@oblyon');
 
 	// setup page goes here *************************
 	// Alert

@@ -65,7 +65,7 @@
 
 	// Configuration header *************************
 	$head									= oblyon_admin_prepare_head();
-	dol_fiche_head($head, 'icons', $langs->trans('Module113900Name'), 0, 'opendsi@oblyon');
+	print dol_get_fiche_head($head, 'icons', $langs->trans('Module113900Name'), 0, 'opendsi@oblyon');
 
 	// setup page goes here *************************
 	print '	<form action = "'.$_SERVER['PHP_SELF'].'" method = "POST">

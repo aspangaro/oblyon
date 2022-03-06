@@ -1,5 +1,15 @@
 ## Changelog ##
 
+### Version 14.0.1 (2022/03/06)
+ - Comptability Dolibarr v14 / Easya 2022.5
+ - Fix restore backup system in oblyon admin
+ - Fix problem with ul/ol on ticket message (Thanks @tnegre)
+ - Fix problem of compatibility with infraSsearch & MBI Calls
+ - Review informations
+
+### Version 13.0.0 - 2021 xx xx
+ - Comptability Dolibarr v13
+
 ### Version 12.0.0 - 2020 06 30
  - Comptability Dolibarr v12
 

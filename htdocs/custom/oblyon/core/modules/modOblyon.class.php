@@ -57,13 +57,14 @@
 			$this->familyinfo		= array($family => array('position' => '001', 'label' => $langs->trans($family . "Family")));
 			$this->module_position	= 1;
 			$this->description		= $langs->trans('Module113900Desc');	// Module description
-			$this->version			= 'dolibarr';								// Version : 'development', 'experimental', 'dolibarr' or 'dolibarr_deprecated' or version
+			$this->version			= '14.0.1';									// Version : 'development', 'experimental', 'dolibarr' or 'dolibarr_deprecated' or version
 			$this->const_name		= 'MAIN_MODULE_'.strtoupper($this->name);	// llx_const table to save module status enabled/disabled
 			$this->special			= 0;										// Where to store the module in setup page (0=common,1=interface,2=others,3=very specific)
 			$this->picto			= 'opendsi_big@'.$this->name;				// Name of image file used for this module. If in theme => 'pictovalue' ; if in module => 'pictovalue@module' under name object_pictovalue.png
 			$this->module_parts		= array('menus'	=> 1,
 											'js'	=> array('js'	=> '/'.$this->name.'/js/pushy.js'),
-											'css'	=> array('css'	=> '/'.$this->name.'/css/'.$this->name.'.css')
+											'css'	=> array('css'	=> '/'.$this->name.'/css/'.$this->name.'.css'),
+											'tpl'	=> 1
 											);
 			$this->dirs				= array('/'.$this->name.'/sql');			// Data directories to create when module is enabled. Example: this->dirs = array("/mymodule/temp");
 			$this->config_page_url	= array('menus.php@'.$this->name);			// List of php page, stored into mymodule/admin directory, to use to setup module.
@@ -72,7 +73,7 @@
 			$this->depends			= array();									// List of modules id that must be enabled if this module is enabled
 			$this->requiredby		= array();									// List of modules id to disable if this one is disabled
 			$this->conflictwith		= array();									// List of modules id this module is in conflict with
-			$this->phpmin			= array(7, 0);								// Minimum version of PHP required by module
+			$this->phpmin			= array(5, 6);								// Minimum version of PHP required by module
       		$this->need_dolibarr_version = array(14,0);							// Minimum version of Dolibarr required by module
 			$this->langfiles		= array($this->name.'@'.$this->name);
 			$this->const			= array();									// List of particular constants to add when module is enabled
