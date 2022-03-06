@@ -206,8 +206,10 @@ SET FOREIGN_KEY_CHECKS = 1;
 						$row[$j]	= '\''.$row[$j].'\'';
 					}
 					if ($j == 1)	$row[$j]	= '\'__ENTITY__\'';
-					$onDuplicate	= $db->type == 'pgsql' ? ' ON CONFLICT ('.$duplicate[2].') DO UPDATE SET ' : ' ON DUPLICATE KEY UPDATE ';
-					$duplicateValue .= $j == $duplicate[0] ? $onDuplicate.$duplicate[1].' = '.$row[$j] : '';
+					if (!empty($duplicate)) {
+						$onDuplicate	= $db->type == 'pgsql' ? ' ON CONFLICT ('.$duplicate[2].') DO UPDATE SET ' : ' ON DUPLICATE KEY UPDATE ';
+						$duplicateValue .= $j == $duplicate[0] ? $onDuplicate.$duplicate[1].' = '.$row[$j] : '';
+					}
 				}
 				$sqlnewtable	.= implode(', ', $row).')'.$duplicateValue.';
 ';
