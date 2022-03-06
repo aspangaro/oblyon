@@ -297,8 +297,6 @@ SET FOREIGN_KEY_CHECKS = 1;
 	*	Print HTML action button for admin page
 	*
 	*	@param		string		$action		action name (with prefix => 'update_')
-	*	@param		string		$desc		Description of action (writes on the first line)
-	*	@param		int			$rowspan	number of rows
 	*	@return		void
 	************************************************/
 	function oblyon_print_btn_action($action)
@@ -313,9 +311,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 	/************************************************
 	*	Print HTML HR line
 	*
-	*	@param		string		$action		action name (with prefix => 'update_')
-	*	@param		string		$desc		Description of action (writes on the first line)
-	*	@param		int			$rowspan	number of rows
+    *	@param		int			$cs1		first colspan
 	*	@return		void
 	************************************************/
 	function oblyon_print_hr($cs1 = 3)
@@ -326,9 +322,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 	/************************************************
 	*	Print HTML final line
 	*
-	*	@param		string		$action		action name (with prefix => 'update_')
-	*	@param		string		$desc		Description of action (writes on the first line)
-	*	@param		int			$rowspan	number of rows
+    *	@param		int			$cs1		first colspan
 	*	@return		void
 	************************************************/
 	function oblyon_print_final($cs1 = 3)
@@ -346,6 +340,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 	*	@param		array		$metas		list of HTML parameters and values (example : 'type'=>'text' and/or 'class'=>'flat center', etc...)
 	*	@param		int			$cs1		first colspan
 	*	@param		int			$cs2		second colspan
+	*	@param		string		$begin		if input element string to be added before or empty td to begin the line
 	*	@param		string		$end		if input element string to be added after or empty td to finish the line
 	*	@return		void
 	************************************************/
