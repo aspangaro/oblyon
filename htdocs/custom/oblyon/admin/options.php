@@ -94,7 +94,7 @@
 	oblyon_print_liste_titre($metas);
 	$metas						= array('type' => 'number', 'class' => 'flat quatrevingtpercent right action', 'dir' => 'rtl', 'min' => '10', 'max' => '16');
 	oblyon_print_input('OBLYON_FONT_SIZE',						'input', $langs->trans('OblyonFontSize'),					'', $metas, 2, 1);	// Font size
-	$metas						= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '_red', 'options');
+	$metas						= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'options');
 	oblyon_print_input('OBLYON_DISABLE_VERSION',				'on_off', $langs->trans('OblyonDisableVersion'),			'', $metas, 2, 1);	// Disable version of Dolibarr
 	$metas						= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'options');
 	oblyon_print_input('MAIN_STATUS_USES_IMAGES',				'on_off', $langs->trans('MainStatusUseImages'),				'', $metas, 2, 1);	// Status use images

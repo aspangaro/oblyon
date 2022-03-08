@@ -117,7 +117,7 @@
 	oblyon_print_input('MAIN_SHOW_LOGO',		'on_off', $langs->trans('OblyonEnableShowLogo'),	'', $metas, 2, 1);	// Show Company Logo
 	$warning	= !empty($conf->global->OBLYON_STICKY_TOPBAR) ? '<br><span class = "warning">'.$langs->trans('StickyTopBarWarning').'</span>'.(!empty($conf->global->MAIN_MENU_INVERT) ? '<br><span class = "warning">'.$langs->trans('StickyTopBarInvertedWarning').'</span>' : '') : '';
 	oblyon_print_input('OBLYON_STICKY_TOPBAR',	'on_off', $langs->trans('StickyTopBar').$warning,	'', $metas, 2, 1);	// Sticky top bar
-	$metas		= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '_red', 'menus');
+	$metas		= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'menus');
 	oblyon_print_input('OBLYON_HIDE_TOPICONS',	'on_off', $langs->trans('HideTopIcons'),			'', $metas, 2, 1);	// Hide top icons
 	// Left menu
 	$metas		= array(array(3), 'LeftMenu');
@@ -126,7 +126,7 @@
 	oblyon_print_input('OBLYON_SHOW_COMPNAME',	'on_off', $langs->trans('ShowCompanyName'),			'', $metas, 2, 1);	// Show Company name
 	$warning	= !empty($conf->global->OBLYON_STICKY_LEFTBAR) ? '<br><span class = "warning">'.$langs->trans('StickyLeftBarWarning').'</span>'.(!empty($conf->global->MAIN_MENU_INVERT) ? '<br><span class = "warning">'.$langs->trans('StickyLeftBarInvertedWarning').'</span>' : '') : '';
 	oblyon_print_input('OBLYON_STICKY_LEFTBAR',	'on_off', $langs->trans('StickyLeftBar').$warning,	'', $metas, 2, 1);	// Sticky left bar
-	$metas		= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '_red', 'menus');
+	$metas		= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'menus');
 	oblyon_print_input('OBLYON_HIDE_LEFTMENU',	'on_off', $langs->trans('HideLeftMenu'),			'', $metas, 2, 1);	// Hide left menu
 	// Effect open leftmenu
 	if($conf->global->OBLYON_HIDE_LEFTMENU) {
