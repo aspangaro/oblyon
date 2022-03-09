@@ -2309,6 +2309,7 @@ transition: all .2s ease-in-out;
     <?php } else { ?>
         margin-<?php print $left; ?>: 10px;
     <?php } ?>
+    list-style: none;
 }
 
 .sec-nav.is-inverted .sec-nav__item.item-heading,
