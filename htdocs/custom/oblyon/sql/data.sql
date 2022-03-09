@@ -46,6 +46,7 @@ INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_COLOR_LOGIN_BCKGRD',			'__ENTITY__', '#F4F4F4',			'chaine', '0',	'Oblyon background login color');
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_COLOR_BLINE',					'__ENTITY__', '#FCFCFC',			'chaine', '0',	'Oblyon background line color');
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_COLOR_BLINE_HOVER',			'__ENTITY__', '#F1F1F1',			'chaine', '0',	'Oblyon background line color hover');
+INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_COLOR_FDATE_DEFAULT',			'__ENTITY__', '#FF0000',			'chaine', '0',	'Oblyon text default date (today) color');
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_COLOR_FLINE',					'__ENTITY__', '#444444',			'chaine', '0',	'Oblyon text line color');
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_COLOR_FLINE_HOVER',			'__ENTITY__', '#222222',			'chaine', '0',	'Oblyon text line color hover');
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_COLOR_BUTTON_ACTION1',			'__ENTITY__', '#0088cc',			'chaine', '0',	'Oblyon button action color 1');

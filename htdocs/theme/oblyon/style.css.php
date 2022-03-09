@@ -127,15 +127,16 @@
 			$bgbutton_hover = '#'.colorArrayToHex($maincolor_variant);
 		}	// if (!empty($matches))
 	}	// if (!empty($maincolor))
-	$logo_background_color									= $conf->global->OBLYON_COLOR_LOGO_BCKGRD;	//default value : #ffffff
-	$bgcolor												= $conf->global->OBLYON_COLOR_BCKGRD;		// default value : #f4f4f4
-	$login_bgcolor											= $conf->global->OBLYON_COLOR_LOGIN_BCKGRD;	// default value : #f4f4f4
-	$colorbtitle											= $conf->global->OBLYON_COLOR_BTITLE;		// default value : #E09430
-	$colorftitle											= $conf->global->OBLYON_COLOR_FTITLE;		// default value : #F4F4F4
-	$colorbline												= $conf->global->OBLYON_COLOR_BLINE;		// default value : #FFFFFF
-	$colorbline_hover										= $conf->global->OBLYON_COLOR_BLINE_HOVER;	// default value : #F1F1F1
-	$colorfline												= $conf->global->OBLYON_COLOR_FLINE;		// default value : #444444
-	$colorfline_hover										= $conf->global->OBLYON_COLOR_FLINE_HOVER;	// default value : #222222
+	$logo_background_color									= $conf->global->OBLYON_COLOR_LOGO_BCKGRD;		//default value : #ffffff
+	$bgcolor												= $conf->global->OBLYON_COLOR_BCKGRD;			// default value : #f4f4f4
+	$login_bgcolor											= $conf->global->OBLYON_COLOR_LOGIN_BCKGRD;		// default value : #f4f4f4
+	$colorbtitle											= $conf->global->OBLYON_COLOR_BTITLE;			// default value : #E09430
+	$colorftitle											= $conf->global->OBLYON_COLOR_FTITLE;			// default value : #F4F4F4
+	$colorbline												= $conf->global->OBLYON_COLOR_BLINE;			// default value : #FFFFFF
+	$colorbline_hover										= $conf->global->OBLYON_COLOR_BLINE_HOVER;		// default value : #F1F1F1
+	$colorfline												= $conf->global->OBLYON_COLOR_FLINE;			// default value : #444444
+	$colorfline_hover										= $conf->global->OBLYON_COLOR_FLINE_HOVER;		// default value : #222222
+	$colorfdatedefault										= $conf->global->OBLYON_COLOR_FDATE_DEFAULT;	// default value : #FF0000
 
     $conf->global->THEME_ELDY_BACKTABCARD1 = '255,255,255'; // card
 	$conf->global->THEME_ELDY_BACKTABACTIVE = '234,234,234';

@@ -2552,7 +2552,7 @@ div.login_block:hover:after {
 }
 
 div.login_block_user{
-    clear: left;
+    /*clear: left;*/
     float: <?php print $left; ?>;
     margin-right: 0px;
 }
@@ -5271,6 +5271,12 @@ div.ui-tooltip {
 html .ui-datepicker-calendar .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:active
 {
     border: unset;
+}
+
+.ui-state-highlight, .ui-widget-content .ui-state-highlight
+{
+    color: <?php echo $colorfdatedefault; ?> !important;
+	font-weight: bold !important;
 }
 
 img.datecallink { padding-right: 2px !important; }
