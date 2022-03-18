@@ -5271,6 +5271,12 @@ html .ui-datepicker-calendar .ui-button.ui-state-disabled:hover, html .ui-button
     border: unset;
 }
 
+.ui-state-highlight, .ui-widget-content .ui-state-highlight
+{
+    color: <?php echo $colorfdatedefault; ?> !important;
+	font-weight: bold !important;
+}
+
 img.datecallink { padding-right: 2px !important; }
 
 .ui-datepicker-trigger {

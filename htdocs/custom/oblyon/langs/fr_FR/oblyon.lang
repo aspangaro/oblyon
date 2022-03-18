@@ -77,6 +77,7 @@ OBLYON_COLOR_BTITLE=Couleur de fond des titres
 OBLYON_COLOR_FTITLE=Couleur de texte des titres
 OBLYON_COLOR_BLINE=Couleur de fond des lignes
 OBLYON_COLOR_BLINE_HOVER=Couleur de fond des lignes survolées
+OBLYON_COLOR_FDATE_DEFAULT=Couleur de la date par défaut (date du jour) dans les calendriers de choix
 OBLYON_COLOR_FLINE=Couleur de texte des lignes
 OBLYON_COLOR_FLINE_HOVER=Couleur du texte survolé des lignes
 OBLYON_COLOR_TOPMENU_BCKGRD=Couleur de fond du menu haut

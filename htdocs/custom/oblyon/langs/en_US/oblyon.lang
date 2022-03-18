@@ -75,6 +75,7 @@ OBLYON_COLOR_BCKGRD=Background color
 OBLYON_COLOR_LOGO_BCKGRD=Logo background color
 OBLYON_COLOR_LOGIN_BCKGRD=Login background color
 OBLYON_COLOR_BLINE=Lines background color
+OBLYON_COLOR_FDATE_DEFAULT=Default date color (today's date) in choice calendars
 OBLYON_COLOR_FLINE=Lines text color
 OBLYON_COLOR_FLINE_HOVER=Lines text hover color
 OBLYON_COLOR_TOPMENU_BCKGRD=Topmenu background color
