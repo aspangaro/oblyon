@@ -15,7 +15,7 @@ a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
 small, strike, sub, sup, tt, var,
 b, u, i, center,
-dl, dt, dd,
+dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed,
@@ -36,6 +36,9 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
     line-height: 1;
+}
+ol, ul {
+    list-style: none;
 }
 blockquote, q {
     quotes: none;
@@ -1922,6 +1925,7 @@ div.attachareaformuserfileecm {
 div.arearef {
 <?php if ($conf->global->FIX_AREAREF_TABACTION) { ?>
 	position: sticky;
+	z-index: 99;
 	<?php if ($conf->global->MAIN_MENU_INVERT) { ?>
 	top: 52px;
 	<?php } else { ?>
@@ -4616,7 +4620,7 @@ table.liste {
     width: 100%;
 }
 
-table.liste .oddeven td { padding: 5px 10px; }
+table.liste .oddeven td { padding: 2px 5px; }
 
 table .liste_titre td { padding: 2px; }
 
