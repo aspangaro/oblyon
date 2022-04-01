@@ -2426,6 +2426,7 @@ li.sec-nav__sub-item:focus, li.sec-nav__sub-item sec-nav__link:focus {
     background-color: <?php print $bgnavleft; ?>;
     box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.055);
     display: none;
+    list-style: none;
     opacity: 0;
     padding-top: 0;
     padding-bottom: 5px;
