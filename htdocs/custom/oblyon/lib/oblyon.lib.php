@@ -103,7 +103,7 @@
 	************************************************/
 	function oblyon_bkup_module ($appliname)
 	{
-		global $db, $conf, $langs, $errormsg, $dolibarr_main_data_root;
+		global $db, $conf, $langs, $errormsg;
 
 		// Set to UTF-8
 		if (is_a($db, 'DoliDBMysqli'))	$db->db->set_charset('utf8');
@@ -112,7 +112,7 @@
 			$db->query('SET CHARACTER SET utf8');
 		}
 		// Control dir and file
-		$path		= $dolibarr_main_data_root.'/'.$appliname.'/sql';
+		$path		= DOL_DATA_ROOT.'/'.(empty($conf->global->MAIN_MODULE_MULTICOMPANY) || $conf->entity == 1 ? '' : $conf->entity.'/').$appliname.'/sql';
 		$bkpfile	= $path.'/update.'.$conf->entity;
 		if (! file_exists($path)) {
 			if (dol_mkdir($path) < 0) {
@@ -226,9 +226,9 @@ SET FOREIGN_KEY_CHECKS = 1;
 	************************************************/
 	function oblyon_restore_module ($appliname)
 	{
-		global $conf, $db, $dolibarr_main_data_root;
+		global $conf;
 
-		$pathsql	= $dolibarr_main_data_root.'/'.$appliname.'/sql';
+		$pathsql	= DOL_DATA_ROOT.'/'.(empty($conf->global->MAIN_MODULE_MULTICOMPANY) || $conf->entity == 1 ? '' : $conf->entity.'/').$appliname.'/sql';
 		$handle		= @opendir($pathsql);
 		if (is_resource($handle)) {
 			$filesql						= $pathsql.'/'.'update.'.$conf->entity;
