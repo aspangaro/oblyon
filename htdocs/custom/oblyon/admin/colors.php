@@ -359,7 +359,7 @@
 		}
 	}
     // button
-    $metas		= array(array(5), 'Button');
+    $metas		= array(array(5), 'Buttons');
     oblyon_print_liste_titre($metas);
     if (count($listcolor['button'])) {
         foreach ($listcolor['button'] as $key) {

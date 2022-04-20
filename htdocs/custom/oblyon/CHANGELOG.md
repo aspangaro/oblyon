@@ -1,20 +1,27 @@
 ## Changelog ##
 
+### Version 14.0.2 (2022/04/20)
+ - Fix menu dropdown "checks" (cheque) with invert menu
+ - Fix icon for new module reception
+ - Fix icon in massaction
+ - Fix link "date now"
+ - Fix language in colors admin
+
 ### Version 14.0.1 (2022/03/06)
- - Comptability Dolibarr v14 / Easya 2022.5
+ - Compatibility Dolibarr v14 / Easya 2022.5
  - Fix restore backup system in oblyon admin
  - Fix problem with ul/ol on ticket message (Thanks @tnegre)
  - Fix problem of compatibility with infraSsearch & MBI Calls
  - Review informations
 
 ### Version 13.0.0 - 2021 xx xx
- - Comptability Dolibarr v13
+ - Compatibility Dolibarr v13
 
 ### Version 12.0.0 - 2020 06 30
- - Comptability Dolibarr v12
+ - Compatibility Dolibarr v12
 
 ### Version 11.0.0 - 2020 02 03
- - Comptability Dolibarr v11
+ - Compatibility Dolibarr v11
  
 ### Version 10.0 beta 3 - 2019 09 04
  - Fix Icon ticket module is missing

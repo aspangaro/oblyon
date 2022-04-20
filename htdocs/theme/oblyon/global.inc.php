@@ -762,7 +762,7 @@ select.flat, form.flat select {
     font-size: unset;
 }
 .optionblue {
-    color: <?php echo $colortextlink; ?>;
+    color: rgb(<?php echo $colortextlink; ?>);
 }
 .select2-results .select2-highlighted.optionblue {
     color: #FFF !important;
@@ -1071,7 +1071,7 @@ div.warning {
     background: #fcf8e3;
 }
 div.warning a, div.info a, div.error a {
-    color: <?php echo $colortextlink; ?>;
+    color: rgb(<?php echo $colortextlink; ?>);
 }
 
 /* Error message */
@@ -1903,6 +1903,11 @@ div.nopadding {
 .tagtdnote span.pictoedit {
     opacity: 0.4;
 }
+.pictofixedwidth {
+    text-align: <?php echo $left; ?>;
+    width: 20px;
+    padding-right: 0;
+}
 .colorthumb {
 	padding-left: 1px !important;
 	padding-right: 1px;
@@ -1922,6 +1927,7 @@ div.attachareaformuserfileecm {
 div.arearef {
 <?php if ($conf->global->FIX_AREAREF_TABACTION) { ?>
 	position: sticky;
+    z-index: 99;
 	<?php if ($conf->global->MAIN_MENU_INVERT) { ?>
 	top: 52px;
 	<?php } else { ?>
@@ -4386,7 +4392,7 @@ div.tabs div.tabsElem:first-of-type a.tab {
 }
 
 a.tabunactive {
-	color: <?php echo $colortextlink; ?> !important;
+	color: rgb(<?php echo $colortextlink; ?>) !important;
 }
 a.tab:link, a.tab:visited, a.tab:hover, a.tab#active {
 	font-family: <?php print $fontlist ?>;
@@ -4617,11 +4623,9 @@ table.liste {
     width: 100%;
 }
 
-table.liste .oddeven td { padding: 5px 10px; }
+table.liste .oddeven td { padding: 2px 5px; }
 
 table .liste_titre td { padding: 2px; }
-
-
 
 table.liste td a img {
 vertical-align: middle;
@@ -5353,7 +5357,6 @@ table.dp {
     padding:0px;
     font-size: 0.85em;
     border-width:0px;
-    color: #eee;
     vertical-align:middle;
     cursor: pointer;
 }
@@ -7277,7 +7280,7 @@ text-shadow: none;
 text-shadow: none;
 }
 .ui-body-c .ui-link, .ui-body-c .ui-link:visited, .ui-body-c .ui-link:hover {
-color: <?php echo $colortextlink; ?>;
+color: rgb(<?php echo $colortextlink; ?>);
 }
 .ui-btn-up-c .vsmenudisabled {
 color: #<?php echo $colorshadowtitle; ?> !important;
@@ -8005,7 +8008,7 @@ tr.liste_titre_topborder td {
     color: <?php print $colorftitle; ?>;
 }
 .liste_titre td a.notasortlink {
-    color: <?php echo $colortextlink; ?>;
+    color: rgb(<?php echo $colortextlink; ?>);
 }
 .liste_titre td a.notasortlink:hover {
     background: transparent;
@@ -8460,7 +8463,7 @@ ul.ulmenu {
 	text-shadow: none;
 }
 .ui-body-c .ui-link, .ui-body-c .ui-link:visited, .ui-body-c .ui-link:hover {
-	color: <?php echo $colortextlink; ?>;
+	color: rgb(<?php echo $colortextlink; ?>);
 }
 .ui-btn-up-c .vsmenudisabled {
 	color: #<?php echo $colorshadowtitle; ?> !important;
