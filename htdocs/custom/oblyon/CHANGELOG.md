@@ -6,6 +6,7 @@
  - Fix icon in massaction
  - Fix link "date now"
  - Fix language in colors admin
+ - Fix Settings save with multicompany (Thanks @SylvainLegrand)
 
 ### Version 14.0.1 (2022/03/06)
  - Compatibility Dolibarr v14 / Easya 2022.5
