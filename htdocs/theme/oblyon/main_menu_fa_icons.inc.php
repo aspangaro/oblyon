@@ -185,6 +185,10 @@
     content: '\f472';
 }
 
+.icon--receptions:before {
+    content: '\f472';
+}
+
 .icon--ficheinter:before {
     content: '\f479';
 }

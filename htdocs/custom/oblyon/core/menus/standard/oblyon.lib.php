@@ -1307,9 +1307,12 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 			// Management of checks
 			if (empty($conf->global->BANK_DISABLE_CHECK_DEPOSIT) && !empty($conf->banque->enabled) && (!empty($conf->facture->enabled) || !empty($conf->global->MAIN_MENU_CHEQUE_DEPOSIT_ON))) {
 				$newmenu->add("/compta/paiement/cheque/index.php?leftmenu=checks&amp;mainmenu=bank", $langs->trans("MenuChequeDeposits"), 0, $user->rights->banque->cheque, '', $mainmenu, 'checks', 0, '', '', '', img_picto('', 'payment', 'class="paddingright pictofixedwidth"'));
-				if (preg_match('/checks/', $leftmenu)) {
-					$newmenu->add("/compta/paiement/cheque/card.php?leftmenu=checks_bis&amp;action=new&amp;mainmenu=bank", $langs->trans("NewChequeDeposit"), 1, $user->rights->banque->cheque);
-					$newmenu->add("/compta/paiement/cheque/list.php?leftmenu=checks_bis&amp;mainmenu=bank", $langs->trans("List"), 1, $user->rights->banque->cheque);
+
+                if (! empty($menu_invert)) $leftmenu= 'checks';
+
+                if ($usemenuhider || empty($leftmenu) || $leftmenu == "checks") {
+					$newmenu->add("/compta/paiement/cheque/card.php?leftmenu=checks&amp;action=new&amp;mainmenu=bank", $langs->trans("NewChequeDeposit"), 1, $user->rights->banque->cheque);
+					$newmenu->add("/compta/paiement/cheque/list.php?leftmenu=checks&amp;mainmenu=bank", $langs->trans("List"), 1, $user->rights->banque->cheque);
 				}
 			}
 

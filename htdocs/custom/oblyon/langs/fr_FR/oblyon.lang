@@ -69,6 +69,7 @@ MainStatusUseImages = Les différents statuts des éléments seront affichés so
 #
 OblyonColorsTitle = Configurateur Oblyon - Couleurs
 Colors=Couleurs
+Buttons=Boutons
 OBLYON_COLOR_MAIN=Couleur principale
 OBLYON_COLOR_BCKGRD=Couleur de fond
 OBLYON_COLOR_LOGO_BCKGRD=Couleur de fond du logo

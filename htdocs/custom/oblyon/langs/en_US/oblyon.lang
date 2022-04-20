@@ -70,6 +70,7 @@ EffectMicroMenuOnly = Ne pas déployer
 #
 OblyonColorsTitle = Oblyon Configurator - Colors
 Colors=Colors
+Buttons=Buttons
 OBLYON_COLOR_MAIN=Maincolor
 OBLYON_COLOR_BCKGRD=Background color
 OBLYON_COLOR_LOGO_BCKGRD=Logo background color
