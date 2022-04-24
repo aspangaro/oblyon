@@ -1,410 +1,167 @@
 <?php
-/* Copyright (C) 2015-2022  Open-DSI            <support@open-dsi.fr>
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+	/************************************************
+	* Copyright (C) 2015-2022  Alexandre Spangaro   <support@open-dsi.fr>
+	* Copyright (C) 2022       Sylvain Legrand      <contact@infras.fr>
+	*
+	* This program is free software: you can redistribute it and/or modify
+	* it under the terms of the GNU General Public License as published by
+	* the Free Software Foundation, either version 3 of the License, or
+	* (at your option) any later version.
+	*
+	* This program is distributed in the hope that it will be useful,
+	* but WITHOUT ANY WARRANTY; without even the implied warranty of
+	* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	* GNU General Public License for more details.
+	*
+	* You should have received a copy of the GNU General Public License
+	* along with this program.  If not, see <http://www.gnu.org/licenses/>.
+	************************************************/
 
-/**
- * 	\file		admin/login.php
- * 	\ingroup	oblyon
- * 	\brief		Login color Page < Oblyon Theme Configurator >
- */
+	/************************************************
+	* 	\file		../oblyon/admin/login.php
+	* 	\ingroup	oblyon
+	* 	\brief		Login Page < Oblyon Theme Configurator >
+	************************************************/
 
 	// Dolibarr environment *************************
 	require '../config.php';
 
-// Libraries
-require_once DOL_DOCUMENT_ROOT . '/core/lib/admin.lib.php';
-require_once '../lib/oblyon.lib.php';
+	// Libraries ************************************
+	require_once(DOL_DOCUMENT_ROOT.'/core/class/html.formadmin.class.php');
+	require_once(DOL_DOCUMENT_ROOT.'/core/class/html.formother.class.php');
+	require_once DOL_DOCUMENT_ROOT.'/core/lib/admin.lib.php';
+	require_once DOL_DOCUMENT_ROOT.'/core/lib/files.lib.php';
+	require_once '../lib/oblyon.lib.php';
 
+	// Translations *********************************
+	$langs->loadLangs(array('admin', 'oblyon@oblyon'));
 
-// Translations
-$langs->load("admin");
-$langs->load("oblyon@oblyon");
+	// Access control *******************************
+	if (! $user->admin)				accessforbidden();
 
-// Access control
-if (! $user->admin) accessforbidden();
+	// Actions **************************************
+	$action							= GETPOST('action','alpha');
+	$result							= '';
+	$formother						= new FormOther($db);
+	// Sauvegarde / Restauration
+	if ($action == 'bkupParams')	$result	= oblyon_bkup_module ('oblyon');
+	if ($action == 'restoreParams')	$result	= oblyon_restore_module ('oblyon');
+	// On / Off management
+	if (preg_match('/set_(.*)/', $action, $reg)) {
+		$confkey	= $reg[1];
+		$result		= dolibarr_set_const($db, $confkey, GETPOST('value'), 'chaine', 0, 'Oblyon module', $conf->entity);
+	}
+	// Update buttons management
+	if (preg_match('/update_(.*)/', $action, $reg)) {
+		$list									= array ('Gen'	=> array('OBLYON_EFFECT_LEFTMENU', 'OBLYON_EFFECT_REDUCE_LEFTMENU'));
+		$confkey								= $reg[1];
+		$error									= 0;
+		foreach ($list[$confkey] as $constname)	$result	= dolibarr_set_const($db, $constname, GETPOST($constname, 'alpha'), 'chaine', 0, 'Oblyon module', $conf->entity);
+	}
+	// Retour => message Ok ou Ko
+	if ($result == 1)			setEventMessages($langs->trans('SetupSaved'), null, 'mesgs');
+	if ($result == -1)			setEventMessages($langs->trans('Error'), null, 'errors');
+	$_SESSION['dol_resetcache']	= dol_print_date(dol_now(), 'dayhourlog');	// Reset cache
 
-// Parameters OBLYON_*
-$login_colors = array (
-    'OBLYON_COLOR_LOGIN_BCKGRD_RIGHT',
-    'OBLYON_COLOR_LOGIN_BCKGRD_LEFT',
-    'OBLYON_COLOR_LOGIN_TXT_RIGHT',
-    'OBLYON_COLOR_LOGIN_TXT_LEFT',
-    'OBLYON_COLOR_LOGIN_TXT_INPUT',
-);
+	// init variables *******************************
+	$result						= !empty($conf->global->MAIN_MENU_INVERT) && ($conf->global->OBLYON_SHOW_COMPNAME || $conf->global->OBLYON_HIDE_LEFTMENU)	? dolibarr_set_const($db, 'OBLYON_FULLSIZE_TOPBAR',			1,			'chaine', 0, 'Oblyon module', $conf->entity) : '';
+	$result						= $conf->global->OBLYON_HIDE_LEFTMENU && empty($conf->global->OBLYON_EFFECT_LEFTMENU)										? dolibarr_set_const($db, 'OBLYON_EFFECT_LEFTMENU',			'slide',	'chaine', 0, 'Oblyon module', $conf->entity) : '';
+	$result						= !empty($conf->global->MAIN_MENU_INVERT) && !empty($conf->global->OBLYON_REDUCE_LEFTMENU)									? dolibarr_set_const($db, 'OBLYON_HIDE_LEFTICONS',			0,			'chaine', 0, 'Oblyon module', $conf->entity) : '';
+	$result						= $conf->global->OBLYON_REDUCE_LEFTMENU && empty($conf->global->OBLYON_EFFECT_REDUCE_LEFTMENU)								? dolibarr_set_const($db, 'OBLYON_EFFECT_REDUCE_LEFTMENU',	'hover',	'chaine', 0, 'Oblyon module', $conf->entity) : '';
 
+	// View *****************************************
+	$page_name					= $langs->trans('OblyonLoginTitle');
+	llxHeader('', $page_name);
+	$linkback					= '<a href = "'.DOL_URL_ROOT.'/admin/modules.php">'.$langs->trans('BackToModuleList').'</a>';
+	print load_fiche_titre($page_name, $linkback);
 
-/*
- * Actions
- */
-$mesg="";
-$action = GETPOST('action', 'alpha');
+	// Configuration header *************************
+	$head						= oblyon_admin_prepare_head();
+    print dol_get_fiche_head($head, 'login', $langs->trans('Module113900Name'), 0, 'opendsi@oblyon');
 
-// set colors
-if ($action == 'update') {
-	$error = 0;
+	// setup page goes here *************************
+	// Alert
+	print '		<script type = "text/javascript">
+					$(document).ready(function() {
+						$(".action").keyup(function(event) {
+							if (event.which === 13)	$("#action").click();
+						});
+					});
+				</script>
+				<form action = "'.$_SERVER['PHP_SELF'].'" method = "POST">
+					<input type = "hidden" name = "token" value = "'.newToken().'" />';
+	// Sauvegarde / Restauration
+	oblyon_print_backup_restore();
+	clearstatcache();
 
-	foreach ($login_colors as $constname) {
-		$constvalue = GETPOST($constname, 'alpha');
-		$constvalue = '#'.$constvalue;
-
-		if (! dolibarr_set_const($db, $constname, $constvalue, 'chaine', 0, '', $conf->entity)) {
-			$error ++;
+	print '			<div class = "div-table-responsive-no-min">
+						<table summary = "edit" class = "noborder centpercent editmode tableforfield">';
+	$metas						= array('*', '156px', '300px');
+	oblyon_print_colgroup($metas);
+	$metas						= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'menus');
+	oblyon_print_input('OBLYON_ACTIVE_LOGIN_PERSONALIZED', 'on_off', $langs->trans('OblyonActiveloginPersonalized'), '', $metas, 2, 1);	// Invert menu
+	// Top menu
+	/*
+    oblyon_print_final();
+	$metas						= array(array(3), 'TopMenu');
+	oblyon_print_liste_titre($metas);
+	// Option only if invert menu is on
+	if ($conf->global->MAIN_MENU_INVERT) {
+		$metas		= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'menus');
+		$warning	= empty($conf->global->OBLYON_FULLSIZE_TOPBAR) ? '<br><span class = "warning">'.$langs->trans('FullsizeTopBarWarning').'</span>' : '';
+		oblyon_print_input('OBLYON_FULLSIZE_TOPBAR', 'on_off', $langs->trans('FullsizeTopBar').$warning, '', $metas, 2, 1);	// Fullsize top bar
+	}
+	$metas		= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'menus');
+	oblyon_print_input('MAIN_SHOW_LOGO',		'on_off', $langs->trans('OblyonEnableShowLogo'),	'', $metas, 2, 1);	// Show Company Logo
+	$warning	= !empty($conf->global->OBLYON_STICKY_TOPBAR) ? '<br><span class = "warning">'.$langs->trans('StickyTopBarWarning').'</span>'.(!empty($conf->global->MAIN_MENU_INVERT) ? '<br><span class = "warning">'.$langs->trans('StickyTopBarInvertedWarning').'</span>' : '') : '';
+	oblyon_print_input('OBLYON_STICKY_TOPBAR',	'on_off', $langs->trans('StickyTopBar').$warning,	'', $metas, 2, 1);	// Sticky top bar
+	$metas		= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '_red', 'menus');
+	oblyon_print_input('OBLYON_HIDE_TOPICONS',	'on_off', $langs->trans('HideTopIcons'),			'', $metas, 2, 1);	// Hide top icons
+	// Left menu
+	$metas		= array(array(3), 'LeftMenu');
+	oblyon_print_liste_titre($metas);
+	$metas		= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'menus');
+	oblyon_print_input('OBLYON_SHOW_COMPNAME',	'on_off', $langs->trans('ShowCompanyName'),			'', $metas, 2, 1);	// Show Company name
+	$warning	= !empty($conf->global->OBLYON_STICKY_LEFTBAR) ? '<br><span class = "warning">'.$langs->trans('StickyLeftBarWarning').'</span>'.(!empty($conf->global->MAIN_MENU_INVERT) ? '<br><span class = "warning">'.$langs->trans('StickyLeftBarInvertedWarning').'</span>' : '') : '';
+	oblyon_print_input('OBLYON_STICKY_LEFTBAR',	'on_off', $langs->trans('StickyLeftBar').$warning,	'', $metas, 2, 1);	// Sticky left bar
+	$metas		= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '_red', 'menus');
+	oblyon_print_input('OBLYON_HIDE_LEFTMENU',	'on_off', $langs->trans('HideLeftMenu'),			'', $metas, 2, 1);	// Hide left menu
+	// Effect open leftmenu
+	if($conf->global->OBLYON_HIDE_LEFTMENU) {
+		print '				<tr class = "oddeven">
+								<td colspan = "2">'.$langs->trans('OpenEffect').'</td>
+								<td class = "center">
+									<input type = "radio" value = "slide" id = "slide" class = "flat action" name = "OBLYON_EFFECT_LEFTMENU" '.($conf->global->OBLYON_EFFECT_LEFTMENU == "slide" ? ' checked = "checked"' : '').'">&nbsp;<label for = "slide">'.$langs->trans('EffectLeftMenuSlide').'</label>
+									<br/>
+									<input type = "radio" value = "push" id = "push" class = "flat action" name = "OBLYON_EFFECT_LEFTMENU" '.($conf->global->OBLYON_EFFECT_LEFTMENU == "push" ? ' checked = "checked"' : '').'">&nbsp;<label for = "push">'.$langs->trans('EffectLeftMenuPush').'</label>
+								</td>
+							</tr>';
+	}
+	oblyon_print_input('OBLYON_HIDE_LEFTICONS',		'on_off', $langs->trans('HideLeftIcons'),			'', $metas, 2, 1);	// Hide left icons
+	if (!empty($conf->global->MAIN_MENU_INVERT)) {
+		$metas		= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'menus');
+		$warning	= !empty($conf->global->OBLYON_REDUCE_LEFTMENU) ? '<br><span class = "warning">'.$langs->trans('MicroMenuLeftBarHideLeftIconsWarning').'</span><br><span class = "warning">'.$langs->trans('MicroMenuLeftBarCompanyNameWarning').'</span>' : '';
+		oblyon_print_input('OBLYON_REDUCE_LEFTMENU',	'on_off', $langs->trans('ReduceLeftMenu').$warning,	'', $metas, 2, 1);	// Micro left menu
+		// Effect hover leftmenu
+		if (!empty($conf->global->OBLYON_REDUCE_LEFTMENU)) {
+			print '			<tr class = "oddeven">
+								<td colspan = "2">'.$langs->trans('OpenEffect').'</td>
+								<td class = "center">
+									<input type = "radio" value = "hover" id = "hover" class = "flat action" name = "OBLYON_EFFECT_REDUCE_LEFTMENU" '.($conf->global->OBLYON_EFFECT_REDUCE_LEFTMENU == "hover" ? ' checked = "checked"' : '').'">&nbsp;<label for = "slide">'.$langs->trans('EffectMicroMenuHover').'</label>
+									<br/>
+									<input type = "radio" value = "only" id = "only" class = "flat action" name = "OBLYON_EFFECT_REDUCE_LEFTMENU" '.($conf->global->OBLYON_EFFECT_REDUCE_LEFTMENU == "only" ? ' checked = "checked"' : '').'">&nbsp;<label for = "push">'.$langs->trans('EffectMicroMenuOnly').'</label>
+								</td>
+							</tr>';
 		}
 	}
-
-    $res = dolibarr_set_const($db, 'OBLYON_LOGIN_TXT1', GETPOST('OBLYON_LOGIN_TXT1'),'chaine',0,'',$conf->entity);
-    $res = dolibarr_set_const($db, 'OBLYON_LOGIN_URL1', GETPOST('OBLYON_LOGIN_URL1'),'chaine',0,'',$conf->entity);
-    $res = dolibarr_set_const($db, 'OBLYON_LOGIN_FAICON1', GETPOST('OBLYON_LOGIN_FAICON1'),'chaine',0,'',$conf->entity);
-
-    $res = dolibarr_set_const($db, 'OBLYON_LOGIN_TXT2', GETPOST('OBLYON_LOGIN_TXT2'),'chaine',0,'',$conf->entity);
-    $res = dolibarr_set_const($db, 'OBLYON_LOGIN_URL2', GETPOST('OBLYON_LOGIN_URL2'),'chaine',0,'',$conf->entity);
-    $res = dolibarr_set_const($db, 'OBLYON_LOGIN_FAICON2', GETPOST('OBLYON_LOGIN_FAICON2'),'chaine',0,'',$conf->entity);
-
-    $res = dolibarr_set_const($db, 'OBLYON_LOGIN_TXT3', GETPOST('OBLYON_LOGIN_TXT3'),'chaine',0,'',$conf->entity);
-    $res = dolibarr_set_const($db, 'OBLYON_LOGIN_URL3', GETPOST('OBLYON_LOGIN_URL3'),'chaine',0,'',$conf->entity);
-    $res = dolibarr_set_const($db, 'OBLYON_LOGIN_FAICON3', GETPOST('OBLYON_LOGIN_FAICON3'),'chaine',0,'',$conf->entity);
-
-    $res = dolibarr_set_const($db, 'OBLYON_SOCIAL_TWITTER', GETPOST('OBLYON_SOCIAL_TWITTER'),'chaine',0,'',$conf->entity);
-    $res = dolibarr_set_const($db, 'OBLYON_SOCIAL_FACEBOOK', GETPOST('OBLYON_SOCIAL_FACEBOOK'),'chaine',0,'',$conf->entity);
-    $res = dolibarr_set_const($db, 'OBLYON_SOCIAL_LINKEDIN', GETPOST('OBLYON_SOCIAL_LINKEDIN'),'chaine',0,'',$conf->entity);
-    $res = dolibarr_set_const($db, 'OBLYON_SOCIAL_INSTAGRAM', GETPOST('OBLYON_SOCIAL_INSTAGRAM'),'chaine',0,'',$conf->entity);
-    $res = dolibarr_set_const($db, 'OBLYON_SOCIAL_YOUTUBE', GETPOST('OBLYON_SOCIAL_YOUTUBE'),'chaine',0,'',$conf->entity);
-    $res = dolibarr_set_const($db, 'OBLYON_SOCIAL_GITHUB', GETPOST('OBLYON_SOCIAL_GITHUB'),'chaine',0,'',$conf->entity);
-
-    if (! $res > 0) $error++;
-
-	if (! $error) {
-		setEventMessages($langs->trans("SetupSaved"), null, 'mesgs');
-	} else {
-		setEventMessages($langs->trans("Error"), null, 'errors');
-	}
-}
-
-if ($action == 'settheme') {
-    $value = GETPOST('value', 'int');
-
-    // Login Dark
-    if ($value == 2) {
-        $_SESSION['dol_resetcache']=dol_print_date(dol_now(),'dayhourlog');
-        $mesg = "<span class='ok'>".$langs->trans("ThemeLoginDarkApplied")."</span>";
-
-        dolibarr_set_const($db, "OBLYON_COLOR_LOGIN_BCKGRD_RIGHT", '#2a2a2a','chaine',0,'',$conf->entity);
-        dolibarr_set_const($db, "OBLYON_COLOR_LOGIN_BCKGRD_LEFT", '#d51123','chaine',0,'',$conf->entity);
-        dolibarr_set_const($db, "OBLYON_COLOR_LOGIN_TXT_RIGHT", '#FFFFFF','chaine',0,'',$conf->entity);
-        dolibarr_set_const($db, "OBLYON_COLOR_LOGIN_TXT_INPUT", '#FFFFFF','chaine',0,'',$conf->entity);
-    }
-
-    // Login Light
-    if ($value == 1) {
-        $_SESSION['dol_resetcache']=dol_print_date(dol_now(),'dayhourlog');
-        $mesg = "<span class='ok'>".$langs->trans("ThemeLoginLightApplied")."</span>";
-
-
-        dolibarr_set_const($db, "OBLYON_COLOR_LOGIN_BCKGRD_RIGHT", '#FFFFFF','chaine',0,'',$conf->entity);
-        dolibarr_set_const($db, "OBLYON_COLOR_LOGIN_BCKGRD_LEFT", '#d51123','chaine',0,'',$conf->entity);
-        dolibarr_set_const($db, "OBLYON_COLOR_LOGIN_TXT_RIGHT", '#444444','chaine',0,'',$conf->entity);
-        dolibarr_set_const($db, "OBLYON_COLOR_LOGIN_TXT_INPUT", '#555555','chaine',0,'',$conf->entity);
-    }
-
-}
-
-$_SESSION['dol_resetcache']=dol_print_date(dol_now(),'dayhourlog');
-
-/*
- * View
- */
-llxHeader('', $langs->trans("OblyonDashboardTitle"),'','','','', array('/oblyon/js/jscolor.js','/oblyon/js/jquery.ui.touch-punch.min.js'),'' );
-
-// Subheader
-$linkback = '<a href="' . DOL_URL_ROOT . '/admin/modules.php">'	. $langs->trans("BackToModuleList") . '</a>';
-print load_fiche_titre($langs->trans('OblyonLoginTitle'), $linkback);
-
-// Configuration header
-$head = oblyon_admin_prepare_head();
-
-dol_fiche_head($head, 'login', $langs->trans("Module113900Name"), 0, "oblyon@oblyon");
-
-dol_htmloutput_mesg($mesg);
-
-// Setup page goes here
-
-print '<script type="text/javascript">';
-print 'r(function(){';
-print '	var els = document.getElementsByTagName("link");';
-print '	var els_length = els.length;';
-print '	for (var i = 0, l = els_length; i < l; i++) {';
-print '    var el = els[i];';
-print '	   if (el.href.search("style.min.css") >= 0) {';
-print '        el.href += "?" + Math.floor(Math.random() * 100);';
-print '    }';
-print '	}';
-print '});';
-print 'function r(f){/in/.test(document.readyState)?setTimeout("r("+f+")",9):f()}';
-// Colorpicker
-print '
-$(document).ready(function() {
-	var root_font_size = parseInt($("html").css("font-size").split("px")[0]),
-	def_dhfs = 1.7 * root_font_size,
-	def_shfs = 1.6 * root_font_size,
-	def_dvmfs = 1.2 * root_font_size,
-	def_svmfs = 1.2 * root_font_size,
-
-	act_rem_dhfs = "' . $act_rem_dhfs . '",
-	act_dhfs = parseFloat(act_rem_dhfs.split("rem")[0]) * root_font_size,
-	act_px_dhfs = ( act_dhfs.toString() ) + "px",
-
-	act_rem_shfs = "' . $act_rem_shfs . '",
-	act_shfs = parseFloat(act_rem_shfs.split("rem")[0]) * root_font_size,
-	act_px_shfs = ( act_shfs.toString() ) + "px";
-
-	act_rem_dvmfs = "' . $act_rem_dvmfs . '",
-	act_dvmfs = parseFloat(act_rem_dvmfs.split("rem")[0]) * root_font_size,
-	act_px_dvmfs = ( act_dvmfs.toString() ) + "px",
-
-	act_rem_svmfs = "' . $act_rem_svmfs . '",
-	act_svmfs = parseFloat(act_rem_svmfs.split("rem")[0]) * root_font_size,
-	act_px_svmfs = ( act_svmfs.toString() ) + "px";
-
-	$("#dhfs-slider").slider({
-		animate: "fast",
-		min: -8,
-		max: 8,
-		step:1
-	});
-	$("#dhfs-disp-val").html(act_px_dhfs);
-	$("#dhfs-stor-val").val(act_rem_dhfs);
-	$("#dhfs-slider").slider("value",act_dhfs - def_dhfs);
-	$("#dhfs-slider").on("slide",function(event, ui) {
-		var dhfs_sel_value = $("#dhfs-slider").slider("value"),
-			new_dhfs = def_dhfs + dhfs_sel_value,
-			rem_dhfs = (new_dhfs / root_font_size).toString() + "rem";
-		$("#dhfs-disp-val").html(new_dhfs.toString() + "px");
-		$("#dhfs-stor-val").val(rem_dhfs);
-		$("#tmenu_tooltip").css("font-size",rem_dhfs);
-		$(".login_block").css("font-size",rem_dhfs);
-	});
-
-	$("#shfs-slider").slider({
-		animate: "fast",
-		min: -8,
-		max: 8,
-		step:1
-	});
-	$("#shfs-disp-val").html(act_px_shfs);
-	$("#shfs-stor-val").val(act_rem_shfs);
-	$("#shfs-slider").slider("value",act_shfs - def_shfs);
-	$("#shfs-slider").on("slide",function(event, ui) {
-		var shfs_sel_value = $("#shfs-slider").slider("value");
-		var new_shfs = def_shfs + shfs_sel_value;
-		var rem_shfs = (new_shfs / root_font_size).toString() + "rem";
-		$("#shfs-disp-val").html(new_shfs.toString() + "px");
-		$("#shfs-stor-val").val(rem_shfs);
-	});
-
-	$("#dvmfs-slider").slider({
-		animate: "fast",
-		min: -8,
-		max: 8,
-		step:1
-	});
-	$("#dvmfs-disp-val").html(act_px_dvmfs);
-	$("#dvmfs-stor-val").val(act_rem_dvmfs);
-	$("#dvmfs-slider").slider("value",act_dvmfs - def_dvmfs);
-	$("#dvmfs-slider").on("slide",function(event, ui) {
-		var dvmfs_sel_value = $("#dvmfs-slider").slider("value"),
-			new_dvmfs = def_dvmfs + dvmfs_sel_value,
-			rem_dvmfs = (new_dvmfs / root_font_size).toString() + "rem";
-		$("#dvmfs-disp-val").html(new_dvmfs.toString() + "px");
-		$("#dvmfs-stor-val").val(rem_dvmfs);
-		$("#id-left").css("font-size",rem_dvmfs);
-	});
-
-	$("#svmfs-slider").slider({
-		animate: "fast",
-		min: -8,
-		max: 8,
-		step:1
-	});
-	$("#svmfs-disp-val").html(act_px_svmfs);
-	$("#svmfs-stor-val").val(act_rem_svmfs);
-	$("#svmfs-slider").slider("value",act_svmfs - def_svmfs);
-	$("#svmfs-slider").on("slide",function(event, ui) {
-		var svmfs_sel_value = $("#svmfs-slider").slider("value");
-		var new_svmfs = def_svmfs + svmfs_sel_value;
-		var rem_svmfs = (new_svmfs / root_font_size).toString() + "rem";
-		$("#svmfs-disp-val").html(new_svmfs.toString() + "px");
-		$("#svmfs-stor-val").val(rem_svmfs);
-	});
-});
-';
-
-print '</script>'."\n";
-
-print '<form action="' . $_SERVER["PHP_SELF"] . '" method="post">';
-print '<input type="hidden" name="token" value="'.newToken().'">';
-print '<input type="hidden" name="action" value="update">';
-
-// Template login
-/* Old Easya 2020 options
-print '<table class="noborder centpercent">';
-print '<tr class="liste_titre">';
-print '<td colspan="2">' . $langs->trans("Themes") . '</td>';
-print '</tr>';
-print '<tr>';
-print '<td align="center"><a title="'.$langs->trans("OblyonLight").'" href="' . $_SERVER['PHP_SELF'] . '?action=settheme&value=1">';
-print img_picto($langs->trans("Login light"), 'login_light.png@oblyon', "width='50%'");
-print '</a></td>';
-print '<td align="center"><a title="'.$langs->trans("OblyonDark").'" href="' . $_SERVER['PHP_SELF'] . '?action=settheme&value=2">';
-print img_picto($langs->trans("Login Dark"), 'login_dark.png@oblyon', "width='50%'");
-print '</a></td>';
-print '</tr>';
-print '</table>';
-
-// Colors
-print '<table class="noborder as-settings-colors">';
-
-// Colors
-print '<tr class="liste_titre">';
-print '<td colspan="2">' . $langs->trans('Colors') . '</td>';
-print '</tr>'."\n";
-
-// Set colors
-$num = count($login_colors);
-if ($num)
-{
-	foreach ($login_colors as $key) {
-		print '<tr class="value oddeven">';
-
-		// Param
-		$label = $langs->trans($key);
-		print '<td width="50%">' . $label . '</td>';
-
-		// Value
-		print '<td>';
-		print '<input type="text" class="color" id="' . $conf->global->$key . '" name="' . $key . '" value="' . $conf->global->$key . '">';
-		print '</td></tr>';
-	}
-}
-
-print '</table>'."\n";
-*/
-
-// Links
-/* Old Easya 2020 options
-print '<table class="noborder centpercent">';
-print '<tr class="liste_titre">';
-print '<td colspan="2">' . $langs->trans("OblyonLoginLinks") . '</td>';
-print '</tr>';
-
-print '<tr class="oddeven">';
-print '<td>' . $langs->trans('OBLYON_LOGIN_TXT1') . '<br>';
-print $langs->trans('OBLYON_LOGIN_URL1') . '<br>';
-print $langs->trans('OBLYON_LOGIN_FAICON1');
-print '<td>';
-print '<input type="text" class="minwidth400" id="OBLYON_LOGIN_TXT1" name="OBLYON_LOGIN_TXT1" value="' . $conf->global->OBLYON_LOGIN_TXT1 . '"><br />';
-print '<input type="text" class="minwidth400" id="OBLYON_LOGIN_URL1" name="OBLYON_LOGIN_URL1" value="' . $conf->global->OBLYON_LOGIN_URL1 . '"><br />';
-print '<input type="text" class="minwidth400" id="OBLYON_LOGIN_FAICON1" name="OBLYON_LOGIN_FAICON1" value="' . $conf->global->OBLYON_LOGIN_FAICON1 . '">';
-print "</td>\n";
-print '</tr>';
-
-print '<tr class="oddeven">';
-print '<td>' . $langs->trans('OBLYON_LOGIN_TXT2') . '<br>';
-print $langs->trans('OBLYON_LOGIN_URL2') . '<br>';
-print $langs->trans('OBLYON_LOGIN_FAICON2');
-print '<td>';
-print '<input type="text" class="minwidth400" id="OBLYON_LOGIN_TXT2" name="OBLYON_LOGIN_TXT2" value="' . $conf->global->OBLYON_LOGIN_TXT2 . '"><br />';
-print '<input type="text" class="minwidth400" id="OBLYON_LOGIN_URL2" name="OBLYON_LOGIN_URL2" value="' . $conf->global->OBLYON_LOGIN_URL2 . '"><br />';
-print '<input type="text" class="minwidth400" id="OBLYON_LOGIN_FAICON2" name="OBLYON_LOGIN_FAICON2" value="' . $conf->global->OBLYON_LOGIN_FAICON2 . '">';
-print "</td>\n";
-print '</tr>';
-
-print '<tr class="oddeven">';
-print '<td>' . $langs->trans('OBLYON_LOGIN_TXT3') . '<br>';
-print $langs->trans('OBLYON_LOGIN_URL3') . '<br>';
-print $langs->trans('OBLYON_LOGIN_FAICON3');
-print '<td>';
-print '<input type="text" class="minwidth400" id="OBLYON_LOGIN_TXT3" name="OBLYON_LOGIN_TXT3" value="' . $conf->global->OBLYON_LOGIN_TXT3 . '"><br />';
-print '<input type="text" class="minwidth400" id="OBLYON_LOGIN_URL3" name="OBLYON_LOGIN_URL3" value="' . $conf->global->OBLYON_LOGIN_URL3 . '"><br />';
-print '<input type="text" class="minwidth400" id="OBLYON_LOGIN_FAICON3" name="OBLYON_LOGIN_FAICON3" value="' . $conf->global->OBLYON_LOGIN_FAICON3 . '">';
-print "</td>\n";
-print '</tr>';
-*/
-
-// Social Network
-/* Old Easya 2020 options
-print '<table class="noborder centpercent">';
-print '<tr class="liste_titre">';
-print '<td colspan="2">' . $langs->trans("OblyonSocialNetwork") . '</td>';
-print '</tr>';
-
-print '<tr class="oddeven">';
-print '<td>' . $langs->trans('OBLYON_SOCIAL_TWITTER') . '</td>';
-print '<td>';
-print '<input type="text" class="minwidth500" id="OBLYON_SOCIAL_TWITTER" name="OBLYON_SOCIAL_TWITTER" value="' . $conf->global->OBLYON_SOCIAL_TWITTER . '">';
-print "</td>\n";
-print '</tr>';
-
-print '<tr>';
-print '<td>' . $langs->trans('OBLYON_SOCIAL_FACEBOOK') . '</td>';
-print '<td>';
-print '<input type="text" class="minwidth500" id="OBLYON_SOCIAL_FACEBOOK" name="OBLYON_SOCIAL_FACEBOOK" value="' . $conf->global->OBLYON_SOCIAL_FACEBOOK . '">';
-print "</td>\n";
-print '</tr>';
-
-print '<tr>';
-print '<td>' . $langs->trans('OBLYON_SOCIAL_LINKEDIN') . '</td>';
-print '<td>';
-print '<input type="text" class="minwidth500" id="OBLYON_SOCIAL_LINKEDIN" name="OBLYON_SOCIAL_LINKEDIN" value="' . $conf->global->OBLYON_SOCIAL_LINKEDIN . '">';
-print "</td>\n";
-print '</tr>';
-
-print '<tr>';
-print '<td>' . $langs->trans('OBLYON_SOCIAL_INSTAGRAM') . '</td>';
-print '<td>';
-print '<input type="text" class="minwidth500" id="OBLYON_SOCIAL_INSTAGRAM" name="OBLYON_SOCIAL_INSTAGRAM" value="' . $conf->global->OBLYON_SOCIAL_INSTAGRAM . '">';
-print "</td>\n";
-print '</tr>';
-
-print '<tr>';
-print '<td>' . $langs->trans('OBLYON_SOCIAL_YOUTUBE') . '</td>';
-print '<td>';
-print '<input type="text" class="minwidth500" id="OBLYON_SOCIAL_YOUTUBE" name="OBLYON_SOCIAL_YOUTUBE" value="' . $conf->global->OBLYON_SOCIAL_YOUTUBE . '">';
-print "</td>\n";
-print '</tr>';
-
-print '<tr>';
-print '<td>' . $langs->trans('OBLYON_SOCIAL_GITHUB') . '</td>';
-print '<td>';
-print '<input type="text" class="minwidth500" id="OBLYON_SOCIAL_GITHUB" name="OBLYON_SOCIAL_GITHUB" value="' . $conf->global->OBLYON_SOCIAL_GITHUB . '">';
-print "</td>\n";
-print '</tr>';
-
-print '</table>'."\n";
-print '</div>';
-*/
-
-print dol_get_fiche_end();
-
-print '<div class="center">';
-print '<input class="button button-save reposition" type="submit" name="submit" value="'.$langs->trans("Save").'">';
-print '</div>';
-
-print '</form>';
-print '<br>';
-
-// End of page
-llxFooter();
-$db->close();
+	*/
+	print '				</table>
+					</div>';
+	print dol_get_fiche_end();
+	oblyon_print_btn_action('Gen');
+	print '	</form>
+			<br/>';
+	// End of page
+	llxFooter();
+	$db->close();
+?>

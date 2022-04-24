@@ -62,12 +62,10 @@
 		$h++;
 
 		/*
-		if($conf->global->OBLYON_MAIN_VERSION == "easya") {
-			$head[$h][0] = dol_buildpath("/oblyon/admin/login.php", 1);
-			$head[$h][1] = "Login";
-			$head[$h][2] = 'login';
-			$h++;
-		}
+		$head[$h][0] = dol_buildpath("/oblyon/admin/login.php", 1);
+		$head[$h][1] = $langs->trans("LoginPage");
+		$head[$h][2] = 'login';
+		$h++;
 		*/
 
 		$head[$h][0] = dol_buildpath("/oblyon/admin/options.php", 1);

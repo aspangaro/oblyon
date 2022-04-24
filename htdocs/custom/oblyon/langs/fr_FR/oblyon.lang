@@ -25,6 +25,7 @@ BankColorizeMovementName2=Couleur de fond pour un mouvement créditeur
 # Menus
 #
 OblyonMenusTitle = Configurateur Oblyon - Editeur de menus
+OblyonLoginTitle = Configurateur Oblyon - Editeur de page de connexion
 OblyonSuccessMessage = Thème Oblyon détecté, vous pouvez à présent le personnaliser.
 OblyonErrorMessage = Vous devez utiliser le thème Oblyon pour accéder à sa personnalisation.
 OblyonMenusErrorMessage = Vous devez utiliser le menu Oblyon pour accéder à sa personnalisation. Vérifier votre gestionnaire de menu.
@@ -151,7 +152,7 @@ OBLYON_COLOR_LOGIN_BCKGRD_LEFT=Couleur de fond - Partie gauche
 OBLYON_COLOR_LOGIN_TXT_RIGHT=Couleur du texte - Partie droite
 OBLYON_COLOR_LOGIN_TXT_LEFT=Couleur du texte - Partie gauche
 OBLYON_COLOR_LOGIN_TXT_INPUT=Couleur du texte des champs de saisie
-OblyonLoginTitle=Configurateur Oblyon - Login
+OblyonActiveloginPersonalized=Activer le remplacement de la page de connexion par celle d'Oblyon
 OblyonLoginLinks=Liens
 OblyonSocialNetwork=Réseaux sociaux
 OBLYON_LOGIN_TXT1=1er lien - Texte
