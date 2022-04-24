@@ -215,7 +215,14 @@ class MenuManager {
 			}
 			if ($val['enabled'] == 2)
 			{
-				print '<font class="vsmenudisabled">'.$val['titre'].'</font>';
+                print '<span class="vsmenudisabled">';
+                // Add font-awesome
+                if ($val['level'] == 0 && !empty($val['prefix'])) {
+                    print $val['prefix'];
+                }
+
+                print $val['titre'];
+                print '</span>';
 			}
 			print '</li>';
 			print '</ul>'."\n";

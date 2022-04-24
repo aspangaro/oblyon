@@ -1,5 +1,8 @@
 ## Changelog ##
 
+### Version 14.0.2 - 15a1 (2022/04/24)
+ - Compatibility Dolibarr v15
+
 ### Version 14.0.2 (2022/04/20)
  - Fix menu dropdown "checks" (cheque) with invert menu
  - Fix icon for new module reception

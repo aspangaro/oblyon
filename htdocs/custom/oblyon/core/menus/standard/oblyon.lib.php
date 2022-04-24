@@ -126,9 +126,13 @@ function print_oblyon_menu($db, $atarget, $type_user = 0, &$tabMenu, &$menu, $no
 
 	// Home
 	$showmode=1;
-	if ($_SESSION["mainmenu"] && $_SESSION["mainmenu"] == "home") { $itemsel=TRUE; $_SESSION['idmenu']=''; }
-	else $itemsel=FALSE;
-	$idsel='home';
+	if (!empty($_SESSION["mainmenu"]) && $_SESSION["mainmenu"] == "home") {
+        $itemsel=TRUE;
+        $_SESSION['idmenu']='';
+    } else {
+        $itemsel = FALSE;
+    }
+    $idsel='home';
 
     $chaine=$langs->trans("Home");
 
@@ -146,8 +150,12 @@ function print_oblyon_menu($db, $atarget, $type_user = 0, &$tabMenu, &$menu, $no
     $showmode=dol_oblyon_showmenu($type_user, $tmpentry, $listofmodulesforexternal);
 	if ($showmode)
 	{
-		if ($_SESSION["mainmenu"] && $_SESSION["mainmenu"] == "members") { $itemsel=TRUE; $_SESSION['idmenu']=''; }
-        else $itemsel=FALSE;
+		if (!empty($_SESSION["mainmenu"]) && $_SESSION["mainmenu"] == "members") {
+            $itemsel=TRUE;
+            $_SESSION['idmenu']='';
+        } else {
+            $itemsel = FALSE;
+        }
 		$idsel='members';
 
         $chaine=$langs->trans("MenuMembers");
@@ -172,8 +180,12 @@ function print_oblyon_menu($db, $atarget, $type_user = 0, &$tabMenu, &$menu, $no
 	if ($showmode) {
         $langs->loadLangs(array("companies","suppliers"));
 
-		if ($_SESSION["mainmenu"] && $_SESSION["mainmenu"] == "companies") { $itemsel=TRUE; $_SESSION['idmenu']=''; }
-		else $itemsel=FALSE;
+		if (!empty($_SESSION["mainmenu"]) && $_SESSION["mainmenu"] == "companies") {
+            $itemsel=TRUE;
+            $_SESSION['idmenu']='';
+        } else {
+            $itemsel = FALSE;
+        }
 		$idsel='companies';
 
         $chaine=$langs->trans("ThirdParties");
@@ -194,8 +206,12 @@ function print_oblyon_menu($db, $atarget, $type_user = 0, &$tabMenu, &$menu, $no
 	if ($showmode) {
         $langs->loadLangs(array("products"));
 
-		if ($_SESSION["mainmenu"] && $_SESSION["mainmenu"] == "products") { $itemsel=TRUE; $_SESSION['idmenu']=''; }
-		else $itemsel=FALSE;
+		if (!empty($_SESSION["mainmenu"]) && $_SESSION["mainmenu"] == "products") {
+            $itemsel=TRUE;
+            $_SESSION['idmenu']='';
+        } else {
+            $itemsel = FALSE;
+        }
 		$idsel='products';
 
 		$chaine="";
@@ -228,8 +244,12 @@ function print_oblyon_menu($db, $atarget, $type_user = 0, &$tabMenu, &$menu, $no
     if ($showmode) {
         $langs->loadLangs(array("mrp"));
 
-        if ($_SESSION["mainmenu"] && $_SESSION["mainmenu"] == "mrp") { $itemsel=TRUE; $_SESSION['idmenu']=''; }
-        else $itemsel=FALSE;
+        if (!empty($_SESSION["mainmenu"]) && $_SESSION["mainmenu"] == "mrp") {
+            $itemsel=TRUE;
+            $_SESSION['idmenu']='';
+        } else {
+            $itemsel=FALSE;
+        }
         $idsel='mrp';
 
         $chaine=$langs->trans("TMenuMRP");
@@ -248,9 +268,13 @@ function print_oblyon_menu($db, $atarget, $type_user = 0, &$tabMenu, &$menu, $no
 	if ($showmode) {
         $langs->loadLangs(array("projects"));
 
-		if ($_SESSION["mainmenu"] && $_SESSION["mainmenu"] == "project") { $itemsel=TRUE; $_SESSION['idmenu']=''; }
-		else $itemsel=FALSE;
-		$idsel='project';
+		if (!empty($_SESSION["mainmenu"]) && $_SESSION["mainmenu"] == "project") {
+            $itemsel=TRUE;
+            $_SESSION['idmenu']='';
+        } else {
+            $itemsel = FALSE;
+        }
+        $idsel='project';
 
 		if (empty($noout)) print_start_menu_entry($idsel,$itemsel,$showmode);
 		if (empty($noout)) print_text_menu_entry($langs->trans("MenuProjectsOpportunities"), $showmode, DOL_URL_ROOT.'/projet/index.php?mainmenu=project&amp;leftmenu=', $id, $idsel, $atarget);
@@ -296,8 +320,12 @@ function print_oblyon_menu($db, $atarget, $type_user = 0, &$tabMenu, &$menu, $no
 	if ($showmode) {
         $langs->loadLangs(array("commercial"));
 
-        if ($_SESSION["mainmenu"] && $_SESSION["mainmenu"] == "commercial") { $itemsel=TRUE; $_SESSION['idmenu']=''; }
-        else $itemsel=FALSE;
+        if (!empty($_SESSION["mainmenu"]) && $_SESSION["mainmenu"] == "commercial") {
+            $itemsel=TRUE;
+            $_SESSION['idmenu']='';
+        } else {
+            $itemsel=FALSE;
+        }
         $idsel='commercial';
 
         $chaine=$langs->trans("Commercial");
@@ -330,8 +358,11 @@ function print_oblyon_menu($db, $atarget, $type_user = 0, &$tabMenu, &$menu, $no
 	if ($showmode) {
         $langs->loadLangs(array("compta","accountancy"));
 
-		if ($_SESSION["mainmenu"] && $_SESSION["mainmenu"] == "billing") { $itemsel=TRUE; $_SESSION['idmenu']=''; }
-		else $itemsel=FALSE;
+		if (!empty($_SESSION["mainmenu"]) && $_SESSION["mainmenu"] == "billing") {
+            $itemsel=TRUE; $_SESSION['idmenu']='';
+        } else {
+            $itemsel = FALSE;
+        }
 		$idsel='billing';
 
         $chaine=$langs->trans("MenuFinancial");
@@ -352,8 +383,11 @@ function print_oblyon_menu($db, $atarget, $type_user = 0, &$tabMenu, &$menu, $no
 	if ($showmode) {
         $langs->loadLangs(array("compta","banks"));
 
-		if ($_SESSION["mainmenu"] && $_SESSION["mainmenu"] == "bank") { $itemsel=TRUE; $_SESSION['idmenu']=''; }
-		else $itemsel=FALSE;
+		if (!empty($_SESSION["mainmenu"]) && $_SESSION["mainmenu"] == "bank") {
+            $itemsel=TRUE; $_SESSION['idmenu']='';
+        } else {
+            $itemsel = FALSE;
+        }
 		$idsel='bank';
 
         $chaine=$langs->trans("MenuBankCash");
@@ -375,8 +409,12 @@ function print_oblyon_menu($db, $atarget, $type_user = 0, &$tabMenu, &$menu, $no
 	if ($showmode) {
         $langs->loadLangs(array("compta", "accountancy", "assets", "intracommreport"));
 
-		if ($_SESSION["mainmenu"] && $_SESSION["mainmenu"] == "accountancy") { $itemsel=TRUE; $_SESSION['idmenu']=''; }
-		else $itemsel=FALSE;
+		if (!empty($_SESSION["mainmenu"]) && $_SESSION["mainmenu"] == "accountancy") {
+            $itemsel=TRUE;
+            $_SESSION['idmenu']='';
+        } else {
+            $itemsel = FALSE;
+        }
 		$idsel='accountancy';
 
         $chaine=$langs->trans("MenuAccountancy");
@@ -399,8 +437,12 @@ function print_oblyon_menu($db, $atarget, $type_user = 0, &$tabMenu, &$menu, $no
 	if ($showmode) {
         $langs->loadLangs(array("holiday", "recruitment"));
 
-        if ($_SESSION["mainmenu"] && $_SESSION["mainmenu"] == "hrm") { $itemsel=TRUE; $_SESSION['idmenu']=''; }
-        else $itemsel=FALSE;
+        if (!empty($_SESSION["mainmenu"]) && $_SESSION["mainmenu"] == "hrm") {
+            $itemsel=TRUE;
+            $_SESSION['idmenu']='';
+        } else {
+            $itemsel = FALSE;
+        }
         $idsel='hrm';
 
         $chaine=$langs->trans("HRM");
@@ -423,8 +465,12 @@ function print_oblyon_menu($db, $atarget, $type_user = 0, &$tabMenu, &$menu, $no
 	if ($showmode) {
 		$langs->loadLangs(array("other", "ticket"));
 
-		if ($_SESSION["mainmenu"] && $_SESSION["mainmenu"] == "ticket") { $itemsel=TRUE; $_SESSION['idmenu']=''; }
-		else $itemsel=FALSE;
+		if (!empty($_SESSION["mainmenu"]) && $_SESSION["mainmenu"] == "ticket") {
+            $itemsel=TRUE;
+            $_SESSION['idmenu']='';
+        } else {
+            $itemsel = FALSE;
+        }
 		$idsel='ticket';
 
         $chaine=$langs->trans("Tickets");
@@ -503,8 +549,12 @@ function print_oblyon_menu($db, $atarget, $type_user = 0, &$tabMenu, &$menu, $no
     if ($showmode) {
         $langs->loadLangs(array("other"));
 
-        if ($_SESSION["mainmenu"] && $_SESSION["mainmenu"] == "tools") { $itemsel=TRUE; $_SESSION['idmenu']=''; }
-        else $itemsel=FALSE;
+        if (!empty($_SESSION["mainmenu"]) && $_SESSION["mainmenu"] == "tools") {
+            $itemsel=TRUE;
+            $_SESSION['idmenu']='';
+        } else {
+            $itemsel = FALSE;
+        }
         $idsel='tools';
 
         $chaine=$langs->trans("Tools");
@@ -626,7 +676,7 @@ function print_end_menu_array() {
  */
 function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$tabMenu, &$menu, $noout = 0, $forcemainmenu = '', $forceleftmenu = '', $moredata = null, $type_user = 0)
 {
-	global $user, $conf, $langs, $dolibarr_main_db_name, $mysoc;
+	global $user, $conf, $langs, $dolibarr_main_db_name, $mysoc, $hookmanager;
 
 	//var_dump($tabMenu);
 
@@ -1070,8 +1120,9 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 				if (!empty($conf->global->BILL_ADD_PAYMENT_VALIDATION)) {
 					$newmenu->add("/compta/paiement/tovalidate.php?leftmenu=customers_bills_tovalid", $langs->trans("MenuToValid"), 2, $user->rights->facture->lire, '', $mainmenu, 'customer_bills_tovalid');
 				}
-				$newmenu->add("/compta/paiement/rapport.php?leftmenu=customers_bills_reports", $langs->trans("Reportings"), 2, $user->rights->facture->lire, '', $mainmenu, 'customers_bills_reports');
-
+                if ($usemenuhider || empty($leftmenu) || preg_match('/customers_bills/', $leftmenu)) {
+                    $newmenu->add("/compta/paiement/rapport.php?leftmenu=customers_bills_payment_report", $langs->trans("Reportings"), 2, $user->rights->facture->lire, '', $mainmenu, 'customers_bills_payment_report');
+                }
 				$newmenu->add("/compta/facture/stats/index.php?leftmenu=customers_bills_stats", $langs->trans("Statistics"), 1, $user->rights->facture->lire, '', $mainmenu, 'customers_bills_stats');
 			}
 
@@ -1092,7 +1143,9 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 
 				$newmenu->add("/fourn/paiement/list.php?leftmenu=suppliers_bills_payment", $langs->trans("Payments"), 1, $user->rights->fournisseur->facture->lire, '', $mainmenu, 'suppliers_bills_payment');
 
-				$newmenu->add("/fourn/facture/rapport.php?leftmenu=suppliers_bills_report", $langs->trans("Reportings"), 2, $user->rights->fournisseur->facture->lire, '', $mainmenu, 'suppliers_bills_report');
+                if ($usemenuhider || empty($leftmenu) || preg_match('/suppliers_bills/', $leftmenu)) {
+                    $newmenu->add("/fourn/facture/rapport.php?leftmenu=suppliers_bills_payment_report", $langs->trans("Reportings"), 2, $user->rights->fournisseur->facture->lire, '', $mainmenu, 'suppliers_bills_payment_report');
+                }
 
 				$newmenu->add("/compta/facture/stats/index.php?mode=supplier&amp;leftmenu=suppliers_bills_stats", $langs->trans("Statistics"), 1, $user->rights->fournisseur->facture->lire, '', $mainmenu, 'suppliers_bills_stats');
 			}
@@ -1346,7 +1399,7 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 					$newmenu->add("/variants/list.php", $langs->trans("VariantAttributes"), 1, $user->rights->produit->lire);
 				}
 				if (!empty($conf->propal->enabled) || (!empty($conf->commande->enabled) && empty($conf->global->MAIN_USE_NEW_SUPPLIERMOD)) || !empty($conf->facture->enabled) || !empty($conf->fournisseur->enabled) || !empty($conf->supplier_proposal->enabled) || !empty($conf->supplier_order->enabled) || !empty($conf->supplier_invoice->enabled)) {
-					$newmenu->add("/product/stats/card.php?id=all&leftmenu=stats&type=0", $langs->trans("Statistics"), 1, $user->rights->produit->lire && $user->rights->propale->lire);
+					$newmenu->add("/product/stats/card.php?id=all&leftmenu=stats&type=0", $langs->trans("Statistics"), 1, $user->rights->produit->lire || $user->rights->product->lire);
 				}
 
 				// Categories
@@ -1493,26 +1546,26 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 
 				$titleboth = $langs->trans("LeadsOrProjects");
 				$titlenew = $langs->trans("NewLeadOrProject"); // Leads and opportunities by default
-				if (empty($conf->global->PROJECT_USE_OPPORTUNITIES)) {
-					$titleboth = $langs->trans("Projects");
-					$titlenew = $langs->trans("NewProject");
-				}
-				if (isset($conf->global->PROJECT_USE_OPPORTUNITIES) && $conf->global->PROJECT_USE_OPPORTUNITIES == 2) {	// 2 = leads only
-					$titleboth = $langs->trans("Leads");
-					$titlenew = $langs->trans("NewLead");
-				}
+                if (empty($conf->global->PROJECT_USE_OPPORTUNITIES)) {
+                    $titleboth = $langs->trans("Projects");
+                    $titlenew = $langs->trans("NewProject");
+                }
+                if (isset($conf->global->PROJECT_USE_OPPORTUNITIES) && $conf->global->PROJECT_USE_OPPORTUNITIES == 2) {	// 2 = leads only
+                    $titleboth = $langs->trans("Leads");
+                    $titlenew = $langs->trans("NewLead");
+                }
 
 				// Project assigned to user
 				$newmenu->add("/projet/index.php?leftmenu=projects".($search_project_user ? '&search_project_user='.$search_project_user : ''), $titleboth, 0, $user->rights->projet->lire, '', $mainmenu, 'projects', 0);
 				$newmenu->add("/projet/card.php?leftmenu=projects&action=create".($search_project_user ? '&search_project_user='.$search_project_user : ''), $titlenew, 1, $user->rights->projet->creer);
 
-				if (empty($conf->global->PROJECT_USE_OPPORTUNITIES)) {
+                if (empty($conf->global->PROJECT_USE_OPPORTUNITIES)) {
 					$newmenu->add("/projet/list.php?leftmenu=projets".($search_project_user ? '&search_project_user='.$search_project_user : '').'&search_status=99', $langs->trans("List"), 1, $showmode, '', 'project', 'list');
-				} elseif (isset($conf->global->PROJECT_USE_OPPORTUNITIES) && $conf->global->PROJECT_USE_OPPORTUNITIES == 1) {
+                } elseif (isset($conf->global->PROJECT_USE_OPPORTUNITIES) && $conf->global->PROJECT_USE_OPPORTUNITIES == 1) {
 					$newmenu->add("/projet/list.php?leftmenu=projets".($search_project_user ? '&search_project_user='.$search_project_user : ''), $langs->trans("List"), 1, $showmode, '', 'project', 'list');
 					$newmenu->add('/projet/list.php?mainmenu=project&amp;leftmenu=list&search_usage_opportunity=1&search_status=99&search_opp_status=openedopp&contextpage=lead', $langs->trans("ListOpenLeads"), 2, $showmode);
 					$newmenu->add('/projet/list.php?mainmenu=project&amp;leftmenu=list&search_opp_status=notopenedopp&search_status=99&contextpage=project', $langs->trans("ListOpenProjects"), 2, $showmode);
-				} elseif (isset($conf->global->PROJECT_USE_OPPORTUNITIES) && $conf->global->PROJECT_USE_OPPORTUNITIES == 2) {	// 2 = leads only
+                } elseif (isset($conf->global->PROJECT_USE_OPPORTUNITIES) && $conf->global->PROJECT_USE_OPPORTUNITIES == 2) {	// 2 = leads only
 					$newmenu->add('/projet/list.php?mainmenu=project&amp;leftmenu=list&search_usage_opportunity=1&search_status=99', $langs->trans("List"), 2, $showmode);
 				}
 
@@ -1547,7 +1600,36 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 				$newmenu->add("/user/list.php?mainmenu=hrm&leftmenu=hrm&mode=employee", $langs->trans("Employees"), 0, $user->rights->user->user->lire, '', $mainmenu, 'hrm', 0, '', '', '', img_picto('', 'user', 'class="pictofixedwidth"'));
 				$newmenu->add("/user/card.php?mainmenu=hrm&leftmenu=hrm&action=create&employee=1", $langs->trans("NewEmployee"), 1, $user->rights->user->user->creer);
 				$newmenu->add("/user/list.php?mainmenu=hrm&leftmenu=hrm&mode=employee&contextpage=employeelist", $langs->trans("List"), 1, $user->rights->user->user->lire);
-			}
+
+                if ((float) DOL_VERSION >= 15.0) {
+                    $newmenu->add("/hrm/index.php?mainmenu=hrm&leftmenu=hrm_sm", $langs->trans("SkillsManagement"), 0, $user->rights->hrm->all->read, '', $mainmenu, 'hrm_sm', 0, '', '', '', img_picto('', 'user', 'class="pictofixedwidth"'));
+
+                    if (!empty($menu_invert)) $leftmenu = 'hrm_sm';
+
+                    if ($usemenuhider || empty($leftmenu) || $leftmenu == "hrm_sm") {
+                        // Skills
+                        $newmenu->add("/hrm/skill_list.php?mainmenu=hrm&leftmenu=hrm_sm", $langs->trans("Skills"), 1, $user->rights->hrm->all->read, '', $mainmenu, 'hrm_sm', 0, '', '', '', img_picto('', 'shapes', 'class="pictofixedwidth"'));
+                        //$newmenu->add("/hrm/skill_card.php?mainmenu=hrm&leftmenu=hrm_sm&action=create", $langs->trans("NewSkill"), 1, $user->rights->hrm->all->write);
+                        //$newmenu->add("/hrm/skill_list.php?mainmenu=hrm&leftmenu=hrm_sm", $langs->trans("List"), 1, $user->rights->hrm->all->read);
+
+                        // Job (Description of work to do and skills required)
+                        $newmenu->add("/hrm/job_list.php?mainmenu=hrm&leftmenu=hrm_sm", $langs->trans("JobsPosition"), 1, $user->rights->hrm->all->read, '', $mainmenu, 'hrm_sm', 0, '', '', '', img_picto('', 'technic', 'class="pictofixedwidth"'));
+                        //$newmenu->add("/hrm/job_card.php?mainmenu=hrm&leftmenu=hrm_sm&action=create", $langs->transnoentities("NewObject", $langs->trans("Job")), 1, $user->rights->hrm->all->write);
+                        //$newmenu->add("/hrm/job_list.php?mainmenu=hrm&leftmenu=hrm_sm", $langs->trans("List"), 1, $user->rights->hrm->all->read);
+
+                        // Position = Link job - user
+                        $newmenu->add("/hrm/position_list.php?mainmenu=hrm&leftmenu=hrm_sm", $langs->trans("EmployeePositions"), 1, $user->rights->hrm->all->read, '', $mainmenu, 'hrm_sm', 0, '', '', '', img_picto('', 'user-cog', 'class="pictofixedwidth"'));
+                        //$newmenu->add("/hrm/position.php?mainmenu=hrm&leftmenu=hrm_sm&action=create", $langs->transnoentities("NewObject", $langs->trans("Position")), 1, $user->rights->hrm->all->write);
+                        //$newmenu->add("/hrm/position_list.php?mainmenu=hrm&leftmenu=hrm_sm", $langs->trans("List"), 1, $user->rights->hrm->all->read);
+
+                        // Evaluation
+                        $newmenu->add("/hrm/evaluation_list.php?mainmenu=hrm&leftmenu=hrm_sm", $langs->trans("Evalutions"), 1, $user->rights->hrm->evaluation->read, '', $mainmenu, 'hrm_sm', 0, '', '', '', img_picto('', 'user', 'class="pictofixedwidth"'));
+                        //$newmenu->add("/hrm/evaluation_card.php?mainmenu=hrm&leftmenu=hrm_sm&action=create", $langs->trans("NewEval"), 1, $user->rights->hrm->evaluation->write);
+                        //$newmenu->add("/hrm/evaluation_list.php?mainmenu=hrm&leftmenu=hrm_sm", $langs->trans("List"), 1, $user->rights->hrm->evaluation->read);
+                        $newmenu->add("/hrm/compare.php?mainmenu=hrm&leftmenu=hrm_sm", $langs->trans("SkillComparison"), 1, $user->rights->hrm->evaluation->read || $user->rights->hrm->compare_advance->read);
+                    }
+                }
+            }
 
 			// Leave/Holiday/Vacation module
 			if (!empty($conf->holiday->enabled)) {
@@ -2098,6 +2180,28 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 	if (!is_array($menu_array)) {
 		return 0;
 	}
+
+    // Allow the $menu_array of the menu to be manipulated by modules
+    $parameters = array(
+        'mainmenu' => $mainmenu,
+    );
+    $hook_items = $menu_array;
+    $reshook = $hookmanager->executeHooks('menuLeftMenuItems', $parameters, $hook_items); // Note that $action and $object may have been modified by some hooks
+
+    if (is_numeric($reshook)) {
+        if ($reshook == 0 && !empty($hookmanager->results)) {
+            $menu_array[] = $hookmanager->results; // add
+        } elseif ($reshook == 1) {
+            $menu_array = $hookmanager->results; // replace
+        }
+
+        // @todo Sort menu items by 'position' value
+        //		$position = array();
+        //		foreach ($menu_array as $key => $row) {
+        //			$position[$key] = $row['position'];
+        //		}
+        //		array_multisort($position, SORT_ASC, $menu_array);
+    }
 
 	// TODO Use the position property in menu_array to reorder the $menu_array
 	//var_dump($menu_array);
