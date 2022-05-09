@@ -73,6 +73,11 @@
 		$head[$h][2] = 'options';
 		$h++;
 
+        $head[$h][0] = dol_buildpath("/oblyon/admin/customcss.php", 1);
+        $head[$h][1] = $langs->trans("CustomCSS");
+        $head[$h][2] = 'customcss';
+        $h++;
+
 		// Show more tabs from modules
 		// Entries must be declared in modules descriptor with line
 		//$this->tabs = array(

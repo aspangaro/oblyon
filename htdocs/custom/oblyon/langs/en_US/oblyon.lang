@@ -139,6 +139,11 @@ Iconfat = Thin
 Iconfad = Duotone
 
 #
+# Custom CSS page
+#
+OblyonCustomCSSTitle = Oblyon Configurator - Custom CSS
+
+#
 # About page
 #
 ThemeOblyonAboutTitle = Oblyon Configurator - About

@@ -59,7 +59,7 @@ print load_fiche_titre($langs->trans($page_name), $linkback);
 // Configuration header
 $head = oblyon_admin_prepare_head();
 
-print dol_get_fiche_head($head, 'options', $langs->trans("Module113900Name"), 0, "opendsi@oblyon");
+print dol_get_fiche_head($head, 'about', $langs->trans("Module113900Name"), 0, "opendsi@oblyon");
 
 print '<div class="div-table-responsive-no-min">';
 print '<table summary="edit" class="noborder centpercent editmode tableforfield">';

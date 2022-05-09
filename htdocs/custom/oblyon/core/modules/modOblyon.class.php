@@ -64,7 +64,8 @@
 			$this->module_parts		= array('menus'	=> 1,
 											'js'	=> array('js'	=> '/'.$this->name.'/js/pushy.js'),
 											'css'	=> array('css'	=> '/'.$this->name.'/css/'.$this->name.'.css'),
-											'tpl'	=> 1
+											'tpl'	=> 1,
+											'hooks' => array('data' => array('main'),'entity' => '0',),
 											);
 			$this->dirs				= array('/'.$this->name.'/sql');			// Data directories to create when module is enabled. Example: this->dirs = array("/mymodule/temp");
 			$this->config_page_url	= array('menus.php@'.$this->name);			// List of php page, stored into mymodule/admin directory, to use to setup module.
