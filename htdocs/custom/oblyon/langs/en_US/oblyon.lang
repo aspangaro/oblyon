@@ -14,11 +14,11 @@ OblyonParamRestore                  = Restore
 # Easya
 #
 easyaFamily = Easya Solutions
-MenuProjectsOpportunities=Projects | Opportunities
-BankColorizeMovement=Colouring of bank transactions
-BankColorizeMovementDesc=If this function is activated, you can define a specific background color for debit or credit movements.
-BankColorizeMovementName1=Background color for a debit movement
-BankColorizeMovementName2=Background color for a credit movement
+MenuProjectsOpportunities = Projects | Opportunities
+BankColorizeMovement = Colouring of bank transactions
+BankColorizeMovementDesc = If this function is activated, you can define a specific background color for debit or credit movements.
+BankColorizeMovementName1 = Background color for a debit movement
+BankColorizeMovementName2 = Background color for a credit movement
 
 #
 # Menus
@@ -50,16 +50,10 @@ LogoPadding = Logo Paddings
 NoPaddingLogo = No
 PaddingLogo = Yes
 ShowLeftMenu = Show/Hide Left Menu
-ReduceLeftMenu=Reduce left menu (Icons only)
+ReduceLeftMenu = Reduce Left menu (Icons only)
 
-HideLeftMenu = Masquer le menu gauche
-OpenEffect = Effet d'ouverture menu gauche caché
-OpenEffectReduce = Effet d'ouverture menu gauche réduit
-EffectLeftMenuSlide = Slide
-EffectLeftMenuPush = Push
-HideTopIcons = Masquer les icônes
-HideLeftIcons = Masquer les icônes
-ShowLeftMenu = Afficher/Cacher Menu Gauche
+OpenEffectReduce = Left Menu opening effect reduced
+
 MicroMenuLeftBarHideLeftIconsWarning = Attention. Incompatible avec l'option "Masquer les icônes" du menu gauche.
 MicroMenuLeftBarCompanyNameWarning = Attention. Incompatible avec l'option "Afficher le nom de l'entreprise".
 EffectMicroMenuHover = Déployé au passage de souris
@@ -69,28 +63,28 @@ EffectMicroMenuOnly = Ne pas déployer
 # Colors page
 #
 OblyonColorsTitle = Oblyon Configurator - Colors
-Colors=Colors
-Buttons=Buttons
-OBLYON_COLOR_MAIN=Maincolor
-OBLYON_COLOR_BCKGRD=Background color
-OBLYON_COLOR_LOGO_BCKGRD=Logo background color
-OBLYON_COLOR_LOGIN_BCKGRD=Login background color
-OBLYON_COLOR_BLINE=Lines background color
-OBLYON_COLOR_FDATE_DEFAULT=Default date color (today's date) in choice calendars
-OBLYON_COLOR_FLINE=Lines text color
-OBLYON_COLOR_FLINE_HOVER=Lines text hover color
-OBLYON_COLOR_TOPMENU_BCKGRD=Topmenu background color
-OBLYON_COLOR_TOPMENU_BCKGRD_HOVER=Topmenu background hover color
-OBLYON_COLOR_TOPMENU_TXT=Topmenu color text
-OBLYON_COLOR_LEFTMENU_BCKGRD=Leftmenu background color
-OBLYON_COLOR_LEFTMENU_BCKGRD_HOVER=Leftmenu background hover color
-OBLYON_COLOR_LEFTMENU_TXT=leftmenu color text
-RestoreDefaultColors=Restore default colors
-DefaultsColorsMsg=Default colors restored
+Colors = Colors
+Buttons = Buttons
+OBLYON_COLOR_MAIN = Maincolor
+OBLYON_COLOR_BCKGRD = Background color
+OBLYON_COLOR_LOGO_BCKGRD = Logo background color
+OBLYON_COLOR_LOGIN_BCKGRD = Login background color
+OBLYON_COLOR_BLINE = Lines background color
+OBLYON_COLOR_FDATE_DEFAULT = Default date color (today's date) in choice calendars
+OBLYON_COLOR_FLINE = Lines text color
+OBLYON_COLOR_FLINE_HOVER = Lines text hover color
+OBLYON_COLOR_TOPMENU_BCKGRD = Topmenu background color
+OBLYON_COLOR_TOPMENU_BCKGRD_HOVER = Topmenu background hover color
+OBLYON_COLOR_TOPMENU_TXT = Topmenu color text
+OBLYON_COLOR_LEFTMENU_BCKGRD = Leftmenu background color
+OBLYON_COLOR_LEFTMENU_BCKGRD_HOVER = Leftmenu background hover color
+OBLYON_COLOR_LEFTMENU_TXT = Leftmenu color text
+RestoreDefaultColors = Restore default colors
+DefaultsColorsMsg = Default colors restored
 ThemeApplied = Template applied
 Oblyongreen = Oblyon Green
-Oblyondark = Oblyon Dark
-Oblyonblue = Oblyon Blue
+Oblyondark  = Oblyon Dark
+Oblyonblue  = Oblyon Blue
 Oblyonnight = Oblyon Night
 Oblyonlight = Oblyon Light
 
@@ -98,7 +92,7 @@ Oblyonlight = Oblyon Light
 # Dashboard page
 #
 OblyonDashboardTitle = Oblyon configurator - Dashboard
-OblyonDashboardDisableBlocks=Thumbs of open objects (to process or late) on main dashboard
+OblyonDashboardDisableBlocks = Thumbs of open objects (to process or late) on main dashboard
 ColorIntensity = Color intensity
 ColorIntensityDesc = Set the intensity to the colors below (Currently %s)
 ColorMoreDarker = Less intense
@@ -148,10 +142,10 @@ OblyonCustomCSSTitle = Oblyon Configurator - Custom CSS
 #
 ThemeOblyonAboutTitle = Oblyon Configurator - About
 OblyonAbout = About
-Authors=Authors
+Authors = Authors
 LicenseMessage = Theme Oblyon is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.<br><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a>
 
 #
 # Others
 #
-MenuCatalog=Catalog
+MenuCatalog = Catalog
