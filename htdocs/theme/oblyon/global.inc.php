@@ -4713,11 +4713,11 @@ table.noborder tr td a.button:hover { color: #fff; }
 
 
 .liste tr.liste_titre:nth-child(3) {
-    background-color: #333;
+    background-color: <?php print $colorbtitle; ?>;
 }
 
 tr.liste_titre:nth-child(3) {
-    background-color: #333;
+    background-color: <?php print $colorbtitle; ?>;
 }
 
 tr.liste_titre_sel th,
