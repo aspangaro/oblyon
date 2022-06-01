@@ -1269,10 +1269,10 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
                     if (! empty($menu_invert)) $leftmenu= 'tax_salary';
 
 					if ($usemenuhider || empty($leftmenu) || preg_match('/^tax_salary/i', $leftmenu)) {
-						$newmenu->add("/salaries/card.php?leftmenu=tax_salary&action=create", $langs->trans("New"), 1, $user->rights->salaries->write);
-						$newmenu->add("/salaries/list.php?leftmenu=tax_salary", $langs->trans("List"), 1, $user->rights->salaries->read);
-						$newmenu->add("/salaries/payments.php?leftmenu=tax_salary", $langs->trans("Payments"), 1, $user->rights->salaries->read);
-						$newmenu->add("/salaries/stats/index.php?leftmenu=tax_salary", $langs->trans("Statistics"), 1, $user->rights->salaries->read);
+						$newmenu->add("/salaries/card.php?leftmenu=tax_salary&action=create", $langs->trans("New"), 2, $user->rights->salaries->write);
+						$newmenu->add("/salaries/list.php?leftmenu=tax_salary", $langs->trans("List"), 2, $user->rights->salaries->read);
+						$newmenu->add("/salaries/payments.php?leftmenu=tax_salary", $langs->trans("Payments"), 2, $user->rights->salaries->read);
+						$newmenu->add("/salaries/stats/index.php?leftmenu=tax_salary", $langs->trans("Statistics"), 2, $user->rights->salaries->read);
 					}
                 }
 
@@ -1284,7 +1284,7 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 					if (!empty($menu_invert)) $leftmenu = 'tax_loan';
 
 					if ($usemenuhider || empty($leftmenu) || preg_match('/^tax_loan/i', $leftmenu)) {
-						$newmenu->add("/loan/card.php?leftmenu=tax_loan&action=create", $langs->trans("NewLoan"), 1, $user->rights->loan->write);
+						$newmenu->add("/loan/card.php?leftmenu=tax_loan&action=create", $langs->trans("NewLoan"), 2, $user->rights->loan->write);
 						//$newmenu->add("/loan/payment/list.php?leftmenu=tax_loan",$langs->trans("Payments"),2,$user->rights->loan->read);
 					}
 				}
@@ -1297,8 +1297,8 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
                     if (! empty($menu_invert)) $leftmenu= 'tax_various';
 
 					if ($usemenuhider || empty($leftmenu) || preg_match('/^tax_various/i', $leftmenu)) {
-						$newmenu->add("/compta/bank/various_payment/card.php?leftmenu=tax_various&action=create", $langs->trans("New"), 1, $user->rights->banque->modifier);
-						$newmenu->add("/compta/bank/various_payment/list.php?leftmenu=tax_various", $langs->trans("List"), 1, $user->rights->banque->lire);
+						$newmenu->add("/compta/bank/various_payment/card.php?leftmenu=tax_various&action=create", $langs->trans("New"), 2, $user->rights->banque->modifier);
+						$newmenu->add("/compta/bank/various_payment/list.php?leftmenu=tax_various", $langs->trans("List"), 2, $user->rights->banque->lire);
 					}
 				}
 			}
