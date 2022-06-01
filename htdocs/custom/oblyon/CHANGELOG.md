@@ -1,5 +1,11 @@
 ## Changelog ##
 
+### Version 14.0.2 - 16b1 (2022/06/01)
+- Compatibility Dolibarr v15
+- Compatibility Dolibarr v16b
+- Add custom CSS page in admin
+- More complete translation language en_US
+
 ### Version 14.0.2 - 15a1 (2022/04/24)
  - Compatibility Dolibarr v15
 

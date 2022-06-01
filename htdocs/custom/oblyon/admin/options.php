@@ -102,7 +102,7 @@
 	oblyon_print_input('MAIN_USE_TOP_MENU_BOOKMARK_DROPDOWN',	'on_off', $langs->trans('OblyonMainUseBookmarkDropdown'),	'', $metas, 2, 1);	// Bookmark dropdown menu
 	oblyon_print_input('OBLYON_PADDING_RIGHT_BOTTOM',			'on_off', $langs->trans('OblyonPaddingRightBottom'),	'', $metas, 2, 1);	// Bookmark dropdown menu
 	// Login
-	$metas						= array(array(3), 'OblyonLoginTitle');
+	$metas						= array(array(3), 'OblyonLogin');
 	oblyon_print_liste_titre($metas);
 	$metas						= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'options');
 	oblyon_print_input('MAIN_LOGIN_RIGHT',						'on_off', $langs->trans('LoginRight'),						'', $metas, 2, 1);	// Login box on the right

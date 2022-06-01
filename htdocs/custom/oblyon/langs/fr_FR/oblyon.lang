@@ -1,6 +1,6 @@
 # < Oblyon Control Panel - French translation >
 # Copyright (C) 2015       Nicolas Rivera    <nrivera.pro@gmail.com>
-# Copyright (C) 2015-2020  Open-DSI          <support@open-dsi.fr>
+# Copyright (C) 2015-2022  Open-DSI          <support@open-dsi.fr>
 #
 Module113900Name = Oblyon
 Module113900Desc = Panneau d'options qui vous permet de personnaliser le thème Oblyon
@@ -10,16 +10,15 @@ OblyonParamAction2                  = <br>(après une restauration rafraichissez
 OblyonParamBkup                     = Sauvegarder
 OblyonParamRestore                  = Restaurer
 
-
 #
 # Easya
 #
-easyaFamily = Easya Solutions
 MenuProjectsOpportunities=Projets | Opportunités
 BankColorizeMovement=Coloration des mouvements bancaires
 BankColorizeMovementDesc=Si cette fonction est activée, vous pouvez définir une couleur de fond spécifique pour les mouvements débiteurs ou créditeurs.
 BankColorizeMovementName1=Couleur de fond pour un mouvement débiteur
 BankColorizeMovementName2=Couleur de fond pour un mouvement créditeur
+MenuCatalog=Catalogue
 
 #
 # Menus
@@ -31,7 +30,6 @@ OblyonErrorMessage = Vous devez utiliser le thème Oblyon pour accéder à sa pe
 OblyonMenusErrorMessage = Vous devez utiliser le menu Oblyon pour accéder à sa personnalisation. Vérifier votre gestionnaire de menu.
 LeftMenu = Menu Gauche
 TopMenu = Menu Haut
-Buttons = Boutons
 InvertMenus = Intervertir les menus
 FullsizeTopBar = Largeur maximale
 FullsizeTopBarWarning = Utilisez un nombre d'entrées menu limité. 
@@ -58,6 +56,7 @@ MicroMenuLeftBarHideLeftIconsWarning = Attention. Incompatible avec l'option "Ma
 MicroMenuLeftBarCompanyNameWarning = Attention. Incompatible avec l'option "Afficher le nom de l'entreprise".
 EffectMicroMenuHover = Déployé au passage de souris
 EffectMicroMenuOnly = Ne pas déployer
+OblyonLogin = Page de connexion
 LoginRight = Décentrer le bloc de connexion sur la droite de l'écran
 CardBehavior = Comportement des fiches
 FixAreaRefAndTabAction = Fixer le bandeau des références et les boutons d'actions pendant le défilement vertical
@@ -107,7 +106,7 @@ THEME_ELDY_TEXTTITLENOTAB = Couleur du texte des titres (hors tables)
 THEME_ELDY_TEXT = Couleur du texte de base
 THEME_ELDY_TEXTLINK = Couleur des textes de liens
 
-RestoreDefaultColors=Retablir couleurs par défaut
+RestoreDefaultColors=Rétablir couleurs par défaut
 DefaultsColorsMsg=Couleurs par défaut rétabli
 ThemeApplied = Thème appliqué
 Oblyongreen = Oblyon Green
@@ -122,7 +121,7 @@ Oblyonlight = Oblyon Light
 OblyonDashboardTitle = Configurateur Oblyon - Tableau de bord
 OblyonDashboardDisableBlocks=Vignette des objets ouverts (à traiter ou en retard) sur le tableau de bord principal
 DisableGlobalBoxStats = Désactiver le widget des statistiques globales (nombres d'éléments en base de données)
-InfoboxColorOnBackground = Inverser les couleurs des icones et du fond des vignettes
+InfoboxColorOnBackground = Inverser les couleurs des icônes et du fond des vignettes
 ColorIntensity = Intensité des couleurs
 ColorIntensityDesc = Définir l'intensité sur les couleurs ci-dessous (Actuellement %s)
 ColorMoreDarker = Moins intense
@@ -197,17 +196,13 @@ Iconfad = Duotone
 # Custom CSS page
 #
 OblyonCustomCSSTitle = Configurateur Oblyon - CSS Personnalisés
+AddCustomCssSentence = Vous pouvez ajouter vos CSS personnalisés
 
 #
 # About page
 #
 ThemeOblyonAboutTitle = Configurateur Oblyon - A propos
 OblyonAbout = A propos
-Authors=Auteurs
-OldAuthors=Ancien auteurs
+Authors = Auteurs
+OldAuthors = Ancien auteurs
 LicenseMessage = Thème Oblyon mis à disposition selon les termes de la <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">licence Creative Commons Attribution - Pas d’Utilisation Commerciale 4.0 International</a>.<br><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Licence Creative Commons" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a>
-
-#
-# Others
-#
-MenuCatalog=Catalogue

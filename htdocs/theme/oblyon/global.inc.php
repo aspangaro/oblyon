@@ -653,6 +653,15 @@ img[src*=stcomm]	{ vertical-align: text-top; }
     }
 <?php } ?> /* end if (empty($dol_use_jmobile)) */
 
+section.setupsection {
+    padding: 20px;
+    /* background-color: var(--colorbacktitle1); */
+    background-color: #f0f0f0;
+    border-radius: 5px;
+}
+
+.field-error-icon { color: #ea1212; !important; }
+
 select.flat, form.flat select {
     font-weight: normal;
     font-size: unset;
@@ -677,21 +686,59 @@ input.removedfile {
     border: 0 !important;
     padding: 0 !important;
 }
-
+input.removedassigned  {
+    padding: 2px !important;
+    vertical-align: text-bottom;
+    margin-bottom: -3px;
+}
+input.smallpadd {	/* Used for timesheet input */
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
 input.buttongen {
     vertical-align: middle;
 }
-input.buttonpayment {
-    min-width: 320px;
+input.buttonpayment, button.buttonpayment, div.buttonpayment {
+    min-width: 290px;
     margin-bottom: 15px;
+    margin-top: 15px;
+    height: 60px;
     background-image: none;
     line-height: 24px;
     padding: 8px;
     background: none;
-    padding-left: 30px;
-    text-align: <?php echo $left; ?>;
-    border: 2px solid #666666;
+    text-align: center;
+    border: 0;
+    background-color: #9999bb;
     white-space: normal;
+    box-shadow: 1px 1px 4px #bbb;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    max-width: 350px;
+}
+input.short {
+    width: 40px;
+}
+.nofocusvisible:focus-visible {
+    outline: none;
+}
+
+div.buttonpayment input:focus {
+    color: #008;
+}
+.buttonpaymentsmall {
+    font-size: 0.65em;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+div.buttonpayment input {
+    background-color: unset;
+    color: #fff;
+    border-bottom: unset;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
 }
 input.buttonpaymentcb {
     background-image: url(<?php echo dol_buildpath($path.'/theme/common/credit_card.png',1) ?>);
@@ -703,12 +750,6 @@ input.buttonpaymentcheque {
     background-image: url(<?php echo dol_buildpath($path.'/theme/common/cheque.png',1) ?>);
     background-repeat: no-repeat;
     background-position: 8px 7px;
-}
-input.buttonpaymentcb {
-    background-image: url(<?php echo dol_buildpath($path.'/theme/common/credit_card.png',1) ?>);
-    background-size: 24px;
-    background-repeat: no-repeat;
-    background-position: 5px 4px;
 }
 input.buttonpaymentcheque {
     background-image: url(<?php echo dol_buildpath($path.'/paypal/img/object_paypal.png',1) ?>);
@@ -733,7 +774,7 @@ input.buttonpaymentstripe {
 /* Used for timesheets */
 span.timesheetalreadyrecorded input {
     border: none;
-    border-bottom: solid 1px rgba(0,0,0,0.1);
+    border-bottom: solid 1px rgba(0,0,0,0.4);
     margin-right: 1px !important;
 }
 td.onholidaymorning, td.onholidayafternoon {
@@ -742,27 +783,85 @@ td.onholidaymorning, td.onholidayafternoon {
 td.onholidayallday {
     background-color: #f4eede;
 }
+td.weekend {	/* must be after td.onholidayallday */
+    background-color: #eee;
+}
 td.actionbuttons a {
     padding-left: 6px;
 }
+/*
 td.leftborder, td.hide0 {
     border-left: 1px solid #ccc;
 }
 td.leftborder, td.hide6 {
     border-right: 1px solid #ccc;
 }
+*/
 td.rightborder {
     border-right: 1px solid #ccc;
+}
+
+td.amount, span.amount, div.amount, b.amount {
+    color: #006666;
 }
 td.actionbuttons a {
     padding-left: 6px;
 }
-select.flat, form.flat select {
+select.flat, form.flat select, .pageplusone {
     font-weight: normal;
     font-size: unset;
 }
+input.pageplusone {
+    padding-bottom: 4px;
+    padding-top: 4px;
+    margin-right: 4px;
+}
+.paginationlastpage a {
+    padding-left: 8px;
+}
+
+.saturatemedium {
+    filter: saturate(0.8);
+}
 .optionblue {
     color: rgb(<?php echo $colortextlink; ?>);
+}
+.optiongrey, .opacitymedium {
+    opacity: 0.4;
+}
+.opacitymediumbycolor {
+    color: rgba(0, 0, 0, 0.4);
+}
+.opacitylow {
+    opacity: 0.6;
+}
+.opacityhigh {
+    opacity: 0.24;
+}
+.opacitytransp {
+    opacity: 0;
+}
+.colorwhite {
+    color: #fff;
+}
+.colorgrey {
+    color: #888 !important;
+}
+.colorblack {
+    color: #000;
+}
+.fontsizeunset {
+    font-size: unset !important;
+}
+.vmirror {
+    transform: scale(1, -1);
+}
+.hmirror {
+    transform: scale(-1, 1);
+}
+
+select:invalid, select.--error {
+    color: gray;
 }
 .select2-results .select2-highlighted.optionblue {
     color: #FFF !important;
@@ -770,7 +869,8 @@ select.flat, form.flat select {
 select:invalid {
     color: gray;
 }
-input:disabled {
+input:disabled, textarea:disabled, select[disabled='disabled']
+{
     background:#ddd;
 }
 
@@ -1145,6 +1245,11 @@ div.divsearchfield {
     margin-top: 4px;
     margin-bottom: 4px;
     padding-left: 2px;
+}
+.divfilteralone {
+    background-color: rgba(0, 0, 0, 0.08);
+    border-radius: 5px;
+    padding-left: 5px;
 }
 .divsearchfieldfilter {
     text-overflow: clip;
@@ -3689,13 +3794,13 @@ div.vmenu {
     position: relative;
     z-index: 5;
     <?php if (empty($conf->dol_optimize_smallscreen)) { ?>
-        <?php if($conf->global->OBLYON_REDUCE_LEFTMENU) { ?>
+        <?php if (!empty($conf->global->OBLYON_REDUCE_LEFTMENU)) { ?>
             max-width: 40px;
         <?php } else { ?>
             min-width: 230px;
             max-width: 230px;
         <?php } ?>
-        <?php if ( $conf->global->OBLYON_HIDE_LEFTMENU || $conf->dol_optimize_smallscreen ) { ?>
+        <?php if (!empty($conf->global->OBLYON_HIDE_LEFTMENU) || $conf->dol_optimize_smallscreen ) { ?>
             width: 230px;
         <?php } else { ?>
             width: 100%;
@@ -4474,6 +4579,55 @@ span.tabspan {
     list-style-type: none;
     margin: 0 !important;
     padding: 0 !important;
+}
+
+.noborderspacing {
+    border-spacing: 0;
+}
+tr.nocellnopadd td.nobordernopadding, tr.nocellnopadd td.nocellnopadd
+{
+    border: 0px;
+}
+
+.unsetcolor {
+    color: unset !important;
+}
+
+.smallpaddingimp {
+    padding: 4px !important;
+    padding-left: 7px !important;
+    padding-right: 7px !important;
+}
+input.button[name="upload"] {
+    padding: 5px !important;
+    font-size: 0.9em;
+}
+input.button.smallpaddingimp, input.buttonreset.smallpaddingimp {
+    font-size: 0.8em;
+}
+input.buttonreset {
+    margin-top: 3px;
+    margin-bottom: 3px;
+    padding: 8px 15px;
+    text-decoration: underline;
+    color: rgb(<?php echo $colortextlink; ?>);
+    background-color: transparent;
+    cursor: pointer;
+}
+.nopaddingleft {
+    padding-<?php print $left; ?>: 0px;
+}
+div.tabs.nopaddingleft {
+    padding-<?php print $left; ?>: 0px;
+}
+.nopaddingright {
+    padding-<?php print $right; ?>: 0px;
+}
+.nopaddingtopimp {
+    padding-top: 0px !important;
+}
+.nopaddingbottomimp {
+    padding-bottom: 0px !important;
 }
 
 .notopnoleft {
@@ -9020,7 +9174,7 @@ span.clipboardCPValue.hidewithsize {
     }
 
     div.vmenu {
-    <?php if($conf->global->OBLYON_REDUCE_LEFTMENU) { ?>
+    <?php if (!empty($conf->global->OBLYON_REDUCE_LEFTMENU)) { ?>
         max-width: 40px;
     <?php } else { ?>
         min-width: 210px;
@@ -9078,7 +9232,7 @@ span.clipboardCPValue.hidewithsize {
     }
 
     div.vmenu {
-    <?php if($conf->global->OBLYON_REDUCE_LEFTMENU) { ?>
+    <?php if (!empty($conf->global->OBLYON_REDUCE_LEFTMENU)) { ?>
         max-width: 40px;
     <?php } else { ?>
         min-width: 130px;

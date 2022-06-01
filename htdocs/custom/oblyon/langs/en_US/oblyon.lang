@@ -1,6 +1,6 @@
 # < Oblyon Control Panel - English translation >
 # Copyright (C) 2015       Nicolas Rivera   <nrivera.pro@gmail.com>
-# Copyright (C) 2015-2019  Open-DSI         <support@open-dsi.fr>
+# Copyright (C) 2015-2022  Open-DSI         <support@open-dsi.fr>
 #
 Module113900Name = Oblyon
 Module113900Desc = Options panel allows you to personalize the Oblyon theme
@@ -13,17 +13,18 @@ OblyonParamRestore                  = Restore
 #
 # Easya
 #
-easyaFamily = Easya Solutions
 MenuProjectsOpportunities=Projects | Opportunities
 BankColorizeMovement=Colouring of bank transactions
 BankColorizeMovementDesc=If this function is activated, you can define a specific background color for debit or credit movements.
 BankColorizeMovementName1=Background color for a debit movement
 BankColorizeMovementName2=Background color for a credit movement
+MenuCatalog=Catalog
 
 #
 # Menus
 #
 OblyonMenusTitle = Oblyon Configurator - Menus Editor
+OblyonLoginTitle = Oblyon Configurator - Login page editor
 OblyonSuccessMessage = Oblyon theme detected, you can now personalize it.
 OblyonErrorMessage = You must use the Oblyon theme in order to personalize it.
 OblyonMenusErrorMessage = You must use the Oblyon menus in order to personalize it. Please check your current menu manager.
@@ -39,31 +40,29 @@ StickyTopBarInvertedWarning = Certain modules are not supported with this featur
 StickyLeftBar = Sticky left bar
 StickyLeftBarWarning = Experimental. Use a limited number of menu entries.
 StickyLeftBarInvertedWarning = Certain modules are not supported with this feature.
+OblyonEnableShowLogo=Show logo
+OblyonLogoWidth=Logo width (in px) (Default: 260px)
+ReduceLeftMenu=Reduced left menu (Icons only)
+
 HideLeftMenu = Hide Left Menu
 OpenEffect = Opening Effect
+OpenEffectReduce = Reduced left menu opening effect
 EffectLeftMenuSlide = Slide
 EffectLeftMenuPush = Push
 HideTopIcons = Hide Top Icons
 HideLeftIcons = Hide Left Icons
-LogoSize = Logo Size (Small/Big)
-LogoPadding = Logo Paddings
-NoPaddingLogo = No
-PaddingLogo = Yes
 ShowLeftMenu = Show/Hide Left Menu
-ReduceLeftMenu=Reduce left menu (Icons only)
-
-HideLeftMenu = Masquer le menu gauche
-OpenEffect = Effet d'ouverture menu gauche caché
-OpenEffectReduce = Effet d'ouverture menu gauche réduit
-EffectLeftMenuSlide = Slide
-EffectLeftMenuPush = Push
-HideTopIcons = Masquer les icônes
-HideLeftIcons = Masquer les icônes
-ShowLeftMenu = Afficher/Cacher Menu Gauche
-MicroMenuLeftBarHideLeftIconsWarning = Attention. Incompatible avec l'option "Masquer les icônes" du menu gauche.
-MicroMenuLeftBarCompanyNameWarning = Attention. Incompatible avec l'option "Afficher le nom de l'entreprise".
-EffectMicroMenuHover = Déployé au passage de souris
-EffectMicroMenuOnly = Ne pas déployer
+MicroMenuLeftBarHideLeftIconsWarning = Warning. Incompatible with the "Hide icons" option in the left menu.
+MicroMenuLeftBarCompanyNameWarning = Warning. Incompatible with the option "Display company name".
+EffectMicroMenuHover = Deployed at mouse-over
+EffectMicroMenuOnly = Do not deploy
+OblyonLogin = Login page
+LoginRight = Offset the connection block to the right of the screen
+CardBehavior = Behavior of the cards
+FixAreaRefAndTabAction = Fix the reference banner and action buttons during vertical scrolling
+General = General parameters
+OblyonFontSize = Basic text size in pixels (must be between 10 and 16)
+MainStatusUseImages = The different statuses of the elements will be displayed as icons with or without explanatory text (otherwise a colored label will be used)
 
 #
 # Colors page
@@ -75,16 +74,38 @@ OBLYON_COLOR_MAIN=Maincolor
 OBLYON_COLOR_BCKGRD=Background color
 OBLYON_COLOR_LOGO_BCKGRD=Logo background color
 OBLYON_COLOR_LOGIN_BCKGRD=Login background color
+OBLYON_COLOR_BTITLE=Title background color
+OBLYON_COLOR_FTITLE=Text color of the titles
 OBLYON_COLOR_BLINE=Lines background color
+OBLYON_COLOR_BLINE_HOVER=Background color of the hovered lines
 OBLYON_COLOR_FDATE_DEFAULT=Default date color (today's date) in choice calendars
 OBLYON_COLOR_FLINE=Lines text color
 OBLYON_COLOR_FLINE_HOVER=Lines text hover color
 OBLYON_COLOR_TOPMENU_BCKGRD=Topmenu background color
 OBLYON_COLOR_TOPMENU_BCKGRD_HOVER=Topmenu background hover color
 OBLYON_COLOR_TOPMENU_TXT=Topmenu color text
+OBLYON_COLOR_TOPMENU_TXT_ACTIVE=Color of the active text of the top menu
+OBLYON_COLOR_TOPMENU_TXT_HOVER=Hover text color of the top menu
 OBLYON_COLOR_LEFTMENU_BCKGRD=Leftmenu background color
 OBLYON_COLOR_LEFTMENU_BCKGRD_HOVER=Leftmenu background hover color
 OBLYON_COLOR_LEFTMENU_TXT=leftmenu color text
+OBLYON_COLOR_LEFTMENU_TXT_ACTIVE=Color of the active text of the left menu
+OBLYON_COLOR_LEFTMENU_TXT_HOVER=Left menu hover text color
+OBLYON_COLOR_BUTTON_ACTION1=Button background color 1
+OBLYON_COLOR_BUTTON_ACTION2=Button background color 2
+OBLYON_COLOR_BUTTON_DELETE1=Color 1 of the background of the dangerous buttons
+OBLYON_COLOR_BUTTON_DELETE2=Color 2 background of the dangerous buttons
+Eldys = Basic colors
+THEME_ELDY_TOPBORDER_TITLE1 = Title border color
+THEME_ELDY_LINEIMPAIR1 = Background color 1 of the odd lines of the tables
+THEME_ELDY_LINEIMPAIR2 = Background color 2 of the odd lines of the tables
+THEME_ELDY_LINEPAIR1 = Background color 1 of the even rows of the tables
+THEME_ELDY_LINEPAIR2 = Background color 2 of the even rows of the tables
+THEME_ELDY_LINEBREAK = Color of the line breaks
+THEME_ELDY_TEXTTITLENOTAB = Title text color (excluding tables)
+THEME_ELDY_TEXT = Basic text color
+THEME_ELDY_TEXTLINK = Link text color
+
 RestoreDefaultColors=Restore default colors
 DefaultsColorsMsg=Default colors restored
 ThemeApplied = Template applied
@@ -99,6 +120,8 @@ Oblyonlight = Oblyon Light
 #
 OblyonDashboardTitle = Oblyon configurator - Dashboard
 OblyonDashboardDisableBlocks=Thumbs of open objects (to process or late) on main dashboard
+DisableGlobalBoxStats = Disable the global statistics widget (number of items in database)
+InfoboxColorOnBackground = Invert the colors of the icons and the background of the thumbnails
 ColorIntensity = Color intensity
 ColorIntensityDesc = Set the intensity to the colors below (Currently %s)
 ColorMoreDarker = Less intense
@@ -107,14 +130,45 @@ OBLYON_INFOXBOX_BACKGROUND = Thumb background color
 OBLYON_INFOXBOX_WEATHER_COLOR = Thumb color 'weather'
 OBLYON_INFOXBOX_ACTION_COLOR = Thumb color 'agenda'
 OBLYON_INFOXBOX_PROJECT_COLOR = Thumb color 'project'
-OBLYON_INFOXBOX_CUSTOMER_COLOR = Thumb color 'customers'
-OBLYON_INFOXBOX_SUPPLIER_COLOR = Thumb color 'suppliers'
+OBLYON_INFOXBOX_CUSTOMER_PROPAL_COLOR = Thumb color 'customer sales proposals'
+OBLYON_INFOXBOX_CUSTOMER_ORDER_COLOR = Thumb color 'customer orders'
+OBLYON_INFOXBOX_CUSTOMER_INVOICE_COLOR = Thumb color 'customer invoices'
+OBLYON_INFOXBOX_SUPPLIER_PROPAL_COLOR = Thumb color 'requests for quotations from suppliers'
+OBLYON_INFOXBOX_SUPPLIER_ORDER_COLOR = Thumb color 'supplier orders'
+OBLYON_INFOXBOX_SUPPLIER_INVOICE_COLOR = Thumb color 'supplier invoices'
 OBLYON_INFOXBOX_CONTRAT_COLOR = Thumb color 'contract'
 OBLYON_INFOXBOX_BANK_COLOR = Thumb color 'bank'
 OBLYON_INFOXBOX_ADHERENT_COLOR = Thumb color 'members'
 OBLYON_INFOXBOX_EXPENSEREPORT_COLOR = Thumb color 'expense reports'
 OBLYON_INFOXBOX_HOLIDAY_COLOR = Thumb color 'holidays'
 OBLYON_INFOXBOX_TICKET_COLOR = Thumb color 'tickets'
+
+#
+# Login page
+#
+OBLYON_COLOR_LOGIN_BCKGRD_RIGHT=Couleur du fond - Partie droite
+OBLYON_COLOR_LOGIN_BCKGRD_LEFT=Couleur de fond - Partie gauche
+OBLYON_COLOR_LOGIN_TXT_RIGHT=Couleur du texte - Partie droite
+OBLYON_COLOR_LOGIN_TXT_LEFT=Couleur du texte - Partie gauche
+OBLYON_COLOR_LOGIN_TXT_INPUT=Couleur du texte des champs de saisie
+OblyonActiveloginPersonalized=Activer le remplacement de la page de connexion par celle d'Oblyon
+OblyonLoginLinks=Liens
+OblyonSocialNetwork=Réseaux sociaux
+OBLYON_LOGIN_TXT1=1er lien - Texte
+OBLYON_LOGIN_URL1=1er lien - URL
+OBLYON_LOGIN_FAICON1=1er lien - Icône
+OBLYON_LOGIN_TXT2=2ème lien - Texte
+OBLYON_LOGIN_URL2=2ème lien - URL
+OBLYON_LOGIN_FAICON2=2ème lien - Icône
+OBLYON_LOGIN_TXT3=3ème lien - Texte
+OBLYON_LOGIN_URL3=3ème lien - URL
+OBLYON_LOGIN_FAICON3=3ème lien - Icône
+OBLYON_SOCIAL_TWITTER=URL Twitter
+OBLYON_SOCIAL_FACEBOOK=URL Facebook
+OBLYON_SOCIAL_LINKEDIN=URL LinkedIn
+OBLYON_SOCIAL_INSTAGRAM=Instagram
+OBLYON_SOCIAL_YOUTUBE=YouTube
+OBLYON_SOCIAL_GITHUB=Github
 
 #
 # Options page
@@ -142,16 +196,13 @@ Iconfad = Duotone
 # Custom CSS page
 #
 OblyonCustomCSSTitle = Oblyon Configurator - Custom CSS
+AddCustomCssSentence = You can add your custom CSS
 
 #
 # About page
 #
 ThemeOblyonAboutTitle = Oblyon Configurator - About
 OblyonAbout = About
-Authors=Authors
+Authors = Authors
+OldAuthors = Previous authors
 LicenseMessage = Theme Oblyon is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.<br><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a>
-
-#
-# Others
-#
-MenuCatalog=Catalog
