@@ -334,7 +334,7 @@
 	print '				<tr>';
 	foreach ($listtheme as $name => $values)
 		print '				<td class = "center">
-								<a title = "'.$langs->trans('Oblyon'.$name).'" href = "'.$_SERVER['PHP_SELF'].'?action=update_theme&value='.$name.'">'.img_picto($langs->trans('Oblyon'.$name), 'oblyon'.$name.'.png@oblyon', 'width = "50%"').'
+								<a title = "'.$langs->trans('Oblyon'.$name).'" href = "'.$_SERVER['PHP_SELF'].'?action=update_theme&token='.newToken().'&value='.$name.'">'.img_picto($langs->trans('Oblyon'.$name), 'oblyon'.$name.'.png@oblyon', 'width = "50%"').'
 									<br/>'.$langs->trans('Oblyon'.$name).'
 								</a>
 							</td>';
