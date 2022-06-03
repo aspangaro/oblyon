@@ -30,7 +30,7 @@
 	if (! defined('NOREQUIREAJAX'))		define('NOREQUIREAJAX', '1');
 	define('ISLOADEDBYSTEELSHEET', '1');
 	session_cache_limiter('public');
-	require_once __DIR__.'/../../main.inc.php'; // __DIR__ allow this script to be included in custom themes
+	require_once __DIR__.'/../../../../main.inc.php'; // __DIR__ allow this script to be included in custom themes
 	require __DIR__.'/theme_vars.inc.php';
 	if (defined('THEME_ONLY_CONSTANT'))	return;
 	require_once DOL_DOCUMENT_ROOT.'/core/lib/functions2.lib.php';
@@ -86,7 +86,7 @@
 	if (!empty($conf->global->MAIN_OVERWRITE_THEME_RES)) {
 		$path	= '/'.$conf->global->MAIN_OVERWRITE_THEME_RES;
 		$theme	= $conf->global->MAIN_OVERWRITE_THEME_RES;
-	}	// if (!empty($conf->global->MAIN_OVERWRITE_THEME_RES))
+	}
 	// Define image path files and other constants
 	$img_button					= dol_buildpath($path.'/theme/'.$theme.'/img/button_bg.png', 1);
 	$dol_hide_topmenu			= $conf->dol_hide_topmenu;

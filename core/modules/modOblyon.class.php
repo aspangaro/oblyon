@@ -57,12 +57,13 @@
 			$this->familyinfo		= array($family => array('position' => '001', 'label' => $langs->trans($family . "Family")));
 			$this->module_position	= 1;
 			$this->description		= $langs->trans('Module113900Desc');	// Module description
-			$this->version			= '14.0.2 - 16b1';							// Version : 'development', 'experimental', 'dolibarr' or 'dolibarr_deprecated' or version
+			$this->version			= '2.0.0 (14.0.x - 16b1)';					// Version : 'development', 'experimental', 'dolibarr' or 'dolibarr_deprecated' or version
 			$this->const_name		= 'MAIN_MODULE_'.strtoupper($this->name);	// llx_const table to save module status enabled/disabled
 			$this->special			= 0;										// Where to store the module in setup page (0=common,1=interface,2=others,3=very specific)
 			$this->picto			= 'opendsi_big@'.$this->name;				// Name of image file used for this module. If in theme => 'pictovalue' ; if in module => 'pictovalue@module' under name object_pictovalue.png
 			$this->module_parts		= array('menus'	=> 1,
 											'js'	=> array('js'	=> '/'.$this->name.'/js/pushy.js'),
+											'theme' => 1,
 											'css'	=> array('css'	=> '/'.$this->name.'/css/'.$this->name.'.css'),
 											'tpl'	=> 1,
 											'hooks' => array('data' => array('main'),'entity' => '0',),
@@ -107,6 +108,7 @@
 			if (file_exists(dol_buildpath('/core/menus/standard/oblyon_menu.php')))	unlink(dol_buildpath('/core/menus/standard/oblyon_menu.php'));
 			if (file_exists(dol_buildpath('/core/menus/standard/oblyon.lib.php')))		unlink(dol_buildpath('/core/menus/standard/oblyon.lib.php'));
 			dolibarr_set_const($this->db,'MAIN_THEME','oblyon', 'chaine', 0, '', $conf->entity);
+			dolibarr_set_const($this->db,'MAIN_OVERWRITE_THEME_RES', 'oblyon', 'chaine', 0, '', $conf->entity);
 			dolibarr_set_const($this->db,'MAIN_MENU_INVERT', $conf->global->MAIN_MENU_INVERT_OBLYON_SAVE, 'chaine', 0, '', $conf->entity);
 			dolibarr_del_const($this->db,'MAIN_MENU_INVERT_OBLYON_SAVE', $conf->entity);
 			return $this->_init($sql, $options);
@@ -126,6 +128,7 @@
 			oblyon_bkup_module ($this->name);
 
 			dolibarr_set_const($this->db,'MAIN_THEME','eldy', 'chaine', 0, '', $conf->entity);
+			dolibarr_del_const($this->db,'MAIN_OVERWRITE_THEME_RES', $conf->entity);
 			dolibarr_set_const($this->db,'MAIN_MENU_INVERT_OBLYON_SAVE', $conf->global->MAIN_MENU_INVERT, 'chaine', 0, '', $conf->entity);
 			dolibarr_set_const($this->db,'MAIN_MENU_INVERT', 0, 'chaine', 0, '', $conf->entity);
 
