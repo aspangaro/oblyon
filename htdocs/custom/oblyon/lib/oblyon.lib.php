@@ -61,12 +61,10 @@
 		$head[$h][2] = 'dashboard';
 		$h++;
 
-		/*
 		$head[$h][0] = dol_buildpath("/oblyon/admin/login.php", 1);
 		$head[$h][1] = $langs->trans("LoginPage");
 		$head[$h][2] = 'login';
 		$h++;
-		*/
 
 		$head[$h][0] = dol_buildpath("/oblyon/admin/options.php", 1);
 		$head[$h][1] = $langs->trans("Options");
@@ -99,7 +97,7 @@
 	}
 
 	/************************************************
-	*	Sauvegarde les param�tres du module
+	*	Sauvegarde les paramètres du module
 	*
 	*	@param		string		$appliname	module name
 	*	@return		string		1 = Ok or -1 = Ko or or 0 and error message
@@ -166,7 +164,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 	}
 
 	/************************************************
-	*	Recherche d'un fichier contenant un code langue dans son nom � partir d'une liste
+	*	Recherche d'un fichier contenant un code langue dans son nom à partir d'une liste
 	*
 	*	@param	string	$table		table name to backup
 	*	@param	string	$sql		sql query to prepare data  for backup
@@ -222,7 +220,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 	}
 
 	/************************************************
-	*	Restaure les param�tres du module
+	*	Restaure les paramètres du module
 	*
 	*	@param		string		$appliname	module name
 	*	@return		string		1 = Ok or -1 = Ko

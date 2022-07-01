@@ -53,7 +53,9 @@ function print_oblyon_menu($db, $atarget, $type_user = 0, &$tabMenu, &$menu, $no
 	$id = 'mainmenu';
 	$listofmodulesforexternal = explode(',', $conf->global->MAIN_MODULES_FOR_EXTERNAL);
 
-    $menu_invert = $conf->global->MAIN_MENU_INVERT;
+    $classname = '';
+
+    $menu_invert = getDolGlobalInt('MAIN_MENU_INVERT');
 
     if (empty($noout)) print_start_menu_array();
 
@@ -90,7 +92,7 @@ function print_oblyon_menu($db, $atarget, $type_user = 0, &$tabMenu, &$menu, $no
         print_end_menu_entry(4);
 	}
 
-    if ($conf->global->OBLYON_SHOW_COMPNAME && $conf->global->MAIN_INFO_SOCIETE_NOM)
+    if (getDolGlobalInt('OBLYON_SHOW_COMPNAME') && getDolGlobalString('MAIN_INFO_SOCIETE_NOM'))
     {
         if ($menu_invert)
         {
@@ -120,7 +122,7 @@ function print_oblyon_menu($db, $atarget, $type_user = 0, &$tabMenu, &$menu, $no
         print "<!-- End Bookmarks -->\n";
     }
 
-	if ( empty($menu_invert) && ($conf->global->OBLYON_HIDE_LEFTMENU || $conf->dol_optimize_smallscreen) ) {
+	if ( empty($menu_invert) && (getDolGlobalInt('OBLYON_HIDE_LEFTMENU') || $conf->dol_optimize_smallscreen) ) {
 		print '<div class="pushy-btn" title="'.$langs->trans("ShowLeftMenu").'">&#8801;</div>';
 	}
 
@@ -579,7 +581,7 @@ function print_oblyon_menu($db, $atarget, $type_user = 0, &$tabMenu, &$menu, $no
 function print_start_menu_array() {
 	global $conf;
 
-    $menu_invert = $conf->global->MAIN_MENU_INVERT;
+    $menu_invert = getDolGlobalInt('MAIN_MENU_INVERT');
 
     print '<nav class="tmenudiv db-nav main-nav'.(empty($menu_invert)?'':' is-inverted').'">';
 	print '<ul role="navigation" class="tmenu main-nav__list">';
@@ -685,9 +687,9 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 	$mainmenu = ($forcemainmenu ? $forcemainmenu : $_SESSION["mainmenu"]);
 	$leftmenu = ($forceleftmenu ? '' : (empty($_SESSION["leftmenu"]) ? 'none' : $_SESSION["leftmenu"]));
 
-    $menu_invert = $conf->global->MAIN_MENU_INVERT;
+    $menu_invert = getDolGlobalInt('MAIN_MENU_INVERT');
 
-	$usemenuhider = !empty($menu_invert) && ($conf->global->OBLYON_HIDE_LEFTMENU || $conf->dol_optimize_smallscreen);
+	$usemenuhider = !empty($menu_invert) && (getDolGlobalInt('OBLYON_HIDE_LEFTMENU') || $conf->dol_optimize_smallscreen);
 
 	if ( $usemenuhider ) {
 		print '<div class="pushy-btn" title="'.$langs->trans("ShowLeftMenu").'">&#8801;</div>';
@@ -722,7 +724,7 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
         print '</div>'."\n";
 	}
 
-    if ($conf->global->OBLYON_SHOW_COMPNAME && $conf->global->MAIN_INFO_SOCIETE_NOM)
+    if (getDolGlobalInt('OBLYON_SHOW_COMPNAME') && getDolGlobalString('MAIN_INFO_SOCIETE_NOM'))
     {
         if (! $menu_invert)
         {

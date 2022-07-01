@@ -61,8 +61,8 @@ class ActionsOblyon
 		global $conf;
 
 		$style = "<style id='oblyon_custom_css'>";
-		if($conf->global->OBLYON_CUSTOM_CSS){
-			$style .= $conf->global->OBLYON_CUSTOM_CSS;
+		if (getDolGlobalString('OBLYON_CUSTOM_CSS')){
+			$style .= getDolGlobalString('OBLYON_CUSTOM_CSS');
 		}
 		$style .= "</style>";
 		

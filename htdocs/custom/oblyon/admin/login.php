@@ -64,10 +64,10 @@
 	$_SESSION['dol_resetcache']	= dol_print_date(dol_now(), 'dayhourlog');	// Reset cache
 
 	// init variables *******************************
-	$result						= !empty($conf->global->MAIN_MENU_INVERT) && ($conf->global->OBLYON_SHOW_COMPNAME || $conf->global->OBLYON_HIDE_LEFTMENU)	? dolibarr_set_const($db, 'OBLYON_FULLSIZE_TOPBAR',			1,			'chaine', 0, 'Oblyon module', $conf->entity) : '';
-	$result						= $conf->global->OBLYON_HIDE_LEFTMENU && empty($conf->global->OBLYON_EFFECT_LEFTMENU)										? dolibarr_set_const($db, 'OBLYON_EFFECT_LEFTMENU',			'slide',	'chaine', 0, 'Oblyon module', $conf->entity) : '';
+	$result						= !empty($conf->global->MAIN_MENU_INVERT) && (!empty($conf->global->OBLYON_SHOW_COMPNAME) || !empty($conf->global->OBLYON_HIDE_LEFTMENU))	? dolibarr_set_const($db, 'OBLYON_FULLSIZE_TOPBAR',			1,			'chaine', 0, 'Oblyon module', $conf->entity) : '';
+	$result						= !empty($conf->global->OBLYON_HIDE_LEFTMENU) && empty($conf->global->OBLYON_EFFECT_LEFTMENU)										? dolibarr_set_const($db, 'OBLYON_EFFECT_LEFTMENU',			'slide',	'chaine', 0, 'Oblyon module', $conf->entity) : '';
 	$result						= !empty($conf->global->MAIN_MENU_INVERT) && !empty($conf->global->OBLYON_REDUCE_LEFTMENU)									? dolibarr_set_const($db, 'OBLYON_HIDE_LEFTICONS',			0,			'chaine', 0, 'Oblyon module', $conf->entity) : '';
-	$result						= $conf->global->OBLYON_REDUCE_LEFTMENU && empty($conf->global->OBLYON_EFFECT_REDUCE_LEFTMENU)								? dolibarr_set_const($db, 'OBLYON_EFFECT_REDUCE_LEFTMENU',	'hover',	'chaine', 0, 'Oblyon module', $conf->entity) : '';
+	$result						= !empty($conf->global->OBLYON_REDUCE_LEFTMENU) && empty($conf->global->OBLYON_EFFECT_REDUCE_LEFTMENU)								? dolibarr_set_const($db, 'OBLYON_EFFECT_REDUCE_LEFTMENU',	'hover',	'chaine', 0, 'Oblyon module', $conf->entity) : '';
 
 	// View *****************************************
 	$page_name					= $langs->trans('OblyonLoginTitle');
