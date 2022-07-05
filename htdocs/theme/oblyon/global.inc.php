@@ -1674,6 +1674,7 @@ td.showDragHandle {
 	vertical-align: top;
 <?php if($conf->global->OBLYON_STICKY_LEFTBAR) { ?>
 	position: fixed;
+    z-index: 90;
 	overflow-y: auto !important;
 	overflow-x: hidden;
 <?php } else { ?>
@@ -3176,8 +3177,8 @@ font-size: 14px;
 
 #id-left {
 <?php if ( $conf->global->OBLYON_HIDE_LEFTMENU || $conf->dol_optimize_smallscreen ) { ?>
-    position: absolute;
-<?php if ( empty($conf->global->OBLYON_STICKY_TOPBAR) && $conf->global->OBLYON_EFFECT_LEFTMENU == "push" ) { ?>
+    position: <?php print ($conf->dol_optimize_smallscreen) ? 'fixed;' : 'absolute;'?>
+    <?php if ( empty($conf->global->OBLYON_STICKY_TOPBAR) && $conf->global->OBLYON_EFFECT_LEFTMENU == "push" ) { ?>
         top: 0;
     <?php } else { ?>
         <?php if ( $conf->global->MAIN_MENU_INVERT ) { ?>
