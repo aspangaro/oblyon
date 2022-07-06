@@ -477,10 +477,10 @@ hr { border: 0; border-top: 1px solid #ccc; }
     text-decoration: none !important;
     background-color: #f5f5f5;
     /*
-    background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
+    background-image: -moz-linear-gradient(to top,  #ffffff, #e6e6e6);
     background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
-    background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
-    background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
+    background-image: -webkit-linear-gradient(to top,  #ffffff, #e6e6e6);
+    background-image: -o-linear-gradient(to top,  #ffffff, #e6e6e6);
     background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
     */
 
@@ -526,6 +526,11 @@ hr { border: 0; border-top: 1px solid #ccc; }
 td button.liste_titre span {
     color: <?php print $colorftitle; ?>;
 }
+
+div.extra_inline_chkbxlst, div.extra_inline_checkbox {
+	min-width:150px;
+}
+
 /* ============================================================================== */
 /*	Module website 																  */
 /* ============================================================================== */
@@ -4914,11 +4919,11 @@ table.noborder tr td a.button:hover { color: #fff; }
 
 
 .liste tr.liste_titre:nth-child(3) {
-    background-color: #333;
+    background-color: <?php print $colorbtitle; ?>;
 }
 
 tr.liste_titre:nth-child(3) {
-    background-color: #333;
+    background-color: <?php print $colorbtitle; ?>;
 }
 
 tr.liste_titre_sel th,
@@ -7091,8 +7096,8 @@ span#select2-boxbookmark-container, span#select2-boxcombo-container {
     user-select: none;
     background-color: #e4e4e4;
     background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(20%, #f4f4f4), color-stop(50%, #f0f0f0), color-stop(52%, #e8e8e8), color-stop(100%, #eee));
-    background-image: -webkit-linear-gradient(top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eee 100%);
-    background-image: -moz-linear-gradient(top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eee 100%);
+    background-image: -webkit-linear-gradient(to top,  #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eee 100%);
+    background-image: -moz-linear-gradient(to top,  #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eee 100%);
     background-image: linear-gradient(to bottom, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eee 100%);
 }
 .select2-container-multi-dolibarr .select2-choices-dolibarr .select2-search-choice-dolibarr a {
@@ -7810,11 +7815,11 @@ border: 1px solid #888;
     background: white;
     border-radius: 0.25em;
     padding: 1em;
-    background-image: -o-linear-gradient(bottom, rgba(0,0,0,0.1) 0%, rgba(230,230,230,0.4) 100%);
-    background-image: -moz-linear-gradient(bottom, rgba(0,0,0,0.1) 0%, rgba(230,230,230,0.4) 100%);
-    background-image: -webkit-linear-gradient(bottom, rgba(0,0,0,0.1) 0%, rgba(230,230,230,0.4) 100%);
-    background-image: -ms-linear-gradient(bottom, rgba(0,0,0,0.1) 0%, rgba(230,230,230,0.4) 100%);
-    background-image: linear-gradient(bottom, rgba(0,0,0,0.1) 0%, rgba(230,230,230,0.4) 100%);
+    background-image: -o-linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(230,230,230,0.4) 100%);
+    background-image: -moz-linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(230,230,230,0.4) 100%);
+    background-image: -webkit-linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(230,230,230,0.4) 100%);
+    background-image: -ms-linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(230,230,230,0.4) 100%);
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(230,230,230,0.4) 100%);
 }
 .cd-timeline-content:after {
 content: "";
@@ -8316,11 +8321,11 @@ div.tabBar .noborder {
 div:not(.fichecenter):not(.fichehalfleft):not(.fichehalfright):not(.ficheaddleft) > .border > tbody > tr:nth-of-type(even):not(.liste_titre), .liste > tbody > tr:nth-of-type(even):not(.liste_titre),
 div:not(.fichecenter):not(.fichehalfleft):not(.fichehalfright):not(.ficheaddleft) .oddeven.tagtr:nth-of-type(even):not(.liste_titre)
 {
-    background: linear-gradient(bottom, <?php echo $colorbacklineimpair1; ?> 85%, <?php echo $colorbacklineimpair2; ?> 100%);
-    background: -o-linear-gradient(bottom, <?php echo $colorbacklineimpair1; ?> 85%, <?php echo $colorbacklineimpair2; ?> 100%);
-    background: -moz-linear-gradient(bottom, <?php echo $colorbacklineimpair1; ?> 85%, <?php echo $colorbacklineimpair2; ?> 100%);
-    background: -webkit-linear-gradient(bottom, <?php echo $colorbacklineimpair1; ?> 85%, <?php echo $colorbacklineimpair2; ?> 100%);
-    background: -ms-linear-gradient(bottom, <?php echo $colorbacklineimpair1; ?> 85%, <?php echo $colorbacklineimpair2; ?> 100%);
+    background: linear-gradient(to bottom, #<?php echo colorArrayToHex(colorStringToArray($colorbacklineimpair1)); ?> 85%, #<?php echo colorArrayToHex(colorStringToArray($colorbacklineimpair2)); ?> 100%);
+    background: -o-linear-gradient(to bottom, #<?php echo colorArrayToHex(colorStringToArray($colorbacklineimpair1)); ?> 85%, #<?php echo colorArrayToHex(colorStringToArray($colorbacklineimpair2)); ?> 100%);
+    background: -moz-linear-gradient(to bottom, #<?php echo colorArrayToHex(colorStringToArray($colorbacklineimpair1)); ?> 85%, #<?php echo colorArrayToHex(colorStringToArray($colorbacklineimpair2)); ?> 100%);
+    background: -webkit-linear-gradient(to bottom, #<?php echo colorArrayToHex(colorStringToArray($colorbacklineimpair1)); ?> 85%, #<?php echo colorArrayToHex(colorStringToArray($colorbacklineimpair2)); ?> 100%);
+    background: -ms-linear-gradient(to bottom, #<?php echo colorArrayToHex(colorStringToArray($colorbacklineimpair1)); ?> 85%, #<?php echo colorArrayToHex(colorStringToArray($colorbacklineimpair2)); ?> 100%);
 }
 .noborder > tbody > tr:nth-child(even):not(:last-child) td:not(.liste_titre), .liste > tbody > tr:nth-child(even):not(:last-child) td:not(.liste_titre),
 .noborder .oddeven.tagtr:nth-child(even):not(:last-child) .tagtd:not(.liste_titre)
@@ -8332,11 +8337,11 @@ div:not(.fichecenter):not(.fichehalfleft):not(.fichehalfright):not(.ficheaddleft
 div:not(.fichecenter):not(.fichehalfleft):not(.fichehalfright):not(.ficheaddleft) > .border > tbody > tr:nth-of-type(odd):not(.liste_titre), .liste > tbody > tr:nth-of-type(odd):not(.liste_titre),
 div:not(.fichecenter):not(.fichehalfleft):not(.fichehalfright):not(.ficheaddleft) .oddeven.tagtr:nth-of-type(odd):not(.liste_titre)
 {
-    background: linear-gradient(bottom, <?php echo $colorbacklinepair1; ?> 85%, <?php echo $colorbacklinepair2; ?> 100%);
-    background: -o-linear-gradient(bottom, <?php echo $colorbacklinepair1; ?> 85%, <?php echo $colorbacklinepair2; ?> 100%);
-    background: -moz-linear-gradient(bottom, <?php echo $colorbacklinepair1; ?> 85%, <?php echo $colorbacklinepair2; ?> 100%);
-    background: -webkit-linear-gradient(bottom, <?php echo $colorbacklinepair1; ?> 85%, <?php echo $colorbacklinepair2; ?> 100%);
-    background: -ms-linear-gradient(bottom, <?php echo $colorbacklinepair1; ?> 85%, <?php echo $colorbacklinepair2; ?> 100%);
+    background: linear-gradient(to bottom, #<?php echo colorArrayToHex(colorStringToArray($colorbacklinepair1)); ?> 85%, #<?php echo colorArrayToHex(colorStringToArray($colorbacklinepair2)); ?> 100%);
+    background: -o-linear-gradient(to bottom, #<?php echo colorArrayToHex(colorStringToArray($colorbacklinepair1)); ?> 85%, #<?php echo colorArrayToHex(colorStringToArray($colorbacklinepair2)); ?> 100%);
+    background: -moz-linear-gradient(to bottom, #<?php echo colorArrayToHex(colorStringToArray($colorbacklinepair1)); ?> 85%, #<?php echo colorArrayToHex(colorStringToArray($colorbacklinepair2)); ?> 100%);
+    background: -webkit-linear-gradient(to bottom, #<?php echo colorArrayToHex(colorStringToArray($colorbacklinepair1)); ?> 85%, #<?php echo colorArrayToHex(colorStringToArray($colorbacklinepair2)); ?> 100%);
+    background: -ms-linear-gradient(to bottom, #<?php echo colorArrayToHex(colorStringToArray($colorbacklinepair1)); ?> 85%, #<?php echo colorArrayToHex(colorStringToArray($colorbacklinepair2)); ?> 100%);
 }
 .noborder > tbody > tr:nth-child(odd):not(:last-child) td:not(.liste_titre), .liste > tbody > tr:nth-child(odd):not(:last-child) td:not(.liste_titre),
 .noborder .oddeven.tagtr:nth-child(odd):not(:last-child) .tagtd:not(.liste_titre)
@@ -8345,7 +8350,7 @@ div:not(.fichecenter):not(.fichehalfleft):not(.fichehalfright):not(.ficheaddleft
 }
 
 ul.noborder li:nth-child(even):not(.liste_titre) {
-    background-color: <?php echo $colorbacklinepair2; ?> !important;
+    background-color: #<?php echo colorArrayToHex(colorStringToArray($colorbacklinepair2)); ?> !important;
 }
 
 /* ============================================================================== */
@@ -8982,11 +8987,11 @@ div.tabsElem a.tab {
 	background: white;
 	border-radius: 0.25em;
 	padding: 1em;
-	background-image: -o-linear-gradient(bottom, rgba(0,0,0,0.1) 0%, rgba(230,230,230,0.4) 100%);
-	background-image: -moz-linear-gradient(bottom, rgba(0,0,0,0.1) 0%, rgba(230,230,230,0.4) 100%);
-	background-image: -webkit-linear-gradient(bottom, rgba(0,0,0,0.1) 0%, rgba(230,230,230,0.4) 100%);
-	background-image: -ms-linear-gradient(bottom, rgba(0,0,0,0.1) 0%, rgba(230,230,230,0.4) 100%);
-	background-image: linear-gradient(bottom, rgba(0,0,0,0.1) 0%, rgba(230,230,230,0.4) 100%);
+	background-image: -o-linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(230,230,230,0.4) 100%);
+	background-image: -moz-linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(230,230,230,0.4) 100%);
+	background-image: -webkit-linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(230,230,230,0.4) 100%);
+	background-image: -ms-linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(230,230,230,0.4) 100%);
+	background-image: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(230,230,230,0.4) 100%);
 }
 .cd-timeline-content:after {
 	content: "";
