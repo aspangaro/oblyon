@@ -13,12 +13,12 @@ OblyonParamRestore                  = Restore
 #
 # Easya
 #
-MenuProjectsOpportunities=Projects | Opportunities
-BankColorizeMovement=Colouring of bank transactions
-BankColorizeMovementDesc=If this function is activated, you can define a specific background color for debit or credit movements.
-BankColorizeMovementName1=Background color for a debit movement
-BankColorizeMovementName2=Background color for a credit movement
-MenuCatalog=Catalog
+MenuProjectsOpportunities = Projects | Opportunities
+BankColorizeMovement = Colouring of bank transactions
+BankColorizeMovementDesc = If this function is activated, you can define a specific background color for debit or credit movements.
+BankColorizeMovementName1 = Background color for a debit movement
+BankColorizeMovementName2 = Background color for a credit movement
+MenuCatalog = Catalog
 
 #
 # Menus
@@ -40,13 +40,13 @@ StickyTopBarInvertedWarning = Certain modules are not supported with this featur
 StickyLeftBar = Sticky left bar
 StickyLeftBarWarning = Experimental. Use a limited number of menu entries.
 StickyLeftBarInvertedWarning = Certain modules are not supported with this feature.
-OblyonEnableShowLogo=Show logo
-OblyonLogoWidth=Logo width (in px) (Default: 260px)
-ReduceLeftMenu=Reduced left menu (Icons only)
+OblyonEnableShowLogo = Show logo
+OblyonLogoWidth = Logo width (in px) (Default: 260px)
+ReduceLeftMenu = Reduced left menu (Icons only)
 
 HideLeftMenu = Hide Left Menu
 OpenEffect = Opening Effect
-OpenEffectReduce = Reduced left menu opening effect
+OpenEffectReduce = Left Menu opening effect reduced
 EffectLeftMenuSlide = Slide
 EffectLeftMenuPush = Push
 HideTopIcons = Hide Top Icons
@@ -68,33 +68,33 @@ MainStatusUseImages = The different statuses of the elements will be displayed a
 # Colors page
 #
 OblyonColorsTitle = Oblyon Configurator - Colors
-Colors=Colors
-Buttons=Buttons
-OBLYON_COLOR_MAIN=Maincolor
-OBLYON_COLOR_BCKGRD=Background color
-OBLYON_COLOR_LOGO_BCKGRD=Logo background color
-OBLYON_COLOR_LOGIN_BCKGRD=Login background color
-OBLYON_COLOR_BTITLE=Title background color
-OBLYON_COLOR_FTITLE=Text color of the titles
-OBLYON_COLOR_BLINE=Lines background color
-OBLYON_COLOR_BLINE_HOVER=Background color of the hovered lines
-OBLYON_COLOR_FDATE_DEFAULT=Default date color (today's date) in choice calendars
-OBLYON_COLOR_FLINE=Lines text color
-OBLYON_COLOR_FLINE_HOVER=Lines text hover color
-OBLYON_COLOR_TOPMENU_BCKGRD=Topmenu background color
-OBLYON_COLOR_TOPMENU_BCKGRD_HOVER=Topmenu background hover color
-OBLYON_COLOR_TOPMENU_TXT=Topmenu color text
-OBLYON_COLOR_TOPMENU_TXT_ACTIVE=Color of the active text of the top menu
-OBLYON_COLOR_TOPMENU_TXT_HOVER=Hover text color of the top menu
-OBLYON_COLOR_LEFTMENU_BCKGRD=Leftmenu background color
-OBLYON_COLOR_LEFTMENU_BCKGRD_HOVER=Leftmenu background hover color
-OBLYON_COLOR_LEFTMENU_TXT=leftmenu color text
-OBLYON_COLOR_LEFTMENU_TXT_ACTIVE=Color of the active text of the left menu
-OBLYON_COLOR_LEFTMENU_TXT_HOVER=Left menu hover text color
-OBLYON_COLOR_BUTTON_ACTION1=Button background color 1
-OBLYON_COLOR_BUTTON_ACTION2=Button background color 2
-OBLYON_COLOR_BUTTON_DELETE1=Color 1 of the background of the dangerous buttons
-OBLYON_COLOR_BUTTON_DELETE2=Color 2 background of the dangerous buttons
+Colors = Colors
+Buttons = Buttons
+OBLYON_COLOR_MAIN = Maincolor
+OBLYON_COLOR_BCKGRD = Background color
+OBLYON_COLOR_LOGO_BCKGRD = Logo background color
+OBLYON_COLOR_LOGIN_BCKGRD = Login background color
+OBLYON_COLOR_BTITLE = Title background color
+OBLYON_COLOR_FTITLE = Text color of the titles
+OBLYON_COLOR_BLINE = Lines background color
+OBLYON_COLOR_BLINE_HOVER = Background color of the hovered lines
+OBLYON_COLOR_FDATE_DEFAULT = Default date color (today's date) in choice calendars
+OBLYON_COLOR_FLINE = Lines text color
+OBLYON_COLOR_FLINE_HOVER = Lines text hover color
+OBLYON_COLOR_TOPMENU_BCKGRD = Topmenu background color
+OBLYON_COLOR_TOPMENU_BCKGRD_HOVER = Topmenu background hover color
+OBLYON_COLOR_TOPMENU_TXT = Topmenu color text
+OBLYON_COLOR_TOPMENU_TXT_ACTIVE = Color of the active text of the top menu
+OBLYON_COLOR_TOPMENU_TXT_HOVER = Hover text color of the top menu
+OBLYON_COLOR_LEFTMENU_BCKGRD = Leftmenu background color
+OBLYON_COLOR_LEFTMENU_BCKGRD_HOVER = Leftmenu background hover color
+OBLYON_COLOR_LEFTMENU_TXT = leftmenu color text
+OBLYON_COLOR_LEFTMENU_TXT_ACTIVE = Color of the active text of the left menu
+OBLYON_COLOR_LEFTMENU_TXT_HOVER = Left menu hover text color
+OBLYON_COLOR_BUTTON_ACTION1 = Button background color 1
+OBLYON_COLOR_BUTTON_ACTION2 = Button background color 2
+OBLYON_COLOR_BUTTON_DELETE1 = Color 1 of the background of the dangerous buttons
+OBLYON_COLOR_BUTTON_DELETE2 = Color 2 background of the dangerous buttons
 Eldys = Basic colors
 THEME_ELDY_TOPBORDER_TITLE1 = Title border color
 THEME_ELDY_LINEIMPAIR1 = Background color 1 of the odd lines of the tables
@@ -146,38 +146,38 @@ OBLYON_INFOXBOX_TICKET_COLOR = Thumb color 'tickets'
 #
 # Login page
 #
-OBLYON_COLOR_LOGIN_BCKGRD_RIGHT=Couleur du fond - Partie droite
-OBLYON_COLOR_LOGIN_BCKGRD_LEFT=Couleur de fond - Partie gauche
-OBLYON_COLOR_LOGIN_TXT_RIGHT=Couleur du texte - Partie droite
-OBLYON_COLOR_LOGIN_TXT_LEFT=Couleur du texte - Partie gauche
-OBLYON_COLOR_LOGIN_TXT_INPUT=Couleur du texte des champs de saisie
-OblyonActiveloginPersonalized=Activer le remplacement de la page de connexion par celle d'Oblyon
-OblyonLoginLinks=Liens
-OblyonSocialNetwork=Réseaux sociaux
-OBLYON_LOGIN_TXT1=1er lien - Texte
-OBLYON_LOGIN_URL1=1er lien - URL
-OBLYON_LOGIN_FAICON1=1er lien - Icône
-OBLYON_LOGIN_TXT2=2ème lien - Texte
-OBLYON_LOGIN_URL2=2ème lien - URL
-OBLYON_LOGIN_FAICON2=2ème lien - Icône
-OBLYON_LOGIN_TXT3=3ème lien - Texte
-OBLYON_LOGIN_URL3=3ème lien - URL
-OBLYON_LOGIN_FAICON3=3ème lien - Icône
-OBLYON_SOCIAL_TWITTER=URL Twitter
-OBLYON_SOCIAL_FACEBOOK=URL Facebook
-OBLYON_SOCIAL_LINKEDIN=URL LinkedIn
-OBLYON_SOCIAL_INSTAGRAM=Instagram
-OBLYON_SOCIAL_YOUTUBE=YouTube
-OBLYON_SOCIAL_GITHUB=Github
+OBLYON_COLOR_LOGIN_BCKGRD_RIGHT = Couleur du fond - Partie droite
+OBLYON_COLOR_LOGIN_BCKGRD_LEFT = Couleur de fond - Partie gauche
+OBLYON_COLOR_LOGIN_TXT_RIGHT = Couleur du texte - Partie droite
+OBLYON_COLOR_LOGIN_TXT_LEFT = Couleur du texte - Partie gauche
+OBLYON_COLOR_LOGIN_TXT_INPUT = Couleur du texte des champs de saisie
+OblyonActiveloginPersonalized = Activer le remplacement de la page de connexion par celle d'Oblyon
+OblyonLoginLinks = Liens
+OblyonSocialNetwork = Réseaux sociaux
+OBLYON_LOGIN_TXT1 = 1er lien - Texte
+OBLYON_LOGIN_URL1 = 1er lien - URL
+OBLYON_LOGIN_FAICON1 = 1er lien - Icône
+OBLYON_LOGIN_TXT2 = 2ème lien - Texte
+OBLYON_LOGIN_URL2 = 2ème lien - URL
+OBLYON_LOGIN_FAICON2 = 2ème lien - Icône
+OBLYON_LOGIN_TXT3 = 3ème lien - Texte
+OBLYON_LOGIN_URL3 = 3ème lien - URL
+OBLYON_LOGIN_FAICON3 = 3ème lien - Icône
+OBLYON_SOCIAL_TWITTER = URL Twitter
+OBLYON_SOCIAL_FACEBOOK = URL Facebook
+OBLYON_SOCIAL_LINKEDIN = URL LinkedIn
+OBLYON_SOCIAL_INSTAGRAM = Instagram
+OBLYON_SOCIAL_YOUTUBE = YouTube
+OBLYON_SOCIAL_GITHUB = Github
 
 #
 # Options page
 #
-OblyonOptionsTitle=Options
-OblyonMainUseQuickAddDropdown=Add the quick action menu (in top right)
-OblyonMainUseBookmarkDropdown=Add the bookmark menu (in top right)
-OblyonDisableVersion=Don't show the version number of Dolibarr (in top right)
-OblyonPaddingRightBottom=Display a margin at the bottom of the page on the right side
+OblyonOptionsTitle = Options
+OblyonMainUseQuickAddDropdown = Add the quick action menu (in top right)
+OblyonMainUseBookmarkDropdown = Add the bookmark menu (in top right)
+OblyonDisableVersion = Don't show the version number of Dolibarr (in top right)
+OblyonPaddingRightBottom = Display a margin at the bottom of the page on the right side
 
 #
 # Icons page
