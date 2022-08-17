@@ -753,7 +753,7 @@ input.buttonpayment, button.buttonpayment, div.buttonpayment {
     min-width: 290px;
     margin-bottom: 15px;
     margin-top: 15px;
-    height: 60px;
+    height: 64px;
     background-image: none;
     line-height: 24px;
     padding: 8px;
@@ -5325,7 +5325,7 @@ table.table-fiche-title {
 }
 
 
-div.backgreypublicpayment { background-color: #f0f0f0; padding: 20px; border-bottom: 1px solid #ddd; }
+/*div.backgreypublicpayment { background-color: #f0f0f0; padding: 20px; border-bottom: 1px solid #ddd; }	*/
 .backgreypublicpayment a { color: #222 !important; }
 .poweredbypublicpayment {
     float: right;
@@ -5339,9 +5339,21 @@ div.backgreypublicpayment { background-color: #f0f0f0; padding: 20px; border-bot
 
 #dolpaymenttable { min-width: 320px; font-size: 16px; }	/* Width must have min to make stripe input area visible */
 #tablepublicpayment { border: 1px solid #CCCCCC !important; width: 100%; padding: 20px; }
-#tablepublicpayment .CTableRow1  { background-color: #F0F0F0 !important; }
+/* #tablepublicpayment .CTableRow1  { background-color: #F0F0F0 !important; }	*/
 #tablepublicpayment tr.liste_total { border-bottom: 1px solid #CCCCCC !important; }
 #tablepublicpayment tr.liste_total td { border-top: none; }
+
+.titlepublicpayment {
+	font-size: 24px;
+}
+
+td.CTableRow1 {
+	padding: 4px 1px 4px 4px; /* t r b l */
+}
+
+td.CTableRow2 {
+	padding: 4px 4px 4px 12px; /* t r b l */
+}
 
 div#login_left, div#login_right {
     min-width: 150px !important;
