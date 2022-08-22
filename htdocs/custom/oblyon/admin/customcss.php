@@ -91,7 +91,8 @@ print '<table summary="blockdashboard" class="noborder centpercent editmode tabl
 
 
 print '<tr class="oddeven width25p"><td>';
-	print $form->textwithpicto($langs->trans("AddCustomCssSentence"), $texthelp, 1, 'help', '', 0, 2, 'tooltipmessageofday');
+$texthelp = '';
+print $form->textwithpicto($langs->trans("AddCustomCssSentence"), $texthelp, 1, 'help', '', 0, 2, 'tooltipmessageofday');
 print '</td></tr>';
 
 print '<tr class="oddeven width25p"><td>';
@@ -106,13 +107,14 @@ print '<div class="center">';
 print '<input class="button button-save reposition" type="submit" name="submit" value="' . $langs->trans("Save") . '">';
 print '</div>';
 
+$constantOblyonCustomCSS = !empty($conf->global->OBLYON_CUSTOM_CSS) ? $conf->global->OBLYON_CUSTOM_CSS : '';
 print '	<script type = "text/javascript">
 				$(document).ready(function() {
 					$(".action").keyup(function(event) {
 						if (event.which === 13)	$("#action").click();
 					});
                     var elem = document.getElementById("codeMirror")
-		            var initialValue = `'.$conf->global->OBLYON_CUSTOM_CSS.'`;
+		            var initialValue = `'.$constantOblyonCustomCSS.'`;
 		            if(initialValue) {
                         var textDefault = initialValue;
                     } else {

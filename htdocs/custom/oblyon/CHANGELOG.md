@@ -1,5 +1,11 @@
 ## Changelog ##
 
+### Version 2.0.0 - Compatibility 14.0.x - 16.0.0 (2022/08/22)
+- New versioning of the module / We start again with Oblyon v2
+- Compatibility Dolibarr v16 / PHP 8 - Work in progress
+- Fix some CSS
+- Abandonment Markdown for Parsedown to read changelog (Compatibility PHP8)
+
 ### Version 14.0.2 - 16b1 (2022/06/01)
 - Compatibility Dolibarr v15
 - Compatibility Dolibarr v16b

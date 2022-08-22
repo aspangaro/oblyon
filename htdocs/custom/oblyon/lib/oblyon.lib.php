@@ -44,12 +44,14 @@
 		$head[$h][2] = 'menus';
 		$h++;
 
-		if((float) $conf->global->EASYA_VERSION >= 2022.5) {
-			$head[$h][0] = dol_buildpath("/oblyon/admin/icons.php", 1);
-			$head[$h][1] = $langs->trans("Icons");
-			$head[$h][2] = 'icons';
-			$h++;
-		}
+		if(!empty($conf->global->EASYA_VERSION)) {
+            if ((float)$conf->global->EASYA_VERSION >= 2022.5) {
+                $head[$h][0] = dol_buildpath("/oblyon/admin/icons.php", 1);
+                $head[$h][1] = $langs->trans("Icons");
+                $head[$h][2] = 'icons';
+                $h++;
+            }
+        }
 
 		$head[$h][0] = dol_buildpath("/oblyon/admin/colors.php", 1);
 		$head[$h][1] = $langs->trans("Colors");
@@ -84,7 +86,9 @@
 		//$this->tabs = array(
 		//	'entity:-tabname:Title:@oblyon:/oblyon/mypage.php?id=__ID__'
 		//); // to remove a tab
-		complete_head_from_modules($conf, $langs, $object, $head, $h, 'admin_oblyon');
+		complete_head_from_modules($conf, $langs, null, $head, $h, 'admin_oblyon');
+
+        complete_head_from_modules($conf, $langs, null, $head, $h, 'admin_oblyon', 'remove');
 
 		if(empty($conf->global->EASYA_VERSION)) {
 			$head[$h][0] = dol_buildpath("/oblyon/admin/about.php", 1);
@@ -198,7 +202,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 				$columns						= count($row);
 				$duplicateValue					= '';
 				for($j = 0; $j < $columns; $j++) {
-					// Processing each columns of the row to ensure that we correctly save the value (eg: add quotes for string - in fact we add quotes for everything, it's easier)
+					// Processing each column of the row to ensure that we correctly save the value (eg: add quotes for string - in fact we add quotes for everything, it's easier)
 					if ($row[$j] == null && !is_string($row[$j]))	$row[$j]	= 'NULL';	// IMPORTANT: if the field is NULL we set it NULL
 					elseif(is_string($row[$j]) && $row[$j] == '')	$row[$j]	= '\'\'';	// if it's an empty string, we set it as an empty string
 					else {
@@ -250,18 +254,18 @@ SET FOREIGN_KEY_CHECKS = 1;
 	{
 		global $conf, $langs;
 
-		print '	<table width = "100%" style = "border-spacing: 0px;">';
+		print '	<table class="centpercent noborder">';
 		$metas	= array('*', '90px', '156px', '120px');
 		oblyon_print_colgroup($metas);
 		print '		<tr>
-						<td colspan = "2" align = "center" style = "font-size: 14px;">
-							<a href = "'.DOL_URL_ROOT.'/document.php?modulepart=oblyon&file=sql/update.'.$conf->entity.'">'.$langs->trans('OblyonParamAction1').' <b><FONT color = "#D51123">'.$langs->trans('Module113900Name').'</FONT></b> <FONT size = "2">'.$langs->trans('OblyonParamAction2').'</FONT></a>
+						<td colspan="2" class="center" style = "font-size: 14px;">
+							<a href = "'.DOL_URL_ROOT.'/document.php?modulepart=oblyon&file=sql/update.'.$conf->entity.'">'.$langs->trans('OblyonParamAction1').' <b><span color = "#D51123">'.$langs->trans('Module113900Name').'</span></b> <span size = "2">'.$langs->trans('OblyonParamAction2').'</span></a>
 						</td>
-						<td align = "center"><button class = "butActionBackup" type = "submit" value = "bkupParams" name = "action">'.$langs->trans('OblyonParamBkup').'</button></td>
-						<td align = "center"><button class = "butActionBackup" type = "submit" value = "restoreParams" name = "action">'.$langs->trans('OblyonParamRestore').'</button></td>
+						<td class="center"><button class = "butActionBackup" type = "submit" value = "bkupParams" name = "action">'.$langs->trans('OblyonParamBkup').'</button></td>
+						<td class="center"><button class = "butActionBackup" type = "submit" value = "restoreParams" name = "action">'.$langs->trans('OblyonParamRestore').'</button></td>
 					</tr>
-					<tr><td colspan = "4" align = "center" style = "padding: 0;"><hr></td></tr>
-					<tr><td colspan = "4" style = "line-height: 1px;">&nbsp;</td></tr>
+					<tr><td colspan = "4" class="center" style = "padding: 0;"><hr></td></tr>
+					<tr><td colspan = "4" style="line-height: 1px;">&nbsp;</td></tr>
 				</table>';
 	}
 
@@ -374,7 +378,8 @@ SET FOREIGN_KEY_CHECKS = 1;
 							'.(strpos($conf->global->$confkey, $metas) !== false ? img_picto($langs->trans('Activated'), 'switch_on') : img_picto($langs->trans('Disabled'), 'switch_off')).'
 						</a>';
 		elseif ($tag == 'input') {
-			$defaultMetas						= array('type' => 'text', 'class' => 'flat quatrevingtpercent', 'style' => 'padding: 0; font-size: inherit;', 'name' => $confkey, 'id' => $confkey, 'value' => $conf->global->$confkey);
+            $constantKey                        = !empty($conf->global->$confkey) ? $conf->global->$confkey : 0;
+			$defaultMetas						= array('type' => 'text', 'class' => 'flat quatrevingtpercent', 'style' => 'padding: 0; font-size: inherit;', 'name' => $confkey, 'id' => $confkey, 'value' => $constantKey);
 			$metas								= array_merge ($defaultMetas, $metas);
 			$metascompil						= '';
 			foreach ($metas as $key => $value)	$metascompil	.= ' '.$key.($key == 'enabled' || $key == 'disabled' ? '' : ' = "'.$value.'"');

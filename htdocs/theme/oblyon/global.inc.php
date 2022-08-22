@@ -2521,6 +2521,7 @@ li.item-heading:hover > .sec-nav__link {
 
 li.sec-nav__sub-item {
     color: <?php print $bgnavleft_txt; ?>;
+    list-style: none;
 }
 li.sec-nav__sub-item:hover, li.sec-nav__sub-item sec-nav__link:hover {
 	background-color: <?php print $bgnavleft_hover; ?>;
@@ -3107,20 +3108,20 @@ div.login a:hover {
 }
 
 .sec-nav__sub-list .item-level1 {
-    padding: 0.3em 0.8em;
+    padding: 0.3em 0.8em 0.3em 0;
 }
 
 .sec-nav__sub-list .item-level2 {
-    padding: 0.2em 1em;
+    padding: 0.2em 1em 0.3em 0;
 }
 
 .sec-nav__sub-list .item-level3 {
-    padding: 0.2em 1em;
+    padding: 0.2em 1em 0.3em 0;
 }
 
 .sec-nav__sub-item.is-disabled {
     opacity: .6;
-    padding: 0.3em 0.8em;
+    padding: 0.3em 0.8em 0.3em 0;
 }
 
 .sec-nav .sec-nav__link.is-disabled {
@@ -9428,6 +9429,7 @@ span.clipboardCPValue.hidewithsize {
     div.login_block {
         max-width: 120px;
         padding-right: 3px;
+        display: inline-flex;
     }
     div.login_block_other {
         display: block;
@@ -9480,6 +9482,10 @@ span.clipboardCPValue.hidewithsize {
     }
     .tableforfield>tr>td:first-child {
         max-width: 100px;			/* but no more than 100px */
+    }
+
+    .main-nav .icon {
+        font-size:12px;
     }
 
     #tmenu_tooltipinvert .sec-nav__item {

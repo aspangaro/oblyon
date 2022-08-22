@@ -116,7 +116,8 @@
 	oblyon_print_input('MAIN_DISABLE_GLOBAL_BOXSTATS',		'on_off', $langs->trans('DisableGlobalBoxStats'),		'', $metas, 2, 1);	// Disable boxes stats widget
 	$metas						= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'dashboard');
 	oblyon_print_input('THEME_INFOBOX_COLOR_ON_BACKGROUND',	'on_off', $langs->trans('InfoboxColorOnBackground'),	'', $metas, 2, 1);	// On workboard invert background color with text color
-	if ((float) $conf->global->EASYA_VERSION >= 2022.5 || (float) DOL_VERSION >= 15.0) {
+	$easyaVersion = (float) !empty($conf->global->EASYA_VERSION) ? $conf->global->EASYA_VERSION : '';
+    if ($easyaVersion >= 2022.5 || (float) DOL_VERSION >= 15.0) {
 		if (empty($conf->global->MAIN_DISABLE_GLOBAL_WORKBOARD)) {
 			$metas		= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'dashboard');
 			oblyon_print_input('MAIN_DISABLE_METEO',				'on_off', $langs->trans('MAIN_DISABLE_METEO'),					'', $metas, 2, 1);	// weather block

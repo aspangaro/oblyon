@@ -26,14 +26,11 @@
 
 // Libraries
 require_once DOL_DOCUMENT_ROOT . '/core/lib/admin.lib.php';
-require_once '../lib/oblyon.lib.php';
-
-dol_include_once('/oblyon/lib/php-markdown/markdown.php');
+dol_include_once('/oblyon/lib/oblyon.lib.php');
+dol_include_once('/oblyon/lib/opendsi_common.lib.php');
 
 // Langs
-$langs->load("oblyon@oblyon");
-$langs->load("opendsi@oblyon");
-$langs->load("monogramm@oblyon");
+$langs->loadLangs(array('oblyon@oblyon', 'opendsi@oblyon', 'monogramm@oblyon'));
 
 // Access control
 if (! $user->admin)
@@ -69,7 +66,7 @@ print '</tr>'."\n";
 
 // Alexandre Spangaro
 print '<tr>';
-print '<td width="310px"><img src="../img/opendsi_dolibarr_preferred_partner.png" /></td>'."\n";
+print '<td width="310px"><img alt="OpenDsi" src="../img/opendsi_dolibarr_preferred_partner.png" /></td>'."\n";
 print '<td align="left" valign="top"><p>'.$langs->trans("OpenDsiAboutDesc").'</p></td>'."\n";
 print '</tr>'."\n";
 
@@ -85,7 +82,7 @@ print '<tr class="liste_titre"><td colspan="2">' . $langs->trans("OldAuthors") .
 print '</tr>';
 
 // Nicolas Rivera
-print '<tr><td class="titlefield center"><img src="../img/object_oblyon.png"></td>';
+print '<tr><td class="titlefield center"><img alt="Nicolas Rivera" src="../img/object_oblyon.png"></td>';
 print '<td><b>Nicolas Rivera</b>&nbsp;-&nbsp;Développeur';
 //print '<br>' . $langs->trans("Email") . ' : nrivera.pro@gmail.com<br>';
 print '<br>&nbsp;';
@@ -93,7 +90,7 @@ print '</td></tr>';
 
 // Mathieu BRUNOT / Monogramm
 print '<tr>';
-print '<td width="310px"><img src="../img/monogramm.png" /></td>'."\n";
+print '<td width="310px"><img alt="Monogramm" src="../img/monogramm.png" /></td>'."\n";
 print '<td align="left" valign="top"><p>'.$langs->trans("MonogrammAboutDesc").'</p></td>'."\n";
 print '</tr>'."\n";
 
@@ -107,8 +104,11 @@ print $langs->trans("LicenseMessage");
 print '<h2>Bugs / comments</h2>';
 print $langs->trans("AboutMessage");
 
-$buffer = file_get_contents(dol_buildpath('/custom/oblyon/CHANGELOG.md', 0));
-echo Markdown($buffer);
+$changelog = opendsi_common_getChangeLog('oblyon');
+
+print '<div class="moduledesclong">'."\n";
+print (!empty($changelog) ? $changelog : $langs->trans("NotAvailable"));
+print '<div>'."\n";
 
 llxFooter();
 
