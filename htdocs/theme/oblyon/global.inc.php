@@ -72,8 +72,8 @@ time, mark, audio, video {
     padding: 0;
     border: 0;
     font-size: 100%;
-    font: inherit;
-    vertical-align: middle;
+/*	font: inherit;	*/
+/*	vertical-align: middle;	*/
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
@@ -128,7 +128,122 @@ body {
     margin: 0;
 }
 
+/* Style used to protect html content in output to avoid attack by replacing full page with js content */
+.sensiblehtmlcontent * {
+	position: static !important;
+}
+
 .thumbstat { font-weight: bold !important; }
+
+th a { font-weight: <?php echo ($useboldtitle ? 'bold' : 'normal'); ?> !important; }
+a.tab { font-weight: 500 !important; }
+
+a:link, a:visited, a:hover, a:active, .classlink { color: var(--colortextlink); text-decoration: none;  }
+a:hover { text-decoration: underline; color: var(--colortextlink); }
+a.commonlink { color: var(--colortextlink) !important; text-decoration: none; }
+th.liste_titre a div div:hover, th.liste_titre_sel a div div:hover { text-decoration: underline; }
+tr.liste_titre th.liste_titre_sel:not(.maxwidthsearch), tr.liste_titre td.liste_titre_sel:not(.maxwidthsearch),
+tr.liste_titre th.liste_titre:not(.maxwidthsearch), tr.liste_titre td.liste_titre:not(.maxwidthsearch) { opacity: 0.8; }
+/* th.liste_titre_sel a, th.liste_titre a, td.liste_titre_sel a, td.liste_titre a { color: #766; } */
+
+input {
+	font-size: unset;
+}
+input, input.flat, textarea, textarea.flat, form.flat select, select, select.flat, .dataTables_length label select {
+	background-color: var(--inputbackgroundcolor);
+	color: var(--colortext);
+	border-radius: 2px;
+}
+select.vmenusearchselectcombo {
+	background-color: unset;
+}
+
+table.liste th.wrapcolumntitle.liste_titre:not(.maxwidthsearch), table.liste td.wrapcolumntitle.liste_titre:not(.maxwidthsearch) {
+	overflow: hidden;
+	white-space: nowrap;
+	max-width: 100px;
+	text-overflow: ellipsis;
+}
+.liste_titre input[name=month_date_when], .liste_titre input[name=monthvalid], .liste_titre input[name=search_ordermonth], .liste_titre input[name=search_deliverymonth],
+.liste_titre input[name=search_smonth], .liste_titre input[name=search_month], .liste_titre input[name=search_emonth], .liste_titre input[name=smonth], .liste_titre input[name=month], .liste_titre select[name=month],
+.liste_titre input[name=month_lim], .liste_titre input[name=month_start], .liste_titre input[name=month_end], .liste_titre input[name=month_create],
+.liste_titre input[name=search_month_lim], .liste_titre input[name=search_month_start], .liste_titre input[name=search_month_end], .liste_titre input[name=search_month_create],
+.liste_titre input[name=search_month_update], .liste_titre input[name=search_month_start], .liste_titre input[name=search_month_end],
+.liste_titre input[name=day_date_when], .liste_titre input[name=dayvalid], .liste_titre input[name=search_orderday], .liste_titre input[name=search_deliveryday],
+.liste_titre input[name=search_sday], .liste_titre input[name=search_day], .liste_titre input[name=search_eday], .liste_titre input[name=sday], .liste_titre input[name=day], .liste_titre select[name=day],
+.liste_titre input[name=day_lim], .liste_titre input[name=day_start], .liste_titre input[name=day_end], .liste_titre input[name=day_create],
+.liste_titre input[name=search_day_lim], .liste_titre input[name=search_day_start], .liste_titre input[name=search_day_end], .liste_titre input[name=search_day_create],
+.liste_titre input[name=search_day_create], .liste_titre input[name=search_day_start], .liste_titre input[name=search_day_end],
+.liste_titre input[name=search_day_date_when], .liste_titre input[name=search_month_date_when], .liste_titre input[name=search_year_date_when],
+.liste_titre input[name=search_dtstartday], .liste_titre input[name=search_dtendday], .liste_titre input[name=search_dtstartmonth], .liste_titre input[name=search_dtendmonth],
+select#date_startday, select#date_startmonth, select#date_endday, select#date_endmonth, select#reday, select#remonth,
+input[name=duration_value], input[name=durationhour]
+{
+	margin-right: 4px !important;
+}
+input[type=submit], input[type=submit]:hover {
+	margin-left: 5px;
+}
+input[type=checkbox], input[type=radio] {
+	margin: 0 3px 0 3px;
+}
+input, input.flat, form.flat select, select, select.flat, .dataTables_length label select {
+	border: none;
+}
+input, input.flat, textarea, textarea.flat, form.flat select, select, select.flat, .dataTables_length label select {
+	font-family: <?php print $fontlist ?>;
+	outline: none;
+	margin: 0px 0px 0px 0px;
+	border<?php echo empty($conf->global->THEME_SHOW_BORDER_ON_INPUT) ? '-bottom' : ''; ?>: solid 1px var(--inputbordercolor);
+}
+
+input {
+	line-height: 1.3em;
+	padding: 4px;
+	padding-left: 5px;
+}
+.liste_titre input {
+	padding: 5px;
+}
+select {
+	padding-top: 5px;
+	padding-right: 4px;
+	padding-bottom: 5px;
+	padding-left: 2px;
+}
+input, select {
+	margin-left: 0px;
+	margin-bottom: 1px;
+	margin-top: 1px;
+}
+input.button:hover {
+	-webkit-box-shadow: 0px 0px 6px 1px rgb(50 50 50 / 40%), 0px 0px 0px rgb(60 60 60 / 10%);
+	box-shadow: 0px 0px 6px 1px rgb(50 50 50 / 40%), 0px 0px 0px rgb(60 60 60 / 10%);
+}
+input.button:focus {
+	border-bottom: 0;
+}
+
+input.button.massactionconfirmed {
+	margin: 4px;
+}
+
+input:invalid, select:invalid {
+	border-color: #ea1212;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /**
 * Headings
@@ -615,7 +730,10 @@ img[src*=stcomm]	{ vertical-align: text-top; }
     opacity: 1;
 }
 
-.jPicker .Icon { margin-<?php print $left; ?>: .5em; }
+.jPicker .Icon {
+	vertical-align: middle;
+	margin-<?php print $left; ?>: .5em;
+}
 
 /**
 * Form Elements
@@ -642,11 +760,6 @@ img[src*=stcomm]	{ vertical-align: text-top; }
         padding: 1px;
     }
 
-    input, input.flat, textarea, textarea.flat, form.flat select, select, select.flat, .dataTables_length label select {
-        background-color: #FDFDFD;
-        color: #444;
-    }
-
     textarea:focus, button:focus {
         /* v6 box-shadow: 0 0 4px #8091BF; */
         border: 1px solid #aaa !important;
@@ -665,31 +778,6 @@ img[src*=stcomm]	{ vertical-align: text-top; }
     textarea.cke_source:focus
     {
         box-shadow: none;
-    }
-
-    .liste_titre input[name=month_date_when], .liste_titre input[name=monthvalid], .liste_titre input[name=search_ordermonth], .liste_titre input[name=search_deliverymonth],
-    .liste_titre input[name=search_smonth], .liste_titre input[name=search_month], .liste_titre input[name=search_emonth], .liste_titre input[name=smonth], .liste_titre input[name=month],
-    .liste_titre input[name=month_lim], .liste_titre input[name=month_start], .liste_titre input[name=month_end], .liste_titre input[name=month_create],
-    .liste_titre input[name=search_month_lim], .liste_titre input[name=search_month_start], .liste_titre input[name=search_month_end], .liste_titre input[name=search_month_create],
-    .liste_titre input[name=search_month_create], .liste_titre input[name=search_month_start], .liste_titre input[name=search_month_end],
-    .liste_titre input[name=day_date_when], .liste_titre input[name=dayvalid], .liste_titre input[name=search_orderday], .liste_titre input[name=search_deliveryday],
-    .liste_titre input[name=search_sday], .liste_titre input[name=search_day], .liste_titre input[name=search_eday], .liste_titre input[name=sday], .liste_titre input[name=day], .liste_titre select[name=day],
-    .liste_titre input[name=day_lim], .liste_titre input[name=day_start], .liste_titre input[name=day_end], .liste_titre input[name=day_create],
-    .liste_titre input[name=search_day_lim], .liste_titre input[name=search_day_start], .liste_titre input[name=search_day_end], .liste_titre input[name=search_day_create],
-    .liste_titre input[name=search_day_create], .liste_titre input[name=search_day_start], .liste_titre input[name=search_day_end],
-    .liste_titre input[name=search_day_date_when], .liste_titre input[name=search_month_date_when], .liste_titre input[name=search_year_date_when],
-    .liste_titre input[name=search_dtstartday], .liste_titre input[name=search_dtendday], .liste_titre input[name=search_dtstartmonth], .liste_titre input[name=search_dtendmonth],
-    select#date_startday, select#date_startmonth, select#date_endday, select#date_endmonth, select#reday, select#remonth
-    {
-        margin-right: 4px;
-    }
-    input, input.flat, textarea, textarea.flat, form.flat select, select, select.flat, .dataTables_length label select {
-        font-size: <?php print $fontsize ?>px;
-        font-family: <?php print $fontlist ?>;
-        border: none;
-        border-bottom: solid 1px rgba(0,0,0,.1);
-        outline: none;
-        margin: 0px 0px 0px 0px;
     }
 
     .liste_titre .flat, .liste_titre select.flat {
@@ -1516,9 +1604,6 @@ div.fiche {
     justify-content: flex-start;
 }
 
-.sensiblehtmlcontent * {
-    position: static !important;
-}
 
 .thumbstat {
     flex: 1 1 116px;
@@ -1802,6 +1887,15 @@ td.showDragHandle {
 
 #id-container {
     table-layout: fixed;
+}
+div.login_block_other {
+	display: inline-block;
+	vertical-align: middle;
+	clear: <?php echo $disableimages ? 'none' : 'both'; ?>;
+	padding-top: 0;
+	text-align: right;
+	margin-right: 8px;
+	max-width: 200px;
 }
 
 .login_block_getinfo {
@@ -2713,8 +2807,9 @@ div.login_block:after {
 div.login_block:hover:after {
     color: <?php print $maincolor; ?>;
 }
-
-div.login_block_user{
+div.login_block_user {
+	display: inline-block;
+	vertical-align: middle;
     /*clear: left;*/
     float: <?php print $left; ?>;
     margin-right: 0px;
@@ -2787,6 +2882,10 @@ div.login_block_other {
 
 .login_block_user a img.loginphoto {
     display: none;
+}
+
+.login_block_elem a span.atoplogin, .login_block_elem span.atoplogin {
+	vertical-align: middle;
 }
 
 .login_block_elem {
@@ -4979,6 +5078,9 @@ div.tabBar .noborder {
     -moz-box-shadow: 0 0 0 rgba(0,0,0, .24) !important;
     -webkit-box-shadow: 0 0 0 rgba(0,0,0, .24) !important;
 }
+div.tabBar div.border .table-border-row, div.tabBar div.border .table-key-border-col, div.tabBar .table-val-border-col {
+	vertical-align: middle;
+}
 div .tdtop {
     vertical-align: top !important;
     padding-top: 5px !important;
@@ -5349,6 +5451,7 @@ div#login_left, div#login_right {
     max-width: 200px !important;
     padding-left: 5px !important;
     padding-right: 5px !important;
+	vertical-align: middle;
 }
 div.login_block {
     height: 40px !important;
@@ -5643,6 +5746,9 @@ tr.visible {
 }
 .websiteiframenoborder {
     border: 0px;
+}
+span.websitebuttonsitepreview, a.websitebuttonsitepreview {
+	vertical-align: middle;
 }
 span.websitebuttonsitepreview img, a.websitebuttonsitepreview img {
     width: 26px;
@@ -9427,6 +9533,7 @@ span.clipboardCPValue.hidewithsize {
         <?php } ?>
     }
     div.login_block {
+		vertical-align: middle;
         max-width: 120px;
         padding-right: 3px;
         display: inline-flex;
