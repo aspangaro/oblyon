@@ -2811,7 +2811,7 @@ div.login_block_user {
 	display: inline-block;
 	vertical-align: middle;
     /*clear: left;*/
-    float: <?php print $left; ?>;
+    /*float: <?php print $left; ?>;*/
     margin-right: 0px;
 }
 
