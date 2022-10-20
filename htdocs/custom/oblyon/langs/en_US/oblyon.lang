@@ -176,6 +176,7 @@ OBLYON_SOCIAL_GITHUB = Github
 OblyonOptionsTitle = Options
 OblyonMainUseQuickAddDropdown = Add the quick action menu (in top right)
 OblyonMainUseBookmarkDropdown = Add the bookmark menu (in top right)
+OblyonImageHeightTable = Maximum height of images in lists (tables)
 OblyonDisableVersion = Don't show the version number of Dolibarr (in top right)
 OblyonPaddingRightBottom = Display a margin at the bottom of the page on the right side
 

@@ -50,7 +50,7 @@
 	}
 	// Update buttons management
 	if (preg_match('/update_(.*)/', $action, $reg)) {
-		$list									= array ('Gen'	=> array('OBLYON_FONT_SIZE'));
+		$list									= array ('Gen'	=> array('OBLYON_FONT_SIZE', 'OBLYON_IMAGE_HEIGHT_TABLE'));
 		$confkey								= $reg[1];
 		$error									= 0;
 		foreach ($list[$confkey] as $constname)	$result	= dolibarr_set_const($db, $constname, GETPOST($constname, 'alpha'), 'chaine', 0, 'Oblyon module', $conf->entity);
@@ -94,7 +94,9 @@
 	oblyon_print_liste_titre($metas);
 	$metas						= array('type' => 'number', 'class' => 'flat quatrevingtpercent right action', 'dir' => 'rtl', 'min' => '10', 'max' => '16');
 	oblyon_print_input('OBLYON_FONT_SIZE',						'input', $langs->trans('OblyonFontSize'),					'', $metas, 2, 1);	// Font size
-	$metas						= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'options');
+	$metas						= array('type' => 'number', 'class' => 'flat quatrevingtpercent right action', 'dir' => 'rtl', 'min' => '24', 'max' => '128');
+	oblyon_print_input('OBLYON_IMAGE_HEIGHT_TABLE',				'input', $langs->trans('OblyonImageHeightTable'),			'', $metas, 2, 1);	// Max height for Image on table list
+	$metas						= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '_red', 'options');
 	oblyon_print_input('OBLYON_DISABLE_VERSION',				'on_off', $langs->trans('OblyonDisableVersion'),			'', $metas, 2, 1);	// Disable version of Dolibarr
 	$metas						= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'options');
 	oblyon_print_input('MAIN_STATUS_USES_IMAGES',				'on_off', $langs->trans('MainStatusUseImages'),				'', $metas, 2, 1);	// Status use images

@@ -4934,7 +4934,8 @@ table.liste .oddeven td { padding: 2px 5px; }
 table .liste_titre td { padding: 2px; }
 
 table.liste td a img {
-vertical-align: middle;
+	vertical-align: middle;
+	max-height: <?php print $tblImageMaxHeight; ?>px;
 }
 
 

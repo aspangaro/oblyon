@@ -138,7 +138,7 @@ print '	<script type = "text/javascript">
                         })
 		            })
 				})';
-print '</script>';        
+print '</script>';
 
 print '</form>';
 print '<br/>';

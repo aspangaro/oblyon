@@ -53,6 +53,7 @@
 	$topMenuFontSize	= '1em';
 	$lineHeight			= '1.4em';
 	$dropdownLineHeight	= '1.4em';
+	$tblImageMaxHeight	= !empty($conf->global->OBLYON_IMAGE_HEIGHT_TABLE) ? $conf->global->OBLYON_IMAGE_HEIGHT_TABLE : '32';
 	// Theme Colors
 	$theme_bordercolor	= array(235, 235, 224);
 	$theme_datacolor	= array(array(137, 86, 161),
