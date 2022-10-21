@@ -9304,6 +9304,28 @@ span.clipboardCPValue.hidewithsize {
 }
 
 /* ============================================================================== */
+/* Sticky table headers columns												  */
+/* ============================================================================== */
+<?php if ($conf->global->FIX_STICKY_HEADER_CARD) { ?>
+    .div-table-responsive-no-min {
+	overflow-x: unset;
+}
+tr.liste_titre th {
+	position: sticky;
+    top: 0;
+<?php if($conf->global->OBLYON_STICKY_TOPBAR) { ?>
+    <?php if($conf->global->MAIN_MENU_INVERT) { ?>
+        top: 40px;
+    <?php } else { ?>
+        top: 54px;
+    <?php } ?>
+<?php } ?>
+    background-color: <?php print $maincolor; ?>;
+    z-index: 1;
+}
+<?php } ?>
+
+/* ============================================================================== */
 /* CSS style used for small screen												  */
 /* ============================================================================== */
 

@@ -95,12 +95,12 @@
 	$metas						= array('type' => 'number', 'class' => 'flat quatrevingtpercent right action', 'dir' => 'rtl', 'min' => '10', 'max' => '16');
 	oblyon_print_input('OBLYON_FONT_SIZE',						'input', $langs->trans('OblyonFontSize'),					'', $metas, 2, 1);	// Font size
 	$metas						= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'options');
-	oblyon_print_input('OBLYON_DISABLE_VERSION',				'on_off', $langs->trans('OblyonDisableVersion'),			'', $metas, 2, 1);	// Disable version of Dolibarr
+	oblyon_print_input('OBLYON_DISABLE_VERSION',					'on_off', $langs->trans('OblyonDisableVersion'),			'', $metas, 2, 1);	// Disable version of Dolibarr
 	$metas						= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'options');
-	oblyon_print_input('MAIN_STATUS_USES_IMAGES',				'on_off', $langs->trans('MainStatusUseImages'),				'', $metas, 2, 1);	// Status use images
+	oblyon_print_input('MAIN_STATUS_USES_IMAGES',				'on_off', $langs->trans('MainStatusUseImages'),			'', $metas, 2, 1);	// Status use images
 	oblyon_print_input('MAIN_USE_TOP_MENU_QUICKADD_DROPDOWN',	'on_off', $langs->trans('OblyonMainUseQuickAddDropdown'),	'', $metas, 2, 1);	// Quickadd dropdown menu
 	oblyon_print_input('MAIN_USE_TOP_MENU_BOOKMARK_DROPDOWN',	'on_off', $langs->trans('OblyonMainUseBookmarkDropdown'),	'', $metas, 2, 1);	// Bookmark dropdown menu
-	oblyon_print_input('OBLYON_PADDING_RIGHT_BOTTOM',			'on_off', $langs->trans('OblyonPaddingRightBottom'),	'', $metas, 2, 1);	// Bookmark dropdown menu
+	oblyon_print_input('OBLYON_PADDING_RIGHT_BOTTOM',			'on_off', $langs->trans('OblyonPaddingRightBottom'),		'', $metas, 2, 1);	// Add padding on bottom
 	// Login
 	$metas						= array(array(3), 'OblyonLogin');
 	oblyon_print_liste_titre($metas);
@@ -110,7 +110,12 @@
 	$metas						= array(array(3), 'CardBehavior');
 	oblyon_print_liste_titre($metas);
 	$metas						= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'options');
-	oblyon_print_input('FIX_AREAREF_TABACTION',					'on_off', $langs->trans('FixAreaRefAndTabAction'),			'', $metas, 2, 1);	// Login box on the right
+	oblyon_print_input('FIX_AREAREF_TABACTION',					'on_off', $langs->trans('FixAreaRefAndTabAction'),			'', $metas, 2, 1);	// Sticky area ref & tab action
+
+	$easyaVersion = (float) !empty($conf->global->EASYA_VERSION) ? $conf->global->EASYA_VERSION : '';
+	if ($easyaVersion >= "2022.5.2" || (float) DOL_VERSION >= 17.0) {
+		oblyon_print_input('FIX_STICKY_HEADER_CARD', 			'on_off', $langs->trans('FixStickyTableHeadersColumns'), 	'', $metas, 2, 1);    // Sticky table headers columns
+	}
 	print '			</table>
 				</div>';
 	print dol_get_fiche_end();
