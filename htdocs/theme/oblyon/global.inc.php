@@ -9322,8 +9322,11 @@ span.clipboardCPValue.hidewithsize {
 /* ============================================================================== */
 <?php if ($conf->global->FIX_STICKY_HEADER_CARD) { ?>
 	div.fiche>form>div.div-table-responsive, div.fiche>form>div.div-table-responsive-no-min {
-	overflow-x: unset;
-}
+		overflow-x: unset;
+	}
+	.div-table-responsive-no-min {
+		 overflow-x: unset;
+	 }
 tr.liste_titre th {
 	position: sticky;
 <?php if($conf->global->OBLYON_STICKY_TOPBAR) { ?>
