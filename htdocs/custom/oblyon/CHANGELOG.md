@@ -3,6 +3,8 @@
 ### Version 2.1.0 - Compatibility 14.0.x - 16.0.x (2022/10/20)
 - Fix topmenu-login-dropdown when using some external modules
 - Add an option for Easya 2022.5.2 to fix the table column header on the elements during vertical scrolling
+- Fix min width on left menu hover
+- Fix select2 text align inherit
 
 ### Version 2.0.0 - Compatibility 14.0.x - 16.0.0 (2022/08/22)
 - New versioning of the module / We start again with Oblyon v2

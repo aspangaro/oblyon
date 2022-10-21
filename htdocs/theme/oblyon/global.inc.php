@@ -3970,6 +3970,7 @@ div.vmenu {
 <?php if (!empty($conf->global->OBLYON_REDUCE_LEFTMENU) && $conf->global->OBLYON_EFFECT_REDUCE_LEFTMENU == "hover") { ?>
     .vmenu:hover {
         max-width: 230px;
+        min-width: 230px;
         -webkit-transition-property: max-width;
         -webkit-transition-duration: 0.2s;
         -webkit-transition-timing-function: linear;
@@ -6992,8 +6993,19 @@ padding-top: 0px !important;
 /*  Select2                                                                       */
 /* ============================================================================== */
 
+span.select2.select2-container.select2-container--default {
+    text-align: initial;
+<?php if (empty($conf->global->THEME_SHOW_BORDER_ON_INPUT)) { ?>
+    border-left: none;
+    border-top: none;
+    border-right: none;
+<?php } ?>
+}
+
 .select2-container--focus span.select2-selection.select2-selection--single {
     border-bottom: 1px solid #666 !important;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
 }
 
 .blockvmenusearch .select2-container--default .select2-selection--single,
