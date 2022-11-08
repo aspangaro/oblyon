@@ -142,8 +142,10 @@ a:link, a:visited, a:hover, a:active, .classlink { color: var(--colortextlink); 
 a:hover { text-decoration: underline; color: var(--colortextlink); }
 a.commonlink { color: var(--colortextlink) !important; text-decoration: none; }
 th.liste_titre a div div:hover, th.liste_titre_sel a div div:hover { text-decoration: underline; }
+/*
 tr.liste_titre th.liste_titre_sel:not(.maxwidthsearch), tr.liste_titre td.liste_titre_sel:not(.maxwidthsearch),
 tr.liste_titre th.liste_titre:not(.maxwidthsearch), tr.liste_titre td.liste_titre:not(.maxwidthsearch) { opacity: 0.8; }
+*/
 /* th.liste_titre_sel a, th.liste_titre a, td.liste_titre_sel a, td.liste_titre a { color: #766; } */
 
 input {
@@ -8331,7 +8333,7 @@ tr.liste_titre th, th.liste_titre, tr.liste_titre td, td.liste_titre, form.liste
     font-family: <?php print $fontlist ?>;
     font-weight: <?php echo $useboldtitle ? 'bold' : 'normal'; ?>;
     vertical-align: middle;
-    height: 24px;
+    height: 38px;
 }
 tr.liste_titre th a, th.liste_titre a, tr.liste_titre td a, td.liste_titre a, form.liste_titre div a, div.liste_titre a {
     text-shadow: none !important;
@@ -9320,21 +9322,25 @@ span.clipboardCPValue.hidewithsize {
 /* Sticky table headers columns												  */
 /* ============================================================================== */
 <?php if ($conf->global->FIX_STICKY_HEADER_CARD) { ?>
-    .div-table-responsive-no-min {
-	overflow-x: unset;
-}
+	div.fiche>form>div.div-table-responsive, div.fiche>form>div.div-table-responsive-no-min {
+		overflow-x: unset;
+	}
+	.div-table-responsive-no-min {
+		 overflow-x: unset;
+	 }
 tr.liste_titre th {
 	position: sticky;
-    top: 0;
 <?php if($conf->global->OBLYON_STICKY_TOPBAR) { ?>
-    <?php if($conf->global->MAIN_MENU_INVERT) { ?>
-        top: 40px;
-    <?php } else { ?>
-        top: 54px;
-    <?php } ?>
+	<?php if($conf->global->MAIN_MENU_INVERT) { ?>
+		top: 40px;
+	<?php } else { ?>
+		top: 54px;
+	<?php } ?>
+<?php } else { ?>
+	top: 0;
 <?php } ?>
-    background-color: <?php print $maincolor; ?>;
-    z-index: 1;
+	background-color: <?php print $colorbtitle; ?>;
+	z-index: 1;
 }
 <?php } ?>
 
