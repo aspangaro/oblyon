@@ -1,5 +1,10 @@
 ## Changelog ##
 
+### Version 2.2.0 - Compatibility 14.0.x - 16.0.x (2022/11/08)
+- New option height image on list
+- Fix sticky header on list
+- Fix the setup menu was accessible for unpriviledged users
+
 ### Version 2.1.0 - Compatibility 14.0.x - 16.0.x (2022/10/20)
 - Fix topmenu-login-dropdown when using some external modules
 - Add an option for Easya 2022.5.2 to fix the table column header on the elements during vertical scrolling
