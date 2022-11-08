@@ -775,7 +775,7 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 
             if (! empty($menu_invert)) $leftmenu= 'setup';
 
-			if ($usemenuhider || empty($leftmenu) || $leftmenu == "setup") {
+			if (!empty($user->admin) && ($usemenuhider || empty($leftmenu) || $leftmenu == "setup")) {
 				// Load translation files required by the page
 				$langs->loadLangs(array("admin", "help"));
 
