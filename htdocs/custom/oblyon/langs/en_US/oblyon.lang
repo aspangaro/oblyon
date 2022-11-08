@@ -60,6 +60,7 @@ OblyonLogin = Login page
 LoginRight = Offset the connection block to the right of the screen
 CardBehavior = Behavior of the cards
 FixAreaRefAndTabAction = Fix the reference banner and action buttons during vertical scrolling
+FixStickyTableHeadersColumns = Fix the table column header on the elements during vertical scrolling
 General = General parameters
 OblyonFontSize = Basic text size in pixels (must be between 10 and 16)
 MainStatusUseImages = The different statuses of the elements will be displayed as icons with or without explanatory text (otherwise a colored label will be used)

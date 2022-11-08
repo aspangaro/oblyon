@@ -57,7 +57,7 @@
 			$this->familyinfo		= array($family => array('position' => '001', 'label' => $langs->trans($family . "Family")));
 			$this->module_position	= 1;
 			$this->description		= $langs->trans('Module113900Desc');	// Module description
-			$this->version			= '2.0.0';							// Version : 'development', 'experimental', 'dolibarr' or 'dolibarr_deprecated' or version
+			$this->version			= '2.1.0';							// Version : 'development', 'experimental', 'dolibarr' or 'dolibarr_deprecated' or version
 			$this->const_name		= 'MAIN_MODULE_'.strtoupper($this->name);	// llx_const table to save module status enabled/disabled
 			$this->special			= 0;										// Where to store the module in setup page (0=common,1=interface,2=others,3=very specific)
 			$this->picto			= 'opendsi_big@'.$this->name;				// Name of image file used for this module. If in theme => 'pictovalue' ; if in module => 'pictovalue@module' under name object_pictovalue.png
