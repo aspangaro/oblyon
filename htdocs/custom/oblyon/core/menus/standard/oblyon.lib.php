@@ -824,7 +824,7 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 
             if (! empty($menu_invert)) $leftmenu= 'admintools';
 
-			if ($usemenuhider || empty($leftmenu) || preg_match('/^admintools/', $leftmenu)) {
+			if (!empty($user->admin) && ($usemenuhider || empty($leftmenu) || preg_match('/^admintools/', $leftmenu))) {
 				// Load translation files required by the page
 				$langs->loadLangs(array('admin', 'help', 'cron'));
 
