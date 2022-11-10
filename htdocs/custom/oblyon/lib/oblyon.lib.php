@@ -362,6 +362,8 @@ SET FOREIGN_KEY_CHECKS = 1;
 			print '	<td colspan = "'.$cs1.'">';
 			if (!empty($help))	print $form->textwithtooltip(($desc ? $desc : $langs->trans($confkey)), $langs->trans($help), 2, 1, img_help(1, ''));
 			else				print $desc ? $desc : $langs->trans($confkey);
+
+			if (in_array($tag, ['color', 'input']) && preg_match('/(TXT|TEXT)/i', $confkey) && $conf->global->$confkey == '#FFFFFF') print ' ' . $form->textwithpicto('', $langs->trans('OblyonWarningColorWhiteHelp'), 1, 'warning');
 			print '	</td>
 					<td colspan = "'.$cs2.'" class = "center">';
 		}
