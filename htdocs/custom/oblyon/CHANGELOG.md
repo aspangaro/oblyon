@@ -1,5 +1,9 @@
 ## Changelog ##
 
+### Version 2.2.1 - Compatibility 14.0.x - 16.0.x (2022/11/16)
+- Fix Help on color page setup : add a warning when color text is white
+- Fix bis the administration menu was accessible for unpriviledged users
+
 ### Version 2.2.0 - Compatibility 14.0.x - 16.0.x (2022/11/08)
 - New option height image on list
 - Fix sticky header on list
