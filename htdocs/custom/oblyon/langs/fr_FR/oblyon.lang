@@ -115,6 +115,7 @@ Oblyondark = Oblyon Dark
 Oblyonblue = Oblyon Blue
 Oblyonnight = Oblyon Night
 Oblyonlight = Oblyon Light
+OblyonWarningColorWhiteHelp = La couleur du texte est blanche. Le texte pourrait ne pas être visible sur des fonds clairs.
 
 #
 # Dashboard page
