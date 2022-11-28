@@ -101,7 +101,9 @@
 	$metas						= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'options');
 	oblyon_print_input('MAIN_STATUS_USES_IMAGES',				'on_off', $langs->trans('MainStatusUseImages'),			'', $metas, 2, 1);	// Status use images
 	oblyon_print_input('MAIN_USE_TOP_MENU_QUICKADD_DROPDOWN',	'on_off', $langs->trans('OblyonMainUseQuickAddDropdown'),	'', $metas, 2, 1);	// Quickadd dropdown menu
-	oblyon_print_input('MAIN_USE_TOP_MENU_BOOKMARK_DROPDOWN',	'on_off', $langs->trans('OblyonMainUseBookmarkDropdown'),	'', $metas, 2, 1);	// Bookmark dropdown menu
+	if (!empty($conf->bookmark->enabled)) {
+		oblyon_print_input('MAIN_USE_TOP_MENU_BOOKMARK_DROPDOWN', 'on_off', $langs->trans('OblyonMainUseBookmarkDropdown'), '', $metas, 2, 1);    // Bookmark dropdown menu
+	}
 	oblyon_print_input('OBLYON_PADDING_RIGHT_BOTTOM',			'on_off', $langs->trans('OblyonPaddingRightBottom'),		'', $metas, 2, 1);	// Add padding on bottom
 	// Login
 	$metas						= array(array(3), 'OblyonLogin');
