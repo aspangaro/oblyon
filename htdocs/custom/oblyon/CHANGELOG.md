@@ -1,5 +1,11 @@
 ## Changelog ##
 
+### Version 2.2.3 - Compatibility 14.0.x - 17beta (2022/12/06)
+- Temporary fix problem with bg color on icon bank_account - Problem of dolibarr's core (PR #23114)
+- Unset minwidth on vmenu when menu is inverted
+- Small ajust on accountancy menu
+- Work in Progress - Compatibility v17beta
+
 ### Version 2.2.2 - Compatibility 14.0.x - 16.0.x (2022/11/28)
 - Debug session
 

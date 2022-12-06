@@ -1,5 +1,7 @@
 <?php
-if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
+if (!defined('ISLOADEDBYSTEELSHEET')) {
+    die('Must be call by steelsheet');
+} ?>
 /* <style type="text/css" > */
 
 /*
@@ -232,7 +234,7 @@ if (GETPOSTISSET('THEME_AGRESSIVENESS_RATIO')) {
 .vendor-back {
 	background-color: #599caf !important;
 	color: #FFF !important;
-	padding: 2px;
+	padding: 2px 4px 2px 4px;
 	margin: 2px;
 	border-radius: 3px;
 }
@@ -242,6 +244,20 @@ if (GETPOSTISSET('THEME_AGRESSIVENESS_RATIO')) {
 	padding: 2px;
 	margin: 2px;
 	border-radius: 3px;
+}
+.member-company-back {
+    padding: 2px 7px 2px 7px;
+    background-color: #e4e4e4;
+    color: #666;
+    border-radius: 10px;
+    white-space: nowrap;
+}
+.member-individual-back {
+    padding: 2px 7px 2px 7px;
+    background-color: #e4e4e4;
+    color: #666;
+    border-radius: 10px;
+    white-space: nowrap;
 }
 
 .bg-infobox-action {
@@ -370,8 +386,63 @@ if (GETPOSTISSET('THEME_AGRESSIVENESS_RATIO')) {
 	height: 0;
 }
 
+.info-box-title {
+    width: calc(100% - 20px);
+}
+.info-box-module {
+    min-width: 350px;
+    max-width: 350px;
+}
+
+@media only screen and (max-width: 1740px) {
+    .info-box-module {
+        min-width: 315px;
+        max-width: 315px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .info-box-module {
+        min-width: 260px;
+    }
+}
+
+.info-box-module .info-box-content {
+    height: 98px;
+}
 /* Disabled. This break the responsive on smartphone
 .box{
-	overflow: visible;
+overflow: visible;
 }
 */
+
+@media only screen and (max-width: 767px)
+{
+    .box-flex-container {
+        margin: 0 0 0 0px !important;
+        width: 100% !important;
+        justify-content: space-between;
+    }
+    .info-box-module {
+        width: ;idth: 100%;
+    max-width: unset;
+    }
+
+    .info-box-sm .info-box-icon-text, .info-box-sm .info-box-icon-version {
+        width: 60px;
+    }
+    .info-box-sm .info-box-icon {
+        width: 60px;
+    }
+    .info-box-sm .info-box-content {
+        margin-left: 60px;
+    }
+    .info-box {
+        border: 1px solid #e0e0e0;
+    }
+}
+
+/* Temporary fix problem with bg color on bank_account - Problem of dolibarr's core */
+td span.bg-infobox-bank_account {
+    background-color: unset !important;
+}

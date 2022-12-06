@@ -3972,7 +3972,9 @@ div.vmenu {
 <?php if (!empty($conf->global->OBLYON_REDUCE_LEFTMENU) && $conf->global->OBLYON_EFFECT_REDUCE_LEFTMENU == "hover") { ?>
     .vmenu:hover {
         max-width: 230px;
-        min-width: 230px;
+        <?php if (empty($conf->global->MAIN_MENU_INVERT)) { ?>
+            min-width: 230px;
+        <?php } ?>
         -webkit-transition-property: max-width;
         -webkit-transition-duration: 0.2s;
         -webkit-transition-timing-function: linear;

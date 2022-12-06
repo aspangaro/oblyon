@@ -29,7 +29,7 @@
 require_once DOL_DOCUMENT_ROOT.'/core/class/menubase.class.php';
 
 // Translations
-$langs->load ( "oblyon@oblyon");
+$langs->loadLangs(array('oblyon@oblyon'));
 
 /**
  * Core function to output top menu oblyon
@@ -1765,10 +1765,8 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
                             $numr = $db->num_rows($resql);
                             $i = 0;
 
-                            if ($numr > 0)
-                            {
-                                while ($i < $numr)
-                                {
+                            if ($numr > 0) {
+                                while ($i < $numr) {
                                     $objp = $db->fetch_object($resql);
 
                                     $nature='';
@@ -1803,32 +1801,33 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
                                     }
 
                                     // Remove all type when treasury accounting is on
-                                    if (! empty($conf->treasuryaccounting->enabled))
-                                    {
+                                    if (! empty($conf->treasuryaccounting->enabled)) {
                                         if ($nature == 'sells' || $nature == 'purchases' || $nature == 'bank' || $nature == 'expensereports') $nature='';
                                     }
 
-                                    if ($nature)
-                                    {
+                                    if ($nature) {
                                         $langs->load('accountancy');
-                                        $journallabel=$langs->transnoentities($objp->label);	// Labels in this table are set by loading llx_accounting_abc.sql. Label can be 'ACCOUNTING_SELL_JOURNAL', 'InventoryJournal', ...
-                                        $newmenu->add('/accountancy/journal/'.$nature.'journal.php?mainmenu=accountancy&leftmenu=accountancy_journal&id_journal='.$objp->rowid, $journallabel, 2, $user->rights->accounting->comptarapport->lire);
+                                        $journallabel = $langs->transnoentities($objp->label); // Label of bank account in llx_accounting_journal
+
+                                        $key = $langs->trans("AccountingJournalType".strtoupper($objp->nature));
+                                        $transferlabel = ($objp->nature && $key != "AccountingJournalType".strtoupper($langs->trans($objp->nature)) ? $key.($journallabel != $key ? ' '.$journallabel : ''): $journallabel);
+
+                                        $newmenu->add('/accountancy/journal/'.$nature.'journal.php?mainmenu=accountancy&leftmenu=accountancy_journal&id_journal='.$objp->rowid, $transferlabel, 2, $user->rights->accounting->comptarapport->lire);
                                     }
                                     $i++;
                                 }
-                            }
-                            else
-                            {
+                            } else {
                                 // Should not happened. Entries are added
                                 $newmenu->add('',$langs->trans("NoJournalDefined"), 2, $user->rights->accounting->comptarapport->lire);
                             }
+                        } else {
+                            dol_print_error($db);
                         }
-                        else dol_print_error($db);
                         $db->free($resql);
                     }
 
-                // Accountancy
-                $newmenu->add("/accountancy/index.php?leftmenu=accountancy",$langs->trans("MenuAccountancy"), 0, $permtoshowmenu, '', $mainmenu, 'accountancy');
+                    // Accountancy
+                    $newmenu->add("/accountancy/index.php?leftmenu=accountancy",$langs->trans("MenuAccountancy"), 0, $permtoshowmenu, '', $mainmenu, 'accountancy');
 
                     // Balance
                     $newmenu->add("/accountancy/bookkeeping/balance.php?mainmenu=accountancy&amp;leftmenu=accountancy_balance",$langs->trans("AccountBalance"),1,$user->rights->accounting->mouvements->lire);
