@@ -1629,6 +1629,11 @@ select.selectarrowonleft option {
     direction: ltr;
 }
 
+.img-skinthumb {
+    width: 160px;
+    height: 100px;
+}
+
 /* ============================================================================== */
 /* Styles to hide objects														  */
 /* ============================================================================== */
@@ -5362,8 +5367,8 @@ div.boximport {
     min-height: unset;
 }
 
-.product_line_stock_ok { color: #33cc66; }
-.product_line_stock_too_low { color: #f07b6e; }
+.product_line_stock_ok { color: #002000; }
+.product_line_stock_too_low { color: #884400; }
 
 .fieldrequired { color: <?php echo $colorfline; ?>; font-weight: bold; }
 
