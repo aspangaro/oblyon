@@ -621,7 +621,7 @@ function print_text_menu_entry($text, $showmode, $url, $id, $idsel, $atarget)
 	{
 		print '<a class="tmenu main-nav__link main-nav__'.$idsel.'" href="'.$url.'"'.($atarget?' target="'.$atarget.'"':'').' title="'.dol_escape_htmltag($text).'">';
 		print '<i class="tmenuimage icon icon--'.$idsel.'"></i> ';
-		print $text;
+        print '<span class="mainmenuaspan">'.$text.'</span>';
 		print '</a>';
 	}
 	if ($showmode == 2)
