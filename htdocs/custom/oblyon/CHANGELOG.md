@@ -1,8 +1,10 @@
 ## Changelog ##
 
-### Version 2.3.0 - Compatibility 14.0.x - 17.0.x (2023/01/23)
+### Version 2.2.4 - Compatibility 14.0.x - 17.0.x (2023/03/27)
 - Fix color on line product selector when stock is ok (global.inc.php L5370 .product_line_stock_ok #33cc66 > #002000 | L5371 .product_line_stock_too_low #f07b6e > #884400) 
 - Fix missing class
+- Fix Align height of input on list
+- Add compatibility with module MyField 16.0.x
 
 ### Version 2.2.3 - Compatibility 14.0.x - 17beta (2022/12/06)
 - Temporary fix problem with bg color on icon bank_account - Problem of dolibarr's core (PR #23114)

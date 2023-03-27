@@ -121,7 +121,7 @@ OblyonWarningColorWhiteHelp = La couleur du texte est blanche. Le texte pourrait
 # Dashboard page
 #
 OblyonDashboardTitle = Configurateur Oblyon - Tableau de bord
-OblyonDashboardDisableBlocks=Vignette des objets ouverts (à traiter ou en retard) sur le tableau de bord principal
+OblyonDashboardDisableBlocks=Vignette des éléments ouverts (à traiter ou en retard) sur le tableau de bord principal
 DisableGlobalBoxStats = Désactiver le widget des statistiques globales (nombres d'éléments en base de données)
 InfoboxColorOnBackground = Inverser les couleurs des icônes et du fond des vignettes
 ColorIntensity = Intensité des couleurs

@@ -201,8 +201,7 @@ input, input.flat, textarea, textarea.flat, form.flat select, select, select.fla
 
 input {
 	line-height: 1.3em;
-	padding: 4px;
-	padding-left: 5px;
+	padding: 5px;
 }
 .liste_titre input {
 	padding: 5px;
@@ -759,7 +758,6 @@ img[src*=stcomm]	{ vertical-align: text-top; }
     select {
         border-color: rgba(0,0,0, .24);
         box-shadow: inset 0 1px 2px rgba(0,0,0, .07);
-        padding: 1px;
     }
 
     textarea:focus, button:focus {
@@ -784,7 +782,7 @@ img[src*=stcomm]	{ vertical-align: text-top; }
 
     .liste_titre .flat, .liste_titre select.flat {
         margin: 2px;
-        padding: 2px 4px;
+        /* padding: 2px 4px; */
     }
 
     input, textarea, select {
@@ -1676,6 +1674,7 @@ select.selectarrowonleft option {
 .maxwidth125 { max-width: 125px; }
 .maxwidth150 { max-width: 150px; }
 .maxwidth200 { max-width: 200px; }
+.maxwidth250 { max-width: 250px; }
 .maxwidth300 { max-width: 300px; }
 .maxwidth400 { max-width: 400px; }
 .maxwidth500 { max-width: 500px; }

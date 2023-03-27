@@ -63,7 +63,7 @@
 	// Sauvegarde / Restauration
 	if ($action == 'bkupParams')	$result	= oblyon_bkup_module ('oblyon');
 	if ($action == 'restoreParams')	$result	= oblyon_restore_module ('oblyon');
-	// On / Off management
+    // On / Off management
 	if (preg_match('/set_(.*)/', $action, $reg)) {
 		$confkey	= $reg[1];
 		$result		= dolibarr_set_const($db, $confkey, GETPOST('value'), 'chaine', 0, 'Oblyon module', $conf->entity);
@@ -75,6 +75,8 @@
 		$error									= 0;
 		foreach ($list[$confkey] as $constname)	$result	= dolibarr_set_const($db, $constname, GETPOST($constname, 'alpha'),		'chaine', 0, 'Oblyon module', $conf->entity);
 		foreach ($listcolor as $constname)		$result	= dolibarr_set_const($db, $constname, '#'.GETPOST($constname, 'alpha'),	'chaine', 0, 'Oblyon module', $conf->entity);
+
+        $result		=  dolibarr_set_const($db, "MAIN_MOTD", dol_htmlcleanlastbr(GETPOST("main_motd", 'restricthtml')), 'chaine', 0, '', $conf->entity);
 	}
 	// Retour => message Ok ou Ko
 	if ($result == 1)			setEventMessages($langs->trans('SetupSaved'), null, 'mesgs');
@@ -108,7 +110,14 @@
 					<table summary = "edit" class = "noborder centpercent editmode tableforfield as-settings-colors">';
 	$metas						= array('*', '156px', '300px');
 	oblyon_print_colgroup($metas);
-	// Infobox enable
+    /*
+    // Message of the day
+    require_once DOL_DOCUMENT_ROOT.'/core/class/doleditor.class.php';
+    $texthelp = $langs->trans("FollowingConstantsWillBeSubstituted") . '<br>';
+    oblyon_print_input('MAIN_MOTD',                         'textarea', $langs->trans("MessageOfDay"), $texthelp, $metas, 2);
+    $metas						= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'dashboard');
+    */
+    // Infobox enable
 	$metas						= array(array(3), 'OblyonDashboardDisableBlocks');
 	oblyon_print_liste_titre($metas);
 	$metas						= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'dashboard');

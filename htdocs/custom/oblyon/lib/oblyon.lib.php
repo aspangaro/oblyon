@@ -369,7 +369,9 @@ SET FOREIGN_KEY_CHECKS = 1;
 		}
 		else {
 			print '	<td colspan = "'.($cs1 + $cs2).'" class = "center">';
-			if (!empty($desc))	print $desc.'<br/>';
+			if (!empty($help))	print $form->textwithpicto(($desc ? $desc : $langs->trans($confkey)), $langs->trans($help), 1, 'help', '', 0, 2, '');
+            else                print $desc;
+            if (!empty($desc) || !empty($help)) print '<br/>';
 		}
 		print  (!empty($begin) && !preg_match('/<td(.*)/', $begin, $reg) ? $begin : '');
 		if ($tag == 'on_off') {
