@@ -619,17 +619,21 @@ function print_text_menu_entry($text, $showmode, $url, $id, $idsel, $atarget)
 
 	if ($showmode == 1)
 	{
+        print '<div>'; // for myfield offset and uses div for background color
 		print '<a class="tmenu main-nav__link main-nav__'.$idsel.'" href="'.$url.'"'.($atarget?' target="'.$atarget.'"':'').' title="'.dol_escape_htmltag($text).'">';
 		print '<i class="tmenuimage icon icon--'.$idsel.'"></i> ';
-		print $text;
+        print '<span class="mainmenuaspan">'.$text.'</span>'; // for myfield label and link
 		print '</a>';
+        print '</div>';
 	}
 	if ($showmode == 2)
 	{
+        print '<div>'; // for myfield offset and uses div for background color
 		print '<a class="tmenu main-nav__link is-disabled" id="mainmenua_'.$idsel.'" href="#" title="'.dol_escape_htmltag($langs->trans("NotAllowed")).'">';
 		print '<i class="tmenuimage icon icon--'.$idsel.'"></i> ';
-		print $text;
+        print '<span class="mainmenuaspan">'.$text.'</span>'; // for myfield label and link
 		print '</a>';
+        print '</div>';
 	}
 }
 
