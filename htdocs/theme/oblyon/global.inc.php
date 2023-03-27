@@ -1632,6 +1632,11 @@ select.selectarrowonleft option {
     height: 100px;
 }
 
+/* To avoid message boxes being too large because code not wrapping */
+.longmessagecut pre {
+    white-space: break-spaces;
+}
+
 /* ============================================================================== */
 /* Styles to hide objects														  */
 /* ============================================================================== */
