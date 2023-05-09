@@ -342,6 +342,12 @@ textarea.centpercent {
 .small, small {
     font-size: 85%;
 }
+.large {
+    font-size: 125%;
+}
+.double {
+    font-size: 2em;
+}
 
 .h1 .small, .h1 small, .h2 .small, .h2 small, .h3 .small, .h3 small, h1 .small, h1 small, h2 .small, h2 small, h3 .small, h3 small {
     font-size: 65%;
@@ -352,9 +358,28 @@ textarea.centpercent {
     color: #777;
 }
 
+.flip {
+    transform: scaleX(-1) translate(<?php print ($left == 'left' ? '' : '-'); ?>2px, 0);
+}
+.rotate90 {
+    transform: rotate(90deg) translate(0, <?php print ($left == 'left' ? '' : '-'); ?>2px);
+}
+
 .center {
     text-align: center;
     margin: 0px auto;
+}
+.centerimp {
+    text-align: center !important;
+}
+.alignstart {
+    text-align: start;
+}
+.start {
+    text-align: start;
+}
+.end {
+    text-align: end;
 }
 .left {
     text-align: <?php print $left; ?>;
@@ -386,6 +411,9 @@ textarea.centpercent {
 .wordwrap {
     word-wrap: break-word;
 }
+.wordbreakimp {
+    word-break: break-word;
+}
 .wordbreak {
     word-break: break-all;
 }
@@ -395,20 +423,65 @@ textarea.centpercent {
 .nobold {
     font-weight: normal !important;
 }
+.uppercase {
+    text-transform: uppercase;
+}
 .nounderline {
     text-decoration: none;
+}
+.nounderlineimp {
+    text-decoration: none !important;
+}
+.nopadding {
+    padding: 0;
+}
+.nopaddingleft {
+    padding-left: 0;
+}
+.nopaddingright {
+    padding-right: 0;
+}
+.nopaddingleftimp {
+    padding-left: 0 !important;
+}
+.nopaddingrightimp {
+    padding-right: 0 !important;
 }
 .paddingleft {
     padding-<?php print $left; ?>: 4px;
 }
+.paddingleftimp {
+    padding-<?php print $left; ?>: 4px !important;
+}
 .paddingleft2 {
     padding-<?php print $left; ?>: 2px;
+}
+.paddingleft2imp {
+    padding-<?php print $left; ?>: 2px !important;
 }
 .paddingright {
     padding-<?php print $right; ?>: 4px;
 }
+.paddingrightimp {
+    padding-<?php print $right; ?>: 4px !important;
+}
 .paddingright2 {
     padding-<?php print $right; ?>: 2px;
+}
+.paddingright2imp {
+    padding-<?php print $right; ?>: 2px !important;
+}
+.paddingtop {
+    padding-top: 4px;
+}
+.paddingtop2 {
+    padding-top: 2px;
+}
+.paddingbottom {
+    padding-bottom: 4px;
+}
+.paddingbottom2 {
+    padding-bottom: 2px;
 }
 .marginleft2 {
     margin-<?php print $left; ?>: 2px;
@@ -416,10 +489,22 @@ textarea.centpercent {
 .marginright2 {
     margin-<?php print $right; ?>: 2px;
 }
+.nomarginleft {
+    margin-<?php print $left; ?>: unset;
+}
+.nomarginright {
+    margin-<?php print $right; ?>: unset;
+}
+.nowidthimp {
+    width: unset !important;
+}
 .cursordefault {
     cursor: default;
 }
 .cursorpointer {
+    cursor: pointer;
+}
+.classfortooltiponclick .fa-question-circle {
     cursor: pointer;
 }
 .cursormove {
@@ -427,6 +512,9 @@ textarea.centpercent {
 }
 .cursornotallowed {
     cursor: not-allowed;
+}
+.cursorwait {
+    cursor: wait;
 }
 .backgroundblank {
     background-color: #fff;
@@ -438,10 +526,50 @@ textarea.centpercent {
     font-size: 0.85em;
     opacity: 0.7;
 }
-
+.borderimp {
+    border: 1px solid #888 !important;
+}
 .text-warning {
     color : <?php print $textWarning ; ?>
 }
+.longmessagecut {
+    max-height: 250px;
+    max-width: 100%;
+    overflow-y: auto;
+}
+div.urllink {
+    padding: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    /* border: 1px solid #ccc; */
+    border-radius: 5px;
+    /* width: fit-content; */
+    background-color: #f0f0f8;
+    opacity: 0.8;
+}
+div.urllink, div.urllink a {
+    color: #339 !important;
+}
+
+i.fa-mars::before, i.fa-venus::before, i.fa-genderless::before, i.fa-transgender::before  {
+    color: #888 !important;
+    opacity: 0.4;
+    padding-<?php echo $left; ?>: 3px;
+}
+.stockmovemententry {
+    color: #080;
+    transform: rotate(0.25turn);
+    font-size: 1.2em;
+}
+.stockmovementexit {
+    color: #968822;
+    transform: rotate(0.3turn);
+    font-size: 1.2em;
+}
+.stockmovement {
+    font-size: 1.4em;
+}
+
 body[class*="colorblind-"] .text-warning{
     color : <?php print $colorblind_deuteranopes_textWarning ; ?>
 }
@@ -461,11 +589,37 @@ body[class*="colorblind-"] .text-success{
 .editfielda span.fa-pencil-alt:hover, .editfielda span.fa-trash:hover {
     color: <?php print $colorftitle; ?> !important;
 }
+a.editfielda.nohover *:hover:before {
+    color: #ccc !important;
+}
 
-.fa-toggle-on, .fa-toggle-off { font-size: 2em; }
+.fawidth30 {
+    width: 20px;
+}
+.floatnone {
+    float: none !important;
+}
+
+span.fa.fa-plus-circle.paddingleft {
+    padding-right: 4px;
+    padding-top: 3px;
+    padding-bottom: 2px;
+}
+
+.size15x { font-size: 1.5em !important; }
+.fa-toggle-on, .fa-toggle-off, .size2x { font-size: 2em; }
 .websiteselectionsection .fa-toggle-on, .websiteselectionsection .fa-toggle-off,
-.asetresetmodule .fa-toggle-on, .asetresetmodule .fa-toggle-off {
+.asetresetmodule .fa-toggle-on, .asetresetmodule .fa-toggle-off,
+.tdwebsitesearchresult .fa-toggle-on, .tdwebsitesearchresult .fa-toggle-off
+{
     font-size: 1.5em; vertical-align: text-bottom;
+}
+
+.divoverflow {
+    overflow: hidden;
+    white-space: nowrap;
+    vertical-align: middle;
+    text-overflow: ellipsis;
 }
 
 /* Themes for badges */
@@ -1642,18 +1796,24 @@ select.selectarrowonleft option {
 /* ============================================================================== */
 
 .clearboth  { clear:both; }
+
 .hideobject { display: none; }
+.minwidth25  { min-width: 25px; }
 .minwidth50  { min-width: 50px; }
+.minwidth75  { min-width: 75px; }
 /* rule for not too small screen only */
 @media only screen and (min-width: <?php echo round($nbtopmenuentries * $fontsize * 3.4, 0) + 7; ?>px)
 {
+    .width20  { width: 20px; }
     .width25  { width: 25px; }
     .width50  { width: 50px; }
     .width75  { width: 75px; }
     .width100 { width: 100px; }
     .width200 { width: 200px; }
     .minwidth100 { min-width: 100px; }
+    .minwidth150 { min-width: 150px; }
     .minwidth200 { min-width: 200px; }
+    .minwidth250 { min-width: 250px; }
     .minwidth300 { min-width: 300px; }
     .minwidth400 { min-width: 400px; }
     .minwidth500 { min-width: 500px; }
@@ -1661,20 +1821,30 @@ select.selectarrowonleft option {
     .minwidth75imp  { min-width: 75px !important; }
     .minwidth100imp { min-width: 100px !important; }
     .minwidth200imp { min-width: 200px !important; }
+    .minwidth250imp { min-width: 250px !important; }
     .minwidth300imp { min-width: 300px !important; }
     .minwidth400imp { min-width: 400px !important; }
     .minwidth500imp { min-width: 500px !important; }
 }
 .widthauto { width: auto; }
+.width20  { width: 20px; }
 .width25  { width: 25px; }
+.width40  { width: 40px; }
 .width50  { width: 50px; }
 .width75  { width: 75px; }
 .width100 { width: 100px; }
+.width125 { width: 125px; }
 .width150 { width: 150px; }
 .width200 { width: 200px; }
+.width250 { width: 250px; }
+.width300 { width: 300px; }
+.width400 { width: 400px; }
+.width500 { width: 500px; }
 .maxwidth25  { max-width: 25px; }
+.maxwidth40  { max-width: 40px; }
 .maxwidth50  { max-width: 50px; }
 .maxwidth75  { max-width: 75px; }
+.maxwidthdate  { max-width: 85px; }
 .maxwidth100 { max-width: 100px; }
 .maxwidth125 { max-width: 125px; }
 .maxwidth150 { max-width: 150px; }
@@ -1683,16 +1853,24 @@ select.selectarrowonleft option {
 .maxwidth300 { max-width: 300px; }
 .maxwidth400 { max-width: 400px; }
 .maxwidth500 { max-width: 500px; }
+.maxwidth750 { max-width: 750px; }
+.maxwidth1000 { max-width: 1000px; }
 .maxwidth50imp  { max-width: 50px !important; }
 .maxwidth75imp  { max-width: 75px !important; }
+
+.minwidth100onall { min-width: 100px !important; }
+.minwidth200onall { min-width: 200px !important; }
+.minwidth250onall { min-width: 250px !important; }
+
 .minheight20 { min-height: 20px; }
+.minheight30 { min-height: 30px; }
 .minheight40 { min-height: 40px; }
 .titlefieldcreate { width: 20%; }
-.titlefield       { width: 25%; }
-.titlefieldmiddle { width: 50%; }
+.titlefield       { /* width: 25%; */ min-width: 250px; width: 25%; }
+.titlefieldmiddle { width: 45%; }
+.titlefieldmax45 { max-width: 45%; }
 .imgmaxwidth180 { max-width: 180px; }
 .imgmaxheight50 { max-height: 50px; }
-.maxheight150 { max-height: 150px; }
 
 .width20p { width:20%; }
 .width25p { width:25%; }
@@ -1706,26 +1884,35 @@ select.selectarrowonleft option {
 /* Force values for small screen 1400 */
 @media only screen and (max-width: 1400px)
 {
-    .titlefield { width: 30% !important; }
+    .titlefield { /* width: 30% !important; */ }
     .titlefieldcreate { width: 30% !important; }
     .minwidth50imp  { min-width: 50px !important; }
     .minwidth75imp  { min-width: 75px !important; }
     .minwidth100imp { min-width: 100px !important; }
+    .minwidth125imp { min-width: 125px !important; }
+    .minwidth150imp { min-width: 150px !important; }
     .minwidth200imp { min-width: 200px !important; }
+    .minwidth250imp { min-width: 250px !important; }
     .minwidth300imp { min-width: 300px !important; }
     .minwidth400imp { min-width: 300px !important; }
     .minwidth500imp { min-width: 300px !important; }
+
+    .linkedcol-element {
+        min-width: unset;
+    }
 }
 
 /* Force values for small screen 1000 */
 @media only screen and (max-width: 1000px)
 {
     .maxwidthonsmartphone { max-width: 100px; }
-	.minwidth50imp  { min-width: 50px !important; }
-    .minwidth75imp  { min-width: 70px !important; }
-    .minwidth100imp { min-width: 80px !important; }
-    .minwidth150imp { min-width: 100px !important; }
+    .minwidth50imp  { min-width: 50px !important; }
+    .minwidth75imp  { min-width: 75px !important; }
+    .minwidth100imp { min-width: 100px !important; }
+    .minwidth125imp { min-width: 125px !important; }
+    .minwidth150imp { min-width: 110px !important; }
     .minwidth200imp { min-width: 110px !important; }
+    .minwidth250imp { min-width: 115px !important; }
     .minwidth300imp { min-width: 120px !important; }
     .minwidth400imp { min-width: 150px !important; }
     .minwidth500imp { min-width: 250px !important; }
@@ -1734,12 +1921,59 @@ select.selectarrowonleft option {
 /* Force values for small screen 767 */
 @media only screen and (max-width: 767px)
 {
-	body {
-		font-size: <?php print is_numeric($fontsize) ? ($fontsize+3).'px' : $fontsize; ?>;
-	}
 	div.refidno {
 		font-size: <?php print is_numeric($fontsize) ? ($fontsize+3).'px' : $fontsize; ?> !important;
 	}
+    .divadvancedsearchfield {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    div.divphotoref {
+        padding-right: 10px !important;
+    }
+
+    .hideonsmartphone { display: none; }
+    .hideonsmartphoneimp { display: none !important; }
+
+    .margintoponsmartphone { margin-top: 6px; }
+
+    span.pictotitle {
+        margin-<?php echo $left; ?>: 0 !important;
+    }
+    div.fiche>table.table-fiche-title {
+        margin-top: 7px !important;
+        margin-bottom: 15px !important;
+    }
+
+    select.minwidth100imp, select.minwidth100, select.minwidth200, select.minwidth200imp, select.minwidth300 {
+        width: calc(100% - 40px) !important;
+        min-width: 100px;
+        display: inline-block;
+    }
+    select.widthcentpercentminusxx, span.widthcentpercentminusxx:not(.select2-selection), input.widthcentpercentminusxx {
+        width: calc(100% - 70px) !important;
+        display: inline-block;
+    }
+
+    input.maxwidthinputfileonsmartphone {
+        width: 175px;
+    }
+
+    input.buttonpayment, button.buttonpayment, div.buttonpayment {
+        min-width: 270px;
+    }
+
+    .smallonsmartphone {
+        font-size: 0.8em;
+    }
+
+    .nopaddingtoponsmartphone {
+        padding-top: 0 !important;
+    }
+    .nopaddingbottomonsmartphone {
+        padding-bottom: 0 !important;
+    }
 }
 
 /* Force values for small screen 570 */
@@ -1760,8 +1994,27 @@ select.selectarrowonleft option {
         text-overflow: ellipsis;
         white-space: nowrap;
     }
+    .tdoverflowmax100onsmartphone {			/* For tdoverflow, the max-midth become a minimum ! */
+        max-width: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .tdoverflowmax150onsmartphone {			/* For tdoverflow, the max-midth become a minimum ! */
+        max-width: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
     .border tbody tr, .border tbody tr td, div.tabBar table.border tr, div.tabBar table.border tr td, div.tabBar div.border .table-border-row, div.tabBar div.border .table-key-border-col, div.tabBar div.border .table-val-border-col {
         height: 40px !important;
+    }
+
+    div.tabs div.tab a.tab  {
+        max-width: 200px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 
     .quatrevingtpercent, .inputsearch {
@@ -1787,27 +2040,29 @@ select.selectarrowonleft option {
         max-width: 138px;	/* length of input text in the quick search box when using a smartphone and without dolidroid */
     }
 
-    .hideonsmartphone { display: none; }
-    .hideonsmartphoneimp { display: none !important; }
     .noenlargeonsmartphone { width : 50px !important; display: inline !important; }
     .maxwidthonsmartphone, #search_newcompany.ui-autocomplete-input { max-width: 100px; }
     .maxwidth50onsmartphone { max-width: 40px; }
     .maxwidth75onsmartphone { max-width: 50px; }
     .maxwidth100onsmartphone { max-width: 70px; }
+    .maxwidth125onsmartphone { max-width: 100px; }
     .maxwidth150onsmartphone { max-width: 120px; }
     .maxwidth150onsmartphoneimp { max-width: 120px !important; }
     .maxwidth200onsmartphone { max-width: 200px; }
+    .maxwidth250onsmartphone { max-width: 250px; }
     .maxwidth300onsmartphone { max-width: 300px; }
     .maxwidth400onsmartphone { max-width: 400px; }
     .minwidth50imp  { min-width: 50px !important; }
-    .minwidth75imp  { min-width: 60px !important; }
-    .minwidth100imp { min-width: 80px !important; }
-    .minwidth150imp { min-width: 90px !important; }
-    .minwidth200imp { min-width: 100px !important; }
+    .minwidth75imp  { min-width: 75px !important; }
+    .minwidth100imp { min-width: 100px !important; }
+    .minwidth125imp { min-width: 125px !important; }
+    .minwidth150imp { min-width: 110px !important; }
+    .minwidth200imp { min-width: 110px !important; }
+    .minwidth250imp { min-width: 115px !important; }
     .minwidth300imp { min-width: 120px !important; }
     .minwidth400imp { min-width: 150px !important; }
     .minwidth500imp { min-width: 250px !important; }
-    .titlefield { width: auto; }
+    .titlefield { width: auto; min-width: unset; }
     .titlefieldcreate { width: auto; }
 
     #tooltip {
@@ -1837,6 +2092,7 @@ select.selectarrowonleft option {
 
     div.statusref {
         padding-right: 10px;
+        max-width: 55%;
     }
     div.statusref img {
         padding-right: 3px !important;
@@ -1863,8 +2119,8 @@ table.tableforfield tr>td:first-of-type, div.tableforfield div.tagtr>div.tagtd:f
 }
 */
 <?php if (GETPOST('optioncss', 'aZ09') == 'print') { ?>
-.hideonprint { display: none; }
-<?php } ?>>
+.hideonprint { display: none !important; }
+<?php } ?>
 
 
 /* ============================================================================== */
@@ -2020,6 +2276,9 @@ body.onlinepaymentbody div.fiche {	/* For online payment page */
 div.fiche>table:first-child {
 	margin-bottom: 15px !important;
 }
+div.fiche>table.table-fiche-title {
+    margin-bottom: 12px;
+}
 div.fichecenter {
     clear: both;	/* This is to have div fichecenter that are true rectangles */
     width: 100%;
@@ -2028,43 +2287,62 @@ div.fichecenterbis {
     margin-top: 8px;
 }
 div.fichethirdleft {
-    <?php if ($conf->browser->layout != 'phone') { print "float: ".$left.";\n"; } ?>
-    <?php if ($conf->browser->layout != 'phone') { print "width: 50%;\n"; } ?>
-    <?php if ($conf->browser->layout == 'phone') { print "padding-bottom: 6px;\n"; } ?>
+    <?php if ($conf->browser->layout != 'phone') {
+        print "float: ".$left.";\n";
+    } ?>
+    <?php if ($conf->browser->layout != 'phone') {
+        print "width: calc(50% - 14px);\n";
+    } ?>
+    <?php if ($conf->browser->layout == 'phone') {
+        print "padding-bottom: 6px;\n";
+    } ?>
 }
 div.fichetwothirdright {
-    <?php if ($conf->browser->layout != 'phone') { print "float: ".$right.";\n"; } ?>
-    <?php if ($conf->browser->layout != 'phone') { print "width: 50%;\n"; } ?>
-    <?php if ($conf->browser->layout == 'phone') { print "padding-bottom: 6px\n"; } ?>
-}
-div.fichetwothirdright div.ficheaddleft {
-    padding-left: 20px;
+<?php if ($conf->browser->layout != 'phone') {
+    print "float: ".$right.";\n";
+} ?>
+<?php if ($conf->browser->layout != 'phone') {
+    print "width: calc(50% - 14px);\n";
+} ?>
+<?php if ($conf->browser->layout == 'phone') {
+    print "padding-bottom: 6px\n";
+} ?>
 }
 div.fichehalfleft {
-	<?php if ($conf->browser->layout != 'phone')   { print "float: ".$left.";\n"; } ?>
-	<?php if ($conf->browser->layout != 'phone')   { print "width: calc(50% - 10px);\n"; } ?>
+    <?php if ($conf->browser->layout != 'phone') {
+        print "float: ".$left.";\n";
+    } ?>
+    <?php if ($conf->browser->layout != 'phone') {
+        print "width: calc(50% - 14px);\n";
+    } ?>
 }
 div.fichehalfright {
-	<?php if ($conf->browser->layout != 'phone')   { print "float: ".$right.";\n"; } ?>
-	<?php if ($conf->browser->layout != 'phone')   { print "width: calc(50% - 10px);\n"; } ?>
+    <?php if ($conf->browser->layout != 'phone') {
+        print "float: ".$right.";\n";
+    } ?>
+    <?php if ($conf->browser->layout != 'phone') {
+        print "width: calc(50% - 14px);\n";
+    } ?>
 }
 div.fichehalfright {
-	<?php if ($conf->browser->layout == 'phone')   { print "margin-top: 10px;\n"; } ?>
+    <?php if ($conf->browser->layout == 'phone') {
+        print "margin-top: 10px;\n";
+    } ?>
 }
-div.firstcolumn div.box {
-padding-right: 10px;
+
+/*div.firstcolumn div.box {
+	padding-right: 10px;
 }
 div.secondcolumn div.box {
-padding-left: 10px;
-}
+	padding-left: 10px;
+}*/
 
 /* Force values for small screen */
 @media only screen and (max-width: 1000px)
 {
     div.fiche {
-        /* margin-<?php print $left; ?>: <?php print (GETPOST('optioncss', 'aZ09') == 'print'?6:($dol_hide_leftmenu?'6':'20')); ?>px; */
-        margin-<?php print $left; ?>: <?php print (GETPOST('optioncss', 'aZ09') == 'print'?8:6); ?>px;
-    	margin-<?php print $right; ?>: <?php print (GETPOST('optioncss', 'aZ09') == 'print'?8:6); ?>px;
+        margin-<?php print $left; ?>: <?php print (GETPOST('optioncss', 'aZ09') == 'print' ? 6 : ($dol_hide_leftmenu ? '6' : '20')); ?>px;
+        margin-<?php print $right; ?>: <?php print (GETPOST('optioncss', 'aZ09') == 'print' ? 8 : 6); ?>px;
     }
     div.fichecenter {
         width: 100%;
@@ -2189,17 +2467,20 @@ div.attachareaformuserfileecm {
 div.arearef {
 <?php if ($conf->global->FIX_AREAREF_TABACTION) { ?>
 	position: sticky;
-    z-index: 99;
+    z-index: 94;
 	<?php if ($conf->global->MAIN_MENU_INVERT) { ?>
-	top: 52px;
+	top: 40px;
 	<?php } else { ?>
-	top: 64px;
+	top: 52px;
 	<?php } ?>
 	background: inherit;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #DDD;
+<?php } else { ?>
+    padding-bottom: 10px;
 <?php } ?>
 	padding-top: 2px;
 	margin-bottom: 10px;
-	padding-bottom: 10px;
 }
 div.arearefnobottom {
 	padding-top: 2px;

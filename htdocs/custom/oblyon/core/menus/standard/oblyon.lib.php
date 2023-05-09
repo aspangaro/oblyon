@@ -1842,6 +1842,11 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
                     // Journals
                     $newmenu->add("/accountancy/bookkeeping/list.php?mainmenu=accountancy&amp;leftmenu=accountancy_journals",$langs->trans("Journals"),1,$user->rights->accounting->mouvements->lire);
 
+                    // Export accountancy
+                    if ((float) $conf->global->EASYA_VERSION >= 2022.5 || (float) DOL_VERSION >= 18.0) {
+                        $newmenu->add("/accountancy/bookkeeping/export.php?mainmenu=accountancy&amp;leftmenu=accountancy_export",$langs->trans("MenuExportAccountancy"),1,$user->rights->accounting->mouvements->lire);
+                    }
+
                     // Files
                     if (empty($conf->global->ACCOUNTANCY_HIDE_EXPORT_FILES_MENU))
                     {
@@ -2028,7 +2033,7 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
                         $newmenu->add("/asset/model/card.php?leftmenu=asset_model&amp;action=create", $langs->trans("MenuNewAssetModel"), 2, (empty($conf->global->MAIN_USE_ADVANCED_PERMS) && $user->rights->asset->write) || (!empty($conf->global->MAIN_USE_ADVANCED_PERMS) && !empty($user->rights->asset->model_advance->write)));
                         $newmenu->add("/asset/model/list.php?leftmenu=asset_model", $langs->trans("MenuListAssetModels"), 2, (empty($conf->global->MAIN_USE_ADVANCED_PERMS) && $user->rights->asset->read) || (!empty($conf->global->MAIN_USE_ADVANCED_PERMS) && !empty($user->rights->asset->model_advance->read)));
                     }
-                } else {
+                } elseif ((float) DOL_VERSION >= 17.0) {
                     $newmenu->add("/asset/list.php?leftmenu=asset&amp;mainmenu=accountancy", $langs->trans("MenuAssets"), 0, $user->rights->asset->read, '', $mainmenu, 'asset');
                     $newmenu->add("/asset/card.php?leftmenu=asset&amp;action=create", $langs->trans("MenuNewAsset"), 1, $user->rights->asset->write);
                     $newmenu->add("/asset/list.php?leftmenu=asset&amp;mainmenu=accountancy", $langs->trans("MenuListAssets"), 1, $user->rights->asset->read);

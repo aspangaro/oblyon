@@ -1,5 +1,12 @@
 ## Changelog ##
 
+### Version 2.2.5 - Compatibility 14.0.x - 18alpha (2023/05/09)
+- Upgrade CSS
+- Fix z-index for left menu if invert & with option fix area enabled
+- Fix info-box in module page
+- Compatibility with Dolibarr 17.0.x
+- Compatibility with Dolibarr 18-alpha
+
 ### Version 2.2.4 - Compatibility 14.0.x - 17.0.x (2023/03/27)
 - Fix color on line product selector when stock is ok (global.inc.php L5370 .product_line_stock_ok #33cc66 > #002000 | L5371 .product_line_stock_too_low #f07b6e > #884400) 
 - Fix missing class

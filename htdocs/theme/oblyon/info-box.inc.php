@@ -8,6 +8,15 @@ if (!defined('ISLOADEDBYSTEELSHEET')) {
  * Component: Info Box
  * -------------------
  */
+
+.info-box-module.--external span.info-box-icon-version {
+    background: rgba(0,0,0,0.2);
+}
+
+.info-box-module.--external.--need-update span.info-box-icon-version{
+    background: #bc9525;
+}
+
 .info-box {
 	display: block;
     position: relative;
@@ -72,17 +81,55 @@ if (!defined('ISLOADEDBYSTEELSHEET')) {
 	line-height: 90px;
 	background: rgba(0, 0, 0, 0.2);
 }
-.info-box-sm .info-box-icon{
-    height: 80px;
-    width: 80px;
+
+.info-box-module .info-box-icon {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.info-box-sm .info-box-icon {
+    height: 96px;		/* must match height of info-box-sm .info-box-content */
+    width: 78px;
     font-size: 25px;
+    line-height: 92px;
+}
+.info-box-order {
+    border-top-left-radius: 2px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 2px;
+    display: block;
+    overflow: hidden;
+    float: left;
+    height: 115px;
+    width: 88px;
+    text-align: center;
+    font-size: 2.3em;
+    line-height: 115px;
+    margin-right: 10px;
+    background: var(--colorbacktitle1) !important;
+}
+.opened-dash-board-wrap .info-box .info-box-icon {
+    font-size: 2em;
+}
+.opened-dash-board-wrap .info-box-sm .info-box-icon {
+    border-radius: 0 0 0 20px;
     line-height: 80px;
 }
+.info-box-module .info-box-icon {
+    height: 98px;
+}
 .info-box-icon > img {
-	max-width: 100%;
+    max-width: 85%;
 }
 .info-box-module .info-box-icon > img {
-    max-width: 50%;
+    max-width: 60%;
+}
+
+a.info-box-text.info-box-text-a {
+    display: table-cell;
+}
+a.info-box-text-a i.fa.fa-exclamation-triangle {
+    font-size: 0.9em;
 }
 
 .info-box-icon-text{
@@ -108,22 +155,22 @@ if (!defined('ISLOADEDBYSTEELSHEET')) {
     box-sizing: border-box;
     display: block;
     position: absolute;
-    width: 80px;
-    top: 58px;
+    width: 90px;
+    bottom: 0px;
     color: #ffffff;
     background-color: rgba(0,0,0,0.1);
     cursor: default;
 
     font-size: 10px;
-    line-height: 22px;
-    padding: 0px 3px;
+    line-height: 1.5em;
+    padding: 4px 3px;
     text-align: center;
     opacity: 1;
     -webkit-transition: opacity 0.5s, visibility 0s 0.5s;
     transition: opacity 0.5s, visibility 0s 0.5s;
 }
 .box-flex-item.info-box-module.info-box-module-disabled {
-    opacity: 0.6;
+    /* opacity: 0.6; */
 }
 
 .info-box-actions {
@@ -132,13 +179,38 @@ if (!defined('ISLOADEDBYSTEELSHEET')) {
     bottom: 0;
 }
 
+/* customize section img box on list of products */
+.info-box-img {
+    height: 105px !important;
+    width: 88px;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 2px;
+    display: block;
+    overflow: hidden;
+    float: left;
+    text-align: center;
+    font-size: 2.8em;
+    line-height: 90px;
+    margin-right: 5px;
+    background: var(--colorbacktitle1) !important;
+}
+.info-box-img > img {
+    width: 90%;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 <?php if(empty($conf->global->MAIN_DISABLE_GLOBAL_BOXSTATS) && !empty($conf->global->MAIN_INCLUDE_GLOBAL_STATS_IN_OPENED_DASHBOARD)){ ?>
 .info-box-icon-text{
     opacity: 1;
 }
 <?php } ?>
 
-.info-box-sm .info-box-icon-text{
+.info-box-sm .info-box-icon-text, .info-box-sm .info-box-icon-version {
     overflow: hidden;
     width: 80px;
 }
@@ -147,19 +219,19 @@ if (!defined('ISLOADEDBYSTEELSHEET')) {
 }
 
 .info-box-content {
-	min-height: 80px;
-	padding: 5px 10px;
-	margin-left: 90px;
+    padding: 5px 10px;
+    margin-left: 84px;
 }
 
 .info-box-sm .info-box-content{
     margin-left: 80px;
+    height: 86px;   /* 96 - margins of .info-box-sm .info-box-content */
 }
 .info-box-sm .info-box-module-enabled {
 	background: linear-gradient(0.35turn, #fff, #fff, #f6faf8, #e4efe8);
 }
 .info-box-content-warning span.font-status4 {
-	color: #bc9526 !important;
+    color: #bc9526 !important;
 }
 
 .info-box-number {
