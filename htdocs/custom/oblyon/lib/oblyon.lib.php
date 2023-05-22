@@ -109,6 +109,7 @@
 	function oblyon_bkup_module ($appliname)
 	{
 		global $db, $conf, $langs, $errormsg;
+        require_once DOL_DOCUMENT_ROOT.'/core/lib/files.lib.php';
 
 		// Set to UTF-8
 		if (is_a($db, 'DoliDBMysqli'))	$db->db->set_charset('utf8');
@@ -232,6 +233,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 	function oblyon_restore_module ($appliname)
 	{
 		global $conf;
+        require_once DOL_DOCUMENT_ROOT.'/core/lib/files.lib.php';
 
 		$pathsql	= DOL_DATA_ROOT.'/'.(empty($conf->global->MAIN_MODULE_MULTICOMPANY) || $conf->entity == 1 ? '' : $conf->entity.'/').$appliname.'/sql';
 		$handle		= @opendir($pathsql);
