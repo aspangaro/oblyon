@@ -29,7 +29,7 @@ if (!defined('ISLOADEDBYSTEELSHEET')) {
 	box-shadow: 0 0 1px rgba(0,0,0,.125),0 1px 3px rgba(0,0,0,.2);
     border-top-right-radius: 0.25em;
     border-top-left-radius: 0.50em;
-    border-bottom-left-radius: 0.50em;
+    border-bottom-left-radius: 20px;
     border-bottom-right-radius: 0.25em;
     margin-bottom: 15px;
 }
@@ -87,7 +87,7 @@ if (!defined('ISLOADEDBYSTEELSHEET')) {
     padding-bottom: 5px;
 }
 .info-box-sm .info-box-icon {
-    height: 96px;		/* must match height of info-box-sm .info-box-content */
+    height: 86px;		/* must match height of info-box-sm .info-box-content */
     width: 78px;
     font-size: 25px;
     line-height: 92px;
