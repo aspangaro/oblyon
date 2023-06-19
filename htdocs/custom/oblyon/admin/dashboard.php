@@ -32,7 +32,7 @@
 	require_once '../lib/oblyon.lib.php';
 
 	// Translations *********************************
-	$langs->loadLangs(array('admin', 'oblyon@oblyon'));
+	$langs->loadLangs(array('admin', 'oblyon@oblyon', 'opendsi@oblyon'));
 
 	// Access control *******************************
 	if (! $user->admin)				accessforbidden();
@@ -102,7 +102,10 @@
 				});
 			</script>
 			<form action = "'.$_SERVER['PHP_SELF'].'" method = "POST" enctype = "multipart/form-data">
-				<input type = "hidden" name = "token" value = "'.newToken().'" />';
+				<input type="hidden" name="token" value="'.newToken().'" />
+                <input type="hidden" name="action" value="update">
+                <input type="hidden" name="page_y" value="">
+                <input type="hidden" name="dol_resetcache" value="1">';
 	// Sauvegarde / Restauration
 	oblyon_print_backup_restore();
 	clearstatcache();

@@ -5,7 +5,7 @@
  * Copyright (C) 2005-2012 Regis Houssin        <regis.houssin@inodbox.com>
  * Copyright (C) 2015      Jean-François Ferry	<jfefe@aternatik.fr>
  * Copyright (C) 2022	   Paul Lepont          <paul@kawagency.fr>
- * Copyright (C) 2022	   Alexandre Spangaro   <support@open-dsi.fr>
+ * Copyright (C) 2022-2023 Alexandre Spangaro   <aspangaro@open-dsi.fr>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -32,11 +32,12 @@ require '../config.php';
 
 // Libraries ************************************
 require_once DOL_DOCUMENT_ROOT.'/core/class/html.formfile.class.php';
+require_once DOL_DOCUMENT_ROOT.'/core/class/doleditor.class.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/admin.lib.php';
 require_once '../lib/oblyon.lib.php';
 
 // Translations *********************************
-$langs->loadLangs(array('admin', 'oblyon@oblyon'));
+$langs->loadLangs(array('admin', 'oblyon@oblyon', 'opendsi@oblyon'));
 
 // Access control *******************************
 if (!$user->admin) {
@@ -46,11 +47,12 @@ if (!$user->admin) {
 // Actions **************************************
 $action                         = GETPOST('action', 'aZ09');
 $result							= '';
+
 // Sauvegarde / Restauration
 if ($action == 'bkupParams')	$result	= oblyon_bkup_module ('oblyon');
 if ($action == 'restoreParams')	$result	= oblyon_restore_module ('oblyon');
 
-if($action == 'update')         $result = dolibarr_set_const($db, "OBLYON_CUSTOM_CSS", GETPOST('custom_css'), 'chaine', 0, '', $conf->entity);
+if($action == 'update')         $result = dolibarr_set_const($db, "OBLYON_CUSTOM_CSS", GETPOST('OBLYON_CUSTOM_CSS', 'restricthtml'), 'chaine', 0, '', $conf->entity);
 
 // Retour => message Ok ou Ko
 if ($result == 1)			setEventMessages($langs->trans('SetupSaved'), null, 'mesgs');
@@ -59,7 +61,13 @@ $_SESSION['dol_resetcache']	= dol_print_date(dol_now(), 'dayhourlog');	// Reset 
 
 // View *****************************************
 $page_name					= $langs->trans('OblyonCustomCSSTitle');
-llxHeader('', $page_name);
+
+llxHeader('', $page_name, '', '', 0, 0,
+    array(
+        '/includes/ace/src/ace.js',
+        '/includes/ace/src/ext-statusbar.js',
+        '/includes/ace/src/ext-language_tools.js',
+    ), array());
 $linkback					= '<a href = "'.DOL_URL_ROOT.'/admin/modules.php">'.$langs->trans('BackToModuleList').'</a>';
 print load_fiche_titre($page_name, $linkback);
 
@@ -71,74 +79,39 @@ $form = new Form($db);
 $formfile = new FormFile($db);
 
 // setup page goes here *************************
-print '<form action = "'.$_SERVER['PHP_SELF'].'" method = "POST" enctype = "multipart/form-data">';
-print '<input type = "hidden" name = "token" value = "'.newToken().'" />';
+print '<form enctype="multipart/form-data" method="POST" action="'.$_SERVER["PHP_SELF"].'">';
+print '<input type="hidden" name="token" value="'.newToken().'">';
+print '<input type="hidden" name="action" value="update">';
+print '<input type="hidden" name="page_y" value="">';
+print '<input type="hidden" name="dol_resetcache" value="1">';
+
 // Sauvegarde / Restauration
 oblyon_print_backup_restore();
 clearstatcache();
 
-print '
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js" integrity="sha512-xwrAU5yhWwdTvvmMNheFn9IyuDbl/Kyghz2J3wQRDR8tyNmT8ZIYOd0V3iPYY/g4XdNPy0n/g0NvqGu9f0fPJQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css" integrity="sha512-uf06llspW44/LZpHzHT6qBOIVODjWtv4MxCricRxkzvopAlSWnTf6hpZTFxuuZcuNE9CBQhqE0Seu1CoRk84nQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/css/css.min.js" integrity="sha512-2gAMyrBfWPuTJDA2ZNIWVrBBe9eN6/hOjyvewDd0bsk2Zg06sUla/nPPlqQs75MQMvJ+S5AmfKmq9q3+W2qeKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-';
-
 print '<span class="opacitymedium">'.$langs->trans("DisplayDesc")."</span><br>\n";
 print "<br>\n";
 
+//print $form->textwithpicto($langs->trans("AddCustomCssSentence"), "", 1, 'help', '', 0, 2, 'tooltipmessageofday');
+
 print '<div class="div-table-responsive-no-min">';
-print '<table summary="blockdashboard" class="noborder centpercent editmode tableforfield">';
+print '<table summary="edit" class="noborder centpercent editmode tableforfield">';
 
+print '<tr class="liste_titre">';
+print '<td colspan="2">';
 
-print '<tr class="oddeven width25p"><td>';
-$texthelp = '';
-print $form->textwithpicto($langs->trans("AddCustomCssSentence"), $texthelp, 1, 'help', '', 0, 2, 'tooltipmessageofday');
-print '</td></tr>';
+$customcssValue = getDolGlobalString('OBLYON_CUSTOM_CSS');
 
-print '<tr class="oddeven width25p"><td>';
-print '<div id="codeMirror"></div>';
+$doleditor = new DolEditor('OBLYON_CUSTOM_CSS', $customcssValue, '', '80%', 'Basic', 'In', true, false, 'ace',10,'90%');
+$doleditor->Create(0,'',true,'css','css');
+print '</td></tr>'."\n";
 
-print '</td></tr>' . "\n";
-
-print '</table>';
+print '</table>'."\n";
 print '</div>';
 
 print '<div class="center">';
-print '<input class="button button-save reposition" type="submit" name="submit" value="' . $langs->trans("Save") . '">';
+print '<input class="button button-save reposition buttonforacesave" type="submit" name="submit" value="' . $langs->trans("Save") . '">';
 print '</div>';
-
-$constantOblyonCustomCSS = !empty($conf->global->OBLYON_CUSTOM_CSS) ? $conf->global->OBLYON_CUSTOM_CSS : '';
-print '	<script type = "text/javascript">
-				$(document).ready(function() {
-					$(".action").keyup(function(event) {
-						if (event.which === 13)	$("#action").click();
-					});
-                    var elem = document.getElementById("codeMirror")
-		            var initialValue = `'.$constantOblyonCustomCSS.'`;
-		            if(initialValue) {
-                        var textDefault = initialValue;
-                    } else {
-                        var textDefault = "#myCustomId{ \n	width : 100%; \n}"
-                    }
-                    var myCodeMirror = CodeMirror(elem, {
-                      value: textDefault,
-                      mode:  "css"
-                    });
-                    $(".button-save").on("click", function(){
-                        event.preventDefault();
-                        $.ajax({
-                            url: "./customcss.php",
-                            type: "POST",
-                            data : { action : "update", token : "'.newToken().'", custom_css : myCodeMirror.getValue()}
-                        })
-                        .done(function(response){
-                            if(response == 1){
-                                location.reload()
-                            }
-                        })
-		            })
-				})';
-print '</script>';
 
 print '</form>';
 print '<br/>';

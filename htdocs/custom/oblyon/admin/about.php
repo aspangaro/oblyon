@@ -1,6 +1,6 @@
 <?php
 /* Copyright (C) 2015       Nicolas Rivera      <nrivera.pro@gmail.com>
- * Copyright (C) 2015-2019  Open-DSI            <support@open-dsi.fr>
+ * Copyright (C) 2015-2023  Open-DSI            <support@open-dsi.fr>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,6 +26,7 @@
 
 // Libraries
 require_once DOL_DOCUMENT_ROOT . '/core/lib/admin.lib.php';
+dol_include_once('/oblyon/core/modules/modOblyon.class.php');
 dol_include_once('/oblyon/lib/oblyon.lib.php');
 dol_include_once('/oblyon/lib/opendsi_common.lib.php');
 
@@ -58,21 +59,37 @@ $head = oblyon_admin_prepare_head();
 
 print dol_get_fiche_head($head, 'about', $langs->trans("Module113900Name"), 0, "opendsi@oblyon");
 
-print '<div class="div-table-responsive-no-min">';
-print '<table summary="edit" class="noborder centpercent editmode tableforfield">';
+$modClass = new modOblyon($db);
+$oblyonVersion = !empty($modClass->getVersion()) ? $modClass->getVersion() : 'NC';
 
-print '<tr class="liste_titre"><td colspan="2">' . $langs->trans("Authors") . '</td>';
-print '</tr>'."\n";
+$supportvalue = "/*****"."<br>";
+$supportvalue.= " * Module : Oblyon"."<br>";
+$supportvalue.= " * Module version : ".$oblyonVersion."<br>";
+$supportvalue.= " * Dolibarr version : ".DOL_VERSION."<br>";
+$supportvalue.= " * Dolibarr version installation initiale : ".$conf->global->MAIN_VERSION_LAST_INSTALL."<br>";
+$supportvalue.= " *****/"."<br><br>";
+$supportvalue.= "Description de votre problème :"."<br>";
 
-// Alexandre Spangaro
+// print '<div class="div-table-responsive-no-min">';
+print '<table class="centpercent">';
+
+//print '<tr class="liste_titre"><td colspan="2">' . $langs->trans("Authors") . '</td>';
+//print '</tr>'."\n";
+
+// Easya Solutions
 print '<tr>';
-print '<td width="310px"><img alt="OpenDsi" src="../img/opendsi_dolibarr_preferred_partner.png" /></td>'."\n";
-print '<td align="left" valign="top"><p>'.$langs->trans("OpenDsiAboutDesc").'</p></td>'."\n";
+print '<form id="ticket" method="POST" target="_blank" action="https://support.easya.solutions/create_ticket.php">';
+print '<input name=message type="hidden" value="'.$supportvalue.'" />';
+print '<input name=email type="hidden" value="'.$user->email.'" />';
+print '<td class="titlefield center"><img alt="Easya Solutions" src="../img/opendsi_dolibarr_preferred_partner.png" /></td>'."\n";
+print '<td class="left"><p>'.$langs->trans("OpenDsiAboutDesc1").' <button type="submit" >'.$langs->trans("OpenDsiAboutDesc2").'</button> '.$langs->trans("OpenDsiAboutDesc3").'</p></td>'."\n";
 print '</tr>'."\n";
 
 print '</table>'."\n";
-print '</div>';
+// print '</div>';
 
+print '<br>';
+print '<br>';
 print '<br>';
 
 print '<div class="div-table-responsive-no-min">';
@@ -90,25 +107,12 @@ print '</td></tr>';
 
 // Mathieu BRUNOT / Monogramm
 print '<tr>';
-print '<td width="310px"><img alt="Monogramm" src="../img/monogramm.png" /></td>'."\n";
-print '<td align="left" valign="top"><p>'.$langs->trans("MonogrammAboutDesc").'</p></td>'."\n";
+print '<td class="titlefield center"><img alt="Monogramm" width="100px" src="../img/monogramm.png" /></td>'."\n";
+print '<td><b>Mathieu Brunot - Monogramm.io</b>&nbsp;-&nbsp;Développeur';
 print '</tr>'."\n";
 
 print '</table>'."\n";
 print '</div>';
-
-print '<br>';
-
-print '<h2>Licence</h2>';
-print $langs->trans("LicenseMessage");
-print '<h2>Bugs / comments</h2>';
-print $langs->trans("AboutMessage");
-
-$changelog = opendsi_common_getChangeLog('oblyon');
-
-print '<div class="moduledesclong">'."\n";
-print (!empty($changelog) ? $changelog : $langs->trans("NotAvailable"));
-print '<div>'."\n";
 
 llxFooter();
 

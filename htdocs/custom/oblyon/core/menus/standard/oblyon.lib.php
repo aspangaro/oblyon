@@ -1752,9 +1752,8 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
                     }
 
                     // Journals
-                    if(! empty($conf->accounting->enabled) && ! empty($user->rights->accounting->comptarapport->lire) && $mainmenu == 'accountancy')
-                    {
-                        $newmenu->add('',$langs->trans("RegistrationInAccounting"),1,$user->rights->accounting->comptarapport->lire);
+                    if(! empty($conf->accounting->enabled) && ! empty($user->rights->accounting->comptarapport->lire) && $mainmenu == 'accountancy') {
+                        $newmenu->add('',$langs->trans("RegistrationInAccounting"),1,$user->rights->accounting->comptarapport->lire, '', $mainmenu, 'accountancy_journal');
 
                         // Multi journal
                         $sql = "SELECT rowid, code, label, nature";

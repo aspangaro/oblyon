@@ -57,6 +57,7 @@ class ActionsOblyon
 		$this->db = $db;
 	}
 
+    /*
 	public function addHtmlHeader($parameters){
 		global $conf;
 
@@ -69,4 +70,5 @@ class ActionsOblyon
 		$this->resprints = $style;
 		return 0;
 	}
+    */
 }

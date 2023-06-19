@@ -1,6 +1,7 @@
 # Dolibarr language file - en_US - opendsi
 CHARSET=UTF-8
 easyaFamily=Easya Solutions
-opendsiFamily=OpenDSI
-OpenDsiAboutDesc=This module has been developed by <a href="http://www.open-dsi.fr" target="_blank">Open-DSI</a><br>You can find the documentation on our <a href="http://wiki.open-dsi.fr/index.php/Accueil" target="_blank">wiki</a><br><br>For any question or feedback, contact us on <a href="mailto:support@open-dsi.fr">support@open-dsi.fr</a><br><br>For any question, contact us on <a href="mailto:contact@open-dsi.fr">contact@open-dsi.fr</a> or at +33 4 82 53 94 76<br><br>Find our other modules on <a href="http://www.dolistore.com/search.php?orderby=position&orderway=desc&search_query=open-dsi&submit_search=Rechercher" target="_blank">Dolistore</a>
+OpenDsiAboutDesc1=This module has been developed by <a href="https://easya.solutions"" target="_blank">Easya Solutions</a><br><br>For any question or feedback, contact us on <a href="mailto:support@open-dsi.fr">support@open-dsi.fr</a><br><br>For any question or feedback, file a support demand at
+OpenDsiAboutDesc2=our support ticket
+OpenDsiAboutDesc3=or contact us on <a href="mailto:support@easya.solutions">support@easya.solutions</a> or at +33 4 82 53 94 76<br><br>Find our other modules on <a href="http://www.dolistore.com/search.php?orderby=position&orderway=desc&search_query=open-dsi&submit_search=Rechercher" target="_blank">Dolistore</a>
 OpenDsiChangeLog=ChangeLog file

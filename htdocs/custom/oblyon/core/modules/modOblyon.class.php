@@ -46,24 +46,24 @@
 			$this->db				= $db;
 			$this->numero			= 113900;									// Unique Id for module
 			$this->name				= preg_replace('/^mod/i', '', get_class($this));	// Module label (no space allowed)
-			$this->editor_name		= '<b>Open-DSI</b>';
-			$this->editor_web		= 'https://www.open-dsi.fr';
-			$this->editor_url		= "https://www.open-dsi.fr";
-			$this->editor_email		= 'support@open-dsi.fr';
+			$this->editor_name		= '<b>Easya Solutions</b> (Ex Open-Dsi)';
+			$this->editor_web		= 'https://easya.solutions';
+			$this->editor_url		= "https://easya.solutions";
+			$this->editor_email		= 'support@easya.solutions';
+			$this->url_last_version = 'https://raw.githubusercontent.com/aspangaro/oblyon/14.0/htdocs/custom/oblyon/VERSION';
 			$this->rights_class		= $this->name;								// Key text used to identify module (for permissions, menus, etc...)
-			$family					= (!empty($conf->global->EASYA_VERSION) ? 'easya' : 'opendsi');
-			$this->family			= $family;									// used to group modules in module setup page
+			$this->family			= 'easya';									// used to group modules in module setup page
 			$this->module_position	= 10;
-			$this->familyinfo		= array($family => array('position' => '001', 'label' => $langs->trans($family . "Family")));
+			$this->familyinfo		= array('easya' => array('position' => '001', 'label' => $langs->trans("easyaFamily")));
 			$this->module_position	= 1;
 			$this->description		= $langs->trans('Module113900Desc');	// Module description
-			$this->version			= '2.2.5';							// Version : 'development', 'experimental', 'dolibarr' or 'dolibarr_deprecated' or version
+			$this->version			= file_get_contents(__DIR__.'/../../VERSION');		// Version : 'development', 'experimental', 'dolibarr' or 'dolibarr_deprecated' or version
 			$this->const_name		= 'MAIN_MODULE_'.strtoupper($this->name);	// llx_const table to save module status enabled/disabled
 			$this->special			= 0;										// Where to store the module in setup page (0=common,1=interface,2=others,3=very specific)
 			$this->picto			= 'opendsi_big@'.$this->name;				// Name of image file used for this module. If in theme => 'pictovalue' ; if in module => 'pictovalue@module' under name object_pictovalue.png
 			$this->module_parts		= array('menus'	=> 1,
 											'js'	=> array('js'	=> '/'.$this->name.'/js/pushy.js'),
-											'css'	=> array('css'	=> '/'.$this->name.'/css/'.$this->name.'.css'),
+											'css'	=> array('css'	=> ('/'.$this->name.'/css/'.$this->name.'.css'), ('/theme/'.$this->name.'/custom.css.php')),
 											'tpl'	=> 1,
 											'hooks' => array('data' => array('main'),'entity' => '0',),
 											);

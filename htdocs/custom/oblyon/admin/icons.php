@@ -32,7 +32,7 @@
 	require_once '../lib/oblyon.lib.php';
 
 	// Translations *********************************
-	$langs->loadLangs(array('admin', 'oblyon@oblyon'));
+	$langs->loadLangs(array('admin', 'oblyon@oblyon', 'opendsi@oblyon'));
 
 	// Access control *******************************
 	if (! $user->admin)				accessforbidden();

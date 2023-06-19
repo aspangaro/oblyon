@@ -1,5 +1,12 @@
 ## Changelog ##
 
+### Version 2.2.6 - Compatibility 14.0.x - 18beta (2023/06/13)
+- Fix CSS Dashboard on Easya 2022.5.3
+- Fix Oblyon menu for problem in accountancy module
+- Move Open-DSI to Easya Solutions
+- Add support demand in about/support page
+- Move customCCS to new version
+
 ### Version 2.2.5 - Compatibility 14.0.x - 18alpha (2023/05/09)
 - Upgrade CSS
 - Fix z-index for left menu if invert & with option fix area enabled

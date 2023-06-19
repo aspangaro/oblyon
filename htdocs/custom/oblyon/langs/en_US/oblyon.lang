@@ -20,6 +20,8 @@ BankColorizeMovementName1 = Background color for a debit movement
 BankColorizeMovementName2 = Background color for a credit movement
 MenuCatalog = Catalog
 
+CustomCSS=Style CSS
+
 #
 # Menus
 #
@@ -205,6 +207,7 @@ AddCustomCssSentence = You can add your custom CSS
 # About page
 #
 ThemeOblyonAboutTitle = Oblyon Configurator - About
+ThemeOblyonChangelogTitle = Oblyon Configurator - ChangeLog
 OblyonAbout = About
 Authors = Authors
 OldAuthors = Previous authors

@@ -90,12 +90,15 @@
 
         complete_head_from_modules($conf, $langs, null, $head, $h, 'admin_oblyon', 'remove');
 
-		if(empty($conf->global->EASYA_VERSION)) {
-			$head[$h][0] = dol_buildpath("/oblyon/admin/about.php", 1);
-			$head[$h][1] = $langs->trans("About");
-			$head[$h][2] = 'about';
-			$h++;
-		}
+		$head[$h][0] = dol_buildpath("/oblyon/admin/about.php", 1);
+        $head[$h][1] = $langs->trans("About") . " / " . $langs->trans("Support");
+		$head[$h][2] = 'about';
+		$h++;
+
+        $head[$h][0] = dol_buildpath("/oblyon/admin/changelog.php", 1);
+        $head[$h][1] = $langs->trans("OpenDsiChangeLog");
+        $head[$h][2] = 'changelog';
+        $h++;
 
 		return $head;
 	}

@@ -28,8 +28,8 @@ if (!defined('ISLOADEDBYSTEELSHEET')) {
 	width: 100%;
 	box-shadow: 0 0 1px rgba(0,0,0,.125),0 1px 3px rgba(0,0,0,.2);
     border-top-right-radius: 0.25em;
-    border-top-left-radius: 0.50em;
-    border-bottom-left-radius: 0.50em;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
     border-bottom-right-radius: 0.25em;
     margin-bottom: 15px;
 }
@@ -67,10 +67,10 @@ if (!defined('ISLOADEDBYSTEELSHEET')) {
     transition: width .6s ease;
 }
 .info-box-icon {
-	border-top-left-radius: 0.25em;
+	border-top-left-radius: 6px;
 	border-top-right-radius: 0;
 	border-bottom-right-radius: 0;
-	border-bottom-left-radius: 0.25em;
+	border-bottom-left-radius: 6px;
 	display: block;
     overflow: hidden;
 	float: left;
@@ -83,11 +83,11 @@ if (!defined('ISLOADEDBYSTEELSHEET')) {
 }
 
 .info-box-module .info-box-icon {
-    padding-top: 5px;
+    padding-top: 0px;
     padding-bottom: 5px;
 }
 .info-box-sm .info-box-icon {
-    height: 96px;		/* must match height of info-box-sm .info-box-content */
+    height: 86px;		/* must match height of info-box-sm .info-box-content */
     width: 78px;
     font-size: 25px;
     line-height: 92px;
@@ -112,7 +112,7 @@ if (!defined('ISLOADEDBYSTEELSHEET')) {
     font-size: 2em;
 }
 .opened-dash-board-wrap .info-box-sm .info-box-icon {
-    border-radius: 0 0 0 20px;
+    border-radius: 6px 0 0 6px;
     line-height: 80px;
 }
 .info-box-module .info-box-icon {
@@ -163,7 +163,7 @@ a.info-box-text-a i.fa.fa-exclamation-triangle {
 
     font-size: 10px;
     line-height: 1.5em;
-    padding: 4px 3px;
+    padding: 0px 3px 0px 3px;
     text-align: center;
     opacity: 1;
     -webkit-transition: opacity 0.5s, visibility 0s 0.5s;
@@ -212,7 +212,7 @@ a.info-box-text-a i.fa.fa-exclamation-triangle {
 
 .info-box-sm .info-box-icon-text, .info-box-sm .info-box-icon-version {
     overflow: hidden;
-    width: 80px;
+    width: 78px;
 }
 .info-box:hover .info-box-icon-text{
     opacity: 1;
@@ -224,7 +224,7 @@ a.info-box-text-a i.fa.fa-exclamation-triangle {
 }
 
 .info-box-sm .info-box-content{
-    margin-left: 80px;
+    margin-left: 78px;
     height: 86px;   /* 96 - margins of .info-box-sm .info-box-content */
 }
 .info-box-sm .info-box-module-enabled {
