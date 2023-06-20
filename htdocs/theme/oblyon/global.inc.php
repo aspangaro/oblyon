@@ -9634,6 +9634,9 @@ tr.liste_titre th {
 	background-color: <?php print $colorbtitle; ?>;
 	z-index: 1;
 }
+form.ui-dialog-content tr.liste_titre th {
+	top: unset !important;
+}
 <?php } ?>
 
 /* ============================================================================== */
