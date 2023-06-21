@@ -1,6 +1,10 @@
 ## Changelog ##
 
-### Version 2.2.6 - Compatibility 14.0.x - 18beta (2023/06/13)
+### Version 2.2.7 - Compatibility 14.0.x - 18beta (2023/06/21)
+- Fix right access problem between personalized & tools menu
+- Compatibility with Dolibarr 18-beta
+
+### Version 2.2.6 - Compatibility 14.0.x - 18beta (2023/06/19)
 - Fix CSS Dashboard on Easya 2022.5.3
 - Fix Oblyon menu for problem in accountancy module
 - Move Open-DSI to Easya Solutions

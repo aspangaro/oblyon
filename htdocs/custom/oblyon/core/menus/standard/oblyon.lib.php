@@ -490,14 +490,6 @@ function print_oblyon_menu($db, $atarget, $type_user = 0, &$tabMenu, &$menu, $no
 		$menu->add($link, $chaine, 0, $showmode, $atarget, "ticket", '');
 	}
 
-	// Tools
-	$tmpentry = array(
-		'enabled'=>1,
-		'perms'=>1,
-		'module'=>''
-	);
-	$showmode=dol_oblyon_showmenu($type_user, $tmpentry, $listofmodulesforexternal);
-
 	// Show personalized menus
 	$menuArbo = new Menubase($db,'oblyon');
 	$newTabMenu = $menuArbo->menuTopCharger('','',$type_user,'oblyon',$tabMenu);	// Return tabMenu with only top entries
@@ -548,6 +540,14 @@ function print_oblyon_menu($db, $atarget, $type_user = 0, &$tabMenu, &$menu, $no
 	}
 
     // Show menu tools in last position
+    // Tools
+    $tmpentry = array(
+        'enabled'=>1,
+        'perms'=>1,
+        'module'=>''
+    );
+    $showmode=dol_oblyon_showmenu($type_user, $tmpentry, $listofmodulesforexternal);
+
     if ($showmode) {
         $langs->loadLangs(array("other"));
 

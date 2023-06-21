@@ -1607,6 +1607,15 @@ select.flat.selectlimit {
 .marginbottomonly {
 	margin-bottom: 10px !important;
 }
+.marginbottomonlyshort {
+    margin-bottom: 3px !important;
+}
+.nomargintop {
+    margin-top: 0 !important;
+}
+.nomarginbottom {
+    margin-bottom: 0 !important;
+}
 .selectlimit, .selectlimit:focus {
     border-left: none !important;
     border-top: none !important;
@@ -1620,11 +1629,18 @@ select.flat.selectlimit {
     width: 130px;
 }
 /* using a tdoverflowxxx make the min-width not working */
+.tdnooverflowimp {
+    text-overflow: unset;
+}
 .tdoverflow {
     max-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+.spanoverflow {
+    overflow-x: clip;
+    text-overflow: ellipsis;
 }
 .tdoverflowmax50 {			/* For tdoverflow, the max-midth become a minimum ! */
     max-width: 50px;
@@ -1632,8 +1648,38 @@ select.flat.selectlimit {
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+.tdoverflowmax60 {			/* For tdoverflow, the max-midth become a minimum ! */
+    max-width: 60px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.tdoverflowmax80 {			/* For tdoverflow, the max-midth become a minimum ! */
+    max-width: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.tdoverflowmax80imp {			/* For tdoverflow, the max-midth become a minimum ! */
+    max-width: 80px !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 .tdoverflowmax100 {
     max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.tdoverflowmax100imp {			/* For tdoverflow, the max-midth become a minimum ! */
+    max-width: 100px !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.tdoverflowmax125 {			/* For tdoverflow, the max-midth become a minimum ! */
+    max-width: 125px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -1650,8 +1696,26 @@ select.flat.selectlimit {
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+.tdoverflowmax250 {			/* For tdoverflow, the max-midth become a minimum ! */
+    max-width: 250px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 .tdoverflowmax300 {
     max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.tdoverflowmax400 {			/* For tdoverflow, the max-midth become a minimum ! */
+    max-width: 400px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.tdoverflowmax500 {			/* For tdoverflow, the max-midth become a minimum ! */
+    max-width: 500px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -1676,6 +1740,15 @@ select.flat.selectlimit {
 .tablelistofcalendars {
     margin-top: 25px !important;
 }
+.navselectiondate {
+    width: 250px;
+}
+
+/* Styles for amount on card */
+table.paymenttable td.amountpaymentcomplete, table.paymenttable td.amountremaintopay, table.paymenttable td.amountremaintopayback {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
 .amountalreadypaid {
 }
 .amountpaymentcomplete {
@@ -1695,6 +1768,12 @@ select.flat.selectlimit {
 .amountpaymentneutral {
     font-weight: bold;
     font-size: 1.2em;
+}
+.onlinepaymentbody .amountpaymentcomplete {
+    background-color: #008800;
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
 }
 .savingdocmask {
     margin-top: 6px;
@@ -1717,6 +1796,9 @@ select.flat.selectlimit {
 }
 .fa-file-text-o, .fa-file-code-o, .fa-file-powerpoint-o, .fa-file-excel-o, .fa-file-word-o, .fa-file-o, .fa-file-image-o, .fa-file-video-o, .fa-file-audio-o, .fa-file-archive-o, .fa-file-pdf-o {
     color: <?php print $maincolor; ?>;
+}
+.fa-15 {
+    font-size: 1.5em;
 }
 .fa-trash, .fa-crop, .fa-pencil {
     font-size: 1.4em;
@@ -1916,6 +1998,15 @@ select.selectarrowonleft option {
     .minwidth300imp { min-width: 120px !important; }
     .minwidth400imp { min-width: 150px !important; }
     .minwidth500imp { min-width: 250px !important; }
+}
+
+select.widthcentpercentminusx, span.widthcentpercentminusx:not(.select2-selection), input.widthcentpercentminusx {
+    width: calc(100% - 52px) !important;
+    display: inline-block;
+}
+select.widthcentpercentminusxx, span.widthcentpercentminusxx:not(.select2-selection), input.widthcentpercentminusxx {
+    width: calc(100% - 70px) !important;
+    display: inline-block;
 }
 
 /* Force values for small screen 767 */
