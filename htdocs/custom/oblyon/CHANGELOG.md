@@ -1,5 +1,9 @@
 ## Changelog ##
 
+### Version 2.2.8 - Compatibility 14.0.x - 18.0.x (2023/07/10)
+- Add constant PROJECT_HIDE_MENU_TASKS_ACTIVITY to hide in project menu the link to manage activity
+- Upgrade CSS
+
 ### Version 2.2.7 - Compatibility 14.0.x - 18beta (2023/06/21)
 - Fix right access problem between personalized & tools menu
 - Compatibility with Dolibarr 18-beta
