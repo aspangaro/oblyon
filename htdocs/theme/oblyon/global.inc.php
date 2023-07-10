@@ -1532,7 +1532,8 @@ a.impayee:hover { font-weight: bold; color: #550000; }
     padding-left: 20px;
 }
 div.divsearchfield {
-    float: <?php print $left; ?>;
+    /*float: <?php print $left; ?>;*/
+    display: inline-block;
     margin-<?php print $right; ?>: 12px;
     margin-<?php print $left; ?>: 2px;
     margin-top: 4px;
@@ -1549,7 +1550,133 @@ div.divsearchfield {
     overflow: auto;
     padding-bottom: 5px;
     opacity: 0.6;
+    font-size: small;
 }
+.divadvancedsearchfield:first-child {
+    margin-top: 3px;
+}
+.divadvancedsearchfield {
+    float: left;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 2px;
+    padding-top: 2px;
+}
+.divadvancedsearchfield span.select2.select2-container.select2-container--default {
+    /* padding-bottom: 4px; */
+}
+.search_component_params {
+    /*display: flex; */
+    -webkit-flex-flow: row wrap;
+    flex-flow: row wrap;
+    background: #fff;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-<?php echo $left; ?>: 0;
+    padding-<?php echo $right; ?>: 0;
+    border-bottom: solid 1px var(--inputbordercolor);
+    height: 24px;
+    border-radius: 3px;
+}
+.search_component_searchtext {
+    padding-top: 2px;
+}
+.search_component_params_text, .search_component_params_text:focus {
+    border-bottom: none;
+    width: auto;
+    margin: 0 !important;
+    padding: 3px;
+}
+.tagsearch {
+    padding: 2px;
+    padding-right: 4px;
+    padding-bottom: 3px;
+    background: #ddd;
+    border-radius: 4px;
+}
+.tagsearchdelete {
+    color: #999;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: bold;
+    margin-right: 2px;
+    padding-left: 4px;
+}
+
+.caretleftaxis {
+    margin-left: -13px;
+    margin-top: -1px;
+    position: absolute;
+}
+.caretdownaxis {
+    margin-left: -12px;
+    margin-top: 0;
+    position: absolute;
+}
+
+.a-filter, .a-mesure {
+    border-radius: 50px;
+    background: var(--colortexttitlenotab);
+    color: #fff;
+    padding: 8px 10px 8px 6px;
+}
+.a-filter:before {
+    content: "\f0b0";
+}
+.a-mesure:before {
+    content: "\f080";
+}
+.a-filter:before, .a-mesure:before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 600;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+.a-filter-disabled, .a-mesure-disabled {
+    border-radius: 50px;
+    background: var(--colorbacktitle1);
+    padding: 8px;
+    opacity: 0.6;
+}
+
+
+/* ============================================================================== */
+/* Styles for scan tool                                                           */
+/* ============================================================================== */
+
+div.div-for-modal {
+    /* display: none; */
+    position:absolute;
+    top:calc(50% - 200px);
+    left:calc(50% - 250px);
+    width:500px;  /* adjust as per your needs */
+    height:400px;   /* adjust as per your needs */
+    background: #fff;
+    border: 1px solid #bbb;
+    box-shadow: 2px 2px 20px #ddd;
+    z-index: 100;
+}
+
+#scantoolmessage {
+    height: 3em;
+    border: none;
+    overflow-y: auto;
+}
+
+div.div-for-modal-topright {
+    /* display: none; */
+    position: fixed;
+    top: 0;
+    right: 0;
+    width:50%;  /* adjust as per your needs */
+    height:320px;   /* adjust as per your needs */
+    background: #fff;
+    border: 1px solid #bbb;
+    box-shadow: 2px 2px 20px #ddd;
+    z-index: 1100;
+}
+
+
 <?php
 // Add a nowrap on smartphone, so long list of field used for filter are overflowed with clip
 if ($conf->browser->layout == 'phone') {
