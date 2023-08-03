@@ -29,14 +29,14 @@
 	--colortextlink: rgb(<?php print $colortextlink; ?>);
 	--colortextbackhmenu: #<?php print $colortextbackhmenu; ?>;
 	--colortextbackvmenu: #<?php print $colortextbackvmenu; ?>;
-	--colortopbordertitle1: rgb(<?php print $colortopbordertitle1; ?>);
+	--colortopbordertitle1: rgb(<?php print $bgnavtop; ?>);
 	--listetotal: #888888;
-	--inputbackgroundcolor: #FFF;
+	--inputbackgroundcolor: <?php echo $colorbline_hover; ?>;
 	--inputbordercolor: rgba(0,0,0,.15);
 	--tooltipbgcolor: <?php print $toolTipBgColor; ?>;
 	--tooltipfontcolor : <?php print $toolTipFontColor; ?>;
 	--oddevencolor: #202020;
-	--colorboxstatsborder: #e0e0e0;
+	--colorboxstatsborder: <?php echo $bgnavtop ?>;
 	--dolgraphbg: rgba(255,255,255,0);
 	--fieldrequiredcolor: #400030;
 	--colortextbacktab: #<?php print $colortextbacktab; ?>;
@@ -641,7 +641,7 @@ a:hover {
 }
 
 a:hover, a:focus {
-    color: <?php print $maincolor; ?>;
+    color: var(--colortextlink);
     text-decoration: underline;
 }
 
@@ -698,7 +698,7 @@ select:invalid {
 }
 input:disabled, textarea:disabled, select[disabled='disabled']
 {
-    background:#eee;
+    background: var(--inputbackgroundcolor);
 }
 
 input.liste_titre {
@@ -963,7 +963,7 @@ select.flat, form.flat select {
 
 input:disabled,
 select:disabled {
-    background-color: #ddd;
+    background-color: var(--inputbackgroundcolor);
     cursor: not-allowed;
 }
 
@@ -1141,7 +1141,7 @@ input.pageplusone {
     color: #888 !important;
 }
 .colorblack {
-    color: #000;
+    //color: #000;
 }
 .fontsizeunset {
     font-size: unset !important;
@@ -1164,7 +1164,7 @@ select:invalid {
 }
 input:disabled, textarea:disabled, select[disabled='disabled']
 {
-    background:#ddd;
+    background: var(--inputbackgroundcolor);
 }
 
 input.liste_titre {
@@ -5321,7 +5321,7 @@ table.border {
 }
 
 table.border td {
-    border: 1px solid #E0E0E0;
+    border: 1px solid <?php echo $colortopbordertitle1 ?>;
     border-collapse: collapse;
     padding: 5px 2px 5px 2px;
     vertical-align: middle;
@@ -5635,9 +5635,12 @@ div .tdtop {
     text-align: center;
 
     background: #fcfcfc;
-    border: 1px solid #eee;
-    border-left: 6px solid <?php print $maincolor; ?>;
-    box-shadow: 1px 1px 8px #ddd;
+    <?php if(!empty($conf->global->OBLYON_INFOXBOX_BACKGROUND)) { ?>
+        background: <?php print $conf->global->OBLYON_INFOXBOX_BACKGROUND; ?> !important;
+    <?php } ?>
+//	border: 1px solid var(--colorboxstatsborder);
+	border-left: 6px solid var(--colorboxstatsborder);
+//	box-shadow: 1px 1px 8px #ddd;
     border-radius: 0px;
 }
 .boxstats, .boxstats130, .boxstatscontent {
@@ -5926,7 +5929,7 @@ table.notopnoleftnoright div.titre {
 }
 
 div.titre {
-    color: <?php print $maincolor; ?>;
+    color: <?php print $colorftitle; ?>;
     font-weight: bold;
     font-size: 1.1em;
     text-decoration: none;
@@ -6303,20 +6306,20 @@ span.websitebuttonsitepreviewdisabled img, a.websitebuttonsitepreviewdisabled im
 table.cal_month    { border-spacing: 0px; }
 table.cal_month td:first-child  { border-left: 0px; }
 table.cal_month td:last-child   { border-right: 0px; }
-.cal_current_month { border-top: 0; border-left: solid 1px #E0E0E0; border-right: 0; border-bottom: solid 1px #E0E0E0; }
-.cal_current_month_peruserleft { border-top: 0; border-left: solid 2px #6C7C7B; border-right: 0; border-bottom: solid 1px #E0E0E0; }
-.cal_current_month_oneday { border-right: solid 1px #E0E0E0; }
+.cal_current_month { border-top: 0; border-left: solid 1px <?php echo $colortopbordertitle1 ?>; border-right: 0; border-bottom: solid 1px <?php echo $colortopbordertitle1 ?>; }
+.cal_current_month_peruserleft { border-top: 0; border-left: solid 2px #6C7C7B; border-right: 0; border-bottom: solid 1px <?php echo $colortopbordertitle1 ?>; }
+.cal_current_month_oneday { border-right: solid 1px <?php echo $colortopbordertitle1 ?>; }
 .cal_other_month   { border-top: 0; border-left: solid 1px #C0C0C0; border-right: 0; border-bottom: solid 1px #C0C0C0; }
 .cal_other_month_peruserleft { border-top: 0; border-left: solid 2px #6C7C7B !important; border-right: 0; }
-.cal_current_month_right { border-right: solid 1px #E0E0E0; }
+.cal_current_month_right { border-right: solid 1px <?php echo $colortopbordertitle1 ?>; }
 .cal_other_month_right   { border-right: solid 1px #C0C0C0; }
 .cal_other_month   { /* opacity: 0.6; */ background: #EAEAEA; padding-<?php print $left; ?>: 2px; padding-<?php print $right; ?>: 1px; padding-top: 0px; padding-bottom: 0px; }
 .cal_past_month    { /* opacity: 0.6; */ background: #EEEEEE; padding-<?php print $left; ?>: 2px; padding-<?php print $right; ?>: 1px; padding-top: 0px; padding-bottom: 0px; }
-.cal_current_month { background: #FFFFFF; border-left: solid 1px #E0E0E0; padding-<?php print $left; ?>: 2px; padding-<?php print $right; ?>: 1px; padding-top: 0px; padding-bottom: 0px; }
+.cal_current_month { background: #FFFFFF; border-left: solid 1px <?php echo $colortopbordertitle1 ?>; padding-<?php print $left; ?>: 2px; padding-<?php print $right; ?>: 1px; padding-top: 0px; padding-bottom: 0px; }
 .cal_current_month_peruserleft { background: #FFFFFF; border-left: solid 2px #6C7C7B; padding-<?php print $left; ?>: 2px; padding-<?php print $right; ?>: 1px; padding-top: 0px; padding-bottom: 0px; }
-.cal_today         { background: #FDFDF0; border-left: solid 1px #E0E0E0; border-bottom: solid 1px #E0E0E0; padding-<?php print $left; ?>: 2px; padding-<?php print $right; ?>: 1px; padding-top: 0px; padding-bottom: 0px; }
-.cal_today_peruser { background: #FDFDF0; border-right: solid 1px #E0E0E0; border-bottom: solid 1px #E0E0E0; padding-<?php print $left; ?>: 2px; padding-<?php print $right; ?>: 1px; padding-top: 0px; padding-bottom: 0px; }
-.cal_today_peruser_peruserleft { background: #FDFDF0; border-left: solid 2px #6C7C7B; border-right: solid 1px #E0E0E0; border-bottom: solid 1px #E0E0E0; padding-<?php print $left; ?>: 2px; padding-<?php print $right; ?>: 1px; padding-top: 0px; padding-bottom: 0px; }
+.cal_today         { background: #FDFDF0; border-left: solid 1px <?php echo $colortopbordertitle1 ?>; border-bottom: solid 1px <?php echo $colortopbordertitle1 ?>; padding-<?php print $left; ?>: 2px; padding-<?php print $right; ?>: 1px; padding-top: 0px; padding-bottom: 0px; }
+.cal_today_peruser { background: #FDFDF0; border-right: solid 1px <?php echo $colortopbordertitle1 ?>; border-bottom: solid 1px <?php echo $colortopbordertitle1 ?>; padding-<?php print $left; ?>: 2px; padding-<?php print $right; ?>: 1px; padding-top: 0px; padding-bottom: 0px; }
+.cal_today_peruser_peruserleft { background: #FDFDF0; border-left: solid 2px #6C7C7B; border-right: solid 1px <?php echo $colortopbordertitle1 ?>; border-bottom: solid 1px <?php echo $colortopbordertitle1 ?>; padding-<?php print $left; ?>: 2px; padding-<?php print $right; ?>: 1px; padding-top: 0px; padding-bottom: 0px; }
 .cal_past          { }
 .cal_peruser       { padding: 0px; }
 .cal_impair        { background: #F8F8F8; }
@@ -7524,10 +7527,10 @@ span.select2.select2-container.select2-container--default {
 .blockvmenusearch .select2-container--default .select2-selection--single,
 .blockvmenubookmarks .select2-container--default .select2-selection--single
 {
-    background-color: #ffffff;
+    background-color: var(--inputbackgroundcolor);
 }
 .select2-container--default .select2-selection--single .select2-selection__rendered {
-    /* color: unset; */
+    color: unset;
 }
 .select2-default {
     color: #999 !important;
@@ -7575,6 +7578,7 @@ span.select2.select2-container.select2-container--default {
 }
 .select2-container--default .select2-selection--single
 {
+	background-color: var(--inputbackgroundcolor);
     outline: none;
     border-top: none;
     border-left: none;
@@ -7609,11 +7613,12 @@ span.select2.select2-container.select2-container--default {
     box-shadow: none !important;
 }
 .select2-dropdown {
-    border: 1px solid #ccc;
-    box-shadow: 1px 2px 10px #ddd;
+    border: 1px solid var(--colorboxstatsborder);
+//    box-shadow: 1px 2px 10px #ddd;
+    background-color: <?php print $bgnavtop_hover; ?> !important;
 }
 .select2-dropdown-open {
-    background-color: #fff;
+    background-color: <?php print $bgnavtop_hover; ?> !important;
 }
 .select2-dropdown-open .select2-choice, .select2-dropdown-open .select2-choices
 {
@@ -7623,7 +7628,7 @@ span.select2.select2-container.select2-container--default {
     border-bottom: none;
     -webkit-box-shadow: none !important;
     box-shadow: none !important;
-    background-color: #fff;
+    background-color: <?php print $bgnavtop_hover; ?> !important;
 }
 .select2-disabled
 {
@@ -7641,7 +7646,7 @@ span.select2.select2-container.select2-container--default {
 }
 div.select2-drop-above
 {
-    background: #fff;
+    background: <?php print $bgnavtop_hover; ?> !important;
     -webkit-box-shadow: none !important;
     box-shadow: none !important;
 }
@@ -7762,6 +7767,7 @@ span#select2-boxbookmark-container, span#select2-boxcombo-container {
 }
 
 .select2-container--default .select2-selection--multiple {
+	background-color: var(--inputbackgroundcolor);
     color: #222 !important;
 }
 
@@ -7903,41 +7909,6 @@ dl.dropdown {
 .dropdown span.value {
     display:none;
 }
-.dropdown dd ul {
-    background-color: #fff;
-    box-shadow: 1px 1px 10px #aaa;
-    display:none;
-    <?php echo $right; ?>:0px;						/* pop is align on right */
-    padding: 0 0 0 0;
-    position:absolute;
-    top:2px;
-    list-style:none;
-    max-height: 264px;
-    overflow: auto;
-    border-radius: 2px;
-}
-.dropdown dd ul li {
-    white-space: nowrap;
-    font-weight: normal;
-    padding: 7px 8px 7px 8px;
-    color: #505050;
-}
-.dropdown dd ul li:hover {
-    background: #eee;
-}
-.dropdown dd ul li input[type="checkbox"] {
-    margin-<?php echo $right; ?>: 3px;
-}
-.dropdown dd ul li a, .dropdown dd ul li span {
-    padding: 3px;
-    display: block;
-}
-.dropdown dd ul li span {
-    color: #888;
-}
-.dropdown dd ul li a:hover {
-    background-color: #eee;
-}
 
 /* ============================================================================== */
 /*  Markdown rendering                                                             */
@@ -7996,7 +7967,7 @@ margin-top: -10px;
 select {
 /* display: inline-block; */	/* We can't set this. This disable ability to make */
 overflow:hidden;
-white-space: nowrap;			/* Enabling this make behaviour strange when selecting the empty value if this empty value is '' instead of '&nbsp;' */
+white-space: nowrap;			/* Enabling this make behaviour strange when selecting the empty value if this empty value is '' instead of ' ' */
 text-overflow: ellipsis;
 }
 .fiche .ui-controlgroup {
@@ -8691,18 +8662,22 @@ div.pagination li.paginationafterarrows {
 .oddeven:hover, .evenodd:hover, .impair:hover, .pair:hover
 {
     background: <?php echo $colorbline_hover; ?> !important;		/* Must be background to be stronger than background of odd or even */
+	color: <?php echo $colorfline_hover; ?> !important;
 }
 .tredited, .tredited td {
     background: <?php echo $colorbline_hover; ?> !important;   /* Must be background to be stronger than background of odd or even */
+	color: <?php echo $colorfline_hover; ?> !important;
     border-bottom: 0 !important;
 }
 .treditedlinefordate {
     background: <?php echo $colorbline_hover; ?> !important;   /* Must be background to be stronger than background of odd or even */
+	color: <?php echo $colorfline_hover; ?> !important;
     border-bottom: 0px;
 }
 <?php if ($colorbline_hover) { ?>
 .highlight {
     background: <?php echo $colorbline_hover; ?> !important;   /* Must be background to be stronger than background of odd or even */
+	color: <?php echo $colorfline_hover; ?> !important;
 }
 <?php } ?>
 
@@ -8718,7 +8693,7 @@ div.pagination li.paginationafterarrows {
 {
     font-family: <?php print $fontlist ?>;
     margin-bottom: 1px;
-    color: #202020;
+    color: var(--colortext);
 }
 .impair, .nohover .impair:hover, tr.impair td.nohover
 {
@@ -8731,7 +8706,7 @@ div.pagination li.paginationafterarrows {
 .oddeven, .evenodd, .pair, .nohover .pair:hover, tr.pair td.nohover, .tagtr.oddeven {
     font-family: <?php print $fontlist ?>;
     margin-bottom: 1px;
-    color: #202020;
+    color: var(--colortext);
 }
 .pair, .nohover .pair:hover, tr.pair td.nohover {
     background-color: #<?php echo colorArrayToHex(colorStringToArray($colorbacklinepair1)); ?>;
@@ -8782,7 +8757,7 @@ tr.pair td .nobordernopadding tr td, tr.impair td .nobordernopadding tr td {
     border-bottom: 0px !important;
 }
 table.nobottomiftotal tr.liste_total td {
-    background-color: #fff;
+    background-color: <?php print colorDarker($colorbtitle, 5); ?>;
     border-bottom: 0px !important;
 }
 table.nobottom, td.nobottom {
@@ -8891,8 +8866,8 @@ input.liste_titre {
     line-height: 24px;
 }
 .noborder tr.liste_total td, tr.liste_total td, form.liste_total div, .noborder tr.liste_total_wrap td, tr.liste_total_wrap td, form.liste_total_wrap div {
-    color: #551188;
-    font-weight: normal;
+    color: var(--colortext);
+    font-weight: bold;
 }
 .noborder tr.liste_total td, tr.liste_total td, form.liste_total div {
     white-space: nowrap;
@@ -8974,7 +8949,7 @@ div:not(.fichecenter):not(.fichehalfleft):not(.fichehalfright):not(.ficheaddleft
 .noborder > tbody > tr:nth-child(even):not(:last-child) td:not(.liste_titre), .liste > tbody > tr:nth-child(even):not(:last-child) td:not(.liste_titre),
 .noborder .oddeven.tagtr:nth-child(even):not(:last-child) .tagtd:not(.liste_titre)
 {
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid <?php echo $colortopbordertitle1 ?>;
 }
 
 .noborder > tbody > tr:nth-child(odd):not(.liste_titre), .liste > tbody > tr:nth-child(odd):not(.liste_titre),
@@ -8990,7 +8965,7 @@ div:not(.fichecenter):not(.fichehalfleft):not(.fichehalfright):not(.ficheaddleft
 .noborder > tbody > tr:nth-child(odd):not(:last-child) td:not(.liste_titre), .liste > tbody > tr:nth-child(odd):not(:last-child) td:not(.liste_titre),
 .noborder .oddeven.tagtr:nth-child(odd):not(:last-child) .tagtd:not(.liste_titre)
 {
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid <?php echo $colortopbordertitle1 ?>;
 }
 
 ul.noborder li:nth-child(even):not(.liste_titre) {
@@ -9037,9 +9012,9 @@ dl.dropdown {
     display:none;
 }
 .dropdown dd ul {
-    color: <?php echo $colorfline; ?>;
-    background-color: #FFF;
-    border: 1px solid #888;
+ //   color: <?php echo $colorfline; ?>;
+	background-color: <?php print $bgnavtop_hover; ?>;
+    border: 1px solid var(--colorboxstatsborder);
     display:none;
     right:0px;						/* pop is align on right */
     padding: 2px 15px 2px 5px;
@@ -9053,17 +9028,20 @@ dl.dropdown {
     white-space: nowrap;
     font-weight: normal;
     padding: 2px;
-    color: #000;
+//    color: #000;
+}
+.dropdown dd ul li:hover {
+    background: var(--colorbacklinepairhover);
 }
 .dropdown dd ul li input[type="checkbox"] {
-    margin-right: 3px;
+    margin-<?php echo $right; ?>: 3px;
 }
 .dropdown dd ul li a, .dropdown dd ul li span {
     padding: 3px;
     display: block;
 }
 .dropdown dd ul li span {
-    color: #888;
+ //   color: #888;
 }
 .dropdown dd ul li a:hover,
 .dropdown dd ul li a:focus {
@@ -9107,7 +9085,7 @@ img.loginphoto {
 /* Compatibility Infrassearch													  */
 /* ============================================================================== */
 input#sew_keyword {
-    background-color: #fff !important;
+    background-color: var(--inputbackgroundcolor) !important;
     width: 100% !important;
     line-height: 28px;
 }
@@ -9178,7 +9156,7 @@ a.ui-link, a.ui-link:hover, .ui-btn:hover, span.ui-btn-text:hover, span.ui-btn-i
 select {
 	/* display: inline-block; */	/* We can't set this. This disable ability to make */
 	overflow:hidden;
-	white-space: nowrap;			/* Enabling this make behaviour strange when selecting the empty value if this empty value is '' instead of '&nbsp;' */
+	white-space: nowrap;			/* Enabling this make behaviour strange when selecting the empty value if this empty value is '' instead of ' ' */
 	text-overflow: ellipsis;
 }
 .fiche .ui-controlgroup {

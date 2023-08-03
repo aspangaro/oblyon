@@ -196,8 +196,8 @@ TITLE BUTTON
     border: none;
     font-size: 12px;
     font-weight: 300;
-    background-color: #fbfbfb;
-	border: 1px solid #fff;
+//	background-color: #fbfbfb;
+//	border: 1px solid #fff;
 }
 
 .btnTitle > .btnTitle-icon{

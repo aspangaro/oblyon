@@ -6,7 +6,7 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
 
     .bodylogin
     {
-        background: #f0f0f0;
+        background: <?php echo $colorbtitle; ?>;
         display: table;
         position: absolute;
         height: 100%;
@@ -59,7 +59,7 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
 		box-shadow: 12px 12px 25px 1px rgba(0, 0, 0, 0.2), 0 2px 6px rgba(60,60,60,0.15);
         <?php
             if (!empty($conf->global->MAIN_LOGIN_BACKGROUND)) {
-                print '	background-color: rgba(255, 255, 255, 0.9);';
+                print '	background-color: '.$colorbtitle.';';
             } else {
                 print '	background-color: #FFFFFF;';
             }
@@ -148,9 +148,10 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
     }
 
     div.backgroundsemitransparent {
-        background:rgba(255,255,255,0.6);
+        background: <?php echo $colorbtitle; ?>;
         padding-left: 10px;
         padding-right: 10px;
+    	color: <?php echo $colorftitle; ?>;
     }
     div.login_block {
         position: absolute;

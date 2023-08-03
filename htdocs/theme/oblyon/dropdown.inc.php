@@ -25,7 +25,7 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
     background-color: <?php print (isset($bgcolor)) ? $bgcolor : '#fff' ?>;
     -webkit-background-clip: padding-box;
     background-clip: padding-box;
-    border: 1px solid rgba(0,0,0,.15);
+    border: 1px solid var(--colorboxstatsborder);
     border-radius: 4px;
     -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
     box-shadow: 0 6px 12px rgba(0,0,0,.175);
@@ -89,7 +89,7 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
     border-bottom-left-radius: 4px;
 }
 .user-body {
-    color: #333;
+    color: var(--colortextlink);
 }
 .side-nav-vert .user-menu .dropdown-menu {
     border-top-right-radius: 0;
@@ -124,7 +124,7 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
     width: 90px;
     border: 3px solid;
     border-color: transparent;
-    border-color: rgba(255, 255, 255, 0.2);
+    border-color: var(--colorboxstatsborder);
     max-width: 100%;
     max-height :100%;
 }
@@ -156,8 +156,8 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
 
 .dropdown-menu > .user-body, .dropdown-body{
     padding: 15px;
-    border-bottom: 1px solid #f4f4f4;
-    border-top: 1px solid #dddddd;
+    border-bottom: 1px solid var(--colorboxstatsborder);
+    border-top: 1px solid var(--colorboxstatsborder);
     white-space: normal;
 }
 
