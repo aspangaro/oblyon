@@ -5713,7 +5713,7 @@ div .tdtop {
 span.boxstatstext {
     opacity: 0.7;
     line-height: 18px;
-    color: #000;
+    color: var(--colortextlink);
 }
 span.boxstatstext img, a.dashboardlineindicatorlate img {
     border: 0;
