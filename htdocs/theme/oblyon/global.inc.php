@@ -7615,10 +7615,10 @@ span.select2.select2-container.select2-container--default {
 .select2-dropdown {
     border: 1px solid var(--colorboxstatsborder);
 //    box-shadow: 1px 2px 10px #ddd;
-    background-color: <?php print $bgnavtop_hover; ?> !important;
+    background-color: var(--colorbacklineimpair1) !important;
 }
 .select2-dropdown-open {
-    background-color: <?php print $bgnavtop_hover; ?> !important;
+    background-color: var(--colorbacklineimpair1) !important;
 }
 .select2-dropdown-open .select2-choice, .select2-dropdown-open .select2-choices
 {
@@ -7628,7 +7628,7 @@ span.select2.select2-container.select2-container--default {
     border-bottom: none;
     -webkit-box-shadow: none !important;
     box-shadow: none !important;
-    background-color: <?php print $bgnavtop_hover; ?> !important;
+    background-color: var(--colorbacklineimpair1) !important;
 }
 .select2-disabled
 {
@@ -7646,7 +7646,7 @@ span.select2.select2-container.select2-container--default {
 }
 div.select2-drop-above
 {
-    background: <?php print $bgnavtop_hover; ?> !important;
+    background: var(--colorbacklineimpair1) !important;
     -webkit-box-shadow: none !important;
     box-shadow: none !important;
 }
@@ -7967,7 +7967,7 @@ margin-top: -10px;
 select {
 /* display: inline-block; */	/* We can't set this. This disable ability to make */
 overflow:hidden;
-white-space: nowrap;			/* Enabling this make behaviour strange when selecting the empty value if this empty value is '' instead of 'Â ' */
+white-space: nowrap;			/* Enabling this make behaviour strange when selecting the empty value if this empty value is '' instead of ' ' */
 text-overflow: ellipsis;
 }
 .fiche .ui-controlgroup {
@@ -9156,7 +9156,7 @@ a.ui-link, a.ui-link:hover, .ui-btn:hover, span.ui-btn-text:hover, span.ui-btn-i
 select {
 	/* display: inline-block; */	/* We can't set this. This disable ability to make */
 	overflow:hidden;
-	white-space: nowrap;			/* Enabling this make behaviour strange when selecting the empty value if this empty value is '' instead of 'Â ' */
+	white-space: nowrap;			/* Enabling this make behaviour strange when selecting the empty value if this empty value is '' instead of ' ' */
 	text-overflow: ellipsis;
 }
 .fiche .ui-controlgroup {
