@@ -1,7 +1,7 @@
 <?php
 	/************************************************
 	* Copyright (C) 2015-2022  Alexandre Spangaro   <support@open-dsi.fr>
-	* Copyright (C) 2022       Sylvain Legrand      <contact@infras.fr>
+	* Copyright (C) 2022	   Sylvain Legrand	  <contact@infras.fr>
 	*
 	* This program is free software: you can redistribute it and/or modify
 	* it under the terms of the GNU General Public License as published by
@@ -68,22 +68,26 @@
 															'OBLYON_COLOR_BLINE_HOVER',
 															'OBLYON_COLOR_FLINE',
 															'OBLYON_COLOR_FLINE_HOVER',
-															'OBLYON_COLOR_FDATE_DEFAULT'
+															'OBLYON_COLOR_FDATE_DEFAULT',
+															'OBLYON_COLOR_TEXTTABACTIVE'
 															),
 										'eldy'		=> array('THEME_ELDY_TOPBORDER_TITLE1',
+															'THEME_ELDY_BACKTITLE1',
+															'THEME_ELDY_BACKTABACTIVE',
 															'THEME_ELDY_LINEIMPAIR1',
 															'THEME_ELDY_LINEIMPAIR2',
 															'THEME_ELDY_LINEPAIR1',
 															'THEME_ELDY_LINEPAIR2',
 															'THEME_ELDY_LINEBREAK',
 															'THEME_ELDY_TEXTTITLENOTAB',
+															'THEME_ELDY_TEXTTITLE',
 															'THEME_ELDY_TEXT',
 															'THEME_ELDY_TEXTLINK'
 															)
 										);
 	$listtheme					= array('green'		=> array(
-                                                            'OBLYON_INFOXBOX_BACKGROUND'            => '#FFFFFF',
-                                                            'OBLYON_COLOR_TOPMENU_BCKGRD'			=> '#34495E',
+															'OBLYON_INFOXBOX_BACKGROUND'			=> '#FFFFFF',
+															'OBLYON_COLOR_TOPMENU_BCKGRD'			=> '#34495E',
 															'OBLYON_COLOR_TOPMENU_BCKGRD_HOVER'		=> '#2C3E50',
 															'OBLYON_COLOR_TOPMENU_TXT'				=> '#FFFFFF',
 															'OBLYON_COLOR_TOPMENU_TXT_ACTIVE'		=> '#',
@@ -108,20 +112,24 @@
 															'OBLYON_COLOR_FLINE'					=> '#444444',
 															'OBLYON_COLOR_FLINE_HOVER'				=> '#222222',
 															'OBLYON_COLOR_FDATE_DEFAULT'			=> '#FF0000',
-                                                            'THEME_ELDY_TOPBORDER_TITLE1'			=> '#FFFFFF',
-                                                            'THEME_ELDY_LINEIMPAIR1'				=> '#FFFFFF',
-                                                            'THEME_ELDY_LINEIMPAIR2'				=> '#FFFFFF',
-                                                            'THEME_ELDY_LINEPAIR1'					=> '#FBFBFB',
-                                                            'THEME_ELDY_LINEPAIR2'					=> '#FBFBFB',
-                                                            'THEME_ELDY_LINEBREAK'					=> '#FFFFFF',
-                                                            'THEME_ELDY_TEXTTITLENOTAB'				=> '#FFFFFF',
-                                                            'THEME_ELDY_TEXT'						=> '#000000',
-                                                            'THEME_ELDY_TEXTLINK'					=> '#1C1C1C'
+															'OBLYON_COLOR_TEXTTABACTIVE'			=> '#222222',
+															'THEME_ELDY_TOPBORDER_TITLE1'			=> '#FFFFFF',
+															'THEME_ELDY_BACKTITLE1'					=> '#E9EAED',
+															'THEME_ELDY_BACKTABACTIVE'				=> '#EAEAEA',
+															'THEME_ELDY_LINEIMPAIR1'				=> '#FFFFFF',
+															'THEME_ELDY_LINEIMPAIR2'				=> '#FFFFFF',
+															'THEME_ELDY_LINEPAIR1'					=> '#FBFBFB',
+															'THEME_ELDY_LINEPAIR2'					=> '#FBFBFB',
+															'THEME_ELDY_LINEBREAK'					=> '#FFFFFF',
+															'THEME_ELDY_TEXTTITLENOTAB'				=> '#FFFFFF',
+															'THEME_ELDY_TEXTTITLE'					=> '#28283C',
+															'THEME_ELDY_TEXT'						=> '#000000',
+															'THEME_ELDY_TEXTLINK'					=> '#1C1C1C'
 															),
 										'dark'		=> array(
-                                                            'OBLYON_INFOXBOX_BACKGROUND'            => '#FFFFFF',
-                                                            'OBLYON_COLOR_TOPMENU_BCKGRD'			=> '#333333',
-                                                            'OBLYON_COLOR_TOPMENU_BCKGRD_HOVER'		=> '#0083A2',
+															'OBLYON_INFOXBOX_BACKGROUND'			=> '#FFFFFF',
+															'OBLYON_COLOR_TOPMENU_BCKGRD'			=> '#333333',
+															'OBLYON_COLOR_TOPMENU_BCKGRD_HOVER'		=> '#0083A2',
 															'OBLYON_COLOR_TOPMENU_TXT'				=> '#F4F4F4',
 															'OBLYON_COLOR_TOPMENU_TXT_ACTIVE'		=> '#',
 															'OBLYON_COLOR_TOPMENU_TXT_HOVER'		=> '#',
@@ -145,19 +153,23 @@
 															'OBLYON_COLOR_FLINE'					=> '#444444',
 															'OBLYON_COLOR_FLINE_HOVER'				=> '#222222',
 															'OBLYON_COLOR_FDATE_DEFAULT'			=> '#FF0000',
+															'OBLYON_COLOR_TEXTTABACTIVE'			=> '#222222',
 															'THEME_ELDY_TOPBORDER_TITLE1'			=> '#FFFFFF',
+															'THEME_ELDY_BACKTITLE1'					=> '#E9EAED',
+															'THEME_ELDY_BACKTABACTIVE'				=> '#EAEAEA',
 															'THEME_ELDY_LINEIMPAIR1'				=> '#FFFFFF',
 															'THEME_ELDY_LINEIMPAIR2'				=> '#FFFFFF',
 															'THEME_ELDY_LINEPAIR1'					=> '#FBFBFB',
 															'THEME_ELDY_LINEPAIR2'					=> '#FBFBFB',
 															'THEME_ELDY_LINEBREAK'					=> '#FFFFFF',
 															'THEME_ELDY_TEXTTITLENOTAB'				=> '#FFFFFF',
+															'THEME_ELDY_TEXTTITLE'					=> '#28283C',
 															'THEME_ELDY_TEXT'						=> '#000000',
 															'THEME_ELDY_TEXTLINK'					=> '#1C1C1C'
 															),
 										'blue'		=> array(
-                                                            'OBLYON_INFOXBOX_BACKGROUND'            => '#FFFFFF',
-                                                            'OBLYON_COLOR_TOPMENU_BCKGRD'			=> '#092D5C',
+															'OBLYON_INFOXBOX_BACKGROUND'			=> '#FFFFFF',
+															'OBLYON_COLOR_TOPMENU_BCKGRD'			=> '#092D5C',
 															'OBLYON_COLOR_TOPMENU_BCKGRD_HOVER'		=> '#0D4185',
 															'OBLYON_COLOR_TOPMENU_TXT'				=> '#F4F4F4',
 															'OBLYON_COLOR_TOPMENU_TXT_ACTIVE'		=> '#',
@@ -166,7 +178,7 @@
 															'OBLYON_COLOR_LEFTMENU_BCKGRD_HOVER'	=> '#0D4185',
 															'OBLYON_COLOR_LEFTMENU_TXT'				=> '#F4F4F4',
 															'OBLYON_COLOR_LEFTMENU_TXT_ACTIVE'		=> '#F4F4F4',
-                                                            'OBLYON_COLOR_LEFTMENU_TXT_HOVER'		=> '#FFFFFF',
+															'OBLYON_COLOR_LEFTMENU_TXT_HOVER'		=> '#FFFFFF',
 															'OBLYON_COLOR_BUTTON_ACTION1'			=> '#0088CC',
 															'OBLYON_COLOR_BUTTON_ACTION2'			=> '#0044CC',
 															'OBLYON_COLOR_BUTTON_DELETE1'			=> '#CC8800',
@@ -182,19 +194,23 @@
 															'OBLYON_COLOR_FLINE'					=> '#444444',
 															'OBLYON_COLOR_FLINE_HOVER'				=> '#222222',
 															'OBLYON_COLOR_FDATE_DEFAULT'			=> '#FF0000',
-                                                            'THEME_ELDY_TOPBORDER_TITLE1'			=> '#FFFFFF',
-                                                            'THEME_ELDY_LINEIMPAIR1'				=> '#FFFFFF',
-                                                            'THEME_ELDY_LINEIMPAIR2'				=> '#FFFFFF',
-                                                            'THEME_ELDY_LINEPAIR1'					=> '#FBFBFB',
-                                                            'THEME_ELDY_LINEPAIR2'					=> '#FBFBFB',
-                                                            'THEME_ELDY_LINEBREAK'					=> '#FFFFFF',
-                                                            'THEME_ELDY_TEXTTITLENOTAB'				=> '#FFFFFF',
-                                                            'THEME_ELDY_TEXT'						=> '#000000',
-                                                            'THEME_ELDY_TEXTLINK'					=> '#1C1C1C'
+															'OBLYON_COLOR_TEXTTABACTIVE'			=> '#222222',
+															'THEME_ELDY_TOPBORDER_TITLE1'			=> '#FFFFFF',
+															'THEME_ELDY_BACKTITLE1'					=> '#E9EAED',
+															'THEME_ELDY_BACKTABACTIVE'				=> '#EAEAEA',
+															'THEME_ELDY_LINEIMPAIR1'				=> '#FFFFFF',
+															'THEME_ELDY_LINEIMPAIR2'				=> '#FFFFFF',
+															'THEME_ELDY_LINEPAIR1'					=> '#FBFBFB',
+															'THEME_ELDY_LINEPAIR2'					=> '#FBFBFB',
+															'THEME_ELDY_LINEBREAK'					=> '#FFFFFF',
+															'THEME_ELDY_TEXTTITLENOTAB'				=> '#FFFFFF',
+															'THEME_ELDY_TEXTTITLE'					=> '#28283C',
+															'THEME_ELDY_TEXT'						=> '#000000',
+															'THEME_ELDY_TEXTLINK'					=> '#1C1C1C'
 															),
 										'night'		=> array(
-                                                            'OBLYON_INFOXBOX_BACKGROUND'            => '#444444',
-                                                            'OBLYON_COLOR_TOPMENU_BCKGRD'			=> '#222222',
+															'OBLYON_INFOXBOX_BACKGROUND'			=> '#444444',
+															'OBLYON_COLOR_TOPMENU_BCKGRD'			=> '#222222',
 															'OBLYON_COLOR_TOPMENU_BCKGRD_HOVER'		=> '#333333',
 															'OBLYON_COLOR_TOPMENU_TXT'				=> '#F4F4F4',
 															'OBLYON_COLOR_TOPMENU_TXT_ACTIVE'		=> '#',
@@ -219,53 +235,61 @@
 															'OBLYON_COLOR_FLINE'					=> '#ECECEC',
 															'OBLYON_COLOR_FLINE_HOVER'				=> '#FCFCFC',
 															'OBLYON_COLOR_FDATE_DEFAULT'			=> '#FF0000',
+															'OBLYON_COLOR_TEXTTABACTIVE'			=> '#222222',
 															'THEME_ELDY_TOPBORDER_TITLE1'			=> '#FFFFFF',
-															'THEME_ELDY_LINEIMPAIR1'				=> '#3C3C3C',
-															'THEME_ELDY_LINEIMPAIR2'				=> '#4C4C4C',
-															'THEME_ELDY_LINEPAIR1'					=> '#444444',
-															'THEME_ELDY_LINEPAIR2'					=> '#444444',
-															'THEME_ELDY_LINEBREAK'					=> '#',
-															'THEME_ELDY_TEXTTITLENOTAB'				=> '#FEFEFE',
-															'THEME_ELDY_TEXT'						=> '#FFFFFF',
-															'THEME_ELDY_TEXTLINK'					=> '#e09430'
+															'THEME_ELDY_BACKTITLE1'					=> '#E9EAED',
+															'THEME_ELDY_BACKTABACTIVE'				=> '#EAEAEA',
+															'THEME_ELDY_LINEIMPAIR1'				=> '#FFFFFF',
+															'THEME_ELDY_LINEIMPAIR2'				=> '#FFFFFF',
+															'THEME_ELDY_LINEPAIR1'					=> '#FBFBFB',
+															'THEME_ELDY_LINEPAIR2'					=> '#FBFBFB',
+															'THEME_ELDY_LINEBREAK'					=> '#FFFFFF',
+															'THEME_ELDY_TEXTTITLENOTAB'				=> '#FFFFFF',
+															'THEME_ELDY_TEXTTITLE'					=> '#28283C',
+															'THEME_ELDY_TEXT'						=> '#000000',
+															'THEME_ELDY_TEXTLINK'					=> '#1C1C1C'
 															),
-                                        'light'		=> array(
-                                                            'OBLYON_INFOXBOX_BACKGROUND'            => '#FFFFFF',
-                                                            'OBLYON_COLOR_TOPMENU_BCKGRD'			=> '#FFFFFF',
-                                                            'OBLYON_COLOR_TOPMENU_BCKGRD_HOVER'		=> '#D51123',
-                                                            'OBLYON_COLOR_TOPMENU_TXT'				=> '#444444',
-                                                            'OBLYON_COLOR_TOPMENU_TXT_ACTIVE'		=> '#FFFFFF',
-                                                            'OBLYON_COLOR_TOPMENU_TXT_HOVER'		=> '#FFFFFF',
-                                                            'OBLYON_COLOR_LEFTMENU_BCKGRD'			=> '#FFFFFF',
-                                                            'OBLYON_COLOR_LEFTMENU_BCKGRD_HOVER'	=> '#D51123',
-                                                            'OBLYON_COLOR_LEFTMENU_TXT'				=> '#444444',
-                                                            'OBLYON_COLOR_LEFTMENU_TXT_ACTIVE'		=> '#FFFFFF',
-                                                            'OBLYON_COLOR_LEFTMENU_TXT_HOVER'		=> '#FFFFFF',
-                                                            'OBLYON_COLOR_BUTTON_ACTION1'			=> '#0083A2',
-                                                            'OBLYON_COLOR_BUTTON_ACTION2'			=> '#0063A2',
-                                                            'OBLYON_COLOR_BUTTON_DELETE1'			=> '#CC8800',
-                                                            'OBLYON_COLOR_BUTTON_DELETE2'			=> '#CC4400',
-                                                            'OBLYON_COLOR_MAIN'						=> '#D51123',
-                                                            'OBLYON_COLOR_BCKGRD'					=> '#FFFFFF',
-                                                            'OBLYON_COLOR_LOGO_BCKGRD'				=> '#FFFFFF',
-                                                            'OBLYON_COLOR_LOGIN_BCKGRD'				=> '#FFFFFF',
-                                                            'OBLYON_COLOR_BTITLE'					=> '#D51123',
-                                                            'OBLYON_COLOR_FTITLE'					=> '#FFFFFF',
-                                                            'OBLYON_COLOR_BLINE'					=> '#FFFFFF',
-                                                            'OBLYON_COLOR_BLINE_HOVER'				=> '#F1F1F1',
-                                                            'OBLYON_COLOR_FLINE'					=> '#444444',
-                                                            'OBLYON_COLOR_FLINE_HOVER'				=> '#D51123',
+										'light'		=> array(
+															'OBLYON_INFOXBOX_BACKGROUND'			=> '#FFFFFF',
+															'OBLYON_COLOR_TOPMENU_BCKGRD'			=> '#FFFFFF',
+															'OBLYON_COLOR_TOPMENU_BCKGRD_HOVER'		=> '#D51123',
+															'OBLYON_COLOR_TOPMENU_TXT'				=> '#444444',
+															'OBLYON_COLOR_TOPMENU_TXT_ACTIVE'		=> '#FFFFFF',
+															'OBLYON_COLOR_TOPMENU_TXT_HOVER'		=> '#FFFFFF',
+															'OBLYON_COLOR_LEFTMENU_BCKGRD'			=> '#FFFFFF',
+															'OBLYON_COLOR_LEFTMENU_BCKGRD_HOVER'	=> '#D51123',
+															'OBLYON_COLOR_LEFTMENU_TXT'				=> '#444444',
+															'OBLYON_COLOR_LEFTMENU_TXT_ACTIVE'		=> '#FFFFFF',
+															'OBLYON_COLOR_LEFTMENU_TXT_HOVER'		=> '#FFFFFF',
+															'OBLYON_COLOR_BUTTON_ACTION1'			=> '#0083A2',
+															'OBLYON_COLOR_BUTTON_ACTION2'			=> '#0063A2',
+															'OBLYON_COLOR_BUTTON_DELETE1'			=> '#CC8800',
+															'OBLYON_COLOR_BUTTON_DELETE2'			=> '#CC4400',
+															'OBLYON_COLOR_MAIN'						=> '#D51123',
+															'OBLYON_COLOR_BCKGRD'					=> '#FFFFFF',
+															'OBLYON_COLOR_LOGO_BCKGRD'				=> '#FFFFFF',
+															'OBLYON_COLOR_LOGIN_BCKGRD'				=> '#FFFFFF',
+															'OBLYON_COLOR_BTITLE'					=> '#D51123',
+															'OBLYON_COLOR_FTITLE'					=> '#FFFFFF',
+															'OBLYON_COLOR_BLINE'					=> '#FFFFFF',
+															'OBLYON_COLOR_BLINE_HOVER'				=> '#F1F1F1',
+															'OBLYON_COLOR_FLINE'					=> '#444444',
+															'OBLYON_COLOR_FLINE_HOVER'				=> '#D51123',
 															'OBLYON_COLOR_FDATE_DEFAULT'			=> '#FF0000',
-                                                            'THEME_ELDY_TOPBORDER_TITLE1'			=> '#FFFFFF',
-                                                            'THEME_ELDY_LINEIMPAIR1'				=> '#FFFFFF',
-                                                            'THEME_ELDY_LINEIMPAIR2'				=> '#FFFFFF',
-                                                            'THEME_ELDY_LINEPAIR1'					=> '#FBFBFB',
-                                                            'THEME_ELDY_LINEPAIR2'					=> '#FBFBFB',
-                                                            'THEME_ELDY_LINEBREAK'					=> '#FFFFFF',
-                                                            'THEME_ELDY_TEXTTITLENOTAB'				=> '#FFFFFF',
-                                                            'THEME_ELDY_TEXT'						=> '#000000',
-                                                            'THEME_ELDY_TEXTLINK'					=> '#1C1C1C'
-                                                        )
+															'OBLYON_COLOR_TEXTTABACTIVE'			=> '#222222',
+															'THEME_ELDY_TOPBORDER_TITLE1'			=> '#FFFFFF',
+															'THEME_ELDY_BACKTITLE1'					=> '#E9EAED',
+															'THEME_ELDY_BACKTABACTIVE'				=> '#EAEAEA',
+															'THEME_ELDY_LINEIMPAIR1'				=> '#FFFFFF',
+															'THEME_ELDY_LINEIMPAIR2'				=> '#FFFFFF',
+															'THEME_ELDY_LINEPAIR1'					=> '#FBFBFB',
+															'THEME_ELDY_LINEPAIR2'					=> '#FBFBFB',
+															'THEME_ELDY_LINEBREAK'					=> '#FFFFFF',
+															'THEME_ELDY_TEXTTITLENOTAB'				=> '#FFFFFF',
+															'THEME_ELDY_TEXTTITLE'					=> '#28283C',
+															'THEME_ELDY_TEXT'						=> '#000000',
+															'THEME_ELDY_TEXTLINK'					=> '#1C1C1C'
+														)
 										);
 
 	// Actions **************************************
@@ -319,9 +343,9 @@
 			</script>
 			<form action = "'.$_SERVER['PHP_SELF'].'" method = "POST" enctype = "multipart/form-data">
 				<input type="hidden" name="token" value="'.newToken().'" />
-                <input type="hidden" name="action" value="update">
-                <input type="hidden" name="page_y" value="">
-                <input type="hidden" name="dol_resetcache" value="1">';
+				<input type="hidden" name="action" value="update">
+				<input type="hidden" name="page_y" value="">
+				<input type="hidden" name="dol_resetcache" value="1">';
 	// Sauvegarde / Restauration
 	oblyon_print_backup_restore();
 	clearstatcache();
@@ -361,15 +385,15 @@
 			oblyon_print_input($key, 'input', $langs->trans($key), '', $metas, 4, 1);
 		}
 	}
-    // button
-    $metas		= array(array(5), 'Buttons');
-    oblyon_print_liste_titre($metas);
-    if (count($listcolor['button'])) {
-        foreach ($listcolor['button'] as $key) {
-            $metas	= array('type' => 'text', 'class' => 'flat quatrevingtpercent color action');
-            oblyon_print_input($key, 'input', $langs->trans($key), '', $metas, 4, 1);
-        }
-    }
+	// button
+	$metas		= array(array(5), 'Buttons');
+	oblyon_print_liste_titre($metas);
+	if (count($listcolor['button'])) {
+		foreach ($listcolor['button'] as $key) {
+			$metas	= array('type' => 'text', 'class' => 'flat quatrevingtpercent color action');
+			oblyon_print_input($key, 'input', $langs->trans($key), '', $metas, 4, 1);
+		}
+	}
 	// Others
 	$metas		= array(array(5), 'Others');
 	oblyon_print_liste_titre($metas);

@@ -113,6 +113,7 @@
 	$colorButtonAction2			= $conf->global->OBLYON_COLOR_BUTTON_ACTION2;			// default value: #0044cc
 	$colorButtonDelete1			= $conf->global->OBLYON_COLOR_BUTTON_DELETE1;			// default value: #cc8800
 	$colorButtonDelete2			= $conf->global->OBLYON_COLOR_BUTTON_DELETE2;			// default value: #cc4400
+	$colorTextTabActive			= $conf->global->OBLYON_COLOR_TEXTTABACTIVE;			// default value: #222222
 	$bgotherbox					= '#f4f4f4';											// default value: #E6E6E6	//	Other information boxes on home page
 	$bgbutton_hover				= '#197489';											// default value: #197489
 	if (!empty($maincolor)) {
@@ -127,65 +128,37 @@
 			$bgbutton_hover = '#'.colorArrayToHex($maincolor_variant);
 		}	// if (!empty($matches))
 	}	// if (!empty($maincolor))
-	$logo_background_color									= $conf->global->OBLYON_COLOR_LOGO_BCKGRD;		//default value : #ffffff
-	$bgcolor												= $conf->global->OBLYON_COLOR_BCKGRD;			// default value : #f4f4f4
-	$login_bgcolor											= $conf->global->OBLYON_COLOR_LOGIN_BCKGRD;		// default value : #f4f4f4
-	$colorbtitle											= $conf->global->OBLYON_COLOR_BTITLE;			// default value : #E09430
-	$colorftitle											= $conf->global->OBLYON_COLOR_FTITLE;			// default value : #F4F4F4
-	$colorbline												= $conf->global->OBLYON_COLOR_BLINE;			// default value : #FFFFFF
-	$colorbline_hover										= $conf->global->OBLYON_COLOR_BLINE_HOVER;		// default value : #F1F1F1
-	$colorfline												= $conf->global->OBLYON_COLOR_FLINE;			// default value : #444444
-	$colorfline_hover										= $conf->global->OBLYON_COLOR_FLINE_HOVER;		// default value : #222222
-	$colorfdatedefault										= $conf->global->OBLYON_COLOR_FDATE_DEFAULT;	// default value : #FF0000
+	$logo_background_color				= $conf->global->OBLYON_COLOR_LOGO_BCKGRD;		// default value : #ffffff
+	$bgcolor							= $conf->global->OBLYON_COLOR_BCKGRD;			// default value : #f4f4f4
+	$login_bgcolor						= $conf->global->OBLYON_COLOR_LOGIN_BCKGRD;		// default value : #f4f4f4
+	$colorbtitle						= $conf->global->OBLYON_COLOR_BTITLE;			// default value : #E09430
+	$colorftitle						= $conf->global->OBLYON_COLOR_FTITLE;			// default value : #F4F4F4
+	$colorbline							= $conf->global->OBLYON_COLOR_BLINE;			// default value : #FFFFFF
+	$colorbline_hover					= $conf->global->OBLYON_COLOR_BLINE_HOVER;		// default value : #F1F1F1
+	$colorfline							= $conf->global->OBLYON_COLOR_FLINE;			// default value : #444444
+	$colorfline_hover					= $conf->global->OBLYON_COLOR_FLINE_HOVER;		// default value : #222222
+	$colorfdatedefault					= $conf->global->OBLYON_COLOR_FDATE_DEFAULT;	// default value : #FF0000
 
-    $conf->global->THEME_ELDY_BACKTABCARD1 = '255,255,255'; // card
-	$conf->global->THEME_ELDY_BACKTABACTIVE = '234,234,234';
-    $colorbacktabcard1                                      = empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? (empty($conf->global->THEME_ELDY_BACKTABCARD1) ? $colorbacktabcard1 : $conf->global->THEME_ELDY_BACKTABCARD1) : (empty($user->conf->THEME_ELDY_BACKTABCARD1) ? $colorbacktabcard1 : $user->conf->THEME_ELDY_BACKTABCARD1);
-    $colorbacktabactive                                     = empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? (empty($conf->global->THEME_ELDY_BACKTABACTIVE) ? $colorbacktabactive : $conf->global->THEME_ELDY_BACKTABACTIVE) : (empty($user->conf->THEME_ELDY_BACKTABACTIVE) ? $colorbacktabactive : $user->conf->THEME_ELDY_BACKTABACTIVE);
-
-
-	// Case of option always editable
-	if (!isset($conf->global->THEME_ELDY_BACKBODY))			$conf->global->THEME_ELDY_BACKBODY			= $colorbackbody;
-	if (!isset($conf->global->THEME_ELDY_TOPMENU_BACK1))	$conf->global->THEME_ELDY_TOPMENU_BACK1		= $colorbackhmenu1;
-	if (!isset($conf->global->THEME_ELDY_VERMENU_BACK1))	$conf->global->THEME_ELDY_VERMENU_BACK1		= $colorbackvmenu1;
-	if (!isset($conf->global->THEME_ELDY_BACKTITLE1))		$conf->global->THEME_ELDY_BACKTITLE1		= $colorbacktitle1;
-	if (!isset($conf->global->THEME_ELDY_USE_HOVER))		$conf->global->THEME_ELDY_USE_HOVER			= $colorbacklinepairhover;
-	if (!isset($conf->global->THEME_ELDY_USE_CHECKED))		$conf->global->THEME_ELDY_USE_CHECKED		= $colorbacklinepairchecked;
-	if (!isset($conf->global->THEME_ELDY_LINEBREAK))		$conf->global->THEME_ELDY_LINEBREAK			= $colorbacklinebreak;
-	if (!isset($conf->global->THEME_ELDY_TEXTTITLENOTAB))	$conf->global->THEME_ELDY_TEXTTITLENOTAB	= $colortexttitlenotab;
-	if (!isset($conf->global->THEME_ELDY_TEXTLINK))			$conf->global->THEME_ELDY_TEXTLINK			= $colortextlink;
-	// Case of option editable only if option THEME_ELDY_ENABLE_PERSONALIZED is off
-	if (empty($conf->global->THEME_ELDY_ENABLE_PERSONALIZED)) {
-		$conf->global->THEME_ELDY_BACKTABCARD1	= '255,255,255';	// card
-		$conf->global->THEME_ELDY_BACKTABACTIVE	= '234,234,234';
-		$conf->global->THEME_ELDY_TEXT			= '0,0,0';
-		$conf->global->THEME_ELDY_FONT_SIZE1	= '0.75em';
-		$conf->global->THEME_ELDY_FONT_SIZE2	= '0.65em';
-	}
-	// Case of option availables only if THEME_ELDY_ENABLE_PERSONALIZED is on
-	$colorbackhmenu1					= empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? (empty($conf->global->THEME_ELDY_TOPMENU_BACK1)		? $colorbackhmenu1		: $conf->global->THEME_ELDY_TOPMENU_BACK1)		: (empty($user->conf->THEME_ELDY_TOPMENU_BACK1)		? $colorbackhmenu1		: $user->conf->THEME_ELDY_TOPMENU_BACK1);
-	$colorbackvmenu1					= empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? (empty($conf->global->THEME_ELDY_VERMENU_BACK1)		? $colorbackvmenu1		: $conf->global->THEME_ELDY_VERMENU_BACK1)		: (empty($user->conf->THEME_ELDY_VERMENU_BACK1)		? $colorbackvmenu1		: $user->conf->THEME_ELDY_VERMENU_BACK1);
-	$colortopbordertitle1				= empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? (empty($conf->global->THEME_ELDY_TOPBORDER_TITLE1)	? $colortopbordertitle1	: $conf->global->THEME_ELDY_TOPBORDER_TITLE1)	: (empty($user->conf->THEME_ELDY_TOPBORDER_TITLE1)	? $colortopbordertitle1	: $user->conf->THEME_ELDY_TOPBORDER_TITLE1);
-	$colorbacktitle1					= empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? (empty($conf->global->THEME_ELDY_BACKTITLE1)			? $colorbacktitle1		: $conf->global->THEME_ELDY_BACKTITLE1)			: (empty($user->conf->THEME_ELDY_BACKTITLE1)		? $colorbacktitle1		: $user->conf->THEME_ELDY_BACKTITLE1);
-	$colorbacktabcard1					= empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? (empty($conf->global->THEME_ELDY_BACKTABCARD1)		? $colorbacktabcard1	: $conf->global->THEME_ELDY_BACKTABCARD1)		: (empty($user->conf->THEME_ELDY_BACKTABCARD1)		? $colorbacktabcard1	: $user->conf->THEME_ELDY_BACKTABCARD1);
-	$colorbacktabactive					= empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? (empty($conf->global->THEME_ELDY_BACKTABACTIVE)		? $colorbacktabactive	: $conf->global->THEME_ELDY_BACKTABACTIVE)		: (empty($user->conf->THEME_ELDY_BACKTABACTIVE)		? $colorbacktabactive	: $user->conf->THEME_ELDY_BACKTABACTIVE);
-	$colorbacklineimpair1				= empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? (empty($conf->global->THEME_ELDY_LINEIMPAIR1)		? $colorbacklineimpair1	: $conf->global->THEME_ELDY_LINEIMPAIR1)		: (empty($user->conf->THEME_ELDY_LINEIMPAIR1)		? $colorbacklineimpair1	: $user->conf->THEME_ELDY_LINEIMPAIR1);
-	$colorbacklineimpair2				= empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? (empty($conf->global->THEME_ELDY_LINEIMPAIR2)		? $colorbacklineimpair2	: $conf->global->THEME_ELDY_LINEIMPAIR2)		: (empty($user->conf->THEME_ELDY_LINEIMPAIR2)		? $colorbacklineimpair2	: $user->conf->THEME_ELDY_LINEIMPAIR2);
-	$colorbacklinepair1					= empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? (empty($conf->global->THEME_ELDY_LINEPAIR1)			? $colorbacklinepair1	: $conf->global->THEME_ELDY_LINEPAIR1)			: (empty($user->conf->THEME_ELDY_LINEPAIR1)			? $colorbacklinepair1	: $user->conf->THEME_ELDY_LINEPAIR1);
-	$colorbacklinepair2					= empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? (empty($conf->global->THEME_ELDY_LINEPAIR2)			? $colorbacklinepair2	: $conf->global->THEME_ELDY_LINEPAIR2)			: (empty($user->conf->THEME_ELDY_LINEPAIR2)			? $colorbacklinepair2	: $user->conf->THEME_ELDY_LINEPAIR2);
-	$colorbacklinebreak					= empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? (empty($conf->global->THEME_ELDY_LINEBREAK)			? $colorbacklinebreak	: $conf->global->THEME_ELDY_LINEBREAK)			: (empty($user->conf->THEME_ELDY_LINEBREAK)			? $colorbacklinebreak	: $user->conf->THEME_ELDY_LINEBREAK);
-	$colorbackbody						= empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? (empty($conf->global->THEME_ELDY_BACKBODY)			? $colorbackbody		: $conf->global->THEME_ELDY_BACKBODY)			: (empty($user->conf->THEME_ELDY_BACKBODY)			? $colorbackbody		: $user->conf->THEME_ELDY_BACKBODY);
-	$colortexttitlenotab				= empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? (empty($conf->global->THEME_ELDY_TEXTTITLENOTAB)		? $colortexttitlenotab	: $conf->global->THEME_ELDY_TEXTTITLENOTAB)		: (empty($user->conf->THEME_ELDY_TEXTTITLENOTAB)	? $colortexttitlenotab	: $user->conf->THEME_ELDY_TEXTTITLENOTAB);
-	$colortexttitle						= empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? (empty($conf->global->THEME_ELDY_TEXTTITLE)			? $colortexttitle		: $conf->global->THEME_ELDY_TEXTTITLE)			: (empty($user->conf->THEME_ELDY_TEXTTITLE)			? $colortexttitle		: $user->conf->THEME_ELDY_TEXTTITLE);
-	$colortexttitlelink					= empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? (empty($conf->global->THEME_ELDY_TEXTTITLELINK)		? $colortexttitlelink	: $conf->global->THEME_ELDY_TEXTTITLELINK)		: (empty($user->conf->THEME_ELDY_TEXTTITLELINK)		? $colortexttitlelink	: $user->conf->THEME_ELDY_TEXTTITLELINK);
-	$colortext							= empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? (empty($conf->global->THEME_ELDY_TEXT)				? $colortext			: $conf->global->THEME_ELDY_TEXT)				: (empty($user->conf->THEME_ELDY_TEXT)				? $colortext			: $user->conf->THEME_ELDY_TEXT);
-	$colortextlink						= empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? (empty($conf->global->THEME_ELDY_TEXTLINK)			? $colortextlink		: $conf->global->THEME_ELDY_TEXTLINK)			: (empty($user->conf->THEME_ELDY_TEXTLINK)			? $colortextlink		: $user->conf->THEME_ELDY_TEXTLINK);
-	$fontsize							= empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? (empty($conf->global->THEME_ELDY_FONT_SIZE1)			? $fontsize				: $conf->global->THEME_ELDY_FONT_SIZE1)			: (empty($user->conf->THEME_ELDY_FONT_SIZE1)		? $fontsize				: $user->conf->THEME_ELDY_FONT_SIZE1);
-	$fontsizesmaller					= empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? (empty($conf->global->THEME_ELDY_FONT_SIZE2)			? $fontsize				: $conf->global->THEME_ELDY_FONT_SIZE2)			: (empty($user->conf->THEME_ELDY_FONT_SIZE2)		? $fontsize				: $user->conf->THEME_ELDY_FONT_SIZE2);
+	$colorbackhmenu1					= $conf->global->THEME_ELDY_TOPMENU_BACK1;
+	$colorbackvmenu1					= $conf->global->THEME_ELDY_VERMENU_BACK1;
+	$colortopbordertitle1				= $conf->global->THEME_ELDY_TOPBORDER_TITLE1;
+	$colorbacktitle1					= $conf->global->THEME_ELDY_BACKTITLE1;
+	$colorbacktabcard1					= $conf->global->THEME_ELDY_BACKTABCARD1;
+	$colorbacktabactive					= $conf->global->THEME_ELDY_BACKTABACTIVE;
+	$colorbacklineimpair1				= $conf->global->THEME_ELDY_LINEIMPAIR1;
+	$colorbacklineimpair2				= $conf->global->THEME_ELDY_LINEIMPAIR2;
+	$colorbacklinepair1					= $conf->global->THEME_ELDY_LINEPAIR1;
+	$colorbacklinepair2					= $conf->global->THEME_ELDY_LINEPAIR2;
+	$colorbacklinebreak					= $conf->global->THEME_ELDY_LINEBREAK;
+	$colorbackbody						= $conf->global->THEME_ELDY_BACKBODY;
+	$colortexttitlenotab				= $conf->global->THEME_ELDY_TEXTTITLENOTAB;
+	$colortexttitle						= $conf->global->THEME_ELDY_TEXTTITLE;
+	$colortexttitlelink					= $conf->global->THEME_ELDY_TEXTTITLELINK;
+	$colortext							= $conf->global->THEME_ELDY_TEXT;
+	$colortextlink						= $conf->global->THEME_ELDY_TEXTLINK;
 	// Hover color
 	$colorbacklinepairhover				= colorStringToArray($colorbline_hover);
 	$colorbacklinepairchecked			= colorStringToArray($colorbline_hover);
-	$colortopbordertitle1				= $colorbackhmenu1;
 	$colortopckeditor					= colorArrayToHex(colorStringToArray($colorbackhmenu1));
 	setcookie('colortopckeditor', $colortopckeditor, time() + (86400 * 30), "/"); // 86400 = 1 day
 	// Set text color to black or white
@@ -206,6 +179,7 @@
 	// Format color value to match expected format (may be 'FFFFFF' or '255,255,255')
 	$colorbackhmenu1						= join(',', colorStringToArray($colorbackhmenu1));
 	$colorbackvmenu1						= join(',', colorStringToArray($colorbackvmenu1));
+	$colortopbordertitle1					= join(',', colorStringToArray($colortopbordertitle1));
 	$colorbacktitle1						= join(',', colorStringToArray($colorbacktitle1));
 	$colorbacktabcard1						= join(',', colorStringToArray($colorbacktabcard1));
 	$colorbacktabactive						= join(',', colorStringToArray($colorbacktabactive));
