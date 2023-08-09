@@ -6311,9 +6311,16 @@ table.cal_event td.cal_event_right { padding: 4px 4px !important; }
 /*  Ajax - Liste deroulante de l'autocompletion								   */
 /* ============================================================================== */
 
-.ui-widget-content { border: solid 1px rgba(0,0,0,.3); background: #fff !important; }
+.ui-widget-content {
+	border: solid 1px rgba(0,0,0,.3);
+	background: <?php print $bgcolor; ?> !important;
+	color: var(----colortext);
+}
 
-.ui-autocomplete-loading { background: white url(<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/working.gif', 1) ?>) right center no-repeat; }
+.ui-autocomplete-loading {
+	background: white url(<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/working.gif', 1) ?>) right center no-repeat;
+}
+
 .ui-autocomplete {
 	position:absolute;
 	width:auto;
@@ -6323,11 +6330,13 @@ table.cal_event td.cal_event_right { padding: 4px 4px !important; }
 	margin:0px;
 	/*		   padding:0px; This make combo crazy */
 }
+
 .ui-autocomplete ul {
 	list-style-type:none;
 	margin:0px;
 	padding:0px;
 }
+
 .ui-autocomplete ul li.selected { background-color: #D3E5EC;}
 .ui-autocomplete ul li {
 	list-style-type:none;
@@ -6735,44 +6744,6 @@ p.titre {
 	z-index: 97;
 }
 
-
-/**
-* Ajax - Liste deroulante de l'autocompletion
-*/
-
-.ui-widget-content { border: solid 1px rgba(0,0,0,.3); background: #fff !important; }
-
-.ui-autocomplete-loading {
-	background: white url(<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/working.gif',1); ?>) right center no-repeat;
-}
-
-.ui-autocomplete {
-	background-color: white;
-	border: 1px solid #888;
-	font-size: 1.0em;
-	margin: 0;
-	padding: 0;
-	position: absolute;
-	width: auto;
-}
-
-.ui-autocomplete ul {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-}
-
-.ui-autocomplete ul li.selected { background-color: #d3e5ec;}
-
-.ui-autocomplete ul li {
-	cursor: pointer;
-	display: block;
-	height: 18px;
-	list-style-type: none;
-	margin: 0;
-	padding: 2px;
-}
-
 /**
 * Gantt
 */
@@ -7027,12 +6998,6 @@ line-height: 1em !important;
 .ui-autocomplete-input {
 margin: 0;
 padding: 1px;
-}
-
-
-/* confirmation box */
-.ui-widget-content {
-background-color: #f7f7f7!important;
 }
 
 .ui-state-default,
