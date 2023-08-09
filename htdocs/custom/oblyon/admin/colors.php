@@ -58,6 +58,16 @@
 															'OBLYON_COLOR_BUTTON_DELETE1',
 															'OBLYON_COLOR_BUTTON_DELETE2'
 															),
+										'message'	=> array('OBLYON_COLOR_INFO_BORDER',
+															'OBLYON_COLOR_INFO_BCKGRD',
+															'OBLYON_COLOR_INFO_TEXT',
+															'OBLYON_COLOR_WARNING_BORDER',
+															'OBLYON_COLOR_WARNING_BCKGRD',
+															'OBLYON_COLOR_WARNING_TEXT',
+															'OBLYON_COLOR_ERROR_BORDER',
+															'OBLYON_COLOR_ERROR_BCKGRD',
+															'OBLYON_COLOR_ERROR_TEXT',
+															),
 										'options'	=> array('OBLYON_COLOR_MAIN',
 															'OBLYON_COLOR_BCKGRD',
 															'OBLYON_COLOR_LOGO_BCKGRD',
@@ -101,6 +111,15 @@
 															'OBLYON_COLOR_BUTTON_ACTION2'			=> '#0044CC',
 															'OBLYON_COLOR_BUTTON_DELETE1'			=> '#CC8800',
 															'OBLYON_COLOR_BUTTON_DELETE2'			=> '#CC4400',
+															'OBLYON_COLOR_INFO_BORDER'				=> '#87cfd2',
+															'OBLYON_COLOR_INFO_BCKGRD'				=> '#eff8fc',
+															'OBLYON_COLOR_INFO_TEXT'				=> '#',
+															'OBLYON_COLOR_WARNING_BORDER'			=> '#f2cf87',
+															'OBLYON_COLOR_WARNING_BCKGRD'			=> '#fcf8e3',
+															'OBLYON_COLOR_WARNING_TEXT'				=> '#',
+															'OBLYON_COLOR_ERROR_BORDER'				=> '#e0796e',
+															'OBLYON_COLOR_ERROR_BCKGRD'				=> '#f07b6e',
+															'OBLYON_COLOR_ERROR_TEXT'				=> '#',
 															'OBLYON_COLOR_MAIN'						=> '#0083A2',
 															'OBLYON_COLOR_BCKGRD'					=> '#F5F5F5',
 															'OBLYON_COLOR_LOGO_BCKGRD'				=> '#FFFFFF',
@@ -142,6 +161,15 @@
 															'OBLYON_COLOR_BUTTON_ACTION2'			=> '#0063A2',
 															'OBLYON_COLOR_BUTTON_DELETE1'			=> '#CC8800',
 															'OBLYON_COLOR_BUTTON_DELETE2'			=> '#CC4400',
+															'OBLYON_COLOR_INFO_BORDER'				=> '#87cfd2',
+															'OBLYON_COLOR_INFO_BCKGRD'				=> '#eff8fc',
+															'OBLYON_COLOR_INFO_TEXT'				=> '#',
+															'OBLYON_COLOR_WARNING_BORDER'			=> '#f2cf87',
+															'OBLYON_COLOR_WARNING_BCKGRD'			=> '#fcf8e3',
+															'OBLYON_COLOR_WARNING_TEXT'				=> '#',
+															'OBLYON_COLOR_ERROR_BORDER'				=> '#e0796e',
+															'OBLYON_COLOR_ERROR_BCKGRD'				=> '#f07b6e',
+															'OBLYON_COLOR_ERROR_TEXT'				=> '#',
 															'OBLYON_COLOR_MAIN'						=> '#0083A2',
 															'OBLYON_COLOR_BCKGRD'					=> '#F4F4F4',
 															'OBLYON_COLOR_LOGO_BCKGRD'				=> '#FFFFFF',
@@ -183,6 +211,15 @@
 															'OBLYON_COLOR_BUTTON_ACTION2'			=> '#0044CC',
 															'OBLYON_COLOR_BUTTON_DELETE1'			=> '#CC8800',
 															'OBLYON_COLOR_BUTTON_DELETE2'			=> '#CC4400',
+															'OBLYON_COLOR_INFO_BORDER'				=> '#87cfd2',
+															'OBLYON_COLOR_INFO_BCKGRD'				=> '#eff8fc',
+															'OBLYON_COLOR_INFO_TEXT'				=> '#',
+															'OBLYON_COLOR_WARNING_BORDER'			=> '#f2cf87',
+															'OBLYON_COLOR_WARNING_BCKGRD'			=> '#fcf8e3',
+															'OBLYON_COLOR_WARNING_TEXT'				=> '#',
+															'OBLYON_COLOR_ERROR_BORDER'				=> '#e0796e',
+															'OBLYON_COLOR_ERROR_BCKGRD'				=> '#f07b6e',
+															'OBLYON_COLOR_ERROR_TEXT'				=> '#',
 															'OBLYON_COLOR_MAIN'						=> '#E09430',
 															'OBLYON_COLOR_BCKGRD'					=> '#F4F4F4',
 															'OBLYON_COLOR_LOGO_BCKGRD'				=> '#ffffff',
@@ -224,6 +261,15 @@
 															'OBLYON_COLOR_BUTTON_ACTION2'			=> '#0044CC',
 															'OBLYON_COLOR_BUTTON_DELETE1'			=> '#CC8800',
 															'OBLYON_COLOR_BUTTON_DELETE2'			=> '#CC4400',
+															'OBLYON_COLOR_INFO_BORDER'				=> '#87cfd2',
+															'OBLYON_COLOR_INFO_BCKGRD'				=> '#eff8fc',
+															'OBLYON_COLOR_INFO_TEXT'				=> '#',
+															'OBLYON_COLOR_WARNING_BORDER'			=> '#f2cf87',
+															'OBLYON_COLOR_WARNING_BCKGRD'			=> '#fcf8e3',
+															'OBLYON_COLOR_WARNING_TEXT'				=> '#',
+															'OBLYON_COLOR_ERROR_BORDER'				=> '#e0796e',
+															'OBLYON_COLOR_ERROR_BCKGRD'				=> '#f07b6e',
+															'OBLYON_COLOR_ERROR_TEXT'				=> '#',
 															'OBLYON_COLOR_MAIN'						=> '#E09430',
 															'OBLYON_COLOR_BCKGRD'					=> '#444444',
 															'OBLYON_COLOR_LOGO_BCKGRD'				=> '#FFFFFF',
@@ -265,6 +311,15 @@
 															'OBLYON_COLOR_BUTTON_ACTION2'			=> '#0063A2',
 															'OBLYON_COLOR_BUTTON_DELETE1'			=> '#CC8800',
 															'OBLYON_COLOR_BUTTON_DELETE2'			=> '#CC4400',
+															'OBLYON_COLOR_INFO_BORDER'				=> '#87cfd2',
+															'OBLYON_COLOR_INFO_BCKGRD'				=> '#eff8fc',
+															'OBLYON_COLOR_INFO_TEXT'				=> '#',
+															'OBLYON_COLOR_WARNING_BORDER'			=> '#f2cf87',
+															'OBLYON_COLOR_WARNING_BCKGRD'			=> '#fcf8e3',
+															'OBLYON_COLOR_WARNING_TEXT'				=> '#',
+															'OBLYON_COLOR_ERROR_BORDER'				=> '#e0796e',
+															'OBLYON_COLOR_ERROR_BCKGRD'				=> '#f07b6e',
+															'OBLYON_COLOR_ERROR_TEXT'				=> '#',
 															'OBLYON_COLOR_MAIN'						=> '#D51123',
 															'OBLYON_COLOR_BCKGRD'					=> '#FFFFFF',
 															'OBLYON_COLOR_LOGO_BCKGRD'				=> '#FFFFFF',
@@ -390,6 +445,15 @@
 	oblyon_print_liste_titre($metas);
 	if (count($listcolor['button'])) {
 		foreach ($listcolor['button'] as $key) {
+			$metas	= array('type' => 'text', 'class' => 'flat quatrevingtpercent color action');
+			oblyon_print_input($key, 'input', $langs->trans($key), '', $metas, 4, 1);
+		}
+	}
+	// message
+	$metas		= array(array(5), 'Messages');
+	oblyon_print_liste_titre($metas);
+	if (count($listcolor['message'])) {
+		foreach ($listcolor['message'] as $key) {
 			$metas	= array('type' => 'text', 'class' => 'flat quatrevingtpercent color action');
 			oblyon_print_input($key, 'input', $langs->trans($key), '', $metas, 4, 1);
 		}

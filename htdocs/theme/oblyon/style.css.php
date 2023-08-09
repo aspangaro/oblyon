@@ -113,6 +113,15 @@
 	$colorButtonAction2			= $conf->global->OBLYON_COLOR_BUTTON_ACTION2;			// default value: #0044cc
 	$colorButtonDelete1			= $conf->global->OBLYON_COLOR_BUTTON_DELETE1;			// default value: #cc8800
 	$colorButtonDelete2			= $conf->global->OBLYON_COLOR_BUTTON_DELETE2;			// default value: #cc4400
+	$colorInfoBorder			= $conf->global->OBLYON_COLOR_INFO_BORDER;				// default value: #87cfd2
+	$colorInfoBg				= $conf->global->OBLYON_COLOR_INFO_BCKGRD;				// default value: #eff8fc
+	$colorInfoTxt				= $conf->global->OBLYON_COLOR_INFO_TEXT;				// default value: #
+	$colorWarningBorder			= $conf->global->OBLYON_COLOR_WARNING_BORDER;			// default value: #f2cf87
+	$colorWarningBg				= $conf->global->OBLYON_COLOR_WARNING_BCKGRD;			// default value: #fcf8e3
+	$colorWarningTxt			= $conf->global->OBLYON_COLOR_WARNING_TEXT;				// default value: #
+	$colorErrorBorder			= $conf->global->OBLYON_COLOR_ERROR_BORDER;				// default value: #e0796e
+	$colorErrorBg				= $conf->global->OBLYON_COLOR_ERROR_BCKGRD;				// default value: #f07b6e
+	$colorErrorTxt				= $conf->global->OBLYON_COLOR_ERROR_TEXT;				// default value: #
 	$colorTextTabActive			= $conf->global->OBLYON_COLOR_TEXTTABACTIVE;			// default value: #222222
 	$bgotherbox					= '#f4f4f4';											// default value: #E6E6E6	//	Other information boxes on home page
 	$bgbutton_hover				= '#197489';											// default value: #197489

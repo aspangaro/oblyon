@@ -1417,62 +1417,40 @@ div.ok {
 
 /* Warning message */
 div.warning {
-    border-<?php print $left; ?>: solid 5px #d8c59a;
+    border-<?php print $left; ?>: solid 5px <?php print $colorWarningBorder; ?>;
     padding-top: 8px;
     padding-left: 10px;
     padding-right: 4px;
     padding-bottom: 8px;
     margin: 0.5em 0em 0.5em 0em;
-    background: rgb(255, 218, 135);
+    background: <?php print $colorWarningBg; ?>;
+	color: <?php echo $colorWarningTxt; ?>;
 }
 
 /* Error message */
 div.error {
-    border-<?php print $left; ?>: solid 5px #e0796e;
+    border-<?php print $left; ?>: solid 5px <?php print $colorErrorBorder; ?>;
     padding-top: 8px;
     padding-left: 10px;
     padding-right: 4px;
     padding-bottom: 8px;
     margin: 0.5em 0em 0.5em 0em;
-    background: #f07b6e;
+    background: <?php print $colorErrorBg; ?>;
+	color: <?php echo $colorErrorTxt; ?>;
 }
 
 /* Info admin */
 div.info {
-    border-<?php print $left; ?>: solid 5px #87cfd2;
+    border-<?php print $left; ?>: solid 5px <?php print $colorInfoBorder; ?>;
     padding-top: 8px;
     padding-left: 10px;
     padding-right: 4px;
     padding-bottom: 8px;
     margin: 0.5em 0em 0.5em 0em;
-    background: #eff8fc;
-}
+    background: <?php print $colorInfoBg; ?>;
+	color: <?php echo $colorInfoTxt; ?>;
 
-/* Warning message */
-div.warning {
-    border-<?php print $left; ?>: solid 5px #f2cf87;
-    padding-top: 8px;
-    padding-left: 10px;
-    padding-right: 4px;
-    padding-bottom: 8px;
-    margin: 0.5em 0em 0.5em 0em;
-    background: #fcf8e3;
 }
-div.warning a, div.info a, div.error a {
-    color: rgb(<?php echo $colortextlink; ?>);
-}
-
-/* Error message */
-div.error {
-    border-<?php print $left; ?>: solid 5px #f28787;
-    padding-top: 8px;
-    padding-left: 10px;
-    padding-right: 4px;
-    padding-bottom: 8px;
-    margin: 0.5em 0em 0.5em 0em;
-    background: #EFCFCF;
-}
-
 
 /*
  *   Liens Payes/Non payes
@@ -5620,14 +5598,12 @@ div .tdtop {
     margin-top: 5px;
     margin-bottom: 5px;
     text-align: center;
-
-    background: #fcfcfc;
     <?php if(!empty($conf->global->OBLYON_INFOXBOX_BACKGROUND)) { ?>
         background: <?php print $conf->global->OBLYON_INFOXBOX_BACKGROUND; ?> !important;
-    <?php } ?>
-//	border: 1px solid var(--colorboxstatsborder);
+    <?php } else { ?>
+		background: #fcfcfc;
+	<?php } ?>
 	border-left: 6px solid var(--colorboxstatsborder);
-//	box-shadow: 1px 1px 8px #ddd;
     border-radius: 0px;
 }
 .boxstats, .boxstats130, .boxstatscontent {
@@ -6870,11 +6846,6 @@ background-color: transparent !important;
 min-height: 20px;
 padding: 0 0 0 16px !important;
 }
-
-.treeview .hover {
-color: black !important;
-}
-
 
 /**
 * Excel tabs
