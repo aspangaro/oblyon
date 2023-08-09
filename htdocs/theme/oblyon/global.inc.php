@@ -29,7 +29,7 @@
 	--colortextlink: rgb(<?php print $colortextlink; ?>);
 	--colortextbackhmenu: #<?php print $colortextbackhmenu; ?>;
 	--colortextbackvmenu: #<?php print $colortextbackvmenu; ?>;
-	--colortopbordertitle1: rgb(<?php print $bgnavtop; ?>);
+	--colortopbordertitle1: rgb(<?php print $colortopbordertitle1; ?>);
 	--listetotal: #888888;
 	--inputbackgroundcolor: <?php echo $colorbline_hover; ?>;
 	--inputbordercolor: rgba(0,0,0,.15);
@@ -39,7 +39,7 @@
 	--colorboxstatsborder: <?php echo $bgnavtop ?>;
 	--dolgraphbg: rgba(255,255,255,0);
 	--fieldrequiredcolor: #400030;
-	--colortextbacktab: #<?php print $colortextbacktab; ?>;
+	--colortextbacktab: <?php print $colorTextTabActive; ?>;
 	--colorboxiconbg: #eee;
 	--refidnocolor:#444;
 	--tableforfieldcolor:#666;
@@ -713,11 +713,6 @@ input[type=file ]    { background-color: transparent; border-top: none; border-l
 input[type=checkbox] { background-color: transparent; border: none; box-shadow: none; }
 input[type=radio]    { background-color: transparent; border: none; box-shadow: none; }
 input[type=image]    { background-color: transparent; border: none; box-shadow: none; }
-input:-webkit-autofill {
-    background-color: #FDFFF0 !important;
-    background-image:none !important;
-    -webkit-box-shadow: 0 0 0 50px #FDFFF0 inset;
-}
 ::-webkit-input-placeholder { color:#ccc; }
 input:-moz-placeholder { color:#ccc; }
 input[name=price], input[name=weight], input[name=volume], input[name=surface], input[name=sizeheight], input[name=net_measure], select[name=incoterm_id] { margin-right: 6px; }
@@ -948,7 +943,6 @@ img[src*=stcomm]	{ vertical-align: text-top; }
 
 section.setupsection {
     padding: 20px;
-    /* background-color: var(--colorbacktitle1); */
     background-color: #f0f0f0;
     border-radius: 5px;
 }
@@ -1183,9 +1177,10 @@ input[type=checkbox] { background-color: transparent; border: none; box-shadow: 
 input[type=radio]    { background-color: transparent; border: none; box-shadow: none; }
 input[type=image]    { background-color: transparent; border: none; box-shadow: none; }
 input:-webkit-autofill {
-    background-color: #FDFFF0 !important;
+    background-color: var(--inputbackgroundcolor) !important;
     background-image:none !important;
     -webkit-box-shadow: 0 0 0 50px #FDFFF0 inset;
+	color: var(--colortext) !important;
 }
 ::-webkit-input-placeholder { color:#ccc; }
 input:-moz-placeholder { color:#ccc; }
@@ -1616,8 +1611,8 @@ div.divsearchfield {
 
 .a-filter, .a-mesure {
     border-radius: 50px;
-    background: var(--colortexttitlenotab);
-    color: #fff;
+    background: var(--colorbacktabactive);
+    color: var(--colortexttitlenotab);
     padding: 8px 10px 8px 6px;
 }
 .a-filter:before {
@@ -2763,12 +2758,10 @@ img.photorefnoborder {
 .underrefbanner {
 }
 .underbanner {
-	border-bottom: <?php echo $borderwidth ?>px solid <?php print $colortopbordertitle1; ?>;
-	/* border-bottom: 2px solid rgb(<?php echo $colorbackhmenu1 ?>); */
+	border-bottom: <?php echo $borderwidth ?>px solid var(--colortopbordertitle1);
 }
 .trextrafieldseparator td {
-    /* border-bottom: 2px solid rgb(<?php echo $colorbackhmenu1 ?>) !important; */
-    border-bottom: 2px dashed <?php echo $colortopbordertitle1 ?> !important;
+    border-bottom: 2px dashed var(--colortopbordertitle1) !important;
 }
 
 .tdhrthin {
@@ -2905,16 +2898,14 @@ img.photorefnoborder {
     color: <?php print $bgnavtop_txt; ?>;
 }
 
-.main-nav__item.is-sel {
-    background-color: <?php print $bgnavtop_hover; ?>;
-    color: <?php print $bgnavtop_txt; ?>;
+.main-nav__item.is-sel a {
     <?php if (! empty($conf->global->MAIN_MENU_INVERT)) { ?>
-        /*
-        border-style: solid;
-        border-width: 6px 10px 6px 0px;
-        border-color: transparent <?php print $bgcolor; ?> transparent transparent;
-        */
-    <?php } ?>
+		background-color: <?php print $bgnavleft_hover; ?>;
+		color: <?php print $bgnavleft_txt_active; ?>;
+    <?php } else { ?>
+		background-color: <?php print $bgnavtop_hover; ?>;
+		color: <?php print $bgnavtop_txt_active; ?>;
+	<?php } ?>
 }
 
 
@@ -3167,23 +3158,23 @@ li.sec-nav__sub-item:focus, li.sec-nav__sub-item sec-nav__link:focus {
 }
 
 .sec-nav.is-inverted li.item-heading:hover .caret--top {
-    border-top-color: <?php print $maincolor; ?>;
+    border-top-color: <?php print $bgnavleft_txt_hover; ?>;
 }
 
 .sec-nav__sub-list .item-level2:hover .caret--left {
-    border-left-color: <?php print $maincolor; ?>;
+    border-left-color: <?php print $bgnavleft_txt_hover; ?>;
 }
 
 .sec-nav__sub-list .item-level2:hover .caret--right {
-    border-right-color: <?php print $maincolor; ?>;
+    border-right-color: <?php print $bgnavleft_txt_hover; ?>;
 }
 
 .sec-nav__sub-list .item-level3:hover .caret--left {
-    border-left-color: <?php print $maincolor; ?>;
+    border-left-color: <?php print $bgnavleft_txt_hover; ?>;
 }
 
 .sec-nav__sub-list .item-level3:hover .caret--right {
-    border-right-color: <?php print $maincolor; ?>;
+    border-right-color: <?php print $bgnavleft_txt_hover; ?>;
 }
 
 /**
@@ -3191,7 +3182,7 @@ li.sec-nav__sub-item:focus, li.sec-nav__sub-item sec-nav__link:focus {
 */
 
 .sec-nav.is-inverted .sec-nav__sub-list {
-    background-color: <?php print $bgnavleft; ?>;
+    background-color: <?php print $bgnavleft_hover; ?>;
     box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.055);
     display: none;
     list-style: none;
@@ -3216,6 +3207,10 @@ li.sec-nav__sub-item:focus, li.sec-nav__sub-item sec-nav__link:focus {
 .sec-nav.is-inverted .sec-nav__sub-item {
     float: none;
     padding: 0;
+}
+
+.sec-nav.is-inverted .sec-nav__sub-item:hover, .sec-nav.is-inverted .sec-nav__link:hover {
+	background-color: <?php print $bgnavleft; ?>;
 }
 
 .sec-nav.is-inverted .sec-nav__sub-list .item-level1 .sec-nav__link {
@@ -3924,10 +3919,6 @@ font-size: 14px;
     /* color: #f3e4ac !important; */
 }
 .helppresentcircle {
-    /*
-    color: rgb(<?php echo $colorbackhmenu1 ?>);
-    filter: invert(0.8);
-    */
     color: <?php print $badgeSecondary; ?>;
     margin-<?php echo $left ?>: -7px;
     display: inline-block;
@@ -4269,12 +4260,16 @@ a.tmenudisabled {
 a.tmenu:link,
 a.tmenu:visited,
 a.tmenudisabled {
-    color: <?php print $bgnavtop_txt; ?> /*!important*/;
     display: block;
     font-weight: normal;
     /* padding: 0 5px; */
     text-decoration: none;
     white-space: nowrap;
+}
+
+a.tmenu:link,
+a.tmenudisabled {
+    color: <?php print $bgnavtop_txt; ?> !important;
 }
 
 a.tmenu:active {
@@ -4301,14 +4296,6 @@ a.tmenusel:hover,
 a.tmenusel:active {
     color: #fff;
     font-weight: bold !important;
-}
-
-li.tmenusel a,
-li.tmenusel a:hover,
-li.tmenusel a:active,
-li.tmenusel a:link {
-    color: #fff!important;
-    font-weight: bold!important;
 }
 
 li.tmenuend {
@@ -5037,8 +5024,8 @@ div.tabsAction {
 
 div.tabactive,
 div.tabactive a.tab {
-    background-color: <?php echo $colorbacktabcard1; ?>;
-	  color: <?php print $colortextbacktab; ?>;
+    background-color: var(--colorbacktabactive);
+	  color: var(--colortextbacktab);
     height: 38px;
 }
 
@@ -5321,7 +5308,7 @@ table.border {
 }
 
 table.border td {
-    border: 1px solid <?php echo $colortopbordertitle1 ?>;
+    border: 1px solid var(--colortopbordertitle1);
     border-collapse: collapse;
     padding: 5px 2px 5px 2px;
     vertical-align: middle;
@@ -5774,8 +5761,7 @@ span.dashboardlineko {
     margin-bottom: 8px !important;
     border-bottom-width: 1px;
 
-    border-top: <?php echo $borderwidth ?>px solid <?php echo $colortopbordertitle1 ?>;
-    /* border-top: 2px solid rgb(<?php echo $colorbackhmenu1 ?>) !important; */
+    border-top: <?php echo $borderwidth ?>px solid var(--colortopbordertitle1);
 }
 table.noborder.boxtable tr td {
     height: unset;
@@ -6306,20 +6292,20 @@ span.websitebuttonsitepreviewdisabled img, a.websitebuttonsitepreviewdisabled im
 table.cal_month    { border-spacing: 0px; }
 table.cal_month td:first-child  { border-left: 0px; }
 table.cal_month td:last-child   { border-right: 0px; }
-.cal_current_month { border-top: 0; border-left: solid 1px <?php echo $colortopbordertitle1 ?>; border-right: 0; border-bottom: solid 1px <?php echo $colortopbordertitle1 ?>; }
-.cal_current_month_peruserleft { border-top: 0; border-left: solid 2px #6C7C7B; border-right: 0; border-bottom: solid 1px <?php echo $colortopbordertitle1 ?>; }
-.cal_current_month_oneday { border-right: solid 1px <?php echo $colortopbordertitle1 ?>; }
+.cal_current_month { border-top: 0; border-left: solid 1px var(--colortopbordertitle1); border-right: 0; border-bottom: solid 1px var(--colortopbordertitle1); }
+.cal_current_month_peruserleft { border-top: 0; border-left: solid 2px #6C7C7B; border-right: 0; border-bottom: solid 1px var(--colortopbordertitle1); }
+.cal_current_month_oneday { border-right: solid 1px var(--colortopbordertitle1); }
 .cal_other_month   { border-top: 0; border-left: solid 1px #C0C0C0; border-right: 0; border-bottom: solid 1px #C0C0C0; }
 .cal_other_month_peruserleft { border-top: 0; border-left: solid 2px #6C7C7B !important; border-right: 0; }
-.cal_current_month_right { border-right: solid 1px <?php echo $colortopbordertitle1 ?>; }
+.cal_current_month_right { border-right: solid 1px var(--colortopbordertitle1); }
 .cal_other_month_right   { border-right: solid 1px #C0C0C0; }
 .cal_other_month   { /* opacity: 0.6; */ background: #EAEAEA; padding-<?php print $left; ?>: 2px; padding-<?php print $right; ?>: 1px; padding-top: 0px; padding-bottom: 0px; }
 .cal_past_month    { /* opacity: 0.6; */ background: #EEEEEE; padding-<?php print $left; ?>: 2px; padding-<?php print $right; ?>: 1px; padding-top: 0px; padding-bottom: 0px; }
-.cal_current_month { background: #FFFFFF; border-left: solid 1px <?php echo $colortopbordertitle1 ?>; padding-<?php print $left; ?>: 2px; padding-<?php print $right; ?>: 1px; padding-top: 0px; padding-bottom: 0px; }
+.cal_current_month { background: #FFFFFF; border-left: solid 1px var(--colortopbordertitle1); padding-<?php print $left; ?>: 2px; padding-<?php print $right; ?>: 1px; padding-top: 0px; padding-bottom: 0px; }
 .cal_current_month_peruserleft { background: #FFFFFF; border-left: solid 2px #6C7C7B; padding-<?php print $left; ?>: 2px; padding-<?php print $right; ?>: 1px; padding-top: 0px; padding-bottom: 0px; }
-.cal_today         { background: #FDFDF0; border-left: solid 1px <?php echo $colortopbordertitle1 ?>; border-bottom: solid 1px <?php echo $colortopbordertitle1 ?>; padding-<?php print $left; ?>: 2px; padding-<?php print $right; ?>: 1px; padding-top: 0px; padding-bottom: 0px; }
-.cal_today_peruser { background: #FDFDF0; border-right: solid 1px <?php echo $colortopbordertitle1 ?>; border-bottom: solid 1px <?php echo $colortopbordertitle1 ?>; padding-<?php print $left; ?>: 2px; padding-<?php print $right; ?>: 1px; padding-top: 0px; padding-bottom: 0px; }
-.cal_today_peruser_peruserleft { background: #FDFDF0; border-left: solid 2px #6C7C7B; border-right: solid 1px <?php echo $colortopbordertitle1 ?>; border-bottom: solid 1px <?php echo $colortopbordertitle1 ?>; padding-<?php print $left; ?>: 2px; padding-<?php print $right; ?>: 1px; padding-top: 0px; padding-bottom: 0px; }
+.cal_today         { background: #FDFDF0; border-left: solid 1px var(--colortopbordertitle1); border-bottom: solid 1px var(--colortopbordertitle1); padding-<?php print $left; ?>: 2px; padding-<?php print $right; ?>: 1px; padding-top: 0px; padding-bottom: 0px; }
+.cal_today_peruser { background: #FDFDF0; border-right: solid 1px var(--colortopbordertitle1); border-bottom: solid 1px var(--colortopbordertitle1); padding-<?php print $left; ?>: 2px; padding-<?php print $right; ?>: 1px; padding-top: 0px; padding-bottom: 0px; }
+.cal_today_peruser_peruserleft { background: #FDFDF0; border-left: solid 2px #6C7C7B; border-right: solid 1px var(--colortopbordertitle1); border-bottom: solid 1px var(--colortopbordertitle1); padding-<?php print $left; ?>: 2px; padding-<?php print $right; ?>: 1px; padding-top: 0px; padding-bottom: 0px; }
 .cal_past          { }
 .cal_peruser       { padding: 0px; }
 .cal_impair        { background: #F8F8F8; }
@@ -7967,7 +7953,7 @@ margin-top: -10px;
 select {
 /* display: inline-block; */	/* We can't set this. This disable ability to make */
 overflow:hidden;
-white-space: nowrap;			/* Enabling this make behaviour strange when selecting the empty value if this empty value is '' instead of ' ' */
+white-space: nowrap;			/* Enabling this make behaviour strange when selecting the empty value if this empty value is '' instead of 'Â ' */
 text-overflow: ellipsis;
 }
 .fiche .ui-controlgroup {
@@ -8066,14 +8052,14 @@ box-shadow: none;
 border: none;
 background: none;
 text-shadow: none;
-color: <?php echo $colortexttitlenotab; ?> !important;
+color: var(--colortexttitlenotab) !important;
 }
 .ui-bar-b, .lilevel0 {
 background-repeat: repeat-x;
 border: none;
 background: none;
 text-shadow: none;
-color: <?php echo $colortexttitlenotab; ?> !important;
+color: var(--colortexttitlenotab) !important;
 }
 .alilevel0 {
 font-weight: normal !important;
@@ -8112,10 +8098,6 @@ text-shadow: none !important;
 background: transparent;
 }
 
-div.tabsElem a.tab {
-background: transparent;
-}
-
 .ui-controlgroup-horizontal .ui-btn.ui-first-child {
 -webkit-border-top-left-radius: 6px;
 border-top-left-radius: 6px;
@@ -8126,7 +8108,7 @@ border-top-right-radius: 6px;
 }*/
 
 .alilevel1 {
-    color: <?php echo $colortexttitlenotab; ?> !important;
+    color: var(--colortexttitlenotab) !important;
 }
 .lilevel1 {
     border-top: 2px solid #444;
@@ -8535,7 +8517,7 @@ div.refidpadding {
 }
 div.refid {
     font-weight: bold;
-    color: <?php echo $colortexttitlenotab; ?>;
+    color: var(--colortexttitlenotab);
     font-size: 160%;
 }
 div.refidno	{
@@ -8774,7 +8756,7 @@ div.liste_titre {
 }
 div.liste_titre_bydiv {
     border-top-width: <?php echo $borderwidth ?>px;
-    border-top-color: <?php echo $colortopbordertitle1 ?>;
+    border-top-color: var(--colortopbordertitle1);
     border-top-style: solid;
 
     border-collapse: collapse;
@@ -8797,8 +8779,6 @@ div.colorback	/* for the form "assign user" on time spent view */
 }
 div.liste_titre_bydiv, .liste_titre div.tagtr, tr.liste_titre, tr.liste_titre_sel, .tagtr.liste_titre, .tagtr.liste_titre_sel, form.liste_titre, form.liste_titre_sel, table.dataTable thead tr
 {
-    /*background: rgb(<?php echo $colorbacktitle1; ?>);*/
-    /*font-weight: <?php echo $useboldtitle ? 'bold' : 'normal'; ?>;*/
     font-weight: normal;
 
     color: <?php print $colorftitle; ?>;
@@ -8807,7 +8787,7 @@ div.liste_titre_bydiv, .liste_titre div.tagtr, tr.liste_titre, tr.liste_titre_se
 }
 tr.liste_titre th, tr.liste_titre td, th.liste_titre
 {
-    border-bottom: 1px solid <?php echo $colortopbordertitle1 ?>;
+    border-bottom: 1px solid var(--colortopbordertitle1);
 }
 tr.liste_titre:first-child th, tr:first-child th.liste_titre {
     /*    border-bottom: 1px solid #ddd ! important; */
@@ -8825,7 +8805,7 @@ tr.liste_titre th a, th.liste_titre a, tr.liste_titre td a, td.liste_titre a, fo
 }
 tr.liste_titre_topborder td {
     border-top-width: <?php echo $borderwidth; ?>px;
-    border-top-color: <?php echo $colortopbordertitle1 ?>;
+    border-top-color: var(--colortopbordertitle1);
     border-top-style: solid;
 }
 .liste_titre td a {
@@ -8897,7 +8877,7 @@ table.tableforservicepart1 tr td {
 
 .paymenttable, .margintable {
     /*border-top-width: <?php echo $borderwidth ?>px !important;
-	border-top-color: <?php echo $colortopbordertitle1 ?> !important;
+	border-top-color: var(--colortopbordertitle1) !important;
 	border-top-style: solid !important;*/
     border-top: none !important;
     margin: 0px 0px 0px 0px !important;
@@ -8929,7 +8909,7 @@ div.tabBar .noborder {
 }
 
 #tablelines tr.liste_titre td, .paymenttable tr.liste_titre td, .margintable tr.liste_titre td, .tableforservicepart1 tr.liste_titre td {
-    border-bottom: 1px solid <?php echo $colortopbordertitle1 ?> !important;
+    border-bottom: 1px solid var(--colortopbordertitle1) !important;
 }
 #tablelines tr td {
     height: unset;
@@ -8949,7 +8929,7 @@ div:not(.fichecenter):not(.fichehalfleft):not(.fichehalfright):not(.ficheaddleft
 .noborder > tbody > tr:nth-child(even):not(:last-child) td:not(.liste_titre), .liste > tbody > tr:nth-child(even):not(:last-child) td:not(.liste_titre),
 .noborder .oddeven.tagtr:nth-child(even):not(:last-child) .tagtd:not(.liste_titre)
 {
-    border-bottom: 1px solid <?php echo $colortopbordertitle1 ?>;
+    border-bottom: 1px solid var(--colortopbordertitle1);
 }
 
 .noborder > tbody > tr:nth-child(odd):not(.liste_titre), .liste > tbody > tr:nth-child(odd):not(.liste_titre),
@@ -8965,7 +8945,7 @@ div:not(.fichecenter):not(.fichehalfleft):not(.fichehalfright):not(.ficheaddleft
 .noborder > tbody > tr:nth-child(odd):not(:last-child) td:not(.liste_titre), .liste > tbody > tr:nth-child(odd):not(:last-child) td:not(.liste_titre),
 .noborder .oddeven.tagtr:nth-child(odd):not(:last-child) .tagtd:not(.liste_titre)
 {
-    border-bottom: 1px solid <?php echo $colortopbordertitle1 ?>;
+    border-bottom: 1px solid var(--colortopbordertitle1);
 }
 
 ul.noborder li:nth-child(even):not(.liste_titre) {
@@ -9156,7 +9136,7 @@ a.ui-link, a.ui-link:hover, .ui-btn:hover, span.ui-btn-text:hover, span.ui-btn-i
 select {
 	/* display: inline-block; */	/* We can't set this. This disable ability to make */
 	overflow:hidden;
-	white-space: nowrap;			/* Enabling this make behaviour strange when selecting the empty value if this empty value is '' instead of ' ' */
+	white-space: nowrap;			/* Enabling this make behaviour strange when selecting the empty value if this empty value is '' instead of 'Â ' */
 	text-overflow: ellipsis;
 }
 .fiche .ui-controlgroup {
@@ -9255,14 +9235,14 @@ ul.ulmenu {
 	border: none;
 	background: none;
 	text-shadow: none;
-	color: <?php echo $colortexttitlenotab; ?> !important;
+	color: var(--colortexttitlenotab) !important;
 }
 .ui-bar-b, .lilevel0 {
 	background-repeat: repeat-x;
 	border: none;
 	background: none;
 	text-shadow: none;
-	color: <?php echo $colortexttitlenotab; ?> !important;
+	color: var(--colortexttitlenotab) !important;
 }
 .alilevel0 {
 	font-weight: normal !important;
@@ -9297,11 +9277,8 @@ ul.ulmenu {
 	color: #<?php echo $colorshadowtitle; ?> !important;
 	text-shadow: none !important;
 }
-div.tabsElem a.tab {
-	background: transparent;
-}
 .alilevel1 {
-	color: <?php echo $colortexttitlenotab; ?> !important;
+	color: var(--colortexttitlenotab) !important;
 }
 .lilevel1 {
 	border-top: 2px solid #444;
