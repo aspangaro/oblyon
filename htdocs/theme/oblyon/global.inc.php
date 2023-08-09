@@ -1135,7 +1135,6 @@ input.pageplusone {
     color: #888 !important;
 }
 .colorblack {
-    //color: #000;
 }
 .fontsizeunset {
     font-size: unset !important;
@@ -7287,7 +7286,7 @@ ul.ecmjqft li {
 ul.ecmjqft a {
     line-height: 24px;
     vertical-align: middle;
-    color: #333;
+    color: var(--colortextlink);
     padding: 0px 0px;
     font-weight:normal;
     display: inline-block !important;
@@ -7343,8 +7342,32 @@ div#ecm-layout-center {
 .jnotify-container .jnotify-notification .jnotify-message {
     font-weight: normal;
 }
+
+/* Notification */
+.jnotify-container .jnotify-notification .jnotify-close, .jnotify-container .jnotify-notification .jnotify-message {
+    color: <?php echo $colorNotifInfoTxt ?> !important;
+}
+
+.jnotify-container .jnotify-notification .jnotify-background {
+	background-color: <?php echo $colorNotifInfoBg ?> !important;
+}
+
+/* Warning */
 .jnotify-container .jnotify-notification-warning .jnotify-close, .jnotify-container .jnotify-notification-warning .jnotify-message {
-    color: #a28918 !important;
+    color: <?php echo $colorNotifWarningTxt ?> !important;
+}
+
+.jnotify-container .jnotify-notification-warning .jnotify-background {
+	background-color: <?php echo $colorNotifWarningBg ?> !important;
+}
+
+/* Error */
+.jnotify-container .jnotify-notification-error .jnotify-close, .jnotify-container .jnotify-notification-error .jnotify-message {
+	color:<?php echo $colorNotifErrorTxt ?> !important;
+}
+
+.jnotify-container .jnotify-notification-error .jnotify-background {
+	background-color: <?php echo $colorNotifErrorBg ?> !important;
 }
 
 /* use or not ? */
@@ -7571,7 +7594,6 @@ span.select2.select2-container.select2-container--default {
 }
 .select2-dropdown {
     border: 1px solid var(--colorboxstatsborder);
-//    box-shadow: 1px 2px 10px #ddd;
     background-color: var(--colorbacklineimpair1) !important;
 }
 .select2-dropdown-open {
@@ -8963,7 +8985,6 @@ dl.dropdown {
     display:none;
 }
 .dropdown dd ul {
- //   color: <?php echo $colorfline; ?>;
 	background-color: <?php print $bgnavtop_hover; ?>;
     border: 1px solid var(--colorboxstatsborder);
     display:none;
@@ -8979,7 +9000,6 @@ dl.dropdown {
     white-space: nowrap;
     font-weight: normal;
     padding: 2px;
-//    color: #000;
 }
 .dropdown dd ul li:hover {
     background: var(--colorbacklinepairhover);
@@ -8992,7 +9012,6 @@ dl.dropdown {
     display: block;
 }
 .dropdown dd ul li span {
- //   color: #888;
 }
 .dropdown dd ul li a:hover,
 .dropdown dd ul li a:focus {

@@ -122,7 +122,13 @@
 	$colorErrorBorder			= $conf->global->OBLYON_COLOR_ERROR_BORDER;				// default value: #e0796e
 	$colorErrorBg				= $conf->global->OBLYON_COLOR_ERROR_BCKGRD;				// default value: #f07b6e
 	$colorErrorTxt				= $conf->global->OBLYON_COLOR_ERROR_TEXT;				// default value: #
-	$colorTextTabActive			= $conf->global->OBLYON_COLOR_TEXTTABACTIVE;			// default value: #222222
+	$colorNotifInfoBg			= $conf->global->OBLYON_COLOR_NOTIF_INFO_BCKGRD;		// default value: #d9e5d1
+	$colorNotifInfoTxt			= $conf->global->OBLYON_COLOR_NOTIF_INFO_TEXT;			// default value: #446548
+	$colorNotifWarningBg		= $conf->global->OBLYON_COLOR_NOTIF_WARNING_BCKGRD;		// default value: #fff7d1
+	$colorNotifWarningTxt		= $conf->global->OBLYON_COLOR_NOTIF_WARNING_TEXT;		// default value: #a28918
+	$colorNotifErrorBg			= $conf->global->OBLYON_COLOR_NOTIF_ERROR_BCKGRD;		// default value: #d79eac
+	$colorNotifErrorTxt			= $conf->global->OBLYON_COLOR_NOTIF_ERROR_TEXT;			// default value: #a72947
+	$colorNotifTextTabActive	= $conf->global->OBLYON_COLOR_TEXTTABACTIVE;			// default value: #222222
 	$bgotherbox					= '#f4f4f4';											// default value: #E6E6E6	//	Other information boxes on home page
 	$bgbutton_hover				= '#197489';											// default value: #197489
 	if (!empty($maincolor)) {
