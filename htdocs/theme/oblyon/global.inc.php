@@ -1349,9 +1349,10 @@ span.butActionDelete {
 * State Ok, Warning, Error
 */
 
-.ok	  { color: #114466; }
-.warning { color: #f07b6e !important }
-.error   { color: #7e1515 !important; font-weight: bold; }
+.ok	        { color: #114466; }
+.warning    { color: #f07b6e !important }
+.error      { color: #7e1515 !important; font-weight: bold; }
+.green      { color: #118822 !important; }
 
 .bloc_success {
 	background-color: #33cc66;
@@ -10036,4 +10037,9 @@ include dol_buildpath($path.'/theme/'.$theme.'/dropdown.inc.php', 0);
 include dol_buildpath($path.'/theme/'.$theme.'/info-box.inc.php', 0);
 include dol_buildpath($path.'/theme/'.$theme.'/progress.inc.php', 0);
 include dol_buildpath($path.'/theme/'.$theme.'/timeline.inc.php', 0);
+
+// Compatibility module
+include dol_buildpath($path.'/theme/'.$theme.'/modules.inc.php', 0);
+
+
 

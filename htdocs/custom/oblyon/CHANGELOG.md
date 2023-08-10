@@ -1,5 +1,9 @@
 ## Changelog ##
 
+### Version 2.3.0 - Compatibility 14.0.x - 18.0.x (2023/08/10)
+- NEW Use a lot of new color variables for compatibility with DARK_MODE
+- Compatibility module Quicklist with function "Fix the reference banner and action buttons during vertical scrolling"
+
 ### Version 2.2.8 - Compatibility 14.0.x - 18.0.x (2023/07/10)
 - Add constant PROJECT_HIDE_MENU_TASKS_ACTIVITY to hide in project menu the link to manage activity
 - Upgrade CSS
