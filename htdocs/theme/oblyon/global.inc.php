@@ -6076,6 +6076,11 @@ html .ui-datepicker-calendar .ui-button.ui-state-disabled:hover, html .ui-button
 	border: unset;
 }
 
+.ui-datepicker .ui-datepicker-header {
+	background: <?php print $bgcolor; ?> !important;
+	border: none;
+}
+
 .ui-state-highlight, .ui-widget-content .ui-state-highlight
 {
 	color: <?php echo $colorfdatedefault; ?> !important;
@@ -6263,46 +6268,174 @@ span.websitebuttonsitepreviewdisabled img, a.websitebuttonsitepreviewdisabled im
 .dayevent .tagtr:first-of-type {
 	height: 24px;
 }
-.agendacell { height: 60px; }
-table.cal_month	{ border-spacing: 0px; }
-table.cal_month td:first-child  { border-left: 0px; }
-table.cal_month td:last-child   { border-right: 0px; }
-.cal_current_month { border-top: 0; border-left: solid 1px var(--colortopbordertitle1); border-right: 0; border-bottom: solid 1px var(--colortopbordertitle1); }
-.cal_current_month_peruserleft { border-top: 0; border-left: solid 2px #6C7C7B; border-right: 0; border-bottom: solid 1px var(--colortopbordertitle1); }
-.cal_current_month_oneday { border-right: solid 1px var(--colortopbordertitle1); }
-.cal_other_month   { border-top: 0; border-left: solid 1px #C0C0C0; border-right: 0; border-bottom: solid 1px #C0C0C0; }
-.cal_other_month_peruserleft { border-top: 0; border-left: solid 2px #6C7C7B !important; border-right: 0; }
-.cal_current_month_right { border-right: solid 1px var(--colortopbordertitle1); }
-.cal_other_month_right   { border-right: solid 1px #C0C0C0; }
-.cal_other_month   { /* opacity: 0.6; */ background: #EAEAEA; padding-<?php print $left; ?>: 2px; padding-<?php print $right; ?>: 1px; padding-top: 0px; padding-bottom: 0px; }
-.cal_past_month	{ /* opacity: 0.6; */ background: #EEEEEE; padding-<?php print $left; ?>: 2px; padding-<?php print $right; ?>: 1px; padding-top: 0px; padding-bottom: 0px; }
-.cal_current_month { background: #FFFFFF; border-left: solid 1px var(--colortopbordertitle1); padding-<?php print $left; ?>: 2px; padding-<?php print $right; ?>: 1px; padding-top: 0px; padding-bottom: 0px; }
-.cal_current_month_peruserleft { background: #FFFFFF; border-left: solid 2px #6C7C7B; padding-<?php print $left; ?>: 2px; padding-<?php print $right; ?>: 1px; padding-top: 0px; padding-bottom: 0px; }
-.cal_today		 { background: #FDFDF0; border-left: solid 1px var(--colortopbordertitle1); border-bottom: solid 1px var(--colortopbordertitle1); padding-<?php print $left; ?>: 2px; padding-<?php print $right; ?>: 1px; padding-top: 0px; padding-bottom: 0px; }
-.cal_today_peruser { background: #FDFDF0; border-right: solid 1px var(--colortopbordertitle1); border-bottom: solid 1px var(--colortopbordertitle1); padding-<?php print $left; ?>: 2px; padding-<?php print $right; ?>: 1px; padding-top: 0px; padding-bottom: 0px; }
-.cal_today_peruser_peruserleft { background: #FDFDF0; border-left: solid 2px #6C7C7B; border-right: solid 1px var(--colortopbordertitle1); border-bottom: solid 1px var(--colortopbordertitle1); padding-<?php print $left; ?>: 2px; padding-<?php print $right; ?>: 1px; padding-top: 0px; padding-bottom: 0px; }
-.cal_past		  { }
-.cal_peruser	   { padding: 0px; }
-.cal_impair		{ background: #F8F8F8; }
-.cal_today_peruser_impair { background: #F8F8F0; }
-.peruser_busy	  { background: #CC8888; }
-.peruser_notbusy   { background: #EEDDDD; opacity: 0.5; }
-table.cal_event	{ border: none; border-collapse: collapse; margin-bottom: 1px; -webkit-border-radius: 3px; border-radius: 3px; min-height: 20px;	}
-table.cal_event td { border: none; padding-<?php print $left; ?>: 2px; padding-<?php print $right; ?>: 2px; padding-top: 0px; padding-bottom: 0px; }
-table.cal_event td.cal_event { padding: 4px 4px !important; }
-table.cal_event td.cal_event_right { padding: 4px 4px !important; }
-.cal_event			  { font-size: 1em; }
-.cal_event a:link	   { color: #111111; font-weight: normal !important; }
-.cal_event a:visited	{ color: #111111; font-weight: normal !important; }
-.cal_event a:active	 { color: #111111; font-weight: normal !important; }
-.cal_event_busy a:hover { color: #111111; font-weight: normal !important; color:rgba(255,255,255,.75); }
-.cal_event_busy	  { }
-.cal_peruserviewname { max-width: 140px; height: 22px; }
+.agendacell {
+	height: 60px;
+}
+table.cal_month	{
+	border-spacing: 0px;
+}
+table.cal_month td:first-child  {
+	border-left: 0px;
+}
+table.cal_month td:last-child {
+	border-right: 0px;
+}
+.cal_current_month {
+	border-top: 0;
+	border-left: solid 1px var(--colortopbordertitle1);
+	border-right: 0;
+	border-bottom: solid 1px var(--colortopbordertitle1);
+}
+.cal_current_month_peruserleft {
+	border-top: 0;
+	border-left: solid 2px #6C7C7B;
+	border-right: 0;
+	border-bottom: solid 1px var(--colortopbordertitle1);
+}
+.cal_current_month_oneday {
+	border-right: solid 1px var(--colortopbordertitle1);
+}
+.cal_other_month {
+	border-top: 0;
+	border-left: solid 1px #C0C0C0;
+	border-right: 0;
+	border-bottom: solid 1px #C0C0C0;
+}
+.cal_other_month_peruserleft {
+	border-top: 0;
+	border-left: solid 2px #6C7C7B !important;
+	border-right: 0;
+}
+.cal_current_month_right {
+	border-right: solid 1px var(--colortopbordertitle1);
+}
+.cal_other_month_right {
+	border-right: solid 1px #C0C0C0;
+}
+.cal_other_month {
+	background: <?php echo $colorbline; ?>;
+	padding-<?php print $left; ?>: 2px;
+	padding-<?php print $right; ?>: 1px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+.cal_past_month	{
+	background: <?php echo $colorbline; ?>;
+	padding-<?php print $left; ?>: 2px;
+	padding-<?php print $right; ?>: 1px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+.cal_current_month {
+	background: var(--colorbacktitle1);
+	border-left: solid 1px var(--colortopbordertitle1);
+	padding-<?php print $left; ?>: 2px;
+	padding-<?php print $right; ?>: 1px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+.cal_current_month_peruserleft {
+	background: var(--colorbacktitle1);
+	border-left: solid 2px #6C7C7B;
+	padding-<?php print $left; ?>: 2px;
+	padding-<?php print $right; ?>: 1px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+.cal_today {
+	background: var(--inputbackgroundcolor);
+	border-left: solid 1px var(--colortopbordertitle1);
+	border-bottom: solid 1px var(--colortopbordertitle1);
+	padding-<?php print $left; ?>: 2px;
+	padding-<?php print $right; ?>: 1px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+.cal_today_peruser {
+	background: var(--inputbackgroundcolor);
+	border-right: solid 1px var(--colortopbordertitle1);
+	border-bottom: solid 1px var(--colortopbordertitle1);
+	padding-<?php print $left; ?>: 2px;
+	padding-<?php print $right; ?>: 1px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+.cal_today_peruser_peruserleft {
+	background: var(--inputbackgroundcolor);;
+	border-left: solid 2px #6C7C7B;
+	border-right: solid 1px var(--colortopbordertitle1);
+	border-bottom: solid 1px var(--colortopbordertitle1);
+	padding-<?php print $left; ?>: 2px;
+	padding-<?php print $right; ?>: 1px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+.cal_past { }
+.cal_peruser {
+	padding: 0px;
+}
+.cal_impair {
+	background: var(--colorbacklinepair2);
+}
+.cal_today_peruser_impair {
+	background: var(--colorbacklinepair2);
+}
+.peruser_busy {
+	background: var(--inputbackgroundcolor);
+}
+.peruser_notbusy {
+	background: var(--inputbackgroundcolor);
+	opacity: 0.5;
+}
+table.cal_event	{
+	border: none;
+	border-collapse: collapse;
+	margin-bottom: 1px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px; min-height: 20px;
+	background: <?php print $maincolor; ?> !important;
+}
+table.cal_event td {
+	border: none;
+	padding-<?php print $left; ?>: 2px;
+	padding-<?php print $right; ?>: 2px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+table.cal_event td.cal_event {
+	padding: 4px 4px !important;
+}
+table.cal_event td.cal_event_right {
+	padding: 4px 4px !important;
+}
+.cal_event {
+	font-size: 1em;
+}
+.cal_event a:link {
+	color: #111111;
+	font-weight: normal !important;
+}
+.cal_event a:visited {
+	color: #111111;
+	font-weight: normal !important;
+}
+.cal_event a:active {
+	color: #111111;
+	font-weight: normal !important;
+}
+.cal_event_busy a:hover {
+	color: #111111;
+	font-weight: normal !important;
+	color:rgba(255,255,255,.75);
+}
+.cal_event_busy { }
+.cal_peruserviewname {
+	max-width: 140px; height: 22px;
+}
 
 .topmenuimage {
 	background-size: 28px auto;
 }
-
 .paginationafterarrows > .button_search > .fa.fa-search{
 	color: rgb(<?php print $colortext; ?>);
 }
@@ -7003,7 +7136,8 @@ padding: 1px;
 .ui-state-default,
 .ui-widget-header .ui-state-default,
 .ui-widget-content .ui-state-default {
-background-color: #e6e6e6!important;
+	background-color: unset !important;
+	color: var(--colortext);
 }
 
 .ui-widget-header {
@@ -8557,8 +8691,8 @@ div.pagination li a:hover,
 div.pagination li span:hover,
 div.pagination li a:focus,
 div.pagination li span:focus {
-	color: #000;
-	background-color: #eee;
+	color: var(--colortextbacktab);
+	background-color: transparent;
 	border-color: rgba(0,0,0, .24);
 }
 div.pagination li .active a,
