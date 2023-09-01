@@ -1,5 +1,5 @@
 <?php
-/* Copyright (C) 2004	  Rodolphe Quiedeville <rodolphe@quiedeville.org>
+/* Copyright (C) 2004      Rodolphe Quiedeville <rodolphe@quiedeville.org>
  * Copyright (C) 2004-2012 Laurent Destailleur  <eldy@users.sourceforge.net>
  *
  * This program is free software; you can redistribute it and/or modify
@@ -17,13 +17,13 @@
  */
 
 /**
- *	\file	   htdocs/theme/oblyon/graph-color.php
- *	\brief	  File to declare colors to use to build graphics with theme Eldy
- *  \ingroup	core
+ *	\file       htdocs/theme/oblyon/graph-color.php
+ *	\brief      File to declare colors to use to build graphics with theme Eldy
+ *  \ingroup    core
  *
  *  To include file, do this:
- *	  $color_file = DOL_DOCUMENT_ROOT.'/theme/'.$conf->theme.'/graph-color.php';
- *	  if (is_readable($color_file)) include_once $color_file;
+ *      $color_file = DOL_DOCUMENT_ROOT.'/theme/'.$conf->theme.'/graph-color.php';
+ *      if (is_readable($color_file)) include_once $color_file;
  */
 
 global $theme_bordercolor, $theme_datacolor, $theme_bgcolor, $theme_bgcoloronglet;

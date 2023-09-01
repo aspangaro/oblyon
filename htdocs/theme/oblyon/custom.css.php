@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright (c) 2023 Eric Seigne		   <eric.seigne@cap-rel.fr>
- * Copyright (c) 2023 Alexandre Spangaro	<aspangaro@easya.solutions>
+ * Copyright (c) 2023 Eric Seigne           <eric.seigne@cap-rel.fr>
+ * Copyright (c) 2023 Alexandre Spangaro    <aspangaro@easya.solutions>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-$res																= 0;
+$res														        = 0;
 if (! $res && file_exists("../main.inc.php"))		$res	= @include "../main.inc.php";
 if (! $res && file_exists("../../main.inc.php"))	$res	= @include "../../main.inc.php";
 if (! $res && file_exists("../../../main.inc.php"))	$res	= @include "../../../main.inc.php";
