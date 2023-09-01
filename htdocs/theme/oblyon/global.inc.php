@@ -286,10 +286,36 @@ div.floatright
 {
     float:<?php print $right; ?>;
 }
-
+.block
+{
+    display:block;
+}
 .inline-block
 {
     display:inline-block;
+}
+.inline-blockimp
+{
+    display:inline-block !important;
+}
+.largenumber {
+    font-size: 1.4em;
+}
+button[name='button_search_x'] span.fa.fa-search {
+    font-size: 1.3em;
+}
+button[name='button_removefilter_x'] span.fa.fa-remove {
+    opacity: 0.5;
+    font-size: 1.3em;
+}
+button:focus {
+    outline: none;
+}
+.fa-info-circle {
+    padding-<?php echo $left; ?>: 3px;
+}
+.line-height-large {
+    line-height: 1.8em;
 }
 
 /* th a, .thumbstat, a.tab { font-weight: bold !important; } */
@@ -321,8 +347,14 @@ th .button {
 .centpercent {
 	width: 100%;
 }
+.centpercentimp {
+    width: 100% !important;
+}
+.centpercentwithout1imp {
+    width: calc(100% - 1px) !important;
+}
 .centpercentwithoutmenu {
-	width: calc(100% - 200px);
+    width: calc(100% - 200px);
 }
 .quatrevingtpercent, .inputsearch {
 	width: 80%;
@@ -1395,17 +1427,10 @@ span.butActionDelete {
 /**
 * State Ok, Warning, Error
 */
-
-<<<<<<< HEAD
 .ok	        { color: #114466; }
 .warning    { color: #f07b6e !important }
 .error      { color: #7e1515 !important; font-weight: bold; }
 .green      { color: #118822 !important; }
-=======
-.ok      { color: #114466; }
-.warning { color: #f07b6e !important }
-.error   { color: #7e1515 !important; font-weight: bold; }
->>>>>>> parent of 6f2a77b (Improve the use of variable (#131))
 
 .bloc_success {
     background-color: #33cc66;
