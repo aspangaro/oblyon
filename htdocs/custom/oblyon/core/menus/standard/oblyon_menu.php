@@ -111,9 +111,7 @@ class MenuManager {
 	{
 		global $conf, $langs, $user;
 
-		require_once 'oblyon.lib.php';
-
-        if ($this->type_user == 1) {
+		if ($this->type_user == 1) {
             $conf->global->MAIN_SEARCHFORM_SOCIETE_DISABLED = 1;
             $conf->global->MAIN_SEARCHFORM_CONTACT_DISABLED = 1;
         }
@@ -121,17 +119,24 @@ class MenuManager {
 		require_once DOL_DOCUMENT_ROOT.'/core/class/menu.class.php';
 		$this->menu=new Menu();
 
-		if(empty($conf->global->MAIN_MENU_INVERT))
-		{
+        if (!empty($conf->global->OBLYON_ENABLE_MEGAMENU)) {
+            require_once 'oblyonmegamenu.lib.php';
+
+            if ($mode == 'left') {
+                print_oblyon_megamenu($this->db, $this->atarget, $this->type_user, $this->tabMenu, $this->menu, 0, $mode, '', $moredata);
+            }
+        } elseif (empty($conf->global->MAIN_MENU_INVERT)) {
+            require_once 'oblyon.lib.php';
+
 			if ($mode == 'top') {
                 print_oblyon_menu($this->db, $this->atarget, $this->type_user, $this->tabMenu, $this->menu, 0, $mode);
             }
             if ($mode == 'left') {
                 print_left_oblyon_menu($this->db, $this->menu_array, $this->menu_array_after, $this->tabMenu, $this->menu, 0, '', '', $moredata, $this->type_user);
             }
-		}
-		else
-		{
+		} else {
+            require_once 'oblyon.lib.php';
+
 			if ($mode == 'top') {
                 print_left_oblyon_menu($this->db, $this->menu_array, $this->menu_array_after, $this->tabMenu, $this->menu, 0, '', '', $moredata, $this->type_user);
             }
