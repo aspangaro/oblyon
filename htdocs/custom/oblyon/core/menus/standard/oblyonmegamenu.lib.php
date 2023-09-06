@@ -188,11 +188,11 @@ function print_oblyon_megamenu($db, $atarget, $type_user = 0, &$tabMenu, &$menu,
 
     // Home - dashboard
     //$newmenu->add("/index.php?mainmenu=home&amp;leftmenu=home", $langs->trans("MyDashboard"), 0, 1, '', $mainmenu, 'home');
-    print '<br><span class="mega-menu_link" href="/index.php?mainmenu=home&amp;leftmenu=home">' . $langs->trans("MyDashboard") . '</span>';
+    print '<br><a class="mega-menu_link" href="'.DOL_URL_ROOT.'/index.php?mainmenu=home&amp;leftmenu=home">' . $langs->trans("MyDashboard") . '</a>';
 
     // Setup
     //$newmenu->add("/admin/index.php?mainmenu=home&amp;leftmenu=setup", $langs->trans("Setup"), 0, $user->admin, '', $mainmenu, 'setup');
-    print '<br><span class="mega-menu_link" href="/admin/index.php?mainmenu=home&amp;leftmenu=setup">' . $langs->trans("Setup") . '</span>';
+    print '<br><a class="mega-menu_link" href="'.DOL_URL_ROOT.'/admin/index.php?mainmenu=home&amp;leftmenu=setup">' . $langs->trans("Setup") . '</a>';
 
     if (!empty($user->admin) && ($usemenuhider || empty($leftmenu) || $leftmenu == "setup")) {
         // Load translation files required by the page
