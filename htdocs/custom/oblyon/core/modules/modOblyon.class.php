@@ -33,7 +33,6 @@
 	// Description and activation class *************
 	class modoblyon extends DolibarrModules
 	{
-
 		/************************************************
 		 * Constructor. Define names, constants, directories, boxes, permissions
 		 * @param DoliDB $db Database handler
