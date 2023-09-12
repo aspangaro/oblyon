@@ -292,10 +292,14 @@ function print_oblyon_menu($db, $atarget, $type_user = 0, &$tabMenu, &$menu, $no
 			$title = $langs->trans("Leads");
 			$showmodep = 0;
 		}
-		$menu->add('/projet/index.php?mainmenu=project&amp;leftmenu=', $title, 0, $showmode, $atarget, "project", '', 70, $id, $idsel, $classname);
-		//$menu->add('/projet/index.php?mainmenu=project&amp;leftmenu=&search_opp_status=openedopp', $langs->trans("ListLeads"), 0, $showmodel & $conf->global->PROJECT_USE_OPPORTUNITIES, $atarget, "project", '', 70, $id, $idsel, $classname);
-		//$menu->add('/projet/index.php?mainmenu=project&amp;leftmenu=&search_opp_status=notopenedopp', $langs->trans("ListProjects"), 0, $showmodep, $atarget, "project", '', 70, $id, $idsel, $classname);
-	}
+        if (!empty($conf->global->PROJECT_FORCE_LIST_ACCESS)) {
+            $menu->add('/projet/list.php?mainmenu=project&amp;leftmenu=projets', $title, 0, $showmode, $atarget, "project", '', 70, $id, $idsel, $classname);
+        } else {
+            $menu->add('/projet/index.php?mainmenu=project&amp;leftmenu=', $title, 0, $showmode, $atarget, "project", '', 70, $id, $idsel, $classname);
+        }
+        //$menu->add('/projet/index.php?mainmenu=project&amp;leftmenu=&search_opp_status=openedopp', $langs->trans("ListLeads"), 0, $showmodel & $conf->global->PROJECT_USE_OPPORTUNITIES, $atarget, "project", '', 70, $id, $idsel, $classname);
+        //$menu->add('/projet/index.php?mainmenu=project&amp;leftmenu=&search_opp_status=notopenedopp', $langs->trans("ListProjects"), 0, $showmodep, $atarget, "project", '', 70, $id, $idsel, $classname);
+    }
 
 	// Commercial (propal, commande, supplier_proposal, supplier_order, contrat, ficheinter)
 	$tmpentry = array(
@@ -2145,7 +2149,7 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 		}
 
 		// We update newmenu for special dynamic menus
-		if (!empty($user->rights->banque->lire) && $mainmenu == 'bank')	// Entry for each bank account
+		if (!empty($user->rights->banque->lire) && $mainmenu == 'bank' && $conf->global->OBLYON_ENABLE_MENU_BANK_RECONCILIATE)	// Entry for each bank account
 		{
 			require_once DOL_DOCUMENT_ROOT.'/compta/bank/class/account.class.php';
 
