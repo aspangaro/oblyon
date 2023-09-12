@@ -62,6 +62,7 @@ OblyonLogin = Page de connexion
 LoginRight = Décentrer le bloc de connexion sur la droite de l'écran
 CardBehavior = Comportement des fiches
 FixAreaRefAndTabAction = Fixer le bandeau des références et les boutons d'actions pendant le défilement vertical
+SwitchColunmOnLeft = Basculer la colonne de sélection / recherche / action en masse à gauche
 FixStickyTableHeadersColumns = Fixer l'entête de colonne des tableaux sur les éléments lors d'un défilement vertical
 General = Paramètres généraux
 OblyonFontSize = Taille du texte de base en pixels (doit être entre 10 et 16)

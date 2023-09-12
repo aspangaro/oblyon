@@ -1,5 +1,14 @@
 ## Changelog ##
 
+### Version 2.2.10 - Compatibility 14.0.x - 19-alpha (2023/09/12)
+- NEW Add option to access directly in project list when you click in menu (PROJECT_FORCE_LIST_ACCESS)
+- NEW Add option to show reconciliation link in menu bank (OBLYON_ENABLE_MENU_BANK_RECONCILIATE)
+
+### Version 2.2.9 - Compatibility 14.0.x - 19-alpha (2023/09/01)
+- NEW Add option to switch select column to the left (MAIN_CHECKBOX_LEFT_COLUMN) 
+- Compatibility module Quicklist with function "Fix the reference banner and action buttons during vertical scrolling"
+- Upgrade CSS Compatibility with v18/v19
+
 ### Version 2.2.8 - Compatibility 14.0.x - 18.0.x (2023/07/10)
 - Add constant PROJECT_HIDE_MENU_TASKS_ACTIVITY to hide in project menu the link to manage activity
 - Upgrade CSS

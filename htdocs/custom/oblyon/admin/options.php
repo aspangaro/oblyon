@@ -118,8 +118,13 @@
 	oblyon_print_liste_titre($metas);
 	$metas						= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'options');
 	oblyon_print_input('FIX_AREAREF_TABACTION',					'on_off', $langs->trans('FixAreaRefAndTabAction'),			'', $metas, 2, 1);	// Sticky area ref & tab action
-
+	// List
+	$metas						= array(array(3), 'List');
+	oblyon_print_liste_titre($metas);
 	$easyaVersion = (float) !empty($conf->global->EASYA_VERSION) ? $conf->global->EASYA_VERSION : '';
+	if ($easyaVersion >= "2024.0.0" || (float) DOL_VERSION >= 18.0) {
+		oblyon_print_input('MAIN_CHECKBOX_LEFT_COLUMN', 			'on_off', $langs->trans('SwitchColunmOnLeft'), 	'', $metas, 2, 1);    // Sticky table headers columns
+	}
 	if ($easyaVersion >= "2022.5.2" || (float) DOL_VERSION >= 17.0) {
 		oblyon_print_input('FIX_STICKY_HEADER_CARD', 			'on_off', $langs->trans('FixStickyTableHeadersColumns'), 	'', $metas, 2, 1);    // Sticky table headers columns
 	}
