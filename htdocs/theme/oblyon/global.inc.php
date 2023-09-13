@@ -2160,7 +2160,7 @@ select.selectarrowonleft option {
 }
 
 select.widthcentpercentminusx, span.widthcentpercentminusx:not(.select2-selection), input.widthcentpercentminusx {
-    width: calc(100% - 52px) !important;
+    /* width: calc(100% - 52px) !important; */
     display: inline-block;
 }
 select.widthcentpercentminusxx, span.widthcentpercentminusxx:not(.select2-selection), input.widthcentpercentminusxx {
