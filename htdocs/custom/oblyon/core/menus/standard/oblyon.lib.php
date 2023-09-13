@@ -279,8 +279,12 @@ function print_oblyon_menu($db, $atarget, $type_user = 0, &$tabMenu, &$menu, $no
         $idsel='project';
 
 		if (empty($noout)) print_start_menu_entry($idsel,$itemsel,$showmode);
-		if (empty($noout)) print_text_menu_entry($langs->trans("MenuProjectsOpportunities"), $showmode, DOL_URL_ROOT.'/projet/index.php?mainmenu=project&amp;leftmenu=', $id, $idsel, $atarget);
-		if (empty($noout)) print_end_menu_entry($showmode);
+        if (!empty($conf->global->PROJECT_FORCE_LIST_ACCESS)) {
+            if (empty($noout)) print_text_menu_entry($langs->trans("MenuProjectsOpportunities"), $showmode, DOL_URL_ROOT . '/projet/list.php?mainmenu=project&amp;leftmenu=', $id, $idsel, $atarget);
+        } else {
+            if (empty($noout)) print_text_menu_entry($langs->trans("MenuProjectsOpportunities"), $showmode, DOL_URL_ROOT . '/projet/index.php?mainmenu=project&amp;leftmenu=', $id, $idsel, $atarget);
+        }
+        if (empty($noout)) print_end_menu_entry($showmode);
 		$title = $langs->trans("LeadsOrProjects");	// Leads and opportunities by default
 		$showmodel = $showmodep = $showmode;
 		if (empty($conf->global->PROJECT_USE_OPPORTUNITIES))
