@@ -1,5 +1,8 @@
 ## Changelog ##
 
+### Version 2.3.0 - Compatibility 14.0.x - 18.0.x (2023/08/11)
+- NEW Use a lot of new color variables for compatibility with DARK_MODE
+
 ### Version 2.2.10 - Compatibility 14.0.x - 19-alpha (2023/09/12)
 - NEW Add option to access directly in project list when you click in menu (PROJECT_FORCE_LIST_ACCESS)
 - NEW Add option to show reconciliation link in menu bank (OBLYON_ENABLE_MENU_BANK_RECONCILIATE)
