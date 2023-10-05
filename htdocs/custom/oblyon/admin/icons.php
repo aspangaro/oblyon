@@ -49,8 +49,8 @@
 	// links management
 	if (preg_match('/set_(.*)/', $action, $reg)) {
 		$confkey	= $reg[1];
-		$result		= dolibarr_set_const($db, 'MAIN_FONTAWESOME_ICON_STYLE',	$confkey,			'chaine', 0, 'Oblyon module', $conf->entity);
-		$result		= dolibarr_set_const($db, 'MAIN_FONTAWESOME_WEIGHT',		$list[$confkey],	'chaine', 0, 'Oblyon module', $conf->entity);
+		$result		= dolibarr_set_const($db, 'MAIN_FONTAWESOME_ICON_STYLE', $confkey, 'chaine', 0, 'Oblyon module', $conf->entity);
+		$result		= dolibarr_set_const($db, 'MAIN_FONTAWESOME_WEIGHT', $list[$confkey], 'chaine', 0, 'Oblyon module', $conf->entity);
 	}
 	// Retour => message Ok ou Ko
 	if ($result == 1)						setEventMessages($langs->trans('IconApplied').' : '.$langs->trans('Icon'.$confkey), null, 'mesgs');
