@@ -9870,20 +9870,20 @@ span.clipboardCPValue.hidewithsize {
 	.div-table-responsive-no-min {
 		 overflow-x: unset;
 	 }
-tr.liste_titre th {
-	position: sticky;
-<?php if($conf->global->OBLYON_STICKY_TOPBAR) { ?>
-	<?php if($conf->global->MAIN_MENU_INVERT) { ?>
-		top: 40px;
+	tr.liste_titre th:not(#ajaxloaded_tablelines th) {
+		position: sticky;
+	<?php if($conf->global->OBLYON_STICKY_TOPBAR) { ?>
+		<?php if($conf->global->MAIN_MENU_INVERT) { ?>
+			top: 40px;
+		<?php } else { ?>
+			top: 54px;
+		<?php } ?>
 	<?php } else { ?>
-		top: 54px;
+		top: 0;
 	<?php } ?>
-<?php } else { ?>
-	top: 0;
-<?php } ?>
-	background-color: <?php print $colorbtitle; ?>;
-	z-index: 1;
-}
+		background-color: <?php print $colorbtitle; ?>;
+		z-index: 1;
+	}
 <?php } ?>
 
 /* ============================================================================== */
