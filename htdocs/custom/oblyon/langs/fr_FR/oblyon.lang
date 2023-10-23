@@ -19,6 +19,7 @@ BankColorizeMovementDesc=Si cette fonction est activée, vous pouvez définir un
 BankColorizeMovementName1=Couleur de fond pour un mouvement débiteur
 BankColorizeMovementName2=Couleur de fond pour un mouvement créditeur
 MenuCatalog=Catalogue
+MenuVAT=TVA
 
 CustomCSS=Style CSS
 
