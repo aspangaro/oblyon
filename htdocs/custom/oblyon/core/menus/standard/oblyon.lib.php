@@ -279,8 +279,12 @@ function print_oblyon_menu($db, $atarget, $type_user = 0, &$tabMenu, &$menu, $no
         $idsel='project';
 
 		if (empty($noout)) print_start_menu_entry($idsel,$itemsel,$showmode);
-		if (empty($noout)) print_text_menu_entry($langs->trans("MenuProjectsOpportunities"), $showmode, DOL_URL_ROOT.'/projet/index.php?mainmenu=project&amp;leftmenu=', $id, $idsel, $atarget);
-		if (empty($noout)) print_end_menu_entry($showmode);
+        if (!empty($conf->global->PROJECT_FORCE_LIST_ACCESS)) {
+            if (empty($noout)) print_text_menu_entry($langs->trans("MenuProjectsOpportunities"), $showmode, DOL_URL_ROOT . '/projet/list.php?mainmenu=project&amp;leftmenu=', $id, $idsel, $atarget);
+        } else {
+            if (empty($noout)) print_text_menu_entry($langs->trans("MenuProjectsOpportunities"), $showmode, DOL_URL_ROOT . '/projet/index.php?mainmenu=project&amp;leftmenu=', $id, $idsel, $atarget);
+        }
+        if (empty($noout)) print_end_menu_entry($showmode);
 		$title = $langs->trans("LeadsOrProjects");	// Leads and opportunities by default
 		$showmodel = $showmodep = $showmode;
 		if (empty($conf->global->PROJECT_USE_OPPORTUNITIES))
@@ -292,10 +296,14 @@ function print_oblyon_menu($db, $atarget, $type_user = 0, &$tabMenu, &$menu, $no
 			$title = $langs->trans("Leads");
 			$showmodep = 0;
 		}
-		$menu->add('/projet/index.php?mainmenu=project&amp;leftmenu=', $title, 0, $showmode, $atarget, "project", '', 70, $id, $idsel, $classname);
-		//$menu->add('/projet/index.php?mainmenu=project&amp;leftmenu=&search_opp_status=openedopp', $langs->trans("ListLeads"), 0, $showmodel & $conf->global->PROJECT_USE_OPPORTUNITIES, $atarget, "project", '', 70, $id, $idsel, $classname);
-		//$menu->add('/projet/index.php?mainmenu=project&amp;leftmenu=&search_opp_status=notopenedopp', $langs->trans("ListProjects"), 0, $showmodep, $atarget, "project", '', 70, $id, $idsel, $classname);
-	}
+        if (!empty($conf->global->PROJECT_FORCE_LIST_ACCESS)) {
+            $menu->add('/projet/list.php?mainmenu=project&amp;leftmenu=projets', $title, 0, $showmode, $atarget, "project", '', 70, $id, $idsel, $classname);
+        } else {
+            $menu->add('/projet/index.php?mainmenu=project&amp;leftmenu=', $title, 0, $showmode, $atarget, "project", '', 70, $id, $idsel, $classname);
+        }
+        //$menu->add('/projet/index.php?mainmenu=project&amp;leftmenu=&search_opp_status=openedopp', $langs->trans("ListLeads"), 0, $showmodel & $conf->global->PROJECT_USE_OPPORTUNITIES, $atarget, "project", '', 70, $id, $idsel, $classname);
+        //$menu->add('/projet/index.php?mainmenu=project&amp;leftmenu=&search_opp_status=notopenedopp', $langs->trans("ListProjects"), 0, $showmodep, $atarget, "project", '', 70, $id, $idsel, $classname);
+    }
 
 	// Commercial (propal, commande, supplier_proposal, supplier_order, contrat, ficheinter)
 	$tmpentry = array(
@@ -1218,7 +1226,7 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 					// VAT
 					if (empty($conf->global->TAX_DISABLE_VAT_MENUS))
 					{
-						$newmenu->add("/compta/tva/list.php?leftmenu=tax_vat&amp;mainmenu=billing",$langs->transcountry("VAT", $mysoc->country_code),1,$user->rights->tax->charges->lire, '', $mainmenu, 'tax_vat');
+						$newmenu->add("/compta/tva/list.php?leftmenu=tax_vat&amp;mainmenu=billing",$langs->transcountry("MenuVAT", $mysoc->country_code),1,$user->rights->tax->charges->lire, '', $mainmenu, 'tax_vat');
 
                         if (! empty($menu_invert)) $leftmenu= 'tax_vat';
 
@@ -2145,7 +2153,7 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 		}
 
 		// We update newmenu for special dynamic menus
-		if (!empty($user->rights->banque->lire) && $mainmenu == 'bank')	// Entry for each bank account
+		if (!empty($user->rights->banque->lire) && $mainmenu == 'bank' && $conf->global->OBLYON_ENABLE_MENU_BANK_RECONCILIATE)	// Entry for each bank account
 		{
 			require_once DOL_DOCUMENT_ROOT.'/compta/bank/class/account.class.php';
 
