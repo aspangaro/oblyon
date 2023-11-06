@@ -261,5 +261,6 @@
 	print 'conf->global->THEME_AGRESSIVENESS_RATIO	= '.$conf->global->THEME_AGRESSIVENESS_RATIO." (must be between 0 and 1)\n";
 	print '*/'."\n";
 	require __DIR__.'/global.inc.php';
+	require __DIR__.'/megamenu.inc.php';
 	if (is_object($db))	$db->close();
 ?>

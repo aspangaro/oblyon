@@ -63,12 +63,13 @@ $modClass = new modOblyon($db);
 $oblyonVersion = !empty($modClass->getVersion()) ? $modClass->getVersion() : 'NC';
 
 $supportvalue = "/*****"."<br>";
-$supportvalue.= " * Module : Oblyon"."<br>";
+$supportvalue.= " * Module : ".$langs->trans("Module113900Name")."<br>";
 $supportvalue.= " * Module version : ".$oblyonVersion."<br>";
 $supportvalue.= " * Dolibarr version : ".DOL_VERSION."<br>";
 $supportvalue.= " * Dolibarr version installation initiale : ".$conf->global->MAIN_VERSION_LAST_INSTALL."<br>";
+$supportvalue.= " * Version PHP : ".PHP_VERSION."<br>";
 $supportvalue.= " *****/"."<br><br>";
-$supportvalue.= "Description de votre problème :"."<br>";
+$supportvalue.= $langs->trans("YourRequestDescription")." :"."<br>";
 
 // print '<div class="div-table-responsive-no-min">';
 print '<table class="centpercent">';

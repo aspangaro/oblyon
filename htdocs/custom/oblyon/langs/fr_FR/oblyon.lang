@@ -69,6 +69,9 @@ General = Paramètres généraux
 OblyonFontSize = Taille du texte de base en pixels (doit être entre 10 et 16)
 MainStatusUseImages = Les différents statuts des éléments seront affichés sous forme d'icone avec ou sans texte explicatif (sinon un libellé coloré sera utilisé)
 
+OblyonMegaMenu = Menu unifié détaillé
+OblyonActivateMegaMenu = Activer le menu unifié détaillé
+
 #
 # Colors page
 #

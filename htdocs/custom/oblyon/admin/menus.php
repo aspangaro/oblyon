@@ -159,12 +159,18 @@
 							</tr>';
 		}
 	}
-	print '				</table>
-					</div>';
-	print dol_get_fiche_end();
+
+    // Mega menu
+    $metas		= array(array(3), 'OblyonMegaMenu');
+    oblyon_print_liste_titre($metas);
+    $metas		= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'menus');
+    oblyon_print_input('OBLYON_ENABLE_MEGAMENU',	'on_off', $langs->trans('OblyonActivateMegaMenu'),			'', $metas, 2, 1);	// Show Company name
+
+    print '</table>';
+    print '</div>';
+    print dol_get_fiche_end();
 	oblyon_print_btn_action('Gen');
-	print '	</form>
-			<br/>';
+	print '</form>';
 	// End of page
 	llxFooter();
 	$db->close();
