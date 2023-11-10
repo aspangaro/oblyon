@@ -97,7 +97,7 @@ function print_oblyon_megamenu($db, $atarget, $type_user = 0, &$tabMenu, &$menu,
     if (empty($noout)) print_start_menu_array();
 
     // Show logo company
-	if (empty($menu_invert) && empty($noout) && ! empty($conf->global->MAIN_SHOW_LOGO)) {
+	if (!empty($menu_invert) && !empty($conf->global->MAIN_SHOW_LOGO)) {
         //$mysoc->logo_mini=(empty($conf->global->MAIN_INFO_SOCIETE_LOGO_MINI)?'':$conf->global->MAIN_INFO_SOCIETE_LOGO_MINI);
         $mysoc->logo_squarred_mini=(empty($conf->global->MAIN_INFO_SOCIETE_LOGO_SQUARRED_MINI)?'':$conf->global->MAIN_INFO_SOCIETE_LOGO_SQUARRED_MINI);
 
@@ -827,7 +827,7 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 	}
 
 	// Show logo company
-	if (! empty($menu_invert) && empty($noout) && ! empty($conf->global->MAIN_SHOW_LOGO)) {
+	if (empty($menu_invert) && empty($noout) && ! empty($conf->global->MAIN_SHOW_LOGO)) {
         //$mysoc->logo_mini=(empty($conf->global->MAIN_INFO_SOCIETE_LOGO_MINI)?'':$conf->global->MAIN_INFO_SOCIETE_LOGO_MINI);
         $mysoc->logo_squarred_mini=(empty($conf->global->MAIN_INFO_SOCIETE_LOGO_SQUARRED_MINI)?'':$conf->global->MAIN_INFO_SOCIETE_LOGO_SQUARRED_MINI);
 
@@ -1435,7 +1435,7 @@ function get_megamenu_products($mainmenu, &$newmenu, $type_user = 0, $fa = 'fas'
 {
     global $user, $conf, $langs;
 
-    print '<span class="mega-menu_title">' . $langs->trans("Commercial") . '</span>';
+    print '<span class="mega-menu_title">' . $langs->trans("MenuCatalog") . '</span>';
 
     // Products
     if (!empty($conf->product->enabled)) {
@@ -1575,6 +1575,8 @@ function get_megamenu_commercial($mainmenu, &$newmenu, $type_user = 0, $fa = 'fa
     global $user, $conf, $langs;
 
     $langs->load("companies");
+	
+	print '<span class="mega-menu_title">' . $langs->trans("Commercial") . '</span>';
 
     // Customer proposal
     if (!empty($conf->propal->enabled)) {
@@ -1691,8 +1693,10 @@ function get_megamenu_commercial($mainmenu, &$newmenu, $type_user = 0, $fa = 'fa
 function get_megamenu_mrp($mainmenu, &$newmenu, $type_user = 0, $fa = 'fas')
 {
     global $user, $conf, $langs;
+	
+	$langs->load("mrp");
 
-    print '<span class="mega-menu_title">' . $langs->trans("Commercial") . '</span>';
+    print '<span class="mega-menu_title">' . $langs->trans("MRP") . '</span>';
 
     // BOM
     if (!empty($conf->bom->enabled) || !empty($conf->mrp->enabled)) {
@@ -1726,6 +1730,8 @@ function get_megamenu_projects($mainmenu, &$newmenu, $type_user = 0, $fa = 'fas'
     global $user, $conf, $langs;
 
     $langs->load("projects");
+	
+	print '<span class="mega-menu_title">' . $langs->trans("Projects") . '</span>';
 
     if (!empty($conf->projet->enabled)) {
         $search_project_user = GETPOST('search_project_user', 'int');
@@ -1796,10 +1802,13 @@ function get_megamenu_projects($mainmenu, &$newmenu, $type_user = 0, $fa = 'fas'
 function get_megamenu_billing($mainmenu, &$newmenu, $type_user = 0, $fa = 'fas')
 {
     global $user, $conf, $langs;
+	
+	$langs->load("bills");
+	
+	print '<span class="mega-menu_title">' . $langs->trans("MenuFinancial") . '</span>';
 
     // Customers invoices
     if (!empty($conf->facture->enabled)) {
-        $langs->load("bills");
         $newmenu->add("/compta/facture/index.php?leftmenu=customers_bills", $langs->trans("BillsCustomers"), 0, $user->rights->facture->lire, '', $mainmenu, 'customers_bills', 0);
         $newmenu->add("/compta/facture/card.php?action=create", $langs->trans("NewBill"), 1, $user->rights->facture->creer);
         $newmenu->add("/compta/facture/list.php?leftmenu=customers_bills", $langs->trans("List"), 1, $user->rights->facture->lire, '', $mainmenu, 'customers_bills_list');
@@ -1870,7 +1879,6 @@ function get_megamenu_billing($mainmenu, &$newmenu, $type_user = 0, $fa = 'fas')
             //if ($usemenuhider || empty($leftmenu) || $leftmenu=="orders") $newmenu->add("/commande/", $langs->trans("StatusOrderToBill"), 1, $user->rights->commande->lire);
         }
     }
-
 
     // Donations
     if (!empty($conf->don->enabled)) {
@@ -2017,10 +2025,10 @@ function get_megamenu_bank($mainmenu, &$newmenu, $type_user = 0, $fa = 'fas')
     global $user, $conf, $langs;
 
     $langs->loadLangs(array("withdrawals", "banks", "bills", "categories"));
+	
+	print '<span class="mega-menu_title">' . $langs->trans("MenuBankCash") . '</span>';
 
     if (!empty($conf->societe->enabled)) {
-        print '<span class="mega-menu_title">' . $langs->trans("Banks") . '</span>';
-
         // Bank-Cash account
         if (!empty($conf->banque->enabled)) {
             $newmenu->add("/compta/bank/list.php?leftmenu=bank&amp;mainmenu=bank", $langs->trans("MenuBankCash"), 0, $user->rights->banque->lire, '', $mainmenu, 'bank', 0);
@@ -2105,6 +2113,8 @@ function get_megamenu_bank($mainmenu, &$newmenu, $type_user = 0, $fa = 'fas')
 function get_megamenu_accountancy($mainmenu, &$newmenu, $type_user = 0, $fa = 'fas')
 {
     global $user, $conf, $langs;
+	
+	print '<span class="mega-menu_title">' . $langs->trans("MenuAccountancy") . '</span>';
 
     // Accountancy (Double entries)
     if (! empty($conf->accounting->enabled))
@@ -2452,6 +2462,8 @@ function get_megamenu_accountancy($mainmenu, &$newmenu, $type_user = 0, $fa = 'f
 function get_megamenu_tools($mainmenu, &$newmenu, $type_user = 0, $fa = 'fas')
 {
     global $user, $conf, $langs;
+	
+	print '<span class="mega-menu_title">' . $langs->trans("Tools") . '</span>';
 
     if (empty($user->socid)) { // limit to internal users
         $langs->load("mails");

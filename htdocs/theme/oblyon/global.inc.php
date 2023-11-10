@@ -2511,9 +2511,9 @@ div.login_block_other {
 }
 
 #id-left {
-    <?php if(!$conf->global->OBLYON_HIDE_LEFTMENU && !$conf->dol_optimize_smallscreen) { ?>
-        <?php if($conf->global->OBLYON_STICKY_TOPBAR) { ?>
-            <?php if($conf->global->MAIN_MENU_INVERT) { ?>
+    <?php if (!$conf->global->OBLYON_HIDE_LEFTMENU && !$conf->dol_optimize_smallscreen) { ?>
+        <?php if ($conf->global->OBLYON_STICKY_TOPBAR) { ?>
+            <?php if ($conf->global->MAIN_MENU_INVERT) { ?>
                 padding-top: 40px;
             <?php } else { ?>
                 padding-top: 54px;
@@ -2521,18 +2521,25 @@ div.login_block_other {
         <?php } ?>
     <?php } ?>
     <?php if (!$conf->global->OBLYON_FULLSIZE_TOPBAR) { ?>
-        <?php if(!$conf->global->OBLYON_STICKY_LEFTBAR) { ?>
+        <?php if (!$conf->global->OBLYON_STICKY_LEFTBAR) { ?>
             position: relative;
         <?php } else { ?>
             position: fixed;
         <?php } ?>
     <?php } ?>
-    <?php if(!$conf->global->OBLYON_HIDE_LEFTMENU && !$conf->dol_optimize_smallscreen && (!$conf->global->OBLYON_FULLSIZE_TOPBAR || !$conf->global->OBLYON_SHOW_COMPNAME)) { ?>
+    <?php if (!$conf->global->OBLYON_HIDE_LEFTMENU && !$conf->dol_optimize_smallscreen && (!$conf->global->OBLYON_FULLSIZE_TOPBAR || !$conf->global->OBLYON_SHOW_COMPNAME)) { ?>
         z-index: 92;
     <?php } else { ?>
         z-index: 90;
     <?php } ?>
 }
+
+<?php if ($conf->global->OBLYON_ENABLE_MEGAMENU) { ?>
+#id-left {
+	padding-top: 0px !important;
+	z-index: 95 !important;
+}
+<?php } ?>
 
 #id-top {
     background-color: <?php print $bgnavtop; ?>;
@@ -3106,17 +3113,26 @@ transition: all .2s ease-in-out;
         -moz-transition: max-height .2s ease-in-out;
         -webkit-transition: max-height .2s ease-in-out;
     <?php } ?>
-    max-height: 40px;
+    <?php if ( $conf->global->OBLYON_ENABLE_MEGAMENU ) { ?>
+		height: 40px;
+    <?php } else { ?>
+		max-height: 40px;
+    <?php } ?>
     <?php print $left; ?>: 0;
     margin: 0;
     padding-<?php print $right; ?>: 160px;
     z-index: 95;
-    <?php if ($conf->global->OBLYON_STICKY_TOPBAR) { ?>
+    <?php if (!empty($conf->global->OBLYON_STICKY_TOPBAR) && empty($conf->global->OBLYON_ENABLE_MEGAMENU)) { ?>
         position: fixed;
         top: 0;
         left: 0;
         right: 0;
-    <?php } else { ?>
+    <?php } elseif (!empty($conf->global->OBLYON_STICKY_TOPBAR) && !empty($conf->global->OBLYON_ENABLE_MEGAMENU)) { ?>
+		position: fixed;
+        top: 0;
+        left: 40px;
+        right: 0;
+	<?php } else { ?>
         position: relative;
     <?php } ?>
 <?php } ?>
@@ -4412,9 +4428,14 @@ div.blockvmenulogo
     border-bottom: 0 !important;
 }
 .menulogocontainer {
-    margin: <?php echo $disableimages?'0':'3'; ?>px;
-    margin-left: 11px;
-    margin-right: 9px;
+    /*margin: <?php echo $disableimages?'0':'3'; ?>px;*/
+	<?php if (empty($conf->global->OBLYON_ENABLE_MEGAMENU)) { ?>
+		margin-left: 11px;
+		margin-right: 9px;
+	<?php } else { ?>
+	    margin-left: 5px;
+		margin-right: 9px;
+	<?php } ?>
     padding: 0;
     height: <?php echo $disableimages?'20':'32'; ?>px;
     /* width: 100px; */

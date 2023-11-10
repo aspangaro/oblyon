@@ -122,6 +122,9 @@ class MenuManager {
         if (!empty($conf->global->OBLYON_ENABLE_MEGAMENU)) {
             require_once 'oblyonmegamenu.lib.php';
 
+            if ($mode == 'top') {
+                print_left_oblyon_menu($this->db, $this->menu_array, $this->menu_array_after, $this->tabMenu, $this->menu, 0, '', '', $moredata, $this->type_user);
+            }
             if ($mode == 'left') {
                 print_oblyon_megamenu($this->db, $this->atarget, $this->type_user, $this->tabMenu, $this->menu, 0, $mode, '', $moredata);
             }
