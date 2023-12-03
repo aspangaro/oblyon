@@ -1,5 +1,8 @@
 ## Changelog ##
 
+### Version 2.3.0 - Compatibility 14.0.x - 18.0.x (2023/08/11)
+- NEW Use a lot of new color variables for compatibility with DARK_MODE
+
 ### Version 2.2.11 - Compatibility 14.0.x - 19-alpha (2023/09/12)
 - Upgrade CSS Compatibility with v18/v19
 - Fix token problem (CSRF) on icon page for Easya version
