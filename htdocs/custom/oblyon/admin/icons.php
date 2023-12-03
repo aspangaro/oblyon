@@ -1,6 +1,6 @@
 <?php
 	/************************************************
-	* Copyright (C) 2015-2022  Alexandre Spangaro   <support@open-dsi.fr>
+	* Copyright (C) 2015-2023  Alexandre Spangaro   <support@open-dsi.fr>
 	* Copyright (C) 2022       Sylvain Legrand      <contact@infras.fr>
 	*
 	* This program is free software: you can redistribute it and/or modify
@@ -14,7 +14,7 @@
 	* GNU General Public License for more details.
 	*
 	* You should have received a copy of the GNU General Public License
-	* along with this program.  If not, see <http://www.gnu.org/licenses/>.
+	* along with this program.  If not, see <https://www.gnu.org/licenses/>.
 	************************************************/
 
 	/************************************************
@@ -84,7 +84,7 @@
 	print '				<tr>';
 	foreach ($list as $name => $weight)
 		print '				<td class = "center">
-								<a title = "'.$langs->trans('Icon'.$name).'" href = "'.$_SERVER['PHP_SELF'].'?action=set_'.$name.'">'.img_picto($langs->trans('Icon'.$name), 'icon'.$name.'.png@oblyon', 'width = "50%"').'
+								<a title = "'.$langs->trans('Icon'.$name).'" href = "'.$_SERVER['PHP_SELF'].'?token='.newToken().'&action=set_'.$name.'">'.img_picto($langs->trans('Icon'.$name), 'icon'.$name.'.png@oblyon', 'width = "50%"').'
 									<br/>'.$langs->trans('Icon'.$name).'
 								</a>
 							</td>';

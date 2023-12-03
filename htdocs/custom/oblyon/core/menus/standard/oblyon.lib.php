@@ -1226,7 +1226,7 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 					// VAT
 					if (empty($conf->global->TAX_DISABLE_VAT_MENUS))
 					{
-						$newmenu->add("/compta/tva/list.php?leftmenu=tax_vat&amp;mainmenu=billing",$langs->transcountry("VAT", $mysoc->country_code),1,$user->rights->tax->charges->lire, '', $mainmenu, 'tax_vat');
+						$newmenu->add("/compta/tva/list.php?leftmenu=tax_vat&amp;mainmenu=billing",$langs->transcountry("MenuVAT", $mysoc->country_code),1,$user->rights->tax->charges->lire, '', $mainmenu, 'tax_vat');
 
                         if (! empty($menu_invert)) $leftmenu= 'tax_vat';
 
@@ -1963,7 +1963,7 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
                 if (empty($conf->global->ACCOUNTANCY_HIDE_EXPORT_FILES_MENU)) {
                     $newmenu->add("/compta/accounting-files.php?mainmenu=accountancy&amp;leftmenu=accountancy_files", $langs->trans("AccountantFiles"), 0, $user->rights->compta->resultat->lire, '', $mainmenu, 'files');
                 }
-                
+
                 // Bilan, resultats
                 $newmenu->add("/compta/resultat/index.php?leftmenu=report&amp;mainmenu=accountancy", $langs->trans("Reportings"), 0, $user->rights->compta->resultat->lire, '', $mainmenu, 'ca');
 

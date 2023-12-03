@@ -6,6 +6,7 @@
 /* ============================================================================== */
 
 :root {
+	--bgcolor: <?php print $bgcolor; ?>;
 	--colorbackhmenu1: rgb(<?php print $colorbackhmenu1; ?>);
 	--colorbackvmenu1: rgb(<?php print $colorbackvmenu1; ?>);
 	--colorbacktitle1: rgb(<?php print $colorbacktitle1; ?>);
@@ -1099,11 +1100,33 @@ input.buttonpaymentstripe {
 	background-repeat: no-repeat;
 	background-position: 8px 7px;
 }
+.logopublicpayment #dolpaymentlogo {
+    max-height: 80px;
+    max-width: 300px;
+    image-rendering: -webkit-optimize-contrast;		/* better rendering on public page header */
+}
+
+a.butStatus {
+    padding-left: 5px;
+    padding-right: 5px;
+    background-color: transparent;
+    color: var(--colortext) !important;
+    border: 2px solid var( --butactionbg) !important;
+    margin: 0 0.45em !important;
+}
+
+span.userimg.notfirst, div.userimg.notfirst {
+    margin-left: -5px;
+}
+div.userimg.notfirst {
+    display: block-inline;
+}
 /* Used for timesheets */
 span.timesheetalreadyrecorded input {
 	border: none;
 	border-bottom: solid 1px rgba(0,0,0,0.4);
 	margin-right: 1px !important;
+	min-width: 40px;
 }
 td.onholidaymorning, td.onholidayafternoon {
 	background-color: #fdf6f2;
@@ -1111,12 +1134,23 @@ td.onholidaymorning, td.onholidayafternoon {
 td.onholidayallday {
 	background-color: #f4eede;
 }
+td.onholidayallday:not(.weekend) input {
+    background-color: #f8f7f0;
+}
 td.weekend {	/* must be after td.onholidayallday */
 	background-color: #eee;
 }
 td.actionbuttons a {
 	padding-left: 6px;
 }
+/*
+td.leftborder, td.hide0 {
+    border-left: 1px solid #ccc;
+}
+td.leftborder, td.hide6 {
+    border-right: 1px solid #ccc;
+}
+*/
 td.rightborder {
 	border-right: 1px solid #ccc;
 }
@@ -1931,7 +1965,7 @@ table.paymenttable td.amountpaymentcomplete, table.paymenttable td.amountremaint
 	min-height: 0.01%;
 }
 .div-table-responsive {
-	line-height: 120%;
+    line-height: 155%;
 }
 /* Style used for full page tables with field selector and no content after table (priority before previous for such tables) */
 div.fiche>form>div.div-table-responsive, div.fiche>form>div.div-table-responsive-no-min {
@@ -2113,7 +2147,7 @@ select.selectarrowonleft option {
 }
 
 select.widthcentpercentminusx, span.widthcentpercentminusx:not(.select2-selection), input.widthcentpercentminusx {
-	width: calc(100% - 52px) !important;
+	/* width: calc(100% - 52px) !important; */
 	display: inline-block;
 }
 select.widthcentpercentminusxx, span.widthcentpercentminusxx:not(.select2-selection), input.widthcentpercentminusxx {
@@ -4389,12 +4423,21 @@ div.vmenu {
 		<?php if (empty($conf->global->MAIN_MENU_INVERT)) { ?>
 			min-width: 230px;
 		<?php } ?>
+		<?php if (!empty($conf->global->OBLYON_REDUCE_LEFTMENU) && $conf->global->OBLYON_EFFECT_REDUCE_LEFTMENU == "hover") { ?>
+			min-width: 230px;
+		<?php } ?>
 		-webkit-transition-property: max-width;
 		-webkit-transition-duration: 0.2s;
 		-webkit-transition-timing-function: linear;
 		transition-property: max-width;
 		transition-duration: 0.2s;
 		transition-timing-function: linear;
+	}
+<?php } ?>
+
+<?php if (!empty($conf->global->OBLYON_REDUCE_LEFTMENU) && $conf->global->OBLYON_EFFECT_REDUCE_LEFTMENU == "hover") { ?>
+	.vmenu.sec-nav__link:hover {
+		min-width: unset !important;
 	}
 <?php } ?>
 
@@ -5511,7 +5554,9 @@ div .tdtop {
  */
 
 .box {
-	overflow-x: auto;
+	<?php if (empty($conf->global->FIX_STICKY_HEADER_CARD)) { ?>
+		overflow-x: auto;
+	<?php } ?>
 	min-height: 40px;
 	padding-right: 0px;
 	padding-left: 0px;
@@ -7691,6 +7736,9 @@ a span.select2-chosen
 .select2-container--default .select2-results>.select2-results__options{
 	max-height: 400px;
 }
+.select2-container--default .select2-results__option[aria-selected=true] {
+	background-color: var(--inputbackgroundcolor);
+}
 
 /* Special case for the select2 add widget */
 #addbox .select2-container .select2-choice > .select2-chosen, #actionbookmark .select2-container .select2-choice > .select2-chosen {
@@ -9758,20 +9806,20 @@ span.clipboardCPValue.hidewithsize {
 	.div-table-responsive-no-min {
 		 overflow-x: unset;
 	 }
-tr.liste_titre th {
-	position: sticky;
-<?php if($conf->global->OBLYON_STICKY_TOPBAR) { ?>
-	<?php if($conf->global->MAIN_MENU_INVERT) { ?>
-		top: 40px;
+	tr.liste_titre th:not(#ajaxloaded_tablelines th) {
+		position: sticky;
+	<?php if($conf->global->OBLYON_STICKY_TOPBAR) { ?>
+		<?php if($conf->global->MAIN_MENU_INVERT) { ?>
+			top: 40px;
+		<?php } else { ?>
+			top: 54px;
+		<?php } ?>
 	<?php } else { ?>
-		top: 54px;
+		top: 0;
 	<?php } ?>
-<?php } else { ?>
-	top: 0;
-<?php } ?>
-	background-color: <?php print $colorbtitle; ?>;
-	z-index: 1;
-}
+		background-color: <?php print $colorbtitle; ?>;
+		z-index: 1;
+	}
 <?php } ?>
 
 /* ============================================================================== */
@@ -9892,7 +9940,9 @@ tr.liste_titre th {
 			margin-<?php print $left; ?>: 5px;
 		<?php } ?>
 	}
-
+	.div-table-responsive {
+		line-height: 120%;
+	}
 	.imgopensurveywizard, .imgautosize { width:95%; height: auto; }
 
 	#tooltip {
@@ -10043,7 +10093,9 @@ tr.liste_titre th {
 	div.mainmenu {
 		min-width: 20px;
 	}
-
+	.div-table-responsive {
+		line-height: 120%;
+	}
 	#tooltip {
 		position: absolute;
 		width: <?php print dol_size(300,'width'); ?>px;

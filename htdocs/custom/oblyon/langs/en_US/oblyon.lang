@@ -19,6 +19,7 @@ BankColorizeMovementDesc  = If this function is activated, you can define a spec
 BankColorizeMovementName1 = Background color for a debit movement
 BankColorizeMovementName2 = Background color for a credit movement
 MenuCatalog               = Catalog
+MenuVAT                   = VAT
 
 CustomCSS=Style CSS
 

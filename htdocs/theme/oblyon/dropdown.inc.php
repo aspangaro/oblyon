@@ -12,7 +12,7 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
 
 .dropdown-menu {
 	position: absolute;
-	top: 100%;
+	/*top: 100%;*/
 	left: 0;
 	z-index: 1000;
 	display: none;
@@ -61,6 +61,10 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
 	-webkit-transition: -webkit-transform .2s ease-in-out;
 	-ms-transition: -ms-transform .2s ease-in-out;
 	 transition: transform .2s ease-in-out;
+}
+
+div#topmenu-global-search-dropdown .dropdown-toggle::after, div#topmenu-quickadd-dropdown .dropdown-toggle::after, div#topmenu-bookmark-dropdown .dropdown-toggle::after {
+	content: unset !important;
 }
 
 .open>.dropdown-toggle::after {
@@ -406,11 +410,84 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
 		background: <?php print $maincolor; ?>;
 	}
 
-	/*
-	 * Responsive
-	 */
-	@media only screen and (max-width: 570px) {
-		#topmenu-login-dropdown, #topmenu-bookmark-dropdown, #topmenu-quickadd-dropdown, #topmenu-global-search-dropdown, #topmenu-tool-dropdown {
-			padding: 0 2px 0 2px;
-		}
-	}
+    /* for the dropdown on action buttons */
+    dropdown-holder {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        z-index: 1;
+        width: 300px;
+        right:10px;	/* will be set with js */
+        background: #fff;
+        border: 1px solid #bbb;
+        text-align: <?php echo $left; ?>
+    }
+
+    .dropdown-content a {
+        margin-right: auto !important;
+        margin-left: auto !important;
+    }
+    .dropdown-content .butAction {
+        background: none;
+        color: #000 !important;
+    }
+    .dropdown-content a.butAction {
+        display: flex;
+    }
+    .dropdown-content .butAction:hover {
+        box-shadow: none;
+        text-decoration: underline;
+    }
+    .dropdown-content .butActionRefused {
+        margin-left: 0;
+        margin-right: 0;
+        border: none;
+    }
+
+    .dropdown-holder.open .dropdown-content {
+        display: block;
+    }
+
+    /*
+     * Responsive
+     */
+    @media only screen and (max-width: 767px)
+    {
+        .dropdown-search-input {
+            width: 100%;
+        }
+
+        .tmenu .dropdown-menu, .login_block .dropdown-menu, .topnav .dropdown-menu {
+            margin-left: 5px;
+            right: 0;
+        }
+
+        #topmenu-quickadd-dropdown .dropdown-menu {
+            min-width: 220px;
+            max-width: 235px;
+        }
+        #topmenu-bookmark-dropdown .dropdown-menu {
+            min-width: 220px;
+            max-width: 360px;
+        }
+
+        .side-nav-vert .user-menu .dropdown-menu, .topnav .user-menu .dropdown-menu {
+            width: 300px;
+        }
+        .dropdown-menu {
+            border: none;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+        }
+
+    }
+
+    @media only screen and (max-width: 570px) {
+        #topmenu-login-dropdown, #topmenu-bookmark-dropdown, #topmenu-quickadd-dropdown, #topmenu-global-search-dropdown, #topmenu-tool-dropdown {
+            padding: 0 2px 0 2px;
+        }
+    }
