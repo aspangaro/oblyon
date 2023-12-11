@@ -23,8 +23,8 @@ span.butAction, span.butActionDelete {
     cursor: pointer;
 }
 
-.butAction {
-    background: <?php print $colorButtonAction1; ?>;
+.butAction, .cke_dialog_ui_button_ok {
+	background: <?php print $colorButtonAction1; ?> !important;
 }
 .butActionRefused, .butAction, .butAction:link, .butAction:visited, .butAction:hover, .butAction:active, .butActionDelete, .butActionDelete:link, .butActionDelete:visited, .butActionDelete:hover, .butActionDelete:active {
     text-decoration: none;
@@ -98,8 +98,8 @@ span.butActionNewRefused>span.fa, span.butActionNewRefused>span.fa:hover
 	box-shadow: none; webkit-box-shadow: none;
 }
 
-.butAction:hover   {
-    background: <?php print $colorButtonAction2; ?>;
+.butAction:hover, .cke_dialog_ui_button_ok:hover {
+	background: <?php print $colorButtonAction2; ?> !important;
     -webkit-box-shadow: 0px 1px 4px 1px rgba(50, 50, 50, 0.4), 0px 0px 0px rgba(60,60,60,0.1);
     box-shadow: 0px 1px 4px 1px rgba(50, 50, 50, 0.4), 0px 0px 0px rgba(60,60,60,0.1);
 }
@@ -108,13 +108,13 @@ span.butActionNewRefused>span.fa, span.butActionNewRefused>span.fa:hover
     box-shadow: unset !important;
 }
 
-.butActionDelete, .butActionDelete:link, .butActionDelete:visited, .butActionDelete:hover, .butActionDelete:active, .buttonDelete {
-    background: <?php print $colorButtonDelete1; ?>;
+.butActionDelete, .butActionDelete:link, .butActionDelete:visited, .butActionDelete:hover, .butActionDelete:active, .buttonDelete, .cke_dialog_ui_button_cancel, .ui-button {
+	background: <?php print $colorButtonDelete1; ?> !important;
     color: #ffffff;
 }
 
-.butActionDelete:hover {
-    background: <?php print $colorButtonDelete2; ?>;
+.butActionDelete:hover, .cke_dialog_ui_button_cancel:hover, .ui-button:hover, .ui-button:focus {
+	background: <?php print $colorButtonDelete2; ?> !important;
     -webkit-box-shadow: 0px 1px 4px 1px rgba(50, 50, 50, 0.4), 0px 0px 0px rgba(60,60,60,0.1);
     box-shadow: 0px 1px 4px 1px rgba(50, 50, 50, 0.4), 0px 0px 0px rgba(60,60,60,0.1);
 }
@@ -192,12 +192,9 @@ TITLE BUTTON
     margin: 0 0 0 10px;
     min-width: 80px;
     text-align: center;
-    // color: rgb(<?php print $colortextlink; ?>);
     border: none;
     font-size: 12px;
     font-weight: 300;
-    background-color: #fbfbfb;
-	border: 1px solid #fff;
 }
 
 .btnTitle > .btnTitle-icon{

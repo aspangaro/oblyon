@@ -25,7 +25,7 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
     background-color: <?php print (isset($bgcolor)) ? $bgcolor : '#fff' ?>;
     -webkit-background-clip: padding-box;
     background-clip: padding-box;
-    border: 1px solid rgba(0,0,0,.15);
+	border: 1px solid var(--colorboxstatsborder);
     border-radius: 4px;
     -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
     box-shadow: 0 6px 12px rgba(0,0,0,.175);
@@ -59,7 +59,7 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
         text-decoration:none;
         margin:  auto 3px;
         display: inline-block;
-        content: "\f078";
+	/*content: "\f078";*/
         -webkit-transition: -webkit-transform .2s ease-in-out;
         -ms-transition: -ms-transform .2s ease-in-out;
          transition: transform .2s ease-in-out;
@@ -94,7 +94,7 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
     border-bottom-left-radius: 4px;
 }
 .user-body {
-    color: #333;
+	color: var(--colortextlink);
 }
 .side-nav-vert .user-menu .dropdown-menu {
     border-top-right-radius: 0;
@@ -129,16 +129,16 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
     width: 90px;
     border: 3px solid;
     border-color: transparent;
-    border-color: rgba(255, 255, 255, 0.2);
+	border-color: var(--colorboxstatsborder);
     max-width: 100%;
     max-height :100%;
 }
 
 .dropdown-menu > .user-header{
 <?php if ( $conf->global->MAIN_MENU_INVERT ) { ?>
-    background-color: <?php print $bgnavtop; ?>;
+	background-color: <?php print $bgnavtop_hover; ?>;
 <?php } else { ?>
-    background-color: <?php print $bgnavleft; ?>;
+	background-color: <?php print $bgnavleft_hover; ?>;
 <?php } ?>
 }
 
@@ -147,7 +147,11 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
 }
 
 .dropdown-menu > .user-footer {
-    background-color: #f9f9f9;
+<?php if ( $conf->global->MAIN_MENU_INVERT ) { ?>
+	background-color: <?php print $bgnavtop_hover; ?>;
+<?php } else { ?>
+	background-color: <?php print $bgnavleft_hover; ?>;
+<?php } ?>
     padding: 10px;
 }
 
@@ -161,8 +165,8 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
 
 .dropdown-menu > .user-body, .dropdown-body{
     padding: 15px;
-    border-bottom: 1px solid #f4f4f4;
-    border-top: 1px solid #dddddd;
+	border-bottom: 1px solid var(--colorboxstatsborder);
+	border-top: 1px solid var(--colorboxstatsborder);
     white-space: normal;
 }
 
@@ -230,25 +234,40 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
     -ms-touch-action: manipulation;
     touch-action: manipulation;
     cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
+	-moz-transition: all .3s ease-in-out;
+	-webkit-transition: all .3s ease-in-out;
+	transition: all .3s ease-in-out;
     user-select: none;
     background-image: none;
-    border: 1px solid transparent;
-    border-radius: 4px;
+	border: none;
+	border-radius: 0.30em;
 }
 
-.user-footer .button-top-menu-dropdown {
-    color: #666666;
-    border-radius: 0;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
-    border-width: 1px;
-    background-color: #f4f4f4;
-    border-color: #ddd;
-}
+	.user-footer .pull-left .button-top-menu-dropdown {
+		background-color: <?php print $colorButtonAction1; ?>;
+		color: #fff;
+	}
+
+	.user-footer .pull-left .button-top-menu-dropdown:hover, .user-footer .pull-left .button-top-menu-dropdown:focus {
+		background-color: <?php print $colorButtonAction2; ?>;
+		border-color: <?php print $colorButtonAction2; ?>;
+		box-shadow: inset 0 1px 0 rgba(235,235,235, .6);
+		-webkit-box-shadow: inset 0 1px 0 rgba(235,235,235, .6);
+		color: #fff;
+	}
+
+	.user-footer .pull-right .button-top-menu-dropdown {
+		background-color: <?php print $colorButtonDelete1; ?>;
+		color: #fff;
+	}
+
+	.user-footer .pull-right .button-top-menu-dropdown:hover, .user-footer .pull-left .button-top-menu-dropdown:focus {
+		background-color: <?php print $colorButtonDelete2; ?>;
+		border-color: <?php print $colorButtonDelete2; ?>;
+		box-shadow: inset 0 1px 0 rgba(235,235,235, .6);
+		-webkit-box-shadow: inset 0 1px 0 rgba(235,235,235, .6);
+		color: #fff;
+	}
 
     .dropdown-menu a.top-menu-dropdown-link {
         color: <?php echo (isset($colorfline)) ? $colorfline : '#212529' ?> !important;

@@ -2,202 +2,223 @@
 # Copyright (C) 2015       Nicolas Rivera    <nrivera.pro@gmail.com>
 # Copyright (C) 2015-2022  Open-DSI          <support@open-dsi.fr>
 #
-Module113900Name = Oblyon
-Module113900Desc = Panneau d'options qui vous permet de personnaliser le thème Oblyon
+Module113900Name   = Oblyon
+Module113900Desc   = Panneau d'options qui vous permet de personnaliser le thème Oblyon
 
-OblyonParamAction1                  = Sauvegarder / Restaurer l'ensemble des paramètres du module
-OblyonParamAction2                  = <br>(après une restauration rafraichissez la page (F5) pour visualiser le résultat)
-OblyonParamBkup                     = Sauvegarder
-OblyonParamRestore                  = Restaurer
+OblyonParamAction1 = Sauvegarder / Restaurer l'ensemble des paramètres du module
+OblyonParamAction2 = <br>(après une restauration rafraichissez la page (F5) pour visualiser le résultat)
+OblyonParamBkup    = Sauvegarder
+OblyonParamRestore = Restaurer
 
 #
 # Easya
 #
-MenuProjectsOpportunities=Projets | Opportunités
-BankColorizeMovement=Coloration des mouvements bancaires
-BankColorizeMovementDesc=Si cette fonction est activée, vous pouvez définir une couleur de fond spécifique pour les mouvements débiteurs ou créditeurs.
-BankColorizeMovementName1=Couleur de fond pour un mouvement débiteur
-BankColorizeMovementName2=Couleur de fond pour un mouvement créditeur
-MenuCatalog=Catalogue
-MenuVAT=TVA
+MenuProjectsOpportunities = Projets | Opportunités
+BankColorizeMovement      = Coloration des mouvements bancaires
+BankColorizeMovementDesc  = Si cette fonction est activée, vous pouvez définir une couleur de fond spécifique pour les mouvements débiteurs ou créditeurs.
+BankColorizeMovementName1 = Couleur de fond pour un mouvement débiteur
+BankColorizeMovementName2 = Couleur de fond pour un mouvement créditeur
+MenuCatalog               = Catalogue
+MenuVAT                   = TVA
 
 CustomCSS=Style CSS
 
 #
 # Menus
 #
-OblyonMenusTitle = Configurateur Oblyon - Editeur de menus
-OblyonLoginTitle = Configurateur Oblyon - Editeur de page de connexion
-OblyonSuccessMessage = Thème Oblyon détecté, vous pouvez à présent le personnaliser.
-OblyonErrorMessage = Vous devez utiliser le thème Oblyon pour accéder à sa personnalisation.
-OblyonMenusErrorMessage = Vous devez utiliser le menu Oblyon pour accéder à sa personnalisation. Vérifier votre gestionnaire de menu.
-LeftMenu = Menu Gauche
-TopMenu = Menu Haut
-InvertMenus = Intervertir les menus
-FullsizeTopBar = Largeur maximale
-FullsizeTopBarWarning = Utilisez un nombre d'entrées menu limité. 
-ShowCompanyName = Afficher le nom de l'entreprise
-StickyTopBar = Barre adhésive haute
-StickyTopBarWarning = Expérimental. Utilisez un nombre d'entrées menu limité.
-StickyTopBarInvertedWarning = Certains modules ne sont pas pris en charge avec cette fonctionnalité.
-StickyLeftBar = Barre adhésive gauche
-StickyLeftBarWarning = Expérimental. Utilisez un nombre d'entrées menu limité.
+OblyonMenusTitle             = Configurateur Oblyon - Editeur de menus
+OblyonLoginTitle             = Configurateur Oblyon - Editeur de page de connexion
+OblyonSuccessMessage         = Thème Oblyon détecté, vous pouvez à présent le personnaliser.
+OblyonErrorMessage           = Vous devez utiliser le thème Oblyon pour accéder à sa personnalisation.
+OblyonMenusErrorMessage      = Vous devez utiliser le menu Oblyon pour accéder à sa personnalisation. Vérifier votre gestionnaire de menu.
+LeftMenu                     = Menu Gauche
+TopMenu                      = Menu Haut
+InvertMenus                  = Intervertir les menus
+FullsizeTopBar               = Largeur maximale
+FullsizeTopBarWarning        = Utilisez un nombre d'entrées menu limité. 
+ShowCompanyName              = Afficher le nom de l'entreprise
+StickyTopBar                 = Barre adhésive haute
+StickyTopBarWarning          = Expérimental. Utilisez un nombre d'entrées menu limité.
+StickyTopBarInvertedWarning  = Certains modules ne sont pas pris en charge avec cette fonctionnalité.
+StickyLeftBar                = Barre adhésive gauche
+StickyLeftBarWarning         = Expérimental. Utilisez un nombre d'entrées menu limité.
 StickyLeftBarInvertedWarning = Certains modules ne sont pas pris en charge avec cette fonctionnalité.
-OblyonEnableShowLogo=Afficher le logo
-OblyonLogoWidth=Largeur du logo (en px) (Défaut : 260px)
-ReduceLeftMenu=Menu gauche réduit (Icônes seulement)
+OblyonEnableShowLogo         = Afficher le logo
+OblyonLogoWidth              = Largeur du logo (en px) (Défaut : 260px)
+ReduceLeftMenu               = Menu gauche réduit (Icônes seulement)
 
-HideLeftMenu = Masquer le menu gauche
-OpenEffect = Effet d'ouverture menu gauche caché
-OpenEffectReduce = Effet d'ouverture menu gauche réduit
-EffectLeftMenuSlide = Slide
-EffectLeftMenuPush = Push
-HideTopIcons = Masquer les icônes
-HideLeftIcons = Masquer les icônes
-ShowLeftMenu = Afficher/Cacher Menu Gauche
+HideLeftMenu                         = Masquer le menu gauche
+OpenEffect                           = Effet d'ouverture menu gauche caché
+OpenEffectReduce                     = Effet d'ouverture menu gauche réduit
+EffectLeftMenuSlide                  = Slide
+EffectLeftMenuPush                   = Push
+HideTopIcons                         = Masquer les icônes
+HideLeftIcons                        = Masquer les icônes
+ShowLeftMenu                         = Afficher/Cacher Menu Gauche
 MicroMenuLeftBarHideLeftIconsWarning = Attention. Incompatible avec l'option "Masquer les icônes" du menu gauche.
-MicroMenuLeftBarCompanyNameWarning = Attention. Incompatible avec l'option "Afficher le nom de l'entreprise".
-EffectMicroMenuHover = Déployé au passage de souris
-EffectMicroMenuOnly = Ne pas déployer
-OblyonLogin = Page de connexion
-LoginRight = Décentrer le bloc de connexion sur la droite de l'écran
-CardBehavior = Comportement des fiches
-FixAreaRefAndTabAction = Fixer le bandeau des références et les boutons d'actions pendant le défilement vertical
-SwitchColunmOnLeft = Basculer la colonne de sélection / recherche / action en masse à gauche
-FixStickyTableHeadersColumns = Fixer l'entête de colonne des tableaux sur les éléments lors d'un défilement vertical
-General = Paramètres généraux
-OblyonFontSize = Taille du texte de base en pixels (doit être entre 10 et 16)
-MainStatusUseImages = Les différents statuts des éléments seront affichés sous forme d'icone avec ou sans texte explicatif (sinon un libellé coloré sera utilisé)
+MicroMenuLeftBarCompanyNameWarning   = Attention. Incompatible avec l'option "Afficher le nom de l'entreprise".
+EffectMicroMenuHover                 = Déployé au passage de souris
+EffectMicroMenuOnly                  = Ne pas déployer
+OblyonLogin                          = Page de connexion
+LoginRight                           = Décentrer le bloc de connexion sur la droite de l'écran
+CardBehavior                         = Comportement des fiches
+FixAreaRefAndTabAction               = Fixer le bandeau des références et les boutons d'actions pendant le défilement vertical
+SwitchColunmOnLeft                   = Basculer la colonne de sélection / recherche / action en masse à gauche
+FixStickyTableHeadersColumns         = Fixer l'entête de colonne des tableaux sur les éléments lors d'un défilement vertical
+General                              = Paramètres généraux
+OblyonFontSize                       = Taille du texte de base en pixels (doit être entre 10 et 16)
+MainStatusUseImages                  = Les différents statuts des éléments seront affichés sous forme d'icone avec ou sans texte explicatif (sinon un libellé coloré sera utilisé)
 
 #
 # Colors page
 #
-OblyonColorsTitle = Configurateur Oblyon - Couleurs
-Colors=Couleurs
-Buttons=Boutons
-OBLYON_COLOR_MAIN=Couleur principale
-OBLYON_COLOR_BCKGRD=Couleur de fond
-OBLYON_COLOR_LOGO_BCKGRD=Couleur de fond du logo
-OBLYON_COLOR_LOGIN_BCKGRD=Couleur de fond de la page de connexion
-OBLYON_COLOR_BTITLE=Couleur de fond des titres
-OBLYON_COLOR_FTITLE=Couleur de texte des titres
-OBLYON_COLOR_BLINE=Couleur de fond des lignes
-OBLYON_COLOR_BLINE_HOVER=Couleur de fond des lignes survolées
-OBLYON_COLOR_FDATE_DEFAULT=Couleur de la date par défaut (date du jour) dans les calendriers de choix
-OBLYON_COLOR_FLINE=Couleur de texte des lignes
-OBLYON_COLOR_FLINE_HOVER=Couleur du texte survolé des lignes
-OBLYON_COLOR_TOPMENU_BCKGRD=Couleur de fond du menu haut
-OBLYON_COLOR_TOPMENU_BCKGRD_HOVER=Couleur de fond survolé du menu haut
-OBLYON_COLOR_TOPMENU_TXT=Couleur de texte du menu haut
-OBLYON_COLOR_TOPMENU_TXT_ACTIVE=Couleur du texte actif du menu haut
-OBLYON_COLOR_TOPMENU_TXT_HOVER=Couleur du texte survolé du menu haut
-OBLYON_COLOR_LEFTMENU_BCKGRD=Couleur de fond du menu gauche
-OBLYON_COLOR_LEFTMENU_BCKGRD_HOVER=Couleur de fond survolé du menu gauche
-OBLYON_COLOR_LEFTMENU_TXT=Couleur de texte du menu gauche
-OBLYON_COLOR_LEFTMENU_TXT_ACTIVE=Couleur du texte actif du menu gauche
-OBLYON_COLOR_LEFTMENU_TXT_HOVER=Couleur du texte survolé du menu gauche
-OBLYON_COLOR_BUTTON_ACTION1=Couleur 1 de fond des boutons
-OBLYON_COLOR_BUTTON_ACTION2=Couleur 2 de fond des boutons
-OBLYON_COLOR_BUTTON_DELETE1=Couleur 1 de fond des boutons dangereux
-OBLYON_COLOR_BUTTON_DELETE2=Couleur 2 de fond des boutons dangereux
-Eldys = Couleurs de base
-THEME_ELDY_TOPBORDER_TITLE1 = Couleur des bordures de titre
-THEME_ELDY_LINEIMPAIR1 = Couleur de fond 1 des lignes impaires des tables
-THEME_ELDY_LINEIMPAIR2 = Couleur de fond 2 des lignes impaires des tables
-THEME_ELDY_LINEPAIR1 = Couleur de fond 1 des lignes paires des tables
-THEME_ELDY_LINEPAIR2 = Couleur de fond 2 des lignes paires des tables
-THEME_ELDY_LINEBREAK = Couleur des retours à la ligne
-THEME_ELDY_TEXTTITLENOTAB = Couleur du texte des titres (hors tables)
-THEME_ELDY_TEXT = Couleur du texte de base
-THEME_ELDY_TEXTLINK = Couleur des textes de liens
+OblyonColorsTitle                  = Configurateur Oblyon - Couleurs
+Colors                             = Couleurs
+Buttons                            = Boutons
+OBLYON_COLOR_MAIN                  = Couleur principale
+OBLYON_COLOR_BCKGRD                = Couleur de fond
+OBLYON_COLOR_LOGO_BCKGRD           = Couleur de fond du logo
+OBLYON_COLOR_LOGIN_BCKGRD          = Couleur de fond de la page de connexion
+OBLYON_COLOR_BTITLE                = Couleur de fond des titres
+OBLYON_COLOR_FTITLE                = Couleur de texte des titres
+OBLYON_COLOR_BLINE                 = Couleur de fond des lignes
+OBLYON_COLOR_BLINE_HOVER           = Couleur de fond des lignes survolées
+OBLYON_COLOR_FDATE_DEFAULT         = Couleur de la date par défaut (date du jour) dans les calendriers de choix
+OBLYON_COLOR_FLINE                 = Couleur de texte des lignes
+OBLYON_COLOR_FLINE_HOVER           = Couleur du texte survolé des lignes
+OBLYON_COLOR_TOPMENU_BCKGRD        = Couleur de fond du menu haut
+OBLYON_COLOR_TOPMENU_BCKGRD_HOVER  = Couleur de fond survolé du menu haut
+OBLYON_COLOR_TOPMENU_TXT           = Couleur de texte du menu haut
+OBLYON_COLOR_TOPMENU_TXT_ACTIVE    = Couleur du texte actif du menu haut
+OBLYON_COLOR_TOPMENU_TXT_HOVER     = Couleur du texte survolé du menu haut
+OBLYON_COLOR_LEFTMENU_BCKGRD       = Couleur de fond du menu gauche
+OBLYON_COLOR_LEFTMENU_BCKGRD_HOVER = Couleur de fond survolé du menu gauche
+OBLYON_COLOR_LEFTMENU_TXT          = Couleur de texte du menu gauche
+OBLYON_COLOR_LEFTMENU_TXT_ACTIVE   = Couleur du texte actif du menu gauche
+OBLYON_COLOR_LEFTMENU_TXT_HOVER    = Couleur du texte survolé du menu gauche
+OBLYON_COLOR_BUTTON_ACTION1        = Couleur 1 de fond des boutons
+OBLYON_COLOR_BUTTON_ACTION2        = Couleur 2 de fond des boutons
+OBLYON_COLOR_BUTTON_DELETE1        = Couleur 1 de fond des boutons dangereux
+OBLYON_COLOR_BUTTON_DELETE2        = Couleur 2 de fond des boutons dangereux
+OBLYON_COLOR_INFO_BORDER           = Couleur des bordures des messages d'information
+OBLYON_COLOR_INFO_BCKGRD           = Couleur de fond des messages d'information
+OBLYON_COLOR_INFO_TEXT             = Couleur de texte des messages d'information
+OBLYON_COLOR_WARNING_BORDER        = Couleur des bordures des messages d'avertissement
+OBLYON_COLOR_WARNING_BCKGRD        = Couleur de fond des messages d'avertissement
+OBLYON_COLOR_WARNING_TEXT          = Couleur de texte des messages d'avertissement
+OBLYON_COLOR_ERROR_BORDER          = Couleur des bordures des messages d'erreur
+OBLYON_COLOR_ERROR_BCKGRD          = Couleur de fond des messages d'erreur
+OBLYON_COLOR_ERROR_TEXT            = Couleur de texte des messages d'erreur
+OBLYON_COLOR_NOTIF_INFO_BCKGRD     = Couleur de fond des notifications d'information
+OBLYON_COLOR_NOTIF_INFO_TEXT       = Couleur de texte des notifications d'information
+OBLYON_COLOR_NOTIF_WARNING_BCKGRD  = Couleur de fond des notifications d'avertissement
+OBLYON_COLOR_NOTIF_WARNING_TEXT    = Couleur de texte des notifications d'avertissement
+OBLYON_COLOR_NOTIF_ERROR_BCKGRD    = Couleur de fond des notifications d'erreur
+OBLYON_COLOR_NOTIF_ERROR_TEXT      = Couleur de texte des notifications d'erreur
+OBLYON_COLOR_TEXTTABACTIVE         = Couleur de texte des onglets actifs
+OBLYON_COLOR_INPUT_BCKGRD          = Couleur de fond des zones de saisie
+InvertRatioDesc                    = Ratio du filtre d'inversion des couleurs (Applicable aux icones basées sur des fichiers images PNG)
+Eldys                              = Couleurs de base
+THEME_ELDY_TOPBORDER_TITLE1        = Couleur des bordures de titre
+THEME_ELDY_BACKTITLE1              = Couleur de fond des filtres (Oblyon => uniquement sur les filtres inactifs des statistiques)
+THEME_ELDY_BACKTABACTIVE           = Couleur des onglets actifs
+THEME_ELDY_LINEIMPAIR1             = Couleur de fond 1 des lignes impaires des tables
+THEME_ELDY_LINEIMPAIR2             = Couleur de fond 2 des lignes impaires des tables
+THEME_ELDY_LINEPAIR1               = Couleur de fond 1 des lignes paires des tables
+THEME_ELDY_LINEPAIR2               = Couleur de fond 2 des lignes paires des tables
+THEME_ELDY_LINEBREAK               = Couleur des retours à la ligne
+THEME_ELDY_TEXTTITLENOTAB          = Couleur du texte des titres (hors tables)
+THEME_ELDY_TEXTTITLE               = Couleur du texte des titres
+THEME_ELDY_TEXT                    = Couleur du texte de base
+THEME_ELDY_TEXTLINK                = Couleur des textes de liens
 
-RestoreDefaultColors=Rétablir couleurs par défaut
-DefaultsColorsMsg=Couleurs par défaut rétabli
-ThemeApplied = Thème appliqué
-Oblyongreen = Oblyon Green
-Oblyondark = Oblyon Dark
-Oblyonblue = Oblyon Blue
-Oblyonnight = Oblyon Night
-Oblyonlight = Oblyon Light
-OblyonWarningColorWhiteHelp = La couleur du texte est blanche. Le texte pourrait ne pas être visible sur des fonds clairs.
+RestoreDefaultColors               = Rétablir couleurs par défaut
+DefaultsColorsMsg                  = Couleurs par défaut rétabli
+ThemeApplied                       = Thème appliqué
+Oblyongreen                        = Oblyon Green
+Oblyondark                         = Oblyon Dark
+Oblyonblue                         = Oblyon Blue
+Oblyonnight                        = Oblyon Night
+Oblyonlight                        = Oblyon Light
+OblyonWarningColorWhiteHelp        = La couleur du texte est blanche. Le texte pourrait ne pas être visible sur des fonds clairs.
 
 #
 # Dashboard page
 #
-OblyonDashboardTitle = Configurateur Oblyon - Tableau de bord
-OblyonDashboardDisableBlocks=Vignette des éléments ouverts (à traiter ou en retard) sur le tableau de bord principal
-DisableGlobalBoxStats = Désactiver le widget des statistiques globales (nombres d'éléments en base de données)
-InfoboxColorOnBackground = Inverser les couleurs des icônes et du fond des vignettes
-ColorIntensity = Intensité des couleurs
-ColorIntensityDesc = Définir l'intensité sur les couleurs ci-dessous (Actuellement %s)
-ColorMoreDarker = Moins intense
-ColorMoreLighter = Plus intense
-OBLYON_INFOXBOX_BACKGROUND = Couleur de fond de la vignette
-OBLYON_INFOXBOX_WEATHER_COLOR = Couleur vignette 'météo'
-OBLYON_INFOXBOX_ACTION_COLOR = Couleur vignette 'agenda'
-OBLYON_INFOXBOX_PROJECT_COLOR = Couleur vignette 'projet'
-OBLYON_INFOXBOX_CUSTOMER_PROPAL_COLOR = Couleur vignette 'propositions commerciales clients'
-OBLYON_INFOXBOX_CUSTOMER_ORDER_COLOR = Couleur vignette 'commandes clients'
+OblyonDashboardTitle                   = Configurateur Oblyon - Tableau de bord
+OblyonDashboardDisableBlocks           = Vignette des éléments ouverts (à traiter ou en retard) sur le tableau de bord principal
+DisableGlobalBoxStats                  = Désactiver le widget des statistiques globales (nombres d'éléments en base de données)
+InfoboxColorOnBackground               = Inverser les couleurs des icônes et du fond des vignettes
+ColorIntensity                         = Intensité des couleurs
+ColorIntensityDesc                     = Définir l'intensité sur les couleurs ci-dessous (Actuellement %s)
+ColorMoreDarker                        = Moins intense
+ColorMoreLighter                       = Plus intense
+OBLYON_INFOXBOX_BACKGROUND             = Couleur de fond de la vignette
+OBLYON_INFOXBOX_WEATHER_COLOR          = Couleur vignette 'météo'
+OBLYON_INFOXBOX_ACTION_COLOR           = Couleur vignette 'agenda'
+OBLYON_INFOXBOX_PROJECT_COLOR          = Couleur vignette 'projet'
+OBLYON_INFOXBOX_CUSTOMER_PROPAL_COLOR  = Couleur vignette 'propositions commerciales clients'
+OBLYON_INFOXBOX_CUSTOMER_ORDER_COLOR   = Couleur vignette 'commandes clients'
 OBLYON_INFOXBOX_CUSTOMER_INVOICE_COLOR = Couleur vignette 'factures clients'
-OBLYON_INFOXBOX_SUPPLIER_PROPAL_COLOR = Couleur vignette 'demandes de prix fournisseurs'
-OBLYON_INFOXBOX_SUPPLIER_ORDER_COLOR = Couleur vignette 'commandes fournisseurs'
+OBLYON_INFOXBOX_SUPPLIER_PROPAL_COLOR  = Couleur vignette 'demandes de prix fournisseurs'
+OBLYON_INFOXBOX_SUPPLIER_ORDER_COLOR   = Couleur vignette 'commandes fournisseurs'
 OBLYON_INFOXBOX_SUPPLIER_INVOICE_COLOR = Couleur vignette 'factures fournisseurs'
-OBLYON_INFOXBOX_CONTRAT_COLOR = Couleur vignette 'contrat'
-OBLYON_INFOXBOX_BANK_COLOR = Couleur vignette 'banque'
-OBLYON_INFOXBOX_ADHERENT_COLOR = Couleur vignette 'adhérent'
-OBLYON_INFOXBOX_EXPENSEREPORT_COLOR = Couleur vignette 'note de frais'
-OBLYON_INFOXBOX_HOLIDAY_COLOR = Couleur vignette 'congés payés'
-OBLYON_INFOXBOX_TICKET_COLOR = Couleur vignette 'tickets'
+OBLYON_INFOXBOX_CONTRAT_COLOR          = Couleur vignette 'contrat'
+OBLYON_INFOXBOX_BANK_COLOR             = Couleur vignette 'banque'
+OBLYON_INFOXBOX_ADHERENT_COLOR         = Couleur vignette 'adhérent'
+OBLYON_INFOXBOX_EXPENSEREPORT_COLOR    = Couleur vignette 'note de frais'
+OBLYON_INFOXBOX_HOLIDAY_COLOR          = Couleur vignette 'congés payés'
+OBLYON_INFOXBOX_TICKET_COLOR           = Couleur vignette 'tickets'
 
 #
 # Login page
 #
-OBLYON_COLOR_LOGIN_BCKGRD_RIGHT=Couleur du fond - Partie droite
-OBLYON_COLOR_LOGIN_BCKGRD_LEFT=Couleur de fond - Partie gauche
-OBLYON_COLOR_LOGIN_TXT_RIGHT=Couleur du texte - Partie droite
-OBLYON_COLOR_LOGIN_TXT_LEFT=Couleur du texte - Partie gauche
-OBLYON_COLOR_LOGIN_TXT_INPUT=Couleur du texte des champs de saisie
-OblyonActiveloginPersonalized=Activer le remplacement de la page de connexion par celle d'Oblyon
-OblyonLoginLinks=Liens
-OblyonSocialNetwork=Réseaux sociaux
-OBLYON_LOGIN_TXT1=1er lien - Texte
-OBLYON_LOGIN_URL1=1er lien - URL
-OBLYON_LOGIN_FAICON1=1er lien - Icône
-OBLYON_LOGIN_TXT2=2ème lien - Texte
-OBLYON_LOGIN_URL2=2ème lien - URL
-OBLYON_LOGIN_FAICON2=2ème lien - Icône
-OBLYON_LOGIN_TXT3=3ème lien - Texte
-OBLYON_LOGIN_URL3=3ème lien - URL
-OBLYON_LOGIN_FAICON3=3ème lien - Icône
-OBLYON_SOCIAL_TWITTER=URL Twitter
-OBLYON_SOCIAL_FACEBOOK=URL Facebook
-OBLYON_SOCIAL_LINKEDIN=URL LinkedIn
-OBLYON_SOCIAL_INSTAGRAM=Instagram
-OBLYON_SOCIAL_YOUTUBE=YouTube
-OBLYON_SOCIAL_GITHUB=Github
+OBLYON_COLOR_LOGIN_BCKGRD_RIGHT = Couleur du fond - Partie droite
+OBLYON_COLOR_LOGIN_BCKGRD_LEFT  = Couleur de fond - Partie gauche
+OBLYON_COLOR_LOGIN_TXT_RIGHT    = Couleur du texte - Partie droite
+OBLYON_COLOR_LOGIN_TXT_LEFT     = Couleur du texte - Partie gauche
+OBLYON_COLOR_LOGIN_TXT_INPUT    = Couleur du texte des champs de saisie
+OblyonActiveloginPersonalized   = Activer le remplacement de la page de connexion par celle d'Oblyon
+OblyonLoginLinks                = Liens
+OblyonSocialNetwork             = Réseaux sociaux
+OBLYON_LOGIN_TXT1               = 1er lien - Texte
+OBLYON_LOGIN_URL1               = 1er lien - URL
+OBLYON_LOGIN_FAICON1            = 1er lien - Icône
+OBLYON_LOGIN_TXT2               = 2ème lien - Texte
+OBLYON_LOGIN_URL2               = 2ème lien - URL
+OBLYON_LOGIN_FAICON2            = 2ème lien - Icône
+OBLYON_LOGIN_TXT3               = 3ème lien - Texte
+OBLYON_LOGIN_URL3               = 3ème lien - URL
+OBLYON_LOGIN_FAICON3            = 3ème lien - Icône
+OBLYON_SOCIAL_TWITTER           = URL Twitter
+OBLYON_SOCIAL_FACEBOOK          = URL Facebook
+OBLYON_SOCIAL_LINKEDIN          = URL LinkedIn
+OBLYON_SOCIAL_INSTAGRAM         = Instagram
+OBLYON_SOCIAL_YOUTUBE           = YouTube
+OBLYON_SOCIAL_GITHUB            = Github
 
 #
 # Options page
 #
-OblyonOptionsTitle = Options
+OblyonOptionsTitle            = Options
 OblyonMainUseQuickAddDropdown = Utiliser le menu d'ajout rapide des éléments (En haut à droite)
 OblyonMainUseBookmarkDropdown = Utiliser le menu des marques pages (En haut à droite)
-OblyonImageHeightTable = Hauteur maximale des images dans les listes (tables)
-OblyonDisableVersion = Ne pas afficher le numéro de version de Dolibarr (En haut à droite)
-OblyonPaddingRightBottom = Afficher une marge en bas de page sur la partie droite
+OblyonImageHeightTable        = Hauteur maximale des images dans les listes (tables)
+OblyonDisableVersion          = Ne pas afficher le numéro de version de Dolibarr (En haut à droite)
+OblyonPaddingRightBottom      = Afficher une marge en bas de page sur la partie droite
 
 #
 # Icons page
 #
 OblyonIconsTitle = Configurateur Oblyon - Icônes
-Icons = Icônes
-IconsStyle = Style d'icônes
-IconApplied = Style d'icônes appliqué
-Iconfas = Solid
-Iconfar = Regular
-Iconfal = Light
-Iconfat = Thin
-Iconfad = Duotone
+Icons            = Icônes
+IconsStyle       = Style d'icônes
+IconApplied      = Style d'icônes appliqué
+Iconfas          = Solid
+Iconfar          = Regular
+Iconfal          = Light
+Iconfat          = Thin
+Iconfad          = Duotone
 
 #
 # Custom CSS page
@@ -208,9 +229,9 @@ AddCustomCssSentence = Vous pouvez ajouter vos CSS personnalisés
 #
 # About page
 #
-ThemeOblyonAboutTitle = Configurateur Oblyon - A propos
+ThemeOblyonAboutTitle     = Configurateur Oblyon - A propos
 ThemeOblyonChangelogTitle = Configurateur Oblyon - ChangeLog
-OblyonAbout = A propos
-Authors = Auteurs
-OldAuthors = Ancien auteurs
-LicenseMessage = Thème Oblyon mis à disposition selon les termes de la <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">licence Creative Commons Attribution - Pas d’Utilisation Commerciale 4.0 International</a>.<br><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Licence Creative Commons" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a>
+OblyonAbout               = A propos
+Authors                   = Auteurs
+OldAuthors                = Ancien auteurs
+LicenseMessage            = Thème Oblyon mis à disposition selon les termes de la <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">licence Creative Commons Attribution - Pas d’Utilisation Commerciale 4.0 International</a>.<br><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Licence Creative Commons" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a>
