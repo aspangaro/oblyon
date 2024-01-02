@@ -5,10 +5,13 @@
 Module113900Name = Oblyon
 Module113900Desc = Options panel allows you to personalize the Oblyon theme
 
-OblyonParamAction1                  = Save / Restore all module parameters for
-OblyonParamAction2                  = <br>(after a restore refresh the page (F5) to visualize the result)
-OblyonParamBkup                     = Backup
-OblyonParamRestore                  = Restore
+OblyonDeleteThemeError  = An error occurred when deleting the theme Oblyon
+OblyonCopyThemeError    = An error occurred while copying the theme Oblyon
+
+OblyonParamAction1  = Save / Restore all module parameters for
+OblyonParamAction2  = <br>(after a restore refresh the page (F5) to visualize the result)
+OblyonParamBkup     = Backup
+OblyonParamRestore  = Restore
 
 #
 # Easya

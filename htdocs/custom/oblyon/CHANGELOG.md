@@ -1,5 +1,11 @@
 ## Changelog ##
 
+### Version 3.0.0 - Compatibility 14.0.x - 19-beta (2024/01/02)
+- Merge theme & custom directory to simplify deployment - Copy of theme directory is made when module Oblyon is enabled
+- Remove old library icomoons
+- Fix admin display
+- Fix CSS error
+
 ### Version 2.2.11 - Compatibility 14.0.x - 19-alpha (2023/09/12)
 - Upgrade CSS Compatibility with v18/v19
 - Fix token problem (CSRF) on icon page for Easya version

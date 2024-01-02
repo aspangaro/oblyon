@@ -269,8 +269,6 @@ SET FOREIGN_KEY_CHECKS = 1;
 						<td class="center"><button class = "butActionBackup" type = "submit" value = "bkupParams" name = "action">'.$langs->trans('OblyonParamBkup').'</button></td>
 						<td class="center"><button class = "butActionBackup" type = "submit" value = "restoreParams" name = "action">'.$langs->trans('OblyonParamRestore').'</button></td>
 					</tr>
-					<tr><td colspan = "4" class="center" style = "padding: 0;"><hr></td></tr>
-					<tr><td colspan = "4" style="line-height: 1px;">&nbsp;</td></tr>
 				</table>';
 	}
 

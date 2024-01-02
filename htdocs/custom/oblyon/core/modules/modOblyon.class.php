@@ -3,7 +3,7 @@
 	* Copyright (C) 2003       Rodolphe Quiedeville <rodolphe@quiedeville.org>
 	* Copyright (C) 2004-2012  Laurent Destailleur  <eldy@users.sourceforge.net>
 	* Copyright (C) 2005-2012  Regis Houssin        <regis.houssin@capnetworks.com>
-	* Copyright (C) 2015-2022  Alexandre Spangaro   <support@open-dsi.fr>
+	* Copyright (C) 2015-2024  Alexandre Spangaro   <support@open-dsi.fr>
 	* Copyright (C) 2022       Sylvain Legrand      <contact@infras.fr>
 	*
 	* This program is free software: you can redistribute it and/or modify
@@ -107,10 +107,28 @@
 		************************************************/
 		function init($options = '')
 		{
-			global $conf;
+			global $langs, $conf;
 			$sql	= array();
 			$this->_load_tables('/'.$this->name.'/sql/');
 			oblyon_restore_module ($this->name);
+
+			// Copy dir custom/oblyon/themeoblyon to theme/oblyon
+			$srcDir = dol_buildpath('/custom/oblyon/themeoblyon');
+			$destDir = DOL_DOCUMENT_ROOT . '/theme/oblyon';
+
+			if (dol_is_dir($destDir)) {
+				$result = dol_delete_dir_recursive($destDir);
+				if ($result < 0) {
+					setEventMessage($langs->trans('OblyonDeleteThemeError'), 'errors');
+					return 0;
+				}
+			}
+			$result = dolCopyDir($srcDir, $destDir, 0, 1);
+			if ($result < 0) {
+				setEventMessage($langs->trans('OblyonCopyThemeError'), 'errors');
+				return 0;
+			}
+
 			// delete old menu manager
 			if (file_exists(dol_buildpath('/core/menus/standard/oblyon_menu.php')))	unlink(dol_buildpath('/core/menus/standard/oblyon_menu.php'));
 			if (file_exists(dol_buildpath('/core/menus/standard/oblyon.lib.php')))		unlink(dol_buildpath('/core/menus/standard/oblyon.lib.php'));
@@ -129,7 +147,7 @@
 		************************************************/
 		function remove($options = '')
 		{
-			global $conf;
+			global $conf, $langs;
 			$sql	= array();
 			oblyon_bkup_module ($this->name);
 
@@ -154,6 +172,16 @@
 			dolibarr_del_const($this->db,'THEME_ELDY_TEXT', $conf->entity);
 			dolibarr_del_const($this->db,'THEME_ELDY_TEXTLINK', $conf->entity);
 			dolibarr_del_const($this->db,'THEME_ELDY_ENABLE_PERSONALIZED', $conf->entity);
+
+			$destDir = DOL_DOCUMENT_ROOT . '/theme/oblyon';
+
+			if (dol_is_dir($destDir)) {
+				$result = dol_delete_dir_recursive($destDir);
+				if ($result < 0) {
+					setEventMessage($langs->trans('ThemeOblyonErrorDelete'), 'errors');
+					return 0;
+				}
+			}
 
 			return $this->_remove($sql, $options);
 		}	// function remove($options = '')
