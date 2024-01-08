@@ -1,5 +1,8 @@
 ## Changelog ##
 
+### Version 2.2.12 - Compatibility 14.0.x - 19-alpha (2024/07/01)
+- Remove login functionality
+
 ### Version 2.2.11 - Compatibility 14.0.x - 19-alpha (2023/09/12)
 - Upgrade CSS Compatibility with v18/v19
 - Fix token problem (CSRF) on icon page for Easya version

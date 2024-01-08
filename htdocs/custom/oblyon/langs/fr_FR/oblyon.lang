@@ -152,7 +152,7 @@ OBLYON_INFOXBOX_TICKET_COLOR = Couleur vignette 'tickets'
 #
 # Login page
 #
-OBLYON_COLOR_LOGIN_BCKGRD_RIGHT=Couleur du fond - Partie droite
+OBLYON_COLOR_LOGIN_BCKGRD_RIGHT = Couleur du fond - Partie droite
 OBLYON_COLOR_LOGIN_BCKGRD_LEFT=Couleur de fond - Partie gauche
 OBLYON_COLOR_LOGIN_TXT_RIGHT=Couleur du texte - Partie droite
 OBLYON_COLOR_LOGIN_TXT_LEFT=Couleur du texte - Partie gauche

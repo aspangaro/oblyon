@@ -3,7 +3,7 @@
 	* Copyright (C) 2003       Rodolphe Quiedeville <rodolphe@quiedeville.org>
 	* Copyright (C) 2004-2012  Laurent Destailleur  <eldy@users.sourceforge.net>
 	* Copyright (C) 2005-2012  Regis Houssin        <regis.houssin@capnetworks.com>
-	* Copyright (C) 2015-2022  Alexandre Spangaro   <support@open-dsi.fr>
+	* Copyright (C) 2015-2024  Alexandre Spangaro   <support@open-dsi.fr>
 	* Copyright (C) 2022       Sylvain Legrand      <contact@infras.fr>
 	*
 	* This program is free software: you can redistribute it and/or modify
@@ -63,7 +63,7 @@
 			$this->module_parts		= array('menus'	=> 1,
 											'js'	=> array('js'	=> '/'.$this->name.'/js/pushy.js'),
 											'css'	=> array('css'	=> ('/'.$this->name.'/css/'.$this->name.'.css'), ('/theme/'.$this->name.'/custom.css.php')),
-											'tpl'	=> 1,
+											'tpl'	=> 0,
 											'hooks' => array('data' => array('main'),'entity' => '0',),
 											);
 			$this->dirs				= array('/'.$this->name.'/sql');			// Data directories to create when module is enabled. Example: this->dirs = array("/mymodule/temp");

@@ -63,11 +63,6 @@
 		$head[$h][2] = 'dashboard';
 		$h++;
 
-		$head[$h][0] = dol_buildpath("/oblyon/admin/login.php", 1);
-		$head[$h][1] = $langs->trans("LoginPage");
-		$head[$h][2] = 'login';
-		$h++;
-
 		$head[$h][0] = dol_buildpath("/oblyon/admin/options.php", 1);
 		$head[$h][1] = $langs->trans("Options");
 		$head[$h][2] = 'options';
