@@ -4,11 +4,6 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet');
 /* <style type="text/css" > */
 
 <?php
-/*
- * Module: Quicklist
- * Editor: Easya Solutions (Open-Dsi)
- * -------------------
- */
  	require_once DOL_DOCUMENT_ROOT.'/core/lib/files.lib.php';
 
 	$cssdir		= DOL_DOCUMENT_ROOT.$path.'/theme/'.$theme.'/modules';
