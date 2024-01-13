@@ -5,10 +5,12 @@
 Module113900Name   = Oblyon
 Module113900Desc   = Panneau d'options qui vous permet de personnaliser le thème Oblyon
 
-OblyonParamAction1 = Sauvegarder / Restaurer l'ensemble des paramètres du module
-OblyonParamAction2 = <br>(après une restauration rafraichissez la page (F5) pour visualiser le résultat)
-OblyonParamBkup    = Sauvegarder
-OblyonParamRestore = Restaurer
+OblyonParamAction1  = Sauvegarder / Restaurer l'ensemble des paramètres du module
+OblyonParamAction2  = <br>(après une restauration rafraichissez la page (F5) pour visualiser le résultat)
+OblyonParamBkup     = Sauvegarder
+OblyonParamRestore  = Restaurer
+OblyonDeleteThemeError  = Une erreur s'est produite lors de la suppression du thème Oblyon
+OblyonCopyThemeError    = Une erreur s'est produite lors de la copie du thème Oblyon
 
 #
 # Easya

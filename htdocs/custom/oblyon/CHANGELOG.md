@@ -1,5 +1,11 @@
 ## Changelog ##
 
+### Version 3.0.0 - Compatibility 14.0.x - 20-alpha (2024/01/13)
+- Merge theme & custom directory to simplify deployment - Copy of theme directory is made when module Oblyon is enabled
+- Remove old library icomoons
+- Fix admin display
+- Fix CSS error
+
 ### Version 2.3.0 - Compatibility 14.0.x - 19-alpha (2023/11/12)
 - NEW Use a lot of new color variables for compatibility with DARK_MODE
   - Add a lot of variables instead of hard coded values.

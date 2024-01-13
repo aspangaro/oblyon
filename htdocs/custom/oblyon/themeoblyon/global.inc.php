@@ -1010,7 +1010,7 @@ section.setupsection {
     border-radius: 5px;
 }
 
-.field-error-icon { color: #ea1212; !important; }
+.field-error-icon { color: #ea1212 !important; }
 
 select.flat, form.flat select {
     font-weight: normal;
@@ -10011,7 +10011,7 @@ span.clipboardCPValue.hidewithsize {
 }
 
 /* ============================================================================== */
-/* Sticky table headers columns												  */
+/* Sticky table headers columns												      */
 /* ============================================================================== */
 <?php if ($conf->global->FIX_STICKY_HEADER_CARD) { ?>
 	div.fiche>form>div.div-table-responsive, div.fiche>form>div.div-table-responsive-no-min {
@@ -10033,6 +10033,34 @@ span.clipboardCPValue.hidewithsize {
 <?php } ?>
 	background-color: <?php print $colorbtitle; ?>;
 	z-index: 1;
+}
+<?php } ?>
+
+/* ============================================================================== */
+/* Sticky table 1st column  WIP												      */
+/* ============================================================================== */
+<?php if ($conf->global->OBLYON_STICKY_COLUMN_FIRST) { ?>
+@media (min-width: 768px) {
+    #id-right > .fiche > form[action*="list.php"] div.div-table-responsive > table > tbody > * > :first-of-type,
+    #id-right > .fiche > .tabBar > form[action*="list.php"] div.div-table-responsive > table > tbody > * > :first-of-type {
+        position: sticky;
+        left: 0;
+        z-index: 1;
+        background: #<?php echo colorArrayToHex(colorStringToArray($colorbacklineimpair1)); ?>;
+    }
+}
+<?php } ?>
+
+/* ============================================================================== */
+/* Sticky table last column  WIP												      */
+/* ============================================================================== */
+<?php if ($conf->global->OBLYON_STICKY_COLUMN_LAST) { ?>
+#id-right > .fiche > form[action*="list.php"] div.div-table-responsive > table > tbody > * > :last-of-type,
+#id-right > .fiche > .tabBar > form[action*="list.php"] div.div-table-responsive > table > tbody > * > :last-of-type {
+    position: sticky;
+    right: 0;
+    z-index: 1;
+    background: #<?php echo colorArrayToHex(colorStringToArray($colorbacklineimpair1)); ?>;
 }
 <?php } ?>
 
