@@ -1,6 +1,6 @@
 ## Changelog ##
 
-### Version 3.0.0 - Compatibility 14.0.x - 19-beta (2024/01/02)
+### Version 3.0.0 - Compatibility 14.0.x - 20-alpha (2024/01/13)
 - Merge theme & custom directory to simplify deployment - Copy of theme directory is made when module Oblyon is enabled
 - Remove old library icomoons
 - Fix admin display
