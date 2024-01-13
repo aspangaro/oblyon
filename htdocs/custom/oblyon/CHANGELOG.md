@@ -1,5 +1,11 @@
 ## Changelog ##
 
+### Version 2.3.0 - Compatibility 14.0.x - 19-alpha (2023/11/12)
+- NEW Use a lot of new color variables for compatibility with DARK_MODE
+  - Add a lot of variables instead of hard coded values.
+  - Add SQL constants for updates
+- NEW system of extensions for external modules
+
 ### Version 2.2.12 - Compatibility 14.0.x - 19-alpha (2024/07/01)
 - Remove login functionality
 

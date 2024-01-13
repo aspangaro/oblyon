@@ -6,6 +6,7 @@
 /* ============================================================================== */
 
 :root {
+	--bgcolor: <?php print $bgcolor; ?>;
 	--colorbackhmenu1: rgb(<?php print $colorbackhmenu1; ?>);
 	--colorbackvmenu1: rgb(<?php print $colorbackvmenu1; ?>);
 	--colorbacktitle1: rgb(<?php print $colorbacktitle1; ?>);
@@ -31,15 +32,15 @@
 	--colortextbackvmenu: #<?php print $colortextbackvmenu; ?>;
 	--colortopbordertitle1: rgb(<?php print $colortopbordertitle1; ?>);
 	--listetotal: #888888;
-	--inputbackgroundcolor: #FFF;
+	--inputbackgroundcolor: <?php echo $colorBckgrdInput; ?>;
 	--inputbordercolor: rgba(0,0,0,.15);
 	--tooltipbgcolor: <?php print $toolTipBgColor; ?>;
 	--tooltipfontcolor : <?php print $toolTipFontColor; ?>;
 	--oddevencolor: #202020;
-	--colorboxstatsborder: #e0e0e0;
+	--colorboxstatsborder: <?php echo $bgnavtop ?>;
 	--dolgraphbg: rgba(255,255,255,0);
 	--fieldrequiredcolor: #400030;
-	--colortextbacktab: #<?php print $colortextbacktab; ?>;
+	--colortextbacktab: <?php print $colorTextTabActive; ?>;
 	--colorboxiconbg: #eee;
 	--refidnocolor:#444;
 	--tableforfieldcolor:#666;
@@ -49,6 +50,7 @@
 	--productlinestockod: #002200;
 	--productlinestocktoolow: #884400;
 	--infoboxmoduleenabledbgcolor : linear-gradient(0.4turn, #fff, #fff, #fff, #e4efe8);
+	--invertratiofilter: <?php print $invertratiofilter; ?>;
 }
 
 /*------------------------------------*\
@@ -616,7 +618,7 @@ body[class*="colorblind-"] .text-success{
 }
 
 .editfielda span.fa-pencil-alt, .editfielda span.fa-trash {
-    /* color: #cccccc !important; */
+    color: var(--colortextlink) !important;
 }
 .editfielda span.fa-pencil-alt:hover, .editfielda span.fa-trash:hover {
     color: <?php print $colorftitle; ?> !important;
@@ -673,7 +675,7 @@ a:hover {
 }
 
 a:hover, a:focus {
-    color: <?php print $maincolor; ?>;
+	color: var(--colortextlink);
     text-decoration: underline;
 }
 
@@ -730,7 +732,7 @@ select:invalid {
 }
 input:disabled, textarea:disabled, select[disabled='disabled']
 {
-    background:#eee;
+	background: var(--inputbackgroundcolor);
 }
 
 input.liste_titre {
@@ -763,8 +765,14 @@ div#moretabsList, div#moretabsListaction {
     z-index: 5;
 }
 
-hr { border: 0; border-top: 1px solid #ccc; }
-.tabBar hr { margin-top: 20px; margin-bottom: 17px; }
+hr {
+	border: 0;
+	border-top: 1px solid <?php print $colorbacklinebreak ?>;
+}
+.tabBar hr {
+	margin-top: 20px;
+	margin-bottom: 17px;
+}
 
 .button, .buttonDelete, input[name="sbmtConnexion"] {
     margin-bottom: 0;
@@ -961,11 +969,28 @@ img[src*=stcomm]	{ vertical-align: text-top; }
         border-bottom:  solid 1px rgba(0,0,0,.2) !important;	/* required to avoid to lose bottom line when focus is lost on select2. */
     }
 
+	.cke_top {
+    	background: var(--colorbacktitle1) !important;
+    }
+	.cke_dialog_ui_vbox_child {
+    	color: var(--tooltipfontcolor) !important;
+    }
+	.cke_reset_all textarea, .cke_reset_all input[type="text"], .cke_reset_all input[type="password"] {
+    	color: var(--tooltipfontcolor) !important;
+    }
+	textarea.cke_source	{
+		box-shadow: none;
+		background-color:var(--inputbackgroundcolor) !important;
+		color: var(--colortext) !important;
+	}
     textarea.cke_source:focus
     {
         box-shadow: none;
     }
 
+	select.cke_dialog_ui_input_select {
+		color: var(--tooltipfontcolor) !important;
+	}
     .liste_titre .flat, .liste_titre select.flat {
         margin: 2px;
         /* padding: 2px 4px; */
@@ -995,7 +1020,7 @@ select.flat, form.flat select {
 
 input:disabled,
 select:disabled {
-    background-color: #ddd;
+	background-color: var(--inputbackgroundcolor);
     cursor: not-allowed;
 }
 
@@ -1198,7 +1223,6 @@ input.pageplusone {
     color: #888 !important;
 }
 .colorblack {
-    color: #000;
 }
 .fontsizeunset {
     font-size: unset !important;
@@ -1221,7 +1245,7 @@ select:invalid {
 }
 input:disabled, textarea:disabled, select[disabled='disabled']
 {
-    background:#ddd;
+	background: var(--inputbackgroundcolor);
 }
 
 input.liste_titre {
@@ -1240,9 +1264,10 @@ input[type=checkbox] { background-color: transparent; border: none; box-shadow: 
 input[type=radio]    { background-color: transparent; border: none; box-shadow: none; }
 input[type=image]    { background-color: transparent; border: none; box-shadow: none; }
 input:-webkit-autofill {
-    background-color: #FDFFF0 !important;
+	background-color: var(--inputbackgroundcolor) !important;
     background-image:none !important;
     -webkit-box-shadow: 0 0 0 50px #FDFFF0 inset;
+	color: var(--colortext) !important;
 }
 ::-webkit-input-placeholder { color:#ccc; }
 input:-moz-placeholder { color:#ccc; }
@@ -1453,8 +1478,6 @@ span.butActionDelete {
 * State Ok, Warning, Error
 */
 .ok	        { color: #114466; }
-.warning    { color: #f07b6e !important }
-.error      { color: #7e1515 !important; font-weight: bold; }
 .green      { color: #118822 !important; }
 
 .bloc_success {
@@ -1479,60 +1502,44 @@ div.ok {
 
 /* Warning message */
 div.warning {
-    border-<?php print $left; ?>: solid 5px #d8c59a;
+	border-<?php print $left; ?>: solid 5px <?php print $colorWarningBorder; ?>;
     padding-top: 8px;
     padding-left: 10px;
     padding-right: 4px;
     padding-bottom: 8px;
     margin: 0.5em 0em 0.5em 0em;
-    background: rgb(255, 218, 135);
+	background: <?php print $colorWarningBg; ?>;
+	color: <?php echo $colorWarningTxt; ?>;
 }
 
 /* Error message */
 div.error {
-    border-<?php print $left; ?>: solid 5px #e0796e;
+	border-<?php print $left; ?>: solid 5px <?php print $colorErrorBorder; ?> !important;
+	text-align: <?php print $left; ?> !important;
     padding-top: 8px;
     padding-left: 10px;
     padding-right: 4px;
     padding-bottom: 8px;
     margin: 0.5em 0em 0.5em 0em;
-    background: #f07b6e;
+	background: <?php print $colorErrorBg; ?>;
+	color: <?php echo $colorErrorTxt; ?>;
+	font-size: unset !important;
 }
 
 /* Info admin */
 div.info {
-    border-<?php print $left; ?>: solid 5px #87cfd2;
+	border-<?php print $left; ?>: solid 5px <?php print $colorInfoBorder; ?>;
     padding-top: 8px;
     padding-left: 10px;
     padding-right: 4px;
     padding-bottom: 8px;
     margin: 0.5em 0em 0.5em 0em;
-    background: #eff8fc;
-}
 
 /* Warning message */
-div.warning {
-    border-<?php print $left; ?>: solid 5px #f2cf87;
-    padding-top: 8px;
-    padding-left: 10px;
-    padding-right: 4px;
-    padding-bottom: 8px;
-    margin: 0.5em 0em 0.5em 0em;
-    background: #fcf8e3;
-}
-div.warning a, div.info a, div.error a {
-    color: rgb(<?php echo $colortextlink; ?>);
-}
+	background: <?php print $colorInfoBg; ?>;
+	color: <?php echo $colorInfoTxt; ?>;
 
 /* Error message */
-div.error {
-    border-<?php print $left; ?>: solid 5px #f28787;
-    padding-top: 8px;
-    padding-left: 10px;
-    padding-right: 4px;
-    padding-bottom: 8px;
-    margin: 0.5em 0em 0.5em 0em;
-    background: #EFCFCF;
 }
 
 
@@ -1673,8 +1680,8 @@ div.divsearchfield {
 
 .a-filter, .a-mesure {
     border-radius: 50px;
-    background: var(--colortexttitlenotab);
-    color: #fff;
+	background: var(--colorbacktabactive);
+	color: var(--colortexttitlenotab);
     padding: 8px 10px 8px 6px;
 }
 .a-filter:before {
@@ -2820,12 +2827,12 @@ img.photorefnoborder {
 .underrefbanner {
 }
 .underbanner {
-	border-bottom: <?php echo $borderwidth ?>px solid <?php print $colortopbordertitle1; ?>;
+	border-bottom: <?php echo $borderwidth ?>px solid var(--colortopbordertitle1);
 	/* border-bottom: 2px solid rgb(<?php echo $colorbackhmenu1 ?>); */
 }
 .trextrafieldseparator td {
     /* border-bottom: 2px solid rgb(<?php echo $colorbackhmenu1 ?>) !important; */
-    border-bottom: 2px dashed <?php echo $colortopbordertitle1 ?> !important;
+	border-bottom: 2px dashed var(--colortopbordertitle1) !important;
 }
 
 .tdhrthin {
@@ -2962,10 +2969,13 @@ img.photorefnoborder {
     color: <?php print $bgnavtop_txt; ?>;
 }
 
-.main-nav__item.is-sel {
+.main-nav__item.is-sel a {
+	<?php if (! empty($conf->global->MAIN_MENU_INVERT)) { ?>
+		background-color: <?php print $bgnavleft_hover; ?>;
+		color: <?php print $bgnavleft_txt_active; ?>;
+	<?php } else { ?>
     background-color: <?php print $bgnavtop_hover; ?>;
-    color: <?php print $bgnavtop_txt; ?>;
-    <?php if (! empty($conf->global->MAIN_MENU_INVERT)) { ?>
+		color: <?php print $bgnavtop_txt_active; ?>;
         /*
         border-style: solid;
         border-width: 6px 10px 6px 0px;
@@ -3038,7 +3048,7 @@ transition: all .2s ease-in-out;
 }
 
 .main-nav__link {
-    color: <?php print $navlinkcolor; ?>;
+	color: <?php print $bgnavtop_txt; ?> !important;
     display: block;
     font-family: <?php print $fontmainmenu; ?>;
     transition: all .2s ease-in-out;
@@ -3224,23 +3234,23 @@ li.sec-nav__sub-item:focus, li.sec-nav__sub-item sec-nav__link:focus {
 }
 
 .sec-nav.is-inverted li.item-heading:hover .caret--top {
-    border-top-color: <?php print $maincolor; ?>;
+	border-top-color: <?php print $bgnavleft_txt_hover; ?>;
 }
 
 .sec-nav__sub-list .item-level2:hover .caret--left {
-    border-left-color: <?php print $maincolor; ?>;
+	border-left-color: <?php print $bgnavleft_txt_hover; ?>;
 }
 
 .sec-nav__sub-list .item-level2:hover .caret--right {
-    border-right-color: <?php print $maincolor; ?>;
+	border-right-color: <?php print $bgnavleft_txt_hover; ?>;
 }
 
 .sec-nav__sub-list .item-level3:hover .caret--left {
-    border-left-color: <?php print $maincolor; ?>;
+	border-left-color: <?php print $bgnavleft_txt_hover; ?>;
 }
 
 .sec-nav__sub-list .item-level3:hover .caret--right {
-    border-right-color: <?php print $maincolor; ?>;
+	border-right-color: <?php print $bgnavleft_txt_hover; ?>;
 }
 
 /**
@@ -3248,7 +3258,7 @@ li.sec-nav__sub-item:focus, li.sec-nav__sub-item sec-nav__link:focus {
 */
 
 .sec-nav.is-inverted .sec-nav__sub-list {
-    background-color: <?php print $bgnavleft; ?>;
+	background-color: <?php print $bgnavleft_hover; ?>;
     box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.055);
     display: none;
     list-style: none;
@@ -3273,6 +3283,9 @@ li.sec-nav__sub-item:focus, li.sec-nav__sub-item sec-nav__link:focus {
 .sec-nav.is-inverted .sec-nav__sub-item {
     float: none;
     padding: 0;
+}
+.sec-nav.is-inverted .sec-nav__sub-item:hover, .sec-nav.is-inverted .sec-nav__link:hover {
+	background-color: <?php print $bgnavleft; ?>;
 }
 
 .sec-nav.is-inverted .sec-nav__sub-list .item-level1 .sec-nav__link {
@@ -4326,12 +4339,15 @@ a.tmenudisabled {
 a.tmenu:link,
 a.tmenu:visited,
 a.tmenudisabled {
-    color: <?php print $bgnavtop_txt; ?> /*!important*/;
     display: block;
     font-weight: normal;
     /* padding: 0 5px; */
     text-decoration: none;
     white-space: nowrap;
+}
+a.tmenu:link,
+a.tmenudisabled {
+	color: <?php print $bgnavtop_txt; ?> !important;
 }
 
 a.tmenu:active {
@@ -5103,8 +5119,8 @@ div.tabsAction {
 
 div.tabactive,
 div.tabactive a.tab {
-    background-color: <?php echo $colorbacktabcard1; ?>;
-	  color: <?php print $colortextbacktab; ?>;
+	background-color: var(--colorbacktabactive);
+	color: var(--colortextbacktab);
     height: 38px;
 }
 
@@ -5387,7 +5403,7 @@ table.border {
 }
 
 table.border td {
-    border: 1px solid #E0E0E0;
+	border: 1px solid var(--colortopbordertitle1);
     border-collapse: collapse;
     padding: 5px 2px 5px 2px;
     vertical-align: middle;
@@ -5701,11 +5717,12 @@ div .tdtop {
     margin-top: 5px;
     margin-bottom: 5px;
     text-align: center;
-
+	<?php if(!empty($conf->global->OBLYON_INFOXBOX_BACKGROUND)) { ?>
+		background: <?php print $conf->global->OBLYON_INFOXBOX_BACKGROUND; ?> !important;
+	<?php } else { ?>
     background: #fcfcfc;
-    border: 1px solid #eee;
-    border-left: 6px solid <?php print $maincolor; ?>;
-    box-shadow: 1px 1px 8px #ddd;
+	<?php } ?>
+	border-left: 6px solid var(--colorboxstatsborder);
     border-radius: 0px;
 }
 .boxstats, .boxstats130, .boxstatscontent {
@@ -5778,7 +5795,7 @@ div .tdtop {
 span.boxstatstext {
     opacity: 0.7;
     line-height: 18px;
-    color: #000;
+	color: var(--colortextlink);
 }
 span.boxstatstext img, a.dashboardlineindicatorlate img {
     border: 0;
@@ -5810,7 +5827,7 @@ span.dashboardlineok {
 span.dashboardlineko {
     color: #FFF;
     /*color: #8c4446 ! important;
-    padding-left: 1px;*/
+	padding-left: 1px;*/
 
     font-size: 80%;
 }
@@ -5839,7 +5856,7 @@ span.dashboardlineko {
     margin-bottom: 8px !important;
     border-bottom-width: 1px;
 
-    border-top: <?php echo $borderwidth ?>px solid <?php echo $colortopbordertitle1 ?>;
+	border-top: <?php echo $borderwidth ?>px solid var(--colortopbordertitle1);
     /* border-top: 2px solid rgb(<?php echo $colorbackhmenu1 ?>) !important; */
 }
 table.noborder.boxtable tr td {
@@ -5994,7 +6011,7 @@ table.notopnoleftnoright div.titre {
 }
 
 div.titre {
-    color: <?php print $maincolor; ?>;
+	color: <?php print $colorftitle; ?>;
     font-weight: bold;
     font-size: 1.1em;
     text-decoration: none;
@@ -6179,6 +6196,10 @@ html .ui-datepicker-calendar .ui-button.ui-state-disabled:hover, html .ui-button
 {
     border: unset;
 }
+.ui-datepicker .ui-datepicker-header {
+	background: <?php print $bgcolor; ?> !important;
+	border: none;
+}
 
 .ui-state-highlight, .ui-widget-content .ui-state-highlight
 {
@@ -6189,6 +6210,7 @@ html .ui-datepicker-calendar .ui-button.ui-state-disabled:hover, html .ui-button
 img.datecallink { padding-right: 2px !important; }
 
 .ui-datepicker-trigger {
+	filter: invert(<?php print $invertratiofilter; ?>%);
     vertical-align: middle;
     cursor: pointer;
     padding-left: 2px;
@@ -6367,41 +6389,170 @@ span.websitebuttonsitepreviewdisabled img, a.websitebuttonsitepreviewdisabled im
 .dayevent .tagtr:first-of-type {
     height: 24px;
 }
-.agendacell { height: 60px; }
-table.cal_month    { border-spacing: 0px; }
-table.cal_month td:first-child  { border-left: 0px; }
-table.cal_month td:last-child   { border-right: 0px; }
-.cal_current_month { border-top: 0; border-left: solid 1px #E0E0E0; border-right: 0; border-bottom: solid 1px #E0E0E0; }
-.cal_current_month_peruserleft { border-top: 0; border-left: solid 2px #6C7C7B; border-right: 0; border-bottom: solid 1px #E0E0E0; }
-.cal_current_month_oneday { border-right: solid 1px #E0E0E0; }
-.cal_other_month   { border-top: 0; border-left: solid 1px #C0C0C0; border-right: 0; border-bottom: solid 1px #C0C0C0; }
-.cal_other_month_peruserleft { border-top: 0; border-left: solid 2px #6C7C7B !important; border-right: 0; }
-.cal_current_month_right { border-right: solid 1px #E0E0E0; }
-.cal_other_month_right   { border-right: solid 1px #C0C0C0; }
-.cal_other_month   { /* opacity: 0.6; */ background: #EAEAEA; padding-<?php print $left; ?>: 2px; padding-<?php print $right; ?>: 1px; padding-top: 0px; padding-bottom: 0px; }
-.cal_past_month    { /* opacity: 0.6; */ background: #EEEEEE; padding-<?php print $left; ?>: 2px; padding-<?php print $right; ?>: 1px; padding-top: 0px; padding-bottom: 0px; }
-.cal_current_month { background: #FFFFFF; border-left: solid 1px #E0E0E0; padding-<?php print $left; ?>: 2px; padding-<?php print $right; ?>: 1px; padding-top: 0px; padding-bottom: 0px; }
-.cal_current_month_peruserleft { background: #FFFFFF; border-left: solid 2px #6C7C7B; padding-<?php print $left; ?>: 2px; padding-<?php print $right; ?>: 1px; padding-top: 0px; padding-bottom: 0px; }
-.cal_today         { background: #FDFDF0; border-left: solid 1px #E0E0E0; border-bottom: solid 1px #E0E0E0; padding-<?php print $left; ?>: 2px; padding-<?php print $right; ?>: 1px; padding-top: 0px; padding-bottom: 0px; }
-.cal_today_peruser { background: #FDFDF0; border-right: solid 1px #E0E0E0; border-bottom: solid 1px #E0E0E0; padding-<?php print $left; ?>: 2px; padding-<?php print $right; ?>: 1px; padding-top: 0px; padding-bottom: 0px; }
-.cal_today_peruser_peruserleft { background: #FDFDF0; border-left: solid 2px #6C7C7B; border-right: solid 1px #E0E0E0; border-bottom: solid 1px #E0E0E0; padding-<?php print $left; ?>: 2px; padding-<?php print $right; ?>: 1px; padding-top: 0px; padding-bottom: 0px; }
+.agendacell {
+	height: 60px;
+}
+table.cal_month	{
+	border-spacing: 0px;
+}
+table.cal_month td:first-child  {
+	border-left: 0px;
+}
+table.cal_month td:last-child {
+	border-right: 0px;
+}
+.cal_current_month {
+	border-top: 0;
+	border-left: solid 1px var(--colortopbordertitle1);
+	border-right: 0;
+	border-bottom: solid 1px var(--colortopbordertitle1);
+}
+.cal_current_month_peruserleft {
+	border-top: 0;
+	border-left: solid 2px #6C7C7B;
+	border-right: 0;
+	border-bottom: solid 1px var(--colortopbordertitle1);
+}
+.cal_current_month_oneday {
+	border-right: solid 1px var(--colortopbordertitle1);
+}
+.cal_other_month {
+	border-top: 0;
+	border-left: solid 1px #C0C0C0;
+	border-right: 0;
+	border-bottom: solid 1px #C0C0C0;
+}
+.cal_other_month_peruserleft {
+	border-top: 0;
+	border-left: solid 2px #6C7C7B !important;
+	border-right: 0;
+}
+.cal_current_month_right {
+	border-right: solid 1px var(--colortopbordertitle1);
+}
+.cal_other_month_right {
+	border-right: solid 1px #C0C0C0;
+}
+.cal_other_month {
+	background: <?php echo $colorbline; ?>;
+	padding-<?php print $left; ?>: 2px;
+	padding-<?php print $right; ?>: 1px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+.cal_past_month	{
+	background: <?php echo $colorbline; ?>;
+	padding-<?php print $left; ?>: 2px;
+	padding-<?php print $right; ?>: 1px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+.cal_current_month {
+	background: var(--colorbacktitle1);
+	border-left: solid 1px var(--colortopbordertitle1);
+	padding-<?php print $left; ?>: 2px;
+	padding-<?php print $right; ?>: 1px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+.cal_current_month_peruserleft {
+	background: var(--colorbacktitle1);
+	border-left: solid 2px #6C7C7B;
+	padding-<?php print $left; ?>: 2px;
+	padding-<?php print $right; ?>: 1px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+.cal_today {
+	background: var(--inputbackgroundcolor);
+	border-left: solid 1px var(--colortopbordertitle1);
+	border-bottom: solid 1px var(--colortopbordertitle1);
+	padding-<?php print $left; ?>: 2px;
+	padding-<?php print $right; ?>: 1px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+.cal_today_peruser {
+	background: var(--inputbackgroundcolor);
+	border-right: solid 1px var(--colortopbordertitle1);
+	border-bottom: solid 1px var(--colortopbordertitle1);
+	padding-<?php print $left; ?>: 2px;
+	padding-<?php print $right; ?>: 1px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+.cal_today_peruser_peruserleft {
+	background: var(--inputbackgroundcolor);;
+	border-left: solid 2px #6C7C7B;
+	border-right: solid 1px var(--colortopbordertitle1);
+	border-bottom: solid 1px var(--colortopbordertitle1);
+	padding-<?php print $left; ?>: 2px;
+	padding-<?php print $right; ?>: 1px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
 .cal_past          { }
-.cal_peruser       { padding: 0px; }
-.cal_impair        { background: #F8F8F8; }
-.cal_today_peruser_impair { background: #F8F8F0; }
-.peruser_busy      { background: #CC8888; }
-.peruser_notbusy   { background: #EEDDDD; opacity: 0.5; }
-table.cal_event    { border: none; border-collapse: collapse; margin-bottom: 1px; -webkit-border-radius: 3px; border-radius: 3px; min-height: 20px;	}
-table.cal_event td { border: none; padding-<?php print $left; ?>: 2px; padding-<?php print $right; ?>: 2px; padding-top: 0px; padding-bottom: 0px; }
-table.cal_event td.cal_event { padding: 4px 4px !important; }
-table.cal_event td.cal_event_right { padding: 4px 4px !important; }
-.cal_event              { font-size: 1em; }
-.cal_event a:link       { color: #111111; font-weight: normal !important; }
-.cal_event a:visited    { color: #111111; font-weight: normal !important; }
-.cal_event a:active     { color: #111111; font-weight: normal !important; }
-.cal_event_busy a:hover { color: #111111; font-weight: normal !important; color:rgba(255,255,255,.75); }
+.cal_peruser {
+	padding: 0px;
+}
+.cal_impair {
+	background: var(--colorbacklinepair2);
+}
+.cal_today_peruser_impair {
+	background: var(--colorbacklinepair2);
+}
+.peruser_busy {
+	background: var(--inputbackgroundcolor);
+}
+.peruser_notbusy {
+	background: var(--inputbackgroundcolor);
+	opacity: 0.5;
+}
+table.cal_event	{
+	border: none;
+	border-collapse: collapse;
+	margin-bottom: 1px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px; min-height: 20px;
+	background: <?php print $maincolor; ?> !important;
+}
+table.cal_event td {
+	border: none;
+	padding-<?php print $left; ?>: 2px;
+	padding-<?php print $right; ?>: 2px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+table.cal_event td.cal_event {
+	padding: 4px 4px !important;
+}
+table.cal_event td.cal_event_right {
+	padding: 4px 4px !important;
+}
+.cal_event {
+	font-size: 1em;
+}
+.cal_event a:link {
+	color: #111111;
+	font-weight: normal !important;
+}
+.cal_event a:visited {
+	color: #111111;
+	font-weight: normal !important;
+}
+.cal_event a:active {
+	color: #111111;
+	font-weight: normal !important;
+}
+.cal_event_busy a:hover {
+	color: #111111;
+	font-weight: normal !important;
+	color:rgba(255,255,255,.75);
+}
 .cal_event_busy      { }
-.cal_peruserviewname { max-width: 140px; height: 22px; }
+.cal_peruserviewname {
+	max-width: 140px; height: 22px;
+}
 
 .topmenuimage {
     background-size: 28px auto;
@@ -6415,15 +6566,19 @@ table.cal_event td.cal_event_right { padding: 4px 4px !important; }
 /*  Ajax - Liste deroulante de l'autocompletion                                   */
 /* ============================================================================== */
 
-.ui-widget-content { border: solid 1px rgba(0,0,0,.3); background: #fff !important; }
+.ui-widget-content {
+	border: solid 1px rgba(0,0,0,.3);
+	background: <?php print $bgcolor; ?> !important;
+	color: var(--colortext);
+}
 
-.ui-autocomplete-loading { background: white url(<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/working.gif', 1) ?>) right center no-repeat; }
+.ui-autocomplete-loading {
+	background: white url(<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/working.gif', 1) ?>) right center no-repeat;
+}
 .ui-autocomplete {
     position:absolute;
     width:auto;
     font-size: 1.0em;
-    background-color:white;
-    border:1px solid #888;
     margin:0px;
     /*	       padding:0px; This make combo crazy */
 }
@@ -6844,38 +6999,11 @@ p.titre {
 * Ajax - Liste deroulante de l'autocompletion
 */
 
-.ui-widget-content { border: solid 1px rgba(0,0,0,.3); background: #fff !important; }
 
-.ui-autocomplete-loading {
-    background: white url(<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/working.gif',1); ?>) right center no-repeat;
-}
 
-.ui-autocomplete {
-    background-color: white;
-    border: 1px solid #888;
-    font-size: 1.0em;
-    margin: 0;
-    padding: 0;
-    position: absolute;
-    width: auto;
-}
 
-.ui-autocomplete ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
 
-.ui-autocomplete ul li.selected { background-color: #d3e5ec;}
 
-.ui-autocomplete ul li {
-    cursor: pointer;
-    display: block;
-    height: 18px;
-    list-style-type: none;
-    margin: 0;
-    padding: 2px;
-}
 
 /**
 * Gantt
@@ -6950,9 +7078,6 @@ min-height: 20px;
 padding: 0 0 0 16px !important;
 }
 
-.treeview .hover {
-color: black !important;
-}
 
 
 /**
@@ -7104,6 +7229,7 @@ display: block;
 font-family: <?php echo $fontlist; ?>;
 font-size: 1em;
 font-weight: normal;
+color: var(--colortext);
 line-height: 1.5;
 padding: .2em .4em;
 text-decoration: none;
@@ -7113,6 +7239,9 @@ zoom: 1;
 .ui-widget {
 font-family: <?php echo $fontlist; ?>;
 font-size: <?php echo $fontsize; ?>px;
+}
+.ui-widget.ui-widget-content {
+	border: solid 1px rgba(0,0,0,.3);
 }
 
 .ui-button {
@@ -7140,14 +7269,12 @@ padding: 1px;
 
 
 /* confirmation box */
-.ui-widget-content {
-background-color: #f7f7f7!important;
-}
 
 .ui-state-default,
 .ui-widget-header .ui-state-default,
 .ui-widget-content .ui-state-default {
-background-color: #e6e6e6!important;
+	background-color: unset !important;
+	color: var(--colortext);
 }
 
 .ui-widget-header {
@@ -7395,7 +7522,7 @@ ul.ecmjqft li {
 ul.ecmjqft a {
     line-height: 24px;
     vertical-align: middle;
-    color: #333;
+	color: var(--colortextlink);
     padding: 0px 0px;
     font-weight:normal;
     display: inline-block !important;
@@ -7451,10 +7578,26 @@ div#ecm-layout-center {
 .jnotify-container .jnotify-notification .jnotify-message {
     font-weight: normal;
 }
+.jnotify-container .jnotify-notification .jnotify-close, .jnotify-container .jnotify-notification .jnotify-message {
+	color: <?php echo $colorNotifInfoTxt ?> !important;
+}
+.jnotify-container .jnotify-notification .jnotify-background {
+	background-color: <?php echo $colorNotifInfoBg ?> !important;
+}
 .jnotify-container .jnotify-notification-warning .jnotify-close, .jnotify-container .jnotify-notification-warning .jnotify-message {
-    color: #a28918 !important;
+	color: <?php echo $colorNotifWarningTxt ?> !important;
 }
 
+.jnotify-container .jnotify-notification-warning .jnotify-background {
+	background-color: <?php echo $colorNotifWarningBg ?> !important;
+}
+
+.jnotify-container .jnotify-notification-error .jnotify-close, .jnotify-container .jnotify-notification-error .jnotify-message {
+	color:<?php echo $colorNotifErrorTxt ?> !important;
+}
+.jnotify-container .jnotify-notification-error .jnotify-background {
+	background-color: <?php echo $colorNotifErrorBg ?> !important;
+}
 /* use or not ? */
 div.jnotify-background {
     opacity : 0.95 !important;
@@ -7592,10 +7735,10 @@ span.select2.select2-container.select2-container--default {
 .blockvmenusearch .select2-container--default .select2-selection--single,
 .blockvmenubookmarks .select2-container--default .select2-selection--single
 {
-    background-color: #ffffff;
+	background-color: var(--inputbackgroundcolor);
 }
 .select2-container--default .select2-selection--single .select2-selection__rendered {
-    /* color: unset; */
+	color: var(--colortext);
 }
 .select2-default {
     color: #999 !important;
@@ -7643,6 +7786,7 @@ span.select2.select2-container.select2-container--default {
 }
 .select2-container--default .select2-selection--single
 {
+	background-color: var(--inputbackgroundcolor);
     outline: none;
     border-top: none;
     border-left: none;
@@ -7677,11 +7821,11 @@ span.select2.select2-container.select2-container--default {
     box-shadow: none !important;
 }
 .select2-dropdown {
-    border: 1px solid #ccc;
-    box-shadow: 1px 2px 10px #ddd;
+	border: 1px solid var(--colorboxstatsborder);
+	background-color: var(--colorbacklineimpair1) !important;
 }
 .select2-dropdown-open {
-    background-color: #fff;
+	background-color: var(--colorbacklineimpair1) !important;
 }
 .select2-dropdown-open .select2-choice, .select2-dropdown-open .select2-choices
 {
@@ -7691,7 +7835,7 @@ span.select2.select2-container.select2-container--default {
     border-bottom: none;
     -webkit-box-shadow: none !important;
     box-shadow: none !important;
-    background-color: #fff;
+	background-color: var(--colorbacklineimpair1) !important;
 }
 .select2-disabled
 {
@@ -7709,7 +7853,7 @@ span.select2.select2-container.select2-container--default {
 }
 div.select2-drop-above
 {
-    background: #fff;
+	background: var(--colorbacklineimpair1) !important;
     -webkit-box-shadow: none !important;
     box-shadow: none !important;
 }
@@ -7759,6 +7903,9 @@ a span.select2-chosen
 }
 .select2-container--default .select2-results>.select2-results__options{
     max-height: 400px;
+}
+.select2-container--default .select2-results__option[aria-selected=true] {
+	background-color: var(--inputbackgroundcolor);
 }
 
 /* Special case for the select2 add widget */
@@ -7830,6 +7977,7 @@ span#select2-boxbookmark-container, span#select2-boxcombo-container {
 }
 
 .select2-container--default .select2-selection--multiple {
+	background-color: var(--inputbackgroundcolor);
     color: #222 !important;
 }
 
@@ -7970,41 +8118,6 @@ dl.dropdown {
 }
 .dropdown span.value {
     display:none;
-}
-.dropdown dd ul {
-    background-color: #fff;
-    box-shadow: 1px 1px 10px #aaa;
-    display:none;
-    <?php echo $right; ?>:0px;						/* pop is align on right */
-    padding: 0 0 0 0;
-    position:absolute;
-    top:2px;
-    list-style:none;
-    max-height: 264px;
-    overflow: auto;
-    border-radius: 2px;
-}
-.dropdown dd ul li {
-    white-space: nowrap;
-    font-weight: normal;
-    padding: 7px 8px 7px 8px;
-    color: #505050;
-}
-.dropdown dd ul li:hover {
-    background: #eee;
-}
-.dropdown dd ul li input[type="checkbox"] {
-    margin-<?php echo $right; ?>: 3px;
-}
-.dropdown dd ul li a, .dropdown dd ul li span {
-    padding: 3px;
-    display: block;
-}
-.dropdown dd ul li span {
-    color: #888;
-}
-.dropdown dd ul li a:hover {
-    background-color: #eee;
 }
 
 /* ============================================================================== */
@@ -8163,14 +8276,14 @@ box-shadow: none;
 border: none;
 background: none;
 text-shadow: none;
-color: <?php echo $colortexttitlenotab; ?> !important;
+color: var(--colortexttitlenotab) !important;
 }
 .ui-bar-b, .lilevel0 {
 background-repeat: repeat-x;
 border: none;
 background: none;
 text-shadow: none;
-color: <?php echo $colortexttitlenotab; ?> !important;
+color: var(--colortexttitlenotab) !important;
 }
 .alilevel0 {
 font-weight: normal !important;
@@ -8223,7 +8336,7 @@ border-top-right-radius: 6px;
 }*/
 
 .alilevel1 {
-    color: <?php echo $colortexttitlenotab; ?> !important;
+	color: var(--colortexttitlenotab) !important;
 }
 .lilevel1 {
     border-top: 2px solid #444;
@@ -8632,7 +8745,7 @@ div.refidpadding {
 }
 div.refid {
     font-weight: bold;
-    color: <?php echo $colortexttitlenotab; ?>;
+	color: var(--colortexttitlenotab);
     font-size: 160%;
 }
 div.refidno	{
@@ -8677,12 +8790,12 @@ div.pagination li.pagination span {
     padding: 6px 12px;
     padding-top: 8px;
     line-height: 1.42857143;
-    color: #000;
+    color: var(--colortextlink);
     text-decoration: none;
 }
 div.pagination li.pagination span.inactive {
     cursor: default;
-    color: #ccc;
+    color: var(--colortextlink);
 }
 
 div.pagination li.litext {
@@ -8714,8 +8827,8 @@ div.pagination li a:hover,
 div.pagination li span:hover,
 div.pagination li a:focus,
 div.pagination li span:focus {
-    color: #000;
-    background-color: #eee;
+	color: var(--colortextbacktab);
+	background-color: transparent;
     border-color: rgba(0,0,0, .24);
 }
 div.pagination li .active a,
@@ -8759,18 +8872,22 @@ div.pagination li.paginationafterarrows {
 .oddeven:hover, .evenodd:hover, .impair:hover, .pair:hover
 {
     background: <?php echo $colorbline_hover; ?> !important;		/* Must be background to be stronger than background of odd or even */
+	color: <?php echo $colorfline_hover; ?> !important;
 }
 .tredited, .tredited td {
     background: <?php echo $colorbline_hover; ?> !important;   /* Must be background to be stronger than background of odd or even */
+	color: <?php echo $colorfline_hover; ?> !important;
     border-bottom: 0 !important;
 }
 .treditedlinefordate {
     background: <?php echo $colorbline_hover; ?> !important;   /* Must be background to be stronger than background of odd or even */
+	color: <?php echo $colorfline_hover; ?> !important;
     border-bottom: 0px;
 }
 <?php if ($colorbline_hover) { ?>
 .highlight {
     background: <?php echo $colorbline_hover; ?> !important;   /* Must be background to be stronger than background of odd or even */
+	color: <?php echo $colorfline_hover; ?> !important;
 }
 <?php } ?>
 
@@ -8786,7 +8903,7 @@ div.pagination li.paginationafterarrows {
 {
     font-family: <?php print $fontlist ?>;
     margin-bottom: 1px;
-    color: #202020;
+	color: var(--colortext);
 }
 .impair, .nohover .impair:hover, tr.impair td.nohover
 {
@@ -8799,7 +8916,7 @@ div.pagination li.paginationafterarrows {
 .oddeven, .evenodd, .pair, .nohover .pair:hover, tr.pair td.nohover, .tagtr.oddeven {
     font-family: <?php print $fontlist ?>;
     margin-bottom: 1px;
-    color: #202020;
+	color: var(--colortext);
 }
 .pair, .nohover .pair:hover, tr.pair td.nohover {
     background-color: #<?php echo colorArrayToHex(colorStringToArray($colorbacklinepair1)); ?>;
@@ -8850,7 +8967,7 @@ tr.pair td .nobordernopadding tr td, tr.impair td .nobordernopadding tr td {
     border-bottom: 0px !important;
 }
 table.nobottomiftotal tr.liste_total td {
-    background-color: #fff;
+	background-color: <?php print colorDarker($colorbtitle, 5); ?>;
     border-bottom: 0px !important;
 }
 table.nobottom, td.nobottom {
@@ -8867,7 +8984,7 @@ div.liste_titre {
 }
 div.liste_titre_bydiv {
     border-top-width: <?php echo $borderwidth ?>px;
-    border-top-color: <?php echo $colortopbordertitle1 ?>;
+	border-top-color: var(--colortopbordertitle1);
     border-top-style: solid;
 
     border-collapse: collapse;
@@ -8900,7 +9017,7 @@ div.liste_titre_bydiv, .liste_titre div.tagtr, tr.liste_titre, tr.liste_titre_se
 }
 tr.liste_titre th, tr.liste_titre td, th.liste_titre
 {
-    border-bottom: 1px solid <?php echo $colortopbordertitle1 ?>;
+	border-bottom: 1px solid var(--colortopbordertitle1);
 }
 tr.liste_titre:first-child th, tr:first-child th.liste_titre {
     /*    border-bottom: 1px solid #ddd ! important; */
@@ -8918,7 +9035,7 @@ tr.liste_titre th a, th.liste_titre a, tr.liste_titre td a, td.liste_titre a, fo
 }
 tr.liste_titre_topborder td {
     border-top-width: <?php echo $borderwidth; ?>px;
-    border-top-color: <?php echo $colortopbordertitle1 ?>;
+	border-top-color: var(--colortopbordertitle1);
     border-top-style: solid;
 }
 .liste_titre td a {
@@ -8959,8 +9076,8 @@ input.liste_titre {
     line-height: 24px;
 }
 .noborder tr.liste_total td, tr.liste_total td, form.liste_total div, .noborder tr.liste_total_wrap td, tr.liste_total_wrap td, form.liste_total_wrap div {
-    color: #551188;
-    font-weight: normal;
+	color: var(--colortext);
+	font-weight: bold;
 }
 .noborder tr.liste_total td, tr.liste_total td, form.liste_total div {
     white-space: nowrap;
@@ -9022,7 +9139,7 @@ div.tabBar .noborder {
 }
 
 #tablelines tr.liste_titre td, .paymenttable tr.liste_titre td, .margintable tr.liste_titre td, .tableforservicepart1 tr.liste_titre td {
-    border-bottom: 1px solid <?php echo $colortopbordertitle1 ?> !important;
+	border-bottom: 1px solid var(--colortopbordertitle1) !important;
 }
 #tablelines tr td {
     height: unset;
@@ -9042,7 +9159,7 @@ div:not(.fichecenter):not(.fichehalfleft):not(.fichehalfright):not(.ficheaddleft
 .noborder > tbody > tr:nth-child(even):not(:last-child) td:not(.liste_titre), .liste > tbody > tr:nth-child(even):not(:last-child) td:not(.liste_titre),
 .noborder .oddeven.tagtr:nth-child(even):not(:last-child) .tagtd:not(.liste_titre)
 {
-    border-bottom: 1px solid #e0e0e0;
+	border-bottom: 1px solid var(--colortopbordertitle1);
 }
 
 .noborder > tbody > tr:nth-child(odd):not(.liste_titre), .liste > tbody > tr:nth-child(odd):not(.liste_titre),
@@ -9058,7 +9175,7 @@ div:not(.fichecenter):not(.fichehalfleft):not(.fichehalfright):not(.ficheaddleft
 .noborder > tbody > tr:nth-child(odd):not(:last-child) td:not(.liste_titre), .liste > tbody > tr:nth-child(odd):not(:last-child) td:not(.liste_titre),
 .noborder .oddeven.tagtr:nth-child(odd):not(:last-child) .tagtd:not(.liste_titre)
 {
-    border-bottom: 1px solid #e0e0e0;
+	border-bottom: 1px solid var(--colortopbordertitle1);
 }
 
 ul.noborder li:nth-child(even):not(.liste_titre) {
@@ -9105,9 +9222,8 @@ dl.dropdown {
     display:none;
 }
 .dropdown dd ul {
-    color: <?php echo $colorfline; ?>;
-    background-color: #FFF;
-    border: 1px solid #888;
+	background-color: <?php print $bgnavtop_hover; ?>;
+	border: 1px solid var(--colorboxstatsborder);
     display:none;
     right:0px;						/* pop is align on right */
     padding: 2px 15px 2px 5px;
@@ -9121,17 +9237,18 @@ dl.dropdown {
     white-space: nowrap;
     font-weight: normal;
     padding: 2px;
-    color: #000;
+}
+.dropdown dd ul li:hover {
+	background: var(--colorbacklinepairhover);
 }
 .dropdown dd ul li input[type="checkbox"] {
-    margin-right: 3px;
+	margin-<?php echo $right; ?>: 3px;
 }
 .dropdown dd ul li a, .dropdown dd ul li span {
     padding: 3px;
     display: block;
 }
 .dropdown dd ul li span {
-    color: #888;
 }
 .dropdown dd ul li a:hover,
 .dropdown dd ul li a:focus {
@@ -9175,7 +9292,7 @@ img.loginphoto {
 /* Compatibility Infrassearch													  */
 /* ============================================================================== */
 input#sew_keyword {
-    background-color: #fff !important;
+	background-color: var(--inputbackgroundcolor) !important;
     width: 100% !important;
     line-height: 28px;
 }
@@ -9345,14 +9462,14 @@ ul.ulmenu {
 	border: none;
 	background: none;
 	text-shadow: none;
-	color: <?php echo $colortexttitlenotab; ?> !important;
+	color: var(--colortexttitlenotab) !important;
 }
 .ui-bar-b, .lilevel0 {
 	background-repeat: repeat-x;
 	border: none;
 	background: none;
 	text-shadow: none;
-	color: <?php echo $colortexttitlenotab; ?> !important;
+	color: var(--colortexttitlenotab) !important;
 }
 .alilevel0 {
 	font-weight: normal !important;
@@ -9387,11 +9504,8 @@ ul.ulmenu {
 	color: #<?php echo $colorshadowtitle; ?> !important;
 	text-shadow: none !important;
 }
-div.tabsElem a.tab {
-	background: transparent;
-}
 .alilevel1 {
-	color: <?php echo $colortexttitlenotab; ?> !important;
+	color: var(--colortexttitlenotab) !important;
 }
 .lilevel1 {
 	border-top: 2px solid #444;
@@ -9696,7 +9810,7 @@ div.tabsElem a.tab {
 .cd-timeline-content {
 	position: relative;
 	margin-left: 60px;
-	background: white;
+	background: <?php echo (!empty($colorbline_hover) ? $colorbline_hover : 'white'); ?>;
 	border-radius: 0.25em;
 	padding: 1em;
 	background-image: -o-linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(230,230,230,0.4) 100%);
@@ -9738,7 +9852,7 @@ div.tabsElem a.tab {
 	height: 0;
 	width: 0;
 	border: 7px solid transparent;
-	border-right: 7px solid white;
+	border-right: 7px solid <?php echo (!empty($colorbline_hover) ? $colorbline_hover : 'white'); ?>;
 }
 @media only screen and (min-width: 768px) {
 	.cd-timeline-content h2 {
@@ -9764,7 +9878,7 @@ div.tabsElem a.tab {
 		top: 24px;
 		left: 100%;
 		border-color: transparent;
-		border-left-color: white;
+		border-left-color: <?php echo (!empty($colorbline_hover) ? $colorbline_hover : 'white'); ?>;
 	}
 	.cd-timeline-content .cd-read-more {
 		float: left;
@@ -9785,7 +9899,7 @@ div.tabsElem a.tab {
 		left: auto;
 		right: 100%;
 		border-color: transparent;
-		border-right-color: white;
+		border-right-color: <?php echo (!empty($colorbline_hover) ? $colorbline_hover : 'white'); ?>;
 	}
 	.cd-timeline-block:nth-child(even) .cd-timeline-content .cd-read-more {
 		float: right;
@@ -9906,7 +10020,7 @@ span.clipboardCPValue.hidewithsize {
 	.div-table-responsive-no-min {
 		 overflow-x: unset;
 	 }
-tr.liste_titre th {
+	tr.liste_titre th:not(#ajaxloaded_tablelines th) {
 	position: sticky;
 <?php if($conf->global->OBLYON_STICKY_TOPBAR) { ?>
 	<?php if($conf->global->MAIN_MENU_INVERT) { ?>

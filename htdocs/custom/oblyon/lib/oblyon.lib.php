@@ -143,16 +143,16 @@ SET FOREIGN_KEY_CHECKS = 0;
 SET SQL_MODE = \'NO_AUTO_VALUE_ON_ZERO\';
 ';
 			fwrite($handle, $sqlhead);
-			$sql_const		= 'SELECT name, entity, value, type, visible, note';
-			$sql_const		.= ' FROM '.MAIN_DB_PREFIX.'const';
-			$sql_const		.= ' WHERE (name LIKE "FIX\_AREAREF\_TABACTION" OR name LIKE "MAIN\_DISABLE\_BLOCK\_%" OR name LIKE "MAIN\_DISABLE\_GLOBAL\_%" OR name LIKE "MAIN\_DISABLE\_METEO" OR';
-			$sql_const		.= ' name LIKE "MAIN\_FONTAWESOME\_%" OR name LIKE "MAIN\_LOGIN\_RIGHT" OR name LIKE "MAIN\_MENU\_INVERT" OR name LIKE "MAIN\_SHOW\_LOGO" OR';
-			$sql_const		.= ' name LIKE "MAIN\_STATUS\_USES\_IMAGES" OR name LIKE "MAIN\_USE\_TOP\_MENU\_%" OR name LIKE "OBLYON\_%" OR name LIKE "THEME\_%")';
-			$sql_const		.= ' AND entity = "'.$conf->entity.'"';
-			$sql_const		.= ' ORDER BY name';
-			$listeCols		= array ('name', 'entity', 'value', 'type', 'visible', 'note');
-			$duplicate		= array ('2', 'value', 'name');
-			fwrite($handle, oblyon_bkup_table ('const', $sql_const, $listeCols, $duplicate));
+			$cols_const			= array ('name', 'entity', 'value', 'type', 'visible', 'note');
+			$duplicate_const	= array ('2', 'value', 'name');
+			$sql_const			= 'SELECT '.implode(', ', $cols_const);
+			$sql_const			.= ' FROM '.MAIN_DB_PREFIX.'const';
+			$sql_const			.= ' WHERE (name LIKE "FIX\_AREAREF\_TABACTION" OR name LIKE "MAIN\_DISABLE\_BLOCK\_%" OR name LIKE "MAIN\_DISABLE\_GLOBAL\_%" OR name LIKE "MAIN\_DISABLE\_METEO" OR';
+			$sql_const			.= ' name LIKE "MAIN\_FONTAWESOME\_%" OR name LIKE "MAIN\_LOGIN\_RIGHT" OR name LIKE "MAIN\_MENU\_INVERT" OR name LIKE "MAIN\_SHOW\_LOGO" OR';
+			$sql_const			.= ' name LIKE "MAIN\_STATUS\_USES\_IMAGES" OR name LIKE "MAIN\_USE\_TOP\_MENU\_%" OR name LIKE "OBLYON\_%" OR name LIKE "THEME\_%")';
+			$sql_const			.= ' AND entity = "'.$conf->entity.'"';
+			$sql_const			.= ' ORDER BY name';
+			fwrite($handle, oblyon_bkup_table ('const', $sql_const, $cols_const, $duplicate_constduplicate_const));
 			// Enabling back the keys/index checking
 			$sqlfooter		= '
 SET FOREIGN_KEY_CHECKS = 1;

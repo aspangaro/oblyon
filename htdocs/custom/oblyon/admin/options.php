@@ -50,7 +50,7 @@
 	}
 	// Update buttons management
 	if (preg_match('/update_(.*)/', $action, $reg)) {
-		$list									= array ('Gen'	=> array('OBLYON_FONT_SIZE', 'OBLYON_IMAGE_HEIGHT_TABLE'));
+		$list									= array ('Gen' => array('OBLYON_FONT_SIZE', 'OBLYON_IMAGE_HEIGHT_TABLE'));
 		$confkey								= $reg[1];
 		$error									= 0;
 		foreach ($list[$confkey] as $constname)	$result	= dolibarr_set_const($db, $constname, GETPOST($constname, 'alpha'), 'chaine', 0, 'Oblyon module', $conf->entity);
@@ -82,9 +82,9 @@
 			</script>
 			<form action = "'.$_SERVER['PHP_SELF'].'" method = "POST">
 			<input type="hidden" name="token" value="'.newToken().'" />
-            <input type="hidden" name="action" value="update">
-            <input type="hidden" name="page_y" value="">
-            <input type="hidden" name="dol_resetcache" value="1">';
+			<input type="hidden" name="action" value="update">
+			<input type="hidden" name="page_y" value="">
+			<input type="hidden" name="dol_resetcache" value="1">';
 	// Sauvegarde / Restauration
 	oblyon_print_backup_restore();
 	clearstatcache();
@@ -96,37 +96,42 @@
 	$metas						= array(array(3), 'General');
 	oblyon_print_liste_titre($metas);
 	$metas						= array('type' => 'number', 'class' => 'flat quatrevingtpercent right action', 'dir' => 'rtl', 'min' => '10', 'max' => '16');
-	oblyon_print_input('OBLYON_FONT_SIZE',						'input', $langs->trans('OblyonFontSize'),					'', $metas, 2, 1);	// Font size
+	oblyon_print_input('OBLYON_FONT_SIZE', 'input', $langs->trans('OblyonFontSize'), '', $metas, 2, 1);	// Font size
 	$metas						= array('type' => 'number', 'class' => 'flat quatrevingtpercent right action', 'dir' => 'rtl', 'min' => '24', 'max' => '128');
-	oblyon_print_input('OBLYON_IMAGE_HEIGHT_TABLE',				'input', $langs->trans('OblyonImageHeightTable'),			'', $metas, 2, 1);	// Max height for Image on table list
+	oblyon_print_input('OBLYON_IMAGE_HEIGHT_TABLE', 'input', $langs->trans('OblyonImageHeightTable'), '', $metas, 2, 1);	// Max height for Image on table list
 	$metas						= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'options');
-	oblyon_print_input('OBLYON_DISABLE_VERSION',					'on_off', $langs->trans('OblyonDisableVersion'),			'', $metas, 2, 1);	// Disable version of Dolibarr
+	oblyon_print_input('OBLYON_DISABLE_VERSION', 'on_off', $langs->trans('OblyonDisableVersion'), '', $metas, 2, 1);	// Disable version of Dolibarr
 	$metas						= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'options');
-	oblyon_print_input('MAIN_STATUS_USES_IMAGES',				'on_off', $langs->trans('MainStatusUseImages'),			'', $metas, 2, 1);	// Status use images
-	oblyon_print_input('MAIN_USE_TOP_MENU_QUICKADD_DROPDOWN',	'on_off', $langs->trans('OblyonMainUseQuickAddDropdown'),	'', $metas, 2, 1);	// Quickadd dropdown menu
+	oblyon_print_input('MAIN_STATUS_USES_IMAGES', 'on_off', $langs->trans('MainStatusUseImages'), '', $metas, 2, 1);	// Status use images
+	$metas						= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'options');
+	oblyon_print_input('MAIN_USE_TOP_MENU_QUICKADD_DROPDOWN', 'on_off', $langs->trans('OblyonMainUseQuickAddDropdown'), '', $metas, 2, 1);	// Quickadd dropdown menu
 	if (!empty($conf->bookmark->enabled)) {
+		$metas	= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'options');
 		oblyon_print_input('MAIN_USE_TOP_MENU_BOOKMARK_DROPDOWN', 'on_off', $langs->trans('OblyonMainUseBookmarkDropdown'), '', $metas, 2, 1);    // Bookmark dropdown menu
 	}
-	oblyon_print_input('OBLYON_PADDING_RIGHT_BOTTOM',			'on_off', $langs->trans('OblyonPaddingRightBottom'),		'', $metas, 2, 1);	// Add padding on bottom
+	$metas	= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'options');
+	oblyon_print_input('OBLYON_PADDING_RIGHT_BOTTOM', 'on_off', $langs->trans('OblyonPaddingRightBottom'), '', $metas, 2, 1);	// Add padding on bottom
 	// Login
-	$metas						= array(array(3), 'OblyonLogin');
+	$metas	= array(array(3), 'OblyonLogin');
 	oblyon_print_liste_titre($metas);
-	$metas						= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'options');
-	oblyon_print_input('MAIN_LOGIN_RIGHT',						'on_off', $langs->trans('LoginRight'),						'', $metas, 2, 1);	// Login box on the right
+	$metas	= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'options');
+	oblyon_print_input('MAIN_LOGIN_RIGHT', 'on_off', $langs->trans('LoginRight'), '', $metas, 2, 1);	// Login box on the right
 	// Card
-	$metas						= array(array(3), 'CardBehavior');
+	$metas	= array(array(3), 'CardBehavior');
 	oblyon_print_liste_titre($metas);
-	$metas						= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'options');
-	oblyon_print_input('FIX_AREAREF_TABACTION',					'on_off', $langs->trans('FixAreaRefAndTabAction'),			'', $metas, 2, 1);	// Sticky area ref & tab action
+	$metas	= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'options');
+	oblyon_print_input('FIX_AREAREF_TABACTION', 'on_off', $langs->trans('FixAreaRefAndTabAction'), '', $metas, 2, 1);	// Sticky area ref & tab action
 	// List
-	$metas						= array(array(3), 'List');
+	$metas	= array(array(3), 'List');
 	oblyon_print_liste_titre($metas);
 	$easyaVersion = (float) !empty($conf->global->EASYA_VERSION) ? $conf->global->EASYA_VERSION : '';
 	if ($easyaVersion >= "2024.0.0" || (float) DOL_VERSION >= 18.0) {
-		oblyon_print_input('MAIN_CHECKBOX_LEFT_COLUMN', 			'on_off', $langs->trans('SwitchColunmOnLeft'), 	'', $metas, 2, 1);    // Sticky table headers columns
+		$metas	= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'options');
+		oblyon_print_input('MAIN_CHECKBOX_LEFT_COLUMN', 'on_off', $langs->trans('SwitchColunmOnLeft'), '', $metas, 2, 1);    // Sticky table headers columns
 	}
 	if ($easyaVersion >= "2022.5.2" || (float) DOL_VERSION >= 17.0) {
-		oblyon_print_input('FIX_STICKY_HEADER_CARD', 			'on_off', $langs->trans('FixStickyTableHeadersColumns'), 	'', $metas, 2, 1);    // Sticky table headers columns
+		$metas	= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'options');
+		oblyon_print_input('FIX_STICKY_HEADER_CARD', 'on_off', $langs->trans('FixStickyTableHeadersColumns'), '', $metas, 2, 1);    // Sticky table headers columns
 	}
 	print '			</table>
 				</div>';

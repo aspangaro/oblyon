@@ -39,22 +39,22 @@
 
 	// init variables *******************************
 	$result							= empty($conf->global->THEME_AGRESSIVENESS_RATIO) ? dolibarr_set_const($db, 'THEME_AGRESSIVENESS_RATIO', -50, 'chaine', 0, 'Oblyon module', $conf->entity) : '';
-	$listcolor						= array('OBLYON_INFOXBOX_BACKGROUND',               // #ffffff
-                                            'OBLYON_INFOXBOX_WEATHER_COLOR',            // #bdbdbd
-											'OBLYON_INFOXBOX_ACTION_COLOR',				// #b46080 AGENDA
-											'OBLYON_INFOXBOX_PROJECT_COLOR',			// #6c6a98 PROJECT
-											'OBLYON_INFOXBOX_CUSTOMER_PROPAL_COLOR',	// #99a17d CUSTOMER PROPOSAL
-											'OBLYON_INFOXBOX_CUSTOMER_ORDER_COLOR',	 	// #99a17d CUSTOMER ORDER
-											'OBLYON_INFOXBOX_CUSTOMER_INVOICE_COLOR',   // #99a17d CUSTOMER INVOICE
-											'OBLYON_INFOXBOX_SUPPLIER_PROPAL_COLOR',	// #599caf SUPPLIER PROPOSAL
-											'OBLYON_INFOXBOX_SUPPLIER_ORDER_COLOR',	 	// #599caf SUPPLIER ORDER
-											'OBLYON_INFOXBOX_SUPPLIER_INVOICE_COLOR',   // #599caf SUPPLIER INVOICE
+	$listcolor						= array('OBLYON_INFOXBOX_BACKGROUND',				// #FFFFFF
+											'OBLYON_INFOXBOX_WEATHER_COLOR',			// #BDBDBD
+											'OBLYON_INFOXBOX_ACTION_COLOR',				// #B46080 AGENDA
+											'OBLYON_INFOXBOX_PROJECT_COLOR',			// #6C6A98 PROJECT
+											'OBLYON_INFOXBOX_CUSTOMER_PROPAL_COLOR',	// #99A17D CUSTOMER PROPOSAL
+											'OBLYON_INFOXBOX_CUSTOMER_ORDER_COLOR',		// #99A17D CUSTOMER ORDER
+											'OBLYON_INFOXBOX_CUSTOMER_INVOICE_COLOR',	// #99A17D CUSTOMER INVOICE
+											'OBLYON_INFOXBOX_SUPPLIER_PROPAL_COLOR',	// #599CAF SUPPLIER PROPOSAL
+											'OBLYON_INFOXBOX_SUPPLIER_ORDER_COLOR',		// #599CAF SUPPLIER ORDER
+											'OBLYON_INFOXBOX_SUPPLIER_INVOICE_COLOR',	// #599CAF SUPPLIER INVOICE
 											'OBLYON_INFOXBOX_CONTRAT_COLOR',			// #469686 CONTRACT
-											'OBLYON_INFOXBOX_BANK_COLOR',				// #c5903e BANK
-											'OBLYON_INFOXBOX_ADHERENT_COLOR',			// #79633f MEMBERS
-											'OBLYON_INFOXBOX_EXPENSEREPORT_COLOR',		// #79633f EXPENSES
+											'OBLYON_INFOXBOX_BANK_COLOR',				// #C5903E BANK
+											'OBLYON_INFOXBOX_ADHERENT_COLOR',			// #79633F MEMBERS
+											'OBLYON_INFOXBOX_EXPENSEREPORT_COLOR',		// #79633F EXPENSES
 											'OBLYON_INFOXBOX_HOLIDAY_COLOR',			// #755114 HOLIDAYS
-											'OBLYON_INFOXBOX_TICKET_COLOR',             // #755114 TICKETS
+											'OBLYON_INFOXBOX_TICKET_COLOR',				// #755114 TICKETS
 											);
 
 	// Actions **************************************
@@ -124,10 +124,11 @@
 	$metas						= array(array(3), 'OblyonDashboardDisableBlocks');
 	oblyon_print_liste_titre($metas);
 	$metas						= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'dashboard');
-	oblyon_print_input('MAIN_DISABLE_GLOBAL_WORKBOARD',		'on_off', $langs->trans('DashboardDisableGlobal'),		'', $metas, 2, 1);	// Disable all workboard
-	oblyon_print_input('MAIN_DISABLE_GLOBAL_BOXSTATS',		'on_off', $langs->trans('DisableGlobalBoxStats'),		'', $metas, 2, 1);	// Disable boxes stats widget
+	oblyon_print_input('MAIN_DISABLE_GLOBAL_WORKBOARD', 'on_off', $langs->trans('DashboardDisableGlobal'), '', $metas, 2, 1);	// Disable all workboard
 	$metas						= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'dashboard');
-	oblyon_print_input('THEME_INFOBOX_COLOR_ON_BACKGROUND',	'on_off', $langs->trans('InfoboxColorOnBackground'),	'', $metas, 2, 1);	// On workboard invert background color with text color
+	oblyon_print_input('MAIN_DISABLE_GLOBAL_BOXSTATS', 'on_off', $langs->trans('DisableGlobalBoxStats'), '', $metas, 2, 1);	// Disable boxes stats widget
+	$metas						= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'dashboard');
+	oblyon_print_input('THEME_INFOBOX_COLOR_ON_BACKGROUND', 'on_off', $langs->trans('InfoboxColorOnBackground'), '', $metas, 2, 1);	// On workboard invert background color with text color
 	$easyaVersion = (float) !empty($conf->global->EASYA_VERSION) ? $conf->global->EASYA_VERSION : '';
     if ($easyaVersion >= 2022.5 || (float) DOL_VERSION >= 15.0) {
 		if (empty($conf->global->MAIN_DISABLE_GLOBAL_WORKBOARD)) {
@@ -151,8 +152,8 @@
 	$metas	= '	<div class = "range-sliders" id = "range-sliders">
 					<span class = "bold">-100</span>
 					<input type = "range" class = "range-slider flat soixantepercent action" id = "THEME_AGRESSIVENESS_RATIO" name = "THEME_AGRESSIVENESS_RATIO" min = "-100" max = "100" value = "'.$conf->global->THEME_AGRESSIVENESS_RATIO.'" />
-					<input type = "number" class = "input-slider flat" id = "input-intensity" min = "-100" max = "100" value = "'.$conf->global->THEME_AGRESSIVENESS_RATIO.'" />
-                    <span class = "bold">+100</span>
+					<input type = "number" class = "input-slider flat" id = "input-intensity" style = "width: 35px;" min = "-100" max = "100" value = "'.$conf->global->THEME_AGRESSIVENESS_RATIO.'" />
+					<span class = "bold">+100</span>
 					<script src = "../js/range-slider.js"></script>
 				</div>';
 	oblyon_print_input('', 'range', $langs->trans('ColorIntensityDesc', $conf->global->THEME_AGRESSIVENESS_RATIO), '', $metas, 1, 2);
