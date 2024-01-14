@@ -48,10 +48,6 @@ INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_REDUCE_LEFTMENU',					'__ENTITY__', '0',					'chaine',	'0',	'Oblyon module');
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_EFFECT_REDUCE_LEFTMENU',			'__ENTITY__', 'only',				'chaine',	'0',	'Oblyon module');
 
--- Icons
-INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('MAIN_FONTAWESOME_ICON_STYLE',				'__ENTITY__', 'fal',				'yesno',	'0',	'Oblyon module');
-INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('MAIN_FONTAWESOME_WEIGHT',					'__ENTITY__', '300',				'yesno',	'0',	'Oblyon module');
-
 -- Color - use Oblyon blue by default
 -- Color - top
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_COLOR_TOPMENU_BCKGRD',				'__ENTITY__', '#092D5C',			'chaine',	'0',	'Oblyon background topmenu color');
@@ -149,14 +145,7 @@ INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_INFOXBOX_HOLIDAY_COLOR',			'__ENTITY__', '#E0A01F',			'chaine',	'0',	'Oblyon Dashboard holiday background color');
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_INFOXBOX_TICKET_COLOR',			'__ENTITY__', '#C93E28',			'chaine',	'0',	'Oblyon Dashboard ticket background color');
 
--- Login
-INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_ACTIVE_LOGIN_PERSONALIZED',		'__ENTITY__', '0',					'chaine',	'0',	'Oblyon background login left');
-INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_COLOR_LOGIN_BCKGRD_LEFT',			'__ENTITY__', '#D51123',			'chaine',	'0',	'Oblyon background login left');
-INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_COLOR_LOGIN_BCKGRD_RIGHT',			'__ENTITY__', '#2A2A2A',			'chaine',	'0',	'Oblyon background login right');
-INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_COLOR_LOGIN_TXT_INPUT',			'__ENTITY__', '#FFFFFF',			'chaine',	'0',	'Oblyon text inputt');
-INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_COLOR_LOGIN_TXT_RIGHT',			'__ENTITY__', '#FFFFFF',			'chaine',	'0',	'Oblyon text login right');
-
--- Options - général
+-- Options - general
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_FONT_SIZE',						'__ENTITY__', '12',					'chaine',	'0',	'Oblyon module');
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_IMAGE_HEIGHT_TABLE',		    	'__ENTITY__', '24',					'chaine',	'0',	'Oblyon max height for image on tables');
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_DISABLE_VERSION',					'__ENTITY__', '0',					'yesno',	'0',	'Oblyon module');
@@ -164,10 +153,13 @@ INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('MAIN_S
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('MAIN_USE_TOP_MENU_QUICKADD_DROPDOWN',		'__ENTITY__', '0',					'chaine',	'0',	'Oblyon module');
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('MAIN_USE_TOP_MENU_BOOKMARK_DROPDOWN',		'__ENTITY__', '0',					'chaine',	'0',	'Oblyon module');
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_PADDING_RIGHT_BOTTOM',				'__ENTITY__', '0',					'chaine',	'0',	'Oblyon module');
+
 --Options - page de connexion
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('MAIN_LOGIN_RIGHT',						'__ENTITY__', '0',					'chaine',	'0',	'Oblyon module');
+
 -- Options - comportement des fiches
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('FIX_AREAREF_TABACTION',					'__ENTITY__', '0',					'chaine',	'0',	'Oblyon module');
+
 -- Options - liste
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('MAIN_CHECKBOX_LEFT_COLUMN',				'__ENTITY__', '0',					'yesno',	'0',	'Oblyon module');
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('FIX_STICKY_HEADER_CARD',					'__ENTITY__', '0',					'yesno',	'0',	'Oblyon module');

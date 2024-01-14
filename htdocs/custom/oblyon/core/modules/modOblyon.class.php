@@ -110,7 +110,7 @@
 			global $langs, $conf;
 			$sql	= array();
 			$this->_load_tables('/'.$this->name.'/sql/');
-			oblyon_restore_module ($this->name);
+			oblyon_restore_module($this->name);
 
 			// Copy dir custom/oblyon/themeoblyon to theme/oblyon
 			$srcDir = dol_buildpath('/custom/oblyon/themeoblyon');
@@ -172,6 +172,9 @@
 			dolibarr_del_const($this->db,'THEME_ELDY_TEXT', $conf->entity);
 			dolibarr_del_const($this->db,'THEME_ELDY_TEXTLINK', $conf->entity);
 			dolibarr_del_const($this->db,'THEME_ELDY_ENABLE_PERSONALIZED', $conf->entity);
+
+			dolibarr_del_const($this->db,'MAIN_FONTAWESOME_ICON_STYLE', $conf->entity);
+			dolibarr_del_const($this->db,'MAIN_FONTAWESOME_WEIGHT', $conf->entity);
 
 			$destDir = DOL_DOCUMENT_ROOT . '/theme/oblyon';
 

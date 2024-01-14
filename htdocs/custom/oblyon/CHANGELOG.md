@@ -5,6 +5,7 @@
 - Remove old library icomoons
 - Fix admin display
 - Fix CSS error
+- Ajust template by default
 
 ### Version 2.3.0 - Compatibility 14.0.x - 19-alpha (2023/11/12)
 - NEW Use a lot of new color variables for compatibility with DARK_MODE

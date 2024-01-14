@@ -161,7 +161,7 @@
 	$colortopbordertitle1				= $conf->global->THEME_ELDY_TOPBORDER_TITLE1;
 	$colorbacktitle1					= $conf->global->THEME_ELDY_BACKTITLE1;
 	$colorbacktabcard1					= $conf->global->THEME_ELDY_BACKTABCARD1;
-	$colorbacktabactive					= $conf->global->THEME_ELDY_BACKTABACTIVE;
+	$colorbacktabactive                 = empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? (empty($conf->global->THEME_ELDY_BACKTABACTIVE) ? $colorbacktabactive : $conf->global->THEME_ELDY_BACKTABACTIVE) : (empty($user->conf->THEME_ELDY_BACKTABACTIVE) ? $colorbacktabactive : $user->conf->THEME_ELDY_BACKTABACTIVE);
 	$colorbacklineimpair1				= $conf->global->THEME_ELDY_LINEIMPAIR1;
 	$colorbacklineimpair2				= $conf->global->THEME_ELDY_LINEIMPAIR2;
 	$colorbacklinepair1					= $conf->global->THEME_ELDY_LINEPAIR1;

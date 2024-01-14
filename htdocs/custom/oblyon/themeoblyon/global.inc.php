@@ -5256,7 +5256,8 @@ a.tab:link, a.tab:visited, a.tab:hover, a.tab#active {
 }
 
 .tabactive, a.tab#active {
-	background-color: <?php echo $colorbline; ?>;
+    color: var(--colortextbacktab) !important;
+    background: var(--colorbacktabcard1) !important;
 	margin: 0 0.2em 0 0.2em !important;
 	text-decoration: none;
 
@@ -5264,8 +5265,7 @@ a.tab:link, a.tab:visited, a.tab:hover, a.tab#active {
 	border-bottom: none;
 }
 .tabunactive, a.tab#unactive {
-    background-color:rgba(0,0,0, .04);
-	border: 1px solid rgba(0,0,0, .16);
+    border: 1px solid rgba(0,0,0, .16);
 	border-bottom: 0px !important;
 	height: 38px;
 }
@@ -9232,6 +9232,9 @@ dl.dropdown {
     list-style:none;
     max-height: 264px;
     overflow: auto;
+}
+.dropdown dd ul.selectedfieldsleft {
+    <?php echo $right; ?>: auto;
 }
 .dropdown dd ul li {
     white-space: nowrap;

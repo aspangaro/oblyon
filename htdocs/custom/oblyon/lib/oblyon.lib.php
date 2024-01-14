@@ -148,7 +148,7 @@ SET SQL_MODE = \'NO_AUTO_VALUE_ON_ZERO\';
 			$sql_const			= 'SELECT '.implode(', ', $cols_const);
 			$sql_const			.= ' FROM '.MAIN_DB_PREFIX.'const';
 			$sql_const			.= ' WHERE (name LIKE "FIX\_AREAREF\_TABACTION" OR name LIKE "MAIN\_DISABLE\_BLOCK\_%" OR name LIKE "MAIN\_DISABLE\_GLOBAL\_%" OR name LIKE "MAIN\_DISABLE\_METEO" OR';
-			$sql_const			.= ' name LIKE "MAIN\_FONTAWESOME\_%" OR name LIKE "MAIN\_LOGIN\_RIGHT" OR name LIKE "MAIN\_MENU\_INVERT" OR name LIKE "MAIN\_SHOW\_LOGO" OR';
+			$sql_const			.= ' name LIKE "MAIN\_LOGIN\_RIGHT" OR name LIKE "MAIN\_MENU\_INVERT" OR name LIKE "MAIN\_SHOW\_LOGO" OR';
 			$sql_const			.= ' name LIKE "MAIN\_STATUS\_USES\_IMAGES" OR name LIKE "MAIN\_USE\_TOP\_MENU\_%" OR name LIKE "OBLYON\_%" OR name LIKE "THEME\_%")';
 			$sql_const			.= ' AND entity = "'.$conf->entity.'"';
 			$sql_const			.= ' ORDER BY name';
