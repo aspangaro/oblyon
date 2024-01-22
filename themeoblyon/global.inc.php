@@ -7245,26 +7245,26 @@ font-size: <?php echo $fontsize; ?>px;
 }
 
 .ui-button {
-margin-left: -2px;
-padding-top: 1px;
+    margin-left: -2px;
+    padding-top: 1px;
 }
 
 .ui-button-icon-only .ui-button-text {
-height: 8px;
+    height: 8px;
 }
 
 .ui-button-icon-only .ui-button-text,
 .ui-button-icons-only .ui-button-text {
-padding: 2px 0 6px 0;
+    padding: 2px 0 6px 0;
 }
 
 .ui-button-text {
-line-height: 1em !important;
+    line-height: 1em !important;
 }
 
 .ui-autocomplete-input {
-margin: 0;
-padding: 1px;
+    margin: 0;
+    padding: 1px;
 }
 
 

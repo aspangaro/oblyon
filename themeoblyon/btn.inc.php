@@ -108,12 +108,12 @@ span.butActionNewRefused>span.fa, span.butActionNewRefused>span.fa:hover
     box-shadow: unset !important;
 }
 
-.butActionDelete, .butActionDelete:link, .butActionDelete:visited, .butActionDelete:hover, .butActionDelete:active, .buttonDelete, .cke_dialog_ui_button_cancel, .ui-button {
+.butActionDelete, .butActionDelete:link, .butActionDelete:visited, .butActionDelete:hover, .butActionDelete:active, .buttonDelete {
 	background: <?php print $colorButtonDelete1; ?> !important;
     color: #ffffff;
 }
 
-.butActionDelete:hover, .cke_dialog_ui_button_cancel:hover, .ui-button:hover, .ui-button:focus {
+.butActionDelete:hover {
 	background: <?php print $colorButtonDelete2; ?> !important;
     -webkit-box-shadow: 0px 1px 4px 1px rgba(50, 50, 50, 0.4), 0px 0px 0px rgba(60,60,60,0.1);
     box-shadow: 0px 1px 4px 1px rgba(50, 50, 50, 0.4), 0px 0px 0px rgba(60,60,60,0.1);
