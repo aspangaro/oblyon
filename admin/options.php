@@ -133,6 +133,14 @@
 		$metas	= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'options');
 		oblyon_print_input('FIX_STICKY_HEADER_CARD', 'on_off', $langs->trans('FixStickyTableHeadersColumns'), '', $metas, 2, 1);    // Sticky table headers columns
 	}
+	if ($easyaVersion >= "2022.5.2" || (float) DOL_VERSION >= 14.0) {
+		$metas	= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'options');
+		oblyon_print_input('OBLYON_STICKY_COLUMN_FIRST', 'on_off', $langs->trans('FixStickyFirstColumn'), '', $metas, 2, 1);    // Sticky table first column
+	}
+	if ($easyaVersion >= "2022.5.2" || (float) DOL_VERSION >= 14.0) {
+		$metas	= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'options');
+		oblyon_print_input('OBLYON_STICKY_COLUMN_LAST', 'on_off', $langs->trans('FixStickyLastColumn'), '', $metas, 2, 1);    // Sticky table last column
+	}
 	print '			</table>
 				</div>';
 	print dol_get_fiche_end();
