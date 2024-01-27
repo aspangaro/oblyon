@@ -10055,7 +10055,7 @@ span.clipboardCPValue.hidewithsize {
 <?php } ?>
 
 /* ============================================================================== */
-/* Sticky table last column  WIP												      */
+/* Sticky table last column  WIP			    							      */
 /* ============================================================================== */
 <?php if ($conf->global->OBLYON_STICKY_COLUMN_LAST) { ?>
 #id-right > .fiche > form[action*="list.php"] div.div-table-responsive > table > tbody > * > :last-of-type,
@@ -10064,6 +10064,15 @@ span.clipboardCPValue.hidewithsize {
     right: 0;
     z-index: 1;
     background: #<?php echo colorArrayToHex(colorStringToArray($colorbacklineimpair1)); ?>;
+}
+<?php } ?>
+
+/* ============================================================================== */
+/* Option to remove Kanban view in list                                           */
+/* ============================================================================== */
+<?php if ($conf->global->OBLYON_DISABLE_KANBAN_VIEW_IN_LIST) { ?>
+.paginationafterarrows > .reposition {
+    display: none;
 }
 <?php } ?>
 

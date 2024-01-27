@@ -66,6 +66,7 @@ LoginRight                           = Offset the connection block to the right 
 CardBehavior                         = Behavior of the cards
 FixAreaRefAndTabAction               = Fix the reference banner and action buttons during vertical scrolling
 SwitchColunmOnLeft                   = Toggle selection / search / mass action column to the left
+RemoveKanbanViewInList               = Remove the "Kanban view" button at the top right of the lists
 FixStickyTableHeadersColumns         = Fix the table column header on the elements during vertical scrolling
 General                              = General parameters
 OblyonFontSize                       = Basic text size in pixels (must be between 10 and 16)

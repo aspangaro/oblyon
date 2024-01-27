@@ -129,6 +129,10 @@
 		$metas	= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'options');
 		oblyon_print_input('MAIN_CHECKBOX_LEFT_COLUMN', 'on_off', $langs->trans('SwitchColunmOnLeft'), '', $metas, 2, 1);    // Sticky table headers columns
 	}
+	if ($easyaVersion >= "2024.0.0" || (float) DOL_VERSION >= 18.0) {
+		$metas	= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'options');
+		oblyon_print_input('OBLYON_DISABLE_KANBAN_VIEW_IN_LIST', 'on_off', $langs->trans('RemoveKanbanViewInList'), '', $metas, 2, 1);    // Remove button kanban view in list
+	}
 	if ($easyaVersion >= "2022.5.2" || (float) DOL_VERSION >= 17.0) {
 		$metas	= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'options');
 		oblyon_print_input('FIX_STICKY_HEADER_CARD', 'on_off', $langs->trans('FixStickyTableHeadersColumns'), '', $metas, 2, 1);    // Sticky table headers columns
