@@ -10040,6 +10040,26 @@ span.clipboardCPValue.hidewithsize {
 <?php } ?>
 
 /* ============================================================================== */
+/* Sticky tabs card WIP     												      */
+/* ============================================================================== */
+<?php if ($conf->global->FIX_STICKY_TABS_CARD) { ?>
+div.tabs:first-of-type, .fiche > div.tabs
+{
+    position: sticky;
+    <?php if($conf->global->OBLYON_STICKY_TOPBAR) { ?>
+        top: 41px;
+    <?php } else { ?>
+        top: 0;
+    <?php } ?>
+    border-bottom: solid 1px #cccccc !important;
+    background-color: <?php echo $bgcolor; ?>;
+    margin: 0 auto 0 0 !important;
+    height: auto;
+    z-index: 50;
+}
+<?php } ?>
+
+/* ============================================================================== */
 /* Sticky table 1st column  WIP												      */
 /* ============================================================================== */
 <?php if ($conf->global->OBLYON_STICKY_COLUMN_FIRST) { ?>
