@@ -2152,7 +2152,11 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 			}
 		}
 
-		// We update newmenu for special dynamic menus
+		// Initializing Variable for PHP 8.2 Compatibility
+		if (empty($conf->global->OBLYON_ENABLE_MENU_BANK_RECONCILIATE)) {
+			$conf->global->OBLYON_ENABLE_MENU_BANK_RECONCILIATE = 0;
+		};
+                // We update newmenu for special dynamic menus
 		if (!empty($user->rights->banque->lire) && $mainmenu == 'bank' && $conf->global->OBLYON_ENABLE_MENU_BANK_RECONCILIATE)	// Entry for each bank account
 		{
 			require_once DOL_DOCUMENT_ROOT.'/compta/bank/class/account.class.php';
