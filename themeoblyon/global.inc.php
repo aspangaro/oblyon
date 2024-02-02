@@ -1477,8 +1477,10 @@ span.butActionDelete {
 /**
 * State Ok, Warning, Error
 */
-.ok	        { color: #114466; }
-.green      { color: #118822 !important; }
+.ok      { color: #114466; }
+.warning { color: #887711 !important; }
+.error   { color: #b62512 !important; font-weight: bold; }
+.green   { color: #118822 !important; }
 
 .bloc_success {
     background-color: #33cc66;
@@ -7906,6 +7908,7 @@ a span.select2-chosen
 }
 .select2-container--default .select2-results__option[aria-selected=true] {
 	background-color: var(--inputbackgroundcolor);
+    color: var(--colortext);
 }
 
 /* Special case for the select2 add widget */

@@ -77,7 +77,7 @@
       		$this->need_dolibarr_version = array(14,0);							// Minimum version of Dolibarr required by module
 			$this->langfiles		= array($this->name.'@'.$this->name);
 			$this->const			= array();									// List of particular constants to add when module is enabled
-			// Remove classic Dolibarr tabs to avoid a theme change problem (Only available > 15.0.x)
+			// WIP - Remove classic Dolibarr tabs to avoid a theme change problem (Only available > 15.0.x)
 			$easyaVersion = (float) !empty($conf->global->EASYA_VERSION) ? $conf->global->EASYA_VERSION : '';
     		if ($easyaVersion >= '2022.5.2' || (float) DOL_VERSION >= 16.0) {
 				$this->tabs = array(

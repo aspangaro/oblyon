@@ -75,6 +75,8 @@
 	// setup page goes here *************************
 	$easyaVersion = (float) !empty($conf->global->EASYA_VERSION) ? $conf->global->EASYA_VERSION : '';
 
+	$labs_picto = ' '.img_picto($langs->trans('WIP'), 'fa-flask', '', false, 0, 0, '', 'error ');
+
 	print '	<script type = "text/javascript">
 				$(document).ready(function() {
 					$(".action").keyup(function(event) {
@@ -125,7 +127,7 @@
 	oblyon_print_input('FIX_AREAREF_TABACTION', 'on_off', $langs->trans('FixAreaRefAndTabAction'), '', $metas, 2, 1);	// Sticky area ref & tab action
 	if ($easyaVersion >= "2022.5.2" || (float) DOL_VERSION >= 17.0) {
 		$metas	= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'options');
-		oblyon_print_input('FIX_STICKY_TABS_CARD', 'on_off', $langs->trans('FixStickyTabsCard'), '', $metas, 2, 1);    // Sticky tabs card
+		oblyon_print_input('FIX_STICKY_TABS_CARD', 'on_off', $langs->trans('FixStickyTabsCard').$labs_picto, '', $metas, 2, 1);    // Sticky tabs card
 	}
 	// List
 	$metas	= array(array(3), 'List');
@@ -136,7 +138,7 @@
 	}
 	if ($easyaVersion >= "2024.0.0" || (float) DOL_VERSION >= 18.0) {
 		$metas	= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'options');
-		oblyon_print_input('OBLYON_DISABLE_KANBAN_VIEW_IN_LIST', 'on_off', $langs->trans('RemoveKanbanViewInList'), '', $metas, 2, 1);    // Remove button kanban view in list
+		oblyon_print_input('OBLYON_DISABLE_KANBAN_VIEW_IN_LIST', 'on_off', $langs->trans('RemoveKanbanViewInList').$labs_picto, '', $metas, 2, 1);    // Remove button kanban view in list
 	}
 	if ($easyaVersion >= "2022.5.2" || (float) DOL_VERSION >= 17.0) {
 		$metas	= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'options');
@@ -144,11 +146,11 @@
 	}
 	if ($easyaVersion >= "2022.5.2" || (float) DOL_VERSION >= 14.0) {
 		$metas	= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'options');
-		oblyon_print_input('OBLYON_STICKY_COLUMN_FIRST', 'on_off', $langs->trans('FixStickyFirstColumn'), '', $metas, 2, 1);    // Sticky table first column
+		oblyon_print_input('OBLYON_STICKY_COLUMN_FIRST', 'on_off', $langs->trans('FixStickyFirstColumn').$labs_picto, '', $metas, 2, 1);    // Sticky table first column
 	}
 	if ($easyaVersion >= "2022.5.2" || (float) DOL_VERSION >= 14.0) {
 		$metas	= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'options');
-		oblyon_print_input('OBLYON_STICKY_COLUMN_LAST', 'on_off', $langs->trans('FixStickyLastColumn'), '', $metas, 2, 1);    // Sticky table last column
+		oblyon_print_input('OBLYON_STICKY_COLUMN_LAST', 'on_off', $langs->trans('FixStickyLastColumn').$labs_picto, '', $metas, 2, 1);    // Sticky table last column
 	}
 	print '			</table>
 				</div>';

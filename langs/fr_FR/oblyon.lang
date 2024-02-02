@@ -65,6 +65,7 @@ OblyonLogin                          = Page de connexion
 LoginRight                           = Décentrer le bloc de connexion sur la droite de l'écran
 CardBehavior                         = Comportement des fiches
 FixAreaRefAndTabAction               = Fixer le bandeau des références et les boutons d'actions pendant le défilement vertical
+FixStickyTabsCard                    = Fixer le bandeau des onglets lors d'un défilement vertical
 SwitchColunmOnLeft                   = Basculer la colonne de sélection / recherche / action en masse à gauche
 RemoveKanbanViewInList               = Retirer le bouton "Vue kanban" en haut à droite des listes
 FixStickyTableHeadersColumns         = Fixer l'entête de colonne des tableaux sur les éléments lors d'un défilement vertical
@@ -72,7 +73,12 @@ FixStickyFirstColumn                 = Fixer la première colonne des tableaux l
 FixStickyLastColumn                  = Fixer la dernière colonne des tableaux lors d'un défilement horizontal
 General                              = Paramètres généraux
 OblyonFontSize                       = Taille du texte de base en pixels (doit être entre 10 et 16)
-MainStatusUseImages                  = Les différents statuts des éléments seront affichés sous forme d'icone avec ou sans texte explicatif (sinon un libellé coloré sera utilisé)
+MainStatusUseImages                  = Les différents statuts des éléments seront affichés sous forme d'icône avec ou sans texte explicatif (sinon un libellé coloré sera utilisé)
+
+#
+# Warnings
+#
+WIP = Attention ! Fonction en cours de développement - Peut provoquer un comportement inattendu au niveau de l'affichage
 
 #
 # Colors page
