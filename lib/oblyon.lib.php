@@ -144,12 +144,16 @@ SET SQL_MODE = \'NO_AUTO_VALUE_ON_ZERO\';
 ';
 			fwrite($handle, $sqlhead);
 			$cols_const			= array ('name', 'entity', 'value', 'type', 'visible', 'note');
+			$listConstKeys		= array('FIX\_AREAREF\_TABACTION', 'FIX\_STICKY\_%\_CARD', 'MAIN\_CHECKBOX\_LEFT\_COLUMN', 'MAIN\_DISABLE\_BLOCK\_%', 'MAIN\_DISABLE\_GLOBAL\_%', 'MAIN\_DISABLE\_METEO',
+										'MAIN\_FONTAWESOME\_%', 'MAIN\_LOGIN\_RIGHT', 'MAIN\_MENU\_INVERT', 'MAIN\_SHOW\_LOGO', 'MAIN\_STATUS\_USES\_IMAGES', 'MAIN\_USE\_TOP\_MENU\_%', 'OBLYON\_%', 'THEME\_%');
 			$duplicate_const	= array ('2', 'value', 'name');
 			$sql_const			= 'SELECT '.implode(', ', $cols_const);
 			$sql_const			.= ' FROM '.MAIN_DB_PREFIX.'const';
-			$sql_const			.= ' WHERE (name LIKE "FIX\_AREAREF\_TABACTION" OR name LIKE "MAIN\_DISABLE\_BLOCK\_%" OR name LIKE "MAIN\_DISABLE\_GLOBAL\_%" OR name LIKE "MAIN\_DISABLE\_METEO" OR';
-			$sql_const			.= ' name LIKE "MAIN\_LOGIN\_RIGHT" OR name LIKE "MAIN\_MENU\_INVERT" OR name LIKE "MAIN\_SHOW\_LOGO" OR';
-			$sql_const			.= ' name LIKE "MAIN\_STATUS\_USES\_IMAGES" OR name LIKE "MAIN\_USE\_TOP\_MENU\_%" OR name LIKE "OBLYON\_%" OR name LIKE "THEME\_%")';
+			$sql_const			.= ' WHERE (';
+			foreach ($listConstKeys as $key => $constKey) {
+				$sql_const		.= 'name LIKE "'.$constKey.($key === array_key_last($listConstKeys) ? '"' : '" OR ');
+			}
+			$sql_const			.= ')';
 			$sql_const			.= ' AND entity = "'.$conf->entity.'"';
 			$sql_const			.= ' ORDER BY name';
 			fwrite($handle, oblyon_bkup_table ('const', $sql_const, $cols_const, $duplicate_constduplicate_const));
