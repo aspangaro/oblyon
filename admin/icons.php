@@ -60,7 +60,7 @@
 	// View *****************************************
 	$page_name								= $langs->trans('OblyonIconsTitle');
 	llxHeader('', $page_name);
-	$linkback								= '<a href = "'.DOL_URL_ROOT.'/admin/modules.php">'.$langs->trans('BackToModuleList').'</a>';
+	$linkback								= '<a href = "'.DOL_URL_ROOT.'/admin/modules.php?restore_lastsearch_values=1">'.$langs->trans('BackToModuleList').'</a>';
 	print load_fiche_titre($page_name, $linkback);
 
 	// Configuration header *************************

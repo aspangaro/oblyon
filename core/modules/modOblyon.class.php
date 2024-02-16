@@ -42,41 +42,41 @@
 			global $langs, $conf;
 
 			$langs->loadLangs(array('oblyon@oblyon', 'opendsi@oblyon'));
-			$this->db				= $db;
-			$this->numero			= 113900;									// Unique Id for module
-			$this->name				= preg_replace('/^mod/i', '', get_class($this));	// Module label (no space allowed)
-			$this->editor_name		= '<b>Easya Solutions</b> (Ex Open-Dsi)';
-			$this->editor_web		= 'https://easya.solutions';
-			$this->editor_url		= "https://easya.solutions";
-			$this->editor_email		= 'support@easya.solutions';
-			$this->url_last_version = 'https://raw.githubusercontent.com/aspangaro/oblyon/14.0/htdocs/custom/oblyon/VERSION';
-			$this->rights_class		= $this->name;								// Key text used to identify module (for permissions, menus, etc...)
-			$this->family			= 'easya';									// used to group modules in module setup page
-			$this->module_position	= 10;
-			$this->familyinfo		= array('easya' => array('position' => '001', 'label' => $langs->trans("easyaFamily")));
-			$this->module_position	= 1;
-			$this->description		= $langs->trans('Module113900Desc');	// Module description
-			$this->version			= file_get_contents(__DIR__.'/../../VERSION');		// Version : 'development', 'experimental', 'dolibarr' or 'dolibarr_deprecated' or version
-			$this->const_name		= 'MAIN_MODULE_'.strtoupper($this->name);	// llx_const table to save module status enabled/disabled
-			$this->special			= 0;										// Where to store the module in setup page (0=common,1=interface,2=others,3=very specific)
-			$this->picto			= 'opendsi_big@'.$this->name;				// Name of image file used for this module. If in theme => 'pictovalue' ; if in module => 'pictovalue@module' under name object_pictovalue.png
-			$this->module_parts		= array('menus'	=> 1,
-											'js'	=> array('js'	=> '/'.$this->name.'/js/pushy.js'),
-											'css'	=> array('css'	=> ('/'.$this->name.'/css/'.$this->name.'.css'), ('/theme/'.$this->name.'/custom.css.php')),
-											'tpl'	=> 0,
-											'hooks' => array('data' => array('main'),'entity' => '0',),
-											);
-			$this->dirs				= array('/'.$this->name.'/sql');			// Data directories to create when module is enabled. Example: this->dirs = array("/mymodule/temp");
-			$this->config_page_url	= array('menus.php@'.$this->name);			// List of php page, stored into mymodule/admin directory, to use to setup module.
+			$this->db						= $db;
+			$this->numero					= 113900;											// Unique Id for module
+			$this->name						= preg_replace('/^mod/i', '', get_class($this));	// Module label (no space allowed)
+			$this->editor_name				= '<b>Easya Solutions</b> (Ex Open-Dsi)';
+			$this->editor_web				= 'https://easya.solutions';
+			$this->editor_url				= "https://easya.solutions";
+			$this->editor_email				= 'support@easya.solutions';
+			$this->url_last_version 		= 'https://raw.githubusercontent.com/aspangaro/oblyon/14.0/htdocs/custom/oblyon/VERSION';
+			$this->rights_class				= $this->name;										// Key text used to identify module (for permissions, menus, etc...)
+			$this->family					= 'easya';											// used to group modules in module setup page
+			$this->module_position			= 10;
+			$this->familyinfo				= array('easya' => array('position' => '001', 'label' => $langs->trans("easyaFamily")));
+			$this->module_position			= 1;
+			$this->description				= $langs->trans('Module113900Desc');				// Module description
+			$this->version					= file_get_contents(__DIR__.'/../../VERSION');		// Version : 'development', 'experimental', 'dolibarr' or 'dolibarr_deprecated' or version
+			$this->const_name				= 'MAIN_MODULE_'.strtoupper($this->name);			// llx_const table to save module status enabled/disabled
+			$this->special					= 0;												// Where to store the module in setup page (0=common,1=interface,2=others,3=very specific)
+			$this->picto					= 'opendsi_big@'.$this->name;						// Name of image file used for this module. If in theme => 'pictovalue' ; if in module => 'pictovalue@module' under name object_pictovalue.png
+			$this->module_parts				= array('menus'	=> 1,
+													'js'	=> array('js'	=> '/'.$this->name.'/js/pushy.js'),
+													'css'	=> array('css'	=> ('/'.$this->name.'/css/'.$this->name.'.css'), ('/theme/'.$this->name.'/custom.css.php')),
+													'tpl'	=> 0,
+													'hooks' => array('data' => array('main'),'entity' => '0',),
+													);
+			$this->dirs						= array('/'.$this->name.'/sql');					// Data directories to create when module is enabled. Example: this->dirs = array("/mymodule/temp");
+			$this->config_page_url			= array('menus.php@'.$this->name);					// List of php page, stored into mymodule/admin directory, to use to setup module.
 			// Dependencies
-			$this->hidden			= false;									// A condition to hide module
-			$this->depends			= array();									// List of modules id that must be enabled if this module is enabled
-			$this->requiredby		= array();									// List of modules id to disable if this one is disabled
-			$this->conflictwith		= array();									// List of modules id this module is in conflict with
-			$this->phpmin			= array(7, 0);								// Minimum version of PHP required by module
-      		$this->need_dolibarr_version = array(14,0);							// Minimum version of Dolibarr required by module
-			$this->langfiles		= array($this->name.'@'.$this->name);
-			$this->const			= array();									// List of particular constants to add when module is enabled
+			$this->hidden					= false;											// A condition to hide module
+			$this->depends					= array();											// List of modules id that must be enabled if this module is enabled
+			$this->requiredby				= array();											// List of modules id to disable if this one is disabled
+			$this->conflictwith				= array();											// List of modules id this module is in conflict with
+			$this->phpmin					= array(7, 4);										// Minimum version of PHP required by module
+      		$this->need_dolibarr_version	= array(14,0);										// Minimum version of Dolibarr required by module
+			$this->langfiles				= array($this->name.'@'.$this->name);
+			$this->const					= array();											// List of particular constants to add when module is enabled
 			// WIP - Remove classic Dolibarr tabs to avoid a theme change problem (Only available > 15.0.x)
 			$easyaVersion = (float) !empty($conf->global->EASYA_VERSION) ? $conf->global->EASYA_VERSION : '';
     		if ($easyaVersion >= '2022.5.2' || (float) DOL_VERSION >= 16.0) {
@@ -91,11 +91,11 @@
 				$conf->oblyon			= new stdClass();
 				$conf->oblyon->enabled	= 0;
 			}
-			$this->dictionaries	= array();										// Dictionaries
-			$this->boxes		= array();										// List of boxes
-			$this->cronjobs		= array();										// List of cron jobs entries to add
-			$this->rights		= array();										// Permission array used by this module
-			$this->menu			= array();										// List of menus to add
+			$this->dictionaries	= array();	// Dictionaries
+			$this->boxes		= array();	// List of boxes
+			$this->cronjobs		= array();	// List of cron jobs entries to add
+			$this->rights		= array();	// Permission array used by this module
+			$this->menu			= array();	// List of menus to add
 		}
 
 		/************************************************
@@ -108,30 +108,27 @@
 		function init($options = '')
 		{
 			global $langs, $conf;
-			$sql	= array();
+			$sql		= array();
 			$this->_load_tables('/'.$this->name.'/sql/');
 			oblyon_restore_module($this->name);
-
 			// Copy dir custom/oblyon/themeoblyon to theme/oblyon
-			$srcDir = dol_buildpath('/custom/oblyon/themeoblyon');
-			$destDir = DOL_DOCUMENT_ROOT . '/theme/oblyon';
-
+			$srcDir		= dol_buildpath('/custom/oblyon/themeoblyon');
+			$destDir	= DOL_DOCUMENT_ROOT.'/theme/oblyon';
 			if (dol_is_dir($destDir)) {
-				$result = dol_delete_dir_recursive($destDir);
+				$result	= dol_delete_dir_recursive($destDir);
 				if ($result < 0) {
 					setEventMessage($langs->trans('OblyonDeleteThemeError'), 'errors');
 					return 0;
 				}
 			}
-			$result = dolCopyDir($srcDir, $destDir, 0, 1);
+			$result	= dolCopyDir($srcDir, $destDir, 0, 1);
 			if ($result < 0) {
 				setEventMessage($langs->trans('OblyonCopyThemeError'), 'errors');
 				return 0;
 			}
-
 			// delete old menu manager
 			if (file_exists(dol_buildpath('/core/menus/standard/oblyon_menu.php')))	unlink(dol_buildpath('/core/menus/standard/oblyon_menu.php'));
-			if (file_exists(dol_buildpath('/core/menus/standard/oblyon.lib.php')))		unlink(dol_buildpath('/core/menus/standard/oblyon.lib.php'));
+			if (file_exists(dol_buildpath('/core/menus/standard/oblyon.lib.php')))	unlink(dol_buildpath('/core/menus/standard/oblyon.lib.php'));
 			dolibarr_set_const($this->db,'MAIN_THEME','oblyon', 'chaine', 0, '', $conf->entity);
 			dolibarr_set_const($this->db,'MAIN_MENU_INVERT', getDolGlobalInt('MAIN_MENU_INVERT_OBLYON_SAVE'), 'chaine', 0, '', $conf->entity);
 			dolibarr_del_const($this->db,'MAIN_MENU_INVERT_OBLYON_SAVE', $conf->entity);
@@ -148,7 +145,7 @@
 		function remove($options = '')
 		{
 			global $conf, $langs;
-			$sql	= array();
+			$sql		= array();
 			oblyon_bkup_module ($this->name);
 
 			dolibarr_set_const($this->db,'MAIN_THEME','eldy', 'chaine', 0, '', $conf->entity);
@@ -176,8 +173,7 @@
 			dolibarr_del_const($this->db,'MAIN_FONTAWESOME_ICON_STYLE', $conf->entity);
 			dolibarr_del_const($this->db,'MAIN_FONTAWESOME_WEIGHT', $conf->entity);
 
-			$destDir = DOL_DOCUMENT_ROOT . '/theme/oblyon';
-
+			$destDir	= DOL_DOCUMENT_ROOT.'/theme/oblyon';
 			if (dol_is_dir($destDir)) {
 				$result = dol_delete_dir_recursive($destDir);
 				if ($result < 0) {
@@ -185,8 +181,7 @@
 					return 0;
 				}
 			}
-
 			return $this->_remove($sql, $options);
-		}	// function remove($options = '')
+		}
 	}
 ?>
