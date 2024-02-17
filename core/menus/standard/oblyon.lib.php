@@ -2030,6 +2030,8 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 			// Assets
 			if (! empty($conf->asset->enabled))
             {
+                $langs->load("assets");
+
                 if ((float) $conf->global->EASYA_VERSION >= 2022.5 || (float) DOL_VERSION >= 16.0) {
                     $newmenu->add("/asset/list.php?leftmenu=asset&amp;mainmenu=accountancy", $langs->trans("MenuAssets"), 0, $user->rights->asset->read, '', $mainmenu, 'asset', 100, '', '', '', img_picto('', 'payment', 'class="paddingright pictofixedwidth"'));
                     $newmenu->add("/asset/card.php?leftmenu=asset&amp;action=create", $langs->trans("MenuNewAsset"), 1, $user->rights->asset->write);
