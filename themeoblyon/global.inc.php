@@ -3892,7 +3892,7 @@ font-size: 14px;
 */
 
 .blockvmenubookmarks {
-    <?php if (getDolGlobalString(getDolGlobalString($conf->global->MAIN_MENU_INVERT)) { ?>
+    <?php if (getDolGlobalString($conf->global->MAIN_MENU_INVERT)) { ?>
         background-color: <?php print $bgnavtop; ?>;
         border-bottom: 1px solid <?php print $bgnavtop_hover; ?>;
     <?php } else { ?>

@@ -83,7 +83,7 @@
 	$left											= ($langs->trans("DIRECTION") == 'rtl' ? 'right' : 'left');
 	$path											= '';    	// This value may be used in future for external module to overwrite theme
 	$theme											= 'oblyon';	// Value of theme
-	if (getDolGlobalString($conf->global->MAIN_OVERWRITE_THEME_RES)) {
+	if (!empty($conf->global->MAIN_OVERWRITE_THEME_RES)) {
 		$path	= '/'.$conf->global->MAIN_OVERWRITE_THEME_RES;
 		$theme	= $conf->global->MAIN_OVERWRITE_THEME_RES;
 	}
@@ -94,44 +94,44 @@
 	$dol_optimize_smallscreen	= $conf->dol_optimize_smallscreen;
 	$dol_no_mouse_hover			= $conf->dol_no_mouse_hover;
 	dolibarr_set_const($db, 'THEME_ELDY_ENABLE_PERSONALIZED', 1, 'chaine', 0, 'OblyonTheme', $conf->entity);
-	$useboldtitle				= getDolGlobalString($conf->global->THEME_ELDY_USEBOLDTITLE, 0);
+	$useboldtitle				= (isset($conf->global->THEME_ELDY_USEBOLDTITLE) ? $conf->global->THEME_ELDY_USEBOLDTITLE : 0);
 	// Oblyon
-	$maincolor					= getDolGlobalString($conf->global->OBLYON_COLOR_MAIN);						// default value: #0083a2
-	$navlinkcolor				= '#f4f4f4';																// default value: #eee
-	$topmenu_hover				= $maincolor;																// default value: #
-	$bgnavtop					= getDolGlobalString($conf->global->OBLYON_COLOR_TOPMENU_BCKGRD);			// default value: #333		//	for main navigation
-	$bgnavtop_txt				= getDolGlobalString($conf->global->OBLYON_COLOR_TOPMENU_TXT);				// default value: #f4f4f4	//	for main navigation
-	$bgnavtop_txt_active		= getDolGlobalString($conf->global->OBLYON_COLOR_TOPMENU_TXT_ACTIVE);		// default value: #f4f4f4	//	for main navigation
-	$bgnavtop_txt_hover			= getDolGlobalString($conf->global->OBLYON_COLOR_TOPMENU_TXT_HOVER);		// default value: #f4f4f4	//	for main navigation
-	$bgnavtop_hover				= getDolGlobalString($conf->global->OBLYON_COLOR_TOPMENU_BCKGRD_HOVER);		// default value: #444		//	for main navigation
-	$bgnavleft					= getDolGlobalString($conf->global->OBLYON_COLOR_LEFTMENU_BCKGRD);			// default value: #333		//	for left navigation
-	$bgnavleft_txt				= getDolGlobalString($conf->global->OBLYON_COLOR_LEFTMENU_TXT);				// default value: #f4f4f4	//	for left navigation
-	$bgnavleft_txt_active		= getDolGlobalString($conf->global->OBLYON_COLOR_LEFTMENU_TXT_ACTIVE);		// default value: #f4f4f4	//	for left navigation
-	$bgnavleft_txt_hover		= getDolGlobalString($conf->global->OBLYON_COLOR_LEFTMENU_TXT_HOVER);		// default value: #f4f4f4	//	for left navigation
-	$bgnavleft_hover			= getDolGlobalString($conf->global->OBLYON_COLOR_LEFTMENU_BCKGRD_HOVER);	// default value: #444	    //	for left navigation
-	$colorButtonAction1			= getDolGlobalString($conf->global->OBLYON_COLOR_BUTTON_ACTION1);			// default value: #0088cc
-	$colorButtonAction2			= getDolGlobalString($conf->global->OBLYON_COLOR_BUTTON_ACTION2);			// default value: #0044cc
-	$colorButtonDelete1			= getDolGlobalString($conf->global->OBLYON_COLOR_BUTTON_DELETE1);			// default value: #cc8800
-	$colorButtonDelete2			= getDolGlobalString($conf->global->OBLYON_COLOR_BUTTON_DELETE2);			// default value: #cc4400
-	$colorInfoBorder			= getDolGlobalString($conf->global->OBLYON_COLOR_INFO_BORDER);				// default value: #87cfd2
-	$colorInfoBg				= getDolGlobalString($conf->global->OBLYON_COLOR_INFO_BCKGRD);				// default value: #eff8fc
-	$colorInfoTxt				= getDolGlobalString($conf->global->OBLYON_COLOR_INFO_TEXT);				// default value: #
-	$colorWarningBorder			= getDolGlobalString($conf->global->OBLYON_COLOR_WARNING_BORDER);			// default value: #f2cf87
-	$colorWarningBg				= getDolGlobalString($conf->global->OBLYON_COLOR_WARNING_BCKGRD);			// default value: #fcf8e3
-	$colorWarningTxt			= getDolGlobalString($conf->global->OBLYON_COLOR_WARNING_TEXT);				// default value: #
-	$colorErrorBorder			= getDolGlobalString($conf->global->OBLYON_COLOR_ERROR_BORDER);				// default value: #e0796e
-	$colorErrorBg				= getDolGlobalString($conf->global->OBLYON_COLOR_ERROR_BCKGRD);				// default value: #f07b6e
-	$colorErrorTxt				= getDolGlobalString($conf->global->OBLYON_COLOR_ERROR_TEXT);				// default value: #
-	$colorNotifInfoBg			= getDolGlobalString($conf->global->OBLYON_COLOR_NOTIF_INFO_BCKGRD);		// default value: #d9e5d1
-	$colorNotifInfoTxt			= getDolGlobalString($conf->global->OBLYON_COLOR_NOTIF_INFO_TEXT);			// default value: #446548
-	$colorNotifWarningBg		= getDolGlobalString($conf->global->OBLYON_COLOR_NOTIF_WARNING_BCKGRD);		// default value: #fff7d1
-	$colorNotifWarningTxt		= getDolGlobalString($conf->global->OBLYON_COLOR_NOTIF_WARNING_TEXT);		// default value: #a28918
-	$colorNotifErrorBg			= getDolGlobalString($conf->global->OBLYON_COLOR_NOTIF_ERROR_BCKGRD);		// default value: #d79eac
-	$colorNotifErrorTxt			= getDolGlobalString($conf->global->OBLYON_COLOR_NOTIF_ERROR_TEXT);			// default value: #a72947
-	$colorTextTabActive			= getDolGlobalString($conf->global->OBLYON_COLOR_TEXTTABACTIVE);			// default value: #222222
-	$colorBckgrdInput			= getDolGlobalString($conf->global->OBLYON_COLOR_INPUT_BCKGRD);				// default value: #DEDEDE
-	$bgotherbox					= '#f4f4f4';																// default value: #E6E6E6	//	Other information boxes on home page
-	$bgbutton_hover				= '#197489';																// default value: #197489
+	$maincolor					= $conf->global->OBLYON_COLOR_MAIN;						// default value: #0083a2
+	$navlinkcolor				= '#f4f4f4';											// default value: #eee
+	$topmenu_hover				= $maincolor;											// default value: #
+	$bgnavtop					= $conf->global->OBLYON_COLOR_TOPMENU_BCKGRD;			// default value: #333		//	for main navigation
+	$bgnavtop_txt				= $conf->global->OBLYON_COLOR_TOPMENU_TXT;				// default value: #f4f4f4	//	for main navigation
+	$bgnavtop_txt_active		= $conf->global->OBLYON_COLOR_TOPMENU_TXT_ACTIVE;		// default value: #f4f4f4	//	for main navigation
+	$bgnavtop_txt_hover			= $conf->global->OBLYON_COLOR_TOPMENU_TXT_HOVER;		// default value: #f4f4f4	//	for main navigation
+	$bgnavtop_hover				= $conf->global->OBLYON_COLOR_TOPMENU_BCKGRD_HOVER;		// default value: #444		//	for main navigation
+	$bgnavleft					= $conf->global->OBLYON_COLOR_LEFTMENU_BCKGRD;			// default value: #333		//	for left navigation
+	$bgnavleft_txt				= $conf->global->OBLYON_COLOR_LEFTMENU_TXT;				// default value: #f4f4f4	//	for left navigation
+	$bgnavleft_txt_active		= $conf->global->OBLYON_COLOR_LEFTMENU_TXT_ACTIVE;		// default value: #f4f4f4	//	for left navigation
+	$bgnavleft_txt_hover		= $conf->global->OBLYON_COLOR_LEFTMENU_TXT_HOVER;		// default value: #f4f4f4	//	for left navigation
+	$bgnavleft_hover			= $conf->global->OBLYON_COLOR_LEFTMENU_BCKGRD_HOVER;	// default value: #444	    //	for left navigation
+	$colorButtonAction1			= $conf->global->OBLYON_COLOR_BUTTON_ACTION1;			// default value: #0088cc
+	$colorButtonAction2			= $conf->global->OBLYON_COLOR_BUTTON_ACTION2;			// default value: #0044cc
+	$colorButtonDelete1			= $conf->global->OBLYON_COLOR_BUTTON_DELETE1;			// default value: #cc8800
+	$colorButtonDelete2			= $conf->global->OBLYON_COLOR_BUTTON_DELETE2;			// default value: #cc4400
+	$colorInfoBorder			= $conf->global->OBLYON_COLOR_INFO_BORDER;				// default value: #87cfd2
+	$colorInfoBg				= $conf->global->OBLYON_COLOR_INFO_BCKGRD;				// default value: #eff8fc
+	$colorInfoTxt				= $conf->global->OBLYON_COLOR_INFO_TEXT;				// default value: #
+	$colorWarningBorder			= $conf->global->OBLYON_COLOR_WARNING_BORDER;			// default value: #f2cf87
+	$colorWarningBg				= $conf->global->OBLYON_COLOR_WARNING_BCKGRD;			// default value: #fcf8e3
+	$colorWarningTxt			= $conf->global->OBLYON_COLOR_WARNING_TEXT;				// default value: #
+	$colorErrorBorder			= $conf->global->OBLYON_COLOR_ERROR_BORDER;				// default value: #e0796e
+	$colorErrorBg				= $conf->global->OBLYON_COLOR_ERROR_BCKGRD;				// default value: #f07b6e
+	$colorErrorTxt				= $conf->global->OBLYON_COLOR_ERROR_TEXT;				// default value: #
+	$colorNotifInfoBg			= $conf->global->OBLYON_COLOR_NOTIF_INFO_BCKGRD;		// default value: #d9e5d1
+	$colorNotifInfoTxt			= $conf->global->OBLYON_COLOR_NOTIF_INFO_TEXT;			// default value: #446548
+	$colorNotifWarningBg		= $conf->global->OBLYON_COLOR_NOTIF_WARNING_BCKGRD;		// default value: #fff7d1
+	$colorNotifWarningTxt		= $conf->global->OBLYON_COLOR_NOTIF_WARNING_TEXT;		// default value: #a28918
+	$colorNotifErrorBg			= $conf->global->OBLYON_COLOR_NOTIF_ERROR_BCKGRD;		// default value: #d79eac
+	$colorNotifErrorTxt			= $conf->global->OBLYON_COLOR_NOTIF_ERROR_TEXT;			// default value: #a72947
+	$colorTextTabActive			= $conf->global->OBLYON_COLOR_TEXTTABACTIVE;			// default value: #222222
+	$colorBckgrdInput			= $conf->global->OBLYON_COLOR_INPUT_BCKGRD;				// default value: #DEDEDE
+	$bgotherbox					= '#f4f4f4';											// default value: #E6E6E6	//	Other information boxes on home page
+	$bgbutton_hover				= '#197489';											// default value: #197489
 	if (!empty($maincolor)) {
 		$colorlength	= strlen($maincolor);
 		$matches		= array();
@@ -144,35 +144,35 @@
 			$bgbutton_hover = '#'.colorArrayToHex($maincolor_variant);
 		}	// if (!empty($matches))
 	}	// if (!empty($maincolor))
-	$logo_background_color				= getDolGlobalString($conf->global->OBLYON_COLOR_LOGO_BCKGRD);		// default value : #ffffff
-	$bgcolor							= getDolGlobalString($conf->global->OBLYON_COLOR_BCKGRD);			// default value : #f4f4f4
-	$login_bgcolor						= getDolGlobalString($conf->global->OBLYON_COLOR_LOGIN_BCKGRD);		// default value : #f4f4f4
-	$colorbtitle						= getDolGlobalString($conf->global->OBLYON_COLOR_BTITLE);			// default value : #E09430
-	$colorftitle						= getDolGlobalString($conf->global->OBLYON_COLOR_FTITLE);			// default value : #F4F4F4
-	$colorbline							= getDolGlobalString($conf->global->OBLYON_COLOR_BLINE);			// default value : #FFFFFF
-	$colorbline_hover					= getDolGlobalString($conf->global->OBLYON_COLOR_BLINE_HOVER);		// default value : #F1F1F1
-	$colorfline							= getDolGlobalString($conf->global->OBLYON_COLOR_FLINE);			// default value : #444444
-	$colorfline_hover					= getDolGlobalString($conf->global->OBLYON_COLOR_FLINE_HOVER);		// default value : #222222
-	$colorfdatedefault					= getDolGlobalString($conf->global->OBLYON_COLOR_FDATE_DEFAULT);	// default value : #FF0000
-	$invertratiofilter					= getDolGlobalString($conf->global->THEME_INVERT_RATIO_FILTER);		// default value : 0
+	$logo_background_color				= $conf->global->OBLYON_COLOR_LOGO_BCKGRD;		// default value : #ffffff
+	$bgcolor							= $conf->global->OBLYON_COLOR_BCKGRD;			// default value : #f4f4f4
+	$login_bgcolor						= $conf->global->OBLYON_COLOR_LOGIN_BCKGRD;		// default value : #f4f4f4
+	$colorbtitle						= $conf->global->OBLYON_COLOR_BTITLE;			// default value : #E09430
+	$colorftitle						= $conf->global->OBLYON_COLOR_FTITLE;			// default value : #F4F4F4
+	$colorbline							= $conf->global->OBLYON_COLOR_BLINE;			// default value : #FFFFFF
+	$colorbline_hover					= $conf->global->OBLYON_COLOR_BLINE_HOVER;		// default value : #F1F1F1
+	$colorfline							= $conf->global->OBLYON_COLOR_FLINE;			// default value : #444444
+	$colorfline_hover					= $conf->global->OBLYON_COLOR_FLINE_HOVER;		// default value : #222222
+	$colorfdatedefault					= $conf->global->OBLYON_COLOR_FDATE_DEFAULT;	// default value : #FF0000
+	$invertratiofilter					= $conf->global->THEME_INVERT_RATIO_FILTER;		// default value : 0
 
-	$colorbackhmenu1					= getDolGlobalString($conf->global->THEME_ELDY_TOPMENU_BACK1, '38,60,92');
-	$colorbackvmenu1					= getDolGlobalString($conf->global->THEME_ELDY_VERMENU_BACK1, '250,250,250');
-	$colortopbordertitle1				= getDolGlobalString($conf->global->THEME_ELDY_TOPBORDER_TITLE1, '215,215,215');
-	$colorbacktitle1					= getDolGlobalString($conf->global->THEME_ELDY_BACKTITLE1, '233,234,237');
-	$colorbacktabcard1					= getDolGlobalString($conf->global->THEME_ELDY_BACKTABCARD1, '255,255,255');
+	$colorbackhmenu1					= $conf->global->THEME_ELDY_TOPMENU_BACK1;
+	$colorbackvmenu1					= $conf->global->THEME_ELDY_VERMENU_BACK1;
+	$colortopbordertitle1				= $conf->global->THEME_ELDY_TOPBORDER_TITLE1;
+	$colorbacktitle1					= $conf->global->THEME_ELDY_BACKTITLE1;
+	$colorbacktabcard1					= $conf->global->THEME_ELDY_BACKTABCARD1;
 	$colorbacktabactive                 = empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? (empty($conf->global->THEME_ELDY_BACKTABACTIVE) ? $colorbacktabactive : $conf->global->THEME_ELDY_BACKTABACTIVE) : (empty($user->conf->THEME_ELDY_BACKTABACTIVE) ? $colorbacktabactive : $user->conf->THEME_ELDY_BACKTABACTIVE);
-	$colorbacklineimpair1				= getDolGlobalString($conf->global->THEME_ELDY_LINEIMPAIR1, '255,255,255');
-	$colorbacklineimpair2				= getDolGlobalString($conf->global->THEME_ELDY_LINEIMPAIR2, '255,255,255');
-	$colorbacklinepair1					= getDolGlobalString($conf->global->THEME_ELDY_LINEPAIR1, '251,251,251');
-	$colorbacklinepair2					= getDolGlobalString($conf->global->THEME_ELDY_LINEPAIR2, '251,251,251');
-	$colorbacklinebreak					= getDolGlobalString($conf->global->THEME_ELDY_LINEBREAK, '248,247,244');
-	$colorbackbody						= getDolGlobalString($conf->global->THEME_ELDY_BACKBODY, '255,255,255');
-	$colortexttitlenotab				= getDolGlobalString($conf->global->THEME_ELDY_TEXTTITLENOTAB, '35,135,140');
-	$colortexttitle						= getDolGlobalString($conf->global->THEME_ELDY_TEXTTITLE, '40,40,60');
-	$colortexttitlelink					= getDolGlobalString($conf->global->THEME_ELDY_TEXTTITLELINK, '10, 20, 100');
-	$colortext							= getDolGlobalString($conf->global->THEME_ELDY_TEXT, '0,0,0');
-	$colortextlink						= getDolGlobalString($conf->global->THEME_ELDY_TEXTLINK, '10, 20, 100');
+	$colorbacklineimpair1				= $conf->global->THEME_ELDY_LINEIMPAIR1;
+	$colorbacklineimpair2				= $conf->global->THEME_ELDY_LINEIMPAIR2;
+	$colorbacklinepair1					= $conf->global->THEME_ELDY_LINEPAIR1;
+	$colorbacklinepair2					= $conf->global->THEME_ELDY_LINEPAIR2;
+	$colorbacklinebreak					= $conf->global->THEME_ELDY_LINEBREAK;
+	$colorbackbody						= $conf->global->THEME_ELDY_BACKBODY;
+	$colortexttitlenotab				= $conf->global->THEME_ELDY_TEXTTITLENOTAB;
+	$colortexttitle						= $conf->global->THEME_ELDY_TEXTTITLE;
+	$colortexttitlelink					= $conf->global->THEME_ELDY_TEXTTITLELINK;
+	$colortext							= $conf->global->THEME_ELDY_TEXT;
+	$colortextlink						= $conf->global->THEME_ELDY_TEXTLINK;
 	// Hover color
 	$colorbacklinepairhover				= colorStringToArray($colorbline_hover);
 	$colorbacklinepairchecked			= colorStringToArray($colorbline_hover);
@@ -249,7 +249,7 @@
 	print 'topMenuFontSize							= '.$topMenuFontSize."\n";
 	print 'toolTipBgColor							= '.$toolTipBgColor."\n";
 	print 'toolTipFontColor							= '.$toolTipFontColor."\n";
-	print 'conf->global->THEME_AGRESSIVENESS_RATIO	= '.getDolGlobalString($conf->global->THEME_AGRESSIVENESS_RATIO)." (must be between 0 and 1)\n";
+	print 'conf->global->THEME_AGRESSIVENESS_RATIO	= '.$conf->global->THEME_AGRESSIVENESS_RATIO." (must be between 0 and 1)\n";
 	print '*/'."\n";
 	require __DIR__.'/global.inc.php';
 	if (is_object($db))	$db->close();
