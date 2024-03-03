@@ -2934,7 +2934,7 @@ img.photorefnoborder {
     <?php if (GETPOST("optioncss") == 'print') { ?>
         display: none;
     <?php } else { ?>
-        /*background-color: rgb(<?php echo $colorback1; ?>);*/
+        /*background-color: rgb(<?php echo (!empty($colorback1) ? $colorback1 : 0); ?>);*/
         color: #fcfcfc;
         font-size: 13px;
         margin: 0;
@@ -3106,7 +3106,7 @@ transition: all .2s ease-in-out;
     overflow: auto;
     width: 100%;
     background-color: <?php print $bgnavleft; ?>;
-    <?php if ( $usecss3 ) { ?>
+    <?php if (!empty($usecss3)) { ?>
         <?php if (!empty($conf->global->OBLYON_STICKY_TOPBAR)) { ?>
             /*
             box-shadow: 0 1px 2px rgba(0, 0, 0, .4) !important;
@@ -4027,7 +4027,7 @@ font-size: 14px;
     <?php } ?>
 
     background-color: <?php print $bgnavleft; ?>;
-    <?php if ( $usecss3) { ?>
+    <?php if (!empty($usecss3)) { ?>
         box-shadow: 0 1px 2px rgba(0, 0, 0, .4);
         -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .4);
     <?php } ?>
