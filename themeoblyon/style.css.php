@@ -160,19 +160,19 @@
 	$colorbackvmenu1					= $conf->global->THEME_ELDY_VERMENU_BACK1;
 	$colortopbordertitle1				= $conf->global->THEME_ELDY_TOPBORDER_TITLE1;
 	$colorbacktitle1					= $conf->global->THEME_ELDY_BACKTITLE1;
-	$colorbacktabcard1					= $conf->global->THEME_ELDY_BACKTABCARD1;
-	$colorbacktabactive                 = empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? (empty($conf->global->THEME_ELDY_BACKTABACTIVE) ? $colorbacktabactive : $conf->global->THEME_ELDY_BACKTABACTIVE) : (empty($user->conf->THEME_ELDY_BACKTABACTIVE) ? $colorbacktabactive : $user->conf->THEME_ELDY_BACKTABACTIVE);
-	$colorbacklineimpair1				= $conf->global->THEME_ELDY_LINEIMPAIR1;
-	$colorbacklineimpair2				= $conf->global->THEME_ELDY_LINEIMPAIR2;
-	$colorbacklinepair1					= $conf->global->THEME_ELDY_LINEPAIR1;
-	$colorbacklinepair2					= $conf->global->THEME_ELDY_LINEPAIR2;
-	$colorbacklinebreak					= $conf->global->THEME_ELDY_LINEBREAK;
-	$colorbackbody						= $conf->global->THEME_ELDY_BACKBODY;
-	$colortexttitlenotab				= $conf->global->THEME_ELDY_TEXTTITLENOTAB;
-	$colortexttitle						= $conf->global->THEME_ELDY_TEXTTITLE;
-	$colortexttitlelink					= $conf->global->THEME_ELDY_TEXTTITLELINK;
-	$colortext							= $conf->global->THEME_ELDY_TEXT;
-	$colortextlink						= $conf->global->THEME_ELDY_TEXTLINK;
+	$colorbacktabcard1					= empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? (empty($conf->global->THEME_ELDY_BACKTABCARD1)	? $colorbacktabcard1	: $conf->global->THEME_ELDY_BACKTABCARD1)	: (empty($user->conf->THEME_ELDY_BACKTABCARD1)		? $colorbacktabcard1	: $user->conf->THEME_ELDY_BACKTABCARD1);
+	$colorbacktabactive					= empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? (empty($conf->global->THEME_ELDY_BACKTABACTIVE)	? $colorbacktabactive	: $conf->global->THEME_ELDY_BACKTABACTIVE)	: (empty($user->conf->THEME_ELDY_BACKTABACTIVE)		? $colorbacktabactive	: $user->conf->THEME_ELDY_BACKTABACTIVE);
+	$colorbacklineimpair1				= empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? (empty($conf->global->THEME_ELDY_LINEIMPAIR1)	? $colorbacklineimpair1	: $conf->global->THEME_ELDY_LINEIMPAIR1)	: (empty($user->conf->THEME_ELDY_LINEIMPAIR1)		? $colorbacklineimpair1	: $user->conf->THEME_ELDY_LINEIMPAIR1);
+	$colorbacklineimpair2				= empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? (empty($conf->global->THEME_ELDY_LINEIMPAIR2)	? $colorbacklineimpair2	: $conf->global->THEME_ELDY_LINEIMPAIR2)	: (empty($user->conf->THEME_ELDY_LINEIMPAIR2)		? $colorbacklineimpair2	: $user->conf->THEME_ELDY_LINEIMPAIR2);
+	$colorbacklinepair1					= empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? (empty($conf->global->THEME_ELDY_LINEPAIR1)		? $colorbacklinepair1	: $conf->global->THEME_ELDY_LINEPAIR1)		: (empty($user->conf->THEME_ELDY_LINEPAIR1)			? $colorbacklinepair1	: $user->conf->THEME_ELDY_LINEPAIR1);
+	$colorbacklinepair2					= empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? (empty($conf->global->THEME_ELDY_LINEPAIR2)		? $colorbacklinepair2	: $conf->global->THEME_ELDY_LINEPAIR2)		: (empty($user->conf->THEME_ELDY_LINEPAIR2)			? $colorbacklinepair2	: $user->conf->THEME_ELDY_LINEPAIR2);
+	$colorbacklinebreak					= empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? (empty($conf->global->THEME_ELDY_LINEBREAK)		? $colorbacklinebreak	: $conf->global->THEME_ELDY_LINEBREAK)		: (empty($user->conf->THEME_ELDY_LINEBREAK)			? $colorbacklinebreak	: $user->conf->THEME_ELDY_LINEBREAK);
+	$colorbackbody						= empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? (empty($conf->global->THEME_ELDY_BACKBODY)		? $colorbackbody		: $conf->global->THEME_ELDY_BACKBODY)		: (empty($user->conf->THEME_ELDY_BACKBODY)			? $colorbackbody		: $user->conf->THEME_ELDY_BACKBODY);
+	$colortexttitlenotab				= empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? (empty($conf->global->THEME_ELDY_TEXTTITLENOTAB)	? $colortexttitlenotab	: $conf->global->THEME_ELDY_TEXTTITLENOTAB)	: (empty($user->conf->THEME_ELDY_TEXTTITLENOTAB)	? $colortexttitlenotab	: $user->conf->THEME_ELDY_TEXTTITLENOTAB);
+	$colortexttitle						= empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? (empty($conf->global->THEME_ELDY_TEXTTITLE)		? $colortexttitle		: $conf->global->THEME_ELDY_TEXTTITLE)		: (empty($user->conf->THEME_ELDY_TEXTTITLE)			? $colortexttitle		: $user->conf->THEME_ELDY_TEXTTITLE);
+	$colortexttitlelink					= empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? (empty($conf->global->THEME_ELDY_TEXTTITLELINK)	? $colortexttitlelink	: $conf->global->THEME_ELDY_TEXTTITLELINK)	: (empty($user->conf->THEME_ELDY_TEXTTITLELINK)		? $colortexttitlelink	: $user->conf->THEME_ELDY_TEXTTITLELINK);
+	$colortext							= empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? (empty($conf->global->THEME_ELDY_TEXT)			? $colortext			: $conf->global->THEME_ELDY_TEXT)			: (empty($user->conf->THEME_ELDY_TEXT)				? $colortext			: $user->conf->THEME_ELDY_TEXT);
+	$colortextlink						= empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? (empty($conf->global->THEME_ELDY_TEXTLINK)		? $colortextlink		: $conf->global->THEME_ELDY_TEXTLINK)		: (empty($user->conf->THEME_ELDY_TEXTLINK)			? $colortextlink		: $user->conf->THEME_ELDY_TEXTLINK);
 	// Hover color
 	$colorbacklinepairhover				= colorStringToArray($colorbline_hover);
 	$colorbacklinepairchecked			= colorStringToArray($colorbline_hover);
@@ -217,6 +217,7 @@
 	if ($colorBackWarning != '')			$colorBackWarning			= join(',', colorStringToArray($colorBackWarning));
 	if ($colorBorderError != '')			$colorBorderError			= join(',', colorStringToArray($colorBorderError));
 	if ($colorBackError != '')				$colorBackError				= join(',', colorStringToArray($colorBackError));
+	$nbtopmenuentries						= $menumanager->showmenu('topnb');
 	if ($conf->browser->layout == 'phone')	$nbtopmenuentries			= max($nbtopmenuentries, 10);
 	$minwidthtmenu							= 66;	/* minimum width for one top menu entry */
 	$heightmenu								= 50;	/* height of top menu, part with image */
