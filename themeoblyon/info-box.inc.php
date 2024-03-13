@@ -496,8 +496,8 @@ overflow: visible;
         justify-content: space-between;
     }
     .info-box-module {
-        width: ;idth: 100%;
-    max-width: unset;
+        width: 100%;
+        max-width: unset;
     }
 
     .info-box-sm .info-box-icon-text, .info-box-sm .info-box-icon-version {

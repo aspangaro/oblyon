@@ -795,7 +795,7 @@ hr {
     */
 
     background-repeat: repeat-x;
-    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25)
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
     -webkit-border-radius: 2px;
     border-radius: 1px;
 
