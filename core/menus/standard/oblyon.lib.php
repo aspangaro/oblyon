@@ -116,7 +116,7 @@ function print_oblyon_menu($db, $atarget, $type_user = 0, &$tabMenu, &$menu, $no
     }
     */
 
-    if (is_array($moredata) && ! empty($moredata['searchform']))	// searchform can contains select2 code or link to show old search form or link to switch on search page
+    if (is_array($moredata) && ! empty($moredata['searchform']) && empty($noout))	// searchform can contains select2 code or link to show old search form or link to switch on search page
     {
         print "\n";
         print "<!-- Begin SearchForm -->\n";
@@ -126,7 +126,7 @@ function print_oblyon_menu($db, $atarget, $type_user = 0, &$tabMenu, &$menu, $no
         print "<!-- End SearchForm -->\n";
     }
 
-    if (is_array($moredata) && ! empty($moredata['bookmarks']))
+    if (is_array($moredata) && ! empty($moredata['bookmarks']) && empty($noout))
     {
         print "\n";
         print "<!-- Begin Bookmarks -->\n";
@@ -136,7 +136,7 @@ function print_oblyon_menu($db, $atarget, $type_user = 0, &$tabMenu, &$menu, $no
         print "<!-- End Bookmarks -->\n";
     }
 
-	if ( empty($menu_invert) && (getDolGlobalInt('OBLYON_HIDE_LEFTMENU') || $conf->dol_optimize_smallscreen) ) {
+	if ( empty($menu_invert) && (getDolGlobalInt('OBLYON_HIDE_LEFTMENU') || $conf->dol_optimize_smallscreen) && empty($noout) ) {
 		print '<div class="pushy-btn" title="'.$langs->trans("ShowLeftMenu").'">&#8801;</div>';
 	}
 
