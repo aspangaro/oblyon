@@ -4050,6 +4050,19 @@ font-size: 14px;
 <?php } ?>
 }
 
+@media all and (orientation:landscape) {
+    @media only screen and (max-height: 500px) {
+        #id-left {
+            max-height: 300px;
+            overflow-y: auto;
+            
+        }
+        #id-left::-webkit-scrollbar { 
+            display: none;
+        }
+    }
+}
+
 <?php if (!empty($conf->global->OBLYON_HIDE_LEFTMENU) || !empty($conf->dol_optimize_smallscreen)) { ?>
     #id-left, #id-container, .push {
     <?php if (!empty($conf->global->OBLYON_EFFECT_LEFTMENU) && $conf->global->OBLYON_EFFECT_LEFTMENU == "push") { ?>
