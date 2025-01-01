@@ -2757,13 +2757,21 @@ div.attachareaformuserfileecm {
 	padding-bottom: 0;
 }
 div.arearef {
-<?php if (!empty($conf->global->FIX_AREAREF_TABACTION)) { ?>
+<?php if (!empty($conf->global->FIX_AREAREF_CARD)) { ?>
 	position: sticky;
     z-index: 4;
 	<?php if (!empty($conf->global->MAIN_MENU_INVERT)) { ?>
-	top: 42px;
+        <?php if (!empty($conf->global->FIX_STICKY_TABS_CARD)) { ?>
+    	top: 84px;
+	    <?php } else { ?>
+	    top: 42px;
+	    <?php } ?>
 	<?php } else { ?>
-	top: 42px;
+        <?php if (!empty($conf->global->FIX_STICKY_TABS_CARD)) { ?>
+    	top: 84px;
+	    <?php } else { ?>
+	    top: 42px;
+	    <?php } ?>
 	<?php } ?>
 	background: inherit;
     padding-bottom: 20px;
@@ -5128,7 +5136,7 @@ div.tabsAction {
     margin: 20px 0 10px 0;
     padding: 0;
     text-align: <?php print $right; ?>;
-<?php if (!empty($conf->global->FIX_AREAREF_TABACTION)) { ?>
+<?php if (!empty($conf->global->FIX_ABSOLUTE_BUTTONS_ACTION_CARD)) { ?>
 	position: sticky;
     z-index: 4;
 	bottom: 0;
@@ -10221,12 +10229,12 @@ div.tabs:first-of-type, .fiche > div.tabs
 /* ============================================================================== */
 /* Sticky table 1st column  												      */
 /* ============================================================================== */
-<?php if (!empty($conf->global->OBLYON_STICKY_COLUMN_FIRST)) { ?>
+<?php if (!empty($conf->global->FIX_STICKY_COLUMN_FIRST)) { ?>
 @media (min-width: 768px) {
     #id-right > .fiche > form[action*="list.php"] div.div-table-responsive > table > tbody > * > :first-of-type,
     #id-right > .fiche > .tabBar > form[action*="list.php"] div.div-table-responsive > table > tbody > * > :first-of-type {
         position: sticky;
-        left: 0;
+        left: 38px;
         z-index: 2;
         background: #<?php echo colorArrayToHex(colorStringToArray($colorbacklineimpair1)); ?>;
         border-right: 1px solid #bbbbbb;
@@ -10294,7 +10302,7 @@ div.tabs:first-of-type, .fiche > div.tabs
 /* ============================================================================== */
 /* Option to remove Kanban view in list                                           */
 /* ============================================================================== */
-<?php if (!empty($conf->global->OBLYON_DISABLE_KANBAN_VIEW_IN_LIST)) { ?>
+<?php if (!empty($conf->global->DISABLE_KANBAN_VIEW_IN_LIST)) { ?>
 .paginationafterarrows > .reposition {
     display: none;
 }
