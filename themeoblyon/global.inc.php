@@ -6691,6 +6691,10 @@ table.cal_event td.cal_event_right {
     background: var(--colorbackbody) !important;
     color: var(--colortext) !important;
 }
+
+.ui-widget-content a {
+    color: var(--colortext) !important;
+}
 /*.ui-widget-header {
 	background: var(--colorbacktitle);
 }*/
@@ -7814,7 +7818,7 @@ input.select2-input {
     line-height: 1.4em;
 }
 .select2-container--default .select2-selection--multiple .select2-selection__choice {
-    background-color: #ddd;
+    background-color: var(--color1BckgrdInfobox);
     margin-top: 4px !important;
 }
 .select2-selection--multiple input.select2-search__field {
@@ -7856,10 +7860,6 @@ input.select2-input {
 }
 .select2-container--default .select2-selection--multiple .select2-selection__rendered {
     line-height: 1.4em;
-}
-.select2-container--default .select2-selection--multiple .select2-selection__choice {
-    background-color: #ddd;
-    margin-top: 4px !important;
 }
 .select2-selection--multiple input.select2-search__field {
     border-bottom: none !important;
