@@ -56,6 +56,8 @@
 	--productlinestocktoolow: #884400;
 	--infoboxmoduleenabledbgcolor : linear-gradient(0.4turn, #fff, #fff, #fff, #e4efe8);
 	--invertratiofilter: <?php print $invertratiofilter; ?>;
+	--colorfdatedefault: <?php print $colorfdatedefault; ?>;
+    --colorfdateselected: <?php print $colorfdateselected; ?>;
 }
 
 /*------------------------------------*\
@@ -4075,7 +4077,7 @@ font-size: 14px;
             max-height: 300px;
             overflow-y: auto;
         }
-        #id-left::-webkit-scrollbar { 
+        #id-left::-webkit-scrollbar {
             display: none;
         }
     }
@@ -6239,6 +6241,7 @@ div#ui-datepicker-div {
     padding-left: 5px;
     padding-right: 5px;
     padding-top: 5px;
+    z-index: 102 !important;    /* 102 is the minimum value because the formcofirm popup form is set to 101, so if we use the date picker on formcofirm... */
 }
 .ui-datepicker .ui-datepicker table {
     font-size: unset;
@@ -6255,8 +6258,8 @@ div#ui-datepicker-div {
 
 .ui-state-highlight, .ui-widget-content .ui-state-highlight
 {
-    color: <?php echo $colorfdatedefault; ?> !important;
-	font-weight: bold !important;
+    color: var(--colorfdatedefault) !important;
+	font-weight: bolder !important;
 }
 
 img.datecallink { padding-left: 2px !important; padding-right: 2px !important; }
@@ -6695,6 +6698,7 @@ table.cal_event td.cal_event_right {
 .ui-widget-content a {
     color: var(--colortext) !important;
 }
+
 /*.ui-widget-header {
 	background: var(--colorbacktitle);
 }*/
@@ -7023,7 +7027,7 @@ A.none, A.none:active, A.none:visited, A.none:hover {
 }
 .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover {
     background: var(--colorbackhmenu1);
-    color: #ffffff !important;
+    color: var(--colorfdateselected) !important;
     border: 1px solid var(--colorbackhmenu1);
 }
 .ui-menu {
@@ -8229,6 +8233,11 @@ dl.dropdown {
     vertical-align: middle;
     display: inline-block;
 }
+
+#linktoobjectname {
+    width:400px;
+}
+
 .dropdown dd, .dropdown dt {
     margin:0px;
     padding:0px;
@@ -10487,7 +10496,7 @@ div.tabs:first-of-type, .fiche > div.tabs
     }
 
     <?php if (getDolGlobalString('MAIN_CHECKBOX_LEFT_COLUMN')) { ?>
-        .dropdown dd ul {
+        .dropdown dd ul:not(.ulselectedfields ) {
             left: 60px;
         }
     <?php } else { ?>

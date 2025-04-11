@@ -111,7 +111,7 @@ print '<td colspan="2">';
 
 $customcssValue = getDolGlobalString('OBLYON_CUSTOM_CSS');
 
-$doleditor = new DolEditor('OBLYON_CUSTOM_CSS', $customcssValue, '', '80%', 'Basic', 'In', true, false, 'ace',10,'90%');
+$doleditor = new DolEditor('OBLYON_CUSTOM_CSS', $customcssValue, 0, 80, 'Basic', 'In', true, false, 'ace',10,'90%');
 $doleditor->Create(0,'',true,'css','css');
 print '</td></tr>'."\n";
 

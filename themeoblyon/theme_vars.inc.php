@@ -73,8 +73,8 @@
 								array(150, 80, 150)
 								);
 	if (!defined('ISLOADEDBYSTEELSHEET')) {	// File is run after an include of a php page, not by the style sheet, if the constant is not defined.
-		if (!empty($conf->global->MAIN_OPTIMIZEFORCOLORBLIND)) { // user is loaded by dolgraph.class.php
-			if ($conf->global->MAIN_OPTIMIZEFORCOLORBLIND == 'flashy')	$theme_datacolor	= array(array(157, 56, 191),
+		if (!empty(getDolGlobalString('MAIN_OPTIMIZEFORCOLORBLIND'))) { // user is loaded by dolgraph.class.php
+			if (getDolGlobalString('MAIN_OPTIMIZEFORCOLORBLIND') == 'flashy')	$theme_datacolor	= array(array(157, 56, 191),
 																									array(0, 147, 183),
 																									array(250, 190, 30),
 																									array(221, 75, 57),
@@ -104,8 +104,8 @@
 																									array(150, 135, 80),
 																									array(150, 80, 150)
 																									);
-		}	// if (!empty($conf->global->MAIN_OPTIMIZEFORCOLORBLIND))
-	}	// if (!defined('ISLOADEDBYSTEELSHEET'))
+		}
+	}
 	$theme_bgcolor										= array(hexdec('F4'), hexdec('F4'), hexdec('F4'));
 	$theme_bgcoloronglet								= array(hexdec('DE'), hexdec('E7'), hexdec('EC'));
 	// Colors

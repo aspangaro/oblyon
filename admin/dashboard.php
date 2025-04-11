@@ -100,7 +100,7 @@ $help_url = '';
 llxHeader('', $page_name, $help_url, '', 0, 0, array('/oblyon/js/jscolor.js', '/oblyon/js/jquery.ui.touch-punch.min.js'), '', '', 'mod-oblyon page-admin_dashboard');
 
 $linkback = '<a href = "'.DOL_URL_ROOT.'/admin/modules.php?restore_lastsearch_values=1">'.$langs->trans('BackToModuleList').'</a>';
-print load_fiche_titre($page_name, $linkback, $linkback, 'object_inovea.png@oblyon');
+print load_fiche_titre($page_name, $linkback, 'object_inovea.png@oblyon');
 
 // Configuration header *************************
 $head						= oblyon_admin_prepare_head();
