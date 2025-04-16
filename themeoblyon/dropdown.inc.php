@@ -38,18 +38,8 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
     /* CSS to hide the arrow to show open/close */
     .dropdown-toggle::after {
         /* font part */
-        font-family: "<?php if(empty($conf->global->MAIN_FONTAWESOME_FAMILY)) {
-                                echo 'Font Awesome 5 Free';
-                            } else {
-                                echo $conf->global->MAIN_FONTAWESOME_FAMILY;
-                            }
-                     ?>";
-        font-weight: <?php if(empty($conf->global->MAIN_FONTAWESOME_WEIGHT)) {
-                                echo 900;
-                            } else {
-                                echo $conf->global->MAIN_FONTAWESOME_WEIGHT;
-                            }
-                      ?>;
+        font-family: var(--fontawesomeFamily);
+        font-weight: var(--fontawesomeWeight);
         font-size: 0.7em;
         font-style: normal;
         font-variant: normal;
@@ -294,18 +284,8 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
     }
     .dropdown-item::before {
         /* font part */
-        font-family: "<?php if(empty($conf->global->MAIN_FONTAWESOME_FAMILY)) {
-                            echo 'Font Awesome 5 Free';
-                        } else {
-                            echo $conf->global->MAIN_FONTAWESOME_FAMILY;
-                        }
-                 ?>";
-        font-weight: <?php if(empty($conf->global->MAIN_FONTAWESOME_WEIGHT)) {
-                            echo 900;
-                        } else {
-                            echo $conf->global->MAIN_FONTAWESOME_WEIGHT;
-                        }
-                  ?>;
+        font-family: var(--fontawesomeFamily);
+        font-weight: var(--fontawesomeWeight);
         font-style: normal;
         font-variant: normal;
         text-rendering: auto;

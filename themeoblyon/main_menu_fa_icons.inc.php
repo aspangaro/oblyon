@@ -3,18 +3,8 @@
 
 .icon {
     /* use !important to prevent issues with browser extensions that change fonts */
-    font-family: "<?php if(empty($conf->global->MAIN_FONTAWESOME_FAMILY)) {
-                            echo 'Font Awesome 5 Free';
-                        } else {
-                            echo $conf->global->MAIN_FONTAWESOME_FAMILY;
-                        }
-                 ?>" !important;
-    font-weight: <?php if(empty($conf->global->MAIN_FONTAWESOME_WEIGHT)) {
-                            echo 900;
-                        } else {
-                            echo $conf->global->MAIN_FONTAWESOME_WEIGHT;
-                        }
-                  ?>;
+    font-family: var(--fontawesomeFamily) !important;
+    font-weight: var(--fontawesomeWeight);
     font-style: normal;
     font-variant: normal;
     line-height: 1;
@@ -171,17 +161,17 @@
 }
 
 .icon--paypal:before {
-    font-family: "Font Awesome 5 Brands";
+    font-family: var(--fontawesomeBrands);
     content: '\f1ed';
 }
 
 .icon--stripe:before {
-    font-family: "Font Awesome 5 Brands";
+    font-family: var(--fontawesomeBrands);
     content: '\f42a';
 }
 
 .icon--google:before {
-    font-family: "Font Awesome 5 Brands";
+    font-family: var(--fontawesomeBrands);
     content: '\f1a0';
 }
 
@@ -328,18 +318,8 @@
 /* Compatibility */
 .mainmenu::before{
     /* font part */
-    font-family: "<?php if(empty($conf->global->MAIN_FONTAWESOME_FAMILY)) {
-                            echo 'Font Awesome 5 Free';
-                        } else {
-                            echo $conf->global->MAIN_FONTAWESOME_FAMILY;
-                        }
-                 ?>";
-    font-weight: <?php if(empty($conf->global->MAIN_FONTAWESOME_WEIGHT)) {
-                            echo 900;
-                        } else {
-                            echo $conf->global->MAIN_FONTAWESOME_WEIGHT;
-                        }
-                  ?>;
+    font-family: var(--fontawesomeFamily);
+    font-weight: var(--fontawesomeWeight);
     font-style: normal;
     font-variant: normal;
     text-rendering: auto;

@@ -107,16 +107,11 @@
 	function oblyon_bkup_module ($appliname)
 	{
 		global $db, $conf, $langs, $errormsg;
+
         require_once DOL_DOCUMENT_ROOT.'/core/lib/files.lib.php';
 
-		// Set to UTF-8
-		if (is_a($db, 'DoliDBMysqli'))	$db->db->set_charset('utf8');
-		else {
-			$db->query('SET NAMES utf8');
-			$db->query('SET CHARACTER SET utf8');
-		}
 		// Control dir and file
-		$path		= DOL_DATA_ROOT.'/'.(empty($conf->global->MAIN_MODULE_MULTICOMPANY) || $conf->entity == 1 ? '' : $conf->entity.'/').$appliname.'/sql';
+		$path		= DOL_DATA_ROOT.'/'.(!isModEnabled('multicompany') || $conf->entity == 1 ? '' : $conf->entity.'/').$appliname.'/sql';
 		$bkpfile	= $path.'/update.'.$conf->entity;
 		if (! file_exists($path)) {
 			if (dol_mkdir($path) < 0) {
@@ -156,7 +151,7 @@ SET SQL_MODE = \'NO_AUTO_VALUE_ON_ZERO\';
 			$sql_const			.= ')';
 			$sql_const			.= ' AND entity = "'.$conf->entity.'"';
 			$sql_const			.= ' ORDER BY name';
-			fwrite($handle, oblyon_bkup_table ('const', $sql_const, $cols_const, $duplicate_constduplicate_const));
+			fwrite($handle, oblyon_bkup_table ('const', $sql_const, $cols_const, $duplicate_const));
 			// Enabling back the keys/index checking
 			$sqlfooter		= '
 SET FOREIGN_KEY_CHECKS = 1;

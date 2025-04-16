@@ -180,4 +180,3 @@
 	$colorblind_deuteranopes_badgeStatus_textColor4		= $colorblind_deuteranopes_badgeStatus_textColor7	= '#000';
 	$colorblind_deuteranopes_badgeStatus1				= $colorblind_deuteranopes_badgeWarning;
 	$colorblind_deuteranopes_badgeStatus_textColor1		= '#000';
-?>

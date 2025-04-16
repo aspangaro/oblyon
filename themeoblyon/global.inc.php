@@ -6,6 +6,9 @@
 /* ============================================================================== */
 
 :root {
+	--fontawesomeFamily: "<?php print $fontawesomeFamily; ?>";
+	--fontawesomeBrands: "<?php print $fontawesomeBrands; ?>";
+    --fontawesomeWeight: <?php echo getDolGlobalString('MAIN_FONTAWESOME_WEIGHT', '900'); ?>;
 	--bgcolor: <?php print $bgcolor; ?>;
 	--colorbackhmenu1: rgb(<?php print $colorbackhmenu1; ?>);
 	--colorbackvmenu1: rgb(<?php print $colorbackvmenu1; ?>);
@@ -3395,12 +3398,7 @@ div.login a:hover {
 div.login_block:after {
     /*content: '\f013';*/
     color: <?php print $bgnavtop_txt; ?>;
-    font-family: "<?php if(empty($conf->global->MAIN_FONTAWESOME_FAMILY)) {
-                            echo 'Font Awesome 5 Free';
-                        } else {
-                            echo $conf->global->MAIN_FONTAWESOME_FAMILY;
-                        }
-                 ?>" !important;
+    font-family: var(--fontawesomeFamily) !important;
     font-size: 20px;
     <?php if (!empty($conf->global->MAIN_MENU_INVERT)) { ?>
         line-height: 40px;
@@ -10165,18 +10163,8 @@ a.phpdebugbar-tab.phpdebugbar-active {
 	font-weight: 600 !important;
 }
 .phpdebugbar-fa-tags, .phpdebugbar-fa-tasks, .phpdebugbar-indicator .fa {
-    font-family: "<?php if(empty($conf->global->MAIN_FONTAWESOME_FAMILY)) {
-                            echo 'Font Awesome 5 Free';
-                        } else {
-                            echo $conf->global->MAIN_FONTAWESOME_FAMILY;
-                        }
-                 ?>";
-    font-weight: <?php if(empty($conf->global->MAIN_FONTAWESOME_WEIGHT)) {
-                            echo 900;
-                        } else {
-                            echo $conf->global->MAIN_FONTAWESOME_WEIGHT;
-                        }
-                  ?>;
+    font-family: var(--fontawesomeFamily) !important;
+    font-weight: var(--fontawesomeWeight);
 }
 div.phpdebugbar-widgets-messages li.phpdebugbar-widgets-list-item span.phpdebugbar-widgets-value.phpdebugbar-widgets-warning:before,
 div.phpdebugbar-widgets-messages li.phpdebugbar-widgets-list-item span.phpdebugbar-widgets-value.phpdebugbar-widgets-error:before,
@@ -10193,12 +10181,7 @@ div.phpdebugbar-widgets-templates span.phpdebugbar-widgets-param-count:before,
 div.phpdebugbar-widgets-templates span.phpdebugbar-widgets-type:before,
 div.phpdebugbar-widgets-templates a.phpdebugbar-widgets-editor-link:before
 {
-    font-family: "<?php if(empty($conf->global->MAIN_FONTAWESOME_FAMILY)) {
-                            echo 'Font Awesome 5 Free';
-                        } else {
-                            echo $conf->global->MAIN_FONTAWESOME_FAMILY;
-                        }
-                 ?>" !important;
+    font-family: var(--fontawesomeFamily) !important;
 }
 
 /* ============================================================================== */

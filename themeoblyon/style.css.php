@@ -46,6 +46,7 @@
 	require __DIR__.'/theme_vars.inc.php';
 	if (defined('THEME_ONLY_CONSTANT'))	return;
 	require_once DOL_DOCUMENT_ROOT.'/core/lib/functions2.lib.php';
+	require_once DOL_DOCUMENT_ROOT.'/core/lib/files.lib.php';
 	require_once DOL_DOCUMENT_ROOT.'/core/lib/admin.lib.php';
 	require_once DOL_DOCUMENT_ROOT.'/user/class/user.class.php';
 
@@ -94,6 +95,29 @@
 	if (GETPOST('THEME_DARKMODEENABLED', 'int')) {
 		$conf->global->THEME_DARKMODEENABLED	= GETPOST('THEME_DARKMODEENABLED', 'int');  // If darkmode was forced on URL
 	}
+	// Define fontawesome family
+	$path		= dol_buildpath('/theme/common/', 0);
+	$listdir	= dol_dir_list($path, 'directories', 0, '^fontawesome-', null, 'name', SORT_ASC, 0, 0, '', 0);
+	$listFamily	= array();
+	foreach ($listdir as $dir) {
+		if (empty($dir['name']))	continue;
+		if (preg_match('/^fontawesome-([0-9])$/', $dir['name'], $reg)) {
+			$version	= $reg[1];
+			$lines		= file(dol_buildpath('/theme/common/'.$dir['name'].'/scss', 0).'/_variables.scss');	// Fetch variables scss file in variable
+			foreach($lines as $line) {
+				// Discard any black line or anything without :
+				if (strpos($line, ':') !== false && preg_match('/\$fa-style-family/', $line, $reg)) {
+					$t						= explode('"', $line);
+					$listFamily[$version]	= $t[1];
+					break;
+				}
+			}
+		}
+	}
+	$fontawesomeFamily	= count($listFamily) > 1 ? $listFamily[max(array_keys($listFamily))] : (!empty($listFamily) ? reset($listFamily) : 'Font Awesome 5 Free');
+	$fontawesomeFamily	= getDolGlobalString('MAIN_FONTAWESOME_FAMILY', $fontawesomeFamily);
+	$fontawesomeBrands	= explode(' ', $fontawesomeFamily);
+	$fontawesomeBrands	= $fontawesomeBrands[0].' '.$fontawesomeBrands[1].' '.$fontawesomeBrands[2].' Brands';
 	$langs->load('main', 0, 1);
 	$right	= ($langs->trans('DIRECTION') == 'rtl' ? 'left' : 'right');
 	$left	= ($langs->trans('DIRECTION') == 'rtl' ? 'right' : 'left');
