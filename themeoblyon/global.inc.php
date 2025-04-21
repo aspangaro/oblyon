@@ -10549,6 +10549,7 @@ td.nobordernopadding.center.valignmiddle.col-center {
     position: sticky;
     left: 300px;
     right: 200px;
+    z-index: 1;
 }
 td.nobordernopadding.valignmiddle.right.col-right {
     position: sticky;
