@@ -227,7 +227,8 @@ OblyonImageHeightTable          = Maximum height of images in lists (tables)
 OblyonDisableVersion            = Don't show the version number of Dolibarr (in top right)
 OblyonPaddingRightBottom        = Display a margin at the bottom of the page on the right side
 # List
-SwitchColumnOnLeft=Flip the selection / search / mass action column to the left.
+SwitchColumnOnLeft=Flip the selection / search / mass action column to the left
+FixTitleInList=Sticky list title bar so that title, mass action, pagination and “Add” element are always visible
 RemoveKanbanViewInList=Remove the “Kanban view” button at the top right of lists
 FixStickyTableHeadersColumns=Sticky table column headers on elements when scrolling vertically
 FixStickyFirstColumn=Sticky first column of tables when scrolling horizontally

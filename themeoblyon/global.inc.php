@@ -10534,6 +10534,29 @@ div.tabs:first-of-type, .fiche > div.tabs
 <?php } ?>
 
 /* ============================================================================== */
+/* Fix title in list        													  */
+/* ============================================================================== */
+<?php if(getDolGlobalString('FIX_TITLE_IN_LIST') && (float) DOL_VERSION >= 18.0) { ?>
+td.nobordernopadding.widthpictotitle.valignmiddle.col-picto {
+    position: sticky;
+    left: 10px;
+}
+td.nobordernopadding.valignmiddle.col-title {
+    position: sticky;
+    left: 40px;
+}
+td.nobordernopadding.center.valignmiddle.col-center {
+    position: sticky;
+    left: 300px;
+    right: 200px;
+}
+td.nobordernopadding.valignmiddle.right.col-right {
+    position: sticky;
+    right: 10px;
+}
+<?php } ?>
+
+/* ============================================================================== */
 /* Option to remove Kanban view in list                                           */
 /* ============================================================================== */
 <?php if (!empty($conf->global->DISABLE_KANBAN_VIEW_IN_LIST) || !empty($conf->global->OBLYON_DISABLE_KANBAN_VIEW_IN_LIST)) { ?>
