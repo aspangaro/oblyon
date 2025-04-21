@@ -10419,6 +10419,9 @@ div.fiche>form>div.div-table-responsive, div.fiche>form>div.div-table-responsive
         background-color: <?php print $colorbtitle; ?>;
         z-index: 1;
     }
+    tr.liste_titre.box_titre th {
+        top: unset !important;
+    }
     .publicnewticketform2 th {
         top: unset !important;
     }
@@ -10426,6 +10429,21 @@ div.fiche>form>div.div-table-responsive, div.fiche>form>div.div-table-responsive
     .fichehalfright  tr.liste_titre th:not(#ajaxloaded_tablelines th) {
         top: unset;
     }
+
+    <?php if (getDolGlobalString('FIX_STICKY_TABS_CARD')) { ?>
+    #id-right > .fiche > form[action*="perday.php"] tr.liste_titre th:not(#ajaxloaded_tablelines th),
+    #id-right > .fiche > .tabBar > form[action*="perday.php"] tr.liste_titre th:not(#ajaxloaded_tablelines th),
+    #id-right > .fiche > form[action*="perweek.php"] tr.liste_titre th:not(#ajaxloaded_tablelines th),
+    #id-right > .fiche > .tabBar > form[action*="perweek.php"] tr.liste_titre th:not(#ajaxloaded_tablelines th),
+    #id-right > .fiche > form[action*="permonth.php"] tr.liste_titre th:not(#ajaxloaded_tablelines th),
+    #id-right > .fiche > .tabBar > form[action*="permonth.php"] tr.liste_titre th:not(#ajaxloaded_tablelines th),
+    #id-right > .fiche > form[action*="bankrecords.php"] tr.liste_titre th:not(#ajaxloaded_tablelines th),
+    #id-right > .fiche > .tabBar > form[action*="bankrecords.php"] tr.liste_titre th:not(#ajaxloaded_tablelines th),
+    #id-right > .fiche > form[action*="prelink.php"] tr.liste_titre th:not(#ajaxloaded_tablelines th),
+    #id-right > .fiche > .tabBar > form[action*="prelink.php"] tr.liste_titre th:not(#ajaxloaded_tablelines th) {
+        top: 104px !important;
+    }
+    <?php } ?>
 <?php } ?>
 
 /* ============================================================================== */
@@ -10458,7 +10476,11 @@ div.tabs:first-of-type, .fiche > div.tabs
 <?php if (!empty($conf->global->FIX_STICKY_COLUMN_FIRST) || !empty($conf->global->OBLYON_STICKY_COLUMN_FIRST)) { ?>
 @media (min-width: 768px) {
     #id-right > .fiche > form[action*="list.php"] div.div-table-responsive > table > tbody > * > :first-of-type,
-    #id-right > .fiche > .tabBar > form[action*="list.php"] div.div-table-responsive > table > tbody > * > :first-of-type {
+    #id-right > .fiche > .tabBar > form[action*="list.php"] div.div-table-responsive > table > tbody > * > :first-of-type,
+    #id-right > .fiche > form[action*="bankrecords.php"] div.div-table-responsive > table > tbody > * > :first-of-type,
+    #id-right > .fiche > .tabBar > form[action*="bankrecords.php"] div.div-table-responsive > table > tbody > * > :first-of-type,
+    #id-right > .fiche > form[action*="prelink.php"] div.div-table-responsive > table > tbody > * > :first-of-type,
+    #id-right > .fiche > .tabBar > form[action*="prelink.php"] div.div-table-responsive > table > tbody > * > :first-of-type {
         position: sticky;
         <?php if (!empty($conf->global->OBLYON_STICKY_LEFTBAR) && empty($conf->global->OBLYON_EFFECT_REDUCE_LEFTMENU)) { ?>
             left: 230px;
@@ -10495,7 +10517,11 @@ div.tabs:first-of-type, .fiche > div.tabs
 /* ============================================================================== */
 <?php if (!empty($conf->global->FIX_STICKY_COLUMN_LAST) || !empty($conf->global->OBLYON_STICKY_COLUMN_LAST)) { ?>
 #id-right > .fiche > form[action*="list.php"] div.div-table-responsive > table > tbody > * > :last-of-type,
-#id-right > .fiche > .tabBar > form[action*="list.php"] div.div-table-responsive > table > tbody > * > :last-of-type {
+#id-right > .fiche > .tabBar > form[action*="list.php"] div.div-table-responsive > table > tbody > * > :last-of-type,
+#id-right > .fiche > form[action*="bankrecords.php"] div.div-table-responsive > table > tbody > * > :last-of-type,
+#id-right > .fiche > .tabBar > form[action*="bankrecords.php"] div.div-table-responsive > table > tbody > * > :last-of-type,
+#id-right > .fiche > form[action*="prelink.php"] div.div-table-responsive > table > tbody > * > :last-of-type,
+#id-right > .fiche > .tabBar > form[action*="prelink.php"] div.div-table-responsive > table > tbody > * > :last-of-type {
     position: sticky;
     right: 0;
     z-index: 1;
@@ -10509,8 +10535,16 @@ div.tabs:first-of-type, .fiche > div.tabs
 /* Sticky total bar                                                               */
 /* ============================================================================== */
 <?php if (getDolGlobalString('FIX_STICKY_TOTAL_BAR')) { ?>
-    #id-right > .fiche > form[action*="list.php"] div.div-table-responsive > table tr.liste_total,
-    #id-right > .fiche > .tabBar > form[action*="list.php"] div.div-table-responsive > table tr.liste_total {
+#id-right > .fiche > form[action*="list.php"] div.div-table-responsive > table tr.liste_total,
+#id-right > .fiche > .tabBar > form[action*="list.php"] div.div-table-responsive > table tr.liste_total,
+#id-right > .fiche > form[action*="perday.php"] div.div-table-responsive > table tr.liste_total,
+#id-right > .fiche > .tabBar > form[action*="perday.php"] div.div-table-responsive > table tr.liste_total,
+#id-right > .fiche > form[action*="perweek.php"] div.div-table-responsive > table tr.liste_total,
+#id-right > .fiche > .tabBar > form[action*="perweek.php"] div.div-table-responsive > table tr.liste_total,
+#id-right > .fiche > form[action*="permonth.php"] div.div-table-responsive > table tr.liste_total,
+#id-right > .fiche > .tabBar > form[action*="permonth.php"] div.div-table-responsive > table tr.liste_total,
+#id-right > .fiche > form[action*="bankrecords.php"] div.div-table-responsive > table tr.liste_total,
+#id-right > .fiche > .tabBar > form[action*="bankrecords.php"] div.div-table-responsive > table tr.liste_total {
         position: sticky;
         <?php if (getDolGlobalString('FIX_STICKY_GRANDTOTAL_BAR')) { ?>
             bottom: 42px;
