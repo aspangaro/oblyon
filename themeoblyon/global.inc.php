@@ -6,6 +6,9 @@
 /* ============================================================================== */
 
 :root {
+	--fontawesomeFamily: "<?php print $fontawesomeFamily; ?>";
+	--fontawesomeBrands: "<?php print $fontawesomeBrands; ?>";
+    --fontawesomeWeight: <?php echo getDolGlobalString('MAIN_FONTAWESOME_WEIGHT', '900'); ?>;
 	--bgcolor: <?php print $bgcolor; ?>;
 	--colorbackhmenu1: rgb(<?php print $colorbackhmenu1; ?>);
 	--colorbackvmenu1: rgb(<?php print $colorbackvmenu1; ?>);
@@ -56,6 +59,8 @@
 	--productlinestocktoolow: #884400;
 	--infoboxmoduleenabledbgcolor : linear-gradient(0.4turn, #fff, #fff, #fff, #e4efe8);
 	--invertratiofilter: <?php print $invertratiofilter; ?>;
+	--colorfdatedefault: <?php print $colorfdatedefault; ?>;
+    --colorfdateselected: <?php print $colorfdateselected; ?>;
 }
 
 /*------------------------------------*\
@@ -3393,12 +3398,7 @@ div.login a:hover {
 div.login_block:after {
     /*content: '\f013';*/
     color: <?php print $bgnavtop_txt; ?>;
-    font-family: "<?php if(empty($conf->global->MAIN_FONTAWESOME_FAMILY)) {
-                            echo 'Font Awesome 5 Free';
-                        } else {
-                            echo $conf->global->MAIN_FONTAWESOME_FAMILY;
-                        }
-                 ?>" !important;
+    font-family: var(--fontawesomeFamily) !important;
     font-size: 20px;
     <?php if (!empty($conf->global->MAIN_MENU_INVERT)) { ?>
         line-height: 40px;
@@ -6239,7 +6239,7 @@ div#ui-datepicker-div {
     padding-left: 5px;
     padding-right: 5px;
     padding-top: 5px;
-    z-index: 5 !important;
+    z-index: 102 !important;    /* 102 is the minimum value because the formcofirm popup form is set to 101, so if we use the date picker on formcofirm... */
 }
 .ui-datepicker .ui-datepicker table {
     font-size: unset;
@@ -6256,8 +6256,8 @@ div#ui-datepicker-div {
 
 .ui-state-highlight, .ui-widget-content .ui-state-highlight
 {
-    color: <?php echo $colorfdatedefault; ?> !important;
-	font-weight: bold !important;
+    color: var(--colorfdatedefault) !important;
+	font-weight: bolder !important;
 }
 
 img.datecallink { padding-left: 2px !important; padding-right: 2px !important; }
@@ -7025,7 +7025,7 @@ A.none, A.none:active, A.none:visited, A.none:hover {
 }
 .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover {
     background: var(--colorbackhmenu1);
-    color: #ffffff !important;
+    color: var(--colorfdateselected) !important;
     border: 1px solid var(--colorbackhmenu1);
 }
 .ui-menu {
@@ -10163,18 +10163,8 @@ a.phpdebugbar-tab.phpdebugbar-active {
 	font-weight: 600 !important;
 }
 .phpdebugbar-fa-tags, .phpdebugbar-fa-tasks, .phpdebugbar-indicator .fa {
-    font-family: "<?php if(empty($conf->global->MAIN_FONTAWESOME_FAMILY)) {
-                            echo 'Font Awesome 5 Free';
-                        } else {
-                            echo $conf->global->MAIN_FONTAWESOME_FAMILY;
-                        }
-                 ?>";
-    font-weight: <?php if(empty($conf->global->MAIN_FONTAWESOME_WEIGHT)) {
-                            echo 900;
-                        } else {
-                            echo $conf->global->MAIN_FONTAWESOME_WEIGHT;
-                        }
-                  ?>;
+    font-family: var(--fontawesomeFamily) !important;
+    font-weight: var(--fontawesomeWeight);
 }
 div.phpdebugbar-widgets-messages li.phpdebugbar-widgets-list-item span.phpdebugbar-widgets-value.phpdebugbar-widgets-warning:before,
 div.phpdebugbar-widgets-messages li.phpdebugbar-widgets-list-item span.phpdebugbar-widgets-value.phpdebugbar-widgets-error:before,
@@ -10191,12 +10181,7 @@ div.phpdebugbar-widgets-templates span.phpdebugbar-widgets-param-count:before,
 div.phpdebugbar-widgets-templates span.phpdebugbar-widgets-type:before,
 div.phpdebugbar-widgets-templates a.phpdebugbar-widgets-editor-link:before
 {
-    font-family: "<?php if(empty($conf->global->MAIN_FONTAWESOME_FAMILY)) {
-                            echo 'Font Awesome 5 Free';
-                        } else {
-                            echo $conf->global->MAIN_FONTAWESOME_FAMILY;
-                        }
-                 ?>" !important;
+    font-family: var(--fontawesomeFamily) !important;
 }
 
 /* ============================================================================== */
@@ -10494,7 +10479,7 @@ div.tabs:first-of-type, .fiche > div.tabs
     }
 
     <?php if (getDolGlobalString('MAIN_CHECKBOX_LEFT_COLUMN')) { ?>
-        .dropdown dd ul {
+        .dropdown dd ul:not(.ulselectedfields ) {
             left: 60px;
         }
     <?php } else { ?>
