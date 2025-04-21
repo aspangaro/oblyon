@@ -4075,7 +4075,7 @@ font-size: 14px;
             max-height: 300px;
             overflow-y: auto;
         }
-        #id-left::-webkit-scrollbar { 
+        #id-left::-webkit-scrollbar {
             display: none;
         }
     }
@@ -6239,6 +6239,7 @@ div#ui-datepicker-div {
     padding-left: 5px;
     padding-right: 5px;
     padding-top: 5px;
+    z-index: 5 !important;
 }
 .ui-datepicker .ui-datepicker table {
     font-size: unset;
@@ -6695,6 +6696,7 @@ table.cal_event td.cal_event_right {
 .ui-widget-content a {
     color: var(--colortext) !important;
 }
+
 /*.ui-widget-header {
 	background: var(--colorbacktitle);
 }*/
@@ -8229,6 +8231,11 @@ dl.dropdown {
     vertical-align: middle;
     display: inline-block;
 }
+
+#linktoobjectname {
+    width:400px;
+}
+
 .dropdown dd, .dropdown dt {
     margin:0px;
     padding:0px;
