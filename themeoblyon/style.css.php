@@ -116,13 +116,17 @@
 	}
 	$fontawesomeFamily	= count($listFamily) > 1 ? $listFamily[max(array_keys($listFamily))] : (!empty($listFamily) ? reset($listFamily) : 'Font Awesome 5 Free');
 	$fontawesomeFamily	= getDolGlobalString('MAIN_FONTAWESOME_FAMILY', $fontawesomeFamily);
+	// Vérifie que la famille font awesome est bien enegistré
+	if (!getDolGlobalString('MAIN_FONTAWESOME_FAMILY', '')) {
+		dolibarr_set_const($db, 'MAIN_FONTAWESOME_FAMILY', $fontawesomeFamily, 'chaine', 0, 'module Oblyon', 0);
+	}
 	$fontawesomeBrands	= explode(' ', $fontawesomeFamily);
 	$fontawesomeBrands	= $fontawesomeBrands[0].' '.$fontawesomeBrands[1].' '.$fontawesomeBrands[2].' Brands';
 	$langs->load('main', 0, 1);
-	$right	= ($langs->trans('DIRECTION') == 'rtl' ? 'left' : 'right');
-	$left	= ($langs->trans('DIRECTION') == 'rtl' ? 'right' : 'left');
-	$path	= '';		// This value may be used in future for external module to overwrite theme
-	$theme	= 'oblyon';	// Value of theme
+	$right				= ($langs->trans('DIRECTION') == 'rtl' ? 'left' : 'right');
+	$left				= ($langs->trans('DIRECTION') == 'rtl' ? 'right' : 'left');
+	$path				= '';		// This value may be used in future for external module to overwrite theme
+	$theme				= 'oblyon';	// Value of theme
 	if (!empty(getDolGlobalString('MAIN_OVERWRITE_THEME_RES'))) {
 		$path	= '/'.getDolGlobalString('MAIN_OVERWRITE_THEME_RES');
 		$theme	= getDolGlobalString('MAIN_OVERWRITE_THEME_RES');
@@ -134,7 +138,7 @@
 	$dol_optimize_smallscreen	= $conf->dol_optimize_smallscreen;
 	$dol_no_mouse_hover			= $conf->dol_no_mouse_hover;
 	dolibarr_set_const($db, 'THEME_ELDY_ENABLE_PERSONALIZED', 1, 'chaine', 0, 'OblyonTheme', $conf->entity);
-	$useboldtitle				= (isset($conf->global->THEME_ELDY_USEBOLDTITLE) ? getDolGlobalString('THEME_ELDY_USEBOLDTITLE') : 0);
+	$useboldtitle				= getDolGlobalInt('THEME_ELDY_USEBOLDTITLE', 0);
 
 	// Oblyon
 	$maincolor					= getDolGlobalString('OBLYON_COLOR_MAIN');								// default value: #0083a2

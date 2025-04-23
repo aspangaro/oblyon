@@ -4,7 +4,7 @@
 	* Copyright (C) 2004-2012  Laurent Destailleur  <eldy@users.sourceforge.net>
 	* Copyright (C) 2005-2012  Regis Houssin        <regis.houssin@capnetworks.com>
 	* Copyright (C) 2015-2024  Alexandre Spangaro   <alexandre@inovea-conseil.com>
-	* Copyright (C) 2022       Sylvain Legrand      <contact@infras.fr>
+	* Copyright (C) 2022-2025  Sylvain Legrand      <contact@infras.fr>
 	*
 	* This program is free software: you can redistribute it and/or modify
 	* it under the terms of the GNU General Public License as published by
@@ -29,6 +29,7 @@
 	// Libraries ************************************
 	include_once DOL_DOCUMENT_ROOT.'/core/modules/DolibarrModules.class.php';
 	dol_include_once('/oblyon/lib/oblyon.lib.php');
+	dol_include_once('/oblyon/backport/v21/core/lib/functions.lib.php');
 
 	// Description and activation class *************
 	class modoblyon extends DolibarrModules
@@ -43,47 +44,46 @@
 
 			$langs->loadLangs(array('oblyon@oblyon', 'inovea@oblyon'));
 
-			$easyaVersion = (float) !empty($conf->global->EASYA_VERSION) ? $conf->global->EASYA_VERSION : '';
-
+			$easyaVersion					= getDolGlobalFloat('EASYA_VERSION', 0);
 			$this->db						= $db;
-			$this->numero					= 432573;											// Unique Id for module
+			$this->numero					= 432573;																				// Unique Id for module
 			$this->name						= preg_replace('/^mod/i', '', get_class($this));	// Module label (no space allowed)
 			$this->editor_name				= '<b>Inovea Conseil</b>';
 			$this->editor_web				= 'https://www.inovea-conseil.com';
 			$this->editor_url				= "https://www.inovea-conseil.com";
 			$this->editor_email				= 'support@inovea-conseil.com';
 			$this->url_last_version 		= 'https://raw.githubusercontent.com/aspangaro/oblyon/14.0/htdocs/custom/oblyon/VERSION';
-			$this->rights_class				= $this->name;										// Key text used to identify module (for permissions, menus, etc...)
-			$this->family					= 'Inovea Conseil';									// used to group modules in module setup page
+			$this->rights_class				= $this->name;																			// Key text used to identify module (for permissions, menus, etc...)
+			$this->family					= 'Inovea Conseil';																		// used to group modules in module setup page
 			$this->module_position			= 10;
 			$this->module_position			= 1;
-			$this->description				= $langs->trans('Module432573Desc');				// Module description
-			$this->version					= file_get_contents(__DIR__.'/../../VERSION');		// Version : 'development', 'experimental', 'dolibarr' or 'dolibarr_deprecated' or version
-			$this->const_name				= 'MAIN_MODULE_'.strtoupper($this->name);			// llx_const table to save module status enabled/disabled
-			$this->special					= 0;												// Where to store the module in setup page (0=common,1=interface,2=others,3=very specific)
-			$this->picto					= 'inovea@'.$this->name;						// Name of image file used for this module. If in theme => 'pictovalue' ; if in module => 'pictovalue@module' under name object_pictovalue.png
+			$this->description				= $langs->trans('Module432573Desc');												// Module description
+			$this->version					= file_get_contents(__DIR__.'/../../VERSION');								// Version : 'development', 'experimental', 'dolibarr' or 'dolibarr_deprecated' or version
+			$this->const_name				= 'MAIN_MODULE_'.strtoupper($this->name);										// llx_const table to save module status enabled/disabled
+			$this->special					= 0;																					// Where to store the module in setup page (0=common,1=interface,2=others,3=very specific)
+			$this->picto					= 'inovea@'.$this->name;																// Name of image file used for this module. If in theme => 'pictovalue' ; if in module => 'pictovalue@module' under name object_pictovalue.png
 			$this->module_parts				= array('menus'	=> 1,
 													'js'	=> array('js'	=> '/'.$this->name.'/js/pushy.js'),
 													'css'	=> array('css'	=> ('/'.$this->name.'/css/'.$this->name.'.css'), ('/theme/'.$this->name.'/custom.css.php')),
 													'tpl'	=> 0,
-													'hooks' => array('data' => array('main'),'entity' => '0',),
+													'hooks' => array('data' => array('main'), 'entity' => '0')
 													);
-			$this->dirs						= array('/'.$this->name.'/sql');					// Data directories to create when module is enabled. Example: this->dirs = array("/mymodule/temp");
-			$this->config_page_url			= array('menus.php@'.$this->name);					// List of php page, stored into mymodule/admin directory, to use to setup module.
+			$this->dirs						= array('/'.$this->name.'/sql');														// Data directories to create when module is enabled. Example: this->dirs = array("/mymodule/temp");
+			$this->config_page_url			= array('menus.php@'.$this->name);														// List of php page, stored into mymodule/admin directory, to use to setup module.
 			// Dependencies
-			$this->hidden					= false;											// A condition to hide module
-			$this->depends					= array();											// List of modules id that must be enabled if this module is enabled
-			$this->requiredby				= array();											// List of modules id to disable if this one is disabled
-			$this->conflictwith				= array("modQuickUX");							// List of modules id this module is in conflict with
-			$this->phpmin					= array(7,1);										// Minimum version of PHP required by module
-      		$this->need_dolibarr_version	= array(14,0);										// Minimum version of Dolibarr required by module
+			$this->hidden					= false;																				// A condition to hide module
+			$this->depends					= array();																				// List of modules id that must be enabled if this module is enabled
+			$this->requiredby				= array();																				// List of modules id to disable if this one is disabled
+			$this->conflictwith				= array("modQuickUX");																	// List of modules id this module is in conflict with
+			$this->phpmin					= array(7,1);																			// Minimum version of PHP required by module
+      		$this->need_dolibarr_version	= array(14,0);																			// Minimum version of Dolibarr required by module
 			if ($easyaVersion >= '2024') {
 				$easya_info = json_decode(file_get_contents(__DIR__ . '/../../.easya_info.json'));
-				$this->phpmin = explode('.', $easya_info->php_min_version);                    // Minimum version of PHP required by module
-				$this->need_dolibarr_version = explode('.', $easya_info->dlb_min_version);    // Minimum version of Dolibarr required by module
+				$this->phpmin = explode('.', $easya_info->php_min_version);										// Minimum version of PHP required by module
+				$this->need_dolibarr_version = explode('.', $easya_info->dlb_min_version);						// Minimum version of Dolibarr required by module
 			}
 			$this->langfiles				= array($this->name.'@'.$this->name);
-			$this->const					= array();											// List of particular constants to add when module is enabled
+			$this->const					= array();																				// List of particular constants to add when module is enabled
 
 			// WIP - Remove classic Dolibarr tabs to avoid a theme change problem (Only available > 15.0.x)
 
@@ -95,7 +95,7 @@
 					//'ihm_admin:+template_oblyon:Colors:oblyon@oblyon::/oblyon/admin/colors.php',
 				);
 			}
-			if (! isset($conf->oblyon->enabled)) {
+			if (!isModEnabled('oblyon')) {
 				$conf->oblyon			= new stdClass();
 				$conf->oblyon->enabled	= 0;
 			}
@@ -134,6 +134,18 @@
 				setEventMessage($langs->trans('OblyonCopyThemeError'), 'errors');
 				return 0;
 			}
+			// Get highest font awesome directory
+			$path				= dol_buildpath('/theme/common/', 0);
+			$listdir			= dol_dir_list($path, 'directories', 0, '^fontawesome-', null, 'name', SORT_ASC, 0, 0, '', 0);
+			$listFontawesome	= array();
+			foreach ($listdir as $dir) {
+				if (empty($dir['name']))	continue;
+				if (preg_match('/^fontawesome-([0-9])$/', $dir['name'], $reg)) {
+					$listFontawesome[$reg[1]]	= $dir['name'];
+				}
+			}
+			$fontawesome_directory	= count($listFontawesome) > 1 ? $listFontawesome[max(array_keys($listFontawesome))] : (!empty($listFontawesome) ? reset($listFontawesome) : 'fontawesome-5');
+			dolibarr_set_const($this->db, 'MAIN_FONTAWESOME_DIRECTORY', '/theme/common/'.$fontawesome_directory, 'chaine', 0, 'module Oblyon', 0);
 			// delete old menu manager
 			if (file_exists(dol_buildpath('/core/menus/standard/oblyon_menu.php')))	unlink(dol_buildpath('/core/menus/standard/oblyon_menu.php'));
 			if (file_exists(dol_buildpath('/core/menus/standard/oblyon.lib.php')))	unlink(dol_buildpath('/core/menus/standard/oblyon.lib.php'));
@@ -195,4 +207,3 @@
 			return $this->_remove($sql, $options);
 		}
 	}
-?>

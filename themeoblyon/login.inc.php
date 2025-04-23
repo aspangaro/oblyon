@@ -15,7 +15,7 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
     }
     .login_center {
 		margin-top: 30vw;
-<?php if (empty($conf->global->MAIN_LOGIN_RIGHT)) { ?>
+<?php if (!getDolGlobalString('MAIN_LOGIN_RIGHT')) { ?>
 		display: table-cell;
 		vertical-align: middle;
 <?php } ?>
@@ -32,11 +32,11 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
     .login_table_title {
 		pointer-events: none;
 		cursor: default;
-<?php if (! empty($conf->global->MAIN_LOGIN_RIGHT)) { ?>
+<?php if (getDolGlobalString('MAIN_LOGIN_RIGHT')) { ?>
 		margin: 0px calc((50vw - 530px) / 2) 0px auto;
 		width: 530px;
 <?php } ?>
-		max-width: <?php echo empty($conf->global->MAIN_LOGIN_RIGHT) ? '530px' : 'calc(50vw - 70px)'; ?>;
+		max-width: <?php echo !getDolGlobalString('MAIN_LOGIN_RIGHT') ? '530px' : 'calc(50vw - 70px)'; ?>;
 		color: <?php print $bgnavtop_txt; ?> !important;
 		padding-bottom: 10px;
     }
@@ -47,18 +47,18 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
         text-shadow: 1px 1px 1px #FFF;
     }
     .login_table {
-		margin: <?php echo empty($conf->global->MAIN_LOGIN_RIGHT) ? '0px auto' : '0px calc((50vw - 600px) / 2) 0px auto'; ?>;
+		margin: <?php echo !getDolGlobalString('MAIN_LOGIN_RIGHT') ? '0px auto' : '0px calc((50vw - 600px) / 2) 0px auto'; ?>;
 
 		padding: 4px;
 		width: 600px;
-		max-width: <?php echo empty($conf->global->MAIN_LOGIN_RIGHT) ? '600px' : '50vw'; ?>;
-<?php if (! empty($conf->global->MAIN_LOGIN_RIGHT)) { ?>
+		max-width: <?php echo !getDolGlobalString('MAIN_LOGIN_RIGHT') ? '600px' : '50vw'; ?>;
+<?php if (getDolGlobalString('MAIN_LOGIN_RIGHT')) { ?>
 		width: 600px;
 <?php } ?>
 		-webkit-box-shadow: 12px 12px 25px 1px rgba(0, 0, 0, 0.2), 0 2px 6px rgba(60,60,60,0.15);
 		box-shadow: 12px 12px 25px 1px rgba(0, 0, 0, 0.2), 0 2px 6px rgba(60,60,60,0.15);
         <?php
-            if (!empty($conf->global->MAIN_LOGIN_BACKGROUND)) {
+            if (getDolGlobalString('MAIN_LOGIN_BACKGROUND')) {
 				print '	background-color: '.$colorbtitle.';';
             } else {
                 print '	background-color: #FFFFFF;';
@@ -169,7 +169,7 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
         display: inline-block;
     }
     div.login_block span.aversion {
-    <?php if ( $conf->global->MAIN_MENU_INVERT ) { ?>
+    <?php if (getDolGlobalString('MAIN_MENU_INVERT')) { ?>
         color: <?php echo $bgnavleft_txt; ?>;
     <?php } else { ?>
         color: <?php echo $bgnavtop_txt; ?>;

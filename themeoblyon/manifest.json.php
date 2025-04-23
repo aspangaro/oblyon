@@ -36,8 +36,8 @@ if (! defined('NOREQUIREAJAX'))   define('NOREQUIREAJAX', '1');
 
 require_once __DIR__.'/../../main.inc.php';
 
-$appli=constant('DOL_APPLICATION_TITLE');
-if (!empty($conf->global->MAIN_APPLICATION_TITLE)) $appli=$conf->global->MAIN_APPLICATION_TITLE;
+$appli = constant('DOL_APPLICATION_TITLE');
+$appli = getDolGlobalString('MAIN_APPLICATION_TITLE', $appli);
 ?>
 {
     "name": "<?php echo $appli; ?>",

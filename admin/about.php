@@ -1,6 +1,7 @@
 <?php
 /* Copyright (C) 2015       Nicolas Rivera      <nrivera.pro@gmail.com>
  * Copyright (C) 2015-2024  Alexandre Spangaro  <alexandre@inovea-conseil.com>
+ * Copyright (C) 2023-2025  Sylvain Legrand		<contact@infras.fr>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -77,7 +78,7 @@ $supportvalue = "/*****"."<br>";
 $supportvalue.= " * Module : Oblyon"."<br>";
 $supportvalue.= " * Module version : ".$oblyonVersion."<br>";
 $supportvalue.= " * Dolibarr version : ".DOL_VERSION."<br>";
-$supportvalue.= " * Dolibarr version installation initiale : ".$conf->global->MAIN_VERSION_LAST_INSTALL."<br>";
+$supportvalue.= " * Dolibarr version installation initiale : ".getDolGlobalString('MAIN_VERSION_LAST_INSTALL')."<br>";
 $supportvalue.= " * Version PHP : ".PHP_VERSION."<br>";
 $supportvalue.= " *****/"."<br><br>";
 $supportvalue.= "Description de votre problème :"."<br>";

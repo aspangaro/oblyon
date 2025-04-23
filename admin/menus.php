@@ -1,7 +1,7 @@
 <?php
 /************************************************
 	* Copyright (C) 2015-2022  Alexandre Spangaro   <alexandre@inovea-conseil.com>
-	* Copyright (C) 2022       Sylvain Legrand      <contact@infras.fr>
+	* Copyright (C) 2022-2025  Sylvain Legrand      <contact@infras.fr>
 	*
 	* This program is free software: you can redistribute it and/or modify
 	* it under the terms of the GNU General Public License as published by
@@ -73,10 +73,10 @@ if ($result == -1)			setEventMessages($langs->trans('Error'), null, 'errors');
 $_SESSION['dol_resetcache']	= dol_print_date(dol_now(), 'dayhourlog');	// Reset cache
 
 // init variables *******************************
-$result = !empty($conf->global->MAIN_MENU_INVERT) && (/*!empty($conf->global->OBLYON_SHOW_COMPNAME) || */!empty($conf->global->OBLYON_HIDE_LEFTMENU)) ? dolibarr_set_const($db, 'OBLYON_FULLSIZE_TOPBAR', 1, 'chaine', 0, 'Oblyon module', $conf->entity) : '';
-$result	= !empty($conf->global->OBLYON_HIDE_LEFTMENU) && empty($conf->global->OBLYON_EFFECT_LEFTMENU) ? dolibarr_set_const($db, 'OBLYON_EFFECT_LEFTMENU', 'slide', 'chaine', 0, 'Oblyon module', $conf->entity) : '';
-$result	= !empty($conf->global->MAIN_MENU_INVERT) && !empty($conf->global->OBLYON_REDUCE_LEFTMENU) ? dolibarr_set_const($db, 'OBLYON_HIDE_LEFTICONS', 0, 'chaine', 0, 'Oblyon module', $conf->entity) : '';
-$result	= !empty($conf->global->OBLYON_REDUCE_LEFTMENU) && empty($conf->global->OBLYON_EFFECT_REDUCE_LEFTMENU) ? dolibarr_set_const($db, 'OBLYON_EFFECT_REDUCE_LEFTMENU', 'hover', 'chaine', 0, 'Oblyon module', $conf->entity) : '';
+$result = getDolGlobalString('MAIN_MENU_INVERT') && (/*getDolGlobalString('OBLYON_SHOW_COMPNAME') || */getDolGlobalString('OBLYON_HIDE_LEFTMENU')) ? dolibarr_set_const($db, 'OBLYON_FULLSIZE_TOPBAR', 1, 'chaine', 0, 'Oblyon module', $conf->entity) : '';
+$result	= getDolGlobalString('OBLYON_HIDE_LEFTMENU') && !getDolGlobalString('OBLYON_EFFECT_LEFTMENU') ? dolibarr_set_const($db, 'OBLYON_EFFECT_LEFTMENU', 'slide', 'chaine', 0, 'Oblyon module', $conf->entity) : '';
+$result	= getDolGlobalString('MAIN_MENU_INVERT') && getDolGlobalString('OBLYON_REDUCE_LEFTMENU') ? dolibarr_set_const($db, 'OBLYON_HIDE_LEFTICONS', 0, 'chaine', 0, 'Oblyon module', $conf->entity) : '';
+$result	= getDolGlobalString('OBLYON_REDUCE_LEFTMENU') && !getDolGlobalString('OBLYON_EFFECT_REDUCE_LEFTMENU') ? dolibarr_set_const($db, 'OBLYON_EFFECT_REDUCE_LEFTMENU', 'hover', 'chaine', 0, 'Oblyon module', $conf->entity) : '';
 
 // View *****************************************
 $page_name = $langs->trans('OblyonMenusTitle');
@@ -125,14 +125,14 @@ print '<table summary = "edit" class = "noborder centpercent editmode tableforfi
 	oblyon_print_liste_titre($metas);
 
 // Option only if invert menu is on
-if (!empty($conf->global->MAIN_MENU_INVERT)) {
+if (getDolGlobalString('MAIN_MENU_INVERT')) {
 	$metas		= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'menus');
-	$warning	= empty($conf->global->OBLYON_FULLSIZE_TOPBAR) ? '<br><span class = "warning">'.$langs->trans('FullsizeTopBarWarning').'</span>' : '';
+	$warning	= !getDolGlobalString('OBLYON_FULLSIZE_TOPBAR') ? '<br><span class = "warning">'.$langs->trans('FullsizeTopBarWarning').'</span>' : '';
 	oblyon_print_input('OBLYON_FULLSIZE_TOPBAR', 'on_off', $langs->trans('FullsizeTopBar').$warning, '', $metas, 2, 1);	// Fullsize top bar
 }
 $metas		= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'menus');
 oblyon_print_input('MAIN_SHOW_LOGO', 'on_off', $langs->trans('OblyonEnableShowLogo'), '', $metas, 2, 1);	// Show Company Logo
-$warning	= !empty($conf->global->OBLYON_STICKY_TOPBAR) ? '<br><span class = "warning">'.$langs->trans('StickyTopBarWarning').'</span>'.(!empty($conf->global->MAIN_MENU_INVERT) ? '<br><span class = "warning">'.$langs->trans('StickyTopBarInvertedWarning').'</span>' : '') : '';
+$warning	= getDolGlobalString('OBLYON_STICKY_TOPBAR') ? '<br><span class = "warning">'.$langs->trans('StickyTopBarWarning').'</span>'.(getDolGlobalString('MAIN_MENU_INVERT') ? '<br><span class = "warning">'.$langs->trans('StickyTopBarInvertedWarning').'</span>' : '') : '';
 $metas		= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'menus');
 oblyon_print_input('OBLYON_STICKY_TOPBAR', 'on_off', $langs->trans('StickyTopBar').$warning, '', $metas, 2, 1);	// Sticky top bar
 $metas		= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'menus');
@@ -141,12 +141,12 @@ oblyon_print_input('OBLYON_HIDE_TOPICONS', 'on_off', $langs->trans('HideTopIcons
 $metas		= array(array(3), 'LeftMenu');
 oblyon_print_liste_titre($metas);
 $metas		= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'menus');
-if (!empty($conf->global->MAIN_MENU_INVERT)) {
+if (getDolGlobalString('MAIN_MENU_INVERT')) {
     //oblyon_print_input('OBLYON_SHOW_COMPNAME', 'on_off', $langs->trans('ShowCompanyName'), '', $metas, 2, 1);    // Show Company name
 } else {
     oblyon_print_input('OBLYON_SHOW_COMPNAME', 'on_off', $langs->trans('ShowCompanyName'), '', $metas, 2, 1);    // Show Company name
 }
-$warning	= !empty($conf->global->OBLYON_STICKY_LEFTBAR) ? '<br><span class = "warning">'.$langs->trans('StickyLeftBarWarning').'</span>'.(!empty($conf->global->MAIN_MENU_INVERT) ? '<br><span class = "warning">'.$langs->trans('StickyLeftBarInvertedWarning').'</span>' : '') : '';
+$warning	= getDolGlobalString('OBLYON_STICKY_LEFTBAR') ? '<br><span class = "warning">'.$langs->trans('StickyLeftBarWarning').'</span>'.(getDolGlobalString('MAIN_MENU_INVERT') ? '<br><span class = "warning">'.$langs->trans('StickyLeftBarInvertedWarning').'</span>' : '') : '';
 $metas		= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'menus');
 oblyon_print_input('OBLYON_STICKY_LEFTBAR', 'on_off', $langs->trans('StickyLeftBar').$warning,	'', $metas, 2, 1);	// Sticky left bar
 $metas		= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'menus');
@@ -156,26 +156,26 @@ if (getDolGlobalInt('OBLYON_HIDE_LEFTMENU')) {
 	print '				<tr class = "oddeven">
 							<td colspan = "2">'.$langs->trans('OpenEffect').'</td>
 							<td class = "center">
-								<input type = "radio" value = "slide" id = "slide" class = "flat action" name = "OBLYON_EFFECT_LEFTMENU" '.($conf->global->OBLYON_EFFECT_LEFTMENU == "slide" ? ' checked = "checked"' : '').'">&nbsp;<label for = "slide">'.$langs->trans('EffectLeftMenuSlide').'</label>
+								<input type = "radio" value = "slide" id = "slide" class = "flat action" name = "OBLYON_EFFECT_LEFTMENU" '.(getDolGlobalString('OBLYON_EFFECT_LEFTMENU') == "slide" ? ' checked = "checked"' : '').'">&nbsp;<label for = "slide">'.$langs->trans('EffectLeftMenuSlide').'</label>
 								<br/>
-								<input type = "radio" value = "push" id = "push" class = "flat action" name = "OBLYON_EFFECT_LEFTMENU" '.($conf->global->OBLYON_EFFECT_LEFTMENU == "push" ? ' checked = "checked"' : '').'">&nbsp;<label for = "push">'.$langs->trans('EffectLeftMenuPush').'</label>
+								<input type = "radio" value = "push" id = "push" class = "flat action" name = "OBLYON_EFFECT_LEFTMENU" '.(getDolGlobalString('OBLYON_EFFECT_LEFTMENU') == "push" ? ' checked = "checked"' : '').'">&nbsp;<label for = "push">'.$langs->trans('EffectLeftMenuPush').'</label>
 							</td>
 						</tr>';
 }
 $metas		= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'menus');
 oblyon_print_input('OBLYON_HIDE_LEFTICONS', 'on_off', $langs->trans('HideLeftIcons'), '', $metas, 2, 1);	// Hide left icons
-if (!empty($conf->global->MAIN_MENU_INVERT)) {
+if (getDolGlobalString('MAIN_MENU_INVERT')) {
 	$metas		= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'menus');
-	$warning	= !empty($conf->global->OBLYON_REDUCE_LEFTMENU) ? '<br><span class = "warning">'.$langs->trans('MicroMenuLeftBarHideLeftIconsWarning').'</span><br><span class = "warning">'.$langs->trans('MicroMenuLeftBarCompanyNameWarning').'</span>' : '';
+	$warning	= getDolGlobalString('OBLYON_REDUCE_LEFTMENU') ? '<br><span class = "warning">'.$langs->trans('MicroMenuLeftBarHideLeftIconsWarning').'</span><br><span class = "warning">'.$langs->trans('MicroMenuLeftBarCompanyNameWarning').'</span>' : '';
 	oblyon_print_input('OBLYON_REDUCE_LEFTMENU', 'on_off', $langs->trans('ReduceLeftMenu').$warning, '', $metas, 2, 1);	// Micro left menu
 	// Effect hover leftmenu
-	if (!empty($conf->global->OBLYON_REDUCE_LEFTMENU)) {
+	if (getDolGlobalInt('OBLYON_REDUCE_LEFTMENU')) {
 		print '			<tr class = "oddeven">
 							<td colspan = "2">'.$langs->trans('OpenEffect').'</td>
 							<td class = "center">
-								<input type = "radio" value = "hover" id = "hover" class = "flat action" name = "OBLYON_EFFECT_REDUCE_LEFTMENU" '.($conf->global->OBLYON_EFFECT_REDUCE_LEFTMENU == "hover" ? ' checked = "checked"' : '').'">&nbsp;<label for = "hover">'.$langs->trans('EffectMicroMenuHover').'</label>
+								<input type = "radio" value = "hover" id = "hover" class = "flat action" name = "OBLYON_EFFECT_REDUCE_LEFTMENU" '.(getDolGlobalString('OBLYON_EFFECT_REDUCE_LEFTMENU') == "hover" ? ' checked = "checked"' : '').'">&nbsp;<label for = "hover">'.$langs->trans('EffectMicroMenuHover').'</label>
 							<br/>
-								<input type = "radio" value = "only" id = "only" class = "flat action" name = "OBLYON_EFFECT_REDUCE_LEFTMENU" '.($conf->global->OBLYON_EFFECT_REDUCE_LEFTMENU == "only" ? ' checked = "checked"' : '').'">&nbsp;<label for = "only">'.$langs->trans('EffectMicroMenuOnly').'</label>
+								<input type = "radio" value = "only" id = "only" class = "flat action" name = "OBLYON_EFFECT_REDUCE_LEFTMENU" '.(getDolGlobalString('OBLYON_EFFECT_REDUCE_LEFTMENU') == "only" ? ' checked = "checked"' : '').'">&nbsp;<label for = "only">'.$langs->trans('EffectMicroMenuOnly').'</label>
 							</td>
 						</tr>';
 	}

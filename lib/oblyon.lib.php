@@ -1,7 +1,7 @@
 <?php
 	/************************************************
 	* Copyright (C) 2015-2022  Alexandre Spangaro   <alexandre@inovea-conseil.com>
-	* Copyright (C) 2022       Sylvain Legrand      <contact@infras.fr>
+	* Copyright (C) 2022-2025	   Sylvain Legrand	  <contact@infras.fr>
 	*
 	* This program is free software: you can redistribute it and/or modify
 	* it under the terms of the GNU General Public License as published by
@@ -44,14 +44,14 @@
 		$head[$h][2] = 'menus';
 		$h++;
 
-		if(!empty($conf->global->EASYA_VERSION)) {
-            if ((float)$conf->global->EASYA_VERSION >= 2022.5) {
-                $head[$h][0] = dol_buildpath("/oblyon/admin/icons.php", 1);
-                $head[$h][1] = $langs->trans("Icons");
-                $head[$h][2] = 'icons';
-                $h++;
-            }
-        }
+		$fontawesomeFamily	= explode(' ', getDolGlobalString('MAIN_FONTAWESOME_FAMILY', ''));
+		dol_syslog('ici  $fontawesomeFamily[3] = '. $fontawesomeFamily[3]);
+		if (!empty($fontawesomeFamily[3]) && $fontawesomeFamily[3] != 'Free') {
+			$head[$h][0] = dol_buildpath("/oblyon/admin/icons.php", 1);
+			$head[$h][1] = $langs->trans("Icons");
+			$head[$h][2] = 'icons';
+			$h++;
+		}
 
 		$head[$h][0] = dol_buildpath("/oblyon/admin/colors.php", 1);
 		$head[$h][1] = $langs->trans("Colors");
@@ -68,10 +68,10 @@
 		$head[$h][2] = 'options';
 		$h++;
 
-        $head[$h][0] = dol_buildpath("/oblyon/admin/customcss.php", 1);
-        $head[$h][1] = $langs->trans("CustomCSS");
-        $head[$h][2] = 'customcss';
-        $h++;
+		$head[$h][0] = dol_buildpath("/oblyon/admin/customcss.php", 1);
+		$head[$h][1] = $langs->trans("CustomCSS");
+		$head[$h][2] = 'customcss';
+		$h++;
 
 		// Show more tabs from modules
 		// Entries must be declared in modules descriptor with line
@@ -83,17 +83,17 @@
 		//); // to remove a tab
 		complete_head_from_modules($conf, $langs, null, $head, $h, 'admin_oblyon');
 
-        complete_head_from_modules($conf, $langs, null, $head, $h, 'admin_oblyon', 'remove');
+		complete_head_from_modules($conf, $langs, null, $head, $h, 'admin_oblyon', 'remove');
 
 		$head[$h][0] = dol_buildpath("/oblyon/admin/about.php", 1);
-        $head[$h][1] = $langs->trans("About") . " / " . $langs->trans("Support");
+		$head[$h][1] = $langs->trans("About") . " / " . $langs->trans("Support");
 		$head[$h][2] = 'about';
 		$h++;
 
-        $head[$h][0] = dol_buildpath("/oblyon/admin/changelog.php", 1);
-        $head[$h][1] = $langs->trans("InoveaChangeLog");
-        $head[$h][2] = 'changelog';
-        $h++;
+		$head[$h][0] = dol_buildpath("/oblyon/admin/changelog.php", 1);
+		$head[$h][1] = $langs->trans("InoveaChangeLog");
+		$head[$h][2] = 'changelog';
+		$h++;
 
 		return $head;
 	}
@@ -108,7 +108,7 @@
 	{
 		global $db, $conf, $langs, $errormsg;
 
-        require_once DOL_DOCUMENT_ROOT.'/core/lib/files.lib.php';
+		require_once DOL_DOCUMENT_ROOT.'/core/lib/files.lib.php';
 
 		// Control dir and file
 		$path		= DOL_DATA_ROOT.'/'.(!isModEnabled('multicompany') || $conf->entity == 1 ? '' : $conf->entity.'/').$appliname.'/sql';
@@ -129,7 +129,7 @@
 			// Print headers and global mysql config vars
 			$sqlhead	= '-- '.$db::LABEL.' dump via php with Dolibarr '.DOL_VERSION.'
 --
--- Host: '.$db->db->host_info.'    Database: '.$db->database_name.'
+-- Host: '.$db->db->host_info.'	Database: '.$db->database_name.'
 -- ------------------------------------------------------
 -- Server version			'.$db->db->server_info.'
 -- Dolibarr version			'.DOL_VERSION.'
@@ -230,22 +230,22 @@ SET FOREIGN_KEY_CHECKS = 1;
 	function oblyon_restore_module ($appliname)
 	{
 		global $conf;
-        require_once DOL_DOCUMENT_ROOT.'/core/lib/files.lib.php';
+		require_once DOL_DOCUMENT_ROOT.'/core/lib/files.lib.php';
 
-		$pathsql	= DOL_DATA_ROOT.'/'.(empty($conf->global->MAIN_MODULE_MULTICOMPANY) || $conf->entity == 1 ? '' : $conf->entity.'/').$appliname.'/sql';
+		$pathsql	= DOL_DATA_ROOT.'/'.(!getDolGlobalString('MAIN_MODULE_MULTICOMPANY') || $conf->entity == 1 ? '' : $conf->entity.'/').$appliname.'/sql';
 		$handle		= @opendir($pathsql);
 		if (is_resource($handle)) {
-			$filesql    = $pathsql.'/'.'update.'.$conf->entity;
-			$moved      = dol_copy($filesql, $filesql.'.sql');
+			$filesql	= $pathsql.'/'.'update.'.$conf->entity;
+			$moved	  = dol_copy($filesql, $filesql.'.sql');
 			if (is_file($filesql.'.sql')) {
-                $result	= run_sql($filesql.'.sql', (empty($conf->global->MAIN_DISPLAY_SQL_INSTALL_LOG) ? 1 : 0), $conf->entity, 1);
-            }
-			$delete     = dol_delete_file($filesql.'.sql');
+				$result	= run_sql($filesql.'.sql', (getDolGlobalString('MAIN_DISPLAY_SQL_INSTALL_LOG') ? 1 : 0), $conf->entity, 1);
+			}
+			$delete	 = dol_delete_file($filesql.'.sql');
 
-            dol_syslog('oblyon.Lib::oblyon_restore_module appliname = '.$appliname.' filesql = '.$filesql.' moved = '.$moved.' result = '.$result.' delete = '.$delete);
+			dol_syslog('oblyon.Lib::oblyon_restore_module appliname = '.$appliname.' filesql = '.$filesql.' moved = '.$moved.' result = '.$result.' delete = '.$delete);
 			if ($result > 0) {
-                return 1;
-            }
+				return 1;
+			}
 		}
 		return -1;
 	}
@@ -264,11 +264,11 @@ SET FOREIGN_KEY_CHECKS = 1;
 		print '<tr>';
 		print '<td colspan="2" class="center" style="font-size: 14px;">';
 		print '<a href="'.DOL_URL_ROOT.'/document.php?modulepart=oblyon&file=sql/update.'.$conf->entity.'">'.$langs->trans('OblyonParamAction1').' <b><span color="#D51123">'.$langs->trans('Module432573Name').'</span></b> <span size="2">'.$langs->trans('OblyonParamAction2').'</span></a>';
-        print '</td>';
-        print '<td class="center"><button class = "butActionBackup" type = "submit" value = "bkupParams" name = "action">'.$langs->trans('OblyonParamBkup').'</button></td>';
-        print '<td class="center"><button class = "butActionBackup" type = "submit" value = "restoreParams" name = "action">'.$langs->trans('OblyonParamRestore').'</button></td>';
-        print '</tr>';
-        print '</table>';
+		print '</td>';
+		print '<td class="center"><button class = "butActionBackup" type = "submit" value = "bkupParams" name = "action">'.$langs->trans('OblyonParamBkup').'</button></td>';
+		print '<td class="center"><button class = "butActionBackup" type = "submit" value = "restoreParams" name = "action">'.$langs->trans('OblyonParamRestore').'</button></td>';
+		print '</tr>';
+		print '</table>';
 	}
 
 	/************************************************
@@ -318,7 +318,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 	/************************************************
 	*	Print HTML HR line
 	*
-    *	@param		int			$cs1		first colspan
+	*	@param		int			$cs1		first colspan
 	*	@return		void
 	************************************************/
 	function oblyon_print_hr($cs1 = 3)
@@ -329,7 +329,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 	/************************************************
 	*	Print HTML final line
 	*
-    *	@param		int			$cs1		first colspan
+	*	@param		int			$cs1		first colspan
 	*	@return		void
 	************************************************/
 	function oblyon_print_final($cs1 = 3)
@@ -363,58 +363,58 @@ SET FOREIGN_KEY_CHECKS = 1;
 		if ($tag != 'textarea') {
 			print '<td colspan = "'.$cs1.'">';
 			if (!empty($help)) {
-                print $form->textwithtooltip(($desc ? $desc : $langs->trans($confkey)), $langs->trans($help), 2, 1, img_help(1, ''));
-            } else {
-                print $desc ? $desc : $langs->trans($confkey);
-            }
-			if (in_array($tag, ['color', 'input']) && preg_match('/(TXT|TEXT)/i', $confkey) && $conf->global->$confkey == '#FFFFFF') {
-                print ' ' . $form->textwithpicto('', $langs->trans('OblyonWarningColorWhiteHelp'), 1, 'warning');
-            }
-            print '</td>';
-            print '<td colspan = "'.$cs2.'" class = "center">';
+				print $form->textwithtooltip(($desc ? $desc : $langs->trans($confkey)), $langs->trans($help), 2, 1, img_help(1, ''));
+			} else {
+				print $desc ? $desc : $langs->trans($confkey);
+			}
+			if (in_array($tag, ['color', 'input']) && preg_match('/(TXT|TEXT)/i', $confkey) && getDolGlobalString($confkey) == '#FFFFFF') {
+				print ' ' . $form->textwithpicto('', $langs->trans('OblyonWarningColorWhiteHelp'), 1, 'warning');
+			}
+			print '</td>';
+			print '<td colspan = "'.$cs2.'" class = "center">';
 		} else {
 			print '<td colspan = "'.($cs1 + $cs2).'" class="center">';
 			if (!empty($help)) {
-                print $form->textwithpicto(($desc ? $desc : $langs->trans($confkey)), $langs->trans($help), 1, 'help', '', 0, 2, '');
-            } else {
-                print $desc;
-            }
-            if (!empty($desc) || !empty($help)) {
-                print '<br/>';
-            }
+				print $form->textwithpicto(($desc ? $desc : $langs->trans($confkey)), $langs->trans($help), 1, 'help', '', 0, 2, '');
+			} else {
+				print $desc;
+			}
+			if (!empty($desc) || !empty($help)) {
+				print '<br/>';
+			}
 		}
 		print (!empty($begin) && !preg_match('/<td(.*)/', $begin, $reg) ? $begin : '');
 		if ($tag == 'on_off') {
 			print ajax_constantonoff($confkey, $metas[0], $metas[1], $metas[2], $metas[3], $metas[4], $metas[5], $metas[6], $metas[7], $metas[8], $metas[9]);
 		}
 		if ($tag == 'on_off2') {
-            print '<a href = "' . $_SERVER['PHP_SELF'] . '?action=set_' . $confkey . '&token=' . newToken() . '&value=' . (str_contains($conf->global->$confkey, $metas) ? '0' : '1') . '">';
-            print (str_contains($conf->global->$confkey, $metas) ? img_picto($langs->trans('Activated'), 'switch_on') : img_picto($langs->trans('Disabled'), 'switch_off'));
+			print '<a href = "' . $_SERVER['PHP_SELF'] . '?action=set_' . $confkey . '&token=' . newToken() . '&value=' . (str_contains(getDolGlobalString($confkey), $metas) ? '0' : '1') . '">';
+			print (str_contains(getDolGlobalString($confkey), $metas) ? img_picto($langs->trans('Activated'), 'switch_on') : img_picto($langs->trans('Disabled'), 'switch_off'));
 			print '</a>';
-        } elseif ($tag == 'input') {
-            $constantKey        = !empty($conf->global->$confkey) ? $conf->global->$confkey : 0;
-			$defaultMetas       = array('type' => 'text', 'class' => 'flat quatrevingtpercent', 'style' => 'padding: 0; font-size: inherit;', 'name' => $confkey, 'id' => $confkey, 'value' => $constantKey);
-			$metas              = array_merge ($defaultMetas, $metas);
-			$metascompil        = '';
+		} elseif ($tag == 'input') {
+			$constantKey		= getDolGlobalString($confkey, 0);
+			$defaultMetas	   = array('type' => 'text', 'class' => 'flat quatrevingtpercent', 'style' => 'padding: 0; font-size: inherit;', 'name' => $confkey, 'id' => $confkey, 'value' => $constantKey);
+			$metas			  = array_merge ($defaultMetas, $metas);
+			$metascompil		= '';
 			foreach ($metas as $key => $value) {
-                $metascompil    .= ' '.$key.($key == 'enabled' || $key == 'disabled' ? '' : ' = "'.$value.'"');
-            }
+				$metascompil	.= ' '.$key.($key == 'enabled' || $key == 'disabled' ? '' : ' = "'.$value.'"');
+			}
 			print '	<'.$tag.' '.$metascompil.'>'.(!preg_match('/<td(.*)/', $end, $reg) ? $end : '');
 		}
 		elseif ($tag == 'textarea') {
-			if (empty($conf->global->PDF_ALLOW_HTML_FOR_FREE_TEXT)) {
-                print '<textarea name="'.$confkey.'" class="flat" cols="120">'.$conf->global->$confkey.'</textarea>';
-            }
+			if (!getDolGlobalString('PDF_ALLOW_HTML_FOR_FREE_TEXT')) {
+				print '<textarea name="'.$confkey.'" class="flat" cols="120">'.getDolGlobalString($confkey).'</textarea>';
+			}
 			else {
-				$doleditor	= new DolEditor($confkey, $conf->global->$confkey, '', 80, 'dolibarr_notes');
+				$doleditor	= new DolEditor($confkey, getDolGlobalString($confkey), '', 80, 'dolibarr_notes');
 				print $doleditor->Create();
 			}
 		}
 		elseif ($tag == 'color')						print $formother->selectColor($metas, $confkey);
 		elseif ($tag == 'select' || $tag == 'range')	print $metas;
-		elseif ($tag == 'select_types_paiements')		$form->select_types_paiements($conf->global->$confkey, $confkey, $metas[0], $metas[1], $metas[2], $metas[3], $metas[4]);
+		elseif ($tag == 'select_types_paiements')		$form->select_types_paiements(getDolGlobalString($confkey), $confkey, $metas[0], $metas[1], $metas[2], $metas[3], $metas[4]);
 		elseif ($tag == 'selectTypeContact')			print $formcompany->selectTypeContact($metas[0], $metas[1], $confkey, $metas[2], $metas[3], $metas[4], $metas[5]);
-		elseif ($tag == 'select_type_actions')			$formactions->select_type_actions($conf->global->$confkey, $confkey, $metas[0], $metas[1], $metas[2]);
+		elseif ($tag == 'select_type_actions')			$formactions->select_type_actions(getDolGlobalString($confkey), $confkey, $metas[0], $metas[1], $metas[2]);
 		if (!preg_match('/<td(.*)/', $end, $reg))	print $end;
 		print '</td>';
 		if (preg_match('/<td(.*)/', $end, $reg))	print $end;
