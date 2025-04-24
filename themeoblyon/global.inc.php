@@ -39,6 +39,7 @@
 	--inputbackgroundcolor: <?php echo $colorBckgrdInput; ?>;
 	--color1BckgrdInfobox: <?php echo $color1BckgrdInfobox; ?>;
 	--color2BckgrdInfobox: <?php echo $color2BckgrdInfobox; ?>;
+	--colorBorderActionColumn: <?php echo $colorBorderActionColumn; ?>;
 	--inputbordercolor: rgba(0,0,0,.15);
 	--tooltipbgcolor: <?php print $toolTipBgColor; ?>;
 	--tooltipfontcolor : <?php print $toolTipFontColor; ?>;
@@ -10479,7 +10480,7 @@ div.tabs:first-of-type, .fiche > div.tabs
 /* ============================================================================== */
 <?php if (getDolGlobalString('FIX_STICKY_COLUMN_FIRST') || getDolGlobalString('OBLYON_STICKY_COLUMN_FIRST')) { ?>
 @media (min-width: 768px) {
-    #id-right > .fiche > form[action*="list.php"] div.div-table-responsive > table > tbody > * > :first-of-type,
+    #id-right > .fiche > form[action*="list.php"] div.div-table-responsive > table > tbody > * > :first-of-type:not(.actioncolumn),
     #id-right > .fiche > .tabBar > form[action*="list.php"] div.div-table-responsive > table > tbody > * > :first-of-type,
     #id-right > .fiche > form[action*="bankrecords.php"] div.div-table-responsive > table > tbody > * > :first-of-type,
     #id-right > .fiche > .tabBar > form[action*="bankrecords.php"] div.div-table-responsive > table > tbody > * > :first-of-type,
@@ -10496,7 +10497,22 @@ div.tabs:first-of-type, .fiche > div.tabs
         z-index: 2;
         background-color: <?php print $colorbtitle; ?>;
         /* background: #<?php echo colorArrayToHex(colorStringToArray($colorbacklineimpair1)); ?>;*/
-        border-right: 1px solid #bbbbbb;
+        border-right: 1px solid var(--colorBorderActionColumn);
+    }
+
+    #id-right > .fiche > form[action*="list.php"] div.div-table-responsive > table > tbody > * > :first-of-type.actioncolumn {
+        position: sticky;
+        <?php if (getDolGlobalString('OBLYON_STICKY_LEFTBAR') && !getDolGlobalString('OBLYON_EFFECT_REDUCE_LEFTMENU')) { ?>
+            left: 230px;
+        <?php } elseif (getDolGlobalString('OBLYON_STICKY_LEFTBAR') && getDolGlobalString('OBLYON_EFFECT_REDUCE_LEFTMENU')) { ?>
+            left: 38px;
+        <?php } else { ?>
+            left: 0;
+        <?php } ?>
+        z-index: 1;
+        background-color: <?php print $colorbtitle; ?>;
+        /* background: #<?php echo colorArrayToHex(colorStringToArray($colorbacklineimpair1)); ?>;*/
+        border-right: 1px solid var(--colorBorderActionColumn);
     }
 
     .multichoicedoc {
@@ -10574,25 +10590,25 @@ div.tabs:first-of-type, .fiche > div.tabs
 /* ============================================================================== */
 /* Fix title in list        													  */
 /* ============================================================================== */
-<?php if(getDolGlobalString('FIX_TITLE_IN_LIST') && (float) DOL_VERSION >= 18.0) { ?>
-td.nobordernopadding.widthpictotitle.valignmiddle.col-picto {
-    position: sticky;
-    left: 10px;
-}
-td.nobordernopadding.valignmiddle.col-title {
-    position: sticky;
-    left: 40px;
-}
-td.nobordernopadding.center.valignmiddle.col-center {
-    position: sticky;
-    left: 300px;
-    right: 200px;
-    z-index: 1;
-}
-td.nobordernopadding.valignmiddle.right.col-right {
-    position: sticky;
-    right: 10px;
-}
+<?php if (getDolGlobalString('FIX_TITLE_IN_LIST') && (float) DOL_VERSION >= 18.0) { ?>
+    td.nobordernopadding.widthpictotitle.valignmiddle.col-picto {
+        position: sticky;
+        left: 10px;
+    }
+    td.nobordernopadding.valignmiddle.col-title {
+        position: sticky;
+        left: 40px;
+    }
+    td.nobordernopadding.center.valignmiddle.col-center {
+        position: sticky;
+        left: 300px;
+        right: 200px;
+        z-index: 1;
+    }
+    td.nobordernopadding.valignmiddle.right.col-right {
+        position: sticky;
+        right: 10px;
+    }
 <?php } ?>
 
 /* ============================================================================== */

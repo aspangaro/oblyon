@@ -177,6 +177,7 @@
 	$colorBckgrdInput			= getDolGlobalString('OBLYON_COLOR_INPUT_BCKGRD', '#DEDEDE');			// default value: #DEDEDE
 	$color1BckgrdInfobox		= getDolGlobalString('OBLYON_COLOR_INFOBOX_BCKGRD1', '#444444');		// default value: #444444
 	$color2BckgrdInfobox		= getDolGlobalString('OBLYON_COLOR_INFOBOX_BCKGRD2', '#E4EFE8');		// default value: #E4EFE8
+	$colorBorderActionColumn	= getDolGlobalString('OBLYON_COLOR_BORDER_ACTIONCOLUMN', '#BBBBBB');	// default value: #BBBBBB
 	$bgotherbox					= '#f4f4f4';															// default value: #E6E6E6	//	Other information boxes on home page
 	$bgbutton_hover				= '#197489';															// default value: #197489
 	if (!empty($maincolor)) {
