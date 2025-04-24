@@ -2042,7 +2042,11 @@ div.fiche {
 }
 
 .flexcontainer {
-<?php if (!empty($conf->browser->browsername) && in_array($conf->browser->browsername, array('chrome', 'firefox'))) echo 'display: inline-flex;' ?>
+<?php
+	if (!empty($conf->browser->browsername) && in_array($conf->browser->browsername, array('chrome', 'firefox', 'safari'))) {
+		echo 'display: inline-flex;'."\n";
+	}
+?>
     flex-flow: row wrap;
     justify-content: flex-start;
 }
