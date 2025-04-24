@@ -10500,7 +10500,8 @@ div.tabs:first-of-type, .fiche > div.tabs
         border-right: 1px solid var(--colorBorderActionColumn);
     }
 
-    #id-right > .fiche > form[action*="list.php"] div.div-table-responsive > table > tbody > * > :first-of-type.actioncolumn {
+    #id-right > .fiche > form[action*="list.php"] div.div-table-responsive > table > tbody > * > :first-of-type.actioncolumn,
+    #id-right > .fiche > form[action*="list.php"] div.div-table-responsive > table > tbody > * > :first-of-type:has(.checkforselect) {
         position: sticky;
         <?php if (getDolGlobalString('OBLYON_STICKY_LEFTBAR') && !getDolGlobalString('OBLYON_EFFECT_REDUCE_LEFTMENU')) { ?>
             left: 230px;
