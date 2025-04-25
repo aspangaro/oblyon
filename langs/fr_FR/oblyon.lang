@@ -1,14 +1,14 @@
 # < Oblyon Control Panel - French translation >
 # Copyright (C) 2015       Nicolas Rivera       <nrivera.pro@gmail.com>
 # Copyright (C) 2015-2024  Alexandre Spangaro   <alexandre@inovea-conseil.com>
+# Copyright (C) 2015-2025  Sylvain Legrand      <technique@infras.fr>
 #
-Module432573Name   = Oblyon
-Module432573Desc   = Panneau d'options qui vous permet de personnaliser le thème Oblyon
-
-OblyonParamAction1  = Sauvegarder / Restaurer l'ensemble des paramètres du module
-OblyonParamAction2  = <br>(après une restauration rafraichissez la page (F5) pour visualiser le résultat)
-OblyonParamBkup     = Sauvegarder
-OblyonParamRestore  = Restaurer
+Module432573Name        = Oblyon
+Module432573Desc        = Panneau d'options qui vous permet de personnaliser le thème Oblyon
+OblyonParamAction1      = Sauvegarder / Restaurer l'ensemble des paramètres du module
+OblyonParamAction2      = <br>(après une restauration rafraichissez la page (F5) pour visualiser le résultat)
+OblyonParamBkup         = Sauvegarder
+OblyonParamRestore      = Restaurer
 OblyonDeleteThemeError  = Une erreur s'est produite lors de la suppression du thème Oblyon
 OblyonCopyThemeError    = Une erreur s'est produite lors de la copie du thème Oblyon
 
@@ -80,10 +80,10 @@ MainStatusUseImages                  = Les différents statuts des éléments se
 #
 # Warnings
 #
-ResetCacheDisclaimer=Pour que certaines options soient effectives, il est nécessaire de vider le cache du navigateur.<br> CTRL + F5 suffira dans la plupart des cas juste après avoir appliqué une option ci-dessous.
-WIP = Attention ! Fonction en cours de développement - Peut provoquer un comportement inattendu au niveau de l'affichage
-NotAvailableOnAllLists=Non disponible sur toutes les listes
-WarningActivationOption1Enabled=Activation déconseillée lorsque l'option %s est activée
+ResetCacheDisclaimer            = Pour que certaines options soient effectives, il est nécessaire de vider le cache du navigateur.<br> CTRL + F5 suffira dans la plupart des cas juste après avoir appliqué une option ci-dessous.
+WIP                             = Attention ! Fonction en cours de développement - Peut provoquer un comportement inattendu au niveau de l'affichage
+NotAvailableOnAllLists          = Non disponible sur toutes les listes
+WarningActivationOption1Enabled = Activation déconseillée lorsque l'option %s est activée
 
 #
 # Colors page
@@ -137,6 +137,7 @@ OBLYON_COLOR_TEXTTABACTIVE         = Couleur de texte des onglets actifs
 OBLYON_COLOR_INPUT_BCKGRD          = Couleur de fond des zones de saisie
 OBLYON_COLOR_INFOBOX_BCKGRD1       = Couleur de fond 1 des cartes kanban active (applications / modules)
 OBLYON_COLOR_INFOBOX_BCKGRD2       = Couleur de fond 2 des cartes kanban active (applications / modules)
+OBLYON_COLOR_BORDER_ACTIONCOLUMN   = Couleur de bordure de la colonne 'action' des tableaux
 InvertRatioDesc                    = Ratio du filtre d'inversion des couleurs (Applicable aux icones basées sur des fichiers images PNG)
 Eldys                              = Couleurs de base
 THEME_ELDY_TOPBORDER_TITLE1        = Couleur des bordures de titre
@@ -229,25 +230,27 @@ OblyonMainUseBookmarkDropdown   = Utiliser le menu des marques pages (En haut à
 OblyonImageHeightTable          = Hauteur maximale des images dans les listes (tables)
 OblyonDisableVersion            = Ne pas afficher le numéro de version de Dolibarr (En haut à droite)
 OblyonPaddingRightBottom        = Afficher une marge en bas de page sur la partie droite
+
 # List
-OptionsList=Options des listes
-SwitchColumnOnLeft=Basculer la colonne de sélection / recherche / action en masse à gauche
-FixTitleInList=Fixer la barre de titre des listes de manière à toujours voir le titre, l'action en masse, la pagination et l'élément "Ajouter"
-RemoveKanbanViewInList=Retirer le bouton "Vue kanban" en haut à droite des listes
-FixStickyTableHeadersColumns=Fixer l'entête de colonne des tableaux sur les éléments lors d'un défilement vertical
-FixStickyFirstColumn=Fixer la première colonne des tableaux lors d'un défilement horizontal
-FixStickyLastColumn=Fixer la dernière colonne des tableaux lors d'un défilement horizontal
-FixStickyTotalBar=Fixer la barre des totaux des tableaux en bas de page
-ShowGrandTotalList=Afficher les totaux généraux hors pagination si les montants sont différents des totaux classiques
-FixStickyGrandTotalBar=Fixer la barre des totaux généraux des tableaux en bas de page
+OptionsList                  = Options des listes
+SwitchColumnOnLeft           = Basculer la colonne de sélection / recherche / action en masse à gauche
+FixTitleInList               = Fixer la barre de titre des listes de manière à toujours voir le titre, l'action en masse, la pagination et l'élément "Ajouter"
+RemoveKanbanViewInList       = Retirer le bouton "Vue kanban" en haut à droite des listes
+FixStickyTableHeadersColumns = Fixer l'entête de colonne des tableaux sur les éléments lors d'un défilement vertical
+FixStickyFirstColumn         = Fixer la première colonne des tableaux lors d'un défilement horizontal
+FixStickyLastColumn          = Fixer la dernière colonne des tableaux lors d'un défilement horizontal
+FixStickyTotalBar            = Fixer la barre des totaux des tableaux en bas de page
+ShowGrandTotalList           = Afficher les totaux généraux hors pagination si les montants sont différents des totaux classiques
+FixStickyGrandTotalBar       = Fixer la barre des totaux généraux des tableaux en bas de page
+
 # Card
-OptionsCard=Options des fiches
-FixStickyTabsCard=Fixer le bandeau des onglets lors d'un défilement vertical
-FixAreaRefCard=Fixer l'espace référence de la fiche lors d'un défilement vertical. (Désactivé sur les téléphones portables)
-MainMaxTabsInCard=Nombre maximal d'onglets visibles. Les autres onglets sont regroupés dans une liste déroulante
-LimitTabLineToOne=(Permet de limiter les onglets à une seule ligne => fortement conseillé quand les 2 options précédentes sont activées simultanément)
-FixAbsoluteButtonsActionCard=Fixer les boutons d'actions en bas de page
-ShowLineNumberCard=Afficher le numéro des lignes (Facture, proposition commerciale, etc)
+OptionsCard                  = Options des fiches
+FixStickyTabsCard            = Fixer le bandeau des onglets lors d'un défilement vertical
+FixAreaRefCard               = Fixer l'espace référence de la fiche lors d'un défilement vertical. (Désactivé sur les téléphones portables)
+MainMaxTabsInCard            = Nombre maximal d'onglets visibles. Les autres onglets sont regroupés dans une liste déroulante
+LimitTabLineToOne            = (Permet de limiter les onglets à une seule ligne => fortement conseillé quand les 2 options précédentes sont activées simultanément)
+FixAbsoluteButtonsActionCard = Fixer les boutons d'actions en bas de page
+ShowLineNumberCard           = Afficher le numéro des lignes (Facture, proposition commerciale, etc)
 
 #
 # Icons page

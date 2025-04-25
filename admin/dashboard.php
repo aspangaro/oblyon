@@ -1,7 +1,7 @@
 <?php
 /************************************************
 * Copyright (C) 2015-2025  Alexandre Spangaro   <alexandre@inovea-conseil.com>
-* Copyright (C) 2022       Sylvain Legrand      <contact@infras.fr>
+* Copyright (C) 2022-2025  Sylvain Legrand      <contact@infras.fr>
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -30,6 +30,7 @@ require '../config.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/admin.lib.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/files.lib.php';
 dol_include_once('/oblyon/lib/oblyon.lib.php');
+dol_include_once('/oblyon/backport/v21/core/lib/functions.lib.php');
 
 /**
  * @var Conf $conf
@@ -47,7 +48,7 @@ $langs->loadLangs(array('admin', 'oblyon@oblyon', 'inovea@oblyon'));
 if (! $user->admin)				accessforbidden();
 
 // init variables *******************************
-$result							= empty($conf->global->THEME_AGRESSIVENESS_RATIO) ? dolibarr_set_const($db, 'THEME_AGRESSIVENESS_RATIO', -50, 'chaine', 0, 'Oblyon module', $conf->entity) : '';
+$result							= !getDolGlobalString('THEME_AGRESSIVENESS_RATIO') ? dolibarr_set_const($db, 'THEME_AGRESSIVENESS_RATIO', -50, 'chaine', 0, 'Oblyon module', $conf->entity) : '';
 $listcolor						= array('OBLYON_INFOXBOX_BACKGROUND',				// #FFFFFF
 										'OBLYON_INFOXBOX_WEATHER_COLOR',			// #BDBDBD
 										'OBLYON_INFOXBOX_ACTION_COLOR',				// #B46080 AGENDA
@@ -144,9 +145,9 @@ $metas						= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'dashboard');
 oblyon_print_input('MAIN_DISABLE_GLOBAL_BOXSTATS', 'on_off', $langs->trans('DisableGlobalBoxStats'), '', $metas, 2, 1);	// Disable boxes stats widget
 $metas						= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'dashboard');
 oblyon_print_input('THEME_INFOBOX_COLOR_ON_BACKGROUND', 'on_off', $langs->trans('InfoboxColorOnBackground'), '', $metas, 2, 1);	// On workboard invert background color with text color
-$easyaVersion = (float) !empty($conf->global->EASYA_VERSION) ? $conf->global->EASYA_VERSION : '';
+$easyaVersion = getDolGlobalFloat('EASYA_VERSION', 0);
 if ($easyaVersion >= 2022.5 || (float) DOL_VERSION >= 15.0) {
-    if (empty($conf->global->MAIN_DISABLE_GLOBAL_WORKBOARD)) {
+    if (!getDolGlobalString('MAIN_DISABLE_GLOBAL_WORKBOARD')) {
 		$metas		= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'dashboard');
 		oblyon_print_input('MAIN_DISABLE_METEO',				'on_off', $langs->trans('MAIN_DISABLE_METEO'),					'', $metas, 2, 1);	// weather block
 		oblyon_print_input('MAIN_DISABLE_BLOCK_AGENDA',			'on_off', $langs->trans('DashboardDisableBlockAgenda'),			'', $metas, 2, 1);	// calendar block
@@ -165,12 +166,12 @@ if ($easyaVersion >= 2022.5 || (float) DOL_VERSION >= 15.0) {
 $metas		= array(array(3), 'ColorIntensity');
 oblyon_print_liste_titre($metas);
 $metas	= '	<div class = "range-sliders" id = "range-sliders">
-				<span class = "bold">-100</span>					<input type = "range" class = "range-slider flat soixantepercent action" id = "THEME_AGRESSIVENESS_RATIO" name = "THEME_AGRESSIVENESS_RATIO" min = "-100" max = "100" value = "'.$conf->global->THEME_AGRESSIVENESS_RATIO.'" />
-				<input type = "number" class = "input-slider flat" id = "input-intensity" style = "width: 35px;" min = "-100" max = "100" value = "'.$conf->global->THEME_AGRESSIVENESS_RATIO.'" />
+				<span class = "bold">-100</span>					<input type = "range" class = "range-slider flat soixantepercent action" id = "THEME_AGRESSIVENESS_RATIO" name = "THEME_AGRESSIVENESS_RATIO" min = "-100" max = "100" value = "'.getDolGlobalString('THEME_AGRESSIVENESS_RATIO').'" />
+				<input type = "number" class = "input-slider flat" id = "input-intensity" style = "width: 35px;" min = "-100" max = "100" value = "'.getDolGlobalString('THEME_AGRESSIVENESS_RATIO').'" />
 				<span class = "bold">+100</span>
 				<script src = "../js/range-slider.js"></script>
 			</div>';
-oblyon_print_input('', 'range', $langs->trans('ColorIntensityDesc', $conf->global->THEME_AGRESSIVENESS_RATIO), '', $metas, 1, 2);
+oblyon_print_input('', 'range', $langs->trans('ColorIntensityDesc', getDolGlobalString('THEME_AGRESSIVENESS_RATIO')), '', $metas, 1, 2);
 // Colors
 $metas		= array(array(3), 'Colors');
 oblyon_print_liste_titre($metas);

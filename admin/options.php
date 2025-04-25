@@ -1,7 +1,7 @@
 <?php
 /************************************************
 * Copyright (C) 2015-2025  Alexandre Spangaro   <alexandre@inovea-conseil.com>
-* Copyright (C) 2022       Sylvain Legrand      <contact@infras.fr>
+* Copyright (C) 2022-2025  Sylvain Legrand      <contact@infras.fr>
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -29,7 +29,8 @@ require '../config.php';
 // Libraries ************************************
 require_once DOL_DOCUMENT_ROOT.'/core/lib/admin.lib.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/files.lib.php';
-require_once '../lib/oblyon.lib.php';
+dol_include_once('/oblyon/lib/oblyon.lib.php');
+dol_include_once('/oblyon/backport/v21/core/lib/functions.lib.php');
 
 /**
  * @var Conf $conf
@@ -113,7 +114,7 @@ $head = oblyon_admin_prepare_head();
 print dol_get_fiche_head($head, 'options', $langs->trans('Module432573Name'), 0, 'inovea@oblyon');
 
 // setup page goes here *************************
-$easyaVersion = (float) !empty($conf->global->EASYA_VERSION) ? $conf->global->EASYA_VERSION : '';
+$easyaVersion = getDolGlobalFloat('EASYA_VERSION', 0);
 
 $labs_picto = ' '.img_picto($langs->trans('WIP'), 'fa-flask', '', false, 0, 0, '', 'error ');
 
@@ -212,7 +213,7 @@ $metas = array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'options');
 oblyon_print_input('MAIN_USE_TOP_MENU_SEARCH_DROPDOWN', 'on_off', 'G' . $countg . ' - ' . $langs->trans('OblyonMainUseSearchDropdown') . ' (' . $stringforfirstkey . ' s)', '', $metas, 2, 1);	// Search dropdown menu
 $countg++;
 
-if (!empty($conf->bookmark->enabled)) {
+if (isModEnabled('bookmark')) {
 	$metas = array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'options');
 	oblyon_print_input('MAIN_USE_TOP_MENU_BOOKMARK_DROPDOWN', 'on_off', 'G' . $countg . ' - ' . $langs->trans('OblyonMainUseBookmarkDropdown'), '', $metas, 2, 1);    // Bookmark dropdown menu
     $countg++;

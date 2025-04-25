@@ -125,7 +125,7 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
 }
 
 .dropdown-menu > .user-header{
-<?php if ( $conf->global->MAIN_MENU_INVERT ) { ?>
+<?php if (getDolGlobalString('MAIN_MENU_INVERT')) { ?>
 	background-color: <?php print $bgnavtop_hover; ?>;
 <?php } else { ?>
 	background-color: <?php print $bgnavleft_hover; ?>;
@@ -137,7 +137,7 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
 }
 
 .dropdown-menu > .user-footer {
-<?php if ( $conf->global->MAIN_MENU_INVERT ) { ?>
+<?php if (getDolGlobalString('MAIN_MENU_INVERT')) { ?>
 	background-color: <?php print $bgnavtop_hover; ?>;
 <?php } else { ?>
 	background-color: <?php print $bgnavleft_hover; ?>;
@@ -178,7 +178,7 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
 .dropdown-body::-webkit-scrollbar-thumb {
     -webkit-border-radius: 0;
     border-radius: 0;
-<?php if ( $conf->global->MAIN_MENU_INVERT ) { ?>
+<?php if (getDolGlobalString('MAIN_MENU_INVERT')) { ?>
     background-color: <?php print $bgnavtop; ?>;
 <?php } else { ?>
     background-color: <?php print $bgnavleft; ?>;
@@ -299,7 +299,7 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
     }
     .dropdown-item.active, .dropdown-item:hover, .dropdown-item:focus, .dropdown-menu a.top-menu-dropdown-link:hover   {
         text-decoration: none;
-<?php if ( $conf->global->MAIN_MENU_INVERT ) { ?>
+<?php if (getDolGlobalString('MAIN_MENU_INVERT')) { ?>
     background-color: <?php print $bgnavtop; ?>;
     color: <?php echo (isset($bgnavtop_txt)) ? $bgnavtop_txt : 'white' ?> !important;
 <?php } else { ?>

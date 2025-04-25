@@ -134,6 +134,7 @@ OBLYON_COLOR_TEXTTABACTIVE         = Color text of active tabs
 OBLYON_COLOR_INPUT_BCKGRD          = Background color of inputs
 OBLYON_COLOR_INFOBOX_BCKGRD1       = Background color 1 of active kanban cards (applications / modules)
 OBLYON_COLOR_INFOBOX_BCKGRD2       = Background color 2 of active kanban cards (applications / modules)
+OBLYON_COLOR_BORDER_ACTIONCOLUMN   = Border color of the 'action' column of the tables
 InvertRatioDesc                    = Color Inversion Filter Ratio (Applicable to icons based on PNG image files)
 Eldys                              = Basic colors
 THEME_ELDY_TOPBORDER_TITLE1        = Title border color

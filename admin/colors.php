@@ -99,7 +99,8 @@ $listcolor	= array('top'		=> array('OBLYON_COLOR_TOPMENU_BCKGRD',
 										'OBLYON_COLOR_TEXTTABACTIVE',
 										'OBLYON_COLOR_INPUT_BCKGRD',
 										'OBLYON_COLOR_INFOBOX_BCKGRD1',
-										'OBLYON_COLOR_INFOBOX_BCKGRD2'
+										'OBLYON_COLOR_INFOBOX_BCKGRD2',
+										'OBLYON_COLOR_BORDER_ACTIONCOLUMN'
 										),
 					'eldy'		=> array('THEME_ELDY_TOPBORDER_TITLE1',
 										'THEME_ELDY_BACKTITLE1',
@@ -162,6 +163,7 @@ $listtheme	= array('green'		=> array('OBLYON_INFOXBOX_BACKGROUND'			=> '#FFFFFF'
 										'OBLYON_COLOR_INPUT_BCKGRD'				=> '#FFFFFF',
 										'OBLYON_COLOR_INFOBOX_BCKGRD1'			=> '#444444',
 										'OBLYON_COLOR_INFOBOX_BCKGRD2'			=> '#E4EFE8',
+										'OBLYON_COLOR_BORDER_ACTIONCOLUMN'		=> '#BBBBBB',
 										'THEME_INVERT_RATIO_FILTER'				=> '0',
 										'THEME_ELDY_TOPBORDER_TITLE1'			=> '#FFFFFF',
 										'THEME_ELDY_BACKTITLE1'					=> '#E9EAED',
@@ -223,6 +225,7 @@ $listtheme	= array('green'		=> array('OBLYON_INFOXBOX_BACKGROUND'			=> '#FFFFFF'
 										'OBLYON_COLOR_INPUT_BCKGRD'				=> '#FFFFFF',
 										'OBLYON_COLOR_INFOBOX_BCKGRD1'			=> '#444444',
 										'OBLYON_COLOR_INFOBOX_BCKGRD2'			=> '#E4EFE8',
+										'OBLYON_COLOR_BORDER_ACTIONCOLUMN'		=> '#BBBBBB',
 										'THEME_INVERT_RATIO_FILTER'				=> '80',
 										'THEME_ELDY_TOPBORDER_TITLE1'			=> '#FFFFFF',
 										'THEME_ELDY_BACKTITLE1'					=> '#E9EAED',
@@ -284,6 +287,7 @@ $listtheme	= array('green'		=> array('OBLYON_INFOXBOX_BACKGROUND'			=> '#FFFFFF'
 										'OBLYON_COLOR_INPUT_BCKGRD'				=> '#FFFFFF',
 										'OBLYON_COLOR_INFOBOX_BCKGRD1'			=> '#444444',
 										'OBLYON_COLOR_INFOBOX_BCKGRD2'			=> '#E4EFE8',
+										'OBLYON_COLOR_BORDER_ACTIONCOLUMN'		=> '#BBBBBB',
 										'THEME_INVERT_RATIO_FILTER'				=> '0',
 										'THEME_ELDY_TOPBORDER_TITLE1'			=> '#FFFFFF',
 										'THEME_ELDY_BACKTITLE1'					=> '#E9EAED',
@@ -345,6 +349,7 @@ $listtheme	= array('green'		=> array('OBLYON_INFOXBOX_BACKGROUND'			=> '#FFFFFF'
 										'OBLYON_COLOR_INPUT_BCKGRD'				=> '#DEDEDE',
 										'OBLYON_COLOR_INFOBOX_BCKGRD1'			=> '#444444',
 										'OBLYON_COLOR_INFOBOX_BCKGRD2'			=> '#E4EFE8',
+										'OBLYON_COLOR_BORDER_ACTIONCOLUMN'		=> '#BBBBBB',
 										'THEME_INVERT_RATIO_FILTER'				=> '0',
 										'THEME_ELDY_TOPBORDER_TITLE1'			=> '#FFFFFF',
 										'THEME_ELDY_BACKTITLE1'					=> '#E9EAED',
@@ -406,6 +411,7 @@ $listtheme	= array('green'		=> array('OBLYON_INFOXBOX_BACKGROUND'			=> '#FFFFFF'
 										'OBLYON_COLOR_INPUT_BCKGRD'				=> '#F4F4F4',
 										'OBLYON_COLOR_INFOBOX_BCKGRD1'			=> '#444444',
 										'OBLYON_COLOR_INFOBOX_BCKGRD2'			=> '#E4EFE8',
+										'OBLYON_COLOR_BORDER_ACTIONCOLUMN'		=> '#BBBBBB',
 										'THEME_INVERT_RATIO_FILTER'				=> '0',
 										'THEME_ELDY_TOPBORDER_TITLE1'			=> '#FFFFFF',
 										'THEME_ELDY_BACKTITLE1'					=> '#E9EAED',
@@ -443,9 +449,14 @@ if (preg_match('/update_(.*)/', $action, $reg)) {
 	$list		= array ('Gen'	=> array('THEME_INVERT_RATIO_FILTER'));
 	$confkey	= $reg[1];
 	$error		= 0;
-	foreach ($list[$confkey] as $constname)	$result	= dolibarr_set_const($db, $constname, GETPOST($constname, 'alpha'),	'chaine', 0, 'Oblyon module', $conf->entity);
-	foreach ($listcolor as $list)
-	foreach ($list as $constname)   $result	= dolibarr_set_const($db, $constname, '#'.GETPOST($constname, 'alpha'),	'chaine', 0, 'Oblyon module', $conf->entity);
+	foreach ($list[$confkey] as $constname) {
+		$result	= dolibarr_set_const($db, $constname, GETPOST($constname, 'alpha'),	'chaine', 0, 'Oblyon module', $conf->entity);
+	}
+	foreach ($listcolor as $list) {
+		foreach ($list as $constname) {
+			$result	= dolibarr_set_const($db, $constname, '#'.GETPOST($constname, 'alpha'),	'chaine', 0, 'Oblyon module', $conf->entity);
+		}
+	}
 	if ($confkey == 'theme') {
 		$res	= 1;
 		foreach ($listtheme[GETPOST('value', 'alpha')] as $constname => $constvalue) {
@@ -516,21 +527,23 @@ print '<form action = "'.$_SERVER['PHP_SELF'].'" method = "POST" enctype = "mult
 	print '				</tr>';
 	// Colors
 	// Top menu
-	$metas		= array(array(5), 'TopMenu');
+	$metas		= array(array(5), (!getDolGlobalString('MAIN_MENU_INVERT', '') ? 'TopMenu' : 'LeftMenu'));
 	oblyon_print_liste_titre($metas);
 	if (count($listcolor['top'])) {
 		foreach ($listcolor['top'] as $key) {
+			$transkey	= !getDolGlobalString('MAIN_MENU_INVERT', '') ? $key : str_replace('TOP', 'LEFT', $key);
 			$metas	= array('type' => 'text', 'class' => 'flat quatrevingtpercent color action');
-			oblyon_print_input($key, 'input', $langs->trans($key), '', $metas, 4, 1);
+			oblyon_print_input($key, 'input', $langs->trans($transkey), '', $metas, 4, 1);
 		}
 	}
 	// Left menu
-	$metas		= array(array(5), 'LeftMenu');
+	$metas		= array(array(5), (!getDolGlobalString('MAIN_MENU_INVERT', '') ? 'LeftMenu' : 'TopMenu'));
 	oblyon_print_liste_titre($metas);
 	if (count($listcolor['left'])) {
 		foreach ($listcolor['left'] as $key) {
+			$transkey	= !getDolGlobalString('MAIN_MENU_INVERT', '') ? $key : str_replace('LEFT', 'TOP', $key);
 			$metas	= array('type' => 'text', 'class' => 'flat quatrevingtpercent color action');
-			oblyon_print_input($key, 'input', $langs->trans($key), '', $metas, 4, 1);
+			oblyon_print_input($key, 'input', $langs->trans($transkey), '', $metas, 4, 1);
 		}
 	}
 	// button
@@ -556,18 +569,21 @@ print '<form action = "'.$_SERVER['PHP_SELF'].'" method = "POST" enctype = "mult
 	oblyon_print_liste_titre($metas);
 	if (count($listcolor['options'])) {
 		foreach ($listcolor['options'] as $key) {
+			if ($key == 'OBLYON_COLOR_BORDER_ACTIONCOLUMN' && !getDolGlobalString('FIX_STICKY_COLUMN_FIRST') && !getDolGlobalString('FIX_STICKY_COLUMN_LAST')) {
+				continue;
+			}
 			$metas	= array('type' => 'text', 'class' => 'flat quatrevingtpercent color action');
 			oblyon_print_input($key, 'input', $langs->trans($key), '', $metas, 4, 1);
 		}
 	}
 	$metas	= '	<div class = "range-sliders" id = "range-sliders">
 					<span class = "bold">0</span>
-					<input type = "range" class = "range-slider flat soixantepercent action" id = "THEME_INVERT_RATIO_FILTER" name = "THEME_INVERT_RATIO_FILTER" min = "0" max = "100" value = "'.$conf->global->THEME_INVERT_RATIO_FILTER.'" />
-					<input type = "number" class = "input-slider flat" id = "input-invert_ratio" style = "width: 35px;" min = "0" max = "100" value = "'.$conf->global->THEME_INVERT_RATIO_FILTER.'" />
+					<input type = "range" class = "range-slider flat soixantepercent action" id = "THEME_INVERT_RATIO_FILTER" name = "THEME_INVERT_RATIO_FILTER" min = "0" max = "100" value = "'.getDolGlobalString('THEME_INVERT_RATIO_FILTER').'" />
+					<input type = "number" class = "input-slider flat" id = "input-invert_ratio" style = "width: 35px;" min = "0" max = "100" value = "'.getDolGlobalString('THEME_INVERT_RATIO_FILTER').'" />
 					<span class = "bold">+100</span>
 					<script src = "../js/range-slider.js"></script>
 				</div>';
-	oblyon_print_input('', 'range', $langs->trans('InvertRatioDesc', $conf->global->THEME_INVERT_RATIO_FILTER), '', $metas, 4, 1);
+	oblyon_print_input('', 'range', $langs->trans('InvertRatioDesc', getDolGlobalString('THEME_INVERT_RATIO_FILTER')), '', $metas, 4, 1);
 
 	// Eldy
 	$metas		= array(array(5), 'Eldy');

@@ -121,7 +121,7 @@ class MenuManager {
 		require_once DOL_DOCUMENT_ROOT.'/core/class/menu.class.php';
 		$this->menu=new Menu();
 
-		if(empty($conf->global->MAIN_MENU_INVERT))
+		if(!getDolGlobalString('MAIN_MENU_INVERT'))
 		{
 			if ($mode == 'top') {
                 print_oblyon_menu($this->db, $this->atarget, $this->type_user, $this->tabMenu, $this->menu, 0, $mode);
@@ -152,7 +152,6 @@ class MenuManager {
 
 			print '<!-- Generate menu list from menu handler '.$this->name.' -->'."\n";
 			foreach($this->menu->liste as $key => $val) {
-			// $val['url','titre','level','enabled'=0|1|2,'target','mainmenu','leftmenu'
 			print '<ul class="ulmenu" data-role="listview" data-inset="true">';
 			print '<li data-role="list-dividerxxx" class="lilevel0">';
 			if ($val['enabled'] == 1)
@@ -191,7 +190,6 @@ class MenuManager {
 				}
 				foreach($submenu->liste as $key2 => $val2)
 				{
-					// $val['url','titre','level','enabled'=0|1|2,'target','mainmenu','leftmenu']
 					$relurl2=dol_buildpath($val2['url'],1);
 					$relurl2=preg_replace('/__LOGIN__/',$user->login,$relurl2);
 					$relurl2=preg_replace('/__USERID__/',$user->id,$relurl2);

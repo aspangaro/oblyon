@@ -2,8 +2,8 @@
 /* <style type="text/css" > */
 
 #ScanInvoicesGlobal {
-	<?php if($conf->global->OBLYON_STICKY_LEFTBAR) { ?>
-		<?php if($conf->global->OBLYON_REDUCE_LEFTMENU) { ?>
+	<?php if (getDolGlobalString('OBLYON_STICKY_LEFTBAR')) { ?>
+		<?php if (getDolGlobalString('OBLYON_REDUCE_LEFTMENU')) { ?>
 			padding-left: 50px !important;
 		<?php } else { ?>
 			padding-left: 240px !important;
