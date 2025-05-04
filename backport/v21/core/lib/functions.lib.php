@@ -22,11 +22,43 @@
 	*	\brief		about page
 	************************************************/
 
+
+	/**
+	 * Return dolibarr global constant string value
+	 *
+	 * @param string $key		key to return value, return '' if not set
+	 * @param string $default	value to return
+	 * @return string
+	 */
+	if (!function_exists('getDolGlobalString')) {
+		function getDolGlobalString($key, $default = '')
+		{
+			global $conf;
+			// return $conf->global->$key ?? $default;
+			return (string) (isset($conf->global->$key) ? $conf->global->$key : $default);
+		}
+	}
+
+	/**
+	 * Return dolibarr global constant int value
+	 *
+	 * @param string	$key		key to return value, return 0 if not set
+	 * @param int		$default	value to return
+	 * @return int
+	 */
+	if (!function_exists('getDolGlobalInt')) {
+		function getDolGlobalInt($key, $default = 0)
+		{
+			global $conf;
+			// return $conf->global->$key ?? $default;
+			return (int) (isset($conf->global->$key) ? $conf->global->$key : $default);
+		}
+	}
+
 	/**
 	*	Return a Dolibarr global constant float value.
-	*	The constants $conf->global->xxx are loaded by the script master.inc.php included at begin of any PHP page.
 	*
-	*	@param string		$key 		Key to return value, return $default if not set
+	*	@param string		$key		Key to return value, return $default if not set
 	*	@param float		$default	Value to return if not defined
 	*	@return float					Value returned
 	*	@see getDolUserInt()
@@ -41,7 +73,6 @@
 
 	/**
 	*	Return a Dolibarr global constant boolean value.
-	*	The constants $conf->global->xxx are loaded by the script master.inc.php included at begin of any PHP page.
 	*
 	*	@param string		$key		Key to return value, return $default if not set
 	*	@param bool			$default	Value to return if not defined
@@ -55,3 +86,42 @@
 		}
 	}
 
+	/**
+	 * Return Dolibarr user constant string value
+	 *
+	 * @param string $key		key to return value, return '' if not set
+	 * @param string $default	value to return
+	 * @param User   $tmpuser   To get another user than current user
+	 * @return string
+	 */
+	if (!function_exists('getDolUserString')) {
+		function getDolUserString($key, $default = '', $tmpuser = null)
+		{
+			if (empty($tmpuser)) {
+				global $user;
+				$tmpuser = $user;
+			}
+			// return $conf->global->$key ?? $default;
+			return (string) (empty($tmpuser->conf->$key) ? $default : $tmpuser->conf->$key);
+		}
+	}
+
+	/**
+	 * Return Dolibarr user constant int value
+	 *
+	 * @param string	$key			key to return value, return 0 if not set
+	 * @param int		$default		value to return
+	 * @param User	$tmpuser		To get another user than current user
+	 * @return int
+	 */
+	if (!function_exists('getDolUserInt')) {
+		function getDolUserInt($key, $default = 0, $tmpuser = null)
+		{
+			if (empty($tmpuser)) {
+				global $user;
+				$tmpuser = $user;
+			}
+			// return $conf->global->$key ?? $default;
+			return (int) (empty($tmpuser->conf->$key) ? $default : $tmpuser->conf->$key);
+		}
+	}

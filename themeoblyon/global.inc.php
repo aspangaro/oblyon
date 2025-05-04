@@ -166,11 +166,6 @@ tr.liste_titre th.liste_titre:not(.maxwidthsearch), tr.liste_titre td.liste_titr
 input {
 	font-size: unset;
 }
-input, input.flat, textarea, textarea.flat, form.flat select, select, select.flat, .dataTables_length label select {
-	background-color: var(--inputbackgroundcolor);
-	color: var(--colortext);
-	border-radius: 2px;
-}
 select.vmenusearchselectcombo {
 	background-color: unset;
 }
@@ -208,6 +203,9 @@ input, input.flat, form.flat select, select, select.flat, .dataTables_length lab
 	border: none;
 }
 input, input.flat, textarea, textarea.flat, form.flat select, select, select.flat, .dataTables_length label select {
+	background-color: var(--inputbackgroundcolor);
+	color: var(--colortext);
+	border-radius: 2px;
 	font-family: var(--fontfamilydol);
 	outline: none;
 	margin: 0px 0px 0px 0px;
@@ -6707,6 +6705,7 @@ table.cal_event td.cal_event_right {
 }*/
 
 .ui-autocomplete-loading {
+    color: #000;
     background: white url(<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/working.gif', 1) ?>) right center no-repeat;
 }
 .ui-autocomplete {

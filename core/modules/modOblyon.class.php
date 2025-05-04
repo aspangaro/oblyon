@@ -28,8 +28,8 @@
 
 	// Libraries ************************************
 	include_once DOL_DOCUMENT_ROOT.'/core/modules/DolibarrModules.class.php';
-	dol_include_once('/oblyon/lib/oblyon.lib.php');
 	dol_include_once('/oblyon/backport/v21/core/lib/functions.lib.php');
+	dol_include_once('/oblyon/lib/oblyon.lib.php');
 
 	// Description and activation class *************
 	class modoblyon extends DolibarrModules
