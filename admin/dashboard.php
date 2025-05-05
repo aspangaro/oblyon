@@ -1,7 +1,7 @@
 <?php
 /************************************************
 * Copyright (C) 2015-2025  Alexandre Spangaro   <alexandre@inovea-conseil.com>
-* Copyright (C) 2022-2025  Sylvain Legrand      <contact@infras.fr>
+* Copyright (C) 2022-2025  Sylvain Legrand	  <contact@infras.fr>
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -88,7 +88,7 @@ if (preg_match('/update_(.*)/', $action, $reg)) {
 	$error									= 0;
 	foreach ($list[$confkey] as $constname)	$result	= dolibarr_set_const($db, $constname, GETPOST($constname, 'alpha'),		'chaine', 0, 'Oblyon module', $conf->entity);
 	foreach ($listcolor as $constname)		$result	= dolibarr_set_const($db, $constname, '#'.GETPOST($constname, 'alpha'),	'chaine', 0, 'Oblyon module', $conf->entity);
-        $result		=  dolibarr_set_const($db, "MAIN_MOTD", dol_htmlcleanlastbr(GETPOST("main_motd", 'restricthtml')), 'chaine', 0, '', $conf->entity);
+		$result		=  dolibarr_set_const($db, "MAIN_MOTD", dol_htmlcleanlastbr(GETPOST("main_motd", 'restricthtml')), 'chaine', 0, '', $conf->entity);
 }
 // Retour => message Ok ou Ko
 if ($result == 1)			setEventMessages($langs->trans('SetupSaved'), null, 'mesgs');
@@ -133,7 +133,7 @@ oblyon_print_colgroup($metas);
 // Message of the day
 require_once DOL_DOCUMENT_ROOT.'/core/class/doleditor.class.php';
 $texthelp = $langs->trans("FollowingConstantsWillBeSubstituted") . '<br>';
-oblyon_print_input('MAIN_MOTD',                         'textarea', $langs->trans("MessageOfDay"), $texthelp, $metas, 2);
+oblyon_print_input('MAIN_MOTD',						 'textarea', $langs->trans("MessageOfDay"), $texthelp, $metas, 2);
 $metas						= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'dashboard');
 */
 // Infobox enable
@@ -147,7 +147,7 @@ $metas						= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'dashboard');
 oblyon_print_input('THEME_INFOBOX_COLOR_ON_BACKGROUND', 'on_off', $langs->trans('InfoboxColorOnBackground'), '', $metas, 2, 1);	// On workboard invert background color with text color
 $easyaVersion = getDolGlobalFloat('EASYA_VERSION', 0);
 if ($easyaVersion >= 2022.5 || (float) DOL_VERSION >= 15.0) {
-    if (!getDolGlobalString('MAIN_DISABLE_GLOBAL_WORKBOARD')) {
+	if (!getDolGlobalString('MAIN_DISABLE_GLOBAL_WORKBOARD')) {
 		$metas		= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'dashboard');
 		oblyon_print_input('MAIN_DISABLE_METEO',				'on_off', $langs->trans('MAIN_DISABLE_METEO'),					'', $metas, 2, 1);	// weather block
 		oblyon_print_input('MAIN_DISABLE_BLOCK_AGENDA',			'on_off', $langs->trans('DashboardDisableBlockAgenda'),			'', $metas, 2, 1);	// calendar block
@@ -160,7 +160,8 @@ if ($easyaVersion >= 2022.5 || (float) DOL_VERSION >= 15.0) {
 		oblyon_print_input('MAIN_DISABLE_BLOCK_EXPENSEREPORT',	'on_off', $langs->trans('DashboardDisableBlockExpenseReport'),	'', $metas, 2, 1);	// expenses block
 		oblyon_print_input('MAIN_DISABLE_BLOCK_HOLIDAY',		'on_off', $langs->trans('DashboardDisableBlockHoliday'),		'', $metas, 2, 1);	// holidays block
 		oblyon_print_input('MAIN_DISABLE_BLOCK_TICKET',			'on_off', $langs->trans('DashboardDisableBlockTicket'),			'', $metas, 2, 1);	// tickets block
-    }
+		oblyon_print_input('OBLYON_INFOXBOX_SINGLE_WIDTH',		'on_off', $langs->trans('OblyonInfoboxSingleWidth'),			'OblyonInfoboxSingleWidthHelp', $metas, 2, 1);	// Single width for all info boxes
+	}
 }
 // Set Intensity
 $metas		= array(array(3), 'ColorIntensity');
