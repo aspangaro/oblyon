@@ -44,6 +44,11 @@
 	--tooltipbgcolor: <?php print $toolTipBgColor; ?>;
 	--tooltipfontcolor : <?php print $toolTipFontColor; ?>;
 	--oddevencolor: #202020;
+	--bgnavtop: <?php echo $bgnavtop ?>;
+    --bgnavtop_hover: <?php echo $bgnavtop_hover ?>;
+    --bgnavtop_txt: <?php echo $bgnavtop_txt ?>;
+    --bgnavtop_txt_hover: <?php echo $bgnavtop_txt_hover ?>;
+    --bgnavtop_txt_active: <?php echo $bgnavtop_txt_active ?>;
 	--colorboxstatsborder: <?php echo $bgnavtop ?>;
 	--dolgraphbg: rgba(255,255,255,0);
 	--fieldrequiredcolor: #400030;
@@ -62,6 +67,9 @@
 	--invertratiofilter: <?php print $invertratiofilter; ?>;
 	--colorfdatedefault: <?php print $colorfdatedefault; ?>;
     --colorfdateselected: <?php print $colorfdateselected; ?>;
+    --bgnavleft_txt: <?php print $bgnavleft_txt; ?>;
+    --bgnavleft_txt_active: <?php print $bgnavleft_txt_active; ?>;
+    --bgnavleft_txt_hover: <?php print $bgnavleft_txt_hover; ?>;
 }
 
 /*------------------------------------*\
@@ -166,11 +174,6 @@ tr.liste_titre th.liste_titre:not(.maxwidthsearch), tr.liste_titre td.liste_titr
 input {
 	font-size: unset;
 }
-input, input.flat, textarea, textarea.flat, form.flat select, select, select.flat, .dataTables_length label select {
-	background-color: var(--inputbackgroundcolor);
-	color: var(--colortext);
-	border-radius: 2px;
-}
 select.vmenusearchselectcombo {
 	background-color: unset;
 }
@@ -208,6 +211,9 @@ input, input.flat, form.flat select, select, select.flat, .dataTables_length lab
 	border: none;
 }
 input, input.flat, textarea, textarea.flat, form.flat select, select, select.flat, .dataTables_length label select {
+	background-color: var(--inputbackgroundcolor);
+	color: var(--colortext);
+	border-radius: 2px;
 	font-family: var(--fontfamilydol);
 	outline: none;
 	margin: 0px 0px 0px 0px;
@@ -2506,7 +2512,7 @@ div.login_block_other {
     <?php } ?>
 <?php } ?>
 <?php if (getDolGlobalString('MAIN_MENU_INVERT')) { ?>
-    background-color: <?php print $bgnavtop; ?>;
+    background-color: var(--bgnavtop);
 <?php } else { ?>
     background-color: <?php print $bgnavleft; ?>;
 <?php } ?>
@@ -2563,7 +2569,7 @@ div.login_block_other {
 }
 
 #id-top {
-    background-color: <?php print $bgnavtop; ?>;
+    background-color: var(--bgnavtop);
     z-index: 91;
 }
 
@@ -2927,7 +2933,7 @@ img.photorefnoborder {
         display: block;
         overflow: auto;
         width: 100%;
-        background-color: <?php print $bgnavtop; ?>;
+        background-color: var(--bgnavtop);
         <?php if (!empty($usecss3)) { ?>
             <?php if (getDolGlobalString('OBLYON_STICKY_TOPBAR')) { ?>
                 box-shadow: 0 1px 2px rgba(0, 0, 0, .4) !important;
@@ -2994,21 +3000,21 @@ img.photorefnoborder {
 }
 
 .main-nav__item {
-    background-color: <?php print $bgnavtop; ?>;
+    background-color: var(--bgnavtop);
 }
 
 .main-nav__item:hover {
-    background-color: <?php print $bgnavtop_hover; ?>;
-    color: <?php print $bgnavtop_txt; ?>;
+    background-color: var(--bgnavtop_hover);
+    color: var(--bgnavtop_txt);
 }
 
 .main-nav__item.is-sel a {
 	<?php if (getDolGlobalString('MAIN_MENU_INVERT')) { ?>
 		background-color: <?php print $bgnavleft_hover; ?>;
-		color: <?php print $bgnavleft_txt_active; ?>;
+		color: var(--bgnavleft_txt_active);
 	<?php } else { ?>
-    background-color: <?php print $bgnavtop_hover; ?>;
-		color: <?php print $bgnavtop_txt_active; ?>;
+    background-color: var(--bgnavtop_hover);
+		color: var(--bgnavtop_txt_active);
         /*
         border-style: solid;
         border-width: 6px 10px 6px 0px;
@@ -3038,7 +3044,7 @@ img.photorefnoborder {
 }
 
 .main-nav__item.tmenusel {
-    background-color: <?php print $bgnavtop_hover; ?>;
+    background-color: var(--bgnavtop_hover);
 }
 
 .main-nav__item.tmenusel .main-nav__link {
@@ -3074,14 +3080,14 @@ transition: all .2s ease-in-out;
 .main-nav__item:hover .main-nav__link,
 .main-nav__item .main-nav__link:focus {
     <?php if (getDolGlobalString('MAIN_MENU_INVERT')) { ?>
-        color: <?php print $bgnavleft_txt; ?>;
+        color: var(--bgnavleft_txt);
     <?php } else { ?>
-        color: <?php print $bgnavtop_txt; ?>;
+        color: var(--bgnavtop_txt);
     <?php } ?>
 }
 
 .main-nav__link {
-	color: <?php print $bgnavtop_txt; ?> !important;
+	color: var(--bgnavtop_txt) !important;
     display: block;
     font-family: var(--fontfamilydol);
     transition: all .2s ease-in-out;
@@ -3220,20 +3226,20 @@ transition: all .2s ease-in-out;
 
 li.item-heading:hover > .sec-nav__link {
     background-color: <?php print $bgnavleft_hover; ?>;
-    color: <?php print $bgnavleft_txt_hover; ?>;
+    color: var(--bgnavleft_txt_hover);
 }
 
 li.sec-nav__sub-item {
-    color: <?php print $bgnavleft_txt; ?>;
+    color: var(--bgnavleft_txt);
     list-style: none;
 }
 li.sec-nav__sub-item:hover, li.sec-nav__sub-item sec-nav__link:hover {
 	background-color: <?php print $bgnavleft_hover; ?>;
-	color: <?php print $bgnavleft_txt_hover; ?>;
+	color: var(--bgnavleft_txt_hover);
 }
 li.sec-nav__sub-item:focus, li.sec-nav__sub-item sec-nav__link:focus {
 	background-color: <?php print $bgnavleft_hover; ?>;
-	color: <?php print $bgnavleft_txt_active; ?>;
+	color: var(--bgnavleft_txt_active);
 }
 
 .caret {
@@ -3267,23 +3273,23 @@ li.sec-nav__sub-item:focus, li.sec-nav__sub-item sec-nav__link:focus {
 }
 
 .sec-nav.is-inverted li.item-heading:hover .caret--top {
-	border-top-color: <?php print $bgnavleft_txt_hover; ?>;
+	border-top-color: var(--bgnavleft_txt_hover);
 }
 
 .sec-nav__sub-list .item-level2:hover .caret--left {
-	border-left-color: <?php print $bgnavleft_txt_hover; ?>;
+	border-left-color: var(--bgnavleft_txt_hover);
 }
 
 .sec-nav__sub-list .item-level2:hover .caret--right {
-	border-right-color: <?php print $bgnavleft_txt_hover; ?>;
+	border-right-color: var(--bgnavleft_txt_hover);
 }
 
 .sec-nav__sub-list .item-level3:hover .caret--left {
-	border-left-color: <?php print $bgnavleft_txt_hover; ?>;
+	border-left-color: var(--bgnavleft_txt_hover);
 }
 
 .sec-nav__sub-list .item-level3:hover .caret--right {
-	border-right-color: <?php print $bgnavleft_txt_hover; ?>;
+	border-right-color: var(--bgnavleft_txt_hover);
 }
 
 /**
@@ -3351,7 +3357,7 @@ div.login_block {
         background-color: <?php print $bgnavleft; ?>;
         height: 40px;
     <?php } else { ?>
-        background-color: <?php print $bgnavtop; ?>;
+        background-color: var(--bgnavtop);
         height: 54px;
     <?php } ?>
     /* padding-right: 10px; */
@@ -3369,7 +3375,7 @@ div.login_block {
 }
 
 div.login_block a {
-	color: <?php print $bgnavtop_txt; ?>;
+	color: var(--bgnavtop_txt);
 	display: inline-block;
 }
 div.login_block span.aversion {
@@ -3377,9 +3383,9 @@ div.login_block span.aversion {
         display: none !important;
     <?php } else { ?>
         <?php if (getDolGlobalString('MAIN_MENU_INVERT')) { ?>
-            color: <?php echo $bgnavleft_txt; ?>;
+            color: var(--bgnavleft_txt);
         <?php } else { ?>
-            color: <?php echo $bgnavtop_txt; ?>;
+            color: var(--bgnavtop_txt);
         <?php } ?>
         filter: contrast(0.7);
     <?php } ?>
@@ -3393,7 +3399,7 @@ div.login {
 	float: right;
 }
 div.login a {
-	color: <?php print $bgnavtop_txt; ?>;
+	color: var(--bgnavtop_txt);
 }
 div.login a:hover {
 	color: <?php print $maincolor; ?>;
@@ -3402,7 +3408,7 @@ div.login a:hover {
 
 div.login_block:after {
     /*content: '\f013';*/
-    color: <?php print $bgnavtop_txt; ?>;
+    color: var(--bgnavtop_txt);
     font-family: var(--fontawesomeFamily) !important;
     font-size: 20px;
     <?php if (getDolGlobalString('MAIN_MENU_INVERT')) { ?>
@@ -3463,7 +3469,7 @@ div.login_block_other {
     <?php if (getDolGlobalString('MAIN_MENU_INVERT')) { ?>
         background: <?php print $bgnavleft; ?>;
     <?php } else { ?>
-        background: <?php print $bgnavtop; ?>;
+        background: var(--bgnavtop);
     <?php } ?>
     <?php if (getDolGlobalString('MAIN_MENU_INVERT')) { ?>
         display: none;
@@ -3502,7 +3508,7 @@ div.login_block_other {
         background-color: <?php print $bgnavleft; ?>;
         height: 40px;
     <?php } else { ?>
-        background-color: <?php print $bgnavtop; ?>;
+        background-color: var(--bgnavtop);
         height: 54px;
     <?php } ?>
     padding: 0;
@@ -3515,12 +3521,12 @@ div.login_block_other {
 .login_block_elem a,
 .login_block td.classfortooltip a {
     <?php if (getDolGlobalString('MAIN_MENU_INVERT')) { ?>
-        color: <?php print $bgnavleft_txt; ?>;
+        color: var(--bgnavleft_txt);
         font-size: 16px;
         height: 40px;
         line-height: 36px;
     <?php } else { ?>
-        color: <?php print $bgnavtop_txt; ?>;
+        color: var(--bgnavtop_txt);
         font-size: 18px;
         height: 54px;
         line-height: 50px;
@@ -3537,17 +3543,17 @@ div.login_block_other {
 .login_block_elem a:hover,
 .login_block td.classfortooltip a:hover {
     <?php if (getDolGlobalString('MAIN_MENU_INVERT')) { ?>
-        color: <?php print $bgnavleft_txt_hover; ?>;
+        color: var(--bgnavleft_txt_hover);
     <?php } else { ?>
-        color: <?php print $bgnavtop_txt_hover; ?>;
+        color: var(--bgnavtop_txt_hover);
     <?php } ?>
 }
 
 .atoplogin, .atoplogin:hover {
 <?php if (getDolGlobalString('MAIN_MENU_INVERT')) { ?>
-    color: <?php print $bgnavleft_txt; ?> !important;
+    color: var(--bgnavleft_txt) !important;
 <?php } else { ?>
-    color: <?php print $bgnavtop_txt; ?> !important;
+    color: var(--bgnavtop_txt) !important;
 <?php } ?>
 }
 .login_block_getinfo {
@@ -3589,9 +3595,9 @@ img.login, img.printer, img.help, img.entity {
     /* margin: 0px 0px 0px 8px; */
     text-decoration: none;
     <?php if (getDolGlobalString('MAIN_MENU_INVERT')) { ?>
-        color: <?php print $bgnavleft_txt; ?>;
+        color: var(--bgnavleft_txt);
     <?php } else { ?>
-        color: <?php print $bgnavtop_txt; ?>;
+        color: var(--bgnavtop_txt);
     <?php } ?>
     font-weight: bold;
 
@@ -3651,7 +3657,7 @@ margin-right: 30px;
     <?php if (getDolGlobalString('MAIN_MENU_INVERT')) { ?>
         background-color: <?php print $bgnavleft_hover; ?>;
     <?php } else { ?>
-        background-color: <?php print $bgnavtop_hover; ?>;
+        background-color: var(--bgnavtop_hover);
     <?php } ?>
 }
 
@@ -3784,7 +3790,7 @@ div.login a:hover {
 .sec-nav { color: <?php print $bgnavleft; ?>; }
 
 .sec-nav .sec-nav__link {
-    color: <?php print $bgnavleft_txt; ?>;
+    color: var(--bgnavleft_txt);
     font-size: <?php print $fontsize; ?>px;
     font-family: var(--fontfamilydol);
     font-weight: normal;
@@ -3797,11 +3803,11 @@ div.login a:hover {
 
 .sec-nav .sec-nav__link:hover {
 	background-color: <?php print $bgnavleft_hover; ?>;
-	color: <?php print $bgnavleft_txt_hover; ?>;
+	color: var(--bgnavleft_txt_hover);
 }
 .sec-nav .sec-nav__link:focus {
 	background-color: <?php print $bgnavleft_hover; ?>;
-	color: <?php print $bgnavleft_txt_active; ?>;
+	color: var(--bgnavleft_txt_active);
 }
 
 .vmenu .sec-nav__item.item-heading {
@@ -3859,7 +3865,7 @@ font-size: 14px;
 */
 .blockvmenusocietyname {
     <?php if (getDolGlobalString('MAIN_MENU_INVERT')) { ?>
-        background-color: <?php print $bgnavtop_hover; ?>;
+        background-color: var(--bgnavtop_hover);
     <?php } else { ?>
         background-color: <?php print $bgnavleft_hover; ?>;
     <?php } ?>
@@ -3868,9 +3874,9 @@ font-size: 14px;
 
 .blockvmenusocietyname span {
     <?php if (getDolGlobalString('MAIN_MENU_INVERT')) { ?>
-        color: <?php print $bgnavtop_txt; ?>;
+        color: var(--bgnavtop_txt);
     <?php } else { ?>
-        color: <?php print $bgnavleft_txt; ?>;
+        color: var(--bgnavleft_txt);
     <?php } ?>
     padding: 5px 10px 5px 10px;
     overflow: hidden;
@@ -3884,8 +3890,8 @@ font-size: 14px;
 
 .blockvmenusearch {
     <?php if (getDolGlobalString('MAIN_MENU_INVERT')) { ?>
-        background-color: <?php print $bgnavtop; ?>;
-        border-bottom: 1px solid <?php print $bgnavtop_hover; ?>;
+        background-color: var(--bgnavtop);
+        border-bottom: 1px solid var(--bgnavtop_hover);
     <?php } else { ?>
         background-color: <?php print $bgnavleft; ?>;
         border-bottom: 1px solid <?php print $bgnavleft_hover; ?>;
@@ -3919,8 +3925,8 @@ font-size: 14px;
 
 .blockvmenubookmarks {
     <?php if (getDolGlobalString('MAIN_MENU_INVERT')) { ?>
-        background-color: <?php print $bgnavtop; ?>;
-        border-bottom: 1px solid <?php print $bgnavtop_hover; ?>;
+        background-color: var(--bgnavtop);
+        border-bottom: 1px solid var(--bgnavtop_hover);
     <?php } else { ?>
         background-color: <?php print $bgnavleft; ?>;
         border-bottom: 1px solid <?php print $bgnavleft_hover; ?>;
@@ -3972,7 +3978,7 @@ font-size: 14px;
 .blockvmenuhelp {
     <?php if (empty($conf->dol_optimize_smallscreen) || getDolGlobalString('OBLYON_REDUCE_LEFTMENU')) { ?>
         <?php if (getDolGlobalString('MAIN_MENU_INVERT')) { ?>
-            background-color: <?php print $bgnavtop; ?>;
+            background-color: var(--bgnavtop);
         <?php } else { ?>
             background-color: <?php print $bgnavleft; ?>;
         <?php } ?>
@@ -3994,7 +4000,7 @@ font-size: 14px;
 .blockvmenuhelp a.help:link,
 .blockvmenuhelp a.help:visited,
 .blockvmenuhelp a.help:active {
-    color: <?php echo $bgnavleft_txt; ?>;
+    color: var(--bgnavleft_txt);
     font-size: <?php print $fontsizesmaller; ?>px;
     font-weight: normal;
     text-align: <?php print $left; ?>;
@@ -4188,8 +4194,8 @@ font-size: 14px;
 
 
     .pushy-btn {
-        background-color: <?php print $bgnavtop; ?>;
-        color: <?php print $bgnavtop_txt; ?>;
+        background-color: var(--bgnavtop);
+        color: var(--bgnavtop_txt);
         display: inline-block;
         float: <?php print $left; ?>;
         font-size: 24px;
@@ -4200,13 +4206,13 @@ font-size: 14px;
     }
 
     .pushy-btn:hover {
-        background-color: <?php print $bgnavtop_hover; ?>;
-        color: <?php print $bgnavtop_txt_hover; ?>;
+        background-color: var(--bgnavtop_hover);
+        color: var(--bgnavtop_txt_hover);
     }
 
     .pushy-active .pushy-btn {
-        background-color: <?php print $bgnavtop_hover; ?>;
-        color: <?php print $bgnavtop_txt_active; ?>;
+        background-color: var(--bgnavtop_hover);
+        color: var(--bgnavtop_txt_active);
     }
 
 <?php } ?> /* end HIDE_LEFTMENU */
@@ -4355,16 +4361,16 @@ li.tmenusel {
 }
 
 li.tmenu:hover {
-    background-color: <?php print $bgnavtop_hover; ?>;
+    background-color: var(--bgnavtop_hover);
     color: <?php print $topmenu_hover; ?>;
 }
 
 #tmenu_tooltip li.tmenu {
-    background-color: <?php print $bgnavtop; ?>;
+    background-color: var(--bgnavtop);
 }
 
 #tmenu_tooltip li.tmenu:hover {
-    background-color: <?php print $bgnavtop_hover; ?>;
+    background-color: var(--bgnavtop_hover);
 }
 
 
@@ -4387,16 +4393,16 @@ a.tmenudisabled {
 }
 a.tmenu:link,
 a.tmenudisabled {
-	color: <?php print $bgnavtop_txt; ?> !important;
+	color: var(--bgnavtop_txt) !important;
 }
 
 a.tmenu:active {
-    color: <?php print $bgnavtop_txt_active; ?> !important;
+    color: var(--bgnavtop_txt_active) !important;
     margin: 0;
 }
 
 a.tmenu:hover {
-    color: <?php print $bgnavtop_txt_hover; ?> !important;
+    color: var(--bgnavtop_txt_hover) !important;
     margin: 0;
 }
 
@@ -4520,7 +4526,7 @@ li#mainmenutd_companylogo {
 }
 
 #tmenu_tooltipinvert a.vmenu {
-    color: <?php $bgnavleft_txt; ?>;
+    color: var(--bgnavleft_txt);
     display: block;
     font-size: 13px;
     line-height: 40px;
@@ -4558,7 +4564,7 @@ li#mainmenutd_companylogo {
 
 div.vmenu {
     <?php if (getDolGlobalString('MAIN_MENU_INVERT')) { ?>
-        background-color: <?php print $bgnavtop; ?>;
+        background-color: var(--bgnavtop);
     <?php } else { ?>
         background-color: <?php print $bgnavleft; ?>;
     <?php } ?>
@@ -5124,7 +5130,7 @@ div.tabsElem {
 div.tabsElem:hover,
 div.tabsElem a.tab:hover {
 	background-color: <?php print $bgnavleft_hover; ?>;
-	color: <?php print $bgnavleft_txt_hover; ?>;
+	color: var(--bgnavleft_txt_hover);
 }
 
 div.tabBar {
@@ -6707,6 +6713,7 @@ table.cal_event td.cal_event_right {
 }*/
 
 .ui-autocomplete-loading {
+    color: #000;
     background: white url(<?php echo dol_buildpath($path.'/theme/'.$theme.'/img/working.gif', 1) ?>) right center no-repeat;
 }
 .ui-autocomplete {
@@ -9449,7 +9456,7 @@ dl.dropdown {
     display:none;
 }
 .dropdown dd ul {
-	background-color: <?php print $bgnavtop_hover; ?>;
+	background-color: var(--bgnavtop_hover);
 	border: 1px solid var(--colorboxstatsborder);
     display:none;
     right:0px;						/* pop is align on right */
@@ -9512,9 +9519,9 @@ img.loginphoto {
 
 .atoplogin #mc-dropdown-icon {
     <?php if (getDolGlobalString('MAIN_MENU_INVERT')) { ?>
-    color: <?php print $bgnavleft_txt; ?>;
+    color: var(--bgnavleft_txt);
     <?php } else { ?>
-    color: <?php print $bgnavtop_txt; ?>;
+    color: var(--bgnavtop_txt);
     <?php } ?>
 }
 

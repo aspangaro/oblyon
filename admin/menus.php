@@ -31,7 +31,8 @@ require_once(DOL_DOCUMENT_ROOT.'/core/class/html.formadmin.class.php');
 require_once(DOL_DOCUMENT_ROOT.'/core/class/html.formother.class.php');
 require_once DOL_DOCUMENT_ROOT.'/core/lib/admin.lib.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/files.lib.php';
-require_once '../lib/oblyon.lib.php';
+dol_include_once('/oblyon/backport/v21/core/lib/functions.lib.php');
+dol_include_once('/oblyon/lib/oblyon.lib.php');
 
 /**
  * @var Conf $conf

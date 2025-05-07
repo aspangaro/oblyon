@@ -131,6 +131,7 @@ INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('MAIN_D
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('MAIN_DISABLE_BLOCK_EXPENSEREPORT',		'__ENTITY__', '0',					'yesno',	'0',	'Oblyon module');
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('MAIN_DISABLE_BLOCK_HOLIDAY',				'__ENTITY__', '0',					'chaine',	'0',	'Oblyon module');
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('MAIN_DISABLE_BLOCK_TICKET',				'__ENTITY__', '0',					'yesno',	'0',	'Oblyon module');
+INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_INFOXBOX_SINGLE_WIDTH',			'__ENTITY__', '0',					'yesno',	'0',	'Oblyon module');
 -- Dashboard - color
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('THEME_AGRESSIVENESS_RATIO',		    	'__ENTITY__', '-50',		        'chaine',	'0',	'Oblyon dashboard agressiveness ratio');
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_INFOXBOX_BACKGROUND',		    	'__ENTITY__', '#FFFFFF',			'chaine',	'0',	'Oblyon infobox background color');

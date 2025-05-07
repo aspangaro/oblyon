@@ -30,6 +30,7 @@
 	*              $var_file = DOL_DOCUMENT_ROOT.'/theme/'.$conf->theme.'/theme_vars.inc.php';
 	*              if (is_readable($var_file)) include $var_file;
 	*/
+	dol_include_once('/oblyon/backport/v21/core/lib/functions.lib.php');
 
 	global $conf, $theme_bordercolor, $theme_datacolor, $theme_bgcolor, $theme_bgcoloronglet;
 

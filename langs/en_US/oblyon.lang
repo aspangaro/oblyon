@@ -66,9 +66,12 @@ OblyonLogin                          = Login page
 LoginRight                           = Offset the connection block to the right of the screen
 CardBehavior                         = Behavior of the cards
 FixAreaRefAndTabAction               = Fix the reference banner and action buttons during vertical scrolling
+FixStickyTabsCard                    = Fix tab banner when scrolling vertically
 SwitchColunmOnLeft                   = Toggle selection / search / mass action column to the left
 RemoveKanbanViewInList               = Remove the "Kanban view" button at the top right of the lists
 FixStickyTableHeadersColumns         = Fix the table column header on the elements during vertical scrolling
+FixStickyFirstColumn                 = Fix first column of tables when scrolling horizontally
+FixStickyLastColumn                  = Fix last column of tables when scrolling horizontally
 General                              = General parameters
 OblyonFontSize                       = Basic text size in pixels (must be between 10 and 16)
 OblyonFontFamily                     = Change Font family for Dolibarr interface
@@ -167,6 +170,8 @@ OblyonDashboardTitle                   = Oblyon configurator - Dashboard
 OblyonDashboardDisableBlocks           =Thumbs of open objects (to process or late) on main dashboard
 DisableGlobalBoxStats                  = Disable the global statistics widget (number of items in database)
 InfoboxColorOnBackground               = Invert the colors of the icons and the background of the thumbnails
+OblyonInfoboxSingleWidth               = Standardize the width of the thumbnails (Dolibarr standard 280px)
+OblyonInfoboxSingleWidthHelp           = Otherwise the width will adapt to the length of the information presented (the minimum width is 260px)
 ColorIntensity                         = Color intensity
 ColorIntensityDesc                     = Set the intensity to the colors below (Currently %s)
 ColorMoreDarker                        = Less intense
@@ -227,23 +232,27 @@ OblyonMainUseBookmarkDropdown   = Add the bookmark menu (in top right)
 OblyonImageHeightTable          = Maximum height of images in lists (tables)
 OblyonDisableVersion            = Don't show the version number of Dolibarr (in top right)
 OblyonPaddingRightBottom        = Display a margin at the bottom of the page on the right side
+
 # List
-SwitchColumnOnLeft=Flip the selection / search / mass action column to the left
-FixTitleInList=Sticky list title bar so that title, mass action, pagination and “Add” element are always visible
-RemoveKanbanViewInList=Remove the “Kanban view” button at the top right of lists
-FixStickyTableHeadersColumns=Sticky table column headers on elements when scrolling vertically
-FixStickyFirstColumn=Sticky first column of tables when scrolling horizontally
-FixStickyLastColumn=Sticky last table column when scrolling horizontally
-FixStickyTotalBar=Sticky total bar at the bottom of the page
-ShowGrandTotalList=Display grand totals without pagination if amounts differ from classic totals
-FixStickyGrandTotalBar=Sticky grand total bar at the bottom of the page
+OptionsList                  = List options
+SwitchColumnOnLeft           = Flip the selection / search / mass action column to the left
+FixTitleInList               = Sticky list title bar so that title, mass action, pagination and “Add” element are always visible
+RemoveKanbanViewInList       = Remove the “Kanban view” button at the top right of lists
+FixStickyTableHeadersColumns = Sticky table column headers on elements when scrolling vertically
+FixStickyFirstColumn         = Sticky first column of tables when scrolling horizontally
+FixStickyLastColumn          = Sticky last table column when scrolling horizontally
+FixStickyTotalBar            = Sticky total bar at the bottom of the page
+ShowGrandTotalList           = Display grand totals without pagination if amounts differ from classic totals
+FixStickyGrandTotalBar       = Sticky grand total bar at the bottom of the page
+
 # Card
-FixStickyTabsCard=Sticky tab banner when scrolling vertically
-FixAreaRefCard=Sticky area ref when scrolling vertically. (Disabled on mobiles phones)
-MainMaxTabsInCard=Maximum number of tabs visible. Others are grouped into a combo list
-LimitTabLineToOne=(Allows you to limit the tabs to a single line => necessary when the 2 previous options are active simultaneously)
-FixAbsoluteButtonsActionCard=Sticky action buttons at bottom of the page
-ShowLineNumberCard=Show line number (Invoice, proposal, etc)
+OptionsCard                  = Card options
+FixStickyTabsCard            = Sticky tab banner when scrolling vertically
+FixAreaRefCard               = Sticky area ref when scrolling vertically. (Disabled on mobiles phones)
+MainMaxTabsInCard            = Maximum number of tabs visible. Others are grouped into a combo list
+LimitTabLineToOne            = (Allows you to limit the tabs to a single line => necessary when the 2 previous options are active simultaneously)
+FixAbsoluteButtonsActionCard = Sticky action buttons at bottom of the page
+ShowLineNumberCard           = Show line number (Invoice, proposal, etc)
 
 #
 # Icons page

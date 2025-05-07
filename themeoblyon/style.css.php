@@ -49,6 +49,7 @@
 	require_once DOL_DOCUMENT_ROOT.'/core/lib/files.lib.php';
 	require_once DOL_DOCUMENT_ROOT.'/core/lib/admin.lib.php';
 	require_once DOL_DOCUMENT_ROOT.'/user/class/user.class.php';
+	dol_include_once('/oblyon/backport/v21/core/lib/functions.lib.php');
 
 	/************************************************
 	*	Select text color from background values
@@ -215,19 +216,20 @@
 	$colorbackvmenu1			= getDolGlobalString('THEME_ELDY_VERMENU_BACK1');
 	$colortopbordertitle1		= getDolGlobalString('THEME_ELDY_TOPBORDER_TITLE1');
 	$colorbacktitle1			= getDolGlobalString('THEME_ELDY_BACKTITLE1');
-	$colorbacktabcard1			= empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? getDolGlobalString('THEME_ELDY_BACKTABCARD1', $colorbacktabcard1)		: (empty($user->conf->THEME_ELDY_BACKTABCARD1)		? $colorbacktabcard1	: $user->conf->THEME_ELDY_BACKTABCARD1);
-	$colorbacktabactive			= empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? getDolGlobalString('THEME_ELDY_BACKTABACTIVE', $colorbacktabactive)		: (empty($user->conf->THEME_ELDY_BACKTABACTIVE)		? $colorbacktabactive	: $user->conf->THEME_ELDY_BACKTABACTIVE);
-	$colorbacklineimpair1		= empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? getDolGlobalString('THEME_ELDY_LINEIMPAIR1', $colorbacklineimpair1)		: (empty($user->conf->THEME_ELDY_LINEIMPAIR1)		? $colorbacklineimpair1	: $user->conf->THEME_ELDY_LINEIMPAIR1);
-	$colorbacklineimpair2		= empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? getDolGlobalString('THEME_ELDY_LINEIMPAIR2', $colorbacklineimpair2)		: (empty($user->conf->THEME_ELDY_LINEIMPAIR2)		? $colorbacklineimpair2	: $user->conf->THEME_ELDY_LINEIMPAIR2);
-	$colorbacklinepair1			= empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? getDolGlobalString('THEME_ELDY_LINEPAIR1', $colorbacklinepair1)			: (empty($user->conf->THEME_ELDY_LINEPAIR1)			? $colorbacklinepair1	: $user->conf->THEME_ELDY_LINEPAIR1);
-	$colorbacklinepair2			= empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? getDolGlobalString('THEME_ELDY_LINEPAIR2', $colorbacklinepair2)			: (empty($user->conf->THEME_ELDY_LINEPAIR2)			? $colorbacklinepair2	: $user->conf->THEME_ELDY_LINEPAIR2);
-	$colorbacklinebreak			= empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? getDolGlobalString('THEME_ELDY_LINEBREAK', $colorbacklinebreak)			: (empty($user->conf->THEME_ELDY_LINEBREAK)			? $colorbacklinebreak	: $user->conf->THEME_ELDY_LINEBREAK);
-	$colorbackbody				= empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? getDolGlobalString('THEME_ELDY_BACKBODY', $colorbackbody)				: (empty($user->conf->THEME_ELDY_BACKBODY)			? $colorbackbody		: $user->conf->THEME_ELDY_BACKBODY);
-	$colortexttitlenotab		= empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? getDolGlobalString('THEME_ELDY_TEXTTITLENOTAB', $colortexttitlenotab)	: (empty($user->conf->THEME_ELDY_TEXTTITLENOTAB)	? $colortexttitlenotab	: $user->conf->THEME_ELDY_TEXTTITLENOTAB);
-	$colortexttitle				= empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? getDolGlobalString('THEME_ELDY_TEXTTITLE', $colortexttitle)				: (empty($user->conf->THEME_ELDY_TEXTTITLE)			? $colortexttitle		: $user->conf->THEME_ELDY_TEXTTITLE);
-	$colortexttitlelink			= empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? getDolGlobalString('THEME_ELDY_TEXTTITLELINK', $colortexttitlelink)		: (empty($user->conf->THEME_ELDY_TEXTTITLELINK)		? $colortexttitlelink	: $user->conf->THEME_ELDY_TEXTTITLELINK);
-	$colortext					= empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? getDolGlobalString('THEME_ELDY_TEXT', $colortext)						: (empty($user->conf->THEME_ELDY_TEXT)				? $colortext			: $user->conf->THEME_ELDY_TEXT);
-	$colortextlink				= empty($user->conf->THEME_ELDY_ENABLE_PERSONALIZED) ? getDolGlobalString('THEME_ELDY_TEXTLINK', $colortextlink)				: (empty($user->conf->THEME_ELDY_TEXTLINK)			? $colortextlink		: $user->conf->THEME_ELDY_TEXTLINK);
+	$colorbacktabcard1			= !getDolUserString('THEME_ELDY_ENABLE_PERSONALIZED', '', $user) ? getDolGlobalString('THEME_ELDY_BACKTABCARD1', $colorbacktabcard1) : getDolUserString('THEME_ELDY_BACKTABCARD1', $colorbacktabcard1, $user);
+	$colorbacktabactive			= !getDolUserString('THEME_ELDY_ENABLE_PERSONALIZED', '', $user) ? getDolGlobalString('THEME_ELDY_BACKTABACTIVE', $colorbacktabactive) : getDolUserString('THEME_ELDY_BACKTABACTIVE', $colorbacktabactive, $user);
+	$colorbacklineimpair1		= !getDolUserString('THEME_ELDY_ENABLE_PERSONALIZED', '', $user) ? getDolGlobalString('THEME_ELDY_LINEIMPAIR1', $colorbacklineimpair1) : getDolUserString('THEME_ELDY_LINEIMPAIR1', $colorbacklineimpair1, $user);
+	$colorbacklineimpair2		= !getDolUserString('THEME_ELDY_ENABLE_PERSONALIZED', '', $user) ? getDolGlobalString('THEME_ELDY_LINEIMPAIR2', $colorbacklineimpair2) : getDolUserString('THEME_ELDY_LINEIMPAIR2', $colorbacklineimpair2, $user);
+	$colorbacklinepair1			= !getDolUserString('THEME_ELDY_ENABLE_PERSONALIZED', '', $user) ? getDolGlobalString('THEME_ELDY_LINEPAIR1', $colorbacklinepair1) : getDolUserString('THEME_ELDY_LINEPAIR1', $colorbacklinepair1, $user);
+	$colorbacklinepair2			= !getDolUserString('THEME_ELDY_ENABLE_PERSONALIZED', '', $user) ? getDolGlobalString('THEME_ELDY_LINEPAIR2', $colorbacklinepair2) : getDolUserString('THEME_ELDY_LINEPAIR2', $colorbacklinepair2, $user);
+	$colorbacklinebreak			= !getDolUserString('THEME_ELDY_ENABLE_PERSONALIZED', '', $user) ? getDolGlobalString('THEME_ELDY_LINEBREAK', $colorbacklinebreak) : getDolUserString('THEME_ELDY_LINEBREAK', $colorbacklinebreak, $user);
+	$colorbackbody				= !getDolUserString('THEME_ELDY_ENABLE_PERSONALIZED', '', $user) ? getDolGlobalString('THEME_ELDY_BACKBODY', $colorbackbody) : getDolUserString('THEME_ELDY_BACKBODY', $colorbackbody, $user);
+	$colortexttitlenotab		= !getDolUserString('THEME_ELDY_ENABLE_PERSONALIZED', '', $user) ? getDolGlobalString('THEME_ELDY_TEXTTITLENOTAB', $colortexttitlenotab) : getDolUserString('THEME_ELDY_TEXTTITLENOTAB', $colortexttitlenotab, $user);
+	$colortexttitle				= !getDolUserString('THEME_ELDY_ENABLE_PERSONALIZED', '', $user) ? getDolGlobalString('THEME_ELDY_TEXTTITLE', $colortexttitle) : getDolUserString('THEME_ELDY_TEXTTITLE', $colortexttitle, $user);
+	$colortexttitlelink			= !getDolUserString('THEME_ELDY_ENABLE_PERSONALIZED', '', $user) ? getDolGlobalString('THEME_ELDY_TEXTTITLELINK', $colortexttitlelink) : getDolUserString('THEME_ELDY_TEXTTITLELINK', $colortexttitlelink, $user);
+	$colortext					= !getDolUserString('THEME_ELDY_ENABLE_PERSONALIZED', '', $user) ? getDolGlobalString('THEME_ELDY_TEXT', $colortext) : getDolUserString('THEME_ELDY_TEXT', $colortext, $user);
+	$colortextlink				= !getDolUserString('THEME_ELDY_ENABLE_PERSONALIZED', '', $user) ? getDolGlobalString('THEME_ELDY_TEXTLINK', $colortextlink) : getDolUserString('THEME_ELDY_TEXTLINK', $colortextlink, $user);
+
 	// Hover color
 	$colorbacklinepairhover		= colorStringToArray($colorbline_hover);
 	$colorbacklinepairchecked	= colorStringToArray($colorbline_hover);
@@ -326,8 +328,8 @@
 	print 'dol_hide_leftmenu						= '.$dol_hide_leftmenu."\n";
 	print 'dol_optimize_smallscreen					= '.$dol_optimize_smallscreen."\n";
 	print 'dol_no_mouse_hover						= '.$dol_no_mouse_hover."\n";
-	print 'dol_screenwidth							= '.$_SESSION['dol_screenwidth']."\n";
-	print 'dol_screenheight							= '.$_SESSION['dol_screenheight']."\n";
+	print 'dol_screenwidth							= '.(!empty($_SESSION['dol_screenwidth']) ? $_SESSION['dol_screenwidth'] : '')."\n";
+	print 'dol_screenheight							= '.(!empty($_SESSION['dol_screenheight']) ? $_SESSION['dol_screenheight'] : '')."\n";
 	print 'nbtopmenuentries							= '.$nbtopmenuentries."\n";
 	print 'topMenuFontSize							= '.$topMenuFontSize."\n";
 	print 'toolTipBgColor							= '.$toolTipBgColor."\n";

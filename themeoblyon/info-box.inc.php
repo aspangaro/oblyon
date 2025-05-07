@@ -271,18 +271,11 @@ a.info-box-text{ text-decoration: none;}
 /* ICONS INFO BOX */
 <?php
 include_once DOL_DOCUMENT_ROOT.'/core/lib/functions2.lib.php';
-
-$prefix='';
+$prefix = '';
 if (getDolGlobalString('THEME_INFOBOX_COLOR_ON_BACKGROUND')) {
 	$prefix = 'background-';
 }
-
-if (GETPOSTISSET('THEME_AGRESSIVENESS_RATIO')) {
-    $conf->global->THEME_AGRESSIVENESS_RATIO = -50;
-}
-if (GETPOSTISSET('THEME_AGRESSIVENESS_RATIO')) {
-    $conf->global->THEME_AGRESSIVENESS_RATIO = GETPOST('THEME_AGRESSIVENESS_RATIO', 'int');
-}
+$conf->global->THEME_AGRESSIVENESS_RATIO = GETPOSTISSET('THEME_AGRESSIVENESS_RATIO') ? GETPOST('THEME_AGRESSIVENESS_RATIO', 'int') : -50;
 ?>
 .info-box-icon {
 	<?php if ($prefix) { ?>
@@ -449,8 +442,11 @@ if (GETPOSTISSET('THEME_AGRESSIVENESS_RATIO')) {
 	flex-grow : 1;
 	flex-shrink: 1;
 	flex-basis: auto;
-
+	<?php if (getDolGlobalString('OBLYON_INFOXBOX_SINGLE_WIDTH')) { ?>
 	width: 280px;
+	<?php } else { ?>
+	min-width: 260px;
+	<?php } ?>
 	margin: 5px 0px 0px 15px;
 }
 .box-flex-item.filler{
