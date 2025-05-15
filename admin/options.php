@@ -374,6 +374,33 @@ print '</tbody>';
 print '</table>';
 print '<br>';
 
+
+print '<table class="noborder centpercent">';
+print '<tbody>';
+print '<tr class="liste_titre">';
+print '<td>'.$langs->trans("OptionsCKEditor").'</td>'."\n";
+print '<td width="10%" class="center"></td>'."\n";
+print '<td width="20%" class="center">'.$langs->trans("Value").'</td>'."\n";
+print "</tr>\n";
+
+$countk = 1;
+
+$metas	= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'options');
+oblyon_print_input('FCKEDITOR_ALLOW_ANY_CONTENT', 'on_off', 'K' . $countk . ' - ' . $langs->trans('FckeditorAllowAnyContent'), '', $metas, 2, 1);    // Allow to enter any content. However, this will totally disable content filtering which is one of the most important CKEditor features. You can use this to keep all your tags and attributes in the html content
+$countk++;
+
+$metas	= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'options');
+oblyon_print_input('FCKEDITOR_ENABLE_SCAYT_AUTOSTARTUP', 'on_off', 'K' . $countk . ' - ' . $langs->trans('FckeditorEnableScaytAutostartup'), '', $metas, 2, 1);    // Allow to activate the SpellCheckAsYouType (SCAYT) plugins of CKEditor i.e an automatic spell checking
+$countk++;
+
+$metas	= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'options');
+oblyon_print_input('MAIN_SECURITY_ALLOW_UNSECURED_LABELS_WITH_HTML', 'on_off', 'K' . $countk . ' - ' . $langs->trans('MainSecurityAllowUnsecuredLabelsWithHtml'), '', $metas, 2, 1);    // Allow HTML tags into products label
+$countk++;
+
+print '</tbody>';
+print '</table>';
+print '<br>';
+
 oblyon_print_btn_action('Card');
 
 print '<br>';

@@ -64,7 +64,7 @@
 			$this->picto					= 'inovea@'.$this->name;																// Name of image file used for this module. If in theme => 'pictovalue' ; if in module => 'pictovalue@module' under name object_pictovalue.png
 			$this->module_parts				= array('menus'	=> 1,
 													'js'	=> array('js'	=> '/'.$this->name.'/js/pushy.js'),
-													'css'	=> array('css'	=> ('/'.$this->name.'/css/'.$this->name.'.css'), ('/theme/'.$this->name.'/custom.css.php')),
+													'css'	=> array('css'	=> ('/'.$this->name.'/css/'.$this->name.'.css'), ('/theme/'.$this->name.'/custom.css.php'), ('/'.$this->name.'/css/font.css')),
 													'tpl'	=> 0,
 													'hooks' => array('data' => array('main'), 'entity' => '0')
 													);
