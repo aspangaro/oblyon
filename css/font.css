@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'puentebold';
+    src: url('/theme/oblyon/fonts/puentebold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'NeuropolRegular';
+    src: url('/theme/oblyon/fonts/NeuropolRegular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
