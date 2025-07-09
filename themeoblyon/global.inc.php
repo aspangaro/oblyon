@@ -3421,6 +3421,21 @@ div.login_block:after {
 div.login_block:hover:after {
     color: <?php print $maincolor; ?>;
 }
+div.login_block_tools {
+    margin-<?php echo $right ?>: 8px;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: <?php echo $disableimages ? '25' : '40'; ?>px;
+    height: <?php echo $disableimages ? '25' : '40'; ?>px;
+}
+div.login_block_other {
+    display: inline-block;
+    vertical-align: middle;
+    clear: <?php echo $disableimages ? 'none' : 'both'; ?>;
+    padding-top: 0;
+    text-align: <?php echo $right ?>;
+    max-width: 200px;
+}
 div.login_block_user {
 	display: inline-block;
 	vertical-align: middle;
