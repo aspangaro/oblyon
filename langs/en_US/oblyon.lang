@@ -254,6 +254,11 @@ LimitTabLineToOne            = (Allows you to limit the tabs to a single line =>
 FixAbsoluteButtonsActionCard = Sticky action buttons at bottom of the page
 ShowLineNumberCard           = Show line number (Invoice, proposal, etc)
 
+# CKEditor
+OptionsCKEditor                          = WYSIWYG Text Editor and Label Options
+FckeditorAllowAnyContent                 = Allows you to enter any content into the text editor. Be careful, this will completely disable content filtering, one of CKEditor's most important features (useful for preserving all your HTML tags and attributes)
+FckeditorEnableScaytAutostartup          = Enables the text editor's SpellCheckAsYouType (SCAYT) features (automatic spell checking)
+MainSecurityAllowUnsecuredLabelsWithHtml = Allow HTML tags in article labels
 #
 # Icons page
 #

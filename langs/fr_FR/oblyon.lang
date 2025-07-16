@@ -254,6 +254,12 @@ LimitTabLineToOne            = (Permet de limiter les onglets à une seule ligne
 FixAbsoluteButtonsActionCard = Fixer les boutons d'actions en bas de page
 ShowLineNumberCard           = Afficher le numéro des lignes (Facture, proposition commerciale, etc)
 
+# CKEditor
+OptionsCKEditor                          = Options de l'éditeur de texte WYSIWYG et des libellés
+FckeditorAllowAnyContent                 = Permet de saisir n'importe quel contenu dans l'éditeur de texte. Attention, cela désactivera totalement le filtrage de contenu, l'une des fonctionnalités les plus importantes de CKEditor (utile pour conserver toutes vos balises et attributs HTML)
+FckeditorEnableScaytAutostartup          = Permet d'activer les fonctions SpellCheckAsYouType (SCAYT) de l'éditeur de texte (vérification orthographique automatique)
+MainSecurityAllowUnsecuredLabelsWithHtml = Autoriser les balises HTML dans le libellé des articles
+
 #
 # Icons page
 #

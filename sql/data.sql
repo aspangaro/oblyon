@@ -117,22 +117,21 @@ INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('THEME_
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('THEME_ELDY_TEXTLINK',								'__ENTITY__', '#000000',			'chaine',	'0',	'Oblyon module');
 
 -- Dashboard - infobox
-INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('MAIN_DISABLE_GLOBAL_WORKBOARD',			'__ENTITY__', '0',					'yesno',	'0',	'Oblyon module');
-INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('MAIN_DISABLE_GLOBAL_BOXSTATS',			'__ENTITY__', '0',					'yesno',	'0',	'Oblyon module');
-INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('THEME_INFOBOX_COLOR_ON_BACKGROUND',	   	'__ENTITY__', '0',			        'chaine',	'0',	'Oblyon dashboard invert color icon');
-INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('MAIN_DISABLE_METEO',						'__ENTITY__', '0',					'chaine',	'0',	'Oblyon module');
-INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('MAIN_DISABLE_BLOCK_AGENDA',				'__ENTITY__', '0',					'yesno',	'0',	'Oblyon module');
-INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('MAIN_DISABLE_BLOCK_PROJECT',				'__ENTITY__', '0',					'yesno',	'0',	'Oblyon module');
-INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('MAIN_DISABLE_BLOCK_CUSTOMER',				'__ENTITY__', '0',					'yesno',	'0',	'Oblyon module');
-INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('MAIN_DISABLE_BLOCK_SUPPLIER',				'__ENTITY__', '0',					'yesno',	'0',	'Oblyon module');
-INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('MAIN_DISABLE_BLOCK_CONTRACT',				'__ENTITY__', '0',					'yesno',	'0',	'Oblyon module');
-INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('MAIN_DISABLE_BLOCK_BANK',					'__ENTITY__', '0',					'chaine',	'0',	'Oblyon module');
-INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('MAIN_DISABLE_BLOCK_ADHERENT',				'__ENTITY__', '0',					'chaine',	'0',	'Oblyon module');
-INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('MAIN_DISABLE_BLOCK_EXPENSEREPORT',		'__ENTITY__', '0',					'yesno',	'0',	'Oblyon module');
-INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('MAIN_DISABLE_BLOCK_HOLIDAY',				'__ENTITY__', '0',					'chaine',	'0',	'Oblyon module');
-INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('MAIN_DISABLE_BLOCK_TICKET',				'__ENTITY__', '0',					'yesno',	'0',	'Oblyon module');
-INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_INFOXBOX_SINGLE_WIDTH',			'__ENTITY__', '0',					'yesno',	'0',	'Oblyon module');
-
+INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('MAIN_DISABLE_GLOBAL_WORKBOARD',					'__ENTITY__', '0',					'yesno',	'0',	'Oblyon module');
+INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('MAIN_DISABLE_GLOBAL_BOXSTATS',					'__ENTITY__', '0',					'yesno',	'0',	'Oblyon module');
+INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('THEME_INFOBOX_COLOR_ON_BACKGROUND',	   			'__ENTITY__', '0',			        'chaine',	'0',	'Oblyon dashboard invert color icon');
+INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('MAIN_DISABLE_METEO',								'__ENTITY__', '0',					'chaine',	'0',	'Oblyon module');
+INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('MAIN_DISABLE_BLOCK_AGENDA',						'__ENTITY__', '0',					'yesno',	'0',	'Oblyon module');
+INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('MAIN_DISABLE_BLOCK_PROJECT',						'__ENTITY__', '0',					'yesno',	'0',	'Oblyon module');
+INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('MAIN_DISABLE_BLOCK_CUSTOMER',						'__ENTITY__', '0',					'yesno',	'0',	'Oblyon module');
+INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('MAIN_DISABLE_BLOCK_SUPPLIER',						'__ENTITY__', '0',					'yesno',	'0',	'Oblyon module');
+INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('MAIN_DISABLE_BLOCK_CONTRACT',						'__ENTITY__', '0',					'yesno',	'0',	'Oblyon module');
+INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('MAIN_DISABLE_BLOCK_BANK',							'__ENTITY__', '0',					'chaine',	'0',	'Oblyon module');
+INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('MAIN_DISABLE_BLOCK_ADHERENT',						'__ENTITY__', '0',					'chaine',	'0',	'Oblyon module');
+INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('MAIN_DISABLE_BLOCK_EXPENSEREPORT',				'__ENTITY__', '0',					'yesno',	'0',	'Oblyon module');
+INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('MAIN_DISABLE_BLOCK_HOLIDAY',						'__ENTITY__', '0',					'chaine',	'0',	'Oblyon module');
+INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('MAIN_DISABLE_BLOCK_TICKET',						'__ENTITY__', '0',					'yesno',	'0',	'Oblyon module');
+INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_INFOXBOX_SINGLE_WIDTH',					'__ENTITY__', '0',					'yesno',	'0',	'Oblyon module');
 -- Dashboard - color
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('THEME_AGRESSIVENESS_RATIO',		    			'__ENTITY__', '-50',		        'chaine',	'0',	'Oblyon dashboard agressiveness ratio');
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_INFOXBOX_BACKGROUND',		    			'__ENTITY__', '#FFFFFF',			'chaine',	'0',	'Oblyon infobox background color');
