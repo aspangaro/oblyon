@@ -52,11 +52,10 @@ function print_oblyon_menu($db, $atarget, $type_user = 0, &$tabMenu, &$menu, $no
 	$leftmenu = (empty($_SESSION["leftmenu"]) ? '' : $_SESSION["leftmenu"]);
 
 	$landingpage = (!getDolUserString('MAIN_LANDING_PAGE') ? (!getDolGlobalString('MAIN_LANDING_PAGE') ? '' : getDolGlobalString('MAIN_LANDING_PAGE')) : getDolUserString('MAIN_LANDING_PAGE'));
-	if (! empty($landingpage)) {
-		$landingpage = dol_buildpath($landingpage, 1);
-	} else {
-		$landingpage = DOL_URL_ROOT . '/index.php?mainmenu=home&amp;leftmenu=home';
+	if (empty($landingpage)) {
+		$landingpage = '/index.php?mainmenu=home&amp;leftmenu=home';
 	}
+	$landingpage = dol_buildpath($landingpage, 1);
 
 	$id = 'mainmenu';
 	$listofmodulesforexternal = explode(',', getDolGlobalString('MAIN_MODULES_FOR_EXTERNAL'));
