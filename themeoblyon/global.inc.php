@@ -10995,3 +10995,27 @@ include dol_buildpath($path.'/theme/'.$theme.'/timeline.inc.php', 0);
 
 // Compatibility module
 include dol_buildpath($path.'/theme/'.$theme.'/modules.inc.php', 0);
+
+// Add custom CSS if defined
+print getDolGlobalString('THEME_CUSTOM_CSS');
+
+?>
+
+    /* Remove text selection - Intuitive table selection */
+    .row-with-select[data-is-last-changed] * {
+        -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none; /* Safari */
+        -khtml-user-select: none; /* Konqueror HTML */
+        -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+        user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+    }
+
+    div.extra_inline_chkbxlst, div.extra_inline_checkbox {
+        min-width:150px;
+    }
+
+    /* Must be at end */
+    div.flot-text .flot-tick-label .tickLabel, .fa-color-unset {
+        color: unset;
+    }
