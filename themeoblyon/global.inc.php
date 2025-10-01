@@ -6342,7 +6342,7 @@ table.cal_event td.cal_event_right {
 	font-size: 1em;
 }
 .cal_event a:link {
-	color: #111111;
+	color: var(--colortext);
 	font-weight: normal !important;
 }
 .cal_event a:visited {
