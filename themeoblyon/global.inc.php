@@ -6346,11 +6346,11 @@ table.cal_event td.cal_event_right {
 	font-weight: normal !important;
 }
 .cal_event a:visited {
-	color: #111111;
+	color: var(--colortextbacktab);
 	font-weight: normal !important;
 }
 .cal_event a:active {
-	color: #111111;
+	color: var(--colortextbacktab);
 	font-weight: normal !important;
 }
 .cal_event_busy a:hover {
