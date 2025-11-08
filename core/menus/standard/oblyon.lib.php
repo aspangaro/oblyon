@@ -2023,7 +2023,7 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 		 * Menu TOOLS
 		 */
 		if ($mainmenu == 'tools') {
-            if (empty($user->socid)) { // limit to internal users
+            if (!getDolGlobalInt('MENU_HIDE_EMAIL_TEMPLATES') && empty($user->socid)) { // limit to internal users
                 $langs->load("mails");
                 $newmenu->add("/admin/mails_templates.php?leftmenu=email_templates", $langs->trans("EMailTemplates"), 0, 1, '', $mainmenu, 'email_templates', 0);
             }
