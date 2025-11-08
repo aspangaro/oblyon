@@ -68,6 +68,7 @@ CardBehavior                         = Behavior of the cards
 FixAreaRefAndTabAction               = Fix the reference banner and action buttons during vertical scrolling
 FixStickyTabsCard                    = Fix tab banner when scrolling vertically
 SwitchColunmOnLeft                   = Toggle selection / search / mass action column to the left
+FixTitleInList                       = Sticky list title bar so that title, mass action, pagination and “Add” element are always visible
 RemoveKanbanViewInList               = Remove the "Kanban view" button at the top right of the lists
 FixStickyTableHeadersColumns         = Fix the table column header on the elements during vertical scrolling
 FixStickyFirstColumn                 = Fix first column of tables when scrolling horizontally
@@ -254,18 +255,28 @@ LimitTabLineToOne            = (Allows you to limit the tabs to a single line =>
 FixAbsoluteButtonsActionCard = Sticky action buttons at bottom of the page
 ShowLineNumberCard           = Show line number (Invoice, proposal, etc)
 
+# FCK Editor
+OptionsCKEditor                             = WYSIWYG editor options (CKEditor)
+FckeditorAllowAnyContent                    = Allow any content in WYSIWYG editor
+FckeditorEnableScaytAutostartup             = Enable automatic spell check (SCAYT)
+MainSecurityAllowUnsecuredLabelsWithHtml    = Allow unsecured label with html
+NotRecommended                              = Not recommended
+
 #
 # Icons page
 #
-OblyonIconsTitle = Oblyon Configurator - Icons
-Icons            = Icons
-IconsStyle       = Icons style
-IconApplied      = Icons style applied
-Iconfas          = Solid
-Iconfar          = Regular
-Iconfal          = Light
-Iconfat          = Thin
-Iconfad          = Duotone
+Icons=Icons
+OblyonSetupIcons=Oblyon Configurator - Icons
+OblyonIconsUseFA6 = QuickUXIconsUseFA6 = Enable use of FontAwesome 6 icons (Free) (Font Awesome 5 by default)
+FontAwesomeSelectPack=Select which FontAwesome pack to use:
+FontAwesomeAction=Action
+FontAwesomeFolder=Folder
+FontAwesomeVersion=Version
+FontAwesomeLicence=Licence
+FontAwesomeAvailableStyles=Available Styles
+FontAwesomeSaveButton=Save
+FontAwesomeSuccessMessage=✅ You are now using %s (%s, weight %s) from %s
+FontAwesomeDirectoryDownload=To add a new FontAwesome pack, you need to create a new “fontawesome-<i><b>x(p)</b></i>” directory (x for the major version, p if it's a pro version) (Example for FontAwesome 6.0.72 Pro: “fontawesome-6p”) in <b>/theme/common/</b>. This directory will contain your unzipped FontAwesome package.
 
 #
 # Custom CSS page

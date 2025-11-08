@@ -77,9 +77,9 @@ llxHeader('', $page_name, '', '', 0, 0,
         '/includes/ace/src/ace.js',
         '/includes/ace/src/ext-statusbar.js',
         '/includes/ace/src/ext-language_tools.js',
-    ), array());
+    ), array(), 'mod-oblyon page-admin-customcss');
 $linkback					= '<a href="'.DOL_URL_ROOT.'/admin/modules.php?restore_lastsearch_values=1">'.$langs->trans('BackToModuleList').'</a>';
-print load_fiche_titre($page_name, $linkback);
+print load_fiche_titre($page_name, $linkback, 'object_inovea.png@oblyon');
 
 // Configuration header *************************
 $head						= oblyon_admin_prepare_head();

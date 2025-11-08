@@ -68,6 +68,7 @@ CardBehavior                         = Comportement des fiches
 FixAreaRefAndTabAction               = Fixer le bandeau des références et les boutons d'actions pendant le défilement vertical
 FixStickyTabsCard                    = Fixer le bandeau des onglets lors d'un défilement vertical
 SwitchColunmOnLeft                   = Basculer la colonne de sélection / recherche / action en masse à gauche
+FixTitleInList                       = Fixer la barre de titre des listes de manière à toujours voir le titre, l'action en masse, la pagination et l'élément "Ajouter"
 RemoveKanbanViewInList               = Retirer le bouton "Vue kanban" en haut à droite des listes
 FixStickyTableHeadersColumns         = Fixer l'entête de colonne des tableaux sur les éléments lors d'un défilement vertical
 FixStickyFirstColumn                 = Fixer la première colonne des tableaux lors d'un défilement horizontal
@@ -254,18 +255,28 @@ LimitTabLineToOne            = (Permet de limiter les onglets à une seule ligne
 FixAbsoluteButtonsActionCard = Fixer les boutons d'actions en bas de page
 ShowLineNumberCard           = Afficher le numéro des lignes (Facture, proposition commerciale, etc)
 
+# FCK Editor
+OptionsCKEditor                             = Options de l'éditeur WYSIWYG (CKEditor)
+FckeditorAllowAnyContent                    = Autoriser tout contenu dans l'éditeur WYSIWYG
+FckeditorEnableScaytAutostartup             = Activer la correction orthographique automatique (SCAYT)
+MainSecurityAllowUnsecuredLabelsWithHtml    = Autoriser les libellés non sécurisés avec HTML
+NotRecommended                              = Non recommandé
+
 #
 # Icons page
 #
-OblyonIconsTitle = Configurateur Oblyon - Icônes
-Icons            = Icônes
-IconsStyle       = Style d'icônes
-IconApplied      = Style d'icônes appliqué
-Iconfas          = Solid
-Iconfar          = Regular
-Iconfal          = Light
-Iconfat          = Thin
-Iconfad          = Duotone
+Icons=Icônes
+OblyonSetupIcons=Configurateur Oblyon - Icônes
+OblyonIconsUseFA6 = Activer l'utilisation des icônes FontAwesome 6 (Free) (Font Awesome 5 par défaut)
+FontAwesomeSelectPack=Sélectionner le pack FontAwesome à utiliser :
+FontAwesomeAction=Action
+FontAwesomeFolder=Direction
+FontAwesomeVersion=Version
+FontAwesomeLicence=Licence
+FontAwesomeAvailableStyles=Style d'icônes disponible
+FontAwesomeSaveButton=Sauvegarder
+FontAwesomeSuccessMessage=✅ Vous utilisez maintenant %s (%s, taille %s) du répertoire %s
+FontAwesomeDirectoryDownload=Pour ajouter un nouveau pack FontAwesome, vous devez créer un nouveau répertoire "fontawesome-<i><b>x(p)</b></i>" (x pour la version majeure, p s'il s'agit d'une version pro) (Exemple pour FontAwesome 6.0.72 Pro : "fontawesome-6p") dans <b>/theme/common/</b>. Ce répertoire contiendra votre pack FontAwesome dézippé.
 
 #
 # Custom CSS page

@@ -39,19 +39,20 @@
 		$h = 0;
 		$head = array();
 
+        $head[$h][0] = dol_buildpath("/oblyon/admin/options.php", 1);
+        $head[$h][1] = $langs->trans("OblyonOptions");
+        $head[$h][2] = 'options';
+        $h++;
+
 		$head[$h][0] = dol_buildpath("/oblyon/admin/menus.php", 1);
 		$head[$h][1] = $langs->trans("Menus");
 		$head[$h][2] = 'menus';
 		$h++;
 
-		$fontawesomeFamily	= explode(' ', getDolGlobalString('MAIN_FONTAWESOME_FAMILY', ''));
-		dol_syslog('ici  $fontawesomeFamily[3] = '. $fontawesomeFamily[3]);
-		if (!empty($fontawesomeFamily[3]) && $fontawesomeFamily[3] != 'Free') {
-			$head[$h][0] = dol_buildpath("/oblyon/admin/icons.php", 1);
-			$head[$h][1] = $langs->trans("Icons");
-			$head[$h][2] = 'icons';
-			$h++;
-		}
+		$head[$h][0] = dol_buildpath("/oblyon/admin/icons.php", 1);
+		$head[$h][1] = $langs->trans("Icons");
+		$head[$h][2] = 'icons';
+		$h++;
 
 		$head[$h][0] = dol_buildpath("/oblyon/admin/colors.php", 1);
 		$head[$h][1] = $langs->trans("Colors");
@@ -61,11 +62,6 @@
 		$head[$h][0] = dol_buildpath("/oblyon/admin/dashboard.php", 1);
 		$head[$h][1] = $langs->trans("Dashboard");
 		$head[$h][2] = 'dashboard';
-		$h++;
-
-		$head[$h][0] = dol_buildpath("/oblyon/admin/options.php", 1);
-		$head[$h][1] = $langs->trans("OblyonOptions");
-		$head[$h][2] = 'options';
 		$h++;
 
 		$head[$h][0] = dol_buildpath("/oblyon/admin/customcss.php", 1);

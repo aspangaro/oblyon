@@ -4,18 +4,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-### [3.1.0] - Compatibility 14.0.x - 21.0.x (2024/12/30)
-
-### Fixed
-- CSS
+### [3.1.0] - Compatibility 18.0.x - 23.0.x (2025/11/08)
 
 ### Added
 - Option to change the Dolibarr font family
+- In admin, new tab "Icons". If you want to use other FontAwesome Pack Free Or Pro, you can select easily your new pack to apply
+- Compatibility v21 / v22 / v23
+
+### Fixed
+- CSS
 
 ### Changed
 - Move ChangeLog to format 1.1.0 of "Keep a changelog" 
 - Separate the option to change the text color of line titles and the main title
 - Remove Cashdesk CSS
+- Move to version v18 minimum
 
 ### [3.0.6] - Compatibility 14.0.x - 20.0.x (2024/09/30)
 - Fix CSS badges
