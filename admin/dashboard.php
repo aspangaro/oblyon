@@ -65,6 +65,7 @@ $listcolor						= array('OBLYON_INFOXBOX_BACKGROUND',				// #FFFFFF
 										'OBLYON_INFOXBOX_EXPENSEREPORT_COLOR',		// #79633F EXPENSES
 										'OBLYON_INFOXBOX_HOLIDAY_COLOR',			// #755114 HOLIDAYS
 										'OBLYON_INFOXBOX_TICKET_COLOR',				// #755114 TICKETS
+										'OBLYON_INFOXBOX_MRP_COLOR',				// #212529 MRP
 										);
 
 // Actions **************************************
@@ -160,6 +161,7 @@ if ($easyaVersion >= 2022.5 || (float) DOL_VERSION >= 15.0) {
 		oblyon_print_input('MAIN_DISABLE_BLOCK_EXPENSEREPORT',	'on_off', $langs->trans('DashboardDisableBlockExpenseReport'),	'', $metas, 2, 1);	// expenses block
 		oblyon_print_input('MAIN_DISABLE_BLOCK_HOLIDAY',		'on_off', $langs->trans('DashboardDisableBlockHoliday'),		'', $metas, 2, 1);	// holidays block
 		oblyon_print_input('MAIN_DISABLE_BLOCK_TICKET',			'on_off', $langs->trans('DashboardDisableBlockTicket'),			'', $metas, 2, 1);	// tickets block
+		if ((float) DOL_VERSION >= 23.0) oblyon_print_input('MAIN_DISABLE_BLOCK_MRP',			'on_off', $langs->trans('DashboardDisableBlockMrp'),			'', $metas, 2, 1);	// mrp block
 		oblyon_print_input('OBLYON_INFOXBOX_SINGLE_WIDTH',		'on_off', $langs->trans('OblyonInfoboxSingleWidth'),			'OblyonInfoboxSingleWidthHelp', $metas, 2, 1);	// Single width for all info boxes
 	}
 }

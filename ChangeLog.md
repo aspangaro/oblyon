@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Option to change the Dolibarr font family
 - In admin, new tab "Icons". If you want to use other FontAwesome Pack Free Or Pro, you can select easily your new pack to apply
+- In admin, add possibility to disable thumb production (MRP) on the dashboard (v23+)
 - Compatibility v21 / v22 / v23
 
 ### Fixed

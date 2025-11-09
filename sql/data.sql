@@ -131,6 +131,7 @@ INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('MAIN_D
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('MAIN_DISABLE_BLOCK_EXPENSEREPORT',		'__ENTITY__', '0',					'yesno',	'0',	'Oblyon module');
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('MAIN_DISABLE_BLOCK_HOLIDAY',				'__ENTITY__', '0',					'chaine',	'0',	'Oblyon module');
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('MAIN_DISABLE_BLOCK_TICKET',				'__ENTITY__', '0',					'yesno',	'0',	'Oblyon module');
+INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('MAIN_DISABLE_BLOCK_BOM',				'__ENTITY__', '0',					'yesno',	'0',	'Oblyon module');
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_INFOXBOX_SINGLE_WIDTH',			'__ENTITY__', '0',					'yesno',	'0',	'Oblyon module');
 
 -- Dashboard - color
@@ -151,6 +152,7 @@ INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_INFOXBOX_EXPENSEREPORT_COLOR',				'__ENTITY__', '#D1D12A',			'chaine',	'0',	'Oblyon expense report background color');
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_INFOXBOX_HOLIDAY_COLOR',					'__ENTITY__', '#E0A01F',			'chaine',	'0',	'Oblyon Dashboard holiday background color');
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_INFOXBOX_TICKET_COLOR',					'__ENTITY__', '#C93E28',			'chaine',	'0',	'Oblyon Dashboard ticket background color');
+INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_INFOXBOX_MRP_COLOR',					'__ENTITY__', '#212529',			'chaine',	'0',	'Oblyon Dashboard mrp background color');
 
 -- Options - general
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_FONT_FAMILY',								'__ENTITY__', 'Arial',              'chaine',   '0',    'Oblyon module') ON DUPLICATE KEY UPDATE value = 'Arial';

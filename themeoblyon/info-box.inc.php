@@ -1,8 +1,21 @@
 <?php
+/* Copyright (C) 2025       Alexandre Spangaro          <alexandre@inovea-conseil.com>
+ */
 if (!defined('ISLOADEDBYSTEELSHEET')) {
     die('Must be call by steelsheet');
-} ?>
-/* <style type="text/css" > */
+}
+/**
+* @var Conf $conf
+* @var string $left
+* @var string $right
+*/
+// Expected to be defined by including parent
+'
+@phan-var-force string $right
+@phan-var-force string $left
+';
+?>
+/* IDE Hack <style type="text/css"> */
 
 /*
  * Component: Info Box
@@ -20,7 +33,7 @@ if (!defined('ISLOADEDBYSTEELSHEET')) {
 .info-box {
 	display: block;
     position: relative;
-	min-height: 90px;
+	min-height: 94px;
 	background: #fff;
     <?php if(getDolGlobalString('OBLYON_INFOXBOX_BACKGROUND')) { ?>
         background: <?php print getDolGlobalString('OBLYON_INFOXBOX_BACKGROUND'); ?> !important;
@@ -37,11 +50,23 @@ if (!defined('ISLOADEDBYSTEELSHEET')) {
     min-height: 80px;
     margin-bottom: 10px;
 }
+.opened-dash-board-wrap .info-box, .opened-dash-board-wrap .info-box .info-box-icon  {
+    border-radius: 0 0 0 15px;
+}
+/*.opened-dash-board-wrap .box-flex-item {
+    border-radius: 10px;
+}*/
 
+.info-box-more {
+    float: right;
+    top: 5px;
+    position: absolute;
+    right: 8px;
+}
 .info-box small {
 	font-size: 14px;
 }
-.info-box .progress {
+.info-box:not(.info-box-kanban) .progress {
 	background: rgba(0, 0, 0, 0.2);
 	margin: 5px -10px 5px -10px;
 	height: 2px;
@@ -51,7 +76,7 @@ if (!defined('ISLOADEDBYSTEELSHEET')) {
 	border-radius: 0;
 }
 
-.info-box .progress .progress-bar {
+.info-box:not(.info-box-kanban) .progress .progress-bar {
     float: left;
     width: 0;
     height: 100%;
@@ -67,27 +92,27 @@ if (!defined('ISLOADEDBYSTEELSHEET')) {
     transition: width .6s ease;
 }
 .info-box-icon {
-	border-top-left-radius: 6px;
+	border-top-left-radius: 2px;
 	border-top-right-radius: 0;
 	border-bottom-right-radius: 0;
-	border-bottom-left-radius: 6px;
+	border-bottom-left-radius: 2px;
 	display: block;
     overflow: hidden;
 	float: left;
-	height: 90px;
-	width: 90px;
+    line-height: 94px;	/* must be same height as min-height of .info-box */
+    height: 94px; 	    /* must be same height as min-height of .info-box */
+	width: 88px;
 	text-align: center;
-	font-size: 45px;
-	line-height: 90px;
+    font-size: 2.8em;
 	background: rgba(0, 0, 0, 0.2);
 }
 
 .info-box-module .info-box-icon {
-    padding-top: 0px;
+    padding-top: 5px;
     padding-bottom: 5px;
 }
-.info-box-sm .info-box-icon {
-    height: 86px;		/* must match height of info-box-sm .info-box-content */
+.info-box-sm .info-box-icon, .info-box-sm .info-box-img {
+    height: 98px !important;		/* must match height of info-box-sm .info-box-content */
     width: 78px;
     font-size: 25px;
     line-height: 92px;
@@ -126,10 +151,21 @@ if (!defined('ISLOADEDBYSTEELSHEET')) {
 }
 
 a.info-box-text.info-box-text-a {
-    display: table-cell;
+    /* display: table-cell; */
+    display: contents;
 }
 a.info-box-text-a i.fa.fa-exclamation-triangle {
     font-size: 0.9em;
+}
+
+.info-box-line {
+    line-height: 1.35em;
+}
+.info-box-line-text {
+    overflow: hidden;
+    width: calc(100% - 92px);
+    max-width: calc(100% - 82px);
+    text-overflow: ellipsis;
 }
 
 .info-box-icon-text{
@@ -212,20 +248,23 @@ a.info-box-text-a i.fa.fa-exclamation-triangle {
 
 .info-box-sm .info-box-icon-text, .info-box-sm .info-box-icon-version {
     overflow: hidden;
-    width: 78px;
+    width: 80px;
 }
 .info-box:hover .info-box-icon-text{
     opacity: 1;
 }
 
 .info-box-content {
-    padding: 5px 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 5px;
     margin-left: 84px;
 }
 
 .info-box-sm .info-box-content{
-    margin-left: 78px;
-    height: 86px;   /* 96 - margins of .info-box-sm .info-box-content */
+    margin-left: 80px;
+    height: 88px;   /* 96 - margins of .info-box-sm .info-box-content */
 }
 .info-box-sm .info-box-module-enabled {
 	background: linear-gradient(0.35turn, var(--color1BckgrdInfobox), var(--color1BckgrdInfobox), var(--color2BckgrdInfobox), var(--color2BckgrdInfobox));
@@ -251,10 +290,23 @@ a.info-box-text-a i.fa.fa-exclamation-triangle {
 .info-box-title{
 	text-transform: uppercase;
 	font-weight: bold;
+    margin-bottom: 3px;	/* not too much space so we can add another lines */
+    opacity: 0.6;
 }
 .info-box-text{
 	font-size: 0.92em;
 }
+/* Force values for small screen 480 */
+@media only screen and (max-width: 480px)
+{
+    .info-box-text {
+        font-size: 0.85em;
+    }
+    .info-box-line {
+        line-height: 1.25em;
+    }
+}
+
 .info-box-text:first-letter{text-transform: uppercase}
 a.info-box-text{ text-decoration: none;}
 
@@ -289,6 +341,19 @@ $conf->global->THEME_AGRESSIVENESS_RATIO = GETPOSTISSET('THEME_AGRESSIVENESS_RAT
 <?php } ?>
 }
 
+.nonature-back {
+    background-color: #EEE;
+    padding: 2px;
+    margin: 2px;
+    border-radius: 3px;
+}
+.prospect-back {
+    background-color: #a7c5b0 !important;
+    color: #FFF !important;
+    padding: 2px;
+    margin: 2px;
+    border-radius: 3px;
+}
 .customer-back {
 	background-color: #55955d !important;
 	color: #FFF !important;
@@ -367,6 +432,9 @@ $conf->global->THEME_AGRESSIVENESS_RATIO = GETPOSTISSET('THEME_AGRESSIVENESS_RAT
 .bg-infobox-ticket {
     <?php echo $prefix; ?>color: <?php print colorAgressiveness(getDolGlobalString('OBLYON_INFOXBOX_TICKET_COLOR'), getDolGlobalString('THEME_AGRESSIVENESS_RATIO')); ?>  !important;
 }
+.bg-infobox-cubes {
+    <?php echo $prefix; ?>color: <?php print colorAgressiveness(getDolGlobalString('OBLYON_INFOXBOX_MRP_COLOR'), getDolGlobalString('THEME_AGRESSIVENESS_RATIO')); ?>  !important;
+}
 
 
 .fa-dol-action:before {
@@ -405,6 +473,9 @@ $conf->global->THEME_AGRESSIVENESS_RATIO = GETPOSTISSET('THEME_AGRESSIVENESS_RAT
 .fa-dol-ticket:before {
     content: "\f3ff";
 }
+.fa-dol-cubes:before {
+    content: "\f468";
+}
 
 
 /* USING FONTAWESOME FOR WEATHER */
@@ -438,6 +509,33 @@ $conf->global->THEME_AGRESSIVENESS_RATIO = GETPOSTISSET('THEME_AGRESSIVENESS_RAT
 	margin: 0 0 0 -15px;
 	/*justify-content: space-between;*/
 }
+.box-flex-container-columns {
+    display: flex; /* or inline-flex */
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+.box-flex-container-column {
+    flex-grow: 1;
+}
+.box-flex-container-column:not(:last-of-type) {
+    border-right: 1px solid #AAA;
+}
+.box-flex-container-column.kanban {
+    flex: 1;
+}
+.kanban.kanbancollapsed {
+    flex: unset;
+    width: 80px;
+}
+.kanban.kanbancollapsed .kanbanlabel, .text-vertical {
+    writing-mode: vertical-rl;
+}
+
+.box-flex-grow-zero {
+    flex-grow: 0 !important;
+}
+
 .box-flex-item{
 	flex-grow : 1;
 	flex-shrink: 1;
@@ -449,9 +547,37 @@ $conf->global->THEME_AGRESSIVENESS_RATIO = GETPOSTISSET('THEME_AGRESSIVENESS_RAT
 	<?php } ?>
 	margin: 5px 0px 0px 15px;
 }
-.box-flex-item.filler{
-	margin: 0px 0px 0px 15px !important;
-	height: 0;
+.box-flex-item.filler {
+    height: 0;
+}
+.box-flex-item, .kanbanlabel {
+    margin-top: 5px;
+    margin-<?php echo $right; ?>: 20px;
+    margin-bottom: 0px;
+    margin-<?php echo $left; ?>: 10px;
+}
+.kanbanlabel {
+    background: var(--colorbacktitle1);
+    padding: 5px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+.kanban .box-flex-item {
+    line-height: 1.4em;
+}
+.kanban .box-flex-item-5lines {
+    line-height: 1.2em;
+}
+
+/* css for small kanban */
+.box-flex-item-small {
+    width: 200px !important;
+}
+.box-flex-item-small .info-box-sm .info-box-content {
+    margin-left: 0;
+}
+.box-flex-item-small .info-box-icon.bg-infobox-action {
+    display: none;
 }
 
 .info-box-title {
@@ -461,7 +587,9 @@ $conf->global->THEME_AGRESSIVENESS_RATIO = GETPOSTISSET('THEME_AGRESSIVENESS_RAT
     min-width: 350px;
     max-width: 350px;
 }
-
+.fright {
+    float:right;
+}
 @media only screen and (max-width: 1740px) {
     .info-box-module {
         min-width: 315px;
@@ -469,9 +597,28 @@ $conf->global->THEME_AGRESSIVENESS_RATIO = GETPOSTISSET('THEME_AGRESSIVENESS_RAT
     }
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 768px) {
     .info-box-module {
         min-width: 260px;
+    }
+    .box-flex-item {
+        width: 280px;
+    }
+}
+
+@media only screen and (max-width: 570px)
+{
+   .box-flex-item {
+       margin: 3px 8px 3px 8px !important;
+   }
+}
+
+@media only screen and (max-width: 480px) {
+    .info-box-module {
+        min-width: 250px;
+    }
+    .box-flex-item {
+        width: 250px;
     }
 }
 
@@ -480,11 +627,11 @@ $conf->global->THEME_AGRESSIVENESS_RATIO = GETPOSTISSET('THEME_AGRESSIVENESS_RAT
 }
 /* Disabled. This break the responsive on smartphone
 .box{
-overflow: visible;
+     overflow: visible;
 }
 */
 
-@media only screen and (max-width: 767px)
+@media only screen and (max-width: 768px)
 {
     .box-flex-container {
         margin: 0 0 0 0px !important;
@@ -508,6 +655,19 @@ overflow: visible;
     .info-box {
         border: 1px solid #e0e0e0;
     }
+
+    .info-box-content {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-left: 10px;
+        padding-right: 2px;
+    }
+    /*
+    .info-box-line-text {
+        width: calc(100% - 98px);
+        max-width: calc(100% - 88px);
+    }
+    */
 }
 
 /* Temporary fix problem with bg color on bank_account - Problem of dolibarr's core */

@@ -1,6 +1,6 @@
 # < Oblyon Control Panel - French translation >
 # Copyright (C) 2015       Nicolas Rivera       <nrivera.pro@gmail.com>
-# Copyright (C) 2015-2024  Alexandre Spangaro   <alexandre@inovea-conseil.com>
+# Copyright (C) 2015-2025  Alexandre Spangaro   <alexandre@inovea-conseil.com>
 # Copyright (C) 2015-2025  Sylvain Legrand      <technique@infras.fr>
 #
 Module432573Name        = Oblyon
@@ -167,32 +167,33 @@ OblyonWarningColorWhiteHelp        = La couleur du texte est blanche. Le texte p
 #
 # Dashboard page
 #
-OblyonDashboardTitle                   = Configurateur Oblyon - Tableau de bord
-OblyonDashboardDisableBlocks           = Vignette des éléments ouverts (à traiter ou en retard) sur le tableau de bord principal
-DisableGlobalBoxStats                  = Désactiver le widget des statistiques globales (nombres d'éléments en base de données)
-InfoboxColorOnBackground               = Inverser les couleurs des icônes et du fond des vignettes
-OblyonInfoboxSingleWidth               = Uniformiser la largeur des vignettes (standard Dolibarr 280px)
-OblyonInfoboxSingleWidthHelp           = Sinon la largeur s'adaptera à la longueur des informations présentées (la largeur minimum est de 260px)
-ColorIntensity                         = Intensité des couleurs
-ColorIntensityDesc                     = Définir l'intensité sur les couleurs ci-dessous (Actuellement %s)
-ColorMoreDarker                        = Moins intense
-ColorMoreLighter                       = Plus intense
-OBLYON_INFOXBOX_BACKGROUND             = Couleur de fond de la vignette
-OBLYON_INFOXBOX_WEATHER_COLOR          = Couleur vignette 'météo'
-OBLYON_INFOXBOX_ACTION_COLOR           = Couleur vignette 'agenda'
-OBLYON_INFOXBOX_PROJECT_COLOR          = Couleur vignette 'projet'
-OBLYON_INFOXBOX_CUSTOMER_PROPAL_COLOR  = Couleur vignette 'propositions commerciales clients'
-OBLYON_INFOXBOX_CUSTOMER_ORDER_COLOR   = Couleur vignette 'commandes clients'
-OBLYON_INFOXBOX_CUSTOMER_INVOICE_COLOR = Couleur vignette 'factures clients'
-OBLYON_INFOXBOX_SUPPLIER_PROPAL_COLOR  = Couleur vignette 'demandes de prix fournisseurs'
-OBLYON_INFOXBOX_SUPPLIER_ORDER_COLOR   = Couleur vignette 'commandes fournisseurs'
-OBLYON_INFOXBOX_SUPPLIER_INVOICE_COLOR = Couleur vignette 'factures fournisseurs'
-OBLYON_INFOXBOX_CONTRAT_COLOR          = Couleur vignette 'contrat'
-OBLYON_INFOXBOX_BANK_COLOR             = Couleur vignette 'banque'
-OBLYON_INFOXBOX_ADHERENT_COLOR         = Couleur vignette 'adhérent'
-OBLYON_INFOXBOX_EXPENSEREPORT_COLOR    = Couleur vignette 'note de frais'
-OBLYON_INFOXBOX_HOLIDAY_COLOR          = Couleur vignette 'congés payés'
-OBLYON_INFOXBOX_TICKET_COLOR           = Couleur vignette 'tickets'
+OblyonDashboardTitle                    = Configurateur Oblyon - Tableau de bord
+OblyonDashboardDisableBlocks            = Vignette des éléments ouverts (à traiter ou en retard) sur le tableau de bord principal
+DisableGlobalBoxStats                   = Désactiver le widget des statistiques globales (nombres d'éléments en base de données)
+InfoboxColorOnBackground                = Inverser les couleurs des icônes et du fond des vignettes
+OblyonInfoboxSingleWidth                = Uniformiser la largeur des vignettes (standard Dolibarr 280px)
+OblyonInfoboxSingleWidthHelp            = Sinon la largeur s'adaptera à la longueur des informations présentées (la largeur minimum est de 260px)
+ColorIntensity                          = Intensité des couleurs
+ColorIntensityDesc                      = Définir l'intensité sur les couleurs ci-dessous (Actuellement %s)
+ColorMoreDarker                         = Moins intense
+ColorMoreLighter                        = Plus intense
+OBLYON_INFOXBOX_BACKGROUND              = Couleur de fond de la vignette
+OBLYON_INFOXBOX_WEATHER_COLOR           = Couleur vignette 'météo'
+OBLYON_INFOXBOX_ACTION_COLOR            = Couleur vignette 'agenda'
+OBLYON_INFOXBOX_PROJECT_COLOR           = Couleur vignette 'projet'
+OBLYON_INFOXBOX_CUSTOMER_PROPAL_COLOR   = Couleur vignette 'propositions commerciales clients'
+OBLYON_INFOXBOX_CUSTOMER_ORDER_COLOR    = Couleur vignette 'commandes clients'
+OBLYON_INFOXBOX_CUSTOMER_INVOICE_COLOR  = Couleur vignette 'factures clients'
+OBLYON_INFOXBOX_SUPPLIER_PROPAL_COLOR   = Couleur vignette 'demandes de prix fournisseurs'
+OBLYON_INFOXBOX_SUPPLIER_ORDER_COLOR    = Couleur vignette 'commandes fournisseurs'
+OBLYON_INFOXBOX_SUPPLIER_INVOICE_COLOR  = Couleur vignette 'factures fournisseurs'
+OBLYON_INFOXBOX_CONTRAT_COLOR           = Couleur vignette 'contrat'
+OBLYON_INFOXBOX_BANK_COLOR              = Couleur vignette 'banque'
+OBLYON_INFOXBOX_ADHERENT_COLOR          = Couleur vignette 'adhérent'
+OBLYON_INFOXBOX_EXPENSEREPORT_COLOR     = Couleur vignette 'note de frais'
+OBLYON_INFOXBOX_HOLIDAY_COLOR           = Couleur vignette 'congés payés'
+OBLYON_INFOXBOX_TICKET_COLOR            = Couleur vignette 'tickets'
+OBLYON_INFOXBOX_MRP_COLOR               = Couleur vignette 'fabrication (MRP)'
 
 #
 # Login page
