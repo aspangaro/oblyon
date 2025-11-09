@@ -826,7 +826,11 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 				if ($usemenuhider || empty($leftmenu) || $leftmenu == 'admintools_info') {
 					$newmenu->add('/admin/system/modules.php?mainmenu=home&amp;leftmenu=admintools_info', $langs->trans('Modules'), 2);
 					$newmenu->add('/admin/triggers.php?mainmenu=home&amp;leftmenu=admintools_info', $langs->trans('Triggers'), 2);
-					$newmenu->add('/admin/system/filecheck.php?mainmenu=home&amp;leftmenu=admintools_info', $langs->trans('FileCheck'), 2);
+                    if ((float) DOL_VERSION >= 23.0) {
+                        $newmenu->add('/blockedlog/admin/filecheck.php?mainmenu=home&amp;leftmenu=admintools_info', $langs->trans('FileCheck'), 2);
+                    } else {
+                        $newmenu->add('/admin/system/filecheck.php?mainmenu=home&amp;leftmenu=admintools_info', $langs->trans('FileCheck'), 2);
+                    }
 				}
 				$newmenu->add('/admin/system/browser.php?mainmenu=home&amp;leftmenu=admintools', $langs->trans('InfoBrowser'), 1);
 				$newmenu->add('/admin/system/os.php?mainmenu=home&amp;leftmenu=admintools', $langs->trans('InfoOS'), 1);
@@ -1489,7 +1493,12 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 			if (isModEnabled('reception')) {
 				$langs->load("receptions");
 				$newmenu->add("/reception/index.php?leftmenu=receptions", $langs->trans("Receptions"), 0, $user->hasRight('reception', 'lire'), '', $mainmenu, 'receptions', 0, '', '', '', img_picto('', 'dollyrevert', 'class="pictofixedwidth"'));
-				$newmenu->add("/reception/card.php?action=create2&amp;leftmenu=receptions", $langs->trans("NewReception"), 1, $user->hasRight('reception', 'creer'));
+                if ((float) DOL_VERSION >= 23.0) {
+                    $newmenu->add("/reception/card.php?action=create&amp;leftmenu=receptions", $langs->trans("NewReception"), 1, $user->hasRight('reception', 'creer'));
+                } else {
+                    $newmenu->add("/reception/card.php?action=create2&amp;leftmenu=receptions", $langs->trans("NewReception"), 1, $user->hasRight('reception', 'creer'));
+                }
+                $newmenu->add("/reception/card.php?action=create2&amp;leftmenu=receptions", $langs->trans("NewReception"), 1, $user->hasRight('reception', 'creer'));
 				$newmenu->add("/reception/list.php?leftmenu=receptions", $langs->trans("List"), 1, $user->hasRight('reception', 'lire'));
 
 				if (! empty($menu_invert)) $leftmenu= 'receptions';
@@ -1769,7 +1778,7 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
                                     if ($objp->nature == 5 && isModEnabled('expensereport') && !getDolGlobalString('ACCOUNTING_DISABLE_BINDING_ON_EXPENSEREPORTS')) {
                                         $nature="expensereports";
                                     }
-                                    if ($objp->nature == 1 && isModEnabled('asset')) {
+                                    if ($objp->nature == 1 && isModEnabled('asset') || isModEnabled('invoice') || isModEnabled('supplier_invoice')) {
                                         $nature = "various";
                                     }
                                     if ($objp->nature == 8) {
