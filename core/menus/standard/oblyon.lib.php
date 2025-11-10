@@ -1750,6 +1750,9 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
                         $sql = "SELECT rowid, code, label, nature";
                         $sql.= " FROM ".MAIN_DB_PREFIX."accounting_journal";
                         $sql.= " WHERE entity = ".$conf->entity;
+                        if (getDolGlobalString('ACCOUNTING_MODE') == 'RECETTES-DEPENSES' && (float) DOL_VERSION >= 22.0) {
+                            $sql .= " AND nature = 4"; // only bank journal when using treasury accounting mode
+                        }
                         $sql.= " AND active = 1";
                         $sql.= " ORDER BY nature ASC, label DESC";
 
