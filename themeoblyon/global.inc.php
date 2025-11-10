@@ -10504,6 +10504,8 @@ div.tabs:first-of-type, .fiche > div.tabs
 @media (min-width: 768px) {
     #id-right > .fiche > form[action*="list.php"] div.div-table-responsive > table > tbody > * > :first-of-type:not(.actioncolumn),
     #id-right > .fiche > .tabBar > form[action*="list.php"] div.div-table-responsive > table > tbody > * > :first-of-type,
+    #id-right > .fiche > form[action*="list.php"] div.div-table-responsive > div.div-table-responsive-inside > table > tbody > * > :first-of-type,
+    #id-right > .fiche > .tabBar > form[action*="list.php"] div.div-table-responsive > div.div-table-responsive-inside > table > tbody > * > :first-of-type,
     #id-right > .fiche > form[action*="bankrecords.php"] div.div-table-responsive > table > tbody > * > :first-of-type,
     #id-right > .fiche > .tabBar > form[action*="bankrecords.php"] div.div-table-responsive > table > tbody > * > :first-of-type,
     #id-right > .fiche > form[action*="prelink.php"] div.div-table-responsive > table > tbody > * > :first-of-type,
@@ -10561,6 +10563,8 @@ div.tabs:first-of-type, .fiche > div.tabs
 <?php if (getDolGlobalString('FIX_STICKY_COLUMN_LAST') || getDolGlobalString('OBLYON_STICKY_COLUMN_LAST')) { ?>
 #id-right > .fiche > form[action*="list.php"] div.div-table-responsive > table > tbody > * > :last-of-type,
 #id-right > .fiche > .tabBar > form[action*="list.php"] div.div-table-responsive > table > tbody > * > :last-of-type,
+#id-right > .fiche > form[action*="list.php"] div.div-table-responsive > div.div-table-responsive-inside > table > tbody > * > :last-of-type,
+#id-right > .fiche > .tabBar > form[action*="list.php"] div.div-table-responsive > div.div-table-responsive-inside > table > tbody > * > :last-of-type,
 #id-right > .fiche > form[action*="bankrecords.php"] div.div-table-responsive > table > tbody > * > :last-of-type,
 #id-right > .fiche > .tabBar > form[action*="bankrecords.php"] div.div-table-responsive > table > tbody > * > :last-of-type,
 #id-right > .fiche > form[action*="prelink.php"] div.div-table-responsive > table > tbody > * > :last-of-type,
