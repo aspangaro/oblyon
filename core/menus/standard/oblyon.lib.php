@@ -1,11 +1,11 @@
 <?php
 /**
- * Copyright (C) 2013-2016  Nicolas Rivera      <nrivera.pro@gmail.com>
+ * Copyright (C) 2013-2016  Nicolas Rivera	  <nrivera.pro@gmail.com>
  * Copyright (C) 2015-2025  Alexandre Spangaro  <alexandre@inovea-conseil.com>
  *
  * Copyright (C) 2010-2013  Laurent Destailleur <eldy@users.sourceforge.net>
- * Copyright (C) 2010       Regis Houssin       <regis.houssin@capnetworks.com>
- * Copyright (C) 2012-2013  Juanjo Menent       <jmenent@2byte.es>
+ * Copyright (C) 2010	   Regis Houssin	   <regis.houssin@capnetworks.com>
+ * Copyright (C) 2012-2013  Juanjo Menent	   <jmenent@2byte.es>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -69,60 +69,60 @@ function print_oblyon_menu($db, $atarget, $type_user = 0, &$tabMenu, &$menu, $no
 	$id = 'mainmenu';
 	$listofmodulesforexternal = explode(',', getDolGlobalString('MAIN_MODULES_FOR_EXTERNAL'));
 
-    $classname = '';
+	$classname = '';
 
-    $menu_invert = getDolGlobalInt('MAIN_MENU_INVERT');
+	$menu_invert = getDolGlobalInt('MAIN_MENU_INVERT');
 
-    if (empty($noout)) print_start_menu_array();
+	if (empty($noout)) print_start_menu_array();
 
-    // Show logo company
+	// Show logo company
 	if (empty($menu_invert) && empty($noout) && getDolGlobalString('MAIN_SHOW_LOGO')) {
-        $mysoc->logo_squarred_mini = getDolGlobalString('MAIN_INFO_SOCIETE_LOGO_SQUARRED_MINI', '');
+		$mysoc->logo_squarred_mini = getDolGlobalString('MAIN_INFO_SOCIETE_LOGO_SQUARRED_MINI', '');
 
-        if (! empty($mysoc->logo_squarred_mini) && is_readable($conf->mycompany->dir_output.'/logos/thumbs/'.$mysoc->logo_squarred_mini)) {
-            $urllogo = DOL_URL_ROOT.'/viewimage.php?cache=1&amp;modulepart=mycompany&amp;file='.urlencode('logos/thumbs/'.$mysoc->logo_squarred_mini);
-        }
-        /*elseif (! empty($mysoc->logo_mini) && is_readable($conf->mycompany->dir_output.'/logos/thumbs/'.$mysoc->logo_mini))
-        {
-            $urllogo=DOL_URL_ROOT.'/viewimage.php?cache=1&amp;modulepart=mycompany&amp;file='.urlencode('logos/thumbs/'.$mysoc->logo_mini);
-        }*/
-        else {
-            $urllogo = DOL_URL_ROOT.'/theme/dolibarr_logo.png';
-            $logoContainerAdditionalClass = '';
-        }
-        $title = $langs->trans("GoIntoSetupToChangeLogo");
+		if (! empty($mysoc->logo_squarred_mini) && is_readable($conf->mycompany->dir_output.'/logos/thumbs/'.$mysoc->logo_squarred_mini)) {
+			$urllogo = DOL_URL_ROOT.'/viewimage.php?cache=1&amp;modulepart=mycompany&amp;file='.urlencode('logos/thumbs/'.$mysoc->logo_squarred_mini);
+		}
+		/*elseif (! empty($mysoc->logo_mini) && is_readable($conf->mycompany->dir_output.'/logos/thumbs/'.$mysoc->logo_mini))
+		{
+			$urllogo=DOL_URL_ROOT.'/viewimage.php?cache=1&amp;modulepart=mycompany&amp;file='.urlencode('logos/thumbs/'.$mysoc->logo_mini);
+		}*/
+		else {
+			$urllogo = DOL_URL_ROOT.'/theme/dolibarr_logo.png';
+			$logoContainerAdditionalClass = '';
+		}
+		$title = $langs->trans("GoIntoSetupToChangeLogo");
 
-        print "\n".'<!-- Show logo on menu -->'."\n";
-        print_start_menu_entry('companylogo', 'class="tmenu tmenucompanylogo"', 1);
+		print "\n".'<!-- Show logo on menu -->'."\n";
+		print_start_menu_entry('companylogo', 'class="tmenu tmenucompanylogo"', 1);
 
-        print '<div class="center backgroundforcompanylogo menulogocontainer">';
-        print '<a href="' . $landingpage . '" alt="'.dol_escape_htmltag($title).'" title="'.dol_escape_htmltag($title).'">';
-        print '<img class="mycompany" title="'.dol_escape_htmltag($title).'" alt="" src="'.$urllogo.'" style="max-width: 100px; height: 32px;">';
-        print '</a>'."\n";
-        print '</div>'."\n";
+		print '<div class="center backgroundforcompanylogo menulogocontainer">';
+		print '<a href="' . $landingpage . '" alt="'.dol_escape_htmltag($title).'" title="'.dol_escape_htmltag($title).'">';
+		print '<img class="mycompany" title="'.dol_escape_htmltag($title).'" alt="" src="'.$urllogo.'" style="max-width: 100px; height: 32px;">';
+		print '</a>'."\n";
+		print '</div>'."\n";
 
-        print_end_menu_entry(1);
+		print_end_menu_entry(1);
 	}
 
-    if (is_array($moredata) && ! empty($moredata['searchform']) && empty($noout))	// searchform can contains select2 code or link to show old search form or link to switch on search page
-    {
-        print "\n";
-        print "<!-- Begin SearchForm -->\n";
-        print '<div id="blockvmenusearch" class="blockvmenusearch">'."\n";
-        print $moredata['searchform'];
-        print '</div>'."\n";
-        print "<!-- End SearchForm -->\n";
-    }
+	if (is_array($moredata) && ! empty($moredata['searchform']) && empty($noout))	// searchform can contains select2 code or link to show old search form or link to switch on search page
+	{
+		print "\n";
+		print "<!-- Begin SearchForm -->\n";
+		print '<div id="blockvmenusearch" class="blockvmenusearch">'."\n";
+		print $moredata['searchform'];
+		print '</div>'."\n";
+		print "<!-- End SearchForm -->\n";
+	}
 
-    if (is_array($moredata) && ! empty($moredata['bookmarks']) && empty($noout))
-    {
-        print "\n";
-        print "<!-- Begin Bookmarks -->\n";
-        print '<div id="blockvmenubookmarks" class="blockvmenubookmarks">'."\n";
-        print $moredata['bookmarks'];
-        print '</div>'."\n";
-        print "<!-- End Bookmarks -->\n";
-    }
+	if (is_array($moredata) && ! empty($moredata['bookmarks']) && empty($noout))
+	{
+		print "\n";
+		print "<!-- Begin Bookmarks -->\n";
+		print '<div id="blockvmenubookmarks" class="blockvmenubookmarks">'."\n";
+		print $moredata['bookmarks'];
+		print '</div>'."\n";
+		print "<!-- End Bookmarks -->\n";
+	}
 
 	if ( empty($menu_invert) && (getDolGlobalInt('OBLYON_HIDE_LEFTMENU') || $conf->dol_optimize_smallscreen) && empty($noout) ) {
 		print '<div class="pushy-btn" title="'.$langs->trans("ShowLeftMenu").'">&#8801;</div>';
@@ -131,14 +131,14 @@ function print_oblyon_menu($db, $atarget, $type_user = 0, &$tabMenu, &$menu, $no
 	// Home
 	$showmode=1;
 	if (!empty($_SESSION["mainmenu"]) && $_SESSION["mainmenu"] == "home") {
-        $itemsel=TRUE;
-        $_SESSION['idmenu']='';
-    } else {
-        $itemsel = FALSE;
-    }
-    $idsel='home';
+		$itemsel=TRUE;
+		$_SESSION['idmenu']='';
+	} else {
+		$itemsel = FALSE;
+	}
+	$idsel='home';
 
-    $chaine=$langs->trans("Home");
+	$chaine=$langs->trans("Home");
 
 	if (empty($noout)) print_start_menu_entry($idsel,$itemsel,$showmode);
 	if (empty($noout)) print_text_menu_entry($chaine, 1, $landingpage, $id, $idsel, $atarget);
@@ -151,23 +151,23 @@ function print_oblyon_menu($db, $atarget, $type_user = 0, &$tabMenu, &$menu, $no
 		'perms' => ($user->hasRight('adherent', 'lire')),
 		'module' => 'adherent'
 	);
-    $showmode = dol_oblyon_showmenu($type_user, $tmpentry, $listofmodulesforexternal);
+	$showmode = dol_oblyon_showmenu($type_user, $tmpentry, $listofmodulesforexternal);
 	if ($showmode)
 	{
 		if (!empty($_SESSION["mainmenu"]) && $_SESSION["mainmenu"] == "members") {
-            $itemsel = TRUE;
-            $_SESSION['idmenu']='';
-        } else {
-            $itemsel = FALSE;
-        }
+			$itemsel = TRUE;
+			$_SESSION['idmenu']='';
+		} else {
+			$itemsel = FALSE;
+		}
 		$idsel='members';
 
-        $chaine=$langs->trans("MenuMembers");
+		$chaine=$langs->trans("MenuMembers");
 
-        if (empty($noout)) print_start_menu_entry($idsel,$itemsel,$showmode);
-        if (empty($noout)) print_text_menu_entry($chaine, 1, DOL_URL_ROOT.'/adherents/index.php?mainmenu=members&amp;leftmenu=', $id, $idsel, $atarget);
-        if (empty($noout)) print_end_menu_entry($showmode);
-        $menu->add('/adherents/index.php?mainmenu=members&amp;leftmenu=', $chaine, 0, $showmode, $atarget, "members", '');
+		if (empty($noout)) print_start_menu_entry($idsel,$itemsel,$showmode);
+		if (empty($noout)) print_text_menu_entry($chaine, 1, DOL_URL_ROOT.'/adherents/index.php?mainmenu=members&amp;leftmenu=', $id, $idsel, $atarget);
+		if (empty($noout)) print_end_menu_entry($showmode);
+		$menu->add('/adherents/index.php?mainmenu=members&amp;leftmenu=', $chaine, 0, $showmode, $atarget, "members", '');
 	}
 
 	// Third parties
@@ -182,17 +182,17 @@ function print_oblyon_menu($db, $atarget, $type_user = 0, &$tabMenu, &$menu, $no
 	);
 	$showmode=dol_oblyon_showmenu($type_user, $tmpentry, $listofmodulesforexternal);
 	if ($showmode) {
-        $langs->loadLangs(array("companies","suppliers"));
+		$langs->loadLangs(array("companies","suppliers"));
 
 		if (!empty($_SESSION["mainmenu"]) && $_SESSION["mainmenu"] == "companies") {
-            $itemsel = TRUE;
-            $_SESSION['idmenu']='';
-        } else {
-            $itemsel = FALSE;
-        }
+			$itemsel = TRUE;
+			$_SESSION['idmenu']='';
+		} else {
+			$itemsel = FALSE;
+		}
 		$idsel='companies';
 
-        $chaine=$langs->trans("ThirdParties");
+		$chaine=$langs->trans("ThirdParties");
 
 		if (empty($noout)) print_start_menu_entry($idsel,$itemsel,$showmode);
 		if (empty($noout)) print_text_menu_entry($chaine, $showmode, DOL_URL_ROOT.'/societe/index.php?mainmenu=companies&amp;leftmenu=', $id, $idsel, $atarget);
@@ -208,14 +208,14 @@ function print_oblyon_menu($db, $atarget, $type_user = 0, &$tabMenu, &$menu, $no
 	);
 	$showmode=dol_oblyon_showmenu($type_user, $tmpentry, $listofmodulesforexternal);
 	if ($showmode) {
-        $langs->loadLangs(array("products"));
+		$langs->loadLangs(array("products"));
 
 		if (!empty($_SESSION["mainmenu"]) && $_SESSION["mainmenu"] == "products") {
-            $itemsel=TRUE;
-            $_SESSION['idmenu']='';
-        } else {
-            $itemsel = FALSE;
-        }
+			$itemsel=TRUE;
+			$_SESSION['idmenu']='';
+		} else {
+			$itemsel = FALSE;
+		}
 		$idsel='products';
 
 		$chaine="";
@@ -233,25 +233,25 @@ function print_oblyon_menu($db, $atarget, $type_user = 0, &$tabMenu, &$menu, $no
 		'perms'=>($user->hasRight('bom', 'read') || $user->hasRight('mrp', 'read')),
 		'module'=>'bom|mrp'
 	);
-    $showmode = dol_oblyon_showmenu($type_user, $tmpentry, $listofmodulesforexternal);
-    if ($showmode) {
-        $langs->loadLangs(array("mrp"));
+	$showmode = dol_oblyon_showmenu($type_user, $tmpentry, $listofmodulesforexternal);
+	if ($showmode) {
+		$langs->loadLangs(array("mrp"));
 
-        if (!empty($_SESSION["mainmenu"]) && $_SESSION["mainmenu"] == "mrp") {
-            $itemsel=TRUE;
-            $_SESSION['idmenu']='';
-        } else {
-            $itemsel=FALSE;
-        }
-        $idsel='mrp';
+		if (!empty($_SESSION["mainmenu"]) && $_SESSION["mainmenu"] == "mrp") {
+			$itemsel=TRUE;
+			$_SESSION['idmenu']='';
+		} else {
+			$itemsel=FALSE;
+		}
+		$idsel='mrp';
 
-        $chaine = $langs->trans("TMenuMRP");
+		$chaine = $langs->trans("TMenuMRP");
 
-        if (empty($noout)) print_start_menu_entry($idsel,$itemsel,$showmode);
-        if (empty($noout)) print_text_menu_entry($chaine, $showmode, DOL_URL_ROOT.'/mrp/index.php?mainmenu=mrp&amp;leftmenu=', $id, $idsel, $atarget);
-        if (empty($noout)) print_end_menu_entry($showmode);
-        $menu->add('/mrp/index.php?mainmenu=mrp&amp;leftmenu=', $chaine, 0, $showmode, $atarget, "mrp", '');
-    }
+		if (empty($noout)) print_start_menu_entry($idsel,$itemsel,$showmode);
+		if (empty($noout)) print_text_menu_entry($chaine, $showmode, DOL_URL_ROOT.'/mrp/index.php?mainmenu=mrp&amp;leftmenu=', $id, $idsel, $atarget);
+		if (empty($noout)) print_end_menu_entry($showmode);
+		$menu->add('/mrp/index.php?mainmenu=mrp&amp;leftmenu=', $chaine, 0, $showmode, $atarget, "mrp", '');
+	}
 
 	// Projects
 	$tmpentry=array('enabled'=>isModEnabled('projet'),
@@ -259,23 +259,23 @@ function print_oblyon_menu($db, $atarget, $type_user = 0, &$tabMenu, &$menu, $no
 		'module'=>'projet');
 	$showmode=dol_oblyon_showmenu($type_user, $tmpentry, $listofmodulesforexternal);
 	if ($showmode) {
-        $langs->loadLangs(array("projects"));
+		$langs->loadLangs(array("projects"));
 
 		if (!empty($_SESSION["mainmenu"]) && $_SESSION["mainmenu"] == "project") {
-            $itemsel=TRUE;
-            $_SESSION['idmenu']='';
-        } else {
-            $itemsel = FALSE;
-        }
-        $idsel='project';
+			$itemsel=TRUE;
+			$_SESSION['idmenu']='';
+		} else {
+			$itemsel = FALSE;
+		}
+		$idsel='project';
 
 		if (empty($noout)) print_start_menu_entry($idsel,$itemsel,$showmode);
-        if (getDolGlobalString('PROJECT_FORCE_LIST_ACCESS')) {
-            if (empty($noout)) print_text_menu_entry($langs->trans("MenuProjectsOpportunities"), $showmode, DOL_URL_ROOT . '/projet/list.php?mainmenu=project&amp;leftmenu=', $id, $idsel, $atarget);
-        } else {
-            if (empty($noout)) print_text_menu_entry($langs->trans("MenuProjectsOpportunities"), $showmode, DOL_URL_ROOT . '/projet/index.php?mainmenu=project&amp;leftmenu=', $id, $idsel, $atarget);
-        }
-        if (empty($noout)) print_end_menu_entry($showmode);
+		if (getDolGlobalString('PROJECT_FORCE_LIST_ACCESS')) {
+			if (empty($noout)) print_text_menu_entry($langs->trans("MenuProjectsOpportunities"), $showmode, DOL_URL_ROOT . '/projet/list.php?mainmenu=project&amp;leftmenu=', $id, $idsel, $atarget);
+		} else {
+			if (empty($noout)) print_text_menu_entry($langs->trans("MenuProjectsOpportunities"), $showmode, DOL_URL_ROOT . '/projet/index.php?mainmenu=project&amp;leftmenu=', $id, $idsel, $atarget);
+		}
+		if (empty($noout)) print_end_menu_entry($showmode);
 		$title = $langs->trans("LeadsOrProjects");	// Leads and opportunities by default
 		$showmodel = $showmodep = $showmode;
 		if (!getDolGlobalString('PROJECT_USE_OPPORTUNITIES'))
@@ -287,12 +287,12 @@ function print_oblyon_menu($db, $atarget, $type_user = 0, &$tabMenu, &$menu, $no
 			$title = $langs->trans("Leads");
 			$showmodep = 0;
 		}
-        if (getDolGlobalString('PROJECT_FORCE_LIST_ACCESS')) {
-            $menu->add('/projet/list.php?mainmenu=project&amp;leftmenu=projets', $title, 0, $showmode, $atarget, "project", '', 70, $id, $idsel, $classname);
-        } else {
-            $menu->add('/projet/index.php?mainmenu=project&amp;leftmenu=', $title, 0, $showmode, $atarget, "project", '', 70, $id, $idsel, $classname);
-        }
-    }
+		if (getDolGlobalString('PROJECT_FORCE_LIST_ACCESS')) {
+			$menu->add('/projet/list.php?mainmenu=project&amp;leftmenu=projets', $title, 0, $showmode, $atarget, "project", '', 70, $id, $idsel, $classname);
+		} else {
+			$menu->add('/projet/index.php?mainmenu=project&amp;leftmenu=', $title, 0, $showmode, $atarget, "project", '', 70, $id, $idsel, $classname);
+		}
+	}
 
 	// Commercial (propal, commande, supplier_proposal, supplier_order, contrat, ficheinter)
 	$tmpentry = array(
@@ -317,23 +317,23 @@ function print_oblyon_menu($db, $atarget, $type_user = 0, &$tabMenu, &$menu, $no
 	);
 	$showmode=dol_oblyon_showmenu($type_user, $tmpentry, $listofmodulesforexternal);
 	if ($showmode) {
-        $langs->loadLangs(array("commercial"));
+		$langs->loadLangs(array("commercial"));
 
-        if (!empty($_SESSION["mainmenu"]) && $_SESSION["mainmenu"] == "commercial") {
-            $itemsel=TRUE;
-            $_SESSION['idmenu']='';
-        } else {
-            $itemsel=FALSE;
-        }
-        $idsel='commercial';
+		if (!empty($_SESSION["mainmenu"]) && $_SESSION["mainmenu"] == "commercial") {
+			$itemsel=TRUE;
+			$_SESSION['idmenu']='';
+		} else {
+			$itemsel=FALSE;
+		}
+		$idsel='commercial';
 
-        $chaine=$langs->trans("Commercial");
+		$chaine=$langs->trans("Commercial");
 
-        if (empty($noout)) print_start_menu_entry($idsel,$itemsel,$showmode);
-        if (empty($noout)) print_text_menu_entry($chaine, $showmode, DOL_URL_ROOT.'/comm/index.php?mainmenu=commercial&amp;leftmenu=', $id, $idsel, $atarget);
-        if (empty($noout)) print_end_menu_entry($showmode);
-        $menu->add('/comm/index.php?mainmenu=commercial&amp;leftmenu=', $chaine, 0, $showmode, $atarget, "commercial", "");
-    }
+		if (empty($noout)) print_start_menu_entry($idsel,$itemsel,$showmode);
+		if (empty($noout)) print_text_menu_entry($chaine, $showmode, DOL_URL_ROOT.'/comm/index.php?mainmenu=commercial&amp;leftmenu=', $id, $idsel, $atarget);
+		if (empty($noout)) print_end_menu_entry($showmode);
+		$menu->add('/comm/index.php?mainmenu=commercial&amp;leftmenu=', $chaine, 0, $showmode, $atarget, "commercial", "");
+	}
 
 	// Billing - Financial
 	$tmpentry = array(
@@ -355,21 +355,21 @@ function print_oblyon_menu($db, $atarget, $type_user = 0, &$tabMenu, &$menu, $no
 	);
 	$showmode=dol_oblyon_showmenu($type_user, $tmpentry, $listofmodulesforexternal);
 	if ($showmode) {
-        $langs->loadLangs(array("compta","accountancy"));
+		$langs->loadLangs(array("compta","accountancy"));
 
 		if (!empty($_SESSION["mainmenu"]) && $_SESSION["mainmenu"] == "billing") {
-            $itemsel=TRUE; $_SESSION['idmenu']='';
-        } else {
-            $itemsel = FALSE;
-        }
+			$itemsel=TRUE; $_SESSION['idmenu']='';
+		} else {
+			$itemsel = FALSE;
+		}
 		$idsel='billing';
 
-        $chaine=$langs->trans("MenuFinancial");
+		$chaine=$langs->trans("MenuFinancial");
 
 		if (empty($noout)) print_start_menu_entry($idsel,$itemsel,$showmode);
 		if (empty($noout)) print_text_menu_entry($chaine, $showmode, DOL_URL_ROOT.'/compta/index.php?mainmenu=billing&amp;leftmenu=', $id, $idsel, $atarget);
 		if (empty($noout)) print_end_menu_entry($showmode);
-        $menu->add('/compta/index.php?mainmenu=billing&amp;leftmenu=', $chaine, 0, $showmode, $atarget, "billing", '');
+		$menu->add('/compta/index.php?mainmenu=billing&amp;leftmenu=', $chaine, 0, $showmode, $atarget, "billing", '');
 	}
 
 	// Bank
@@ -380,16 +380,16 @@ function print_oblyon_menu($db, $atarget, $type_user = 0, &$tabMenu, &$menu, $no
 	);
 	$showmode=dol_oblyon_showmenu($type_user, $tmpentry, $listofmodulesforexternal);
 	if ($showmode) {
-        $langs->loadLangs(array("compta","banks"));
+		$langs->loadLangs(array("compta","banks"));
 
 		if (!empty($_SESSION["mainmenu"]) && $_SESSION["mainmenu"] == "bank") {
-            $itemsel=TRUE; $_SESSION['idmenu']='';
-        } else {
-            $itemsel = FALSE;
-        }
+			$itemsel=TRUE; $_SESSION['idmenu']='';
+		} else {
+			$itemsel = FALSE;
+		}
 		$idsel='bank';
 
-        $chaine=$langs->trans("MenuBankCash");
+		$chaine=$langs->trans("MenuBankCash");
 
 		if (empty($noout)) print_start_menu_entry($idsel,$itemsel,$showmode);
 		if (empty($noout)) print_text_menu_entry($chaine, $showmode, DOL_URL_ROOT.'/compta/bank/list.php?mainmenu=bank&amp;leftmenu=', $id, $idsel, $atarget);
@@ -406,17 +406,17 @@ function print_oblyon_menu($db, $atarget, $type_user = 0, &$tabMenu, &$menu, $no
 	$showmode=dol_oblyon_showmenu($type_user, $tmpentry, $listofmodulesforexternal);
 
 	if ($showmode) {
-        $langs->loadLangs(array("compta", "accountancy", "assets", "intracommreport"));
+		$langs->loadLangs(array("compta", "accountancy", "assets", "intracommreport"));
 
 		if (!empty($_SESSION["mainmenu"]) && $_SESSION["mainmenu"] == "accountancy") {
-            $itemsel=TRUE;
-            $_SESSION['idmenu']='';
-        } else {
-            $itemsel = FALSE;
-        }
+			$itemsel=TRUE;
+			$_SESSION['idmenu']='';
+		} else {
+			$itemsel = FALSE;
+		}
 		$idsel='accountancy';
 
-        $chaine=$langs->trans("MenuAccountancy");
+		$chaine=$langs->trans("MenuAccountancy");
 
 		if (empty($noout)) print_start_menu_entry($idsel,$itemsel,$showmode);
 		if (empty($noout)) print_text_menu_entry($chaine, $showmode, DOL_URL_ROOT.'/accountancy/index.php?mainmenu=accountancy&amp;leftmenu=', $id, $idsel, $atarget);
@@ -434,22 +434,22 @@ function print_oblyon_menu($db, $atarget, $type_user = 0, &$tabMenu, &$menu, $no
 	$showmode=dol_oblyon_showmenu($type_user, $tmpentry, $listofmodulesforexternal);
 
 	if ($showmode) {
-        $langs->loadLangs(array("holiday", "recruitment"));
+		$langs->loadLangs(array("holiday", "recruitment"));
 
-        if (!empty($_SESSION["mainmenu"]) && $_SESSION["mainmenu"] == "hrm") {
-            $itemsel=TRUE;
-            $_SESSION['idmenu']='';
-        } else {
-            $itemsel = FALSE;
-        }
-        $idsel='hrm';
+		if (!empty($_SESSION["mainmenu"]) && $_SESSION["mainmenu"] == "hrm") {
+			$itemsel=TRUE;
+			$_SESSION['idmenu']='';
+		} else {
+			$itemsel = FALSE;
+		}
+		$idsel='hrm';
 
-        $chaine=$langs->trans("HRM");
+		$chaine=$langs->trans("HRM");
 
-        if (empty($noout)) print_start_menu_entry($idsel,$itemsel,$showmode);
-        if (empty($noout)) print_text_menu_entry($chaine, $showmode, DOL_URL_ROOT.'/hrm/index.php?mainmenu=hrm&amp;leftmenu=', $id, $idsel, $atarget);
-        if (empty($noout)) print_end_menu_entry($showmode);
-        $menu->add('/hrm/index.php?mainmenu=hrm&amp;leftmenu=', $chaine, 0, $showmode, $atarget, "hrm", '');
+		if (empty($noout)) print_start_menu_entry($idsel,$itemsel,$showmode);
+		if (empty($noout)) print_text_menu_entry($chaine, $showmode, DOL_URL_ROOT.'/hrm/index.php?mainmenu=hrm&amp;leftmenu=', $id, $idsel, $atarget);
+		if (empty($noout)) print_end_menu_entry($showmode);
+		$menu->add('/hrm/index.php?mainmenu=hrm&amp;leftmenu=', $chaine, 0, $showmode, $atarget, "hrm", '');
 	}
 
 	// Tickets and knowledge base
@@ -465,16 +465,16 @@ function print_oblyon_menu($db, $atarget, $type_user = 0, &$tabMenu, &$menu, $no
 		$langs->loadLangs(array("other", "ticket"));
 
 		if (!empty($_SESSION["mainmenu"]) && $_SESSION["mainmenu"] == "ticket") {
-            $itemsel=TRUE;
-            $_SESSION['idmenu']='';
-        } else {
-            $itemsel = FALSE;
-        }
+			$itemsel=TRUE;
+			$_SESSION['idmenu']='';
+		} else {
+			$itemsel = FALSE;
+		}
 		$idsel='ticket';
 
-        $chaine=$langs->trans("Tickets");
+		$chaine=$langs->trans("Tickets");
 
-        $link = '';
+		$link = '';
 		if (isModEnabled('ticket')) {
 			$link = '/ticket/index.php?mainmenu=ticket&amp;leftmenu=';
 		} else {
@@ -537,33 +537,33 @@ function print_oblyon_menu($db, $atarget, $type_user = 0, &$tabMenu, &$menu, $no
 		);
 	}
 
-    // Show menu tools in last position
-    // Tools
-    $tmpentry = array(
-        'enabled'=>1,
-        'perms'=>1,
-        'module'=>''
-    );
-    $showmode=dol_oblyon_showmenu($type_user, $tmpentry, $listofmodulesforexternal);
+	// Show menu tools in last position
+	// Tools
+	$tmpentry = array(
+		'enabled'=>1,
+		'perms'=>1,
+		'module'=>''
+	);
+	$showmode=dol_oblyon_showmenu($type_user, $tmpentry, $listofmodulesforexternal);
 
-    if ($showmode) {
-        $langs->loadLangs(array("other"));
+	if ($showmode) {
+		$langs->loadLangs(array("other"));
 
-        if (!empty($_SESSION["mainmenu"]) && $_SESSION["mainmenu"] == "tools") {
-            $itemsel=TRUE;
-            $_SESSION['idmenu']='';
-        } else {
-            $itemsel = FALSE;
-        }
-        $idsel='tools';
+		if (!empty($_SESSION["mainmenu"]) && $_SESSION["mainmenu"] == "tools") {
+			$itemsel=TRUE;
+			$_SESSION['idmenu']='';
+		} else {
+			$itemsel = FALSE;
+		}
+		$idsel='tools';
 
-        $chaine=$langs->trans("Tools");
+		$chaine=$langs->trans("Tools");
 
-        if (empty($noout)) print_start_menu_entry($idsel,$itemsel,$showmode);
-        if (empty($noout)) print_text_menu_entry($chaine, $showmode, DOL_URL_ROOT.'/core/tools.php?mainmenu=tools&amp;leftmenu=', $id, $idsel, $atarget);
-        if (empty($noout)) print_end_menu_entry($showmode);
-        $menu->add('/core/tools.php?mainmenu=tools&amp;leftmenu=', $chaine, 0, $showmode, $atarget, "tools", '');
-    }
+		if (empty($noout)) print_start_menu_entry($idsel,$itemsel,$showmode);
+		if (empty($noout)) print_text_menu_entry($chaine, $showmode, DOL_URL_ROOT.'/core/tools.php?mainmenu=tools&amp;leftmenu=', $id, $idsel, $atarget);
+		if (empty($noout)) print_end_menu_entry($showmode);
+		$menu->add('/core/tools.php?mainmenu=tools&amp;leftmenu=', $chaine, 0, $showmode, $atarget, "tools", '');
+	}
 
 	if (empty($noout)) print_end_menu_array();
 
@@ -579,9 +579,9 @@ function print_oblyon_menu($db, $atarget, $type_user = 0, &$tabMenu, &$menu, $no
 function print_start_menu_array() {
 	global $conf;
 
-    $menu_invert = getDolGlobalInt('MAIN_MENU_INVERT');
+	$menu_invert = getDolGlobalInt('MAIN_MENU_INVERT');
 
-    print '<nav class="tmenudiv db-nav main-nav'.(empty($menu_invert)?'':' is-inverted').'">';
+	print '<nav class="tmenudiv db-nav main-nav'.(empty($menu_invert)?'':' is-inverted').'">';
 	print '<ul role="navigation" class="tmenu main-nav__list">';
 }
 
@@ -617,21 +617,21 @@ function print_text_menu_entry($text, $showmode, $url, $id, $idsel, $atarget)
 
 	if ($showmode == 1)
 	{
-        print '<div>'; // for myfield offset and uses div for background color
+		print '<div>'; // for myfield offset and uses div for background color
 		print '<a class="tmenu main-nav__link main-nav__'.$idsel.'" href="'.$url.'"'.($atarget?' target="'.$atarget.'"':'').' title="'.dol_escape_htmltag($text).'">';
 		print '<i class="tmenuimage icon icon--'.$idsel.'"></i> ';
-        print '<span class="mainmenuaspan">'.$text.'</span>'; // for myfield label and link
+		print '<span class="mainmenuaspan">'.$text.'</span>'; // for myfield label and link
 		print '</a>';
-        print '</div>';
+		print '</div>';
 	}
 	if ($showmode == 2)
 	{
-        print '<div>'; // for myfield offset and uses div for background color
+		print '<div>'; // for myfield offset and uses div for background color
 		print '<a class="tmenu main-nav__link is-disabled" id="mainmenua_'.$idsel.'" href="#" title="'.dol_escape_htmltag($langs->trans("NotAllowed")).'">';
 		print '<i class="tmenuimage icon icon--'.$idsel.'"></i> ';
-        print '<span class="mainmenuaspan">'.$text.'</span>'; // for myfield label and link
+		print '<span class="mainmenuaspan">'.$text.'</span>'; // for myfield label and link
 		print '</a>';
-        print '</div>';
+		print '</div>';
 	}
 }
 
@@ -666,16 +666,16 @@ function print_end_menu_array() {
 /**
  * Core function to output left menu oblyon
  *
- * @param	DoliDB		$db                 Database handler
+ * @param	DoliDB		$db				 Database handler
  * @param 	array		$menu_array_before  Table of menu entries to show before entries of menu handler (menu->liste filled with menu->add)
  * @param   array		$menu_array_after   Table of menu entries to show after entries of menu handler (menu->liste filled with menu->add)
- * @param	array		$tabMenu       		If array with menu entries already loaded, we put this array here (in most cases, it's empty)
+ * @param	array		$tabMenu	   		If array with menu entries already loaded, we put this array here (in most cases, it's empty)
  * @param	Menu		$menu				Object Menu to return back list of menu entries
  * @param	int			$noout				Disable output (Initialise &$menu only).
  * @param	string		$forcemainmenu		'x'=Force mainmenu to mainmenu='x'
  * @param	string		$forceleftmenu		'all'=Force leftmenu to '' (= all). If value come being '', we change it to value in session and 'none' if not defined in session.
  * @param	array		$moredata			An array with more data to output
- * @param 	int			$type_user     		0=Menu for backoffice, 1=Menu for front office
+ * @param 	int			$type_user	 		0=Menu for backoffice, 1=Menu for front office
  * @return	int								Nb of menu entries
  */
 function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$tabMenu, &$menu, $noout = 0, $forcemainmenu = '', $forceleftmenu = '', $moredata = null, $type_user = 0)
@@ -689,7 +689,7 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 	$mainmenu = ($forcemainmenu ? $forcemainmenu : $_SESSION["mainmenu"]);
 	$leftmenu = ($forceleftmenu ? '' : (empty($_SESSION["leftmenu"]) ? 'none' : $_SESSION["leftmenu"]));
 
-    $menu_invert = getDolGlobalInt('MAIN_MENU_INVERT');
+	$menu_invert = getDolGlobalInt('MAIN_MENU_INVERT');
 
 	$usemenuhider = !empty($menu_invert) && (getDolGlobalInt('OBLYON_HIDE_LEFTMENU') || $conf->dol_optimize_smallscreen);
 
@@ -707,35 +707,35 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 
 	// Show logo company
 	if (! empty($menu_invert) && empty($noout) && getDolGlobalString('MAIN_SHOW_LOGO')) {
-        $mysoc->logo_squarred_mini = getDolGlobalString('MAIN_INFO_SOCIETE_LOGO_SQUARRED_MINI', '');
+		$mysoc->logo_squarred_mini = getDolGlobalString('MAIN_INFO_SOCIETE_LOGO_SQUARRED_MINI', '');
 
-        if (! empty($mysoc->logo_squarred_mini) && is_readable($conf->mycompany->dir_output.'/logos/thumbs/'.$mysoc->logo_squarred_mini))
-        {
-            $urllogo=DOL_URL_ROOT.'/viewimage.php?cache=1&amp;modulepart=mycompany&amp;file='.urlencode('logos/thumbs/'.$mysoc->logo_squarred_mini);
-        }
-        else
-        {
-            $urllogo=DOL_URL_ROOT.'/theme/dolibarr_logo.png';
-            $logoContainerAdditionalClass = '';
-        }
-        $title=$langs->trans("GoIntoSetupToChangeLogo");
+		if (! empty($mysoc->logo_squarred_mini) && is_readable($conf->mycompany->dir_output.'/logos/thumbs/'.$mysoc->logo_squarred_mini))
+		{
+			$urllogo=DOL_URL_ROOT.'/viewimage.php?cache=1&amp;modulepart=mycompany&amp;file='.urlencode('logos/thumbs/'.$mysoc->logo_squarred_mini);
+		}
+		else
+		{
+			$urllogo=DOL_URL_ROOT.'/theme/dolibarr_logo.png';
+			$logoContainerAdditionalClass = '';
+		}
+		$title=$langs->trans("GoIntoSetupToChangeLogo");
 
 		print "\n".'<!-- Show logo on menu -->'."\n";
 
-        print '<div class="menu_contenu db-menu__society center backgroundforcompanylogo menulogocontainer">';
-        print '<a href="' . DOL_URL_ROOT . $landingpage . '" alt="'.dol_escape_htmltag($title).'" title="'.dol_escape_htmltag($title).'">';
-        print '<img class="mycompany" title="'.dol_escape_htmltag($title).'" alt="" src="'.$urllogo.'" style="max-width: 100px; height: 32px;">';
-        print '</a>'."\n";
-        print '</div>'."\n";
+		print '<div class="menu_contenu db-menu__society center backgroundforcompanylogo menulogocontainer">';
+		print '<a href="' . DOL_URL_ROOT . $landingpage . '" alt="'.dol_escape_htmltag($title).'" title="'.dol_escape_htmltag($title).'">';
+		print '<img class="mycompany" title="'.dol_escape_htmltag($title).'" alt="" src="'.$urllogo.'" style="max-width: 100px; height: 32px;">';
+		print '</a>'."\n";
+		print '</div>'."\n";
 	}
 
-    if (getDolGlobalInt('OBLYON_SHOW_COMPNAME') && getDolGlobalString('MAIN_INFO_SOCIETE_NOM')) {
-        if (! $menu_invert) {
-            print '<div class="blockvmenusocietyname">'."\n";
-            print '<span>'. getDolGlobalString('MAIN_INFO_SOCIETE_NOM') .'</span>'."\n";
-            print '</div>'."\n";
-        }
-    }
+	if (getDolGlobalInt('OBLYON_SHOW_COMPNAME') && getDolGlobalString('MAIN_INFO_SOCIETE_NOM')) {
+		if (! $menu_invert) {
+			print '<div class="blockvmenusocietyname">'."\n";
+			print '<span>'. getDolGlobalString('MAIN_INFO_SOCIETE_NOM') .'</span>'."\n";
+			print '</div>'."\n";
+		}
+	}
 
 	if (is_array($moredata) && !empty($moredata['searchform'])) {	// searchform can contains select2 code or link to show old search form or link to switch on search page
 		print "\n";
@@ -776,7 +776,7 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 			// Setup
 			$newmenu->add("/admin/index.php?mainmenu=home&amp;leftmenu=setup", $langs->trans("Setup"), 0, $user->admin, '', $mainmenu, 'setup');
 
-            if (! empty($menu_invert)) $leftmenu= 'setup';
+			if (! empty($menu_invert)) $leftmenu= 'setup';
 
 			if (!empty($user->admin) && ($usemenuhider || empty($leftmenu) || $leftmenu == "setup")) {
 				// Load translation files required by the page
@@ -821,7 +821,7 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 			// System tools
 			$newmenu->add("/admin/tools/index.php?mainmenu=home&amp;leftmenu=admintools", $langs->trans("AdminTools"), 0, $user->admin, '', $mainmenu, 'admintools');
 
-            if (! empty($menu_invert)) $leftmenu= 'admintools';
+			if (! empty($menu_invert)) $leftmenu= 'admintools';
 
 			if (!empty($user->admin) && ($usemenuhider || empty($leftmenu) || preg_match('/^admintools/', $leftmenu))) {
 				// Load translation files required by the page
@@ -829,16 +829,16 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 
 				$newmenu->add('/admin/system/dolibarr.php?mainmenu=home&amp;leftmenu=admintools_info', $langs->trans('InfoDolibarr'), 1);
 
-                if (! empty($menu_invert)) $leftmenu= 'admintools_info';
+				if (! empty($menu_invert)) $leftmenu= 'admintools_info';
 
 				if ($usemenuhider || empty($leftmenu) || $leftmenu == 'admintools_info') {
 					$newmenu->add('/admin/system/modules.php?mainmenu=home&amp;leftmenu=admintools_info', $langs->trans('Modules'), 2);
 					$newmenu->add('/admin/triggers.php?mainmenu=home&amp;leftmenu=admintools_info', $langs->trans('Triggers'), 2);
-                    if ((float) DOL_VERSION >= 23.0) {
-                        $newmenu->add('/blockedlog/admin/filecheck.php?mainmenu=home&amp;leftmenu=admintools_info', $langs->trans('FileCheck'), 2);
-                    } else {
-                        $newmenu->add('/admin/system/filecheck.php?mainmenu=home&amp;leftmenu=admintools_info', $langs->trans('FileCheck'), 2);
-                    }
+					if ((float) DOL_VERSION >= 23.0) {
+						$newmenu->add('/blockedlog/admin/filecheck.php?mainmenu=home&amp;leftmenu=admintools_info', $langs->trans('FileCheck'), 2);
+					} else {
+						$newmenu->add('/admin/system/filecheck.php?mainmenu=home&amp;leftmenu=admintools_info', $langs->trans('FileCheck'), 2);
+					}
 				}
 				$newmenu->add('/admin/system/browser.php?mainmenu=home&amp;leftmenu=admintools', $langs->trans('InfoBrowser'), 1);
 				$newmenu->add('/admin/system/os.php?mainmenu=home&amp;leftmenu=admintools', $langs->trans('InfoOS'), 1);
@@ -854,7 +854,7 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 				$newmenu->add("/admin/tools/listevents.php?mainmenu=home&amp;leftmenu=admintools", $langs->trans("Audit"), 1);
 				$newmenu->add("/admin/tools/listsessions.php?mainmenu=home&amp;leftmenu=admintools", $langs->trans("Sessions"), 1);
 				$newmenu->add('/admin/system/about.php?mainmenu=home&amp;leftmenu=admintools', $langs->trans('ExternalResources'), 1);
-                $newmenu->add('/cron/list.php?mainmenu=home&amp;leftmenu=admintools', $langs->trans('CronList'), 1);
+				$newmenu->add('/cron/list.php?mainmenu=home&amp;leftmenu=admintools', $langs->trans('CronList'), 1);
 
 				if (isModEnabled('product') || isModEnabled('service')) {
 					$langs->load("products");
@@ -867,18 +867,18 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 			if ($user->hasRight('user', 'user', 'lire')) {
 				if (! empty($menu_invert)) $leftmenu= 'users';
 
-			    if ($usemenuhider || empty($leftmenu) || $leftmenu=="users")
+				if ($usemenuhider || empty($leftmenu) || $leftmenu=="users")
 				{
 					$newmenu->add("/user/list.php?leftmenu=users", $langs->trans("Users"), 1, $user->hasRight('user', 'user', 'lire') || $user->admin);
 					$newmenu->add("/user/card.php?leftmenu=users&action=create", $langs->trans("NewUser"), 2, ($user->hasRight('user', 'user', 'creer') || $user->admin) && !(!empty($conf->multicompany->enabled) && !empty($user->entity) && getDolGlobalString('MULTICOMPANY_TRANSVERSE_MODE')), '', 'home');
 					$newmenu->add("/user/list.php?leftmenu=users", $langs->trans("ListOfUsers"), 2, $user->hasRight('user', 'user', 'lire') || $user->admin);
 					$newmenu->add("/user/hierarchy.php?leftmenu=users", $langs->trans("HierarchicView"), 2, $user->hasRight('user', 'user', 'lire') || $user->admin);
-                    if ((float) DOL_VERSION < 22.0 || getDolGlobalString('CATEGORY_EDIT_IN_MENU_NOT_IN_POPUP')) {
-                        if (isModEnabled('categorie') || isModEnabled('category')) {
-                            $langs->load("categories");
-                            $newmenu->add("/categories/index.php?leftmenu=users&type=7", $langs->trans("UsersCategoriesShort"), 2, $user->hasRight('categorie', 'lire'), '', $mainmenu, 'cat');
-                        }
-                    }
+					if ((float) DOL_VERSION < 22.0 || getDolGlobalString('CATEGORY_EDIT_IN_MENU_NOT_IN_POPUP')) {
+						if (isModEnabled('categorie') || isModEnabled('category')) {
+							$langs->load("categories");
+							$newmenu->add("/categories/index.php?leftmenu=users&type=7", $langs->trans("UsersCategoriesShort"), 2, $user->hasRight('categorie', 'lire'), '', $mainmenu, 'cat');
+						}
+					}
 					$newmenu->add("/user/group/list.php?leftmenu=users", $langs->trans("Groups"), 1, ($user->hasRight('user', 'user', 'lire') || $user->admin) && !(!empty($conf->multicompany->enabled) && !empty($user->entity) && getDolGlobalString('MULTICOMPANY_TRANSVERSE_MODE')));
 					$newmenu->add("/user/group/card.php?leftmenu=users&action=create", $langs->trans("NewGroup"), 2, ((getDolGlobalString('MAIN_USE_ADVANCED_PERMS') ? $user->hasRight('user', 'group_advance', 'write') : $user->hasRight('user', 'user', 'creer')) || $user->admin) && !(!empty($conf->multicompany->enabled) && !empty($user->entity) && getDolGlobalString('MULTICOMPANY_TRANSVERSE_MODE')));
 					$newmenu->add("/user/group/list.php?leftmenu=users", $langs->trans("ListOfGroups"), 2, ((getDolGlobalString('MAIN_USE_ADVANCED_PERMS') ? $user->hasRight('user', 'group_advance', 'read'): $user->hasRight('user', 'user', 'lire')) || $user->admin));
@@ -940,16 +940,16 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 					if (getDolGlobalString('SOCIETE_DISABLE_CUSTOMERS')) {
 						$menutoshow = $langs->trans("ProspectsCategoriesShort");
 					}
-                    if ((float) DOL_VERSION < 22.0 || getDolGlobalString('CATEGORY_EDIT_IN_MENU_NOT_IN_POPUP')) {
-                        $newmenu->add("/categories/index.php?leftmenu=cat&amp;type=2", $menutoshow, 1, $user->hasRight('categorie', 'lire'), '', $mainmenu, 'cat');
-                    }
+					if ((float) DOL_VERSION < 22.0 || getDolGlobalString('CATEGORY_EDIT_IN_MENU_NOT_IN_POPUP')) {
+						$newmenu->add("/categories/index.php?leftmenu=cat&amp;type=2", $menutoshow, 1, $user->hasRight('categorie', 'lire'), '', $mainmenu, 'cat');
+					}
 				}
 				// Categories suppliers
 				if (isModEnabled('fournisseur') && !getDolGlobalString('MAIN_USE_NEW_SUPPLIERMOD') || isModEnabled('supplier_proposal') || isModEnabled('supplier_order') || isModEnabled('supplier_invoice')) {
-                    if ((float) DOL_VERSION < 22.0 || getDolGlobalString('CATEGORY_EDIT_IN_MENU_NOT_IN_POPUP')) {
-                        $newmenu->add("/categories/index.php?leftmenu=catfournish&amp;type=1", $langs->trans("SuppliersCategoriesShort"), 1, $user->hasRight('categorie', 'lire'));
-                    }
-                }
+					if ((float) DOL_VERSION < 22.0 || getDolGlobalString('CATEGORY_EDIT_IN_MENU_NOT_IN_POPUP')) {
+						$newmenu->add("/categories/index.php?leftmenu=catfournish&amp;type=1", $langs->trans("SuppliersCategoriesShort"), 1, $user->hasRight('categorie', 'lire'));
+					}
+				}
 			}
 
 			// Contacts
@@ -970,13 +970,13 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 			//$newmenu->add("/contact/list.php?userid=$user->id", $langs->trans("MyContacts"), 1, $user->hasRight('societe', 'contact', 'lire'));
 
 			// Categories
-            if ((float) DOL_VERSION < 22.0 || getDolGlobalString('CATEGORY_EDIT_IN_MENU_NOT_IN_POPUP')) {
-                if (isModEnabled('categorie') || isModEnabled('category')) {
-                    $langs->load("categories");
-                    // Categories Contact
-                    $newmenu->add("/categories/index.php?leftmenu=catcontact&amp;type=4", $langs->trans("ContactCategoriesShort"), 1, $user->hasRight('categorie', 'lire'), '', $mainmenu, 'cat');
-                }
-            }
+			if ((float) DOL_VERSION < 22.0 || getDolGlobalString('CATEGORY_EDIT_IN_MENU_NOT_IN_POPUP')) {
+				if (isModEnabled('categorie') || isModEnabled('category')) {
+					$langs->load("categories");
+					// Categories Contact
+					$newmenu->add("/categories/index.php?leftmenu=catcontact&amp;type=4", $langs->trans("ContactCategoriesShort"), 1, $user->hasRight('categorie', 'lire'), '', $mainmenu, 'cat');
+				}
+			}
 		}
 
 		/*
@@ -992,7 +992,7 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 				$newmenu->add("/comm/propal/card.php?action=create&amp;leftmenu=propals", $langs->trans("NewPropal"), 1, $user->hasRight('propale', 'creer'));
 				$newmenu->add("/comm/propal/list.php?leftmenu=propals", $langs->trans("List"), 1, $user->hasRight('propale', 'lire'));
 
-                if (! empty($menu_invert)) $leftmenu= 'propals';
+				if (! empty($menu_invert)) $leftmenu= 'propals';
 
 				if ($usemenuhider || empty($leftmenu) || $leftmenu == "propals") {
 					$newmenu->add("/comm/propal/list.php?leftmenu=propals&search_status=0", $langs->trans("PropalsDraft"), 2, $user->hasRight('propale', 'lire'));
@@ -1013,7 +1013,7 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 				$newmenu->add("/commande/card.php?action=create&amp;leftmenu=orders", $langs->trans("NewOrder"), 1, $user->hasRight('commande', 'creer'));
 				$newmenu->add("/commande/list.php?leftmenu=orders", $langs->trans("List"), 1, $user->hasRight('commande', 'lire'));
 
-                if (! empty($menu_invert)) $leftmenu= 'orders';
+				if (! empty($menu_invert)) $leftmenu= 'orders';
 
 				if ($usemenuhider || empty($leftmenu) || $leftmenu == "orders") {
 					$newmenu->add("/commande/list.php?leftmenu=orders&search_status=0", $langs->trans("StatusOrderDraftShort"), 2, $user->hasRight('commande', 'lire'));
@@ -1025,20 +1025,20 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 					//$newmenu->add("/commande/list.php?leftmenu=orders&search_status=4", $langs->trans("StatusOrderProcessed"), 2, $user->hasRight('commande', 'lire'));
 					$newmenu->add("/commande/list.php?leftmenu=orders&search_status=-1", $langs->trans("StatusOrderCanceledShort"), 2, $user->hasRight('commande', 'lire'));
 				}
-                if (empty($user->socid) && (float) DOL_VERSION >= 21.0) {
-                    $newmenu->add("/commande/list_det.php?leftmenu=orders", $langs->trans("ListOrderLigne"), 1, $user->hasRight('commande', 'lire'));
-                }
-                if (getDolGlobalInt('MAIN_NEED_EXPORT_PERMISSION_TO_READ_STATISTICS')) {
-                    $newmenu->add("/commande/stats/index.php?leftmenu=orders", $langs->trans("Statistics"), 1, $user->hasRight('commande', 'commande', 'export'));
-                } else {
-                    $newmenu->add("/commande/stats/index.php?leftmenu=orders", $langs->trans("Statistics"), 1, $user->hasRight('commande', 'lire'));
-                }
+				if (empty($user->socid) && (float) DOL_VERSION >= 21.0) {
+					$newmenu->add("/commande/list_det.php?leftmenu=orders", $langs->trans("ListOrderLigne"), 1, $user->hasRight('commande', 'lire'));
+				}
+				if (getDolGlobalInt('MAIN_NEED_EXPORT_PERMISSION_TO_READ_STATISTICS')) {
+					$newmenu->add("/commande/stats/index.php?leftmenu=orders", $langs->trans("Statistics"), 1, $user->hasRight('commande', 'commande', 'export'));
+				} else {
+					$newmenu->add("/commande/stats/index.php?leftmenu=orders", $langs->trans("Statistics"), 1, $user->hasRight('commande', 'lire'));
+				}
 
-                // Categories
-                if (isModEnabled('category') && getDolGlobalString('CATEGORY_EDIT_IN_MENU_NOT_IN_POPUP') && (float) DOL_VERSION >= 23.0) {
-                    $langs->load("categories");
-                    $newmenu->add("/categories/categorie_list.php?leftmenu=cat&type=16", $langs->trans("Categories"), 1, $user->hasRight('categorie', 'lire'), '', $mainmenu, 'cat');
-                }
+				// Categories
+				if (isModEnabled('category') && getDolGlobalString('CATEGORY_EDIT_IN_MENU_NOT_IN_POPUP') && (float) DOL_VERSION >= 23.0) {
+					$langs->load("categories");
+					$newmenu->add("/categories/categorie_list.php?leftmenu=cat&type=16", $langs->trans("Categories"), 1, $user->hasRight('categorie', 'lire'), '', $mainmenu, 'cat');
+				}
 			}
 
 			// Supplier proposal
@@ -1057,7 +1057,7 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 				$newmenu->add("/fourn/commande/card.php?action=create&amp;leftmenu=orders_suppliers", $langs->trans("NewSupplierOrderShort"), 1, $user->hasRight('fournisseur', 'commande', 'creer'));
 				$newmenu->add("/fourn/commande/list.php?leftmenu=orders_suppliers", $langs->trans("List"), 1, $user->hasRight('fournisseur', 'commande', 'lire'));
 
-                if (! empty($menu_invert)) $leftmenu= 'orders_suppliers';
+				if (! empty($menu_invert)) $leftmenu= 'orders_suppliers';
 
 				if ($usemenuhider || empty($leftmenu) || $leftmenu == "orders_suppliers") {
 					$newmenu->add("/fourn/commande/list.php?leftmenu=orders_suppliers&statut=0", $langs->trans("StatusSupplierOrderDraftShort"), 2, $user->hasRight('fournisseur', 'commande', 'lire'));
@@ -1073,17 +1073,17 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 				}
 				// Billed is another field. We should add instead a dedicated filter on list. if ($usemenuhider || empty($leftmenu) || $leftmenu=="orders_suppliers") $newmenu->add("/fourn/commande/list.php?leftmenu=orders_suppliers&billed=1", $langs->trans("Billed"), 2, $user->hasRight('fournisseur', 'commande', 'lire'));
 
-                if (getDolGlobalInt('MAIN_NEED_EXPORT_PERMISSION_TO_READ_STATISTICS')) {
-                    $newmenu->add("/commande/stats/index.php?leftmenu=orders_suppliers&amp;mode=supplier", $langs->trans("Statistics"), 1, $user->hasRight('fournisseur', 'commande', 'export'));
-                } else {
-                    $newmenu->add("/commande/stats/index.php?leftmenu=orders_suppliers&amp;mode=supplier", $langs->trans("Statistics"), 1, $user->hasRight('fournisseur', 'commande', 'lire'));
-                }
+				if (getDolGlobalInt('MAIN_NEED_EXPORT_PERMISSION_TO_READ_STATISTICS')) {
+					$newmenu->add("/commande/stats/index.php?leftmenu=orders_suppliers&amp;mode=supplier", $langs->trans("Statistics"), 1, $user->hasRight('fournisseur', 'commande', 'export'));
+				} else {
+					$newmenu->add("/commande/stats/index.php?leftmenu=orders_suppliers&amp;mode=supplier", $langs->trans("Statistics"), 1, $user->hasRight('fournisseur', 'commande', 'lire'));
+				}
 
-                // Categories
-                if (isModEnabled('category') && getDolGlobalString('CATEGORY_EDIT_IN_MENU_NOT_IN_POPUP') && (float) DOL_VERSION >= 23.0) {
-                    $langs->load("categories");
-                    $newmenu->add("/categories/categorie_list.php?leftmenu=cat&type=20", $langs->trans("Categories"), 1, $user->hasRight('categorie', 'lire'), '', $mainmenu, 'cat');
-                }
+				// Categories
+				if (isModEnabled('category') && getDolGlobalString('CATEGORY_EDIT_IN_MENU_NOT_IN_POPUP') && (float) DOL_VERSION >= 23.0) {
+					$langs->load("categories");
+					$newmenu->add("/categories/categorie_list.php?leftmenu=cat&type=20", $langs->trans("Categories"), 1, $user->hasRight('categorie', 'lire'), '', $mainmenu, 'cat');
+				}
 			}
 
 			// Contract
@@ -1095,22 +1095,22 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 				$newmenu->add("/contrat/services_list.php?leftmenu=contracts", $langs->trans("MenuServices"), 1, $user->hasRight('contrat', 'lire'));
 
 				if (!empty($menu_invert)) {
-                    $leftmenu = 'contracts';
-                }
+					$leftmenu = 'contracts';
+				}
 
 				if ($usemenuhider || empty($leftmenu) || $leftmenu == "contracts") {
-                    if ((float) DOL_VERSION >= 18.0) {
-                        $newmenu->add("/contrat/services_list.php?leftmenu=contracts&amp;search_status=0", $langs->trans("MenuInactiveServices"), 2, $user->hasRight('contrat', 'lire'));
-                        $newmenu->add("/contrat/services_list.php?leftmenu=contracts&amp;search_status=4", $langs->trans("MenuRunningServices"), 2, $user->hasRight('contrat', 'lire'));
-                        $newmenu->add("/contrat/services_list.php?leftmenu=contracts&amp;search_status=4%26filter=expired", $langs->trans("MenuExpiredServices"), 2, $user->hasRight('contrat', 'lire'));
-                        $newmenu->add("/contrat/services_list.php?leftmenu=contracts&amp;search_status=5", $langs->trans("MenuClosedServices"), 2, $user->hasRight('contrat', 'lire'));
-                    } else {
-                        $newmenu->add("/contrat/services_list.php?leftmenu=contracts&amp;mode=0", $langs->trans("MenuInactiveServices"), 2, $user->hasRight('contrat', 'lire'));
-                        $newmenu->add("/contrat/services_list.php?leftmenu=contracts&amp;mode=4", $langs->trans("MenuRunningServices"), 2, $user->hasRight('contrat', 'lire'));
-                        $newmenu->add("/contrat/services_list.php?leftmenu=contracts&amp;mode=4&amp;filter=expired", $langs->trans("MenuExpiredServices"), 2, $user->hasRight('contrat', 'lire'));
-                        $newmenu->add("/contrat/services_list.php?leftmenu=contracts&amp;mode=5", $langs->trans("MenuClosedServices"), 2, $user->hasRight('contrat', 'lire'));
-                    }
-                }
+					if ((float) DOL_VERSION >= 18.0) {
+						$newmenu->add("/contrat/services_list.php?leftmenu=contracts&amp;search_status=0", $langs->trans("MenuInactiveServices"), 2, $user->hasRight('contrat', 'lire'));
+						$newmenu->add("/contrat/services_list.php?leftmenu=contracts&amp;search_status=4", $langs->trans("MenuRunningServices"), 2, $user->hasRight('contrat', 'lire'));
+						$newmenu->add("/contrat/services_list.php?leftmenu=contracts&amp;search_status=4%26filter=expired", $langs->trans("MenuExpiredServices"), 2, $user->hasRight('contrat', 'lire'));
+						$newmenu->add("/contrat/services_list.php?leftmenu=contracts&amp;search_status=5", $langs->trans("MenuClosedServices"), 2, $user->hasRight('contrat', 'lire'));
+					} else {
+						$newmenu->add("/contrat/services_list.php?leftmenu=contracts&amp;mode=0", $langs->trans("MenuInactiveServices"), 2, $user->hasRight('contrat', 'lire'));
+						$newmenu->add("/contrat/services_list.php?leftmenu=contracts&amp;mode=4", $langs->trans("MenuRunningServices"), 2, $user->hasRight('contrat', 'lire'));
+						$newmenu->add("/contrat/services_list.php?leftmenu=contracts&amp;mode=4&amp;filter=expired", $langs->trans("MenuExpiredServices"), 2, $user->hasRight('contrat', 'lire'));
+						$newmenu->add("/contrat/services_list.php?leftmenu=contracts&amp;mode=5", $langs->trans("MenuClosedServices"), 2, $user->hasRight('contrat', 'lire'));
+					}
+				}
 			}
 
 			// Interventions
@@ -1140,7 +1140,7 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 				$newmenu->add("/compta/facture/card.php?action=create", $langs->trans("NewBill"), 1, $user->hasRight('facture', 'creer'));
 				$newmenu->add("/compta/facture/list.php?leftmenu=customers_bills", $langs->trans("List"), 1, $user->hasRight('facture', 'lire'), '', $mainmenu, 'customers_bills_list');
 
-                if (! empty($menu_invert)) $leftmenu= 'customers_bills';
+				if (! empty($menu_invert)) $leftmenu= 'customers_bills';
 
 				if ($usemenuhider || empty($leftmenu) || preg_match('/customers_bills(|_draft|_notpaid|_paid|_canceled)$/', $leftmenu)) {
 					$newmenu->add("/compta/facture/list.php?leftmenu=customers_bills_draft&amp;search_status=0", $langs->trans("BillShortStatusDraft"), 2, $user->hasRight('facture', 'lire'));
@@ -1155,17 +1155,17 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 				if (getDolGlobalString('BILL_ADD_PAYMENT_VALIDATION')) {
 					$newmenu->add("/compta/paiement/tovalidate.php?leftmenu=customers_bills_tovalid", $langs->trans("MenuToValid"), 2, $user->hasRight('facture', 'lire'), '', $mainmenu, 'customer_bills_tovalid');
 				}
-                if ($usemenuhider || empty($leftmenu) || preg_match('/customers_bills/', $leftmenu)) {
-                    $newmenu->add("/compta/paiement/rapport.php?leftmenu=customers_bills_payment_report", $langs->trans("Reportings"), 2, $user->hasRight('facture', 'lire'), '', $mainmenu, 'customers_bills_payment_report');
-                }
+				if ($usemenuhider || empty($leftmenu) || preg_match('/customers_bills/', $leftmenu)) {
+					$newmenu->add("/compta/paiement/rapport.php?leftmenu=customers_bills_payment_report", $langs->trans("Reportings"), 2, $user->hasRight('facture', 'lire'), '', $mainmenu, 'customers_bills_payment_report');
+				}
 				$newmenu->add("/compta/facture/stats/index.php?leftmenu=customers_bills_stats", $langs->trans("Statistics"), 1, $user->hasRight('facture', 'lire'), '', $mainmenu, 'customers_bills_stats');
 
-                // Categories
-                if (isModEnabled('category') && getDolGlobalString('CATEGORY_EDIT_IN_MENU_NOT_IN_POPUP') && (float) DOL_VERSION >= 23.0) {
-                    $langs->load("categories");
-                    $newmenu->add("/categories/categorie_list.php?leftmenu=cat&type=17", $langs->trans("Categories"), 1, $user->rights->categorie->lire, '', $mainmenu, 'cat');
-                }
-            }
+				// Categories
+				if (isModEnabled('category') && getDolGlobalString('CATEGORY_EDIT_IN_MENU_NOT_IN_POPUP') && (float) DOL_VERSION >= 23.0) {
+					$langs->load("categories");
+					$newmenu->add("/categories/categorie_list.php?leftmenu=cat&type=17", $langs->trans("Categories"), 1, $user->rights->categorie->lire, '', $mainmenu, 'cat');
+				}
+			}
 
 			// Suppliers invoices
 			if (isModEnabled('societe') && isModEnabled('supplier_invoice')) {
@@ -1174,7 +1174,7 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 				$newmenu->add("/fourn/facture/card.php?leftmenu=suppliers_bills&amp;action=create", $langs->trans("NewBill"), 1, ($user->hasRight('fournisseur', 'facture', 'creer') || $user->hasRight('supplier_invoice', 'creer')), '', $mainmenu, 'suppliers_bills_create');
 				$newmenu->add("/fourn/facture/list.php?leftmenu=suppliers_bills", $langs->trans("List"), 1, $user->hasRight('fournisseur', 'facture', 'lire'), '', $mainmenu, 'suppliers_bills_list');
 
-                if (! empty($menu_invert)) $leftmenu= 'suppliers_bills';
+				if (! empty($menu_invert)) $leftmenu= 'suppliers_bills';
 
 				if ($usemenuhider || empty($leftmenu) || preg_match('/suppliers_bills/', $leftmenu)) {
 					$newmenu->add("/fourn/facture/list.php?leftmenu=suppliers_bills_draft&amp;search_status=0", $langs->trans("BillShortStatusDraft"), 2, $user->hasRight('fournisseur', 'facture', 'lire'), '', $mainmenu, 'suppliers_bills_draft');
@@ -1182,24 +1182,24 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 					$newmenu->add("/fourn/facture/list.php?leftmenu=suppliers_bills_paid&amp;search_status=2", $langs->trans("BillShortStatusPaid"), 2, $user->hasRight('fournisseur', 'facture', 'lire'), '', $mainmenu, 'suppliers_bills_paid');
 				}
 
-                if ((float) DOL_VERSION >= 16.0) {
-                    $newmenu->add("/fourn/facture/list-rec.php?leftmenu=supplierinvoicestemplate_list", $langs->trans("ListOfTemplates"), 1, $user->hasRight('fournisseur', 'facture', 'lire'), '', $mainmenu, 'supplierinvoicestemplate_list');
-                }
+				if ((float) DOL_VERSION >= 16.0) {
+					$newmenu->add("/fourn/facture/list-rec.php?leftmenu=supplierinvoicestemplate_list", $langs->trans("ListOfTemplates"), 1, $user->hasRight('fournisseur', 'facture', 'lire'), '', $mainmenu, 'supplierinvoicestemplate_list');
+				}
 
-                $newmenu->add("/fourn/paiement/list.php?leftmenu=suppliers_bills_payment", $langs->trans("Payments"), 1, $user->hasRight('fournisseur', 'facture', 'lire'), '', $mainmenu, 'suppliers_bills_payment');
+				$newmenu->add("/fourn/paiement/list.php?leftmenu=suppliers_bills_payment", $langs->trans("Payments"), 1, $user->hasRight('fournisseur', 'facture', 'lire'), '', $mainmenu, 'suppliers_bills_payment');
 
-                if ($usemenuhider || empty($leftmenu) || preg_match('/suppliers_bills/', $leftmenu)) {
-                    $newmenu->add("/fourn/facture/rapport.php?leftmenu=suppliers_bills_payment_report", $langs->trans("Reportings"), 2, $user->hasRight('fournisseur', 'facture', 'lire'), '', $mainmenu, 'suppliers_bills_payment_report');
-                }
+				if ($usemenuhider || empty($leftmenu) || preg_match('/suppliers_bills/', $leftmenu)) {
+					$newmenu->add("/fourn/facture/rapport.php?leftmenu=suppliers_bills_payment_report", $langs->trans("Reportings"), 2, $user->hasRight('fournisseur', 'facture', 'lire'), '', $mainmenu, 'suppliers_bills_payment_report');
+				}
 
 				$newmenu->add("/compta/facture/stats/index.php?mode=supplier&amp;leftmenu=suppliers_bills_stats", $langs->trans("Statistics"), 1, $user->hasRight('fournisseur', 'facture', 'lire'), '', $mainmenu, 'suppliers_bills_stats');
 
-                // Categories
-                if (isModEnabled('category') && getDolGlobalString('CATEGORY_EDIT_IN_MENU_NOT_IN_POPUP') && (float) DOL_VERSION >= 23.0) {
-                    $langs->load("categories");
-                    $newmenu->add("/categories/categorie_list.php?leftmenu=cat&type=21", $langs->trans("Categories"), 1, $user->rights->categorie->lire, '', $mainmenu, 'cat');
-                }
-            }
+				// Categories
+				if (isModEnabled('category') && getDolGlobalString('CATEGORY_EDIT_IN_MENU_NOT_IN_POPUP') && (float) DOL_VERSION >= 23.0) {
+					$langs->load("categories");
+					$newmenu->add("/categories/categorie_list.php?leftmenu=cat&type=21", $langs->trans("Categories"), 1, $user->rights->categorie->lire, '', $mainmenu, 'cat');
+				}
+			}
 
 			// Orders
 			if (isModEnabled('commande')) {
@@ -1225,7 +1225,7 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 				$langs->load("donations");
 				$newmenu->add("/don/index.php?leftmenu=donations&amp;mainmenu=billing",$langs->trans("Donations"), 0, $user->hasRight('don', 'lire'), '', $mainmenu, 'donations');
 
-                if (! empty($menu_invert)) $leftmenu= 'donations';
+				if (! empty($menu_invert)) $leftmenu= 'donations';
 
 				if ($usemenuhider || empty($leftmenu) || $leftmenu == "donations") {
 					$newmenu->add("/don/card.php?leftmenu=donations&amp;action=create", $langs->trans("NewDonation"), 1, $user->hasRight('don', 'creer'));
@@ -1237,8 +1237,8 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 			// Taxes and social contributions
 			if (isModEnabled('tax') || isModEnabled('salaries') || isModEnabled('loan') || isModEnabled('banque'))
 			{
-                global $mysoc;
-                $langs->load("compta");
+				global $mysoc;
+				$langs->load("compta");
 
 				$permtoshowmenu=((isModEnabled('tax') && $user->hasRight('tax', 'charges', 'lire')) || (isModEnabled('salaries') && $user->hasRight('salaries', 'read')) || (isModEnabled('loan') && $user->hasRight('loan', 'read')) || (isModEnabled('banque') && $user->hasRight('banque', 'lire')));
 				$newmenu->add("/compta/charges/index.php?leftmenu=tax&amp;mainmenu=billing",$langs->trans("MenuSpecialExpenses"), 0, $permtoshowmenu, '', $mainmenu, 'tax');
@@ -1248,7 +1248,7 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 				{
 					$newmenu->add("/compta/sociales/list.php?leftmenu=tax_social",$langs->trans("MenuSocialContributions"),1,$user->hasRight('tax', 'charges', 'lire'));
 
-                    if (! empty($menu_invert)) $leftmenu= 'tax_social';
+					if (! empty($menu_invert)) $leftmenu= 'tax_social';
 
 					if ($usemenuhider || empty($leftmenu) || preg_match('/^tax_social/i', $leftmenu)) {
 						$newmenu->add("/compta/sociales/card.php?leftmenu=tax_social&action=create", $langs->trans("MenuNewSocialContribution"), 2, $user->hasRight('tax', 'charges', 'creer'));
@@ -1261,7 +1261,7 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 					{
 						$newmenu->add("/compta/tva/list.php?leftmenu=tax_vat&amp;mainmenu=billing",$langs->transcountry("MenuVAT", $mysoc->country_code),1,$user->hasRight('tax', 'charges', 'lire'), '', $mainmenu, 'tax_vat');
 
-                        if (! empty($menu_invert)) $leftmenu= 'tax_vat';
+						if (! empty($menu_invert)) $leftmenu= 'tax_vat';
 
 						if ($usemenuhider || empty($leftmenu) || preg_match('/^tax_vat/i', $leftmenu)) {
 							$newmenu->add("/compta/tva/card.php?leftmenu=tax_vat&action=create", $langs->trans("New"), 2, $user->hasRight('tax', 'charges', 'creer'));
@@ -1279,7 +1279,7 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 						{
 							$newmenu->add("/compta/localtax/list.php?leftmenu=tax_1_vat&amp;mainmenu=billing&amp;localTaxType=1",$langs->transcountry("LT1",$mysoc->country_code),1,$user->hasRight('tax', 'charges', 'lire'));
 
-                            if (! empty($menu_invert)) $leftmenu= 'tax_1_vat';
+							if (! empty($menu_invert)) $leftmenu= 'tax_1_vat';
 
 							if ($usemenuhider || empty($leftmenu) || preg_match('/^tax_1_vat/i', $leftmenu)) {
 								$newmenu->add("/compta/localtax/card.php?leftmenu=tax_1_vat&action=create&amp;localTaxType=1", $langs->trans("New"), 2, $user->hasRight('tax', 'charges', 'creer'));
@@ -1295,7 +1295,7 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 						{
 							$newmenu->add("/compta/localtax/list.php?leftmenu=tax_2_vat&amp;mainmenu=billing&amp;localTaxType=2",$langs->transcountry("LT2",$mysoc->country_code),1,$user->hasRight('tax', 'charges', 'lire'));
 
-                            if (! empty($menu_invert)) $leftmenu= 'tax_2_vat';
+							if (! empty($menu_invert)) $leftmenu= 'tax_2_vat';
 
 							if ($usemenuhider || empty($leftmenu) || preg_match('/^tax_2_vat/i', $leftmenu)) {
 								$newmenu->add("/compta/localtax/card.php?leftmenu=tax_2_vat&action=create&amp;localTaxType=2", $langs->trans("New"), 2, $user->hasRight('tax', 'charges', 'creer'));
@@ -1313,7 +1313,7 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 					$langs->load("salaries");
 					$newmenu->add("/salaries/list.php?leftmenu=tax_salary&amp;mainmenu=billing",$langs->trans("Salaries"),1,$user->hasRight('salaries', 'read'), '', $mainmenu, 'tax_salary');
 
-                    if (! empty($menu_invert)) $leftmenu= 'tax_salary';
+					if (! empty($menu_invert)) $leftmenu= 'tax_salary';
 
 					if ($usemenuhider || empty($leftmenu) || preg_match('/^tax_salary/i', $leftmenu)) {
 						$newmenu->add("/salaries/card.php?leftmenu=tax_salary&action=create", $langs->trans("New"), 2, $user->hasRight('salaries', 'write'));
@@ -1321,7 +1321,7 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 						$newmenu->add("/salaries/payments.php?leftmenu=tax_salary", $langs->trans("Payments"), 2, $user->hasRight('salaries', 'read'));
 						$newmenu->add("/salaries/stats/index.php?leftmenu=tax_salary", $langs->trans("Statistics"), 2, $user->hasRight('salaries', 'read'));
 					}
-                }
+				}
 
 				// Loan
 				if (isModEnabled('loan')) {
@@ -1341,7 +1341,7 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 					$langs->load("banks");
 					$newmenu->add("/compta/bank/various_payment/list.php?leftmenu=tax_various&amp;mainmenu=billing",$langs->trans("MenuVariousPayment"),1,$user->hasRight('banque', 'lire'), '', $mainmenu, 'tax_various');
 
-                    if (! empty($menu_invert)) $leftmenu= 'tax_various';
+					if (! empty($menu_invert)) $leftmenu= 'tax_various';
 
 					if ($usemenuhider || empty($leftmenu) || preg_match('/^tax_various/i', $leftmenu)) {
 						$newmenu->add("/compta/bank/various_payment/card.php?leftmenu=tax_various&action=create", $langs->trans("New"), 2, $user->hasRight('banque', 'modifier'));
@@ -1370,17 +1370,17 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 				$newmenu->add("/compta/bank/transfer.php", $langs->trans("MenuBankInternalTransfer"), 1, $user->hasRight('banque', 'transfer'));
 			}
 
-            if (isModEnabled('categorie') || isModEnabled('category')) {
-                if ((float) DOL_VERSION < 22.0 || getDolGlobalString('CATEGORY_EDIT_IN_MENU_NOT_IN_POPUP')) {
-                    $langs->load("categories");
-                    $newmenu->add("/categories/index.php?type=5", $langs->trans("Rubriques"), 1, $user->hasRight('categorie', 'creer'), '', $mainmenu, 'tags');
-                    if ((float) DOL_VERSION >= 21.0) {
-                        $newmenu->add("/categories/index.php?type=8", $langs->trans("RubriquesTransactions"), 1, $user->hasRight('banque', 'configurer'), '', $mainmenu, 'tags');
-                    } else {
-                        $newmenu->add("/compta/bank/categ.php", $langs->trans("RubriquesTransactions"), 1, $user->hasRight('banque', 'configurer'), '', $mainmenu, 'tags');
-                    }
-                }
-            }
+			if (isModEnabled('categorie') || isModEnabled('category')) {
+				if ((float) DOL_VERSION < 22.0 || getDolGlobalString('CATEGORY_EDIT_IN_MENU_NOT_IN_POPUP')) {
+					$langs->load("categories");
+					$newmenu->add("/categories/index.php?type=5", $langs->trans("Rubriques"), 1, $user->hasRight('categorie', 'creer'), '', $mainmenu, 'tags');
+					if ((float) DOL_VERSION >= 21.0) {
+						$newmenu->add("/categories/index.php?type=8", $langs->trans("RubriquesTransactions"), 1, $user->hasRight('banque', 'configurer'), '', $mainmenu, 'tags');
+					} else {
+						$newmenu->add("/compta/bank/categ.php", $langs->trans("RubriquesTransactions"), 1, $user->hasRight('banque', 'configurer'), '', $mainmenu, 'tags');
+					}
+				}
+			}
 
 			// Direct debit order
 			if (isModEnabled('prelevement')) {
@@ -1418,9 +1418,9 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 			if (!getDolGlobalString('BANK_DISABLE_CHECK_DEPOSIT') && isModEnabled('banque') && (isModEnabled('facture') || getDolGlobalString('MAIN_MENU_CHEQUE_DEPOSIT_ON'))) {
 				$newmenu->add("/compta/paiement/cheque/index.php?leftmenu=checks&amp;mainmenu=bank", $langs->trans("MenuChequeDeposits"), 0, $user->hasRight('banque', 'cheque'), '', $mainmenu, 'checks', 0, '', '', '', img_picto('', 'payment', 'class="paddingright pictofixedwidth"'));
 
-                if (! empty($menu_invert)) $leftmenu= 'checks';
+				if (! empty($menu_invert)) $leftmenu= 'checks';
 
-                if ($usemenuhider || empty($leftmenu) || $leftmenu == "checks") {
+				if ($usemenuhider || empty($leftmenu) || $leftmenu == "checks") {
 					$newmenu->add("/compta/paiement/cheque/card.php?leftmenu=checks&amp;action=new&amp;mainmenu=bank", $langs->trans("NewChequeDeposit"), 1, $user->hasRight('banque', 'cheque'));
 					$newmenu->add("/compta/paiement/cheque/list.php?leftmenu=checks&amp;mainmenu=bank", $langs->trans("List"), 1, $user->hasRight('banque', 'cheque'));
 				}
@@ -1460,13 +1460,13 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 				}
 
 				// Categories
-                if ((float) DOL_VERSION < 22.0 || getDolGlobalString('CATEGORY_EDIT_IN_MENU_NOT_IN_POPUP')) {
-                    if (isModEnabled('categorie') || isModEnabled('category')) {
-                        $langs->load("categories");
-                        $newmenu->add("/categories/index.php?leftmenu=cat&amp;type=0", $langs->trans("Categories"), 1, $user->hasRight('categorie', 'lire'), '', $mainmenu, 'cat');
-                        //if ($usemenuhider || empty($leftmenu) || $leftmenu=="cat") $newmenu->add("/categories/list.php", $langs->trans("List"), 1, $user->hasRight('categorie', 'lire'));
-                    }
-                }
+				if ((float) DOL_VERSION < 22.0 || getDolGlobalString('CATEGORY_EDIT_IN_MENU_NOT_IN_POPUP')) {
+					if (isModEnabled('categorie') || isModEnabled('category')) {
+						$langs->load("categories");
+						$newmenu->add("/categories/index.php?leftmenu=cat&amp;type=0", $langs->trans("Categories"), 1, $user->hasRight('categorie', 'lire'), '', $mainmenu, 'cat');
+						//if ($usemenuhider || empty($leftmenu) || $leftmenu=="cat") $newmenu->add("/categories/list.php", $langs->trans("List"), 1, $user->hasRight('categorie', 'lire'));
+					}
+				}
 			}
 
 			// Services
@@ -1478,13 +1478,13 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 					$newmenu->add("/product/stats/card.php?id=all&leftmenu=stats&type=1", $langs->trans("Statistics"), 1, $user->hasRight('service', 'lire') || $user->hasRight('product', 'lire'));
 				}
 				// Categories
-                if ((float) DOL_VERSION < 22.0 || getDolGlobalString('CATEGORY_EDIT_IN_MENU_NOT_IN_POPUP')) {
-                    if (isModEnabled('categorie') || isModEnabled('category')) {
-                        $langs->load("categories");
-                        $newmenu->add("/categories/index.php?leftmenu=cat&amp;type=0", $langs->trans("Categories"), 1, $user->hasRight('categorie', 'lire'), '', $mainmenu, 'cat');
-                        //if ($usemenuhider || empty($leftmenu) || $leftmenu=="cat") $newmenu->add("/categories/list.php", $langs->trans("List"), 1, $user->hasRight('categorie', 'lire'));
-                    }
-                }
+				if ((float) DOL_VERSION < 22.0 || getDolGlobalString('CATEGORY_EDIT_IN_MENU_NOT_IN_POPUP')) {
+					if (isModEnabled('categorie') || isModEnabled('category')) {
+						$langs->load("categories");
+						$newmenu->add("/categories/index.php?leftmenu=cat&amp;type=0", $langs->trans("Categories"), 1, $user->hasRight('categorie', 'lire'), '', $mainmenu, 'cat');
+						//if ($usemenuhider || empty($leftmenu) || $leftmenu=="cat") $newmenu->add("/categories/list.php", $langs->trans("List"), 1, $user->hasRight('categorie', 'lire'));
+					}
+				}
 			}
 
 			// Warehouse
@@ -1502,11 +1502,11 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 				$newmenu->add("/product/stock/stockatdate.php", $langs->trans("StockAtDate"), 1, $user->hasRight('produit', 'lire') && $user->hasRight('stock', 'lire'));
 
 				// Categories for warehouses
-                if ((float) DOL_VERSION < 22.0 || getDolGlobalString('CATEGORY_EDIT_IN_MENU_NOT_IN_POPUP')) {
-                    if (isModEnabled('categorie') || isModEnabled('category')) {
-                        $newmenu->add("/categories/index.php?leftmenu=stock&amp;type=9", $langs->trans("Categories"), 1, $user->hasRight('categorie', 'lire'), '', $mainmenu, 'cat');
-                    }
-                }
+				if ((float) DOL_VERSION < 22.0 || getDolGlobalString('CATEGORY_EDIT_IN_MENU_NOT_IN_POPUP')) {
+					if (isModEnabled('categorie') || isModEnabled('category')) {
+						$newmenu->add("/categories/index.php?leftmenu=stock&amp;type=9", $langs->trans("Categories"), 1, $user->hasRight('categorie', 'lire'), '', $mainmenu, 'cat');
+					}
+				}
 			}
 
 			// Inventory
@@ -1537,7 +1537,7 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 				$newmenu->add("/expedition/card.php?action=create2&amp;leftmenu=sendings", $langs->trans("NewSending"), 1, $user->hasRight('expedition', 'creer'));
 				$newmenu->add("/expedition/list.php?leftmenu=sendings", $langs->trans("List"), 1, $user->hasRight('expedition', 'lire'));
 
-                if (! empty($menu_invert)) $leftmenu= 'sendings';
+				if (! empty($menu_invert)) $leftmenu= 'sendings';
 
 				if ($usemenuhider || empty($leftmenu) || $leftmenu == "sendings") {
 					$newmenu->add("/expedition/list.php?leftmenu=sendings&search_status=0", $langs->trans("StatusSendingDraftShort"), 2, $user->hasRight('expedition', 'lire'));
@@ -1551,12 +1551,12 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 			if (isModEnabled('reception')) {
 				$langs->load("receptions");
 				$newmenu->add("/reception/index.php?leftmenu=receptions", $langs->trans("Receptions"), 0, $user->hasRight('reception', 'lire'), '', $mainmenu, 'receptions', 0, '', '', '', img_picto('', 'dollyrevert', 'class="pictofixedwidth"'));
-                if ((float) DOL_VERSION >= 23.0) {
-                    $newmenu->add("/reception/card.php?action=create&amp;leftmenu=receptions", $langs->trans("NewReception"), 1, $user->hasRight('reception', 'creer'));
-                } else {
-                    $newmenu->add("/reception/card.php?action=create2&amp;leftmenu=receptions", $langs->trans("NewReception"), 1, $user->hasRight('reception', 'creer'));
-                }
-                $newmenu->add("/reception/list.php?leftmenu=receptions", $langs->trans("List"), 1, $user->hasRight('reception', 'lire'));
+				if ((float) DOL_VERSION >= 23.0) {
+					$newmenu->add("/reception/card.php?action=create&amp;leftmenu=receptions", $langs->trans("NewReception"), 1, $user->hasRight('reception', 'creer'));
+				} else {
+					$newmenu->add("/reception/card.php?action=create2&amp;leftmenu=receptions", $langs->trans("NewReception"), 1, $user->hasRight('reception', 'creer'));
+				}
+				$newmenu->add("/reception/list.php?leftmenu=receptions", $langs->trans("List"), 1, $user->hasRight('reception', 'lire'));
 
 				if (! empty($menu_invert)) $leftmenu= 'receptions';
 
@@ -1613,50 +1613,50 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 
 				$titleboth = $langs->trans("LeadsOrProjects");
 				$titlenew = $langs->trans("NewLeadOrProject"); // Leads and opportunities by default
-                if (!getDolGlobalString('PROJECT_USE_OPPORTUNITIES')) {
-                    $titleboth = $langs->trans("Projects");
-                    $titlenew = $langs->trans("NewProject");
-                }
-                if (getDolGlobalInt('PROJECT_USE_OPPORTUNITIES') == 2) {	// 2 = leads only
-                    $titleboth = $langs->trans("Leads");
-                    $titlenew = $langs->trans("NewLead");
-                }
+				if (!getDolGlobalString('PROJECT_USE_OPPORTUNITIES')) {
+					$titleboth = $langs->trans("Projects");
+					$titlenew = $langs->trans("NewProject");
+				}
+				if (getDolGlobalInt('PROJECT_USE_OPPORTUNITIES') == 2) {	// 2 = leads only
+					$titleboth = $langs->trans("Leads");
+					$titlenew = $langs->trans("NewLead");
+				}
 
 				// Project assigned to user
 				$newmenu->add("/projet/index.php?leftmenu=projects".($search_project_user ? '&search_project_user='.$search_project_user : ''), $titleboth, 0, $user->hasRight('projet', 'lire'), '', $mainmenu, 'projects', 0);
 				$newmenu->add("/projet/card.php?leftmenu=projects&action=create".($search_project_user ? '&search_project_user='.$search_project_user : ''), $titlenew, 1, $user->hasRight('projet', 'creer'));
 
-                if (!getDolGlobalString('PROJECT_USE_OPPORTUNITIES')) {
+				if (!getDolGlobalString('PROJECT_USE_OPPORTUNITIES')) {
 					$newmenu->add("/projet/list.php?leftmenu=projets".($search_project_user ? '&search_project_user='.$search_project_user : '').'&search_status=99', $langs->trans("List"), 1, $showmode, '', 'project', 'list');
-                } elseif (getDolGlobalInt('PROJECT_USE_OPPORTUNITIES') == 1) {
+				} elseif (getDolGlobalInt('PROJECT_USE_OPPORTUNITIES') == 1) {
 					$newmenu->add("/projet/list.php?leftmenu=projets".($search_project_user ? '&search_project_user='.$search_project_user : ''), $langs->trans("List"), 1, $showmode, '', 'project', 'list');
 					$newmenu->add('/projet/list.php?mainmenu=project&amp;leftmenu=list&search_usage_opportunity=1&search_status=99&search_opp_status=openedopp&contextpage=lead', $langs->trans("ListOpenLeads"), 2, $showmode);
 					$newmenu->add('/projet/list.php?mainmenu=project&amp;leftmenu=list&search_opp_status=notopenedopp&search_status=99&contextpage=project', $langs->trans("ListOpenProjects"), 2, $showmode);
-                } elseif (getDolGlobalInt('PROJECT_USE_OPPORTUNITIES') == 2) {	// 2 = leads only
+				} elseif (getDolGlobalInt('PROJECT_USE_OPPORTUNITIES') == 2) {	// 2 = leads only
 					$newmenu->add('/projet/list.php?mainmenu=project&amp;leftmenu=list&search_usage_opportunity=1&search_status=99', $langs->trans("List"), 2, $showmode);
 				}
 
 				$newmenu->add("/projet/stats/index.php?leftmenu=projects", $langs->trans("Statistics"), 1, $user->hasRight('projet', 'lire'));
 
 				// Categories
-                if ((float) DOL_VERSION < 22.0 || getDolGlobalString('CATEGORY_EDIT_IN_MENU_NOT_IN_POPUP')) {
-                    if (isModEnabled('categorie') || isModEnabled('category')) {
-                        $langs->load("categories");
-                        $newmenu->add("/categories/index.php?leftmenu=cat&amp;type=6", $langs->trans("Categories"), 1, $user->hasRight('categorie', 'lire'), '', $mainmenu, 'cat');
-                    }
-                }
+				if ((float) DOL_VERSION < 22.0 || getDolGlobalString('CATEGORY_EDIT_IN_MENU_NOT_IN_POPUP')) {
+					if (isModEnabled('categorie') || isModEnabled('category')) {
+						$langs->load("categories");
+						$newmenu->add("/categories/index.php?leftmenu=cat&amp;type=6", $langs->trans("Categories"), 1, $user->hasRight('categorie', 'lire'), '', $mainmenu, 'cat');
+					}
+				}
 
 				if (!getDolGlobalString('PROJECT_HIDE_TASKS')) {
-                    // Project affected to user
-                    $newmenu->add("/projet/activity/index.php?leftmenu=tasks" . ($search_project_user ? '&search_project_user=' . $search_project_user : ''), $langs->trans("Activities"), 0, $user->hasRight('projet', 'lire'), '', 'project', 'tasks', 0);
-                    $newmenu->add("/projet/tasks.php?leftmenu=tasks&action=create", $langs->trans("NewTask"), 1, $user->hasRight('projet', 'creer'));
-                    $newmenu->add("/projet/tasks/list.php?leftmenu=tasks" . ($search_project_user ? '&search_project_user=' . $search_project_user : ''), $langs->trans("List"), 1, $user->hasRight('projet', 'lire'));
-                    $newmenu->add("/projet/tasks/stats/index.php?leftmenu=projects", $langs->trans("Statistics"), 1, $user->hasRight('projet', 'lire'));
+					// Project affected to user
+					$newmenu->add("/projet/activity/index.php?leftmenu=tasks" . ($search_project_user ? '&search_project_user=' . $search_project_user : ''), $langs->trans("Activities"), 0, $user->hasRight('projet', 'lire'), '', 'project', 'tasks', 0);
+					$newmenu->add("/projet/tasks.php?leftmenu=tasks&action=create", $langs->trans("NewTask"), 1, $user->hasRight('projet', 'creer'));
+					$newmenu->add("/projet/tasks/list.php?leftmenu=tasks" . ($search_project_user ? '&search_project_user=' . $search_project_user : ''), $langs->trans("List"), 1, $user->hasRight('projet', 'lire'));
+					$newmenu->add("/projet/tasks/stats/index.php?leftmenu=projects", $langs->trans("Statistics"), 1, $user->hasRight('projet', 'lire'));
 
-                    if (!getDolGlobalString('PROJECT_HIDE_MENU_TASKS_ACTIVITY')) {
-                        $newmenu->add("/projet/activity/perweek.php?leftmenu=tasks" . ($search_project_user ? '&search_project_user=' . $search_project_user : ''), $langs->trans("NewTimeSpent"), 0, $user->hasRight('projet', 'lire'), '', 'project', 'timespent', 0);
-                    }
-                }
+					if (!getDolGlobalString('PROJECT_HIDE_MENU_TASKS_ACTIVITY')) {
+						$newmenu->add("/projet/activity/perweek.php?leftmenu=tasks" . ($search_project_user ? '&search_project_user=' . $search_project_user : ''), $langs->trans("NewTimeSpent"), 0, $user->hasRight('projet', 'lire'), '', 'project', 'timespent', 0);
+					}
+				}
 			}
 		}
 
@@ -1672,23 +1672,23 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 				$newmenu->add("/user/card.php?mainmenu=hrm&leftmenu=hrm&action=create&employee=1", $langs->trans("NewEmployee"), 1, $user->hasRight('user', 'user', 'creer'));
 				$newmenu->add("/user/list.php?mainmenu=hrm&leftmenu=hrm&contextpage=employeelist", $langs->trans("List"), 1, $user->hasRight('user', 'user', 'lire'));
 
-                if ((float) DOL_VERSION >= 15.0) {
-                    $newmenu->add("/hrm/skill_list.php?mainmenu=hrm&leftmenu=hrm_sm", $langs->trans("SkillsManagement"), 0, $user->hasRight('hrm', 'all', 'read'), '', $mainmenu, 'hrm_sm', 0, '', '', '', img_picto('', 'shapes', 'class="paddingright pictofixedwidth"'));
+				if ((float) DOL_VERSION >= 15.0) {
+					$newmenu->add("/hrm/skill_list.php?mainmenu=hrm&leftmenu=hrm_sm", $langs->trans("SkillsManagement"), 0, $user->hasRight('hrm', 'all', 'read'), '', $mainmenu, 'hrm_sm', 0, '', '', '', img_picto('', 'shapes', 'class="paddingright pictofixedwidth"'));
 
-                    // Skills
-                    $newmenu->add("/hrm/skill_list.php?mainmenu=hrm&leftmenu=hrm_sm", $langs->trans("Skills"), 1, $user->hasRight('hrm', 'all', 'read'), '', $mainmenu, 'hrm_sm', 0, '', '', '', img_picto('', 'shapes', 'class="paddingright pictofixedwidth"'));
+					// Skills
+					$newmenu->add("/hrm/skill_list.php?mainmenu=hrm&leftmenu=hrm_sm", $langs->trans("Skills"), 1, $user->hasRight('hrm', 'all', 'read'), '', $mainmenu, 'hrm_sm', 0, '', '', '', img_picto('', 'shapes', 'class="paddingright pictofixedwidth"'));
 
-                    // Job (Description of work to do and skills required)
-                    $newmenu->add("/hrm/job_list.php?mainmenu=hrm&leftmenu=hrm_sm", $langs->trans("JobsProfiles"), 1, $user->hasRight('hrm', 'all', 'read'), '', $mainmenu, 'hrm_sm', 0, '', '', '', img_picto('', 'technic', 'class="paddingright pictofixedwidth"'));
+					// Job (Description of work to do and skills required)
+					$newmenu->add("/hrm/job_list.php?mainmenu=hrm&leftmenu=hrm_sm", $langs->trans("JobsProfiles"), 1, $user->hasRight('hrm', 'all', 'read'), '', $mainmenu, 'hrm_sm', 0, '', '', '', img_picto('', 'technic', 'class="paddingright pictofixedwidth"'));
 
-                    // Position = Link job - user
-                    $newmenu->add("/hrm/position_list.php?mainmenu=hrm&leftmenu=hrm_sm", $langs->trans("EmployeePositions"), 1, $user->hasRight('hrm', 'all', 'read'), '', $mainmenu, 'hrm_sm', 0, '', '', '', img_picto('', 'user-cog', 'class="paddingright pictofixedwidth"'));
+					// Position = Link job - user
+					$newmenu->add("/hrm/position_list.php?mainmenu=hrm&leftmenu=hrm_sm", $langs->trans("EmployeePositions"), 1, $user->hasRight('hrm', 'all', 'read'), '', $mainmenu, 'hrm_sm', 0, '', '', '', img_picto('', 'user-cog', 'class="paddingright pictofixedwidth"'));
 
-                    // Evaluation
-                    $newmenu->add("/hrm/evaluation_list.php?mainmenu=hrm&leftmenu=hrm_sm", $langs->trans("Evals"), 1, $user->hasRight('hrm', 'evaluation', 'read'), '', $mainmenu, 'hrm_sm', 0, '', '', '', img_picto('', 'user', 'class="paddingright pictofixedwidth"'));
-                    $newmenu->add("/hrm/compare.php?mainmenu=hrm&leftmenu=hrm_sm", $langs->trans("SkillComparison"), 1, $user->hasRight('hrm', 'evaluation', 'read') || $user->hasRight('hrm', 'compare_advance', 'read'));
-                }
-            }
+					// Evaluation
+					$newmenu->add("/hrm/evaluation_list.php?mainmenu=hrm&leftmenu=hrm_sm", $langs->trans("Evals"), 1, $user->hasRight('hrm', 'evaluation', 'read'), '', $mainmenu, 'hrm_sm', 0, '', '', '', img_picto('', 'user', 'class="paddingright pictofixedwidth"'));
+					$newmenu->add("/hrm/compare.php?mainmenu=hrm&leftmenu=hrm_sm", $langs->trans("SkillComparison"), 1, $user->hasRight('hrm', 'evaluation', 'read') || $user->hasRight('hrm', 'compare_advance', 'read'));
+				}
+			}
 
 			// Leave/Holiday/Vacation module
 			if (isModEnabled('holiday')) {
@@ -1697,8 +1697,8 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 
 				$newmenu->add("/holiday/list.php?mainmenu=hrm&leftmenu=holiday", $langs->trans("CPTitreMenu"), 0, $user->hasRight('holiday', 'read'), '', $mainmenu, 'holiday', 0, '', '', '', img_picto('', 'holiday', 'class="paddingright pictofixedwidth"'));
 				$newmenu->add("/holiday/card.php?mainmenu=hrm&leftmenu=holiday&action=create", $langs->trans("New"), 1, $user->hasRight('holiday', 'write'), '',$mainmenu);
-                $newmenu->add("/holiday/card_group.php?mainmenu=hrm&leftmenu=holiday&action=create", $langs->trans("NewHolidayForGroup"), 1, $user->hasRight('holiday', 'writeall') && $user->hasRight('holiday', 'readall'), '', $mainmenu, 'holiday_sm');
-                $newmenu->add("/holiday/list.php?mainmenu=hrm&leftmenu=holiday", $langs->trans("List"), 1, $user->hasRight('holiday', 'read'), '',$mainmenu);
+				$newmenu->add("/holiday/card_group.php?mainmenu=hrm&leftmenu=holiday&action=create", $langs->trans("NewHolidayForGroup"), 1, $user->hasRight('holiday', 'writeall') && $user->hasRight('holiday', 'readall'), '', $mainmenu, 'holiday_sm');
+				$newmenu->add("/holiday/list.php?mainmenu=hrm&leftmenu=holiday", $langs->trans("List"), 1, $user->hasRight('holiday', 'read'), '',$mainmenu);
 
 				if (! empty($menu_invert)) $leftmenu= 'holiday';
 
@@ -1725,12 +1725,12 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 
 			// Expense report
 			if (isModEnabled('expensereport')) {
-                $langs->loadLangs(array("trips", "bills"));
+				$langs->loadLangs(array("trips", "bills"));
 				$newmenu->add("/expensereport/index.php?leftmenu=expensereport&amp;mainmenu=hrm", $langs->trans("TripsAndExpenses"), 0, $user->hasRight('expensereport', 'lire'), '', $mainmenu, 'expensereport', 0);
 				$newmenu->add("/expensereport/card.php?action=create&amp;leftmenu=expensereport&amp;mainmenu=hrm", $langs->trans("New"), 1, $user->hasRight('expensereport', 'creer'));
 				$newmenu->add("/expensereport/list.php?leftmenu=expensereport&amp;mainmenu=hrm", $langs->trans("List"), 1, $user->hasRight('expensereport', 'lire'));
 
-                if (! empty($menu_invert)) $leftmenu= 'expensereport';
+				if (! empty($menu_invert)) $leftmenu= 'expensereport';
 
 				if ($usemenuhider || empty($leftmenu) || $leftmenu == "expensereport") {
 					$newmenu->add("/expensereport/list.php?search_status=0&amp;leftmenu=expensereport&amp;mainmenu=hrm", $langs->trans("Draft"), 2, $user->hasRight('expensereport', 'lire'));
@@ -1740,10 +1740,10 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 					$newmenu->add("/expensereport/list.php?search_status=4&amp;leftmenu=expensereport&amp;mainmenu=hrm", $langs->trans("Canceled"), 2, $user->hasRight('expensereport', 'lire'));
 					$newmenu->add("/expensereport/list.php?search_status=99&amp;leftmenu=expensereport&amp;mainmenu=hrm", $langs->trans("Refused"), 2, $user->hasRight('expensereport', 'lire'));
 				}
-                if ((float) DOL_VERSION >= 16.0) {
-                    $newmenu->add("/expensereport/payment/list.php?leftmenu=expensereport_payments&amp;mainmenu=hrm", $langs->trans("Payments"), 1, $user->hasRight('expensereport', 'lire'));
-                }
-                $newmenu->add("/expensereport/stats/index.php?leftmenu=expensereport&amp;mainmenu=hrm", $langs->trans("Statistics"), 1, $user->hasRight('expensereport', 'lire'));
+				if ((float) DOL_VERSION >= 16.0) {
+					$newmenu->add("/expensereport/payment/list.php?leftmenu=expensereport_payments&amp;mainmenu=hrm", $langs->trans("Payments"), 1, $user->hasRight('expensereport', 'lire'));
+				}
+				$newmenu->add("/expensereport/stats/index.php?leftmenu=expensereport&amp;mainmenu=hrm", $langs->trans("Statistics"), 1, $user->hasRight('expensereport', 'lire'));
 			}
 
 			if (isModEnabled('projet')) {
@@ -1769,387 +1769,387 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 			{
 				$permtoshowmenu=(isModEnabled('accounting') || $user->hasRight('accounting', 'bind', 'write') || $user->hasRight('compta', 'resultat', 'lire') || (!getDolGlobalString('MAIN_USE_ADVANCED_PERMS') && $user->hasRight('asset', 'read')) || (getDolGlobalString('MAIN_USE_ADVANCED_PERMS') && $user->hasRight('asset', 'model_advance', 'read')));
 
-                // Transfer in accounting
-                $newmenu->add("/accountancy/index.php?leftmenu=accountancy",$langs->trans("TransferInAccounting"), 0, $permtoshowmenu, '', $mainmenu, 'transfer');
+				// Transfer in accounting
+				$newmenu->add("/accountancy/index.php?leftmenu=accountancy",$langs->trans("TransferInAccounting"), 0, $permtoshowmenu, '', $mainmenu, 'transfer');
 
-                    // Binding
-                    if (isModEnabled('facture') && !getDolGlobalString('ACCOUNTING_DISABLE_BINDING_ON_SALES'))
-                    {
-                        $newmenu->add("/accountancy/customer/index.php?leftmenu=accountancy_dispatch_customer&amp;mainmenu=accountancy",$langs->trans("CustomersVentilation"),1,$user->hasRight('accounting', 'bind', 'write'), '', $mainmenu, 'dispatch_customer');
+					// Binding
+					if (isModEnabled('facture') && !getDolGlobalString('ACCOUNTING_DISABLE_BINDING_ON_SALES'))
+					{
+						$newmenu->add("/accountancy/customer/index.php?leftmenu=accountancy_dispatch_customer&amp;mainmenu=accountancy",$langs->trans("CustomersVentilation"),1,$user->hasRight('accounting', 'bind', 'write'), '', $mainmenu, 'dispatch_customer');
 
-                        if (! empty($menu_invert)) $leftmenu= 'accountancy_dispatch_customer';
+						if (! empty($menu_invert)) $leftmenu= 'accountancy_dispatch_customer';
 
-                        if ($usemenuhider || empty($leftmenu) || preg_match('/accountancy_dispatch_customer/',$leftmenu)) $newmenu->add("/accountancy/customer/list.php?mainmenu=accountancy&amp;leftmenu=accountancy_dispatch_customer",$langs->trans("ToBind"),2,$user->hasRight('accounting', 'bind', 'write'));
-                        if ($usemenuhider || empty($leftmenu) || preg_match('/accountancy_dispatch_customer/',$leftmenu)) $newmenu->add("/accountancy/customer/lines.php?mainmenu=accountancy&amp;leftmenu=accountancy_dispatch_customer",$langs->trans("Binded"),2,$user->hasRight('accounting', 'bind', 'write'));
-                    }
-                    if (isModEnabled('supplier_invoice') && !getDolGlobalString('ACCOUNTING_DISABLE_BINDING_ON_PURCHASES'))
-                    {
-                        $newmenu->add("/accountancy/supplier/index.php?leftmenu=accountancy_dispatch_supplier&amp;mainmenu=accountancy",$langs->trans("SuppliersVentilation"),1,$user->hasRight('accounting', 'bind', 'write'), '', $mainmenu, 'dispatch_supplier');
+						if ($usemenuhider || empty($leftmenu) || preg_match('/accountancy_dispatch_customer/',$leftmenu)) $newmenu->add("/accountancy/customer/list.php?mainmenu=accountancy&amp;leftmenu=accountancy_dispatch_customer",$langs->trans("ToBind"),2,$user->hasRight('accounting', 'bind', 'write'));
+						if ($usemenuhider || empty($leftmenu) || preg_match('/accountancy_dispatch_customer/',$leftmenu)) $newmenu->add("/accountancy/customer/lines.php?mainmenu=accountancy&amp;leftmenu=accountancy_dispatch_customer",$langs->trans("Binded"),2,$user->hasRight('accounting', 'bind', 'write'));
+					}
+					if (isModEnabled('supplier_invoice') && !getDolGlobalString('ACCOUNTING_DISABLE_BINDING_ON_PURCHASES'))
+					{
+						$newmenu->add("/accountancy/supplier/index.php?leftmenu=accountancy_dispatch_supplier&amp;mainmenu=accountancy",$langs->trans("SuppliersVentilation"),1,$user->hasRight('accounting', 'bind', 'write'), '', $mainmenu, 'dispatch_supplier');
 
-                        if (! empty($menu_invert)) $leftmenu= 'accountancy_dispatch_supplier';
+						if (! empty($menu_invert)) $leftmenu= 'accountancy_dispatch_supplier';
 
-                        if ($usemenuhider || empty($leftmenu) || preg_match('/accountancy_dispatch_supplier/',$leftmenu)) $newmenu->add("/accountancy/supplier/list.php?mainmenu=accountancy&amp;leftmenu=accountancy_dispatch_supplier",$langs->trans("ToBind"),2,$user->hasRight('accounting', 'bind', 'write'));
-                        if ($usemenuhider || empty($leftmenu) || preg_match('/accountancy_dispatch_supplier/',$leftmenu)) $newmenu->add("/accountancy/supplier/lines.php?mainmenu=accountancy&amp;leftmenu=accountancy_dispatch_supplier",$langs->trans("Binded"),2,$user->hasRight('accounting', 'bind', 'write'));
-                    }
-                    if (isModEnabled('expensereport') && !getDolGlobalString('ACCOUNTING_DISABLE_BINDING_ON_EXPENSEREPORTS'))
-                    {
-                        $newmenu->add("/accountancy/expensereport/index.php?leftmenu=accountancy_dispatch_expensereport&amp;mainmenu=accountancy",$langs->trans("ExpenseReportsVentilation"),1,$user->hasRight('accounting', 'bind', 'write'), '', $mainmenu, 'dispatch_expensereport');
+						if ($usemenuhider || empty($leftmenu) || preg_match('/accountancy_dispatch_supplier/',$leftmenu)) $newmenu->add("/accountancy/supplier/list.php?mainmenu=accountancy&amp;leftmenu=accountancy_dispatch_supplier",$langs->trans("ToBind"),2,$user->hasRight('accounting', 'bind', 'write'));
+						if ($usemenuhider || empty($leftmenu) || preg_match('/accountancy_dispatch_supplier/',$leftmenu)) $newmenu->add("/accountancy/supplier/lines.php?mainmenu=accountancy&amp;leftmenu=accountancy_dispatch_supplier",$langs->trans("Binded"),2,$user->hasRight('accounting', 'bind', 'write'));
+					}
+					if (isModEnabled('expensereport') && !getDolGlobalString('ACCOUNTING_DISABLE_BINDING_ON_EXPENSEREPORTS'))
+					{
+						$newmenu->add("/accountancy/expensereport/index.php?leftmenu=accountancy_dispatch_expensereport&amp;mainmenu=accountancy",$langs->trans("ExpenseReportsVentilation"),1,$user->hasRight('accounting', 'bind', 'write'), '', $mainmenu, 'dispatch_expensereport');
 
-                        if (! empty($menu_invert)) $leftmenu= 'accountancy_dispatch_expensereport';
+						if (! empty($menu_invert)) $leftmenu= 'accountancy_dispatch_expensereport';
 
-                        if ($usemenuhider || empty($leftmenu) || preg_match('/accountancy_dispatch_expensereport/',$leftmenu)) $newmenu->add("/accountancy/expensereport/list.php?mainmenu=accountancy&amp;leftmenu=accountancy_dispatch_expensereport",$langs->trans("ToBind"),2,$user->hasRight('accounting', 'bind', 'write'));
-                        if ($usemenuhider || empty($leftmenu) || preg_match('/accountancy_dispatch_expensereport/',$leftmenu)) $newmenu->add("/accountancy/expensereport/lines.php?mainmenu=accountancy&amp;leftmenu=accountancy_dispatch_expensereport",$langs->trans("Binded"),2,$user->hasRight('accounting', 'bind', 'write'));
-                    }
+						if ($usemenuhider || empty($leftmenu) || preg_match('/accountancy_dispatch_expensereport/',$leftmenu)) $newmenu->add("/accountancy/expensereport/list.php?mainmenu=accountancy&amp;leftmenu=accountancy_dispatch_expensereport",$langs->trans("ToBind"),2,$user->hasRight('accounting', 'bind', 'write'));
+						if ($usemenuhider || empty($leftmenu) || preg_match('/accountancy_dispatch_expensereport/',$leftmenu)) $newmenu->add("/accountancy/expensereport/lines.php?mainmenu=accountancy&amp;leftmenu=accountancy_dispatch_expensereport",$langs->trans("Binded"),2,$user->hasRight('accounting', 'bind', 'write'));
+					}
 
-                    // Journals
-                    if(isModEnabled('accounting') && $user->hasRight('accounting', 'comptarapport', 'lire') && $mainmenu == 'accountancy') {
-                        $newmenu->add('',$langs->trans("RegistrationInAccounting"),1,$user->hasRight('accounting', 'comptarapport', 'lire'), '', $mainmenu, 'accountancy_journal');
+					// Journals
+					if(isModEnabled('accounting') && $user->hasRight('accounting', 'comptarapport', 'lire') && $mainmenu == 'accountancy') {
+						$newmenu->add('',$langs->trans("RegistrationInAccounting"),1,$user->hasRight('accounting', 'comptarapport', 'lire'), '', $mainmenu, 'accountancy_journal');
 
-                        // Multi journal
-                        $sql = "SELECT rowid, code, label, nature";
-                        $sql.= " FROM ".MAIN_DB_PREFIX."accounting_journal";
-                        $sql.= " WHERE entity = ".$conf->entity;
-                        if (getDolGlobalString('ACCOUNTING_MODE') == 'RECETTES-DEPENSES' && (float) DOL_VERSION >= 22.0) {
-                            $sql .= " AND nature = 4"; // only bank journal when using treasury accounting mode
-                        }
-                        $sql.= " AND active = 1";
-                        $sql.= " ORDER BY nature ASC, label DESC";
+						// Multi journal
+						$sql = "SELECT rowid, code, label, nature";
+						$sql.= " FROM ".MAIN_DB_PREFIX."accounting_journal";
+						$sql.= " WHERE entity = ".$conf->entity;
+						if (getDolGlobalString('ACCOUNTING_MODE') == 'RECETTES-DEPENSES' && (float) DOL_VERSION >= 22.0) {
+							$sql .= " AND nature = 4"; // only bank journal when using treasury accounting mode
+						}
+						$sql.= " AND active = 1";
+						$sql.= " ORDER BY nature ASC, label DESC";
 
-                        $resql = $db->query($sql);
-                        if ($resql)
-                        {
-                            $numr = $db->num_rows($resql);
-                            $i = 0;
+						$resql = $db->query($sql);
+						if ($resql)
+						{
+							$numr = $db->num_rows($resql);
+							$i = 0;
 
-                            if ($numr > 0) {
-                                while ($i < $numr) {
-                                    $objp = $db->fetch_object($resql);
+							if ($numr > 0) {
+								while ($i < $numr) {
+									$objp = $db->fetch_object($resql);
 
-                                    $nature='';
+									$nature='';
 
-                                    // Must match array $sourceList defined into journals_list.php
-                                    if ($objp->nature == 2 && isModEnabled('facture') && !getDolGlobalString('ACCOUNTING_DISABLE_BINDING_ON_SALES')) {
-                                        $nature="sells";
-                                    }
-                                    if ($objp->nature == 3 && isModEnabled('fournisseur') && !getDolGlobalString('ACCOUNTING_DISABLE_BINDING_ON_PURCHASES')) {
-                                        $nature="purchases";
-                                    }
-                                    if ($objp->nature == 4 && isModEnabled('banque')) {
-                                        $nature="bank";
-                                    }
-                                    if ($objp->nature == 5 && isModEnabled('expensereport') && !getDolGlobalString('ACCOUNTING_DISABLE_BINDING_ON_EXPENSEREPORTS')) {
-                                        $nature="expensereports";
-                                    }
-                                    if ($objp->nature == 1 && isModEnabled('asset') || isModEnabled('invoice') || isModEnabled('supplier_invoice')) {
-                                        $nature = "various";
-                                    }
-                                    if ($objp->nature == 8) {
-                                        $nature="inventory";
-                                    }
-                                    if ($objp->nature == 9) {
-                                        $nature="hasnew";
-                                    }
+									// Must match array $sourceList defined into journals_list.php
+									if ($objp->nature == 2 && isModEnabled('facture') && !getDolGlobalString('ACCOUNTING_DISABLE_BINDING_ON_SALES')) {
+										$nature="sells";
+									}
+									if ($objp->nature == 3 && isModEnabled('fournisseur') && !getDolGlobalString('ACCOUNTING_DISABLE_BINDING_ON_PURCHASES')) {
+										$nature="purchases";
+									}
+									if ($objp->nature == 4 && isModEnabled('banque')) {
+										$nature="bank";
+									}
+									if ($objp->nature == 5 && isModEnabled('expensereport') && !getDolGlobalString('ACCOUNTING_DISABLE_BINDING_ON_EXPENSEREPORTS')) {
+										$nature="expensereports";
+									}
+									if ($objp->nature == 1 && isModEnabled('asset') || isModEnabled('invoice') || isModEnabled('supplier_invoice')) {
+										$nature = "various";
+									}
+									if ($objp->nature == 8) {
+										$nature="inventory";
+									}
+									if ($objp->nature == 9) {
+										$nature="hasnew";
+									}
 
-                                    // To enable when page exists
-                                    if (!getDolGlobalString('ACCOUNTANCY_SHOW_DEVELOP_JOURNAL'))
-                                    {
-                                        if ($nature == 'hasnew' || $nature == 'inventory') $nature='';
-                                    }
+									// To enable when page exists
+									if (!getDolGlobalString('ACCOUNTANCY_SHOW_DEVELOP_JOURNAL'))
+									{
+										if ($nature == 'hasnew' || $nature == 'inventory') $nature='';
+									}
 
-                                    // Remove all type when treasury accounting is on
-                                    if (isModEnabled('treasuryaccounting')) {
-                                        if ($nature == 'sells' || $nature == 'purchases' || $nature == 'bank' || $nature == 'expensereports') $nature='';
-                                    }
+									// Remove all type when treasury accounting is on
+									if (isModEnabled('treasuryaccounting')) {
+										if ($nature == 'sells' || $nature == 'purchases' || $nature == 'bank' || $nature == 'expensereports') $nature='';
+									}
 
-                                    if ($nature) {
-                                        $langs->load('accountancy');
-                                        $journallabel = $langs->transnoentities($objp->label); // Label of bank account in llx_accounting_journal
+									if ($nature) {
+										$langs->load('accountancy');
+										$journallabel = $langs->transnoentities($objp->label); // Label of bank account in llx_accounting_journal
 
-                                        $key = $langs->trans("AccountingJournalType".strtoupper($objp->nature));
-                                        $transferlabel = ($objp->nature && $key != "AccountingJournalType".strtoupper($langs->trans($objp->nature)) ? $key.($journallabel != $key ? ' '.$journallabel : ''): $journallabel);
+										$key = $langs->trans("AccountingJournalType".strtoupper($objp->nature));
+										$transferlabel = ($objp->nature && $key != "AccountingJournalType".strtoupper($langs->trans($objp->nature)) ? $key.($journallabel != $key ? ' '.$journallabel : ''): $journallabel);
 
-                                        $newmenu->add('/accountancy/journal/'.$nature.'journal.php?mainmenu=accountancy&leftmenu=accountancy_journal&id_journal='.$objp->rowid, $transferlabel, 2, $user->hasRight('accounting', 'comptarapport', 'lire'));
-                                    }
-                                    $i++;
-                                }
-                            } else {
-                                // Should not happened. Entries are added
-                                $newmenu->add('',$langs->trans("NoJournalDefined"), 2, $user->hasRight('accounting', 'comptarapport', 'lire'));
-                            }
-                        } else {
-                            dol_print_error($db);
-                        }
-                        $db->free($resql);
-                    }
+										$newmenu->add('/accountancy/journal/'.$nature.'journal.php?mainmenu=accountancy&leftmenu=accountancy_journal&id_journal='.$objp->rowid, $transferlabel, 2, $user->hasRight('accounting', 'comptarapport', 'lire'));
+									}
+									$i++;
+								}
+							} else {
+								// Should not happened. Entries are added
+								$newmenu->add('',$langs->trans("NoJournalDefined"), 2, $user->hasRight('accounting', 'comptarapport', 'lire'));
+							}
+						} else {
+							dol_print_error($db);
+						}
+						$db->free($resql);
+					}
 
-                    // Accountancy
-                    $newmenu->add("/accountancy/index.php?leftmenu=accountancy",$langs->trans("MenuAccountancy"), 0, $permtoshowmenu, '', $mainmenu, 'accountancy');
+					// Accountancy
+					$newmenu->add("/accountancy/index.php?leftmenu=accountancy",$langs->trans("MenuAccountancy"), 0, $permtoshowmenu, '', $mainmenu, 'accountancy');
 
-                    // Balance
-                    $newmenu->add("/accountancy/bookkeeping/balance.php?mainmenu=accountancy&amp;leftmenu=accountancy_balance",$langs->trans("AccountBalance"),1,$user->hasRight('accounting', 'mouvements', 'lire'));
+					// Balance
+					$newmenu->add("/accountancy/bookkeeping/balance.php?mainmenu=accountancy&amp;leftmenu=accountancy_balance",$langs->trans("AccountBalance"),1,$user->hasRight('accounting', 'mouvements', 'lire'));
 
-                    // General Ledger
-                    $newmenu->add("/accountancy/bookkeeping/listbyaccount.php?mainmenu=accountancy&amp;leftmenu=accountancy_ledger",$langs->trans("Bookkeeping"),1,$user->hasRight('accounting', 'mouvements', 'lire'));
+					// General Ledger
+					$newmenu->add("/accountancy/bookkeeping/listbyaccount.php?mainmenu=accountancy&amp;leftmenu=accountancy_ledger",$langs->trans("Bookkeeping"),1,$user->hasRight('accounting', 'mouvements', 'lire'));
 
-                    // Journals
-                    $newmenu->add("/accountancy/bookkeeping/list.php?mainmenu=accountancy&amp;leftmenu=accountancy_journals",$langs->trans("Journals"),1,$user->hasRight('accounting', 'mouvements', 'lire'));
+					// Journals
+					$newmenu->add("/accountancy/bookkeeping/list.php?mainmenu=accountancy&amp;leftmenu=accountancy_journals",$langs->trans("Journals"),1,$user->hasRight('accounting', 'mouvements', 'lire'));
 
-                    // Export accountancy
-                    if (getDolGlobalFloat('EASYA_VERSION') >= 2022.5 || (float) DOL_VERSION >= 18.0) {
-                        $newmenu->add("/accountancy/bookkeeping/export.php?mainmenu=accountancy&amp;leftmenu=accountancy_export",$langs->trans("MenuExportAccountancy"),1,$user->hasRight('accounting', 'mouvements', 'lire'));
-                    }
+					// Export accountancy
+					if (getDolGlobalFloat('EASYA_VERSION') >= 2022.5 || (float) DOL_VERSION >= 18.0) {
+						$newmenu->add("/accountancy/bookkeeping/export.php?mainmenu=accountancy&amp;leftmenu=accountancy_export",$langs->trans("MenuExportAccountancy"),1,$user->hasRight('accounting', 'mouvements', 'lire'));
+					}
 
-                    // Files
-                    if (!getDolGlobalString('ACCOUNTANCY_HIDE_EXPORT_FILES_MENU'))
-                    {
-                        $newmenu->add("/compta/accounting-files.php?mainmenu=accountancy&amp;leftmenu=accountancy_files", $langs->trans("AccountantFiles"), 1, $user->hasRight('accounting', 'mouvements', 'lire'));
-                    }
+					// Files
+					if (!getDolGlobalString('ACCOUNTANCY_HIDE_EXPORT_FILES_MENU'))
+					{
+						$newmenu->add("/compta/accounting-files.php?mainmenu=accountancy&amp;leftmenu=accountancy_files", $langs->trans("AccountantFiles"), 1, $user->hasRight('accounting', 'mouvements', 'lire'));
+					}
 
-                    // Closure
-                    $newmenu->add("/accountancy/closure/index.php?mainmenu=accountancy&amp;leftmenu=accountancy_closure", $langs->trans("MenuAccountancyClosure"), 1, $user->hasRight('accounting', 'fiscalyear', 'write'), '', $mainmenu, 'closure');
+					// Closure
+					$newmenu->add("/accountancy/closure/index.php?mainmenu=accountancy&amp;leftmenu=accountancy_closure", $langs->trans("MenuAccountancyClosure"), 1, $user->hasRight('accounting', 'fiscalyear', 'write'), '', $mainmenu, 'closure');
 
-                    // Reports
-                    $newmenu->add("/compta/resultat/index.php?mainmenu=accountancy&amp;leftmenu=accountancy_report", $langs->trans("Reportings"), 1, $user->hasRight('accounting', 'comptarapport', 'lire'), '', $mainmenu, 'ca');
+					// Reports
+					$newmenu->add("/compta/resultat/index.php?mainmenu=accountancy&amp;leftmenu=accountancy_report", $langs->trans("Reportings"), 1, $user->hasRight('accounting', 'comptarapport', 'lire'), '', $mainmenu, 'ca');
 
-                    if (! empty($menu_invert)) $leftmenu= 'accountancy_report';
+					if (! empty($menu_invert)) $leftmenu= 'accountancy_report';
 
-                    if ($usemenuhider || empty($leftmenu) || preg_match('/accountancy_report/', $leftmenu)) {
-                        $newmenu->add("/compta/resultat/index.php?leftmenu=accountancy_report", $langs->trans("MenuReportInOut"), 2, $user->hasRight('accounting', 'comptarapport', 'lire'));
-                        $newmenu->add("/compta/resultat/clientfourn.php?leftmenu=accountancy_report", $langs->trans("ByPredefinedAccountGroups"), 3, $user->hasRight('accounting', 'comptarapport', 'lire'));
-                        $newmenu->add("/compta/resultat/result.php?leftmenu=accountancy_report", $langs->trans("ByPersonalizedAccountGroups"), 3, $user->hasRight('accounting', 'comptarapport', 'lire'));
-                    }
+					if ($usemenuhider || empty($leftmenu) || preg_match('/accountancy_report/', $leftmenu)) {
+						$newmenu->add("/compta/resultat/index.php?leftmenu=accountancy_report", $langs->trans("MenuReportInOut"), 2, $user->hasRight('accounting', 'comptarapport', 'lire'));
+						$newmenu->add("/compta/resultat/clientfourn.php?leftmenu=accountancy_report", $langs->trans("ByPredefinedAccountGroups"), 3, $user->hasRight('accounting', 'comptarapport', 'lire'));
+						$newmenu->add("/compta/resultat/result.php?leftmenu=accountancy_report", $langs->trans("ByPersonalizedAccountGroups"), 3, $user->hasRight('accounting', 'comptarapport', 'lire'));
+					}
 
-                    $modecompta='CREANCES-DETTES';
-                    if(isModEnabled('accounting') && $user->hasRight('accounting', 'comptarapport', 'lire') && $mainmenu == 'accountancy') {
-                        $modecompta='BOOKKEEPING';	// Not yet implemented. Should be BOOKKEEPINGCOLLECTED
-                    }
-                    if ($modecompta) {
-                        if ($usemenuhider || empty($leftmenu) || preg_match('/accountancy_report/', $leftmenu)) {
-                            $newmenu->add("/compta/stats/index.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ReportTurnover"), 2, $user->hasRight('accounting', 'comptarapport', 'lire'));
-                            $newmenu->add("/compta/stats/casoc.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ByCompanies"), 3, $user->hasRight('accounting', 'comptarapport', 'lire'));
-                            $newmenu->add("/compta/stats/cabyuser.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ByUsers"), 3, $user->hasRight('accounting', 'comptarapport', 'lire'));
-                            $newmenu->add("/compta/stats/cabyprodserv.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ByProductsAndServices"), 3, $user->hasRight('accounting', 'comptarapport', 'lire'));
-                            $newmenu->add("/compta/stats/byratecountry.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ByVatRate"), 3, $user->hasRight('accounting', 'comptarapport', 'lire'));
-                        }
-                    }
+					$modecompta='CREANCES-DETTES';
+					if(isModEnabled('accounting') && $user->hasRight('accounting', 'comptarapport', 'lire') && $mainmenu == 'accountancy') {
+						$modecompta='BOOKKEEPING';	// Not yet implemented. Should be BOOKKEEPINGCOLLECTED
+					}
+					if ($modecompta) {
+						if ($usemenuhider || empty($leftmenu) || preg_match('/accountancy_report/', $leftmenu)) {
+							$newmenu->add("/compta/stats/index.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ReportTurnover"), 2, $user->hasRight('accounting', 'comptarapport', 'lire'));
+							$newmenu->add("/compta/stats/casoc.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ByCompanies"), 3, $user->hasRight('accounting', 'comptarapport', 'lire'));
+							$newmenu->add("/compta/stats/cabyuser.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ByUsers"), 3, $user->hasRight('accounting', 'comptarapport', 'lire'));
+							$newmenu->add("/compta/stats/cabyprodserv.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ByProductsAndServices"), 3, $user->hasRight('accounting', 'comptarapport', 'lire'));
+							$newmenu->add("/compta/stats/byratecountry.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ByVatRate"), 3, $user->hasRight('accounting', 'comptarapport', 'lire'));
+						}
+					}
 
-                    $modecompta='RECETTES-DEPENSES';
-                    if ($modecompta) {
-                        if ($usemenuhider || empty($leftmenu) || preg_match('/accountancy_report/', $leftmenu)) {
-                            $newmenu->add("/compta/stats/index.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ReportTurnoverCollected"), 2, $user->hasRight('accounting', 'comptarapport', 'lire'));
-                            $newmenu->add("/compta/stats/casoc.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ByCompanies"), 3, $user->hasRight('accounting', 'comptarapport', 'lire'));
-                            $newmenu->add("/compta/stats/cabyuser.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ByUsers"), 3, $user->hasRight('accounting', 'comptarapport', 'lire'));
-                        }
-                    }
+					$modecompta='RECETTES-DEPENSES';
+					if ($modecompta) {
+						if ($usemenuhider || empty($leftmenu) || preg_match('/accountancy_report/', $leftmenu)) {
+							$newmenu->add("/compta/stats/index.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ReportTurnoverCollected"), 2, $user->hasRight('accounting', 'comptarapport', 'lire'));
+							$newmenu->add("/compta/stats/casoc.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ByCompanies"), 3, $user->hasRight('accounting', 'comptarapport', 'lire'));
+							$newmenu->add("/compta/stats/cabyuser.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ByUsers"), 3, $user->hasRight('accounting', 'comptarapport', 'lire'));
+						}
+					}
 
-                $modecompta = 'CREANCES-DETTES';
-                if (isModEnabled('accounting') && $user->hasRight('accounting', 'comptarapport', 'lire') && $mainmenu == 'accountancy') {
-                    $modecompta = 'BOOKKEEPING'; // Not yet implemented.
-                }
-                if ($modecompta && ((!empty($conf->fournisseur->enabled) && !getDolGlobalString('MAIN_USE_NEW_SUPPLIERMOD')) || !empty($conf->supplier_invoice->enabled))) {
-                    if ($usemenuhider || empty($leftmenu) || preg_match('/accountancy_report/', $leftmenu)) {
-                        $newmenu->add("/compta/stats/supplier_turnover.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ReportPurchaseTurnover"), 2, $user->hasRight('accounting', 'comptarapport', 'lire'));
-                        $newmenu->add("/compta/stats/supplier_turnover_by_thirdparty.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ByCompanies"), 3, $user->hasRight('accounting', 'comptarapport', 'lire'));
-                        $newmenu->add("/compta/stats/supplier_turnover_by_prodserv.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ByProductsAndServices"), 3, $user->hasRight('accounting', 'comptarapport', 'lire'));
-                    }
-                }
+				$modecompta = 'CREANCES-DETTES';
+				if (isModEnabled('accounting') && $user->hasRight('accounting', 'comptarapport', 'lire') && $mainmenu == 'accountancy') {
+					$modecompta = 'BOOKKEEPING'; // Not yet implemented.
+				}
+				if ($modecompta && ((!empty($conf->fournisseur->enabled) && !getDolGlobalString('MAIN_USE_NEW_SUPPLIERMOD')) || !empty($conf->supplier_invoice->enabled))) {
+					if ($usemenuhider || empty($leftmenu) || preg_match('/accountancy_report/', $leftmenu)) {
+						$newmenu->add("/compta/stats/supplier_turnover.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ReportPurchaseTurnover"), 2, $user->hasRight('accounting', 'comptarapport', 'lire'));
+						$newmenu->add("/compta/stats/supplier_turnover_by_thirdparty.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ByCompanies"), 3, $user->hasRight('accounting', 'comptarapport', 'lire'));
+						$newmenu->add("/compta/stats/supplier_turnover_by_prodserv.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ByProductsAndServices"), 3, $user->hasRight('accounting', 'comptarapport', 'lire'));
+					}
+				}
 
-                $modecompta = 'RECETTES-DEPENSES';
-                if (isModEnabled('accounting') && $user->hasRight('accounting', 'comptarapport', 'lire') && $mainmenu == 'accountancy') {
-                    $modecompta = 'BOOKKEEPINGCOLLECTED'; // Not yet implemented.
-                }
-                if ($modecompta && ((isModEnabled('fournisseur') && !getDolGlobalString('MAIN_USE_NEW_SUPPLIERMOD')) || isModEnabled('supplier_invoice'))) {
-                    if ($usemenuhider || empty($leftmenu) || preg_match('/accountancy_report/', $leftmenu)) {
-                        $newmenu->add("/compta/stats/supplier_turnover.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ReportPurchaseTurnoverCollected"), 2, $user->hasRight('accounting', 'comptarapport', 'lire'));
-                        $newmenu->add("/compta/stats/supplier_turnover_by_thirdparty.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ByCompanies"), 3, $user->hasRight('accounting', 'comptarapport', 'lire'));
-                    }
-                }
+				$modecompta = 'RECETTES-DEPENSES';
+				if (isModEnabled('accounting') && $user->hasRight('accounting', 'comptarapport', 'lire') && $mainmenu == 'accountancy') {
+					$modecompta = 'BOOKKEEPINGCOLLECTED'; // Not yet implemented.
+				}
+				if ($modecompta && ((isModEnabled('fournisseur') && !getDolGlobalString('MAIN_USE_NEW_SUPPLIERMOD')) || isModEnabled('supplier_invoice'))) {
+					if ($usemenuhider || empty($leftmenu) || preg_match('/accountancy_report/', $leftmenu)) {
+						$newmenu->add("/compta/stats/supplier_turnover.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ReportPurchaseTurnoverCollected"), 2, $user->hasRight('accounting', 'comptarapport', 'lire'));
+						$newmenu->add("/compta/stats/supplier_turnover_by_thirdparty.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ByCompanies"), 3, $user->hasRight('accounting', 'comptarapport', 'lire'));
+					}
+				}
 
-                // Configuration
-                $newmenu->add("/accountancy/index.php?leftmenu=accountancy_admin", $langs->trans("Setup"), 0, $user->hasRight('accounting', 'chartofaccount'), '', $mainmenu, 'accountancy_admin', 1);
+				// Configuration
+				$newmenu->add("/accountancy/index.php?leftmenu=accountancy_admin", $langs->trans("Setup"), 0, $user->hasRight('accounting', 'chartofaccount'), '', $mainmenu, 'accountancy_admin', 1);
 
-                if (! empty($menu_invert)) $leftmenu= 'accountancy_admin';
+				if (! empty($menu_invert)) $leftmenu= 'accountancy_admin';
 
-                if ($usemenuhider || empty($leftmenu) || preg_match('/accountancy_admin/', $leftmenu)) {
-                    $newmenu->add("/accountancy/admin/index.php?mainmenu=accountancy&leftmenu=accountancy_admin", $langs->trans("General"), 1, $user->hasRight('accounting', 'chartofaccount'), '', $mainmenu, 'accountancy_admin_general', 10);
-                    $newmenu->add("/accountancy/admin/fiscalyear.php?mainmenu=accountancy&leftmenu=accountancy_admin", $langs->trans("FiscalPeriod"), 1, $user->hasRight('accounting', 'chartofaccount'), '', $mainmenu, 'fiscalyear', 20);
-                    $newmenu->add("/accountancy/admin/journals_list.php?id=35&mainmenu=accountancy&leftmenu=accountancy_admin", $langs->trans("AccountingJournals"), 1, $user->hasRight('accounting', 'chartofaccount'), '', $mainmenu, 'accountancy_admin_journal', 30);
-                    $newmenu->add("/accountancy/admin/accountmodel.php?id=31&mainmenu=accountancy&leftmenu=accountancy_admin", $langs->trans("Pcg_version"), 1, $user->hasRight('accounting', 'chartofaccount'), '', $mainmenu, 'accountancy_admin_chartmodel', 40);
-                    $newmenu->add("/accountancy/admin/account.php?mainmenu=accountancy&leftmenu=accountancy_admin", $langs->trans("Chartofaccounts"), 1, $user->hasRight('accounting', 'chartofaccount'), '', $mainmenu, 'accountancy_admin_chart', 41);
-                    $newmenu->add("/accountancy/admin/subaccount.php?mainmenu=accountancy&leftmenu=accountancy_admin", $langs->trans("ChartOfSubaccounts"), 1, $user->hasRight('accounting', 'chartofaccount'), '', $mainmenu, 'accountancy_admin_chart', 42);
-                    $newmenu->add("/accountancy/admin/defaultaccounts.php?mainmenu=accountancy&leftmenu=accountancy_admin", $langs->trans("MenuDefaultAccounts"), 1, $user->hasRight('accounting', 'chartofaccount'), '', $mainmenu, 'accountancy_admin_default', 60);
-                    if (isModEnabled('banque')) {
-                        $newmenu->add("/compta/bank/list.php?mainmenu=accountancy&leftmenu=accountancy_admin&search_status=-1", $langs->trans("MenuBankAccounts"), 1, $user->hasRight('accounting', 'chartofaccount'), '', $mainmenu, 'accountancy_admin_bank', 70);
-                    }
-                    if (isModEnabled('facture') || isModEnabled('fournisseur')) {
-                        $newmenu->add("/admin/dict.php?id=10&from=accountancy&search_country_id=".$mysoc->country_id."&mainmenu=accountancy&leftmenu=accountancy_admin", $langs->trans("MenuVatAccounts"), 1, $user->hasRight('accounting', 'chartofaccount'), '', $mainmenu, 'accountancy_admin_default', 80);
-                    }
-                    if (isModEnabled('tax')) {
-                        $newmenu->add("/admin/dict.php?id=7&from=accountancy&search_country_id=".$mysoc->country_id."&mainmenu=accountancy&leftmenu=accountancy_admin", $langs->trans("MenuTaxAccounts"), 1, $user->hasRight('accounting', 'chartofaccount'), '', $mainmenu, 'accountancy_admin_default', 90);
-                    }
-                    if (isModEnabled('expensereport')) {
-                        $newmenu->add("/admin/dict.php?id=17&from=accountancy&mainmenu=accountancy&leftmenu=accountancy_admin", $langs->trans("MenuExpenseReportAccounts"), 1, $user->hasRight('accounting', 'chartofaccount'), '', $mainmenu, 'accountancy_admin_default', 100);
-                    }
-                    $newmenu->add("/accountancy/admin/productaccount.php?mainmenu=accountancy&leftmenu=accountancy_admin", $langs->trans("MenuProductsAccounts"), 1, $user->hasRight('accounting', 'chartofaccount'), '', $mainmenu, 'accountancy_admin_product', 110);
-                    $newmenu->add("/accountancy/admin/closure.php?mainmenu=accountancy&leftmenu=accountancy_admin", $langs->trans("MenuClosureAccounts"), 1, $user->hasRight('accounting', 'chartofaccount'), '', $mainmenu, 'accountancy_admin_closure', 120);
-                    if (getDolGlobalInt('MAIN_FEATURES_LEVEL') >= 2 && (float) DOL_VERSION >= 21.0) {
-                        $newmenu->add("/accountancy/admin/report_list.php?id=32&search_country_id=" . $mysoc->country_id . "&mainmenu=accountancy&leftmenu=accountancy_admin", $langs->trans("AccountingReport"), 1, $user->hasRight('accounting', 'chartofaccount'), '', $mainmenu, 'accountancy_admin_report', 125);
-                    }
-                    $newmenu->add("/accountancy/admin/categories_list.php?id=32&search_country_id=".$mysoc->country_id."&mainmenu=accountancy&leftmenu=accountancy_admin", $langs->trans("AccountingCategory"), 1, $user->hasRight('accounting', 'chartofaccount'), '', $mainmenu, 'accountancy_admin_chart', 130);
+				if ($usemenuhider || empty($leftmenu) || preg_match('/accountancy_admin/', $leftmenu)) {
+					$newmenu->add("/accountancy/admin/index.php?mainmenu=accountancy&leftmenu=accountancy_admin", $langs->trans("General"), 1, $user->hasRight('accounting', 'chartofaccount'), '', $mainmenu, 'accountancy_admin_general', 10);
+					$newmenu->add("/accountancy/admin/fiscalyear.php?mainmenu=accountancy&leftmenu=accountancy_admin", $langs->trans("FiscalPeriod"), 1, $user->hasRight('accounting', 'chartofaccount'), '', $mainmenu, 'fiscalyear', 20);
+					$newmenu->add("/accountancy/admin/journals_list.php?id=35&mainmenu=accountancy&leftmenu=accountancy_admin", $langs->trans("AccountingJournals"), 1, $user->hasRight('accounting', 'chartofaccount'), '', $mainmenu, 'accountancy_admin_journal', 30);
+					$newmenu->add("/accountancy/admin/accountmodel.php?id=31&mainmenu=accountancy&leftmenu=accountancy_admin", $langs->trans("Pcg_version"), 1, $user->hasRight('accounting', 'chartofaccount'), '', $mainmenu, 'accountancy_admin_chartmodel', 40);
+					$newmenu->add("/accountancy/admin/account.php?mainmenu=accountancy&leftmenu=accountancy_admin", $langs->trans("Chartofaccounts"), 1, $user->hasRight('accounting', 'chartofaccount'), '', $mainmenu, 'accountancy_admin_chart', 41);
+					$newmenu->add("/accountancy/admin/subaccount.php?mainmenu=accountancy&leftmenu=accountancy_admin", $langs->trans("ChartOfSubaccounts"), 1, $user->hasRight('accounting', 'chartofaccount'), '', $mainmenu, 'accountancy_admin_chart', 42);
+					$newmenu->add("/accountancy/admin/defaultaccounts.php?mainmenu=accountancy&leftmenu=accountancy_admin", $langs->trans("MenuDefaultAccounts"), 1, $user->hasRight('accounting', 'chartofaccount'), '', $mainmenu, 'accountancy_admin_default', 60);
+					if (isModEnabled('banque')) {
+						$newmenu->add("/compta/bank/list.php?mainmenu=accountancy&leftmenu=accountancy_admin&search_status=-1", $langs->trans("MenuBankAccounts"), 1, $user->hasRight('accounting', 'chartofaccount'), '', $mainmenu, 'accountancy_admin_bank', 70);
+					}
+					if (isModEnabled('facture') || isModEnabled('fournisseur')) {
+						$newmenu->add("/admin/dict.php?id=10&from=accountancy&search_country_id=".$mysoc->country_id."&mainmenu=accountancy&leftmenu=accountancy_admin", $langs->trans("MenuVatAccounts"), 1, $user->hasRight('accounting', 'chartofaccount'), '', $mainmenu, 'accountancy_admin_default', 80);
+					}
+					if (isModEnabled('tax')) {
+						$newmenu->add("/admin/dict.php?id=7&from=accountancy&search_country_id=".$mysoc->country_id."&mainmenu=accountancy&leftmenu=accountancy_admin", $langs->trans("MenuTaxAccounts"), 1, $user->hasRight('accounting', 'chartofaccount'), '', $mainmenu, 'accountancy_admin_default', 90);
+					}
+					if (isModEnabled('expensereport')) {
+						$newmenu->add("/admin/dict.php?id=17&from=accountancy&mainmenu=accountancy&leftmenu=accountancy_admin", $langs->trans("MenuExpenseReportAccounts"), 1, $user->hasRight('accounting', 'chartofaccount'), '', $mainmenu, 'accountancy_admin_default', 100);
+					}
+					$newmenu->add("/accountancy/admin/productaccount.php?mainmenu=accountancy&leftmenu=accountancy_admin", $langs->trans("MenuProductsAccounts"), 1, $user->hasRight('accounting', 'chartofaccount'), '', $mainmenu, 'accountancy_admin_product', 110);
+					$newmenu->add("/accountancy/admin/closure.php?mainmenu=accountancy&leftmenu=accountancy_admin", $langs->trans("MenuClosureAccounts"), 1, $user->hasRight('accounting', 'chartofaccount'), '', $mainmenu, 'accountancy_admin_closure', 120);
+					if (getDolGlobalInt('MAIN_FEATURES_LEVEL') >= 2 && (float) DOL_VERSION >= 21.0) {
+						$newmenu->add("/accountancy/admin/report_list.php?id=32&search_country_id=" . $mysoc->country_id . "&mainmenu=accountancy&leftmenu=accountancy_admin", $langs->trans("AccountingReport"), 1, $user->hasRight('accounting', 'chartofaccount'), '', $mainmenu, 'accountancy_admin_report', 125);
+					}
+					$newmenu->add("/accountancy/admin/categories_list.php?id=32&search_country_id=".$mysoc->country_id."&mainmenu=accountancy&leftmenu=accountancy_admin", $langs->trans("AccountingCategory"), 1, $user->hasRight('accounting', 'chartofaccount'), '', $mainmenu, 'accountancy_admin_chart', 130);
 
-                    if ((float) DOL_VERSION < 21.0) {
-                        $newmenu->add("/accountancy/admin/export.php?mainmenu=accountancy&leftmenu=accountancy_admin", $langs->trans("ExportOptions"), 1, $user->hasRight('accounting', 'chartofaccount'), '', $mainmenu, 'accountancy_admin_export', 130);
-                    }
-                }
-            }
+					if ((float) DOL_VERSION < 21.0) {
+						$newmenu->add("/accountancy/admin/export.php?mainmenu=accountancy&leftmenu=accountancy_admin", $langs->trans("ExportOptions"), 1, $user->hasRight('accounting', 'chartofaccount'), '', $mainmenu, 'accountancy_admin_export', 130);
+					}
+				}
+			}
 
 			// Accountancy (simple)
 			if (isModEnabled('comptabilite')) {
-                // Files
-                if (!getDolGlobalString('ACCOUNTANCY_HIDE_EXPORT_FILES_MENU')) {
-                    $newmenu->add("/compta/accounting-files.php?mainmenu=accountancy&amp;leftmenu=accountancy_files", $langs->trans("AccountantFiles"), 0, $user->hasRight('compta', 'resultat', 'lire'), '', $mainmenu, 'files');
-                }
+				// Files
+				if (!getDolGlobalString('ACCOUNTANCY_HIDE_EXPORT_FILES_MENU')) {
+					$newmenu->add("/compta/accounting-files.php?mainmenu=accountancy&amp;leftmenu=accountancy_files", $langs->trans("AccountantFiles"), 0, $user->hasRight('compta', 'resultat', 'lire'), '', $mainmenu, 'files');
+				}
 
-                // Bilan, resultats
-                $newmenu->add("/compta/resultat/index.php?leftmenu=report&amp;mainmenu=accountancy", $langs->trans("Reportings"), 0, $user->hasRight('compta', 'resultat', 'lire'), '', $mainmenu, 'ca');
+				// Bilan, resultats
+				$newmenu->add("/compta/resultat/index.php?leftmenu=report&amp;mainmenu=accountancy", $langs->trans("Reportings"), 0, $user->hasRight('compta', 'resultat', 'lire'), '', $mainmenu, 'ca');
 
-                if (! empty($menu_invert)) $leftmenu= 'report';
+				if (! empty($menu_invert)) $leftmenu= 'report';
 
-                if ($usemenuhider || empty($leftmenu) || preg_match('/report/', $leftmenu)) {
-                    $newmenu->add("/compta/resultat/index.php?leftmenu=report", $langs->trans("MenuReportInOut"), 1, $user->hasRight('compta', 'resultat', 'lire'));
-                    $newmenu->add("/compta/resultat/clientfourn.php?leftmenu=report", $langs->trans("ByCompanies"), 2, $user->hasRight('compta', 'resultat', 'lire'));
-                    $modecompta = 'CREANCES-DETTES';
-                    $newmenu->add("/compta/stats/index.php?leftmenu=report&modecompta=".$modecompta, $langs->trans("ReportTurnover"), 1, $user->hasRight('compta', 'resultat', 'lire'));
-                    $newmenu->add("/compta/stats/casoc.php?leftmenu=report&modecompta=".$modecompta, $langs->trans("ByCompanies"), 2, $user->hasRight('compta', 'resultat', 'lire'));
-                    $newmenu->add("/compta/stats/cabyuser.php?leftmenu=report&modecompta=".$modecompta, $langs->trans("ByUsers"), 2, $user->hasRight('compta', 'resultat', 'lire'));
-                    $newmenu->add("/compta/stats/cabyprodserv.php?leftmenu=report&modecompta=".$modecompta, $langs->trans("ByProductsAndServices"), 2, $user->hasRight('compta', 'resultat', 'lire'));
-                    $newmenu->add("/compta/stats/byratecountry.php?leftmenu=report&modecompta=".$modecompta, $langs->trans("ByVatRate"), 2, $user->hasRight('compta', 'resultat', 'lire'));
+				if ($usemenuhider || empty($leftmenu) || preg_match('/report/', $leftmenu)) {
+					$newmenu->add("/compta/resultat/index.php?leftmenu=report", $langs->trans("MenuReportInOut"), 1, $user->hasRight('compta', 'resultat', 'lire'));
+					$newmenu->add("/compta/resultat/clientfourn.php?leftmenu=report", $langs->trans("ByCompanies"), 2, $user->hasRight('compta', 'resultat', 'lire'));
+					$modecompta = 'CREANCES-DETTES';
+					$newmenu->add("/compta/stats/index.php?leftmenu=report&modecompta=".$modecompta, $langs->trans("ReportTurnover"), 1, $user->hasRight('compta', 'resultat', 'lire'));
+					$newmenu->add("/compta/stats/casoc.php?leftmenu=report&modecompta=".$modecompta, $langs->trans("ByCompanies"), 2, $user->hasRight('compta', 'resultat', 'lire'));
+					$newmenu->add("/compta/stats/cabyuser.php?leftmenu=report&modecompta=".$modecompta, $langs->trans("ByUsers"), 2, $user->hasRight('compta', 'resultat', 'lire'));
+					$newmenu->add("/compta/stats/cabyprodserv.php?leftmenu=report&modecompta=".$modecompta, $langs->trans("ByProductsAndServices"), 2, $user->hasRight('compta', 'resultat', 'lire'));
+					$newmenu->add("/compta/stats/byratecountry.php?leftmenu=report&modecompta=".$modecompta, $langs->trans("ByVatRate"), 2, $user->hasRight('compta', 'resultat', 'lire'));
 
-                    $modecompta = 'RECETTES-DEPENSES';
-                    $newmenu->add("/compta/stats/index.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ReportTurnoverCollected"), 1, $user->hasRight('compta', 'resultat', 'lire'));
-                    $newmenu->add("/compta/stats/casoc.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ByCompanies"), 2, $user->hasRight('compta', 'resultat', 'lire'));
-                    $newmenu->add("/compta/stats/cabyuser.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ByUsers"), 2, $user->hasRight('compta', 'resultat', 'lire'));
+					$modecompta = 'RECETTES-DEPENSES';
+					$newmenu->add("/compta/stats/index.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ReportTurnoverCollected"), 1, $user->hasRight('compta', 'resultat', 'lire'));
+					$newmenu->add("/compta/stats/casoc.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ByCompanies"), 2, $user->hasRight('compta', 'resultat', 'lire'));
+					$newmenu->add("/compta/stats/cabyuser.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ByUsers"), 2, $user->hasRight('compta', 'resultat', 'lire'));
 
-                    //Achats
-                    $modecompta = 'CREANCES-DETTES';
-                    $newmenu->add("/compta/stats/supplier_turnover.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ReportPurchaseTurnover"), 1, $user->hasRight('compta', 'resultat', 'lire'));
-                    $newmenu->add("/compta/stats/supplier_turnover_by_thirdparty.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ByCompanies"), 2, $user->hasRight('compta', 'resultat', 'lire'));
-                    $newmenu->add("/compta/stats/supplier_turnover_by_prodserv.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ByProductsAndServices"), 2, $user->hasRight('compta', 'resultat', 'lire'));
+					//Achats
+					$modecompta = 'CREANCES-DETTES';
+					$newmenu->add("/compta/stats/supplier_turnover.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ReportPurchaseTurnover"), 1, $user->hasRight('compta', 'resultat', 'lire'));
+					$newmenu->add("/compta/stats/supplier_turnover_by_thirdparty.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ByCompanies"), 2, $user->hasRight('compta', 'resultat', 'lire'));
+					$newmenu->add("/compta/stats/supplier_turnover_by_prodserv.php?leftmenu=accountancy_report&modecompta=".$modecompta, $langs->trans("ByProductsAndServices"), 2, $user->hasRight('compta', 'resultat', 'lire'));
 
-                    // Journaux
-                    $newmenu->add("/compta/journal/sellsjournal.php?leftmenu=report", $langs->trans("SellsJournal"), 1, $user->hasRight('compta', 'resultat', 'lire'), '', '', '', 50);
-                    $newmenu->add("/compta/journal/purchasesjournal.php?leftmenu=report", $langs->trans("PurchasesJournal"), 1, $user->hasRight('compta', 'resultat', 'lire'), '', '', '', 51);
-                }
-            }
+					// Journaux
+					$newmenu->add("/compta/journal/sellsjournal.php?leftmenu=report", $langs->trans("SellsJournal"), 1, $user->hasRight('compta', 'resultat', 'lire'), '', '', '', 50);
+					$newmenu->add("/compta/journal/purchasesjournal.php?leftmenu=report", $langs->trans("PurchasesJournal"), 1, $user->hasRight('compta', 'resultat', 'lire'), '', '', '', 51);
+				}
+			}
 
-            // Intracomm report
-            if (isModEnabled('intracommreport')) {
-                $langs->load("intracommreport");
+			// Intracomm report
+			if (isModEnabled('intracommreport')) {
+				$langs->load("intracommreport");
 
-                $newmenu->add("/intracommreport/list.php?leftmenu=intracommreport", $langs->trans("MenuIntracommReport"), 0, $user->hasRight('intracommreport', 'read'), '', $mainmenu, 'intracommreport', 60, '', '', '', img_picto('', 'intracommreport', 'class="paddingright pictofixedwidth"'));
+				$newmenu->add("/intracommreport/list.php?leftmenu=intracommreport", $langs->trans("MenuIntracommReport"), 0, $user->hasRight('intracommreport', 'read'), '', $mainmenu, 'intracommreport', 60, '', '', '', img_picto('', 'intracommreport', 'class="paddingright pictofixedwidth"'));
 
-                if (! empty($menu_invert)) $leftmenu= 'intracommreport';
+				if (! empty($menu_invert)) $leftmenu= 'intracommreport';
 
-                if ($usemenuhider || empty($leftmenu) || preg_match('/intracommreport/', $leftmenu)) {
-                    // DEB / DES
-                    $newmenu->add("/intracommreport/card.php?action=create&leftmenu=intracommreport", $langs->trans("MenuIntracommReportNew"), 1, $user->hasRight('intracommreport', 'write'), '', $mainmenu, 'intracommreport', 1);
-                    $newmenu->add("/intracommreport/list.php?leftmenu=intracommreport", $langs->trans("MenuIntracommReportList"), 1, $user->hasRight('intracommreport', 'read'), '', $mainmenu, 'intracommreport', 1);
-                }
-            }
+				if ($usemenuhider || empty($leftmenu) || preg_match('/intracommreport/', $leftmenu)) {
+					// DEB / DES
+					$newmenu->add("/intracommreport/card.php?action=create&leftmenu=intracommreport", $langs->trans("MenuIntracommReportNew"), 1, $user->hasRight('intracommreport', 'write'), '', $mainmenu, 'intracommreport', 1);
+					$newmenu->add("/intracommreport/list.php?leftmenu=intracommreport", $langs->trans("MenuIntracommReportList"), 1, $user->hasRight('intracommreport', 'read'), '', $mainmenu, 'intracommreport', 1);
+				}
+			}
 
 			// Assets
 			if (isModEnabled('asset'))
-            {
-                $langs->load("assets");
+			{
+				$langs->load("assets");
 
 				if (getDolGlobalFloat('EASYA_VERSION') >= 2022.5 || (float) DOL_VERSION >= 16.0) {
-                    $newmenu->add("/asset/list.php?leftmenu=asset&amp;mainmenu=accountancy", $langs->trans("MenuAssets"), 0, $user->hasRight('asset', 'read'), '', $mainmenu, 'asset', 100, '', '', '', img_picto('', 'payment', 'class="paddingright pictofixedwidth"'));
-                    $newmenu->add("/asset/card.php?leftmenu=asset&amp;action=create", $langs->trans("MenuNewAsset"), 1, $user->hasRight('asset', 'write'));
-                    $newmenu->add("/asset/list.php?leftmenu=asset&amp;mainmenu=accountancy", $langs->trans("MenuListAssets"), 1, $user->hasRight('asset', 'read'));
-                    $newmenu->add("/asset/model/list.php?leftmenu=asset_model", $langs->trans("MenuAssetModels"), 1, (!getDolGlobalString('MAIN_USE_ADVANCED_PERMS') && $user->hasRight('asset', 'read')) || (getDolGlobalString('MAIN_USE_ADVANCED_PERMS') && $user->hasRight('asset', 'model_advance', 'read')), '', $mainmenu, 'asset_model');
+					$newmenu->add("/asset/list.php?leftmenu=asset&amp;mainmenu=accountancy", $langs->trans("MenuAssets"), 0, $user->hasRight('asset', 'read'), '', $mainmenu, 'asset', 100, '', '', '', img_picto('', 'payment', 'class="paddingright pictofixedwidth"'));
+					$newmenu->add("/asset/card.php?leftmenu=asset&amp;action=create", $langs->trans("MenuNewAsset"), 1, $user->hasRight('asset', 'write'));
+					$newmenu->add("/asset/list.php?leftmenu=asset&amp;mainmenu=accountancy", $langs->trans("MenuListAssets"), 1, $user->hasRight('asset', 'read'));
+					$newmenu->add("/asset/model/list.php?leftmenu=asset_model", $langs->trans("MenuAssetModels"), 1, (!getDolGlobalString('MAIN_USE_ADVANCED_PERMS') && $user->hasRight('asset', 'read')) || (getDolGlobalString('MAIN_USE_ADVANCED_PERMS') && $user->hasRight('asset', 'model_advance', 'read')), '', $mainmenu, 'asset_model');
 
-                    if (!empty($menu_invert)) $leftmenu = 'asset_model';
+					if (!empty($menu_invert)) $leftmenu = 'asset_model';
 
-                    if ($usemenuhider || empty($leftmenu) || preg_match('/asset_model/', $leftmenu)) {
-                        $newmenu->add("/asset/model/card.php?leftmenu=asset_model&amp;action=create", $langs->trans("MenuNewAssetModel"), 2, (!getDolGlobalString('MAIN_USE_ADVANCED_PERMS') && $user->hasRight('asset', 'write')) || (getDolGlobalString('MAIN_USE_ADVANCED_PERMS') && $user->hasRight('asset', 'model_advance', 'write')));
-                        $newmenu->add("/asset/model/list.php?leftmenu=asset_model", $langs->trans("MenuListAssetModels"), 2, (!getDolGlobalString('MAIN_USE_ADVANCED_PERMS') && $user->hasRight('asset', 'read')) || (getDolGlobalString('MAIN_USE_ADVANCED_PERMS') && $user->hasRight('asset', 'model_advance', 'read')));
-                    }
-                } elseif ((float) DOL_VERSION >= 17.0) {
-                    $newmenu->add("/asset/list.php?leftmenu=asset&amp;mainmenu=accountancy", $langs->trans("MenuAssets"), 0, $user->hasRight('asset', 'read'), '', $mainmenu, 'asset');
-                    $newmenu->add("/asset/card.php?leftmenu=asset&amp;action=create", $langs->trans("MenuNewAsset"), 1, $user->hasRight('asset', 'write'));
-                    $newmenu->add("/asset/list.php?leftmenu=asset&amp;mainmenu=accountancy", $langs->trans("MenuListAssets"), 1, $user->hasRight('asset', 'read'));
-                    $newmenu->add("/asset/type.php?leftmenu=asset_type", $langs->trans("MenuTypeAssets"), 1, $user->hasRight('asset', 'read'), '', $mainmenu, 'asset_type');
+					if ($usemenuhider || empty($leftmenu) || preg_match('/asset_model/', $leftmenu)) {
+						$newmenu->add("/asset/model/card.php?leftmenu=asset_model&amp;action=create", $langs->trans("MenuNewAssetModel"), 2, (!getDolGlobalString('MAIN_USE_ADVANCED_PERMS') && $user->hasRight('asset', 'write')) || (getDolGlobalString('MAIN_USE_ADVANCED_PERMS') && $user->hasRight('asset', 'model_advance', 'write')));
+						$newmenu->add("/asset/model/list.php?leftmenu=asset_model", $langs->trans("MenuListAssetModels"), 2, (!getDolGlobalString('MAIN_USE_ADVANCED_PERMS') && $user->hasRight('asset', 'read')) || (getDolGlobalString('MAIN_USE_ADVANCED_PERMS') && $user->hasRight('asset', 'model_advance', 'read')));
+					}
+				} elseif ((float) DOL_VERSION >= 17.0) {
+					$newmenu->add("/asset/list.php?leftmenu=asset&amp;mainmenu=accountancy", $langs->trans("MenuAssets"), 0, $user->hasRight('asset', 'read'), '', $mainmenu, 'asset');
+					$newmenu->add("/asset/card.php?leftmenu=asset&amp;action=create", $langs->trans("MenuNewAsset"), 1, $user->hasRight('asset', 'write'));
+					$newmenu->add("/asset/list.php?leftmenu=asset&amp;mainmenu=accountancy", $langs->trans("MenuListAssets"), 1, $user->hasRight('asset', 'read'));
+					$newmenu->add("/asset/type.php?leftmenu=asset_type", $langs->trans("MenuTypeAssets"), 1, $user->hasRight('asset', 'read'), '', $mainmenu, 'asset_type');
 
-                    if (!empty($menu_invert)) $leftmenu = 'asset_type';
+					if (!empty($menu_invert)) $leftmenu = 'asset_type';
 
-                    if ($usemenuhider || empty($leftmenu) || preg_match('/asset_type/', $leftmenu)) {
-                        $newmenu->add("/asset/type.php?leftmenu=asset_type&amp;action=create", $langs->trans("MenuNewTypeAssets"), 2, $user->hasRight('asset', 'configurer'));
-                        $newmenu->add("/asset/type.php?leftmenu=asset_type", $langs->trans("MenuListTypeAssets"), 2, $user->hasRight('asset', 'read'));
-                    }
-                }
-            }
+					if ($usemenuhider || empty($leftmenu) || preg_match('/asset_type/', $leftmenu)) {
+						$newmenu->add("/asset/type.php?leftmenu=asset_type&amp;action=create", $langs->trans("MenuNewTypeAssets"), 2, $user->hasRight('asset', 'configurer'));
+						$newmenu->add("/asset/type.php?leftmenu=asset_type", $langs->trans("MenuListTypeAssets"), 2, $user->hasRight('asset', 'read'));
+					}
+				}
+			}
 		}
 
 		/*
 		 * Menu TOOLS
 		 */
 		if ($mainmenu == 'tools') {
-            if ((isModEnabled('category') || isModEnabled('category')) && (float) DOL_VERSION >= 22.0) {
-                $titleindex = $langs->trans("Categories");
-                $newmenu->add("/categories/index.php?leftmenu=category", $titleindex, 0, $user->hasRight('category', 'read'), '', $mainmenu, 'email_templates', 0);
-            }
+			if ((isModEnabled('category') || isModEnabled('category')) && (float) DOL_VERSION >= 22.0) {
+				$titleindex = $langs->trans("Categories");
+				$newmenu->add("/categories/index.php?leftmenu=category", $titleindex, 0, $user->hasRight('category', 'read'), '', $mainmenu, 'email_templates', 0);
+			}
 
-            if (!getDolGlobalInt('MENU_HIDE_EMAIL_TEMPLATES') && empty($user->socid)) { // limit to internal users
-                $langs->load("mails");
-                $newmenu->add("/admin/mails_templates.php?leftmenu=email_templates", $langs->trans("EMailTemplates"), 0, 1, '', $mainmenu, 'email_templates', 0);
-            }
+			if (!getDolGlobalInt('MENU_HIDE_EMAIL_TEMPLATES') && empty($user->socid)) { // limit to internal users
+				$langs->load("mails");
+				$newmenu->add("/admin/mails_templates.php?leftmenu=email_templates", $langs->trans("EMailTemplates"), 0, 1, '', $mainmenu, 'email_templates', 0);
+			}
 
-            if (isModEnabled('mailing')) {
-                $titleindex = $langs->trans("EMailings");
-                $titlenew = $langs->trans("NewMailing");
-                $titlelist = $langs->trans("List");
-                if (getDolGlobalInt('EMAILINGS_SUPPORT_ALSO_SMS') && (float) DOL_VERSION >= 20.0) {
-                    $titleindex .= ' | '.$langs->trans("SMSings");
-                    $titlenew .= ' | '.$langs->trans("NewSMSing");
-                }
-                $newmenu->add("/comm/mailing/index.php?leftmenu=mailing", $titleindex, 0, $user->hasRight('mailing', 'lire'), '', $mainmenu, 'mailing', 0);
-                $newmenu->add("/comm/mailing/card.php?leftmenu=mailing&amp;action=create", $titlenew, 1, $user->hasRight('mailing', 'creer'));
-                $newmenu->add("/comm/mailing/list.php?leftmenu=mailing", $titlelist, 1, $user->hasRight('mailing', 'lire'));
-            }
+			if (isModEnabled('mailing')) {
+				$titleindex = $langs->trans("EMailings");
+				$titlenew = $langs->trans("NewMailing");
+				$titlelist = $langs->trans("List");
+				if (getDolGlobalInt('EMAILINGS_SUPPORT_ALSO_SMS') && (float) DOL_VERSION >= 20.0) {
+					$titleindex .= ' | '.$langs->trans("SMSings");
+					$titlenew .= ' | '.$langs->trans("NewSMSing");
+				}
+				$newmenu->add("/comm/mailing/index.php?leftmenu=mailing", $titleindex, 0, $user->hasRight('mailing', 'lire'), '', $mainmenu, 'mailing', 0);
+				$newmenu->add("/comm/mailing/card.php?leftmenu=mailing&amp;action=create", $titlenew, 1, $user->hasRight('mailing', 'creer'));
+				$newmenu->add("/comm/mailing/list.php?leftmenu=mailing", $titlelist, 1, $user->hasRight('mailing', 'lire'));
+			}
 
-            if ((float) DOL_VERSION >= 23.0) {
-                $title = "ImportExportArea";
-                if (isModEnabled('import') && !isModEnabled('export')) {
-                    $title = "FormatedImport";
-                }
-                if (!isModEnabled('import') && isModEnabled('export')) {
-                    $title = "FormatedExport";
-                }
-                if (isModEnabled('import') || isModEnabled('export')) {
-                    $langs->load("exports");
-                    $newmenu->add(dolBuildUrl('/imports/index.php', ['leftmenu' => 'import']), $langs->trans($title), 0, (int) ($user->hasRight('import', 'run') || $user->hasRight('export', 'lire')), '', $mainmenu, 'import', 20, '', '', '', img_picto('', 'technic', 'class="paddingright pictofixedwidth"'));
-                    $newmenu->add(dolBuildUrl('/imports/import.php', ['leftmenu' => 'import']), $langs->trans("NewImport"), 1, $user->hasRight('import', 'run'));
-                    $newmenu->add(dolBuildUrl('/exports/export.php', ['leftmenu' => 'export']), $langs->trans("NewExport"), 1, $user->hasRight('export', 'lire'));
-                }
-            } else {
-                if (isModEnabled('import')) {
-                    $langs->load("exports");
-                    $newmenu->add("/imports/index.php?leftmenu=import", $langs->trans("FormatedImport"), 0, $user->hasRight('import', 'run'), '', $mainmenu, 'import', 0);
-                    $newmenu->add("/imports/import.php?leftmenu=import", $langs->trans("NewImport"), 1, $user->hasRight('import', 'run'));
-                }
+			if ((float) DOL_VERSION >= 23.0) {
+				$title = "ImportExportArea";
+				if (isModEnabled('import') && !isModEnabled('export')) {
+					$title = "FormatedImport";
+				}
+				if (!isModEnabled('import') && isModEnabled('export')) {
+					$title = "FormatedExport";
+				}
+				if (isModEnabled('import') || isModEnabled('export')) {
+					$langs->load("exports");
+					$newmenu->add(dolBuildUrl('/imports/index.php', ['leftmenu' => 'import']), $langs->trans($title), 0, (int) ($user->hasRight('import', 'run') || $user->hasRight('export', 'lire')), '', $mainmenu, 'import', 20, '', '', '', img_picto('', 'technic', 'class="paddingright pictofixedwidth"'));
+					$newmenu->add(dolBuildUrl('/imports/import.php', ['leftmenu' => 'import']), $langs->trans("NewImport"), 1, $user->hasRight('import', 'run'));
+					$newmenu->add(dolBuildUrl('/exports/export.php', ['leftmenu' => 'export']), $langs->trans("NewExport"), 1, $user->hasRight('export', 'lire'));
+				}
+			} else {
+				if (isModEnabled('import')) {
+					$langs->load("exports");
+					$newmenu->add("/imports/index.php?leftmenu=import", $langs->trans("FormatedImport"), 0, $user->hasRight('import', 'run'), '', $mainmenu, 'import', 0);
+					$newmenu->add("/imports/import.php?leftmenu=import", $langs->trans("NewImport"), 1, $user->hasRight('import', 'run'));
+				}
 
-                if (isModEnabled('export')) {
-                    $langs->load("exports");
-                    $newmenu->add("/exports/index.php?leftmenu=export", $langs->trans("FormatedExport"), 0, $user->hasRight('export', 'lire'), '', $mainmenu, 'export', 0);
-                    $newmenu->add("/exports/export.php?leftmenu=export", $langs->trans("NewExport"), 1, $user->hasRight('export', 'lire'));
-                    //$newmenu->add("/exports/export.php?leftmenu=export",$langs->trans("List"),1, $user->hasRight('export', 'lire'));
-                }
-            }
+				if (isModEnabled('export')) {
+					$langs->load("exports");
+					$newmenu->add("/exports/index.php?leftmenu=export", $langs->trans("FormatedExport"), 0, $user->hasRight('export', 'lire'), '', $mainmenu, 'export', 0);
+					$newmenu->add("/exports/export.php?leftmenu=export", $langs->trans("NewExport"), 1, $user->hasRight('export', 'lire'));
+					//$newmenu->add("/exports/export.php?leftmenu=export",$langs->trans("List"),1, $user->hasRight('export', 'lire'));
+				}
+			}
 
-            if ((float) DOL_VERSION >= 21.0) {
-                $newmenu->add("/core/customreports.php?leftmenu=customreports", $langs->trans("CustomReports"), 0, 1, '', $mainmenu, 'customreports', 0, '', '', '', img_picto('', 'graph', 'class="paddingright pictofixedwidth"'));
-            }
-        }
+			if ((float) DOL_VERSION >= 21.0) {
+				$newmenu->add("/core/customreports.php?leftmenu=customreports", $langs->trans("CustomReports"), 0, 1, '', $mainmenu, 'customreports', 0, '', '', '', img_picto('', 'graph', 'class="paddingright pictofixedwidth"'));
+			}
+		}
 
 		/*
 		 * Menu MEMBERS
@@ -2178,12 +2178,12 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 					$newmenu->add("/adherents/htpasswd.php?leftmenu=export", $langs->trans("Filehtpasswd"), 1, $user->hasRight('adherent', 'export'));
 				}
 
-                if ((float) DOL_VERSION < 22.0 || getDolGlobalString('CATEGORY_EDIT_IN_MENU_NOT_IN_POPUP')) {
-                    if (isModEnabled('categorie') || isModEnabled('category')) {
-                        $langs->load("categories");
-                        $newmenu->add("/categories/index.php?leftmenu=cat&amp;type=3", $langs->trans("Categories"), 1, $user->hasRight('categorie', 'lire'), '', $mainmenu, 'cat');
-                    }
-                }
+				if ((float) DOL_VERSION < 22.0 || getDolGlobalString('CATEGORY_EDIT_IN_MENU_NOT_IN_POPUP')) {
+					if (isModEnabled('categorie') || isModEnabled('category')) {
+						$langs->load("categories");
+						$newmenu->add("/categories/index.php?leftmenu=cat&amp;type=3", $langs->trans("Categories"), 1, $user->hasRight('categorie', 'lire'), '', $mainmenu, 'cat');
+					}
+				}
 
 				$newmenu->add("/adherents/index.php?leftmenu=members&amp;mainmenu=members", $langs->trans("Subscriptions"), 0, $user->hasRight('adherent', 'cotisation', 'lire'), '', $mainmenu, 'members', 0);
 				$newmenu->add("/adherents/list.php?leftmenu=members&amp;statut=-1,1&amp;mainmenu=members", $langs->trans("NewSubscription"), 1, $user->hasRight('adherent', 'cotisation', 'creer'));
@@ -2284,20 +2284,20 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 		return 0;
 	}
 
-    // Allow the $menu_array of the menu to be manipulated by modules
-    $parameters = array(
-        'mainmenu' => $mainmenu,
-    );
-    $hook_items = $menu_array;
-    $reshook = $hookmanager->executeHooks('menuLeftMenuItems', $parameters, $hook_items); // Note that $action and $object may have been modified by some hooks
+	// Allow the $menu_array of the menu to be manipulated by modules
+	$parameters = array(
+		'mainmenu' => $mainmenu,
+	);
+	$hook_items = $menu_array;
+	$reshook = $hookmanager->executeHooks('menuLeftMenuItems', $parameters, $hook_items); // Note that $action and $object may have been modified by some hooks
 
-    if (is_numeric($reshook)) {
-        if ($reshook == 0 && !empty($hookmanager->results)) {
-            $menu_array[] = $hookmanager->results; // add
-        } elseif ($reshook == 1) {
-            $menu_array = $hookmanager->results; // replace
-        }
-    }
+	if (is_numeric($reshook)) {
+		if ($reshook == 0 && !empty($hookmanager->results)) {
+			$menu_array[] = $hookmanager->results; // add
+		} elseif ($reshook == 1) {
+			$menu_array = $hookmanager->results; // replace
+		}
+	}
 
 	// TODO Use the position property in menu_array to reorder the $menu_array
 
