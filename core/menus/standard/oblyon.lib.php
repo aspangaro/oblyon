@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (C) 2013-2016  Nicolas Rivera      <nrivera.pro@gmail.com>
- * Copyright (C) 2015-2024  Alexandre Spangaro  <alexandre@inovea-conseil.com>
+ * Copyright (C) 2015-2025  Alexandre Spangaro  <alexandre@inovea-conseil.com>
  *
  * Copyright (C) 2010-2013  Laurent Destailleur <eldy@users.sourceforge.net>
  * Copyright (C) 2010       Regis Houssin       <regis.houssin@capnetworks.com>
@@ -28,6 +28,14 @@
  */
 require_once DOL_DOCUMENT_ROOT.'/core/class/menubase.class.php';
 dol_include_once('/oblyon/backport/v21/core/lib/functions.lib.php');
+
+/**
+ * @var Conf $conf
+ * @var DoliDB $db
+ * @var HookManager $hookmanager
+ * @var Translate $langs
+ * @var User $user
+ */
 
 // Translations
 $langs->loadLangs(array('oblyon@oblyon'));
@@ -865,10 +873,12 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 					$newmenu->add("/user/card.php?leftmenu=users&action=create", $langs->trans("NewUser"), 2, ($user->hasRight('user', 'user', 'creer') || $user->admin) && !(!empty($conf->multicompany->enabled) && !empty($user->entity) && getDolGlobalString('MULTICOMPANY_TRANSVERSE_MODE')), '', 'home');
 					$newmenu->add("/user/list.php?leftmenu=users", $langs->trans("ListOfUsers"), 2, $user->hasRight('user', 'user', 'lire') || $user->admin);
 					$newmenu->add("/user/hierarchy.php?leftmenu=users", $langs->trans("HierarchicView"), 2, $user->hasRight('user', 'user', 'lire') || $user->admin);
-					if (isModEnabled('categorie')) {
-						$langs->load("categories");
-						$newmenu->add("/categories/index.php?leftmenu=users&type=7", $langs->trans("UsersCategoriesShort"), 2, $user->hasRight('categorie', 'lire'), '', $mainmenu, 'cat');
-					}
+                    if ((float) DOL_VERSION < 22.0 || getDolGlobalString('CATEGORY_EDIT_IN_MENU_NOT_IN_POPUP')) {
+                        if (isModEnabled('categorie') || isModEnabled('category')) {
+                            $langs->load("categories");
+                            $newmenu->add("/categories/index.php?leftmenu=users&type=7", $langs->trans("UsersCategoriesShort"), 2, $user->hasRight('categorie', 'lire'), '', $mainmenu, 'cat');
+                        }
+                    }
 					$newmenu->add("/user/group/list.php?leftmenu=users", $langs->trans("Groups"), 1, ($user->hasRight('user', 'user', 'lire') || $user->admin) && !(!empty($conf->multicompany->enabled) && !empty($user->entity) && getDolGlobalString('MULTICOMPANY_TRANSVERSE_MODE')));
 					$newmenu->add("/user/group/card.php?leftmenu=users&action=create", $langs->trans("NewGroup"), 2, ((getDolGlobalString('MAIN_USE_ADVANCED_PERMS') ? $user->hasRight('user', 'group_advance', 'write') : $user->hasRight('user', 'user', 'creer')) || $user->admin) && !(!empty($conf->multicompany->enabled) && !empty($user->entity) && getDolGlobalString('MULTICOMPANY_TRANSVERSE_MODE')));
 					$newmenu->add("/user/group/list.php?leftmenu=users", $langs->trans("ListOfGroups"), 2, ((getDolGlobalString('MAIN_USE_ADVANCED_PERMS') ? $user->hasRight('user', 'group_advance', 'read'): $user->hasRight('user', 'user', 'lire')) || $user->admin));
@@ -919,7 +929,7 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 			}
 
 			// Categories
-			if (isModEnabled('categorie')) {
+			if (isModEnabled('categorie') || isModEnabled('category')) {
 				$langs->load("categories");
 				if (!getDolGlobalString('SOCIETE_DISABLE_PROSPECTS') || !getDolGlobalString('SOCIETE_DISABLE_CUSTOMERS')) {
 					// Categories prospects/customers
@@ -930,12 +940,16 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 					if (getDolGlobalString('SOCIETE_DISABLE_CUSTOMERS')) {
 						$menutoshow = $langs->trans("ProspectsCategoriesShort");
 					}
-					$newmenu->add("/categories/index.php?leftmenu=cat&amp;type=2", $menutoshow, 1, $user->hasRight('categorie', 'lire'), '', $mainmenu, 'cat');
+                    if ((float) DOL_VERSION < 22.0 || getDolGlobalString('CATEGORY_EDIT_IN_MENU_NOT_IN_POPUP')) {
+                        $newmenu->add("/categories/index.php?leftmenu=cat&amp;type=2", $menutoshow, 1, $user->hasRight('categorie', 'lire'), '', $mainmenu, 'cat');
+                    }
 				}
 				// Categories suppliers
-				if (isModEnabled('fournisseur') && !getDolGlobalString('MAIN_USE_NEW_SUPPLIERMOD') || isModEnabled('supplier_order') || isModEnabled('supplier_invoice')) {
-					$newmenu->add("/categories/index.php?leftmenu=catfournish&amp;type=1", $langs->trans("SuppliersCategoriesShort"), 1, $user->hasRight('categorie', 'lire'));
-				}
+				if (isModEnabled('fournisseur') && !getDolGlobalString('MAIN_USE_NEW_SUPPLIERMOD') || isModEnabled('supplier_proposal') || isModEnabled('supplier_order') || isModEnabled('supplier_invoice')) {
+                    if ((float) DOL_VERSION < 22.0 || getDolGlobalString('CATEGORY_EDIT_IN_MENU_NOT_IN_POPUP')) {
+                        $newmenu->add("/categories/index.php?leftmenu=catfournish&amp;type=1", $langs->trans("SuppliersCategoriesShort"), 1, $user->hasRight('categorie', 'lire'));
+                    }
+                }
 			}
 
 			// Contacts
@@ -956,11 +970,13 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 			//$newmenu->add("/contact/list.php?userid=$user->id", $langs->trans("MyContacts"), 1, $user->hasRight('societe', 'contact', 'lire'));
 
 			// Categories
-			if (isModEnabled('categorie')) {
-				$langs->load("categories");
-				// Categories Contact
-				$newmenu->add("/categories/index.php?leftmenu=catcontact&amp;type=4", $langs->trans("ContactCategoriesShort"), 1, $user->hasRight('categorie', 'lire'), '', $mainmenu, 'cat');
-			}
+            if ((float) DOL_VERSION < 22.0 || getDolGlobalString('CATEGORY_EDIT_IN_MENU_NOT_IN_POPUP')) {
+                if (isModEnabled('categorie') || isModEnabled('category')) {
+                    $langs->load("categories");
+                    // Categories Contact
+                    $newmenu->add("/categories/index.php?leftmenu=catcontact&amp;type=4", $langs->trans("ContactCategoriesShort"), 1, $user->hasRight('categorie', 'lire'), '', $mainmenu, 'cat');
+                }
+            }
 		}
 
 		/*
@@ -1009,7 +1025,20 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 					//$newmenu->add("/commande/list.php?leftmenu=orders&search_status=4", $langs->trans("StatusOrderProcessed"), 2, $user->hasRight('commande', 'lire'));
 					$newmenu->add("/commande/list.php?leftmenu=orders&search_status=-1", $langs->trans("StatusOrderCanceledShort"), 2, $user->hasRight('commande', 'lire'));
 				}
-				$newmenu->add("/commande/stats/index.php?leftmenu=orders", $langs->trans("Statistics"), 1, $user->hasRight('commande', 'lire'));
+                if (empty($user->socid) && (float) DOL_VERSION >= 21.0) {
+                    $newmenu->add("/commande/list_det.php?leftmenu=orders", $langs->trans("ListOrderLigne"), 1, $user->hasRight('commande', 'lire'));
+                }
+                if (getDolGlobalInt('MAIN_NEED_EXPORT_PERMISSION_TO_READ_STATISTICS')) {
+                    $newmenu->add("/commande/stats/index.php?leftmenu=orders", $langs->trans("Statistics"), 1, $user->hasRight('commande', 'commande', 'export'));
+                } else {
+                    $newmenu->add("/commande/stats/index.php?leftmenu=orders", $langs->trans("Statistics"), 1, $user->hasRight('commande', 'lire'));
+                }
+
+                // Categories
+                if (isModEnabled('category') && getDolGlobalString('CATEGORY_EDIT_IN_MENU_NOT_IN_POPUP') && (float) DOL_VERSION >= 23.0) {
+                    $langs->load("categories");
+                    $newmenu->add("/categories/categorie_list.php?leftmenu=cat&type=16", $langs->trans("Categories"), 1, $user->hasRight('categorie', 'lire'), '', $mainmenu, 'cat');
+                }
 			}
 
 			// Supplier proposal
@@ -1044,8 +1073,17 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 				}
 				// Billed is another field. We should add instead a dedicated filter on list. if ($usemenuhider || empty($leftmenu) || $leftmenu=="orders_suppliers") $newmenu->add("/fourn/commande/list.php?leftmenu=orders_suppliers&billed=1", $langs->trans("Billed"), 2, $user->hasRight('fournisseur', 'commande', 'lire'));
 
+                if (getDolGlobalInt('MAIN_NEED_EXPORT_PERMISSION_TO_READ_STATISTICS')) {
+                    $newmenu->add("/commande/stats/index.php?leftmenu=orders_suppliers&amp;mode=supplier", $langs->trans("Statistics"), 1, $user->hasRight('fournisseur', 'commande', 'export'));
+                } else {
+                    $newmenu->add("/commande/stats/index.php?leftmenu=orders_suppliers&amp;mode=supplier", $langs->trans("Statistics"), 1, $user->hasRight('fournisseur', 'commande', 'lire'));
+                }
 
-				$newmenu->add("/commande/stats/index.php?leftmenu=orders_suppliers&amp;mode=supplier", $langs->trans("Statistics"), 1, $user->hasRight('fournisseur', 'commande', 'lire'));
+                // Categories
+                if (isModEnabled('category') && getDolGlobalString('CATEGORY_EDIT_IN_MENU_NOT_IN_POPUP') && (float) DOL_VERSION >= 23.0) {
+                    $langs->load("categories");
+                    $newmenu->add("/categories/categorie_list.php?leftmenu=cat&type=20", $langs->trans("Categories"), 1, $user->hasRight('categorie', 'lire'), '', $mainmenu, 'cat');
+                }
 			}
 
 			// Contract
@@ -1121,7 +1159,13 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
                     $newmenu->add("/compta/paiement/rapport.php?leftmenu=customers_bills_payment_report", $langs->trans("Reportings"), 2, $user->hasRight('facture', 'lire'), '', $mainmenu, 'customers_bills_payment_report');
                 }
 				$newmenu->add("/compta/facture/stats/index.php?leftmenu=customers_bills_stats", $langs->trans("Statistics"), 1, $user->hasRight('facture', 'lire'), '', $mainmenu, 'customers_bills_stats');
-			}
+
+                // Categories
+                if (isModEnabled('category') && getDolGlobalString('CATEGORY_EDIT_IN_MENU_NOT_IN_POPUP') && (float) DOL_VERSION >= 23.0) {
+                    $langs->load("categories");
+                    $newmenu->add("/categories/categorie_list.php?leftmenu=cat&type=17", $langs->trans("Categories"), 1, $user->rights->categorie->lire, '', $mainmenu, 'cat');
+                }
+            }
 
 			// Suppliers invoices
 			if (isModEnabled('societe') && isModEnabled('supplier_invoice')) {
@@ -1149,7 +1193,13 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
                 }
 
 				$newmenu->add("/compta/facture/stats/index.php?mode=supplier&amp;leftmenu=suppliers_bills_stats", $langs->trans("Statistics"), 1, $user->hasRight('fournisseur', 'facture', 'lire'), '', $mainmenu, 'suppliers_bills_stats');
-			}
+
+                // Categories
+                if (isModEnabled('category') && getDolGlobalString('CATEGORY_EDIT_IN_MENU_NOT_IN_POPUP') && (float) DOL_VERSION >= 23.0) {
+                    $langs->load("categories");
+                    $newmenu->add("/categories/categorie_list.php?leftmenu=cat&type=21", $langs->trans("Categories"), 1, $user->rights->categorie->lire, '', $mainmenu, 'cat');
+                }
+            }
 
 			// Orders
 			if (isModEnabled('commande')) {
@@ -1320,13 +1370,15 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 				$newmenu->add("/compta/bank/transfer.php", $langs->trans("MenuBankInternalTransfer"), 1, $user->hasRight('banque', 'transfer'));
 			}
 
-			if (isModEnabled('categorie')) {
-				$langs->load("categories");
-				$newmenu->add("/categories/index.php?type=5", $langs->trans("Rubriques"), 1, $user->hasRight('categorie', 'creer'), '', $mainmenu, 'tags');
-                if ((float) DOL_VERSION >= 21.0) {
-                    $newmenu->add("/categories/index.php?type=8", $langs->trans("RubriquesTransactions"), 1, $user->hasRight('banque', 'configurer'), '', $mainmenu, 'tags');
-                } else {
-                    $newmenu->add("/compta/bank/categ.php", $langs->trans("RubriquesTransactions"), 1, $user->hasRight('banque', 'configurer'), '', $mainmenu, 'tags');
+            if (isModEnabled('categorie') || isModEnabled('category')) {
+                if ((float) DOL_VERSION < 22.0 || getDolGlobalString('CATEGORY_EDIT_IN_MENU_NOT_IN_POPUP')) {
+                    $langs->load("categories");
+                    $newmenu->add("/categories/index.php?type=5", $langs->trans("Rubriques"), 1, $user->hasRight('categorie', 'creer'), '', $mainmenu, 'tags');
+                    if ((float) DOL_VERSION >= 21.0) {
+                        $newmenu->add("/categories/index.php?type=8", $langs->trans("RubriquesTransactions"), 1, $user->hasRight('banque', 'configurer'), '', $mainmenu, 'tags');
+                    } else {
+                        $newmenu->add("/compta/bank/categ.php", $langs->trans("RubriquesTransactions"), 1, $user->hasRight('banque', 'configurer'), '', $mainmenu, 'tags');
+                    }
                 }
             }
 
@@ -1408,11 +1460,13 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 				}
 
 				// Categories
-				if (isModEnabled('categorie')) {
-					$langs->load("categories");
-					$newmenu->add("/categories/index.php?leftmenu=cat&amp;type=0", $langs->trans("Categories"), 1, $user->hasRight('categorie', 'lire'), '', $mainmenu, 'cat');
-					//if ($usemenuhider || empty($leftmenu) || $leftmenu=="cat") $newmenu->add("/categories/list.php", $langs->trans("List"), 1, $user->hasRight('categorie', 'lire'));
-				}
+                if ((float) DOL_VERSION < 22.0 || getDolGlobalString('CATEGORY_EDIT_IN_MENU_NOT_IN_POPUP')) {
+                    if (isModEnabled('categorie') || isModEnabled('category')) {
+                        $langs->load("categories");
+                        $newmenu->add("/categories/index.php?leftmenu=cat&amp;type=0", $langs->trans("Categories"), 1, $user->hasRight('categorie', 'lire'), '', $mainmenu, 'cat');
+                        //if ($usemenuhider || empty($leftmenu) || $leftmenu=="cat") $newmenu->add("/categories/list.php", $langs->trans("List"), 1, $user->hasRight('categorie', 'lire'));
+                    }
+                }
 			}
 
 			// Services
@@ -1424,11 +1478,13 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 					$newmenu->add("/product/stats/card.php?id=all&leftmenu=stats&type=1", $langs->trans("Statistics"), 1, $user->hasRight('service', 'lire') || $user->hasRight('product', 'lire'));
 				}
 				// Categories
-				if (isModEnabled('categorie')) {
-					$langs->load("categories");
-					$newmenu->add("/categories/index.php?leftmenu=cat&amp;type=0", $langs->trans("Categories"), 1, $user->hasRight('categorie', 'lire'), '', $mainmenu, 'cat');
-					//if ($usemenuhider || empty($leftmenu) || $leftmenu=="cat") $newmenu->add("/categories/list.php", $langs->trans("List"), 1, $user->hasRight('categorie', 'lire'));
-				}
+                if ((float) DOL_VERSION < 22.0 || getDolGlobalString('CATEGORY_EDIT_IN_MENU_NOT_IN_POPUP')) {
+                    if (isModEnabled('categorie') || isModEnabled('category')) {
+                        $langs->load("categories");
+                        $newmenu->add("/categories/index.php?leftmenu=cat&amp;type=0", $langs->trans("Categories"), 1, $user->hasRight('categorie', 'lire'), '', $mainmenu, 'cat');
+                        //if ($usemenuhider || empty($leftmenu) || $leftmenu=="cat") $newmenu->add("/categories/list.php", $langs->trans("List"), 1, $user->hasRight('categorie', 'lire'));
+                    }
+                }
 			}
 
 			// Warehouse
@@ -1446,9 +1502,11 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 				$newmenu->add("/product/stock/stockatdate.php", $langs->trans("StockAtDate"), 1, $user->hasRight('produit', 'lire') && $user->hasRight('stock', 'lire'));
 
 				// Categories for warehouses
-				if (isModEnabled('categorie')) {
-					$newmenu->add("/categories/index.php?leftmenu=stock&amp;type=9", $langs->trans("Categories"), 1, $user->hasRight('categorie', 'lire'), '', $mainmenu, 'cat');
-				}
+                if ((float) DOL_VERSION < 22.0 || getDolGlobalString('CATEGORY_EDIT_IN_MENU_NOT_IN_POPUP')) {
+                    if (isModEnabled('categorie') || isModEnabled('category')) {
+                        $newmenu->add("/categories/index.php?leftmenu=stock&amp;type=9", $langs->trans("Categories"), 1, $user->hasRight('categorie', 'lire'), '', $mainmenu, 'cat');
+                    }
+                }
 			}
 
 			// Inventory
@@ -1498,8 +1556,7 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
                 } else {
                     $newmenu->add("/reception/card.php?action=create2&amp;leftmenu=receptions", $langs->trans("NewReception"), 1, $user->hasRight('reception', 'creer'));
                 }
-                $newmenu->add("/reception/card.php?action=create2&amp;leftmenu=receptions", $langs->trans("NewReception"), 1, $user->hasRight('reception', 'creer'));
-				$newmenu->add("/reception/list.php?leftmenu=receptions", $langs->trans("List"), 1, $user->hasRight('reception', 'lire'));
+                $newmenu->add("/reception/list.php?leftmenu=receptions", $langs->trans("List"), 1, $user->hasRight('reception', 'lire'));
 
 				if (! empty($menu_invert)) $leftmenu= 'receptions';
 
@@ -1582,10 +1639,12 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 				$newmenu->add("/projet/stats/index.php?leftmenu=projects", $langs->trans("Statistics"), 1, $user->hasRight('projet', 'lire'));
 
 				// Categories
-				if (isModEnabled('categorie')) {
-					$langs->load("categories");
-					$newmenu->add("/categories/index.php?leftmenu=cat&amp;type=6", $langs->trans("Categories"), 1, $user->hasRight('categorie', 'lire'), '', $mainmenu, 'cat');
-				}
+                if ((float) DOL_VERSION < 22.0 || getDolGlobalString('CATEGORY_EDIT_IN_MENU_NOT_IN_POPUP')) {
+                    if (isModEnabled('categorie') || isModEnabled('category')) {
+                        $langs->load("categories");
+                        $newmenu->add("/categories/index.php?leftmenu=cat&amp;type=6", $langs->trans("Categories"), 1, $user->hasRight('categorie', 'lire'), '', $mainmenu, 'cat');
+                    }
+                }
 
 				if (!getDolGlobalString('PROJECT_HIDE_TASKS')) {
                     // Project affected to user
@@ -2035,28 +2094,56 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 		 * Menu TOOLS
 		 */
 		if ($mainmenu == 'tools') {
+            if ((isModEnabled('category') || isModEnabled('category')) && (float) DOL_VERSION >= 22.0) {
+                $titleindex = $langs->trans("Categories");
+                $newmenu->add("/categories/index.php?leftmenu=category", $titleindex, 0, $user->hasRight('category', 'read'), '', $mainmenu, 'email_templates', 0);
+            }
+
             if (!getDolGlobalInt('MENU_HIDE_EMAIL_TEMPLATES') && empty($user->socid)) { // limit to internal users
                 $langs->load("mails");
                 $newmenu->add("/admin/mails_templates.php?leftmenu=email_templates", $langs->trans("EMailTemplates"), 0, 1, '', $mainmenu, 'email_templates', 0);
             }
 
             if (isModEnabled('mailing')) {
-                $newmenu->add("/comm/mailing/index.php?leftmenu=mailing", $langs->trans("EMailings"), 0, $user->hasRight('mailing', 'lire'), '', $mainmenu, 'mailing', 0);
-                $newmenu->add("/comm/mailing/card.php?leftmenu=mailing&amp;action=create", $langs->trans("NewMailing"), 1, $user->hasRight('mailing', 'creer'));
-                $newmenu->add("/comm/mailing/list.php?leftmenu=mailing", $langs->trans("List"), 1, $user->hasRight('mailing', 'lire'));
+                $titleindex = $langs->trans("EMailings");
+                $titlenew = $langs->trans("NewMailing");
+                $titlelist = $langs->trans("List");
+                if (getDolGlobalInt('EMAILINGS_SUPPORT_ALSO_SMS') && (float) DOL_VERSION >= 20.0) {
+                    $titleindex .= ' | '.$langs->trans("SMSings");
+                    $titlenew .= ' | '.$langs->trans("NewSMSing");
+                }
+                $newmenu->add("/comm/mailing/index.php?leftmenu=mailing", $titleindex, 0, $user->hasRight('mailing', 'lire'), '', $mainmenu, 'mailing', 0);
+                $newmenu->add("/comm/mailing/card.php?leftmenu=mailing&amp;action=create", $titlenew, 1, $user->hasRight('mailing', 'creer'));
+                $newmenu->add("/comm/mailing/list.php?leftmenu=mailing", $titlelist, 1, $user->hasRight('mailing', 'lire'));
             }
 
-            if (isModEnabled('import')) {
-                $langs->load("exports");
-                $newmenu->add("/imports/index.php?leftmenu=import", $langs->trans("FormatedImport"), 0, $user->hasRight('import', 'run'), '', $mainmenu, 'import', 0);
-                $newmenu->add("/imports/import.php?leftmenu=import", $langs->trans("NewImport"), 1, $user->hasRight('import', 'run'));
-            }
+            if ((float) DOL_VERSION >= 23.0) {
+                $title = "ImportExportArea";
+                if (isModEnabled('import') && !isModEnabled('export')) {
+                    $title = "FormatedImport";
+                }
+                if (!isModEnabled('import') && isModEnabled('export')) {
+                    $title = "FormatedExport";
+                }
+                if (isModEnabled('import') || isModEnabled('export')) {
+                    $langs->load("exports");
+                    $newmenu->add(dolBuildUrl('/imports/index.php', ['leftmenu' => 'import']), $langs->trans($title), 0, (int) ($user->hasRight('import', 'run') || $user->hasRight('export', 'lire')), '', $mainmenu, 'import', 20, '', '', '', img_picto('', 'technic', 'class="paddingright pictofixedwidth"'));
+                    $newmenu->add(dolBuildUrl('/imports/import.php', ['leftmenu' => 'import']), $langs->trans("NewImport"), 1, $user->hasRight('import', 'run'));
+                    $newmenu->add(dolBuildUrl('/exports/export.php', ['leftmenu' => 'export']), $langs->trans("NewExport"), 1, $user->hasRight('export', 'lire'));
+                }
+            } else {
+                if (isModEnabled('import')) {
+                    $langs->load("exports");
+                    $newmenu->add("/imports/index.php?leftmenu=import", $langs->trans("FormatedImport"), 0, $user->hasRight('import', 'run'), '', $mainmenu, 'import', 0);
+                    $newmenu->add("/imports/import.php?leftmenu=import", $langs->trans("NewImport"), 1, $user->hasRight('import', 'run'));
+                }
 
-            if (isModEnabled('export')) {
-                $langs->load("exports");
-                $newmenu->add("/exports/index.php?leftmenu=export", $langs->trans("FormatedExport"), 0, $user->hasRight('export', 'lire'), '', $mainmenu, 'export', 0);
-                $newmenu->add("/exports/export.php?leftmenu=export", $langs->trans("NewExport"), 1, $user->hasRight('export', 'lire'));
-                //$newmenu->add("/exports/export.php?leftmenu=export",$langs->trans("List"),1, $user->hasRight('export', 'lire'));
+                if (isModEnabled('export')) {
+                    $langs->load("exports");
+                    $newmenu->add("/exports/index.php?leftmenu=export", $langs->trans("FormatedExport"), 0, $user->hasRight('export', 'lire'), '', $mainmenu, 'export', 0);
+                    $newmenu->add("/exports/export.php?leftmenu=export", $langs->trans("NewExport"), 1, $user->hasRight('export', 'lire'));
+                    //$newmenu->add("/exports/export.php?leftmenu=export",$langs->trans("List"),1, $user->hasRight('export', 'lire'));
+                }
             }
 
             if ((float) DOL_VERSION >= 21.0) {
@@ -2091,10 +2178,12 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 					$newmenu->add("/adherents/htpasswd.php?leftmenu=export", $langs->trans("Filehtpasswd"), 1, $user->hasRight('adherent', 'export'));
 				}
 
-				if (isModEnabled('categorie')) {
-					$langs->load("categories");
-					$newmenu->add("/categories/index.php?leftmenu=cat&amp;type=3", $langs->trans("Categories"), 1, $user->hasRight('categorie', 'lire'), '', $mainmenu, 'cat');
-				}
+                if ((float) DOL_VERSION < 22.0 || getDolGlobalString('CATEGORY_EDIT_IN_MENU_NOT_IN_POPUP')) {
+                    if (isModEnabled('categorie') || isModEnabled('category')) {
+                        $langs->load("categories");
+                        $newmenu->add("/categories/index.php?leftmenu=cat&amp;type=3", $langs->trans("Categories"), 1, $user->hasRight('categorie', 'lire'), '', $mainmenu, 'cat');
+                    }
+                }
 
 				$newmenu->add("/adherents/index.php?leftmenu=members&amp;mainmenu=members", $langs->trans("Subscriptions"), 0, $user->hasRight('adherent', 'cotisation', 'lire'), '', $mainmenu, 'members', 0);
 				$newmenu->add("/adherents/list.php?leftmenu=members&amp;statut=-1,1&amp;mainmenu=members", $langs->trans("NewSubscription"), 1, $user->hasRight('adherent', 'cotisation', 'creer'));

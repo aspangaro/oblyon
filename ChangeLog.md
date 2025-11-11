@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - CSS
+- Menu (Remove categories/tags in v22 -> move to tools)
 
 ### Changed
 - Move ChangeLog to format 1.1.0 of "Keep a changelog" 
