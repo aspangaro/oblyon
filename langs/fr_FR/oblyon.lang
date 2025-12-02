@@ -1,6 +1,6 @@
 # < Oblyon Control Panel - French translation >
 # Copyright (C) 2015       Nicolas Rivera       <nrivera.pro@gmail.com>
-# Copyright (C) 2015-2024  Alexandre Spangaro   <alexandre@inovea-conseil.com>
+# Copyright (C) 2015-2025  Alexandre Spangaro   <alexandre@inovea-conseil.com>
 # Copyright (C) 2015-2025  Sylvain Legrand      <technique@infras.fr>
 #
 Module432573Name        = Oblyon
@@ -68,6 +68,7 @@ CardBehavior                         = Comportement des fiches
 FixAreaRefAndTabAction               = Fixer le bandeau des références et les boutons d'actions pendant le défilement vertical
 FixStickyTabsCard                    = Fixer le bandeau des onglets lors d'un défilement vertical
 SwitchColunmOnLeft                   = Basculer la colonne de sélection / recherche / action en masse à gauche
+FixTitleInList                       = Fixer la barre de titre des listes de manière à toujours voir le titre, l'action en masse, la pagination et l'élément "Ajouter"
 RemoveKanbanViewInList               = Retirer le bouton "Vue kanban" en haut à droite des listes
 FixStickyTableHeadersColumns         = Fixer l'entête de colonne des tableaux sur les éléments lors d'un défilement vertical
 FixStickyFirstColumn                 = Fixer la première colonne des tableaux lors d'un défilement horizontal
@@ -166,32 +167,33 @@ OblyonWarningColorWhiteHelp        = La couleur du texte est blanche. Le texte p
 #
 # Dashboard page
 #
-OblyonDashboardTitle                   = Configurateur Oblyon - Tableau de bord
-OblyonDashboardDisableBlocks           = Vignette des éléments ouverts (à traiter ou en retard) sur le tableau de bord principal
-DisableGlobalBoxStats                  = Désactiver le widget des statistiques globales (nombres d'éléments en base de données)
-InfoboxColorOnBackground               = Inverser les couleurs des icônes et du fond des vignettes
-OblyonInfoboxSingleWidth               = Uniformiser la largeur des vignettes (standard Dolibarr 280px)
-OblyonInfoboxSingleWidthHelp           = Sinon la largeur s'adaptera à la longueur des informations présentées (la largeur minimum est de 260px)
-ColorIntensity                         = Intensité des couleurs
-ColorIntensityDesc                     = Définir l'intensité sur les couleurs ci-dessous (Actuellement %s)
-ColorMoreDarker                        = Moins intense
-ColorMoreLighter                       = Plus intense
-OBLYON_INFOXBOX_BACKGROUND             = Couleur de fond de la vignette
-OBLYON_INFOXBOX_WEATHER_COLOR          = Couleur vignette 'météo'
-OBLYON_INFOXBOX_ACTION_COLOR           = Couleur vignette 'agenda'
-OBLYON_INFOXBOX_PROJECT_COLOR          = Couleur vignette 'projet'
-OBLYON_INFOXBOX_CUSTOMER_PROPAL_COLOR  = Couleur vignette 'propositions commerciales clients'
-OBLYON_INFOXBOX_CUSTOMER_ORDER_COLOR   = Couleur vignette 'commandes clients'
-OBLYON_INFOXBOX_CUSTOMER_INVOICE_COLOR = Couleur vignette 'factures clients'
-OBLYON_INFOXBOX_SUPPLIER_PROPAL_COLOR  = Couleur vignette 'demandes de prix fournisseurs'
-OBLYON_INFOXBOX_SUPPLIER_ORDER_COLOR   = Couleur vignette 'commandes fournisseurs'
-OBLYON_INFOXBOX_SUPPLIER_INVOICE_COLOR = Couleur vignette 'factures fournisseurs'
-OBLYON_INFOXBOX_CONTRAT_COLOR          = Couleur vignette 'contrat'
-OBLYON_INFOXBOX_BANK_COLOR             = Couleur vignette 'banque'
-OBLYON_INFOXBOX_ADHERENT_COLOR         = Couleur vignette 'adhérent'
-OBLYON_INFOXBOX_EXPENSEREPORT_COLOR    = Couleur vignette 'note de frais'
-OBLYON_INFOXBOX_HOLIDAY_COLOR          = Couleur vignette 'congés payés'
-OBLYON_INFOXBOX_TICKET_COLOR           = Couleur vignette 'tickets'
+OblyonDashboardTitle                    = Configurateur Oblyon - Tableau de bord
+OblyonDashboardDisableBlocks            = Vignette des éléments ouverts (à traiter ou en retard) sur le tableau de bord principal
+DisableGlobalBoxStats                   = Désactiver le widget des statistiques globales (nombres d'éléments en base de données)
+InfoboxColorOnBackground                = Inverser les couleurs des icônes et du fond des vignettes
+OblyonInfoboxSingleWidth                = Uniformiser la largeur des vignettes (standard Dolibarr 280px)
+OblyonInfoboxSingleWidthHelp            = Sinon la largeur s'adaptera à la longueur des informations présentées (la largeur minimum est de 260px)
+ColorIntensity                          = Intensité des couleurs
+ColorIntensityDesc                      = Définir l'intensité sur les couleurs ci-dessous (Actuellement %s)
+ColorMoreDarker                         = Moins intense
+ColorMoreLighter                        = Plus intense
+OBLYON_INFOXBOX_BACKGROUND              = Couleur de fond de la vignette
+OBLYON_INFOXBOX_WEATHER_COLOR           = Couleur vignette 'météo'
+OBLYON_INFOXBOX_ACTION_COLOR            = Couleur vignette 'agenda'
+OBLYON_INFOXBOX_PROJECT_COLOR           = Couleur vignette 'projet'
+OBLYON_INFOXBOX_CUSTOMER_PROPAL_COLOR   = Couleur vignette 'propositions commerciales clients'
+OBLYON_INFOXBOX_CUSTOMER_ORDER_COLOR    = Couleur vignette 'commandes clients'
+OBLYON_INFOXBOX_CUSTOMER_INVOICE_COLOR  = Couleur vignette 'factures clients'
+OBLYON_INFOXBOX_SUPPLIER_PROPAL_COLOR   = Couleur vignette 'demandes de prix fournisseurs'
+OBLYON_INFOXBOX_SUPPLIER_ORDER_COLOR    = Couleur vignette 'commandes fournisseurs'
+OBLYON_INFOXBOX_SUPPLIER_INVOICE_COLOR  = Couleur vignette 'factures fournisseurs'
+OBLYON_INFOXBOX_CONTRAT_COLOR           = Couleur vignette 'contrat'
+OBLYON_INFOXBOX_BANK_COLOR              = Couleur vignette 'banque'
+OBLYON_INFOXBOX_ADHERENT_COLOR          = Couleur vignette 'adhérent'
+OBLYON_INFOXBOX_EXPENSEREPORT_COLOR     = Couleur vignette 'note de frais'
+OBLYON_INFOXBOX_HOLIDAY_COLOR           = Couleur vignette 'congés payés'
+OBLYON_INFOXBOX_TICKET_COLOR            = Couleur vignette 'tickets'
+OBLYON_INFOXBOX_MRP_COLOR               = Couleur vignette 'fabrication (MRP)'
 
 #
 # Login page
@@ -254,24 +256,28 @@ LimitTabLineToOne            = (Permet de limiter les onglets à une seule ligne
 FixAbsoluteButtonsActionCard = Fixer les boutons d'actions en bas de page
 ShowLineNumberCard           = Afficher le numéro des lignes (Facture, proposition commerciale, etc)
 
-# CKEditor
-OptionsCKEditor                          = Options de l'éditeur de texte WYSIWYG et des libellés
-FckeditorAllowAnyContent                 = Permet de saisir n'importe quel contenu dans l'éditeur de texte. Attention, cela désactivera totalement le filtrage de contenu, l'une des fonctionnalités les plus importantes de CKEditor (utile pour conserver toutes vos balises et attributs HTML)
-FckeditorEnableScaytAutostartup          = Permet d'activer les fonctions SpellCheckAsYouType (SCAYT) de l'éditeur de texte (vérification orthographique automatique)
-MainSecurityAllowUnsecuredLabelsWithHtml = Autoriser les balises HTML dans le libellé des articles
+# FCK Editor
+OptionsCKEditor                             = Options de l'éditeur WYSIWYG (CKEditor)
+FckeditorAllowAnyContent                    = Autoriser tout contenu dans l'éditeur WYSIWYG
+FckeditorEnableScaytAutostartup             = Activer la correction orthographique automatique (SCAYT)
+MainSecurityAllowUnsecuredLabelsWithHtml    = Autoriser les libellés non sécurisés avec HTML
+NotRecommended                              = Non recommandé
 
 #
 # Icons page
 #
-OblyonIconsTitle = Configurateur Oblyon - Icônes
-Icons            = Icônes
-IconsStyle       = Style d'icônes
-IconApplied      = Style d'icônes appliqué
-Iconfas          = Solid
-Iconfar          = Regular
-Iconfal          = Light
-Iconfat          = Thin
-Iconfad          = Duotone
+Icons=Icônes
+OblyonSetupIcons=Configurateur Oblyon - Icônes
+OblyonIconsUseFA6 = Activer l'utilisation des icônes FontAwesome 6 (Free) (Font Awesome 5 par défaut)
+FontAwesomeSelectPack=Sélectionner le pack FontAwesome à utiliser :
+FontAwesomeAction=Action
+FontAwesomeFolder=Direction
+FontAwesomeVersion=Version
+FontAwesomeLicence=Licence
+FontAwesomeAvailableStyles=Style d'icônes disponible
+FontAwesomeSaveButton=Sauvegarder
+FontAwesomeSuccessMessage=✅ Vous utilisez maintenant %s (%s, taille %s) du répertoire %s
+FontAwesomeDirectoryDownload=Pour ajouter un nouveau pack FontAwesome, vous devez créer un nouveau répertoire "fontawesome-<i><b>x(p)</b></i>" (x pour la version majeure, p s'il s'agit d'une version pro) (Exemple pour FontAwesome 6.0.72 Pro : "fontawesome-6p") dans <b>/theme/common/</b>. Ce répertoire contiendra votre pack FontAwesome dézippé.
 
 #
 # Custom CSS page

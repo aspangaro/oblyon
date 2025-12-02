@@ -2060,7 +2060,7 @@ div.fiche {
 .flexcontainer {
 <?php
 	if (!empty($conf->browser->browsername) && in_array($conf->browser->browsername, array('chrome', 'firefox', 'safari'))) {
-		echo 'display: inline-flex;'."\n";
+		print 'display: inline-flex;'."\n";
 	}
 ?>
     flex-flow: row wrap;
@@ -3361,6 +3361,312 @@ li.sec-nav__sub-item:focus, li.sec-nav__sub-item sec-nav__link:focus {
 /**
 * Login Block
 */
+div.login_block {
+    <?php if (getDolGlobalString('MAIN_MENU_INVERT')) { ?>
+        background-color: var(--bgnavleft);
+        height: 40px;
+    <?php } else { ?>
+        background-color: var(--bgnavtop);
+        height: 54px;
+    <?php } ?>
+    /* padding-right: 10px; */
+    <?php if (getDolGlobalString('OBLYON_STICKY_TOPBAR')) { ?>
+        position: fixed !important;
+    <?php } else { ?>
+        position: absolute !important;
+    <?php } ?>
+    top: 0;
+    <?php print $right; ?>: 0px;
+    z-index: 100;
+    <?php if (GETPOST("optioncss") == 'print') { ?>
+        display: none;
+    <?php } ?>
+}
+
+div.login_block a {
+	color: var(--bgnavtop_txt);
+	display: inline-block;
+}
+div.login_block span.aversion {
+    <?php if(getDolGlobalString('OBLYON_DISABLE_VERSION')) { ?>
+        display: none !important;
+    <?php } else { ?>
+        <?php if (getDolGlobalString('MAIN_MENU_INVERT')) { ?>
+            color: var(--bgnavleft_txt);
+        <?php } else { ?>
+            color: var(--bgnavtop_txt);
+        <?php } ?>
+        filter: contrast(0.7);
+    <?php } ?>
+}
+div.login_block table {
+	display: inline;
+}
+div.login {
+	white-space:nowrap;
+	font-weight: bold;
+	float: right;
+}
+div.login a {
+	color: var(--bgnavtop_txt);
+}
+div.login a:hover {
+	color: <?php print $maincolor; ?>;
+	text-decoration:underline;
+}
+
+div.login_block:after {
+    /*content: '\f013';*/
+    color: var(--bgnavtop_txt);
+    font-family: var(--fontawesomeFamily) !important;
+    font-size: 20px;
+    <?php if (getDolGlobalString('MAIN_MENU_INVERT')) { ?>
+        line-height: 40px;
+    <?php } else { ?>
+        line-height: 54px;
+    <?php } ?>
+}
+
+div.login_block:hover:after {
+    color: <?php print $maincolor; ?>;
+}
+div.login_block_tools {
+    margin-<?php print $right ?>: 8px;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: <?php print $disableimages ? '25' : '40'; ?>px;
+    height: <?php print $disableimages ? '25' : '40'; ?>px;
+}
+div.login_block_other {
+    display: inline-block;
+    vertical-align: middle;
+    clear: <?php print $disableimages ? 'none' : 'both'; ?>;
+    padding-top: 0;
+    text-align: <?php print $right ?>;
+    max-width: 200px;
+}
+div.login_block_user {
+	display: inline-block;
+	vertical-align: middle;
+    /*clear: left;*/
+    /*float: <?php print $left; ?>;*/
+    margin-right: 0px;
+}
+
+div.login_block_user .login a,
+div.login_block_user a {
+    display: table-cell;
+    <?php if (getDolGlobalString('MAIN_MENU_INVERT')) { ?>
+        font-size: 13px;
+    <?php } ?>
+    font-family: <?php print $fontmainmenu; ?>;
+    font-weight: 500;
+    <?php if (getDolGlobalString('MAIN_MENU_INVERT')) { ?>
+        height: 40px;
+    <?php } else { ?>
+        height: 54px;
+    <?php } ?>
+    max-width: 300px;
+    overflow: hidden;
+    padding: 0 3px;
+    text-overflow: ellipsis;
+    transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
+    vertical-align: middle;
+}
+
+div.login_block_user > .classfortooltip.login_block_elem2 {
+    <?php if (getDolGlobalString('MAIN_MENU_INVERT')) { ?>
+        height: 40px;
+    <?php } else { ?>
+        height: 54px;
+    <?php } ?>
+}
+
+div.login_block_other {
+    display: inline-block;
+    clear: <?php print $disableimages ? 'none' : 'both'; ?>;
+}
+
+.login_block_other {
+    <?php if (getDolGlobalString('MAIN_MENU_INVERT')) { ?>
+        background: var(--bgnavleft);
+    <?php } else { ?>
+        background: var(--bgnavtop);
+    <?php } ?>
+    <?php if (getDolGlobalString('MAIN_MENU_INVERT')) { ?>
+        display: none;
+    <?php } ?>
+    /* position: absolute; */
+    right: 0;
+    <?php if (getDolGlobalString('MAIN_MENU_INVERT')) { ?>
+        top: 40px;
+        height: 40px;
+        line-height: 36px;
+    <?php } else { ?>
+        top: 54px;
+        height: 54px;
+        line-height: 50px;
+    <?php } ?>
+    padding-top: 0;
+    text-align: right;
+    margin-right: 3px;
+}
+
+.login_block:hover > .login_block_other {
+    /* display: block; */
+}
+
+.login_block_user a img.loginphoto {
+    display: none;
+}
+
+.login_block_elem a span.atoplogin, .login_block_elem span.atoplogin {
+	vertical-align: middle;
+}
+
+.login_block_elem {
+    float: <?php print $left; ?>;
+    <?php if (getDolGlobalString('MAIN_MENU_INVERT')) { ?>
+        background-color: var(--bgnavleft);
+        height: 40px;
+    <?php } else { ?>
+        background-color: var(--bgnavtop);
+        height: 54px;
+    <?php } ?>
+    padding: 0;
+}
+
+.login_block_elem.classfortooltip {
+    margin: 0;
+}
+
+.login_block_elem a,
+.login_block td.classfortooltip a {
+    <?php if (getDolGlobalString('MAIN_MENU_INVERT')) { ?>
+        color: var(--bgnavleft_txt);
+        font-size: 16px;
+        height: 40px;
+        line-height: 36px;
+    <?php } else { ?>
+        color: var(--bgnavtop_txt);
+        font-size: 18px;
+        height: 54px;
+        line-height: 50px;
+    <?php } ?>
+    display: block;
+    font-family: var(--fontfamilydol);
+    padding: 0 3px;
+    text-decoration: none;
+    transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
+}
+
+.login_block_elem a:hover,
+.login_block td.classfortooltip a:hover {
+    <?php if (getDolGlobalString('MAIN_MENU_INVERT')) { ?>
+        color: var(--bgnavleft_txt_hover);
+    <?php } else { ?>
+        color: var(--bgnavtop_txt_hover);
+    <?php } ?>
+}
+
+.atoplogin, .atoplogin:hover {
+<?php if (getDolGlobalString('MAIN_MENU_INVERT')) { ?>
+    color: var(--bgnavleft_txt) !important;
+<?php } else { ?>
+    color: var(--bgnavtop_txt) !important;
+<?php } ?>
+}
+.login_block_getinfo {
+    text-align: center;
+}
+.login_block_getinfo div.login_block_user {
+    display: block;
+}
+.login_block_getinfo .atoplogin, .login_block_getinfo .atoplogin:hover {
+	color: #333 !important;
+	font-weight: normal !important;
+}
+.alogin, .alogin:hover {
+	font-weight: normal !important;
+	padding-top: 2px;
+}
+.alogin:hover, .atoplogin:hover {
+	text-decoration:underline !important;
+}
+span.fa.atoplogin, span.fa.atoplogin:hover {
+	font-size: 16px;
+	text-decoration: none !important;
+}
+.atoplogin #dropdown-icon-down, .atoplogin #dropdown-icon-up {
+	font-size: 0.7em;
+}
+
+.login_block_elem img.printer,
+.login_block_elem img.login,
+.login_block_elem img.help,
+.login_block td.classfortooltip img.printer,
+.login_block td.classfortooltip img.login,
+.login_block td.classfortooltip img.help {
+    vertical-align: baseline;
+}
+
+img.login, img.printer, img.help, img.entity {
+    /* padding: 0px 0px 0px 4px; */
+    /* margin: 0px 0px 0px 8px; */
+    text-decoration: none;
+    <?php if (getDolGlobalString('MAIN_MENU_INVERT')) { ?>
+        color: var(--bgnavleft_txt);
+    <?php } else { ?>
+        color: var(--bgnavtop_txt);
+    <?php } ?>
+    font-weight: bold;
+
+}
+
+.userimg.atoplogin img.userphoto, .userimgatoplogin img.userphoto {		/* size for user photo in login bar */
+    width: <?php print $disableimages ? '26' : '32'; ?>px;
+    height: <?php print $disableimages ? '26' : '32'; ?>px;
+    border-radius: 50%;
+    background-size: contain;
+	border: 1px solid;
+	border-color: rgba(255, 255, 255, 0.2);
+}
+img.userphoto {				/* size for user photo in lists */
+    border-radius: 0.72em;
+    width: 1.4em;
+    height: 1.4em;
+    background-size: contain;
+    vertical-align: middle;
+}
+
+img.userphotosmall {		/* size for user photo in lists */
+    border-radius: 0.6em;
+    width: 1.2em;
+    height: 1.2em;
+    background-size: contain;
+    vertical-align: middle;
+	background-color: #FFF;
+}
+img.userphoto[alt="Gravatar avatar"], img.photouserphoto.dropdown-user-image[alt="Gravatar avatar"] {
+	background: #fff;
+}
+form[name="addtime"] img.userphoto {
+	border: 1px solid #444;
+}
+
+.span-icon-user {
+    background-image: url(<?php print dol_buildpath($path.'/theme/'.$theme.'/img/object_user.png',1); ?>);
+    background-repeat: no-repeat;
+}
+
+.span-icon-password {
+    background-image: url(<?php print dol_buildpath($path.'/theme/'.$theme.'/img/lock.png',1); ?>);
+    background-repeat: no-repeat;
+}
 
 /*
 .span-icon-user input, .span-icon-password input {
@@ -3368,7 +3674,48 @@ margin-right: 30px;
 }
 */
 
+.login_block td.classfortooltip { height: 40px; }
 
+.login_block .classfortooltip:hover,
+.login_block .classfortooltip:focus {
+    <?php if (getDolGlobalString('MAIN_MENU_INVERT')) { ?>
+        background-color: var(--bgnavleft_hover);
+    <?php } else { ?>
+        background-color: var(--bgnavtop_hover);
+    <?php } ?>
+}
+
+div.login_block table { display: inline; }
+
+/* db inf v3.5 */
+td div.login {
+    white-space: nowrap;
+    padding: 0;
+    margin: 0;
+    font-weight: bold;
+    color: #f4f4f4;
+}
+
+div.login a,
+div.login_block_user a {
+    color: #f4f4f4;
+    font-size: 13px;
+}
+
+div.login a:hover {
+    color: <?php print $maincolor; ?>;
+    text-decoration: inherit;
+}
+
+.alogin {
+    font-weight: normal !important;
+    font-size: <?php print $fontsizesmaller; ?>px !important;
+}
+
+.alogin:hover {
+    text-decoration: underline !important;
+    color: <?php print $maincolor; ?> !important;
+}
 
 
 /*------------------------------------*\
@@ -5367,6 +5714,12 @@ input.liste_titre {
     border: 0;
     margin: inherit;
     padding: 0;
+}
+
+tr.liste_total td {
+	background-color: var(--colorbtitle) !important;
+	color: var(--colorftitle) !important;
+	font-weight: bold !important;
 }
 
 tr.liste_total,
@@ -10166,6 +10519,8 @@ div.tabs:first-of-type, .fiche > div.tabs
 @media (min-width: 768px) {
     #id-right > .fiche > form[action*="list.php"] div.div-table-responsive > table > tbody > * > :first-of-type:not(.actioncolumn),
     #id-right > .fiche > .tabBar > form[action*="list.php"] div.div-table-responsive > table > tbody > * > :first-of-type,
+    #id-right > .fiche > form[action*="list.php"] div.div-table-responsive > div.div-table-responsive-inside > table > tbody > * > :first-of-type,
+    #id-right > .fiche > .tabBar > form[action*="list.php"] div.div-table-responsive > div.div-table-responsive-inside > table > tbody > * > :first-of-type,
     #id-right > .fiche > form[action*="bankrecords.php"] div.div-table-responsive > table > tbody > * > :first-of-type,
     #id-right > .fiche > .tabBar > form[action*="bankrecords.php"] div.div-table-responsive > table > tbody > * > :first-of-type,
     #id-right > .fiche > form[action*="prelink.php"] div.div-table-responsive > table > tbody > * > :first-of-type,
@@ -10223,6 +10578,8 @@ div.tabs:first-of-type, .fiche > div.tabs
 <?php if (getDolGlobalString('FIX_STICKY_COLUMN_LAST') || getDolGlobalString('OBLYON_STICKY_COLUMN_LAST')) { ?>
 #id-right > .fiche > form[action*="list.php"] div.div-table-responsive > table > tbody > * > :last-of-type,
 #id-right > .fiche > .tabBar > form[action*="list.php"] div.div-table-responsive > table > tbody > * > :last-of-type,
+#id-right > .fiche > form[action*="list.php"] div.div-table-responsive > div.div-table-responsive-inside > table > tbody > * > :last-of-type,
+#id-right > .fiche > .tabBar > form[action*="list.php"] div.div-table-responsive > div.div-table-responsive-inside > table > tbody > * > :last-of-type,
 #id-right > .fiche > form[action*="bankrecords.php"] div.div-table-responsive > table > tbody > * > :last-of-type,
 #id-right > .fiche > .tabBar > form[action*="bankrecords.php"] div.div-table-responsive > table > tbody > * > :last-of-type,
 #id-right > .fiche > form[action*="prelink.php"] div.div-table-responsive > table > tbody > * > :last-of-type,

@@ -176,7 +176,7 @@
 	$colorNotifErrorTxt			= getDolGlobalString('OBLYON_COLOR_NOTIF_ERROR_TEXT', '#a72947');		// default value: #a72947
 	$colorTextTabActive			= getDolGlobalString('OBLYON_COLOR_TEXTTABACTIVE', '#222222');			// default value: #222222
 	$colorBckgrdInput			= getDolGlobalString('OBLYON_COLOR_INPUT_BCKGRD', '#DEDEDE');			// default value: #DEDEDE
-	$color1BckgrdInfobox		= getDolGlobalString('OBLYON_COLOR_INFOBOX_BCKGRD1', '#444444');		// default value: #444444
+	$color1BckgrdInfobox		= getDolGlobalString('OBLYON_COLOR_INFOBOX_BCKGRD1', '#a2e0b8');		// default value: #a2e0b8
 	$color2BckgrdInfobox		= getDolGlobalString('OBLYON_COLOR_INFOBOX_BCKGRD2', '#E4EFE8');		// default value: #E4EFE8
 	$colorBorderActionColumn	= getDolGlobalString('OBLYON_COLOR_BORDER_ACTIONCOLUMN', '#BBBBBB');	// default value: #BBBBBB
 	$bgotherbox					= '#f4f4f4';															// default value: #E6E6E6	//	Other information boxes on home page
@@ -199,18 +199,18 @@
 		}
 	}
 	$logo_background_color		= getDolGlobalString('OBLYON_COLOR_LOGO_BCKGRD', '#FFFFFF');	// default value : #FFFFFF
-	$bgcolor					= getDolGlobalString('OBLYON_COLOR_BCKGRD', '#F4F4F4');	// default value : #F4F4F4
+	$bgcolor					= getDolGlobalString('OBLYON_COLOR_BCKGRD', '#F4F4F4');			// default value : #F4F4F4
 	$login_bgcolor				= getDolGlobalString('OBLYON_COLOR_LOGIN_BCKGRD', '#F4F4F4');	// default value : #F4F4F4
-	$colorbtitle				= getDolGlobalString('OBLYON_COLOR_BTITLE', '#E09430');	// default value : #E09430
-	$colorftitle				= getDolGlobalString('OBLYON_COLOR_FTITLE', '#F4F4F4');	// default value : #F4F4F4
-	$colorstitle				= getDolGlobalString('OBLYON_COLOR_STITLE', '#F4F4F4');	// default value : #F4F4F4
-	$colorbline					= getDolGlobalString('OBLYON_COLOR_BLINE', '#FFFFFF');	// default value : #FFFFFF
+	$colorbtitle				= getDolGlobalString('OBLYON_COLOR_BTITLE', '#E09430');			// default value : #E09430
+	$colorftitle				= getDolGlobalString('OBLYON_COLOR_FTITLE', '#F4F4F4');			// default value : #F4F4F4
+	$colorStitle				= getDolGlobalString('OBLYON_COLOR_STITLE', '#F4F4F4');			// default value : #F4F4F4
+	$colorbline					= getDolGlobalString('OBLYON_COLOR_BLINE', '#FFFFFF');			// default value : #FFFFFF
 	$colorbline_hover			= getDolGlobalString('OBLYON_COLOR_BLINE_HOVER', '#F1F1F1');	// default value : #F1F1F1
-	$colorfline					= getDolGlobalString('OBLYON_COLOR_FLINE', '#444444');	// default value : #444444
+	$colorfline					= getDolGlobalString('OBLYON_COLOR_FLINE', '#444444');			// default value : #444444
 	$colorfline_hover			= getDolGlobalString('OBLYON_COLOR_FLINE_HOVER', '#222222');	// default value : #222222
 	$colorfdatedefault			= getDolGlobalString('OBLYON_COLOR_FDATE_DEFAULT', '#FF0000');	// default value : #FF0000
 	$colorfdateselected			= getDolGlobalString('OBLYON_COLOR_FDATE_SELECTED', '#FF0000');	// default value : #FF0000
-	$invertratiofilter			= getDolGlobalString('THEME_INVERT_RATIO_FILTER', 0);	// default value : 0
+	$invertratiofilter			= getDolGlobalString('THEME_INVERT_RATIO_FILTER', 0);			// default value : 0
 
 	$colorbackhmenu1			= getDolGlobalString('THEME_ELDY_TOPMENU_BACK1');
 	$colorbackvmenu1			= getDolGlobalString('THEME_ELDY_VERMENU_BACK1');

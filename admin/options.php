@@ -60,8 +60,7 @@ if (preg_match('/set_(.*)/', $action, $reg)) {
 }
 	// Update buttons management
 if (preg_match('/update_(.*)/', $action, $reg)) {
-	$list									= array('Gen'   => array('OBLYON_FONT_SIZE', 'OBLYON_IMAGE_HEIGHT_TABLE', 'OBLYON_FONT', 'OBLYON_FONT_FAMILY'),
-                                                    'Card'  => array('MAIN_MAXTABS_IN_CARD'));
+	$list									= array('Card'  => array('OBLYON_FONT_SIZE', 'OBLYON_IMAGE_HEIGHT_TABLE', 'OBLYON_FONT', 'OBLYON_FONT_FAMILY', 'MAIN_MAXTABS_IN_CARD'));
 	$confkey								= $reg[1];
 	$error									= 0;
 	foreach ($list[$confkey] as $constname)	$result	= dolibarr_set_const($db, $constname, GETPOST($constname, 'alpha'), 'chaine', 0, 'Oblyon module', $conf->entity);
@@ -104,14 +103,18 @@ $font_options				= array ('Arial' 				=> 'Arial',
 $currentFont				= getDolGlobalString('OBLYON_FONT_FAMILY', 'Arial');
 
 // View *****************************************
-$page_name = $langs->trans('OblyonOptionsTitle');
-llxHeader('', $page_name);
+$help_url = '';
+$title = $langs->trans('OblyonOptionsTitle');
+
+llxHeader('', $title, $help_url, '', 0, 0, '', '', 'mod-oblyon page-admin-options');
+
 $linkback = '<a href = "'.DOL_URL_ROOT.'/admin/modules.php?restore_lastsearch_values=1">'.$langs->trans('BackToModuleList').'</a>';
-print load_fiche_titre($page_name, $linkback);
+print load_fiche_titre($title, $linkback, 'object_inovea.png@oblyon');
 
 // Configuration header *************************
 $head = oblyon_admin_prepare_head();
-print dol_get_fiche_head($head, 'options', $langs->trans('Module432573Name'), 0, 'inovea@oblyon');
+
+print dol_get_fiche_head($head, 'options', $title, -1);
 
 // setup page goes here *************************
 $easyaVersion = getDolGlobalFloat('EASYA_VERSION', 0);
@@ -234,9 +237,6 @@ print '</tbody>';
 print '</table>';
 print '<br>';
 
-oblyon_print_btn_action('Gen');
-
-print '<br>';
 print '<table class="noborder centpercent">';
 print '<tbody>';
 print '<tr class="liste_titre">';
@@ -249,19 +249,20 @@ print "</tr>\n";
 $countl = 1;
 
 if ($easyaVersion >= "2024.0.0" || (float) DOL_VERSION >= 18.0) {
+    // Select Column on left - MAIN_CHECKBOX_LEFT_COLUMN
     $metas	= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'options');
-    oblyon_print_input('MAIN_CHECKBOX_LEFT_COLUMN', 'on_off', 'L' . $countl . ' - ' . $langs->trans('SwitchColunmOnLeft'), '', $metas, 2, 1);    // Sticky table headers columns
+    oblyon_print_input('MAIN_CHECKBOX_LEFT_COLUMN', 'on_off', 'L' . $countl . ' - ' . $langs->trans('SwitchColunmOnLeft'), '', $metas, 2, 1);
     $countleftcheckbox = $countl;
     $countl++;
 }
 if ($easyaVersion >= "2024.0.0" || (float) DOL_VERSION >= 18.0) {
     // Sticky title, pagination and "Add" element in list - FIX_TITLE_IN_LIST
     $metas	= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'options');
-    oblyon_print_input('FIX_TITLE_IN_LIST', 'on_off', 'L' . $countl . ' - ' . $langs->trans('FixTitleInList'), '', $metas, 2, 1);    // Sticky table headers columns
-    $countleftcheckbox = $countl;
+    oblyon_print_input('FIX_TITLE_IN_LIST', 'on_off', 'L' . $countl . ' - ' . $langs->trans('FixTitleInList') . $labs_picto, '', $metas, 2, 1);
     $countl++;
 }
 if ($easyaVersion >= "2024.0.0" || (float) DOL_VERSION >= 19.0) {
+    // Remove Kanban view in list - DISABLE_KANBAN_VIEW_IN_LIST
     // Old Compatibility
     if (getDolGlobalString('OBLYON_DISABLE_KANBAN_VIEW_IN_LIST')) {
         getDolGlobalString('DISABLE_KANBAN_VIEW_IN_LIST') == 1;
@@ -394,7 +395,7 @@ oblyon_print_input('FCKEDITOR_ENABLE_SCAYT_AUTOSTARTUP', 'on_off', 'K' . $countk
 $countk++;
 
 $metas	= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'options');
-oblyon_print_input('MAIN_SECURITY_ALLOW_UNSECURED_LABELS_WITH_HTML', 'on_off', 'K' . $countk . ' - ' . $langs->trans('MainSecurityAllowUnsecuredLabelsWithHtml'), '', $metas, 2, 1);    // Allow HTML tags into products label
+oblyon_print_input('MAIN_SECURITY_ALLOW_UNSECURED_LABELS_WITH_HTML', 'on_off', 'K' . $countk . ' - ' . $langs->trans('MainSecurityAllowUnsecuredLabelsWithHtml').  ' (<i>'. $langs->trans("NotRecommended") . '</i>)', '', $metas, 2, 1);    // Allow HTML tags into products label
 $countk++;
 
 print '</tbody>';

@@ -479,13 +479,13 @@ if ($result == -1) {
 
 // View *****************************************
 $page_name	= $langs->trans('OblyonColorsTitle');
-llxHeader('', $page_name, '', '', 0, 0, array('/oblyon/js/jscolor.js', '/oblyon/js/jquery.ui.touch-punch.min.js'), '');
+llxHeader('', $page_name, '', '', 0, 0, array('/oblyon/js/jscolor.js', '/oblyon/js/jquery.ui.touch-punch.min.js'), '', 'mod-oblyon page-admin-colors');
 $linkback	= '<a href = "'.DOL_URL_ROOT.'/admin/modules.php?restore_lastsearch_values=1">'.$langs->trans('BackToModuleList').'</a>';
-print load_fiche_titre($page_name, $linkback);
+print load_fiche_titre($page_name, $linkback, 'object_inovea.png@oblyon');
 
 // Configuration header *************************
 $head		= oblyon_admin_prepare_head();
-print dol_get_fiche_head($head, 'colors', $langs->trans('Module432573Name'), 0, 'inovea@oblyon');
+print dol_get_fiche_head($head, 'colors', $page_name, -1);
 
 // setup page goes here *************************
 print '	<script type = "text/javascript">

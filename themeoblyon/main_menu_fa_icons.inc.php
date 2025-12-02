@@ -297,6 +297,14 @@
     content: '\f79c';
 }
 
+icon--customreports:before {
+    content: '\f201';
+}
+
+icon--blockedlogbrowser:before {
+    content: '\f013';
+}
+
 /* External modules */
 .icon--cron:before {
     content: '\f017';
