@@ -1840,7 +1840,7 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 									if ($objp->nature == 5 && isModEnabled('expensereport') && !getDolGlobalString('ACCOUNTING_DISABLE_BINDING_ON_EXPENSEREPORTS')) {
 										$nature="expensereports";
 									}
-									if ($objp->nature == 1 && isModEnabled('asset') || isModEnabled('invoice') || isModEnabled('supplier_invoice')) {
+									if ($objp->nature == 1 && (isModEnabled('asset') || isModEnabled('invoice') || isModEnabled('supplier_invoice'))) {
 										$nature = "various";
 									}
 									if ($objp->nature == 8) {
