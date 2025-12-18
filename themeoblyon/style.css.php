@@ -203,7 +203,7 @@
 	$login_bgcolor				= getDolGlobalString('OBLYON_COLOR_LOGIN_BCKGRD', '#F4F4F4');	// default value : #F4F4F4
 	$colorbtitle				= getDolGlobalString('OBLYON_COLOR_BTITLE', '#E09430');			// default value : #E09430
 	$colorftitle				= getDolGlobalString('OBLYON_COLOR_FTITLE', '#F4F4F4');			// default value : #F4F4F4
-	$colorStitle				= getDolGlobalString('OBLYON_COLOR_STITLE', '#F4F4F4');			// default value : #F4F4F4
+	$colorstitle				= getDolGlobalString('OBLYON_COLOR_STITLE', '#F4F4F4');			// default value : #F4F4F4
 	$colorbline					= getDolGlobalString('OBLYON_COLOR_BLINE', '#FFFFFF');			// default value : #FFFFFF
 	$colorbline_hover			= getDolGlobalString('OBLYON_COLOR_BLINE_HOVER', '#F1F1F1');	// default value : #F1F1F1
 	$colorfline					= getDolGlobalString('OBLYON_COLOR_FLINE', '#444444');			// default value : #444444
