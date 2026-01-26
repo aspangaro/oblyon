@@ -33,7 +33,7 @@ if (!defined('ISLOADEDBYSTEELSHEET')) {
 .info-box {
 	display: block;
 	position: relative;
-	min-height: 94px;
+	min-height: 96px;
 	background: #fff;
     <?php if(getDolGlobalString('OBLYON_INFOXBOX_BACKGROUND')) { ?>
         background: <?php print getDolGlobalString('OBLYON_INFOXBOX_BACKGROUND'); ?> !important;
