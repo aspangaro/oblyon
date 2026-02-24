@@ -416,15 +416,22 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
     }
     .dropdown-content .butAction {
         background: none;
-        color: #000 !important;
+        color: var(--colortext) !important;
     }
     .dropdown-content a.butAction {
         display: flex;
         background-color: unset !important;
     }
-    .dropdown-content .butAction:hover {
+    .dropdown-content .butAction:hover, .dropdown-content a.butAction:hover {
         box-shadow: none;
-        text-decoration: underline;
+        text-decoration: none;
+    <?php if (getDolGlobalString('MAIN_MENU_INVERT')) { ?>
+            background-color: var(--bgnavtop_hover) !important;
+            color: var(--bgnavtop_txt) !important;
+    <?php } else { ?>
+            background-color: var(--bgnavleft_hover) !important;
+            color: var(--bgnavleft_txt) !important;
+    <?php } ?>
     }
     .dropdown-content .butActionRefused {
         margin-left: 0;
@@ -434,6 +441,19 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
 
     .dropdown-holder.open .dropdown-content {
         display: block;
+        background-color: var(--bgcolor) !important;
+        color: var(--colortext) !important;
+    }
+    /* dropdown --up variant */
+    .dropdown-holder.--up .dropdown-content {
+        bottom: auto;
+        top: 0;
+        transform: translateY(-100%);
+    }
+    /* dropdown --left variant */
+    .dropdown-holder.--left .dropdown-content {
+        right: auto;
+        left: 12px;
     }
 
     /** dropdown arrow used to clearly identify parent button of dropdown*/
@@ -449,6 +469,18 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
         border-width: 0 var(--triangleBorderSize) var(--triangleBorderSize) var(--triangleBorderSize);
         border-color: transparent transparent #ffff transparent;
         transform: rotate(0deg);
+    }
+    /* dropdown --up arrow variant */
+    .dropdown-holder.--up.open .dropdown-content::before {
+        top: auto;
+        bottom: calc(var(--triangleBorderSize) * -1);
+        border-width: 0 var(--triangleBorderSize) var(--triangleBorderSize) var(--triangleBorderSize);
+        transform: rotate(180deg);
+    }
+    /* dropdown --left arrow variant */
+    .dropdown-holder.--left.open .dropdown-content::before {
+        right: auto;
+        left: 12px;
     }
 
     /*
