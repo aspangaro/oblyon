@@ -1540,7 +1540,7 @@ div.warning {
     padding-bottom: 8px;
     margin: 0.5em 0em 0.5em 0em;
 	background: <?php print $colorWarningBg; ?>;
-	color: <?php print $colorWarningTxt; ?>;
+	color: <?php print $colorWarningTxt; ?> !important;
 }
 
 /* Error message */
@@ -1553,7 +1553,7 @@ div.error {
     padding-bottom: 8px;
     margin: 0.5em 0em 0.5em 0em;
 	background: <?php print $colorErrorBg; ?>;
-	color: <?php print $colorErrorTxt; ?>;
+	color: <?php print $colorErrorTxt; ?> !important;
 	font-size: unset !important;
 }
 
@@ -1568,7 +1568,7 @@ div.info {
 
 /* Warning message */
 	background: <?php print $colorInfoBg; ?>;
-	color: <?php print $colorInfoTxt; ?>;
+	color: <?php print $colorInfoTxt; ?> !important;
 
 /* Error message */
 }
