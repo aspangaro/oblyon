@@ -5186,7 +5186,29 @@ div.tabsAction {
         <?php } ?>
     <?php } ?>
 }
-
+<?php if (getDolGlobalString('FIX_ABSOLUTE_BUTTONS_ACTION_CARD') && GETPOST("optioncss") != 'print') { ?>
+    /* Sticky action bar: raise z-index of dropdown above the bar (z-index 4) */
+    /* The --up class is applied automatically by JS when the dropdown overflows the viewport */
+    div.tabsAction .dropdown-holder {
+        position: relative;
+        z-index: 5;
+    }
+    div.tabsAction .dropdown-holder .dropdown-content {
+        bottom: auto !important;
+        top: 0 !important;
+        background-color: var(--bgcolor) !important;
+    }
+        /* Dropdown links match the theme */
+    div.tabsAction .dropdown-content .butAction {
+        color: var(--colortext) !important;
+        background: none !important;
+        border: none !important;
+    }
+    div.tabsAction .dropdown-content .butAction:hover {
+        background-color: var(--butactionbg) !important;
+        color: var(--textbutaction) !important;
+    }
+<?php } ?>
 div.tabactive,
 div.tabactive a.tab {
 	background-color: var(--colorbacktabactive);
