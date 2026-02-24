@@ -416,15 +416,22 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
     }
     .dropdown-content .butAction {
         background: none;
-        color: #000 !important;
+        color: var(--colortext) !important;
     }
     .dropdown-content a.butAction {
         display: flex;
         background-color: unset !important;
     }
-    .dropdown-content .butAction:hover {
+    .dropdown-content .butAction:hover, .dropdown-content a.butAction:hover {
         box-shadow: none;
-        text-decoration: underline;
+        text-decoration: none;
+    <?php if (getDolGlobalString('MAIN_MENU_INVERT')) { ?>
+            background-color: var(--bgnavtop_hover) !important;
+            color: var(--bgnavtop_txt) !important;
+    <?php } else { ?>
+            background-color: var(--bgnavleft_hover) !important;
+            color: var(--bgnavleft_txt) !important;
+    <?php } ?>
     }
     .dropdown-content .butActionRefused {
         margin-left: 0;
@@ -434,6 +441,8 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
 
     .dropdown-holder.open .dropdown-content {
         display: block;
+        background-color: var(--bgcolor) !important;
+        color: var(--colortext) !important;
     }
 
     /* dropdown --up variant */
