@@ -2959,7 +2959,7 @@ img.photorefnoborder {
             max-height: 54px;
         <?php } ?>
         margin: 0;
-        padding-<?php print $right; ?>: 195px;
+        padding-<?php print $right; ?>: <?php echo ((float) $maxwidthloginblock + 15); ?>px;
         z-index: 95;
         <?php if (getDolGlobalString('OBLYON_STICKY_TOPBAR')) { ?>
             position: fixed;
@@ -3167,7 +3167,7 @@ transition: all .2s ease-in-out;
     max-height: 40px;
     <?php print $left; ?>: 0;
     margin: 0;
-    padding-<?php print $right; ?>: 160px;
+    padding-<?php print $right; ?>: <?php echo ((float) $maxwidthloginblock + 15); ?>px;
     z-index: 95;
     <?php if (getDolGlobalString('OBLYON_STICKY_TOPBAR')) { ?>
         position: fixed;
