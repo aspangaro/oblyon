@@ -24,7 +24,7 @@
 	************************************************/
 
 	// Dolibarr environment *************************
-	$res															= 0;
+	$res	= 0;
 	// Try main.inc.php into web root known defined into CONTEXT_DOCUMENT_ROOT (not always defined)
 	if (empty($res) && !empty($_SERVER['CONTEXT_DOCUMENT_ROOT'])) {
 		$res	= @include $_SERVER['CONTEXT_DOCUMENT_ROOT'].'/main.inc.php';
