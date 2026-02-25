@@ -444,12 +444,14 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
         background-color: var(--bgcolor) !important;
         color: var(--colortext) !important;
     }
+
     /* dropdown --up variant */
     .dropdown-holder.--up .dropdown-content {
         bottom: auto;
         top: 0;
         transform: translateY(-100%);
     }
+
     /* dropdown --left variant */
     .dropdown-holder.--left .dropdown-content {
         right: auto;
@@ -470,6 +472,7 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
         border-color: transparent transparent #ffff transparent;
         transform: rotate(0deg);
     }
+
     /* dropdown --up arrow variant */
     .dropdown-holder.--up.open .dropdown-content::before {
         top: auto;
@@ -477,6 +480,7 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
         border-width: 0 var(--triangleBorderSize) var(--triangleBorderSize) var(--triangleBorderSize);
         transform: rotate(180deg);
     }
+
     /* dropdown --left arrow variant */
     .dropdown-holder.--left.open .dropdown-content::before {
         right: auto;

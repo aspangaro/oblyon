@@ -282,10 +282,6 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
             height: 54px;
         <?php } ?>
     }
-    div.login_block_other {
-        display: inline-block;
-        clear: <?php print $disableimages ? 'none' : 'both'; ?>;
-    }
     .login_block_other {
         <?php if (getDolGlobalString('MAIN_MENU_INVERT')) { ?>
             background: var(--bgnavleft);
