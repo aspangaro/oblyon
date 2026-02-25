@@ -1130,11 +1130,6 @@ input.buttonpaymentcheque {
     background-repeat: no-repeat;
     background-position: 8px 7px;
 }
-input.buttonpaymentcheque {
-    background-image: url(<?php print dol_buildpath($path.'/paypal/img/object_paypal.png',1) ?>);
-    background-repeat: no-repeat;
-    background-position: 5px 4px;
-}
 input.buttonpaymentpaypal {
     background-image: url(<?php print dol_buildpath($path.'/paypal/img/object_paypal.png',1) ?>);
     background-repeat: no-repeat;
