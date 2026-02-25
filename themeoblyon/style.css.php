@@ -316,6 +316,9 @@
 	if (isModEnabled('bookmark')) {
 		$maxwidthloginblock	= $maxwidthloginblock + 55;
 	}
+	if (isModEnabled('multicompany')) {
+		$maxwidthloginblock	= $maxwidthloginblock + 55;
+	}
 	print '/*'."\n";
 	print 'colorbacklineimpair1						= '.$colorbacklineimpair1."\n";
 	print 'colorbacklineimpair2						= '.$colorbacklineimpair2."\n";
