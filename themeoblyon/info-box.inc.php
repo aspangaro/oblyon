@@ -378,7 +378,7 @@ $conf->global->THEME_AGRESSIVENESS_RATIO = GETPOSTISSET('THEME_AGRESSIVENESS_RAT
 }
 
 .nonature-back {
-	background-color: #EEE;
+	background-color: var(--inputbackgroundcolor); // infras add
 }
 .prospect-back {
 	background-color: #a7c5b0 !important;
