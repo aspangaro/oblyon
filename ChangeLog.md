@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+### [3.2.0] - Compatibility 18.0.x - 23.0.x (2026/06/19)
+### Added
+- Touch screen menu mode (tap-to-toggle): drop-down menus open on tap instead of :hover. Auto-detected on touch devices, plus a new option to force it (Menus tab)
+### Fixed
+- Drop-down menus (inverted top menu, reduced left menu) collapsing uncontrollably on touch screens because they relied on :hover. A tap now opens the sub-menu and keeps it open without loading the parent page
 ### [3.1.0] - Compatibility 18.0.x - 23.0.x (2025/11/08)
 
 ### Added

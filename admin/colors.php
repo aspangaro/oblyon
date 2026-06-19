@@ -113,7 +113,15 @@ $listcolor	= array('top'		=> array('OBLYON_COLOR_TOPMENU_BCKGRD',
 										'THEME_ELDY_TEXTTITLENOTAB',
 										'THEME_ELDY_TEXTTITLE',
 										'THEME_ELDY_TEXT',
-										'THEME_ELDY_TEXTLINK'
+										'THEME_ELDY_TEXTLINK',
+										'THEME_ELDY_PROSPECTBACK',
+										'THEME_ELDY_CUSTOMERBACK',
+										'THEME_ELDY_VENDORBACK',
+										'THEME_ELDY_USERBACK',
+										'THEME_ELDY_COLORNATURE',
+										'THEME_ELDY_MEMBER_COMPANYBACK',
+										'THEME_ELDY_MEMBER_INDIVIDUALBACK',
+										'THEME_ELDY_COLORMENBER',
 										)
 					);
 $listtheme	= array('green'		=> array('OBLYON_INFOXBOX_BACKGROUND'			=> '#FFFFFF',
@@ -176,7 +184,15 @@ $listtheme	= array('green'		=> array('OBLYON_INFOXBOX_BACKGROUND'			=> '#FFFFFF'
 										'THEME_ELDY_TEXTTITLENOTAB'				=> '#222222',
 										'THEME_ELDY_TEXTTITLE'					=> '#28283C',
 										'THEME_ELDY_TEXT'						=> '#000000',
-										'THEME_ELDY_TEXTLINK'					=> '#1C1C1C'
+										'THEME_ELDY_TEXTLINK'					=> '#1C1C1C',
+										'THEME_ELDY_PROSPECTBACK'				=> '#A7C5B0',
+										'THEME_ELDY_CUSTOMERBACK'				=> '#55955D',
+										'THEME_ELDY_VENDORBACK'					=> '#599CAF',
+										'THEME_ELDY_USERBACK'					=> '#79633F',
+										'THEME_ELDY_COLORNATURE'				=> '#FFFFFF',
+										'THEME_ELDY_MEMBER_COMPANYBACK'			=> '#E4E4E4',
+										'THEME_ELDY_MEMBER_INDIVIDUALBACK'		=> '#E4E4E4',
+										'THEME_ELDY_COLORMENBER'				=> '#666666'
 										),
 					'dark'		=> array('OBLYON_INFOXBOX_BACKGROUND'			=> '#FFFFFF',
 										'OBLYON_COLOR_TOPMENU_BCKGRD'			=> '#333333',
@@ -238,7 +254,15 @@ $listtheme	= array('green'		=> array('OBLYON_INFOXBOX_BACKGROUND'			=> '#FFFFFF'
 										'THEME_ELDY_TEXTTITLENOTAB'				=> '#222222',
 										'THEME_ELDY_TEXTTITLE'					=> '#28283C',
 										'THEME_ELDY_TEXT'						=> '#000000',
-										'THEME_ELDY_TEXTLINK'					=> '#1C1C1C'
+										'THEME_ELDY_TEXTLINK'					=> '#1C1C1C',
+										'THEME_ELDY_PROSPECTBACK'				=> '#A7C5B0',
+										'THEME_ELDY_CUSTOMERBACK'				=> '#55955D',
+										'THEME_ELDY_VENDORBACK'					=> '#599CAF',
+										'THEME_ELDY_USERBACK'					=> '#79633F',
+										'THEME_ELDY_COLORNATURE'				=> '#FFFFFF',
+										'THEME_ELDY_MEMBER_COMPANYBACK'			=> '#E4E4E4',
+										'THEME_ELDY_MEMBER_INDIVIDUALBACK'		=> '#E4E4E4',
+										'THEME_ELDY_COLORMENBER'				=> '#666666'
 										),
 					'blue'		=> array('OBLYON_INFOXBOX_BACKGROUND'			=> '#FFFFFF',
 										'OBLYON_COLOR_TOPMENU_BCKGRD'			=> '#092D5C',
@@ -300,7 +324,15 @@ $listtheme	= array('green'		=> array('OBLYON_INFOXBOX_BACKGROUND'			=> '#FFFFFF'
 										'THEME_ELDY_TEXTTITLENOTAB'				=> '#222222',
 										'THEME_ELDY_TEXTTITLE'					=> '#28283C',
 										'THEME_ELDY_TEXT'						=> '#000000',
-										'THEME_ELDY_TEXTLINK'					=> '#1C1C1C'
+										'THEME_ELDY_TEXTLINK'					=> '#1C1C1C',
+										'THEME_ELDY_PROSPECTBACK'				=> '#A7C5B0',
+										'THEME_ELDY_CUSTOMERBACK'				=> '#55955D',
+										'THEME_ELDY_VENDORBACK'					=> '#599CAF',
+										'THEME_ELDY_USERBACK'					=> '#79633F',
+										'THEME_ELDY_COLORNATURE'				=> '#FFFFFF',
+										'THEME_ELDY_MEMBER_COMPANYBACK'			=> '#E4E4E4',
+										'THEME_ELDY_MEMBER_INDIVIDUALBACK'		=> '#E4E4E4',
+										'THEME_ELDY_COLORMENBER'				=> '#666666'
 										),
 					'night'		=> array('OBLYON_INFOXBOX_BACKGROUND'			=> '#444444',
 										'OBLYON_COLOR_TOPMENU_BCKGRD'			=> '#222222',
@@ -362,7 +394,15 @@ $listtheme	= array('green'		=> array('OBLYON_INFOXBOX_BACKGROUND'			=> '#FFFFFF'
 										'THEME_ELDY_TEXTTITLENOTAB'				=> '#FFFFFF',
 										'THEME_ELDY_TEXTTITLE'					=> '#28283C',
 										'THEME_ELDY_TEXT'						=> '#000000',
-										'THEME_ELDY_TEXTLINK'					=> '#1C1C1C'
+										'THEME_ELDY_TEXTLINK'					=> '#1C1C1C',
+										'THEME_ELDY_PROSPECTBACK'				=> '#A7C5B0',
+										'THEME_ELDY_CUSTOMERBACK'				=> '#55955D',
+										'THEME_ELDY_VENDORBACK'					=> '#599CAF',
+										'THEME_ELDY_USERBACK'					=> '#79633F',
+										'THEME_ELDY_COLORNATURE'				=> '#FFFFFF',
+										'THEME_ELDY_MEMBER_COMPANYBACK'			=> '#E4E4E4',
+										'THEME_ELDY_MEMBER_INDIVIDUALBACK'		=> '#E4E4E4',
+										'THEME_ELDY_COLORMENBER'				=> '#666666'
 										),
 					'light'		=> array('OBLYON_INFOXBOX_BACKGROUND'			=> '#FFFFFF',
 										'OBLYON_COLOR_TOPMENU_BCKGRD'			=> '#FFFFFF',
@@ -424,7 +464,15 @@ $listtheme	= array('green'		=> array('OBLYON_INFOXBOX_BACKGROUND'			=> '#FFFFFF'
 										'THEME_ELDY_TEXTTITLENOTAB'				=> '#222222',
 										'THEME_ELDY_TEXTTITLE'					=> '#28283C',
 										'THEME_ELDY_TEXT'						=> '#000000',
-										'THEME_ELDY_TEXTLINK'					=> '#1C1C1C'
+										'THEME_ELDY_TEXTLINK'					=> '#1C1C1C',
+										'THEME_ELDY_PROSPECTBACK'				=> '#A7C5B0',
+										'THEME_ELDY_CUSTOMERBACK'				=> '#55955D',
+										'THEME_ELDY_VENDORBACK'					=> '#599CAF',
+										'THEME_ELDY_USERBACK'					=> '#79633F',
+										'THEME_ELDY_COLORNATURE'				=> '#FFFFFF',
+										'THEME_ELDY_MEMBER_COMPANYBACK'			=> '#E4E4E4',
+										'THEME_ELDY_MEMBER_INDIVIDUALBACK'		=> '#E4E4E4',
+										'THEME_ELDY_COLORMENBER'				=> '#666666'
 									)
 					);
 
@@ -442,7 +490,9 @@ if ($action == 'restoreParams') {
 // On / Off management
 if (preg_match('/set_(.*)/', $action, $reg)) {
 	$confkey	= $reg[1];
-	$result		= dolibarr_set_const($db, $confkey, GETPOST('value'), 'chaine', 0, 'Oblyon module', $conf->entity);
+	if (preg_match('/^(OBLYON_|THEME_|MAIN_|FIX_|DISABLE_)/', $confkey)) {
+		$result		= dolibarr_set_const($db, $confkey, GETPOST('value', 'alphanohtml'), 'chaine', 0, 'Oblyon module', $conf->entity);
+	}
 }
 // Update buttons management
 if (preg_match('/update_(.*)/', $action, $reg)) {
@@ -496,7 +546,7 @@ print '	<script type = "text/javascript">
 				});
 			</script>';
 
-print '<form action = "'.$_SERVER['PHP_SELF'].'" method = "POST" enctype = "multipart/form-data">
+print '<form action = "'.dol_escape_htmltag($_SERVER['PHP_SELF']).'" method = "POST" enctype = "multipart/form-data">
 				<input type="hidden" name="token" value="'.newToken().'" />
 				<input type="hidden" name="action" value="update">
 				<input type="hidden" name="page_y" value="">
@@ -519,7 +569,7 @@ print '<form action = "'.$_SERVER['PHP_SELF'].'" method = "POST" enctype = "mult
 	print '				<tr>';
 	foreach ($listtheme as $name => $values) {
 		print '				<td class = "center">
-								<a title = "'.$langs->trans('Oblyon'.$name).'" href = "'.$_SERVER['PHP_SELF'].'?action=update_theme&token='.newToken().'&value='.$name.'">'.img_picto($langs->trans('Oblyon'.$name), 'oblyon'.$name.'.png@oblyon', 'width = "50%"').'
+								<a title = "'.$langs->trans('Oblyon'.$name).'" href = "'.dol_escape_htmltag($_SERVER['PHP_SELF']).'?action=update_theme&token='.newToken().'&value='.urlencode($name).'">'.img_picto($langs->trans('Oblyon'.$name), 'oblyon'.$name.'.png@oblyon', 'width = "50%"').'
 									<br/>'.$langs->trans('Oblyon'.$name).'
 								</a>
 							</td>';

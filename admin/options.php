@@ -56,7 +56,9 @@ if ($action == 'restoreParams')	$result	= oblyon_restore_module ('oblyon');
 // On / Off management
 if (preg_match('/set_(.*)/', $action, $reg)) {
 	$confkey	= $reg[1];
-	$result		= dolibarr_set_const($db, $confkey, GETPOST('value'), 'chaine', 0, 'Oblyon module', $conf->entity);
+	if (preg_match('/^(OBLYON_|THEME_|MAIN_|FIX_|DISABLE_)/', $confkey)) {
+		$result		= dolibarr_set_const($db, $confkey, GETPOST('value', 'alphanohtml'), 'chaine', 0, 'Oblyon module', $conf->entity);
+	}
 }
 	// Update buttons management
 if (preg_match('/update_(.*)/', $action, $reg)) {
@@ -144,7 +146,7 @@ print '	<script type = "text/javascript">
 			});
 		</script>
 
-<form action = "'.$_SERVER['PHP_SELF'].'" method = "POST">
+<form action = "'.dol_escape_htmltag($_SERVER['PHP_SELF']).'" method = "POST">
 <input type="hidden" name="token" value="'.newToken().'" />
 <input type="hidden" name="action" value="update">
 <input type="hidden" name="page_y" value="">

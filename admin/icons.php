@@ -67,7 +67,7 @@ if ($action == 'restoreParams') {
     $result	= oblyon_restore_module ('oblyon');
 }
 
-if (!empty($_POST['select_fa'])) {
+if (GETPOST('select_fa', 'alpha')) {
     $selected_dir = GETPOST('selected_version', 'alpha');
     $selected_family = GETPOST('selected_family_' . $selected_dir, 'alpha');
     $selected_style = GETPOST('selected_style_' . $selected_dir, 'alpha');
@@ -132,7 +132,7 @@ print load_fiche_titre($title, $linkback, 'object_inovea.png@oblyon');
 $head = oblyon_admin_prepare_head();
 print dol_get_fiche_head($head, 'icons', $title, -1);
 
-print '<form action = "'.$_SERVER['PHP_SELF'].'" method = "POST">';
+print '<form action = "'.dol_escape_htmltag($_SERVER['PHP_SELF']).'" method = "POST">';
 print '<input type="hidden" name="token" value="'.newToken().'" />';
 print '<input type="hidden" name="select_fa" value="1">';
 print '<input type="hidden" name="page_y" value="">';

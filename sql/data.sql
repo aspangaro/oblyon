@@ -47,6 +47,7 @@ INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_HIDE_LEFTICONS',							'__ENTITY__', '0',					'chaine',	'0',	'Oblyon module');
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_REDUCE_LEFTMENU',							'__ENTITY__', '0',					'chaine',	'0',	'Oblyon module');
 INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_EFFECT_REDUCE_LEFTMENU',					'__ENTITY__', 'only',				'chaine',	'0',	'Oblyon module');
+INSERT INTO llx_const (name, entity, value, type, visible, note) VALUES ('OBLYON_TOUCH_MENU',								'__ENTITY__', '0',					'chaine',	'0',	'Oblyon module');
 
 -- Color - use Oblyon Green by default
 -- Color - top

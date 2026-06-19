@@ -62,6 +62,8 @@ MicroMenuLeftBarHideLeftIconsWarning = Attention. Incompatible avec l'option "Ma
 MicroMenuLeftBarCompanyNameWarning   = Attention. Incompatible avec l'option "Afficher le nom de l'entreprise".
 EffectMicroMenuHover                 = Déployé au passage de souris
 EffectMicroMenuOnly                  = Ne pas déployer
+TouchMenu                            = Mode tactile des menus
+TouchMenuHelp                        = Ouvre les menus déroulants au toucher (1er appui = ouverture, sans charger la page). Activé automatiquement sur écran tactile ; cette option force le mode même avec une souris (bornes tactiles).
 OblyonLogin                          = Page de connexion
 LoginRight                           = Décentrer le bloc de connexion sur la droite de l'écran
 CardBehavior                         = Comportement des fiches

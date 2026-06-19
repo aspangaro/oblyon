@@ -378,32 +378,32 @@ $conf->global->THEME_AGRESSIVENESS_RATIO = GETPOSTISSET('THEME_AGRESSIVENESS_RAT
 }
 
 .nonature-back {
-	background-color: #EEE;
+	background-color: var(--inputbackgroundcolor);/*#EEE;*/
 }
 .prospect-back {
-	background-color: #a7c5b0 !important;
-	color: #FFF !important;
+	background-color: var(--prospectback) !important;/*#a7c5b0 !important;*/
+	color: var(--colornature) !important;/*#FFF !important;*/
 }
 .customer-back {
-	background-color: #55955d !important;
-	color: #FFF !important;
+	background-color: var(--customerback) !important;/*#55955d !important;*/
+	color: var(--colornature) !important;/*#FFF !important;*/
 }
 .vendor-back {
-	background-color: #599caf !important;
-	color: #FFF !important;
+	background-color: var(--vendorback) !important;/*#599caf !important;*/
+	color: var(--colornature) !important;/*#FFF !important;*/
 }
 .user-back {
-	background-color: #79633f !important;
-	color: #FFF !important;
+	background-color: var(--userback) !important;/*#79633f !important;*/
+	color: var(--colornature) !important;/*#FFF !important;*/
 }
 .member-company-back {
-	background-color: #e4e4e4;
-	color: #666;
+	background-color: var(--member_companyback);/*#e4e4e4;*/
+	color: var(--colormember);/*#666;*/
 	white-space: nowrap;
 }
 .member-individual-back {
-	background-color: #e4e4e4;
-	color: #666;
+	background-color: var(--member_individualback);/*#e4e4e4;*/
+	color: var(--colormember);/*#666;*/
 	white-space: nowrap;
 }
 .nonature-back, .prospect-back, .customer-back, .vendor-back, .user-back, .member-company-back, .member-individual-back {

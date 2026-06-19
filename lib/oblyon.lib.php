@@ -145,7 +145,7 @@ SET SQL_MODE = \'NO_AUTO_VALUE_ON_ZERO\';
 				$sql_const		.= 'name LIKE "'.$constKey.($key === array_key_last($listConstKeys) ? '"' : '" OR ');
 			}
 			$sql_const			.= ')';
-			$sql_const			.= ' AND entity = "'.$conf->entity.'"';
+			$sql_const			.= ' AND entity = '.((int) $conf->entity);
 			$sql_const			.= ' ORDER BY name';
 			fwrite($handle, oblyon_bkup_table ('const', $sql_const, $cols_const, $duplicate_const));
 			// Enabling back the keys/index checking
@@ -384,7 +384,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 			print ajax_constantonoff($confkey, $metas[0], $metas[1], $metas[2], $metas[3], $metas[4], $metas[5], $metas[6], $metas[7], $metas[8], $metas[9]);
 		}
 		if ($tag == 'on_off2') {
-			print '<a href = "' . $_SERVER['PHP_SELF'] . '?action=set_' . $confkey . '&token=' . newToken() . '&value=' . (str_contains(getDolGlobalString($confkey), $metas) ? '0' : '1') . '">';
+			print '<a href = "' . dol_escape_htmltag($_SERVER['PHP_SELF']) . '?action=set_' . urlencode($confkey) . '&token=' . newToken() . '&value=' . (str_contains(getDolGlobalString($confkey), $metas) ? '0' : '1') . '">';
 			print (str_contains(getDolGlobalString($confkey), $metas) ? img_picto($langs->trans('Activated'), 'switch_on') : img_picto($langs->trans('Disabled'), 'switch_off'));
 			print '</a>';
 		} elseif ($tag == 'input') {

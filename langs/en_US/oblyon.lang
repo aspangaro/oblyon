@@ -62,6 +62,8 @@ MicroMenuLeftBarHideLeftIconsWarning = Warning. Incompatible with the "Hide icon
 MicroMenuLeftBarCompanyNameWarning   = Warning. Incompatible with the option "Display company name".
 EffectMicroMenuHover                 = Deployed at mouse-over
 EffectMicroMenuOnly                  = Do not deploy
+TouchMenu                            = Touch screen menu mode
+TouchMenuHelp                        = Opens drop-down menus on tap (first tap = open, without loading the page). Enabled automatically on touch screens; this option forces the mode even with a mouse (touch kiosks).
 OblyonLogin                          = Login page
 LoginRight                           = Offset the connection block to the right of the screen
 CardBehavior                         = Behavior of the cards

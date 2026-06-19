@@ -139,7 +139,6 @@ class MenuManager {
 		}
 		else
 		{
-			$conf->global->MAIN_SHOW_LOGO = 0;
 			if ($mode == 'top') {
                 print_left_oblyon_menu($this->db, $this->menu_array, $this->menu_array_after, $this->tabMenu, $this->menu, 0, '', '', $moredata, $this->type_user);
             }

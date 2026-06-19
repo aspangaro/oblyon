@@ -79,6 +79,14 @@
     --bgnavleft_txt: <?php print $bgnavleft_txt; ?>;
     --bgnavleft_txt_active: <?php print $bgnavleft_txt_active; ?>;
     --bgnavleft_txt_hover: <?php print $bgnavleft_txt_hover; ?>;
+	--prospectback: <?php print $prospectback; ?>;
+	--customerback: <?php print $customerback; ?>;
+	--vendorback: <?php print $vendorback; ?>;
+	--userback: <?php print $userback; ?>;
+	--colornature: <?php print $colornature; ?>;
+	--member_companyback: <?php print $member_companyback; ?>;
+	--member_individualback: <?php print $member_individualback; ?>;
+	--colormember: <?php print $colormember; ?>;
 }
 
 /*------------------------------------*\
@@ -146,7 +154,7 @@ html, body {
 
 body {
 <?php print 'direction: '.$langs->trans("DIRECTION").";\n"; ?>
-<?php if (GETPOST("optioncss") == 'print') {	?>
+<?php if (GETPOST("optioncss", "aZ09") == 'print') {	?>
     background-color: #fff !important;
 <?php } else { ?>
     background-color: var(--bgcolor)!important;
@@ -1615,9 +1623,22 @@ a.impayee:hover { font-weight: bold; color: #550000; }
     margin-left: 1px;
 }
 .listofinvoicetype {
-    height: 28px;
+    /* InfraS change begin : alignement sur le modèle eldy (flex + min-height + flex-wrap) pour éviter le chevauchement avec le bloc factures modèles quand #credit_note_options est affiché */
+    min-height: 1.8em;
     vertical-align: middle;
+    padding-top: 7px;
+    padding-bottom: 1px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    /* InfraS change end */
 }
+/* InfraS add begin : décalage horizontal de #credit_note_options pour rendre visible sa dépendance au radio "Facture avoir pour correction..." */
+#credit_note_options {
+    margin-<?php print $left; ?>: 30px;
+    width: 100%;
+}
+/* InfraS add end */
 .divsocialnetwork:not(:first-child) {
     padding-left: 20px;
 }
@@ -2523,7 +2544,7 @@ div.login_block_other {
 }
 
 #id-right {
-<?php if (GETPOST("optioncss") == 'print') { ?>
+<?php if (GETPOST("optioncss", "aZ09") == 'print') { ?>
     padding-top: 10px;
     <?php } elseif(getDolGlobalString('OBLYON_STICKY_TOPBAR')) { ?>
         <?php if (getDolGlobalString('OBLYON_PADDING_RIGHT_BOTTOM')) { ?>
@@ -2931,7 +2952,7 @@ img.photorefnoborder {
 */
 
 #tmenu_tooltip {
-    <?php if (GETPOST("optioncss") == 'print') { ?>
+    <?php if (GETPOST("optioncss", "aZ09") == 'print') { ?>
         display: none;
     <?php } else { ?>
         display: block;
@@ -2972,7 +2993,7 @@ img.photorefnoborder {
 }
 
 .main-nav {
-    <?php if (GETPOST("optioncss") == 'print') { ?>
+    <?php if (GETPOST("optioncss", "aZ09") == 'print') { ?>
         display: none;
     <?php } else { ?>
         /*background-color: rgb(<?php print (!empty($colorback1) ? $colorback1 : 0); ?>);*/
@@ -3140,7 +3161,7 @@ transition: all .2s ease-in-out;
 }
 
 #tmenu_tooltipinvert {
-<?php if (GETPOST("optioncss") == 'print') { ?>
+<?php if (GETPOST("optioncss", "aZ09") == 'print') { ?>
     display: none;
 <?php } else { ?>
     display: inline-table;
@@ -3373,7 +3394,7 @@ div.login_block {
     top: 0;
     <?php print $right; ?>: 0px;
     z-index: 100;
-    <?php if (GETPOST("optioncss") == 'print') { ?>
+    <?php if (GETPOST("optioncss", "aZ09") == 'print') { ?>
         display: none;
     <?php } ?>
 }
@@ -4322,7 +4343,7 @@ else
 ?>
 
 .tmenudiv {
-    <?php if (GETPOST("optioncss") == 'print') {	?>
+    <?php if (GETPOST("optioncss", "aZ09") == 'print') {	?>
         display: none;
     <?php } else { ?>
         color: #fcfcfc;
@@ -4640,7 +4661,7 @@ div.vmenu {
 <?php } ?>
 
 .vmenu {
-    <?php if (GETPOST("optioncss") == 'print') { ?>
+    <?php if (GETPOST("optioncss", "aZ09") == 'print') { ?>
         display: none;
     <?php } ?>
 }
@@ -5174,14 +5195,14 @@ div.tabsAction {
         position: sticky;
         z-index: 4;
         bottom: 0;
-        <?php if (GETPOST("optioncss") == 'print') {	?>
+        <?php if (GETPOST("optioncss", "aZ09") == 'print') {	?>
             background-color: #fff !important;
         <?php } else { ?>
             background-color: var(--bgcolor) !important;
         <?php } ?>
     <?php } ?>
 }
-<?php if (getDolGlobalString('FIX_ABSOLUTE_BUTTONS_ACTION_CARD') && GETPOST("optioncss") != 'print') { ?>
+<?php if (getDolGlobalString('FIX_ABSOLUTE_BUTTONS_ACTION_CARD') && GETPOST("optioncss", "aZ09") != 'print') { ?>
     /* Sticky action bar: raise z-index of dropdown above the bar (z-index 4) */
     /* The --up class is applied automatically by JS when the dropdown overflows the viewport */
     div.tabsAction .dropdown-holder {
@@ -10919,7 +10940,7 @@ div.tabs:first-of-type, .fiche > div.tabs
         display: none;
     }
     div#tmenu_tooltip, #tmenu_tooltipinvert {
-        <?php if (GETPOST("optioncss") == 'print') {	?>
+        <?php if (GETPOST("optioncss", "aZ09") == 'print') {	?>
             display:none;
         <?php } else { ?>
             padding-<?php print $right; ?>: 92px;
@@ -11025,6 +11046,7 @@ div.tabs:first-of-type, .fiche > div.tabs
 
 <?php
 include dol_buildpath($path.'/theme/'.$theme.'/dropdown.inc.php', 0);
+include dol_buildpath($path.'/theme/'.$theme.'/touchmenu.inc.php', 0); // InfraS add
 include dol_buildpath($path.'/theme/'.$theme.'/info-box.inc.php', 0);
 include dol_buildpath($path.'/theme/'.$theme.'/progress.inc.php', 0);
 include dol_buildpath($path.'/theme/'.$theme.'/timeline.inc.php', 0);

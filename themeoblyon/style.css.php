@@ -211,6 +211,14 @@
 	$colorfdatedefault			= getDolGlobalString('OBLYON_COLOR_FDATE_DEFAULT', '#FF0000');	// default value : #FF0000
 	$colorfdateselected			= getDolGlobalString('OBLYON_COLOR_FDATE_SELECTED', '#FF0000');	// default value : #FF0000
 	$invertratiofilter			= getDolGlobalString('THEME_INVERT_RATIO_FILTER', 0);			// default value : 0
+	$prospectback				= getDolGlobalString('THEME_ELDY_PROSPECTBACK', '#A7C5B0');	// default value : #A7C5B0
+	$customerback				= getDolGlobalString('THEME_ELDY_CUSTOMERBACK', '#55955D');	// default value : #55955D
+	$vendorback					= getDolGlobalString('THEME_ELDY_VENDORBACK', '#599CAF');	// default value : #599CAF
+	$userback					= getDolGlobalString('THEME_ELDY_USERBACK', '#79633F');	// default value : #79633F
+	$colornature				= getDolGlobalString('THEME_ELDY_COLORNATURE', '#FFFFFF');	// default value : #FFFFFF
+	$member_companyback			= getDolGlobalString('THEME_ELDY_MEMBER_COMPANYBACK', '#E4E4E4');	// default value : #E4E4E4
+	$member_individualback		= getDolGlobalString('THEME_ELDY_MEMBER_INDIVIDUALBACK', '#E4E4E4');	// default value : #E4E4E4
+	$colormember				= getDolGlobalString('THEME_ELDY_COLORMEMBER', '#666666');	// default value : #666666
 
 	$colorbackhmenu1			= getDolGlobalString('THEME_ELDY_TOPMENU_BACK1');
 	$colorbackvmenu1			= getDolGlobalString('THEME_ELDY_VERMENU_BACK1');

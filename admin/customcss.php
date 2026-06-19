@@ -89,7 +89,7 @@ $form = new Form($db);
 $formfile = new FormFile($db);
 
 // setup page goes here *************************
-print '<form enctype="multipart/form-data" method="POST" action="'.$_SERVER["PHP_SELF"].'">';
+print '<form enctype="multipart/form-data" method="POST" action="'.dol_escape_htmltag($_SERVER["PHP_SELF"]).'">';
 print '<input type="hidden" name="token" value="'.newToken().'">';
 print '<input type="hidden" name="action" value="update">';
 print '<input type="hidden" name="page_y" value="">';
