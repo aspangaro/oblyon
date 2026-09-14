@@ -10,8 +10,9 @@ OblyonParamAction1  = Save / Restore all module parameters for
 OblyonParamAction2  = <br>(after a restore refresh the page (F5) to visualize the result)
 OblyonParamBkup     = Backup
 OblyonParamRestore  = Restore
-OblyonDeleteThemeError  = An error occurred when deleting the theme Oblyon
-OblyonCopyThemeError    = An error occurred while copying the theme Oblyon
+OblyonThemeSourceMissing      = Oblyon theme source directory not found: %s
+OblyonThemeMissingNotWritable = The Oblyon theme is missing from %s and the web server is not allowed to create this directory. Copy the directory %s to %s, then enable the module again.
+OblyonThemeNotUpdated         = The theme found in %s differs from the module version (%s) and could not be updated (insufficient permissions). Copy %s to %s manually to synchronize it.
 
 #
 # Easya

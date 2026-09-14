@@ -19,9 +19,9 @@ Informations module (issues du code et du changelog local) :
 - Contributeur : InfraS (Sylvain Legrand)
 - Numéro module : `432573`
 - Licence : GPL v3+
-- Compatibilité Dolibarr : `18.0.0` à `23.0.x`
+- Compatibilité Dolibarr : `18.0.0` à `24.0.x`
 - Compatibilité PHP : `7.1` à `8.4`
-- Dernière version locale : `3.3.1` (2026-07)
+- Dernière version locale : `3.3.2` (2026-09)
 - Dépendances obligatoires : aucune
 - Conflits : `modQuickUX`
 - Emplacement : `htdocs/custom/oblyon/`
@@ -134,9 +134,9 @@ Dans `core/modules/modOblyon.class.php` :
 
 `init()` effectue :
 
-1. Chargement SQL (`_load_tables('/oblyon/sql/')`)
-2. Restauration des constantes module (`oblyon_restore_module`)
-3. Copie/mise à jour du thème `themeoblyon/` → `htdocs/theme/oblyon/`, **uniquement si `htdocs/VERSION` est absent** (Dolibarr standard) ; en LTS (`VERSION` présent) le thème est déjà livré → étape ignorée
+1. Contrôle/déploiement du thème `htdocs/theme/oblyon/` (`deployTheme()`, **avant toute écriture en base**) : thème présent et identique à `themeoblyon/` → rien ; absent ou différent et répertoire inscriptible → copie par écrasement (jamais de suppression préalable) ; présent mais non inscriptible → avertissement et activation poursuivie ; absent et non inscriptible → `$this->error` + retour 0 (activation refusée proprement, aucune constante insérée)
+2. Chargement SQL (`_load_tables('/oblyon/sql/')`)
+3. Restauration des constantes module (`oblyon_restore_module`)
 4. Détection du répertoire FontAwesome le plus récent (`fontawesome-N`) et enregistrement dans `MAIN_FONTAWESOME_DIRECTORY`
 5. Suppression des anciens fichiers menu manager du core (`core/menus/standard/oblyon_menu.php`, `oblyon.lib.php`)
 6. Activation du thème Oblyon (`MAIN_THEME` = `oblyon`)
@@ -150,7 +150,7 @@ Dans `core/modules/modOblyon.class.php` :
 
 - Sauvegarde module (`oblyon_bkup_module`)
 - Restauration du thème par défaut (`MAIN_THEME` = `eldy`)
-- Suppression du thème `htdocs/theme/oblyon/`, **uniquement si `htdocs/VERSION` est absent** (Dolibarr standard) ; ignorée en LTS
+- Le thème `htdocs/theme/oblyon/` n'est **jamais supprimé** (depuis 3.3.2)
 - Sauvegarde de `MAIN_MENU_INVERT` pour restauration future
 - Nettoyage des constantes de menus forcés (`MAIN_MENU*_FORCED`)
 - Nettoyage des constantes `THEME_ELDY_*` (couleurs Dolibarr)
@@ -348,8 +348,8 @@ Si modification SQL / descripteur / thème CSS / menus / constantes :
 
 ## Points d'attention (Watchpoints)
 
-- Le thème est **servi depuis `htdocs/theme/oblyon/`** (Dolibarr résout `/theme/oblyon/style.css.php` via `dol_buildpath`, racine principale d'abord). Ce répertoire est une **copie** de la source éditable `custom/oblyon/themeoblyon/` : livré d'office en LTS, (re)créé par `init()` sur Dolibarr standard. ⚠️ Après édition de `themeoblyon/`, resynchroniser `theme/oblyon/` (sinon rien n'est servi) + vider le cache CSS (Ctrl+F5)
-- La copie/suppression de `theme/oblyon/` par `init()`/`remove()` est **conditionnée à l'absence de `htdocs/VERSION`** : présent = LTS (thème pré-installé, on n'y touche pas) ; absent = Dolibarr standard (copie/suppression effectuées). Le user PHP‑FPM n'ayant pas les droits d'écriture dans `htdocs/theme/` en LTS, cette garde évite l'erreur de permission à l'activation
+- Le thème est **servi depuis `htdocs/theme/oblyon/`** (Dolibarr résout `/theme/oblyon/style.css.php` via `dol_buildpath`, racine principale d'abord, et une quinzaine de pages du core incluent `DOL_DOCUMENT_ROOT.'/theme/'.$conf->theme.'/theme_vars.inc.php'` en chemin dur). Ce répertoire est une **copie** de la source éditable `custom/oblyon/themeoblyon/` : livré avec l'instance (base LTS), ou copié par `init()` quand le répertoire est inscriptible. ⚠️ Après édition de `themeoblyon/`, resynchroniser `theme/oblyon/` (sinon rien n'est servi) + vider le cache CSS (Ctrl+F5)
+- `deployTheme()` (3.3.2) compare récursivement `themeoblyon/` et `theme/oblyon/` (taille + md5 de chaque fichier source ; les fichiers supplémentaires côté `theme/oblyon/`, ex. `modules/<module>.inc.php` propre à l'instance, sont ignorés). Le user PHP‑FPM n'a pas les droits d'écriture dans `htdocs/theme/` sur le serveur (ACL `www-data:r-x`) : le thème doit donc être livré avec l'instance ; le module ne le supprime jamais et ne le copie que s'il en a le droit. Incident 2026-08 sur dolinfras24 : l'ancien `init()` (suppression puis recopie systématique) échouait en `Permission denied` alors que le thème était déjà en place
 - Le fichier `global.inc.php` fait ~11000 lignes ; les modifications CSS doivent être ciblées
 - La version est lue depuis le fichier `VERSION` à la racine du module (pas de `changelog.xml`)
 - Le changelog est affiché via Parsedown (`CHANGELOG.md`)
@@ -363,6 +363,7 @@ Si modification SQL / descripteur / thème CSS / menus / constantes :
 
 ## Dernières mises à jour (Recent updates)
 
+- `3.3.2` (2026-09) : activation/désactivation sans suppression du thème. `init()` ne supprime plus puis ne recopie plus `htdocs/theme/oblyon/` : nouvelle méthode privée `deployTheme()` (contrôle par comparaison taille + md5, copie par écrasement seulement si nécessaire et possible, avertissement si présent mais non modifiable, refus propre avec message explicite si absent et non créable), exécutée **avant** `_load_tables()` pour ne plus laisser de constantes en base après un échec. `remove()` ne supprime plus le thème (sans droit d'écriture, la désactivation échouait à mi-chemin : module encore actif mais `MAIN_THEME=eldy` et constantes de menu effacées). Heuristique `htdocs/VERSION` abandonnée. Clés `OblyonDeleteThemeError`/`OblyonCopyThemeError` remplacées par `OblyonThemeSourceMissing`, `OblyonThemeMissingNotWritable`, `OblyonThemeNotUpdated`
 - `3.3.1` (2026-07) : fix chevauchement du dropdown des boutons d'action (`dropdown.inc.php` : sélecteur `.dropdown-holder` sans son point initial, jamais appliqué ; `.dropdown-content` sans ancrage par défaut `bottom:0`/`transform:translateY(100%)` ni `z-index:5`, contrairement à eldy — le menu pouvait recouvrir les blocs « Fichiers joints » / « Derniers événements ») ; complément du correctif `FIX_ABSOLUTE_BUTTONS_ACTION_CARD` (`global.inc.php`) avec le `transform: translateY(-100%)` manquant pour que l'ouverture vers le haut de la barre d'action sticky fonctionne réellement
 - `3.3.0` (2026-07) : regroupe l'ensemble des évolutions 2026-07 listées ci-dessous (options couleurs autocomplétion + multi-select, fix menu inversé sticky, fix fallback FontAwesome, migration constantes → eldy, consolidation CSS boutons, data.sql exhaustif). Version portée dans `VERSION` et `CHANGELOG.md`
 - (2026-07) Migration des constantes propres au thème vers les constantes standard Dolibarr/Eldy (groupe A) : `OBLYON_FONT_FAMILY`→`THEME_FONT_FAMILY`, `OBLYON_FONT_SIZE`→`THEME_ELDY_FONT_SIZE1`, `OBLYON_STICKY_TOPBAR`→`THEME_STICKY_TOPMENU`, `OBLYON_COLOR_BUTTON_ACTION1`→`THEME_ELDY_BTNACTION`, `OBLYON_COLOR_FTITLE`→`THEME_ELDY_TEXTTITLE`, `OBLYON_COLOR_BLINE_HOVER`→`THEME_ELDY_USE_HOVER` (+ `_USE_CHECKED`) ; nouveau `sql/update_3.2.0_oblyon_to_eldy.sql`

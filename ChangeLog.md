@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+### [3.3.2] - Compatibility 18.0.x - 24.0.x (2026/09/14)
+### Fixed
+- Module activation no longer deletes then recopies htdocs/theme/oblyon. The theme directory is now only checked (size + md5 of every source file) and copied over, without any prior deletion, only when it is missing or outdated and the directory is writable. On hostings where PHP is not allowed to write into htdocs/theme (the theme being delivered with the instance), activation failed with hundreds of "unlink(): Permission denied" although the theme was already in place
+- The theme check now runs before any database write: a missing theme with a non-writable htdocs/theme stops the activation with an explicit message (which directory to copy where) instead of failing after the module constants were inserted. An outdated theme that cannot be updated only raises a warning
+- Disabling the module no longer removes the theme directory (on a non-writable htdocs/theme the disable failed half-way, leaving the module enabled but with the eldy theme and without the Oblyon menu manager)
+- The htdocs/VERSION heuristic used to detect an LTS distribution is dropped: behaviour now only depends on the presence and writability of the theme directory
 ### [3.3.1] - Compatibility 18.0.x - 23.0.x (2026/07/23)
 
 ### Fixed

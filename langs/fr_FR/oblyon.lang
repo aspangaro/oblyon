@@ -9,8 +9,9 @@ OblyonParamAction1      = Sauvegarder / Restaurer l'ensemble des paramètres du 
 OblyonParamAction2      = <br>(après une restauration rafraichissez la page (F5) pour visualiser le résultat)
 OblyonParamBkup         = Sauvegarder
 OblyonParamRestore      = Restaurer
-OblyonDeleteThemeError  = Une erreur s'est produite lors de la suppression du thème Oblyon
-OblyonCopyThemeError    = Une erreur s'est produite lors de la copie du thème Oblyon
+OblyonThemeSourceMissing      = Dossier source du thème Oblyon introuvable : %s
+OblyonThemeMissingNotWritable = Le thème Oblyon est absent de %s et le serveur web n'a pas le droit de créer ce dossier. Copiez le dossier %s vers %s, puis réactivez le module.
+OblyonThemeNotUpdated         = Le thème présent dans %s diffère de la version du module (%s) et n'a pas pu être mis à jour (droits insuffisants). Copiez manuellement %s vers %s pour le synchroniser.
 
 #
 # Easya

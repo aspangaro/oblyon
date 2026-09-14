@@ -119,25 +119,13 @@
 		{
 			global $langs, $conf;
 			$sql		= array();
+			// InfraS change begin : controle/deploiement du theme htdocs/theme/oblyon AVANT toute ecriture en base (voir deployTheme()) ; plus aucune suppression du theme
+			if ($this->deployTheme() < 0) {
+						return 0;
+			}
+			// InfraS change end
 			$this->_load_tables('/'.$this->name.'/sql/');
 			oblyon_restore_module($this->name);
-			// Copie/mise a jour du theme vers theme/oblyon : uniquement en version standard (absence de htdocs/VERSION ; en LTS le theme est deja livre)
-			if (! dol_is_file(DOL_DOCUMENT_ROOT.'/VERSION')) {
-				$srcDir		= dol_buildpath('/oblyon/themeoblyon');
-				$destDir	= DOL_DOCUMENT_ROOT.'/theme/oblyon';
-				if (dol_is_dir($destDir)) {
-					$result	= dol_delete_dir_recursive($destDir);
-					if ($result < 0) {
-						setEventMessage($langs->trans('OblyonDeleteThemeError'), 'errors');
-						return 0;
-					}
-				}
-				$result	= dolCopyDir($srcDir, $destDir, 0, 1);
-				if ($result < 0) {
-					setEventMessage($langs->trans('OblyonCopyThemeError'), 'errors');
-					return 0;
-				}
-			}
 			// Get highest font awesome directory
 			$path				= dol_buildpath('/theme/common/', 0);
 			$listdir			= dol_dir_list($path, 'directories', 0, '^fontawesome-', null, 'name', SORT_ASC, 0, 0, '', 0);
@@ -209,17 +197,75 @@
 			dolibarr_del_const($this->db,'MAIN_FONTAWESOME_FAMILY', -1);
 			dolibarr_del_const($this->db,'MAIN_FONTAWESOME_ICON_STYLE', -1);
 			dolibarr_del_const($this->db,'MAIN_FONTAWESOME_WEIGHT', -1);
-			// Suppression du theme theme/oblyon : uniquement en version standard (absence de htdocs/VERSION ; en LTS ne pas y toucher)
-			if (! dol_is_file(DOL_DOCUMENT_ROOT.'/VERSION')) {
-				$destDir	= DOL_DOCUMENT_ROOT.'/theme/oblyon';
-				if (dol_is_dir($destDir)) {
-					$result = dol_delete_dir_recursive($destDir);
-					if ($result < 0) {
-						setEventMessage($langs->trans('OblyonDeleteThemeError'), 'errors');
-						return 0;
-					}
-				}
-			}
+			// InfraS change : le theme htdocs/theme/oblyon n'est plus supprime a la desactivation (livre avec l'instance, PHP n'a pas forcement le droit d'ecrire dans htdocs/theme) ; MAIN_THEME est deja remis a eldy ci-dessus
 			return $this->_remove($sql, $options);
 		}
+		// InfraS add begin
+		/************************************************
+		 *	Check or deploy the theme directory htdocs/theme/oblyon from the module source custom/oblyon/themeoblyon.
+		 *	Dolibarr core hard-codes DOL_DOCUMENT_ROOT.'/theme/<theme>/' paths (theme_vars.inc.php, img/, ckeditor/...),
+		 *	so the theme must physically exist there. The directory is never deleted :
+		 *	- present and identical to the source	=> nothing to do
+		 *	- missing or outdated, and writable		=> copied over (files overwritten, nothing deleted)
+		 *	- outdated but not writable				=> warning, activation goes on with the current theme
+		 *	- missing and not writable				=> error ($this->error set), activation must be aborted
+		 *	@return		int		1 = theme up to date, 2 = theme copied, 0 = present but not updated (warning), -1 = missing or source not found (error)
+		************************************************/
+		private function deployTheme()
+		{
+			global $langs;
+			require_once DOL_DOCUMENT_ROOT.'/core/lib/files.lib.php';
+			$srcDir		= dol_buildpath('/oblyon/themeoblyon', 0);
+				$destDir	= DOL_DOCUMENT_ROOT.'/theme/oblyon';
+			if (! dol_is_dir($srcDir)) {
+				$this->error	= $langs->trans('OblyonThemeSourceMissing', $srcDir);
+				dol_syslog(get_class($this).'::deployTheme '.$this->error, LOG_ERR);
+				return -1;
+			}
+			$destExists	= dol_is_dir($destDir);
+			if ($destExists && $this->themeIsUpToDate($srcDir, $destDir)) {
+				return 1;
+			}
+			$canWrite	= $destExists ? is_writable($destDir) : is_writable(dirname($destDir));
+			if ($canWrite) {
+				dolCopyDir($srcDir, $destDir, 0, 1);	// overwrite existing files, never delete anything first
+				if ($this->themeIsUpToDate($srcDir, $destDir)) {
+					dol_syslog(get_class($this).'::deployTheme theme copied from '.$srcDir.' to '.$destDir);
+					return 2;
+				}
+			}
+				if (dol_is_dir($destDir)) {
+				dol_syslog(get_class($this).'::deployTheme theme present in '.$destDir.' but could not be updated from '.$srcDir, LOG_WARNING);
+				setEventMessages($langs->trans('OblyonThemeNotUpdated', $destDir, $srcDir, $srcDir, $destDir), null, 'warnings');
+						return 0;
+			}
+			$this->error	= $langs->trans('OblyonThemeMissingNotWritable', $destDir, $srcDir, $destDir);
+			dol_syslog(get_class($this).'::deployTheme '.$this->error, LOG_ERR);
+			return -1;
+		}
+		/************************************************
+		 *	Compare recursively the theme source with the deployed directory (size + md5 of every source file).
+		 *	Extra files in the deployed directory (ex: instance specific modules/*.inc.php) are ignored.
+		 *	@param		string	$srcDir		Module theme source directory
+		 *	@param		string	$destDir	Deployed theme directory
+		 *	@return		bool				True if every source file exists in destination with the same content
+		************************************************/
+		private function themeIsUpToDate($srcDir, $destDir)
+		{
+			$iterator	= new RecursiveIteratorIterator(new RecursiveDirectoryIterator($srcDir, FilesystemIterator::SKIP_DOTS), RecursiveIteratorIterator::SELF_FIRST);
+			foreach ($iterator as $item) {
+				$target	= $destDir.substr($item->getPathname(), strlen($srcDir));
+				if ($item->isDir()) {
+					if (! is_dir($target)) {
+						return false;
+					}
+					continue;
+				}
+				if (! is_file($target) || filesize($target) != $item->getSize() || md5_file($target) !== md5_file($item->getPathname())) {
+					return false;
+				}
+			}
+			return true;
+		}
+		// InfraS add end
 	}
