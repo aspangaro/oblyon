@@ -1,7 +1,7 @@
 <?php
 	/************************************************
 	* Copyright (C) 2015-2022  Alexandre Spangaro   <alexandre@inovea-conseil.com>
-	* Copyright (C) 2022-2025	   Sylvain Legrand	  <contact@infras.fr>
+	* Copyright (C) 2022-2026	   Sylvain Legrand	  <contact@infras.fr>
 	*
 	* This program is free software: you can redistribute it and/or modify
 	* it under the terms of the GNU General Public License as published by
@@ -69,6 +69,14 @@
 		$head[$h][2] = 'customcss';
 		$h++;
 
+		// InfraS add begin : caisse TakePOS (3.9.0), onglet affiche seulement si le module TakePOS est actif
+		if (isModEnabled('takepos')) {
+			$head[$h][0] = dol_buildpath("/oblyon/admin/takepos.php", 1);
+			$head[$h][1] = $langs->trans("OblyonTakepos");
+			$head[$h][2] = 'takepos';
+			$h++;
+		}
+		// InfraS add end
 		// Show more tabs from modules
 		// Entries must be declared in modules descriptor with line
 		//$this->tabs = array(
@@ -135,17 +143,29 @@ SET SQL_MODE = \'NO_AUTO_VALUE_ON_ZERO\';
 ';
 			fwrite($handle, $sqlhead);
 			$cols_const			= array ('name', 'entity', 'value', 'type', 'visible', 'note');
+			// Préfixes : constantes calculées au runtime (MAIN_FONTAWESOME_*) et familles du thème (OBLYON_*, THEME_*)
 			$listConstKeys		= array('FIX\_AREAREF\_TABACTION', 'FIX\_STICKY\_%\_CARD', 'MAIN\_CHECKBOX\_LEFT\_COLUMN', 'MAIN\_DISABLE\_BLOCK\_%', 'MAIN\_DISABLE\_GLOBAL\_%', 'MAIN\_DISABLE\_METEO',
-										'MAIN\_FONTAWESOME\_%', 'MAIN\_LOGIN\_RIGHT', 'MAIN\_MENU\_INVERT', 'MAIN\_SHOW\_LOGO', 'MAIN\_STATUS\_USES\_IMAGES', 'MAIN\_USE\_TOP\_MENU\_%', 'OBLYON\_%', 'THEME\_%');
+									'MAIN\_FONTAWESOME\_%', 'MAIN\_LOGIN\_RIGHT', 'MAIN\_MENU\_INVERT', 'MAIN\_SHOW\_LOGO', 'MAIN\_STATUS\_USES\_IMAGES', 'MAIN\_USE\_TOP\_MENU\_%', 'OBLYON\_%', 'THEME\_%');
+			// + Toutes les constantes déclarées dans le data.sql du module (source de vérité, auto-synchronisée) :
+			//   couvre les réglages sans préfixe dédié (FCKEDITOR_*, MAIN_MENU*_FORCED, MAIN_SECURITY_*, ...).
+			$listConstNames		= array();
+			$datasqlfile		= dol_buildpath('/'.$appliname.'/sql/data.sql', 0);
+			if (dol_is_file($datasqlfile)) {
+				foreach (file($datasqlfile) as $dataline) {
+					if (preg_match('/VALUES\s*\(\s*\'([A-Za-z0-9_]+)\'/', $dataline, $regdata))	$listConstNames[$regdata[1]]	= $regdata[1];
+				}
+			}
 			$duplicate_const	= array ('2', 'value', 'name');
+			$whereConst			= array();
+			foreach ($listConstKeys as $constKey)	$whereConst[]	= 'name LIKE "'.$constKey.'"';
+			if (!empty($listConstNames)) {
+				$listConstNames	= array_map(array($db, 'escape'), $listConstNames);
+				$whereConst[]	= 'name IN ("'.implode('", "', $listConstNames).'")';
+			}
 			$sql_const			= 'SELECT '.implode(', ', $cols_const);
 			$sql_const			.= ' FROM '.MAIN_DB_PREFIX.'const';
-			$sql_const			.= ' WHERE (';
-			foreach ($listConstKeys as $key => $constKey) {
-				$sql_const		.= 'name LIKE "'.$constKey.($key === array_key_last($listConstKeys) ? '"' : '" OR ');
-			}
-			$sql_const			.= ')';
-			$sql_const			.= ' AND entity = "'.$conf->entity.'"';
+			$sql_const			.= ' WHERE ('.implode(' OR ', $whereConst).')';
+			$sql_const			.= ' AND entity = '.((int) $conf->entity);
 			$sql_const			.= ' ORDER BY name';
 			fwrite($handle, oblyon_bkup_table ('const', $sql_const, $cols_const, $duplicate_const));
 			// Enabling back the keys/index checking
@@ -234,7 +254,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 			$filesql	= $pathsql.'/'.'update.'.$conf->entity;
 			$moved	  = dol_copy($filesql, $filesql.'.sql');
 			if (is_file($filesql.'.sql')) {
-				$result	= run_sql($filesql.'.sql', (getDolGlobalString('MAIN_DISPLAY_SQL_INSTALL_LOG') ? 1 : 0), $conf->entity, 1);
+				$result	= run_sql($filesql.'.sql', (!getDolGlobalString('MAIN_DISPLAY_SQL_INSTALL_LOG') ? 1 : 0), $conf->entity, 1);
 			}
 			$delete	 = dol_delete_file($filesql.'.sql');
 
@@ -384,13 +404,22 @@ SET FOREIGN_KEY_CHECKS = 1;
 			print ajax_constantonoff($confkey, $metas[0], $metas[1], $metas[2], $metas[3], $metas[4], $metas[5], $metas[6], $metas[7], $metas[8], $metas[9]);
 		}
 		if ($tag == 'on_off2') {
-			print '<a href = "' . $_SERVER['PHP_SELF'] . '?action=set_' . $confkey . '&token=' . newToken() . '&value=' . (str_contains(getDolGlobalString($confkey), $metas) ? '0' : '1') . '">';
+			print '<a href = "' . dol_escape_htmltag($_SERVER['PHP_SELF']) . '?action=set_' . urlencode($confkey) . '&token=' . newToken() . '&value=' . (str_contains(getDolGlobalString($confkey), $metas) ? '0' : '1') . '">';
 			print (str_contains(getDolGlobalString($confkey), $metas) ? img_picto($langs->trans('Activated'), 'switch_on') : img_picto($langs->trans('Disabled'), 'switch_off'));
 			print '</a>';
 		} elseif ($tag == 'input') {
 			$constantKey		= getDolGlobalString($confkey, 0);
-			$defaultMetas	   = array('type' => 'text', 'class' => 'flat quatrevingtpercent', 'style' => 'padding: 0; font-size: inherit;', 'name' => $confkey, 'id' => $confkey, 'value' => $constantKey);
+			$ownvalue		= isset($metas['value']);	// valeur imposee par l'appelant (ex. couleur effective d'un bouton) : affichee telle quelle
+			$defaultMetas	   = array('type' => 'text', 'class' => 'flat quatrevingtpercent', 'style' => 'padding: 0; font-size: inherit;', 'name' => $confkey, 'id' => $confkey, 'value' => dol_escape_htmltag($constantKey));	// InfraS change : valeur echappee (une constante peut venir d'un preset importe)
 			$metas			  = array_merge ($defaultMetas, $metas);
+			// champ couleur sans valeur ('' ou '#' = heriter / derivee) : jscolor (required par defaut) remplacait la valeur par FFFFFF dans le champ,
+			// enregistre ensuite en #FFFFFF (texte du menu haut passe en blanc sur plusieurs instances). Le champ reste vide, jscolor accepte le vide ({required:false}),
+			// un repere "Automatique" est affiche ; a l'enregistrement le vide redevient '#' (convention du module)
+			if (! $ownvalue && preg_match('/\bcolor\b/', $metas['class']) && in_array((string) $constantKey, array('', '#', '0'), true)) {	// '0' = constante absente (defaut de getDolGlobalString ci-dessus), jamais une couleur
+				$metas['value']			= '';
+				$metas['class']			= preg_replace('/\bcolor\b/', 'color {required:false}', $metas['class'], 1);
+				$metas['placeholder']	= $langs->trans('Automatic');
+			}
 			$metascompil		= '';
 			foreach ($metas as $key => $value) {
 				$metascompil	.= ' '.$key.($key == 'enabled' || $key == 'disabled' ? '' : ' = "'.$value.'"');

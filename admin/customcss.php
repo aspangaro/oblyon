@@ -6,7 +6,7 @@
  * Copyright (C) 2015      Jean-François Ferry	<jfefe@aternatik.fr>
  * Copyright (C) 2022	   Paul Lepont          <paul@kawagency.fr>
  * Copyright (C) 2022-2023 Alexandre Spangaro   <alexandre@inovea-conseil.com>
- * Copyright (C) 2023-2025  Sylvain Legrand		<contact@infras.fr>
+ * Copyright (C) 2023-2026  Sylvain Legrand		<contact@infras.fr>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -89,7 +89,7 @@ $form = new Form($db);
 $formfile = new FormFile($db);
 
 // setup page goes here *************************
-print '<form enctype="multipart/form-data" method="POST" action="'.$_SERVER["PHP_SELF"].'">';
+print '<form enctype="multipart/form-data" method="POST" action="'.dol_escape_htmltag($_SERVER["PHP_SELF"]).'">';
 print '<input type="hidden" name="token" value="'.newToken().'">';
 print '<input type="hidden" name="action" value="update">';
 print '<input type="hidden" name="page_y" value="">';

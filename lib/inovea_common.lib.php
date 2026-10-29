@@ -1,6 +1,7 @@
 <?php
 /* Copyright (C) 2005-2013  Laurent Destailleur     <eldy@users.sourceforge.net>
  * Copyright (C) 2017-2024  Alexandre Spangaro      <alexandre@inovea-conseil.com>
+ * Copyright (C) 2022-2026  Sylvain Legrand      <contact@infras.fr>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

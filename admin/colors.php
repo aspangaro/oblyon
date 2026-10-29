@@ -1,7 +1,7 @@
 <?php
 /************************************************
 	* Copyright (C) 2015-2025  Alexandre Spangaro   <alexandre@inovea-conseil.com>
-	* Copyright (C) 2023-2025  Sylvain Legrand		<contact@infras.fr>
+	* Copyright (C) 2023-2026  Sylvain Legrand		<contact@infras.fr>
 	*
 	* This program is free software: you can redistribute it and/or modify
 	* it under the terms of the GNU General Public License as published by
@@ -30,6 +30,7 @@ require '../config.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/admin.lib.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/files.lib.php';
 dol_include_once('/oblyon/lib/oblyon.lib.php');
+dol_include_once('/oblyon/lib/oblyon_presets.lib.php');	// InfraS add : presets JSON (3.6.0)
 
 /**
  * @var Conf $conf
@@ -49,12 +50,69 @@ if (! $user->admin) accessforbidden();
 // Reset cache **********************************
 $_SESSION['dol_resetcache']	= dol_print_date(dol_now(), 'dayhourlog');
 
+// InfraS add begin : presets JSON (3.6.0) : telecharger (GET + jeton), appliquer / mettre a jour / enregistrer sous / supprimer / importer (POST + jeton, puis redirection)
+oblyon_colors_normalize_stored();	// InfraS add 3.7.0 : constantes encore en 'r,g,b' (pages "Interface utilisateur" du core) reecrites en '#RRGGBB'
+oblyon_detect_current_preset();	// instance mise a jour par copie de fichiers : OBLYON_CURRENT_PRESET semee si la base correspond exactement a un preset
+$presetaction	= GETPOST('action', 'aZ09');
+$presetkey		= GETPOST('preset_key', 'alphanohtml');
+if ($presetaction == 'download_preset' && oblyon_preset_key_is_valid($presetkey)) {
+	$preset	= oblyon_get_preset($presetkey);
+	if ($preset !== null) {
+		header('Content-Type: application/json; charset=utf-8');
+		header('Content-Disposition: attachment; filename="'.$presetkey.'.json"');
+		header('Content-Length: '.filesize($preset['file']));
+		readfile($preset['file']);
+		exit;
+	}
+}
+if (in_array($presetaction, array('apply_preset', 'save_preset', 'saveas_preset', 'delete_preset', 'import_preset')) && $_SERVER['REQUEST_METHOD'] == 'POST') {
+	$presetsections	= array_values(array_intersect((array) GETPOST('preset_sections', 'array'), array_keys(oblyon_presets_sections())));
+	$presetres		= 0;
+	$presetmsg		= '';
+	if ($presetaction == 'apply_preset') {
+		$presetres	= oblyon_apply_preset($presetkey, $presetsections);
+		$presetmsg	= 'OblyonPresetApplied';
+	} elseif ($presetaction == 'save_preset') {
+		$presetres	= oblyon_update_preset($presetkey, array(), GETPOST('preset_name', 'alphanohtml'), GETPOST('preset_desc', 'alphanohtml'));	// always the whole file (the screen has no section choice)
+		$presetmsg	= 'OblyonPresetSaved';
+	} elseif ($presetaction == 'saveas_preset') {
+		$presetkey	= strtolower(preg_replace('/[^a-z0-9_-]/i', '-', $presetkey));
+		$presetres	= oblyon_export_preset($presetkey, GETPOST('preset_name', 'alphanohtml'), GETPOST('preset_desc', 'alphanohtml'), $presetsections);
+		$presetmsg	= 'OblyonPresetCreated';
+	} elseif ($presetaction == 'delete_preset') {
+		$presetres	= oblyon_delete_preset($presetkey);
+		$presetmsg	= 'OblyonPresetDeleted';
+	} elseif ($presetaction == 'import_preset') {
+		if (! empty($_FILES['preset_file']['tmp_name']) && is_uploaded_file($_FILES['preset_file']['tmp_name'])) {
+			if ($presetkey === '')	$presetkey	= preg_replace('/\.json$/i', '', $_FILES['preset_file']['name']);
+			$presetkey	= strtolower(preg_replace('/[^a-z0-9_-]/i', '-', $presetkey));
+			$presetres	= oblyon_import_preset($_FILES['preset_file']['tmp_name'], $presetkey, GETPOSTINT('preset_replace') ? true : false);
+		} else {
+			$presetres	= -5;
+		}
+		$presetmsg	= 'OblyonPresetImported';
+	}
+	if ($presetres > 0) {
+		setEventMessages($langs->trans($presetmsg, $presetkey), null, 'mesgs');
+	} else {
+		$preseterrors	= array(-1 => 'OblyonPresetErrorWrite', -2 => 'OblyonPresetErrorKey', -3 => 'OblyonPresetErrorReserved', -4 => 'OblyonPresetErrorExists', -5 => 'OblyonPresetErrorFile');
+		if ($presetaction == 'apply_preset' || $presetaction == 'delete_preset' || $presetaction == 'save_preset')	$preseterrors[-2]	= 'OblyonPresetErrorUnknown';
+		if ($presetaction == 'apply_preset')	$preseterrors[-1]	= 'OblyonPresetErrorApply';	// -1 = SQL error, not a file error
+		setEventMessages($langs->trans(isset($preseterrors[$presetres]) ? $preseterrors[$presetres] : 'Error'), null, 'errors');
+	}
+	header('Location: '.$_SERVER['PHP_SELF']);
+	exit;
+}
+// InfraS add end
+
 // init variables *******************************
 $listcolor	= array('top'		=> array('OBLYON_COLOR_TOPMENU_BCKGRD',
 										'OBLYON_COLOR_TOPMENU_BCKGRD_HOVER',
 										'OBLYON_COLOR_TOPMENU_TXT',
 										'OBLYON_COLOR_TOPMENU_TXT_ACTIVE',
-										'OBLYON_COLOR_TOPMENU_TXT_HOVER'
+										'OBLYON_COLOR_TOPMENU_TXT_HOVER',
+										'OBLYON_COLOR_TOPMENU_BCKGRD_SEL',	// InfraS add : entree selectionnee (3.7.0)
+										'OBLYON_COLOR_TOPMENU_TXT_SEL'		// InfraS add
 										),
 					'left'		=> array('OBLYON_COLOR_LEFTMENU_BCKGRD',
 										'OBLYON_COLOR_LEFTMENU_BCKGRD_HOVER',
@@ -62,11 +120,7 @@ $listcolor	= array('top'		=> array('OBLYON_COLOR_TOPMENU_BCKGRD',
 										'OBLYON_COLOR_LEFTMENU_TXT_ACTIVE',
 										'OBLYON_COLOR_LEFTMENU_TXT_HOVER',
 										),
-					'button'	=> array('OBLYON_COLOR_BUTTON_ACTION1',
-										'OBLYON_COLOR_BUTTON_ACTION2',
-										'OBLYON_COLOR_BUTTON_DELETE1',
-										'OBLYON_COLOR_BUTTON_DELETE2'
-										),
+					'button'	=> oblyon_button_colors_all(),	// familles action / suppression / formulaire x fond, texte, bordure, survol (oblyon_button_families()) ; les styles Contour / Doux ont leur propre jeu FLAT_*
 					'message'	=> array('OBLYON_COLOR_INFO_BORDER',
 										'OBLYON_COLOR_INFO_BCKGRD',
 										'OBLYON_COLOR_INFO_TEXT',
@@ -83,350 +137,128 @@ $listcolor	= array('top'		=> array('OBLYON_COLOR_TOPMENU_BCKGRD',
 										'OBLYON_COLOR_NOTIF_ERROR_BCKGRD',
 										'OBLYON_COLOR_NOTIF_ERROR_TEXT'
 										),
-					'options'	=> array('OBLYON_COLOR_MAIN',
-										'OBLYON_COLOR_BCKGRD',
-										'OBLYON_COLOR_LOGO_BCKGRD',
-										'OBLYON_COLOR_LOGIN_BCKGRD',
-										'OBLYON_COLOR_BTITLE',
-										'OBLYON_COLOR_FTITLE',
-										'OBLYON_COLOR_STITLE',
-										'OBLYON_COLOR_BLINE',
-										'OBLYON_COLOR_BLINE_HOVER',
-										'OBLYON_COLOR_FLINE',
-										'OBLYON_COLOR_FLINE_HOVER',
-										'OBLYON_COLOR_FDATE_DEFAULT',
-										'OBLYON_COLOR_FDATE_SELECTED',
-										'OBLYON_COLOR_TEXTTABACTIVE',
-										'OBLYON_COLOR_INPUT_BCKGRD',
-										'OBLYON_COLOR_INFOBOX_BCKGRD1',
-										'OBLYON_COLOR_INFOBOX_BCKGRD2',
-										'OBLYON_COLOR_BORDER_ACTIONCOLUMN'
-										),
-					'eldy'		=> array('THEME_ELDY_TOPBORDER_TITLE1',
-										'THEME_ELDY_BACKTITLE1',
-										'THEME_ELDY_BACKTABACTIVE',
-										'THEME_ELDY_LINEIMPAIR1',
-										'THEME_ELDY_LINEIMPAIR2',
-										'THEME_ELDY_LINEPAIR1',
-										'THEME_ELDY_LINEPAIR2',
-										'THEME_ELDY_LINEBREAK',
-										'THEME_ELDY_TEXTTITLENOTAB',
-										'THEME_ELDY_TEXTTITLE',
-										'THEME_ELDY_TEXT',
-										'THEME_ELDY_TEXTLINK'
+					'options'	=> array('OblyonColorGrpBackgrounds'	=> array('OBLYON_COLOR_MAIN',
+																				'OBLYON_COLOR_BCKGRD',
+																				'OBLYON_COLOR_INPUT_BCKGRD',
+																				'OBLYON_COLOR_INPUT_ADD_BCKGRD',
+																				'OBLYON_COLOR_OVERLAY_BCKGRD',	// InfraS add : surfaces flottantes (3.7.0)
+																				'OBLYON_COLOR_LOGO_BCKGRD',
+																				'OBLYON_COLOR_LOGIN_BCKGRD'
+																				),
+										'OblyonColorGrpText'			=> array('THEME_ELDY_TEXT',
+																				'THEME_ELDY_TEXTLINK',
+																				'OBLYON_COLOR_ICON_TEXT'	// InfraS add : pictos secondaires (3.7.0)
+																				),
+										'OblyonColorGrpTitles'			=> array('OBLYON_COLOR_BTITLE',
+																				'OBLYON_COLOR_STITLE',
+																				'THEME_ELDY_TEXTTITLE',
+																				'THEME_ELDY_TEXTTITLENOTAB',
+																				'THEME_ELDY_TOPBORDER_TITLE1',
+																				'THEME_ELDY_BACKTITLE1',
+																				'OBLYON_COLOR_LISTHEAD_FLAT_BCKGRD',	// en-tetes de liste plats (3.8.0), affichees seulement quand OBLYON_LIST_HEADER_STYLE = flat (oblyon_tab_color_visible)
+																				'OBLYON_COLOR_LISTHEAD_FLAT_TXT',
+																				'OBLYON_COLOR_LISTHEAD_FLAT_LINE',
+																				'OBLYON_COLOR_LISTHEAD_FLAT_SEL'
+																				),
+										'OblyonColorGrpTabs'			=> array('THEME_ELDY_BACKTABACTIVE',	// boites (rendu d'origine) ; chaque style d'onglets n'affiche que ses couleurs : oblyon_tab_color_visible() (3.8.0)
+																				'THEME_ELDY_BACKTABCARD1',	// InfraS add : fond de l'onglet actif d'une fiche, jusqu'ici absent de l'onglet (restait blanc dans un preset sombre)
+																				'OBLYON_COLOR_TEXTTABACTIVE',
+																				'OBLYON_COLOR_TAB_PILL_BCKGRD',	// onglets en pilules (3.8.0)
+																				'OBLYON_COLOR_TAB_PILL_TXT',
+																				'OBLYON_COLOR_TAB_PILL_BORDER',
+																				'OBLYON_COLOR_TAB_UNDER_BAND',	// onglets soulignes (3.8.0)
+																				'OBLYON_COLOR_TAB_UNDER_TXT',
+																				'OBLYON_COLOR_TAB_UNDER_LINE'
+																				),
+										'OblyonColorGrpLines'			=> array('OBLYON_COLOR_BLINE',
+																				'OBLYON_COLOR_FLINE',
+																				'THEME_ELDY_USE_HOVER',
+																				'THEME_ELDY_USE_CHECKED',
+																				'OBLYON_COLOR_FLINE_HOVER',
+																				'THEME_ELDY_LINEIMPAIR1',
+																				'THEME_ELDY_LINEIMPAIR2',
+																				'THEME_ELDY_LINEPAIR1',
+																				'THEME_ELDY_LINEPAIR2',
+																				'THEME_ELDY_LINEBREAK'
+																				),
+										'OblyonColorGrpTotal'			=> array('OBLYON_COLOR_BTOTAL',
+																				'OBLYON_COLOR_FTOTAL'
+																				),
+										'OblyonColorGrpDate'			=> array('OBLYON_COLOR_FDATE_DEFAULT',
+																				'OBLYON_COLOR_FDATE_SELECTED'
+																				),
+										'OblyonColorGrpAgenda'			=> array('OBLYON_COLOR_CAL_EVENT_TXT',	// InfraS add begin : agenda / calendriers (3.7.0)
+																				'OBLYON_COLOR_CAL_WEEKEND_BCKGRD',
+																				'OBLYON_COLOR_CAL_HOLIDAY_BCKGRD'
+																				),	// InfraS add end
+										'OblyonColorGrpTimeline'		=> array('OBLYON_COLOR_TIMELINE_BCKGRD',	// InfraS add begin : fil de discussion des tickets (3.7.0)
+																				'OBLYON_COLOR_TIMELINE_PRIVATE_BCKGRD'
+																				),	// InfraS add end
+										'OblyonColorGrpNatures'			=> array('THEME_ELDY_PROSPECTBACK',
+																				'THEME_ELDY_CUSTOMERBACK',
+																				'THEME_ELDY_VENDORBACK',
+																				'THEME_ELDY_USERBACK',
+																				'THEME_ELDY_COLORNATURE'
+																				),
+										'OblyonColorGrpMembers'			=> array('THEME_ELDY_MEMBER_COMPANYBACK',
+																				'THEME_ELDY_MEMBER_INDIVIDUALBACK',
+																				'THEME_ELDY_COLORMEMBER'
+																				),
+										'OblyonColorGrpDashboard'		=> array('OBLYON_COLOR_BOX_SHADOW',
+																				'OBLYON_COLOR_INFOBOX_BCKGRD1',
+																				'OBLYON_COLOR_INFOBOX_BCKGRD2',
+																				'OBLYON_COLOR_BORDER_ACTIONCOLUMN'
+																				),
+										'OblyonColorGrpAmounts'			=> array('OBLYON_COLOR_AMOUNT_TEXT',	// InfraS add : texte des montants (3.7.0)
+																				'OBLYON_COLOR_AMOUNT_REMAIN',
+																				'OBLYON_COLOR_AMOUNT_PAID',
+																				'OBLYON_COLOR_AMOUNT_UNPAID'
+																				),
+										'OblyonColorGrpStock'			=> array('OBLYON_COLOR_STOCK_OK',	// InfraS add begin : stock et mouvements (3.7.0)
+																				'OBLYON_COLOR_STOCK_LOW',
+																				'OBLYON_COLOR_STOCK_EXIT'
+																				),
+										'OblyonColorGrpBadges'			=> array('OBLYON_COLOR_BADGE_DRAFT',	// badges de statut : fond / bordure, texte calcule par contraste (3.7.0)
+																				'OBLYON_COLOR_BADGE_VALIDATED',
+																				'OBLYON_COLOR_BADGE_APPROVED',
+																				'OBLYON_COLOR_BADGE_WAITING',
+																				'OBLYON_COLOR_BADGE_ACTIVE',
+																				'OBLYON_COLOR_BADGE_CLOSED',
+																				'OBLYON_COLOR_BADGE_CANCELED',
+																				'OBLYON_COLOR_BADGE_ERROR',
+																				'OBLYON_COLOR_BADGE_DONE'
+																				),	// InfraS add end
+										'OblyonColorGrpStatus'			=> array('OBLYON_COLOR_STATUS_SUCCESS',
+																				'OBLYON_COLOR_STATUS_INFO',
+																				'OBLYON_COLOR_STATUS_WARNING',
+																				'OBLYON_COLOR_STATUS_DANGER',
+																				'OBLYON_COLOR_STATUS_PRIMARY',
+																				'OBLYON_COLOR_PROGRESSBAR',
+																				'OBLYON_COLOR_TIMELINEITEM'
+																				),
+										'OblyonColorGrpWeather'			=> array('OBLYON_COLOR_WEATHER_LEVEL0',
+																				'OBLYON_COLOR_WEATHER_LEVEL1',
+																				'OBLYON_COLOR_WEATHER_LEVEL2',
+																				'OBLYON_COLOR_WEATHER_LEVEL3',
+																				'OBLYON_COLOR_WEATHER_LEVEL4',
+																				'OBLYON_COLOR_INFOBOX_UPDATE'
+																				),
+										'OblyonColorGrpAutocomplete'	=> array('OBLYON_COLOR_AUTOCOMPLETE_BCKGRD',
+																				'OBLYON_COLOR_AUTOCOMPLETE_TEXT'
+																				),
+										'OblyonColorGrpMultiselect'		=> array('OBLYON_COLOR_CHIP_BCKGRD',
+																				'OBLYON_COLOR_CHIP_TEXT',
+																				'OBLYON_COLOR_RESULT_BCKGRD',
+																				'OBLYON_COLOR_RESULT_TEXT'
+																				),
+										'OblyonColorGrpEldyOther'		=> array('THEME_ELDY_TOPMENU_BACK1',	// InfraS add begin : lues par le theme et deja proposees sur l'onglet utilisateur, mais absentes ici (3.7.0) ; valeurs invalides '0.0.0' impossibles a corriger depuis le module
+																				'THEME_ELDY_VERMENU_BACK1',
+																				'THEME_ELDY_BACKBODY',
+																				'THEME_ELDY_TEXTTITLELINK'
+																				),	// InfraS add end
 										)
 					);
-$listtheme	= array('green'		=> array('OBLYON_INFOXBOX_BACKGROUND'			=> '#FFFFFF',
-										'OBLYON_COLOR_TOPMENU_BCKGRD'			=> '#34495E',
-										'OBLYON_COLOR_TOPMENU_BCKGRD_HOVER'		=> '#2C3E50',
-										'OBLYON_COLOR_TOPMENU_TXT'				=> '#FFFFFF',
-										'OBLYON_COLOR_TOPMENU_TXT_ACTIVE'		=> '#',
-										'OBLYON_COLOR_TOPMENU_TXT_HOVER'		=> '#',
-										'OBLYON_COLOR_LEFTMENU_BCKGRD'			=> '#2ECC71',
-										'OBLYON_COLOR_LEFTMENU_BCKGRD_HOVER'	=> '#29B564',
-										'OBLYON_COLOR_LEFTMENU_TXT'				=> '#FFFFFF',
-										'OBLYON_COLOR_LEFTMENU_TXT_ACTIVE'		=> '#',
-										'OBLYON_COLOR_LEFTMENU_TXT_HOVER'		=> '#222222',
-										'OBLYON_COLOR_BUTTON_ACTION1'			=> '#0088CC',
-										'OBLYON_COLOR_BUTTON_ACTION2'			=> '#0044CC',
-										'OBLYON_COLOR_BUTTON_DELETE1'			=> '#CC8800',
-										'OBLYON_COLOR_BUTTON_DELETE2'			=> '#CC4400',
-										'OBLYON_COLOR_INFO_BORDER'				=> '#87cfd2',
-										'OBLYON_COLOR_INFO_BCKGRD'				=> '#eff8fc',
-										'OBLYON_COLOR_INFO_TEXT'				=> '#222222',
-										'OBLYON_COLOR_WARNING_BORDER'			=> '#f2cf87',
-										'OBLYON_COLOR_WARNING_BCKGRD'			=> '#fcf8e3',
-										'OBLYON_COLOR_WARNING_TEXT'				=> '#222222',
-										'OBLYON_COLOR_ERROR_BORDER'				=> '#e0796e',
-										'OBLYON_COLOR_ERROR_BCKGRD'				=> '#f07b6e',
-										'OBLYON_COLOR_ERROR_TEXT'				=> '#222222',
-										'OBLYON_COLOR_NOTIF_INFO_BCKGRD'		=> '#d9e5d1',
-										'OBLYON_COLOR_NOTIF_INFO_TEXT'			=> '#446548',
-										'OBLYON_COLOR_NOTIF_WARNING_BCKGRD'		=> '#fff7d1',
-										'OBLYON_COLOR_NOTIF_WARNING_TEXT'		=> '#a28918',
-										'OBLYON_COLOR_NOTIF_ERROR_BCKGRD'		=> '#d79eac',
-										'OBLYON_COLOR_NOTIF_ERROR_TEXT'			=> '#a72947',
-										'OBLYON_COLOR_MAIN'						=> '#0083A2',
-										'OBLYON_COLOR_BCKGRD'					=> '#F5F5F5',
-										'OBLYON_COLOR_LOGO_BCKGRD'				=> '#FFFFFF',
-										'OBLYON_COLOR_LOGIN_BCKGRD'				=> '#F4F4F4',
-										'OBLYON_COLOR_BTITLE'					=> '#0083A2',
-										'OBLYON_COLOR_FTITLE'					=> '#222222',
-										'OBLYON_COLOR_STITLE'					=> '#222222',
-										'OBLYON_COLOR_BLINE'					=> '#FFFFFF',
-										'OBLYON_COLOR_BLINE_HOVER'				=> '#F1F1F1',
-										'OBLYON_COLOR_FLINE'					=> '#444444',
-										'OBLYON_COLOR_FLINE_HOVER'				=> '#222222',
-										'OBLYON_COLOR_FDATE_DEFAULT'			=> '#FF0000',
-										'OBLYON_COLOR_FDATE_SELECTED'			=> '#FF0000',
-										'OBLYON_COLOR_TEXTTABACTIVE'			=> '#222222',
-										'OBLYON_COLOR_INPUT_BCKGRD'				=> '#FFFFFF',
-										'OBLYON_COLOR_INFOBOX_BCKGRD1'			=> '#444444',
-										'OBLYON_COLOR_INFOBOX_BCKGRD2'			=> '#E4EFE8',
-										'OBLYON_COLOR_BORDER_ACTIONCOLUMN'		=> '#BBBBBB',
-										'THEME_INVERT_RATIO_FILTER'				=> '0',
-										'THEME_ELDY_TOPBORDER_TITLE1'			=> '#FFFFFF',
-										'THEME_ELDY_BACKTITLE1'					=> '#E9EAED',
-										'THEME_ELDY_BACKTABACTIVE'				=> '#FFFFFF',
-										'THEME_ELDY_LINEIMPAIR1'				=> '#FFFFFF',
-										'THEME_ELDY_LINEIMPAIR2'				=> '#FFFFFF',
-										'THEME_ELDY_LINEPAIR1'					=> '#FBFBFB',
-										'THEME_ELDY_LINEPAIR2'					=> '#FBFBFB',
-										'THEME_ELDY_LINEBREAK'					=> '#FFFFFF',
-										'THEME_ELDY_TEXTTITLENOTAB'				=> '#222222',
-										'THEME_ELDY_TEXTTITLE'					=> '#28283C',
-										'THEME_ELDY_TEXT'						=> '#000000',
-										'THEME_ELDY_TEXTLINK'					=> '#1C1C1C'
-										),
-					'dark'		=> array('OBLYON_INFOXBOX_BACKGROUND'			=> '#FFFFFF',
-										'OBLYON_COLOR_TOPMENU_BCKGRD'			=> '#333333',
-										'OBLYON_COLOR_TOPMENU_BCKGRD_HOVER'		=> '#0083A2',
-										'OBLYON_COLOR_TOPMENU_TXT'				=> '#F4F4F4',
-										'OBLYON_COLOR_TOPMENU_TXT_ACTIVE'		=> '#',
-										'OBLYON_COLOR_TOPMENU_TXT_HOVER'		=> '#',
-										'OBLYON_COLOR_LEFTMENU_BCKGRD'			=> '#333333',
-										'OBLYON_COLOR_LEFTMENU_BCKGRD_HOVER'	=> '#0083A2',
-										'OBLYON_COLOR_LEFTMENU_TXT'				=> '#F4F4F4',
-										'OBLYON_COLOR_LEFTMENU_TXT_ACTIVE'		=> '#',
-										'OBLYON_COLOR_LEFTMENU_TXT_HOVER'		=> '#FFFFFF',
-										'OBLYON_COLOR_BUTTON_ACTION1'			=> '#0083A2',
-										'OBLYON_COLOR_BUTTON_ACTION2'			=> '#0063A2',
-										'OBLYON_COLOR_BUTTON_DELETE1'			=> '#CC8800',
-										'OBLYON_COLOR_BUTTON_DELETE2'			=> '#CC4400',
-										'OBLYON_COLOR_INFO_BORDER'				=> '#87cfd2',
-										'OBLYON_COLOR_INFO_BCKGRD'				=> '#eff8fc',
-										'OBLYON_COLOR_INFO_TEXT'				=> '#222222',
-										'OBLYON_COLOR_WARNING_BORDER'			=> '#f2cf87',
-										'OBLYON_COLOR_WARNING_BCKGRD'			=> '#fcf8e3',
-										'OBLYON_COLOR_WARNING_TEXT'				=> '#222222',
-										'OBLYON_COLOR_ERROR_BORDER'				=> '#e0796e',
-										'OBLYON_COLOR_ERROR_BCKGRD'				=> '#f07b6e',
-										'OBLYON_COLOR_ERROR_TEXT'				=> '#222222',
-										'OBLYON_COLOR_NOTIF_INFO_BCKGRD'		=> '#d9e5d1',
-										'OBLYON_COLOR_NOTIF_INFO_TEXT'			=> '#446548',
-										'OBLYON_COLOR_NOTIF_WARNING_BCKGRD'		=> '#fff7d1',
-										'OBLYON_COLOR_NOTIF_WARNING_TEXT'		=> '#a28918',
-										'OBLYON_COLOR_NOTIF_ERROR_BCKGRD'		=> '#d79eac',
-										'OBLYON_COLOR_NOTIF_ERROR_TEXT'			=> '#a72947',
-										'OBLYON_COLOR_MAIN'						=> '#0083A2',
-										'OBLYON_COLOR_BCKGRD'					=> '#F4F4F4',
-										'OBLYON_COLOR_LOGO_BCKGRD'				=> '#FFFFFF',
-										'OBLYON_COLOR_LOGIN_BCKGRD'				=> '#F4F4F4',
-										'OBLYON_COLOR_BTITLE'					=> '#0083A2',
-										'OBLYON_COLOR_FTITLE'					=> '#222222',
-										'OBLYON_COLOR_STITLE'					=> '#222222',
-										'OBLYON_COLOR_BLINE'					=> '#FFFFFF',
-										'OBLYON_COLOR_BLINE_HOVER'				=> '#F1F1F1',
-										'OBLYON_COLOR_FLINE'					=> '#444444',
-										'OBLYON_COLOR_FLINE_HOVER'				=> '#222222',
-										'OBLYON_COLOR_FDATE_DEFAULT'			=> '#FF0000',
-										'OBLYON_COLOR_FDATE_SELECTED'			=> '#FF0000',
-										'OBLYON_COLOR_TEXTTABACTIVE'			=> '#222222',
-										'OBLYON_COLOR_INPUT_BCKGRD'				=> '#FFFFFF',
-										'OBLYON_COLOR_INFOBOX_BCKGRD1'			=> '#444444',
-										'OBLYON_COLOR_INFOBOX_BCKGRD2'			=> '#E4EFE8',
-										'OBLYON_COLOR_BORDER_ACTIONCOLUMN'		=> '#BBBBBB',
-										'THEME_INVERT_RATIO_FILTER'				=> '80',
-										'THEME_ELDY_TOPBORDER_TITLE1'			=> '#FFFFFF',
-										'THEME_ELDY_BACKTITLE1'					=> '#E9EAED',
-										'THEME_ELDY_BACKTABACTIVE'				=> '#FFFFFF',
-										'THEME_ELDY_LINEIMPAIR1'				=> '#FFFFFF',
-										'THEME_ELDY_LINEIMPAIR2'				=> '#FFFFFF',
-										'THEME_ELDY_LINEPAIR1'					=> '#FBFBFB',
-										'THEME_ELDY_LINEPAIR2'					=> '#FBFBFB',
-										'THEME_ELDY_LINEBREAK'					=> '#FFFFFF',
-										'THEME_ELDY_TEXTTITLENOTAB'				=> '#222222',
-										'THEME_ELDY_TEXTTITLE'					=> '#28283C',
-										'THEME_ELDY_TEXT'						=> '#000000',
-										'THEME_ELDY_TEXTLINK'					=> '#1C1C1C'
-										),
-					'blue'		=> array('OBLYON_INFOXBOX_BACKGROUND'			=> '#FFFFFF',
-										'OBLYON_COLOR_TOPMENU_BCKGRD'			=> '#092D5C',
-										'OBLYON_COLOR_TOPMENU_BCKGRD_HOVER'		=> '#0D4185',
-										'OBLYON_COLOR_TOPMENU_TXT'				=> '#F4F4F4',
-										'OBLYON_COLOR_TOPMENU_TXT_ACTIVE'		=> '#',
-										'OBLYON_COLOR_TOPMENU_TXT_HOVER'		=> '#',
-										'OBLYON_COLOR_LEFTMENU_BCKGRD'			=> '#092D5C',
-										'OBLYON_COLOR_LEFTMENU_BCKGRD_HOVER'	=> '#0D4185',
-										'OBLYON_COLOR_LEFTMENU_TXT'				=> '#F4F4F4',
-										'OBLYON_COLOR_LEFTMENU_TXT_ACTIVE'		=> '#F4F4F4',
-										'OBLYON_COLOR_LEFTMENU_TXT_HOVER'		=> '#FFFFFF',
-										'OBLYON_COLOR_BUTTON_ACTION1'			=> '#0088CC',
-										'OBLYON_COLOR_BUTTON_ACTION2'			=> '#0044CC',
-										'OBLYON_COLOR_BUTTON_DELETE1'			=> '#CC8800',
-										'OBLYON_COLOR_BUTTON_DELETE2'			=> '#CC4400',
-										'OBLYON_COLOR_INFO_BORDER'				=> '#87CFD2',
-										'OBLYON_COLOR_INFO_BCKGRD'				=> '#EFF8FC',
-										'OBLYON_COLOR_INFO_TEXT'				=> '#222222',
-										'OBLYON_COLOR_WARNING_BORDER'			=> '#F2CF87',
-										'OBLYON_COLOR_WARNING_BCKGRD'			=> '#FCF8E3',
-										'OBLYON_COLOR_WARNING_TEXT'				=> '#222222',
-										'OBLYON_COLOR_ERROR_BORDER'				=> '#E0796E',
-										'OBLYON_COLOR_ERROR_BCKGRD'				=> '#F07B6E',
-										'OBLYON_COLOR_ERROR_TEXT'				=> '#222222',
-										'OBLYON_COLOR_NOTIF_INFO_BCKGRD'		=> '#446548',
-										'OBLYON_COLOR_NOTIF_INFO_TEXT'			=> '#D9E5D1',
-										'OBLYON_COLOR_NOTIF_WARNING_BCKGRD'		=> '#A28918',
-										'OBLYON_COLOR_NOTIF_WARNING_TEXT'		=> '#FFF7D1',
-										'OBLYON_COLOR_NOTIF_ERROR_BCKGRD'		=> '#A72947',
-										'OBLYON_COLOR_NOTIF_ERROR_TEXT'			=> '#D79EAC',
-										'OBLYON_COLOR_MAIN'						=> '#E09430',
-										'OBLYON_COLOR_BCKGRD'					=> '#F4F4F4',
-										'OBLYON_COLOR_LOGO_BCKGRD'				=> '#FFFFFF',
-										'OBLYON_COLOR_LOGIN_BCKGRD'				=> '#F4F4F4',
-										'OBLYON_COLOR_BTITLE'					=> '#E09430',
-										'OBLYON_COLOR_FTITLE'					=> '#222222',
-										'OBLYON_COLOR_STITLE'					=> '#222222',
-										'OBLYON_COLOR_BLINE'					=> '#FFFFFF',
-										'OBLYON_COLOR_BLINE_HOVER'				=> '#F1F1F1',
-										'OBLYON_COLOR_FLINE'					=> '#444444',
-										'OBLYON_COLOR_FLINE_HOVER'				=> '#222222',
-										'OBLYON_COLOR_FDATE_DEFAULT'			=> '#FF0000',
-										'OBLYON_COLOR_FDATE_SELECTED'			=> '#FF0000',
-										'OBLYON_COLOR_TEXTTABACTIVE'			=> '#222222',
-										'OBLYON_COLOR_INPUT_BCKGRD'				=> '#FFFFFF',
-										'OBLYON_COLOR_INFOBOX_BCKGRD1'			=> '#444444',
-										'OBLYON_COLOR_INFOBOX_BCKGRD2'			=> '#E4EFE8',
-										'OBLYON_COLOR_BORDER_ACTIONCOLUMN'		=> '#BBBBBB',
-										'THEME_INVERT_RATIO_FILTER'				=> '0',
-										'THEME_ELDY_TOPBORDER_TITLE1'			=> '#FFFFFF',
-										'THEME_ELDY_BACKTITLE1'					=> '#E9EAED',
-										'THEME_ELDY_BACKTABACTIVE'				=> '#FFFFFF',
-										'THEME_ELDY_LINEIMPAIR1'				=> '#FFFFFF',
-										'THEME_ELDY_LINEIMPAIR2'				=> '#FFFFFF',
-										'THEME_ELDY_LINEPAIR1'					=> '#FBFBFB',
-										'THEME_ELDY_LINEPAIR2'					=> '#FBFBFB',
-										'THEME_ELDY_LINEBREAK'					=> '#FFFFFF',
-										'THEME_ELDY_TEXTTITLENOTAB'				=> '#222222',
-										'THEME_ELDY_TEXTTITLE'					=> '#28283C',
-										'THEME_ELDY_TEXT'						=> '#000000',
-										'THEME_ELDY_TEXTLINK'					=> '#1C1C1C'
-										),
-					'night'		=> array('OBLYON_INFOXBOX_BACKGROUND'			=> '#444444',
-										'OBLYON_COLOR_TOPMENU_BCKGRD'			=> '#222222',
-										'OBLYON_COLOR_TOPMENU_BCKGRD_HOVER'		=> '#333333',
-										'OBLYON_COLOR_TOPMENU_TXT'				=> '#F4F4F4',
-										'OBLYON_COLOR_TOPMENU_TXT_ACTIVE'		=> '#',
-										'OBLYON_COLOR_TOPMENU_TXT_HOVER'		=> '#',
-										'OBLYON_COLOR_LEFTMENU_BCKGRD'			=> '#2C2C2C',
-										'OBLYON_COLOR_LEFTMENU_BCKGRD_HOVER'	=> '#222222',
-										'OBLYON_COLOR_LEFTMENU_TXT'				=> '#F4F4F4',
-										'OBLYON_COLOR_LEFTMENU_TXT_ACTIVE'		=> '#',
-										'OBLYON_COLOR_LEFTMENU_TXT_HOVER'		=> '#FFFFFF',
-										'OBLYON_COLOR_BUTTON_ACTION1'			=> '#0088CC',
-										'OBLYON_COLOR_BUTTON_ACTION2'			=> '#0044CC',
-										'OBLYON_COLOR_BUTTON_DELETE1'			=> '#CC8800',
-										'OBLYON_COLOR_BUTTON_DELETE2'			=> '#CC4400',
-										'OBLYON_COLOR_INFO_BORDER'				=> '#87cfd2',
-										'OBLYON_COLOR_INFO_BCKGRD'				=> '#eff8fc',
-										'OBLYON_COLOR_INFO_TEXT'				=> '#222222',
-										'OBLYON_COLOR_WARNING_BORDER'			=> '#f2cf87',
-										'OBLYON_COLOR_WARNING_BCKGRD'			=> '#fcf8e3',
-										'OBLYON_COLOR_WARNING_TEXT'				=> '#222222',
-										'OBLYON_COLOR_ERROR_BORDER'				=> '#e0796e',
-										'OBLYON_COLOR_ERROR_BCKGRD'				=> '#f07b6e',
-										'OBLYON_COLOR_ERROR_TEXT'				=> '#222222',
-										'OBLYON_COLOR_NOTIF_INFO_BCKGRD'		=> '#d9e5d1',
-										'OBLYON_COLOR_NOTIF_INFO_TEXT'			=> '#446548',
-										'OBLYON_COLOR_NOTIF_WARNING_BCKGRD'		=> '#fff7d1',
-										'OBLYON_COLOR_NOTIF_WARNING_TEXT'		=> '#a28918',
-										'OBLYON_COLOR_NOTIF_ERROR_BCKGRD'		=> '#d79eac',
-										'OBLYON_COLOR_NOTIF_ERROR_TEXT'			=> '#a72947',
-										'OBLYON_COLOR_MAIN'						=> '#E09430',
-										'OBLYON_COLOR_BCKGRD'					=> '#444444',
-										'OBLYON_COLOR_LOGO_BCKGRD'				=> '#FFFFFF',
-										'OBLYON_COLOR_LOGIN_BCKGRD'				=> '#333333',
-										'OBLYON_COLOR_BTITLE'					=> '#E09430',
-										'OBLYON_COLOR_FTITLE'					=> '#F4F4F4',
-										'OBLYON_COLOR_STITLE'					=> '#F4F4F4',
-										'OBLYON_COLOR_BLINE'					=> '#444444',
-										'OBLYON_COLOR_BLINE_HOVER'				=> '#F1F1F1',
-										'OBLYON_COLOR_FLINE'					=> '#ECECEC',
-										'OBLYON_COLOR_FLINE_HOVER'				=> '#FCFCFC',
-										'OBLYON_COLOR_FDATE_DEFAULT'			=> '#FF0000',
-										'OBLYON_COLOR_FDATE_SELECTED'			=> '#FF0000',
-										'OBLYON_COLOR_TEXTTABACTIVE'			=> '#222222',
-										'OBLYON_COLOR_INPUT_BCKGRD'				=> '#DEDEDE',
-										'OBLYON_COLOR_INFOBOX_BCKGRD1'			=> '#444444',
-										'OBLYON_COLOR_INFOBOX_BCKGRD2'			=> '#E4EFE8',
-										'OBLYON_COLOR_BORDER_ACTIONCOLUMN'		=> '#BBBBBB',
-										'THEME_INVERT_RATIO_FILTER'				=> '0',
-										'THEME_ELDY_TOPBORDER_TITLE1'			=> '#FFFFFF',
-										'THEME_ELDY_BACKTITLE1'					=> '#E9EAED',
-										'THEME_ELDY_BACKTABACTIVE'				=> '#444444',
-										'THEME_ELDY_LINEIMPAIR1'				=> '#FFFFFF',
-										'THEME_ELDY_LINEIMPAIR2'				=> '#FFFFFF',
-										'THEME_ELDY_LINEPAIR1'					=> '#FBFBFB',
-										'THEME_ELDY_LINEPAIR2'					=> '#FBFBFB',
-										'THEME_ELDY_LINEBREAK'					=> '#FFFFFF',
-										'THEME_ELDY_TEXTTITLENOTAB'				=> '#FFFFFF',
-										'THEME_ELDY_TEXTTITLE'					=> '#28283C',
-										'THEME_ELDY_TEXT'						=> '#000000',
-										'THEME_ELDY_TEXTLINK'					=> '#1C1C1C'
-										),
-					'light'		=> array('OBLYON_INFOXBOX_BACKGROUND'			=> '#FFFFFF',
-										'OBLYON_COLOR_TOPMENU_BCKGRD'			=> '#FFFFFF',
-										'OBLYON_COLOR_TOPMENU_BCKGRD_HOVER'		=> '#D51123',
-										'OBLYON_COLOR_TOPMENU_TXT'				=> '#444444',
-										'OBLYON_COLOR_TOPMENU_TXT_ACTIVE'		=> '#FFFFFF',
-										'OBLYON_COLOR_TOPMENU_TXT_HOVER'		=> '#FFFFFF',
-										'OBLYON_COLOR_LEFTMENU_BCKGRD'			=> '#FFFFFF',
-										'OBLYON_COLOR_LEFTMENU_BCKGRD_HOVER'	=> '#D51123',
-										'OBLYON_COLOR_LEFTMENU_TXT'				=> '#444444',
-										'OBLYON_COLOR_LEFTMENU_TXT_ACTIVE'		=> '#FFFFFF',
-										'OBLYON_COLOR_LEFTMENU_TXT_HOVER'		=> '#FFFFFF',
-										'OBLYON_COLOR_BUTTON_ACTION1'			=> '#0083A2',
-										'OBLYON_COLOR_BUTTON_ACTION2'			=> '#0063A2',
-										'OBLYON_COLOR_BUTTON_DELETE1'			=> '#CC8800',
-										'OBLYON_COLOR_BUTTON_DELETE2'			=> '#CC4400',
-										'OBLYON_COLOR_INFO_BORDER'				=> '#87cfd2',
-										'OBLYON_COLOR_INFO_BCKGRD'				=> '#eff8fc',
-										'OBLYON_COLOR_INFO_TEXT'				=> '#222222',
-										'OBLYON_COLOR_WARNING_BORDER'			=> '#f2cf87',
-										'OBLYON_COLOR_WARNING_BCKGRD'			=> '#fcf8e3',
-										'OBLYON_COLOR_WARNING_TEXT'				=> '#222222',
-										'OBLYON_COLOR_ERROR_BORDER'				=> '#e0796e',
-										'OBLYON_COLOR_ERROR_BCKGRD'				=> '#f07b6e',
-										'OBLYON_COLOR_ERROR_TEXT'				=> '#222222',
-										'OBLYON_COLOR_NOTIF_INFO_BCKGRD'		=> '#d9e5d1',
-										'OBLYON_COLOR_NOTIF_INFO_TEXT'			=> '#446548',
-										'OBLYON_COLOR_NOTIF_WARNING_BCKGRD'		=> '#fff7d1',
-										'OBLYON_COLOR_NOTIF_WARNING_TEXT'		=> '#a28918',
-										'OBLYON_COLOR_NOTIF_ERROR_BCKGRD'		=> '#d79eac',
-										'OBLYON_COLOR_NOTIF_ERROR_TEXT'			=> '#a72947',
-										'OBLYON_COLOR_MAIN'						=> '#D51123',
-										'OBLYON_COLOR_BCKGRD'					=> '#FFFFFF',
-										'OBLYON_COLOR_LOGO_BCKGRD'				=> '#FFFFFF',
-										'OBLYON_COLOR_LOGIN_BCKGRD'				=> '#FFFFFF',
-										'OBLYON_COLOR_BTITLE'					=> '#D51123',
-										'OBLYON_COLOR_FTITLE'					=> '#222222',
-										'OBLYON_COLOR_STITLE'					=> '#222222',
-										'OBLYON_COLOR_BLINE'					=> '#FFFFFF',
-										'OBLYON_COLOR_BLINE_HOVER'				=> '#F1F1F1',
-										'OBLYON_COLOR_FLINE'					=> '#444444',
-										'OBLYON_COLOR_FLINE_HOVER'				=> '#D51123',
-										'OBLYON_COLOR_FDATE_DEFAULT'			=> '#FF0000',
-										'OBLYON_COLOR_FDATE_SELECTED'			=> '#FF0000',
-										'OBLYON_COLOR_TEXTTABACTIVE'			=> '#222222',
-										'OBLYON_COLOR_INPUT_BCKGRD'				=> '#F4F4F4',
-										'OBLYON_COLOR_INFOBOX_BCKGRD1'			=> '#444444',
-										'OBLYON_COLOR_INFOBOX_BCKGRD2'			=> '#E4EFE8',
-										'OBLYON_COLOR_BORDER_ACTIONCOLUMN'		=> '#BBBBBB',
-										'THEME_INVERT_RATIO_FILTER'				=> '0',
-										'THEME_ELDY_TOPBORDER_TITLE1'			=> '#FFFFFF',
-										'THEME_ELDY_BACKTITLE1'					=> '#E9EAED',
-										'THEME_ELDY_BACKTABACTIVE'				=> '#FFFFFF',
-										'THEME_ELDY_LINEIMPAIR1'				=> '#FFFFFF',
-										'THEME_ELDY_LINEIMPAIR2'				=> '#FFFFFF',
-										'THEME_ELDY_LINEPAIR1'					=> '#FBFBFB',
-										'THEME_ELDY_LINEPAIR2'					=> '#FBFBFB',
-										'THEME_ELDY_LINEBREAK'					=> '#FFFFFF',
-										'THEME_ELDY_TEXTTITLENOTAB'				=> '#222222',
-										'THEME_ELDY_TEXTTITLE'					=> '#28283C',
-										'THEME_ELDY_TEXT'						=> '#000000',
-										'THEME_ELDY_TEXTLINK'					=> '#1C1C1C'
-									)
-					);
+// InfraS change : les presets de couleurs (ex-tableau $listtheme, 5 x 102 constantes) sont des fichiers JSON : presets/*.json du module et presets de l'instance (voir lib/oblyon_presets.lib.php)
 
 // Actions **************************************
 $action		= GETPOST('action','alpha');
@@ -442,7 +274,9 @@ if ($action == 'restoreParams') {
 // On / Off management
 if (preg_match('/set_(.*)/', $action, $reg)) {
 	$confkey	= $reg[1];
-	$result		= dolibarr_set_const($db, $confkey, GETPOST('value'), 'chaine', 0, 'Oblyon module', $conf->entity);
+	if (preg_match('/^(OBLYON_|THEME_|MAIN_|FIX_|DISABLE_)/', $confkey)) {
+		$result		= dolibarr_set_const($db, $confkey, GETPOST('value', 'alphanohtml'), 'chaine', 0, 'Oblyon module', $conf->entity);
+	}
 }
 // Update buttons management
 if (preg_match('/update_(.*)/', $action, $reg)) {
@@ -452,24 +286,18 @@ if (preg_match('/update_(.*)/', $action, $reg)) {
 	foreach ($list[$confkey] as $constname) {
 		$result	= dolibarr_set_const($db, $constname, GETPOST($constname, 'alpha'),	'chaine', 0, 'Oblyon module', $conf->entity);
 	}
+	$btnauto	= oblyon_button_auto_values(new User($db));	// couleurs de boutons automatiques de l'INSTANCE (utilisateur sans id : jamais les couleurs personnelles de l'admin), calculees avant toute ecriture : une couleur postee identique a la valeur affichee reste automatique ('#')
 	foreach ($listcolor as $list) {
-		foreach ($list as $constname) {
-			$result	= dolibarr_set_const($db, $constname, '#'.GETPOST($constname, 'alpha'),	'chaine', 0, 'Oblyon module', $conf->entity);
-		}
+		array_walk_recursive($list, function ($constname) use ($db, $conf, &$result, $btnauto) {
+			if (! GETPOSTISSET($constname))	return;	// champ non affiche (ex. couleurs des pilules hors style "pills", bordure de la colonne d'actions) : valeur en base conservee au lieu d'etre remplacee par '#'
+			$value	= '#'.GETPOST($constname, 'alpha');
+			if (isset($btnauto[$constname]) && strtoupper($value) === $btnauto[$constname])	$value	= '#';	// non modifiee -> suit toujours le style et les couleurs de base
+			$result	= dolibarr_set_const($db, $constname, $value,	'chaine', 0, 'Oblyon module', $conf->entity);
+		});
 	}
-	if ($confkey == 'theme') {
-		$res	= 1;
-		foreach ($listtheme[GETPOST('value', 'alpha')] as $constname => $constvalue) {
-			$result	= dolibarr_set_const($db, $constname, $constvalue,	'chaine', 0, 'Oblyon module', $conf->entity);
-			$res	= $res * $result;
-		}
-		$result	= $res > 0 ? 2 : -1;
-	}
+	// InfraS change : l'application d'un preset ne passe plus par ce bloc (action apply_preset, lib/oblyon_presets.lib.php)
 }
 // Retour => message Ok ou Ko
-if ($result == 2) {
-	setEventMessages($langs->trans('ThemeApplied').' : '.$langs->trans('Oblyon'.GETPOST('value', 'alpha')), null, 'mesgs');
-}
 if ($result == 1) {
 	setEventMessages($langs->trans('SetupSaved'), null, 'mesgs');
 }
@@ -496,7 +324,13 @@ print '	<script type = "text/javascript">
 				});
 			</script>';
 
-print '<form action = "'.$_SERVER['PHP_SELF'].'" method = "POST" enctype = "multipart/form-data">
+// InfraS add begin : presets (cartes, enregistrer sous, importer) : formulaires propres, donc avant le formulaire des couleurs
+print oblyon_print_preset_cards();
+print oblyon_print_preset_forms();
+// InfraS add end
+// (3.8.0 : le rapport de contraste texte / fond affiche ici depuis la 3.7.0 est retire, mecanisme juge trop lourd pour son usage)
+
+print '<form action = "'.dol_escape_htmltag($_SERVER['PHP_SELF']).'" method = "POST" enctype = "multipart/form-data">
 				<input type="hidden" name="token" value="'.newToken().'" />
 				<input type="hidden" name="action" value="update">
 				<input type="hidden" name="page_y" value="">
@@ -507,24 +341,7 @@ print '<form action = "'.$_SERVER['PHP_SELF'].'" method = "POST" enctype = "mult
 	clearstatcache();
 	print '		<div class = "div-table-responsive-no-min">
 					<table summary = "edit" class = "noborder centpercent editmode tableforfield as-settings-colors">';
-	$larg	= !empty($listtheme) && count($listtheme) > 0 ? 100 / count($listtheme) : 100;
-	$metas	= array();
-	for ($i = 0; $i < count($listtheme); $i++) {
-		$metas[]	= $larg.'%';
-	}
-	oblyon_print_colgroup($metas);
-	// Infobox enable
-	$metas	= array(array(count($listtheme)), 'Themes');
-	oblyon_print_liste_titre($metas);
-	print '				<tr>';
-	foreach ($listtheme as $name => $values) {
-		print '				<td class = "center">
-								<a title = "'.$langs->trans('Oblyon'.$name).'" href = "'.$_SERVER['PHP_SELF'].'?action=update_theme&token='.newToken().'&value='.$name.'">'.img_picto($langs->trans('Oblyon'.$name), 'oblyon'.$name.'.png@oblyon', 'width = "50%"').'
-									<br/>'.$langs->trans('Oblyon'.$name).'
-								</a>
-							</td>';
-	}
-	print '				</tr>';
+	oblyon_print_colgroup(array('20%', '20%', '20%', '20%', '20%'));	// InfraS change : la ligne des vignettes de presets est remplacee par les cartes au-dessus du formulaire
 	// Colors
 	// Top menu
 	$metas		= array(array(5), (!getDolGlobalString('MAIN_MENU_INVERT', '') ? 'TopMenu' : 'LeftMenu'));
@@ -547,12 +364,19 @@ print '<form action = "'.$_SERVER['PHP_SELF'].'" method = "POST" enctype = "mult
 		}
 	}
 	// button
+	// une sous-section par famille (boutons d'action, bouton Supprimer, boutons de formulaire si couleurs propres), les cinq roles
+	// (les styles Contour / Doux ont leur propre jeu de constantes, cf. oblyon_button_families()) ; chaque champ montre la couleur reellement appliquee
+	// (oblyon_button_effective_colors()) : une couleur non modifiee reste automatique a l'enregistrement (cf. action update_), aide en infobulle sur le titre de chaque famille
 	$metas		= array(array(5), 'Buttons');
 	oblyon_print_liste_titre($metas);
-	if (count($listcolor['button'])) {
-		foreach ($listcolor['button'] as $key) {
-			$metas	= array('type' => 'text', 'class' => 'flat quatrevingtpercent color action');
-			oblyon_print_input($key, 'input', $langs->trans($key), '', $metas, 4, 1);
+	$formbtn	= new Form($db);
+	$btnhelp	= $langs->trans('OblyonBtnGroupHelp', $langs->transnoentities('OblyonButtonStyle'.ucfirst(getDolGlobalString('OBLYON_BUTTON_STYLE', 'filled'))));
+	$btncolors	= oblyon_button_effective_colors('', new User($db));	// couleurs de l'instance (utilisateur sans id), pas celles, personnelles, de l'admin connecte
+	foreach (oblyon_button_families() as $familykey => $family) {
+		print '<tr class="oddeven"><td colspan="5"><strong>'.$formbtn->textwithtooltip($langs->trans($family['label']), $btnhelp, 2, 1, img_help(1, '')).'</strong></td></tr>';
+		foreach ($family['colors'] as $role => $key) {
+			$metas	= array('type' => 'text', 'class' => 'flat quatrevingtpercent color action', 'value' => $btncolors[$familykey][$role]['hex']);
+			oblyon_print_input($key, 'input', '&nbsp;&nbsp;&nbsp;'.$langs->trans('OblyonBtnRole'.ucfirst(str_replace('_', '', ucwords($role, '_')))), '', $metas, 4, 1);
 		}
 	}
 	// message
@@ -564,12 +388,15 @@ print '<form action = "'.$_SERVER['PHP_SELF'].'" method = "POST" enctype = "mult
 			oblyon_print_input($key, 'input', $langs->trans($key), '', $metas, 4, 1);
 		}
 	}
-	// Others
-	$metas		= array(array(5), 'Others');
-	oblyon_print_liste_titre($metas);
-	if (count($listcolor['options'])) {
-		foreach ($listcolor['options'] as $key) {
+	// Others - une section distincte par groupe (facilite la lecture / la recherche)
+	foreach ($listcolor['options'] as $grouplabel => $groupkeys) {
+		$metas		= array(array(5), $grouplabel);
+		oblyon_print_liste_titre($metas);
+		foreach ($groupkeys as $key) {
 			if ($key == 'OBLYON_COLOR_BORDER_ACTIONCOLUMN' && !getDolGlobalString('FIX_STICKY_COLUMN_FIRST') && !getDolGlobalString('FIX_STICKY_COLUMN_LAST')) {
+				continue;
+			}
+			if (! oblyon_tab_color_visible($key)) {	// groupe Onglets : seulement les couleurs du style d'onglets choisi (3.8.0)
 				continue;
 			}
 			$metas	= array('type' => 'text', 'class' => 'flat quatrevingtpercent color action');
@@ -585,15 +412,6 @@ print '<form action = "'.$_SERVER['PHP_SELF'].'" method = "POST" enctype = "mult
 				</div>';
 	oblyon_print_input('', 'range', $langs->trans('InvertRatioDesc', getDolGlobalString('THEME_INVERT_RATIO_FILTER')), '', $metas, 4, 1);
 
-	// Eldy
-	$metas		= array(array(5), 'Eldy');
-	oblyon_print_liste_titre($metas);
-	if (count($listcolor['eldy'])) {
-		foreach ($listcolor['eldy'] as $key) {
-			$metas	= array('type' => 'text', 'class' => 'flat quatrevingtpercent color action');
-			oblyon_print_input($key, 'input', $langs->trans($key), '', $metas, 4, 1);
-		}
-	}
 	print '			</table>
 				</div>';
 	print dol_get_fiche_end();

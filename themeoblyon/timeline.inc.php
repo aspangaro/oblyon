@@ -10,6 +10,13 @@
 
 if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
 /* <style type="text/css" > */
+/* ================================================================================================
+   oblyon/themeoblyon/timeline.inc.php
+   Role      : Fil de discussion des tickets (base AdminLTE) : jetons OBLYON_COLOR_TIMELINE_*
+   Inclus par : global.inc.php | Garde : ISLOADEDBYSTEELSHEET | Variables PHP : portee de style.css.php / theme_vars.inc.php
+   Regle     : une regle, un endroit (pas de copie d'un selecteur present dans un autre fichier ; verifier avec dev/csscompare.php)
+   ================================================================================================ */
+
 
 
 /*
@@ -27,7 +34,7 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
     top: 0;
     bottom: 0;
     width: 4px;
-    background: #ddd;
+    background: var(--oblyon-border-strong);	/* InfraS change 3.7.0 : jeton */
     left: 31px;
     margin: 0;
     border-radius: 2px;
@@ -49,11 +56,11 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
 .timeline > li > .timeline-item {
     -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     box-shadow:  0 1px 3px rgba(0, 0, 0, 0.1);
-    border:1px solid #d2d2d2;
+    border:1px solid var(--oblyon-border);	/* InfraS change 3.7.0 : jeton */
     border-radius: 3px;
     margin-top: 0;
-    background: #fff;
-    color: #444;
+    background: var(--colorTimelineBg);	/* InfraS change 3.7.0 : jeton */
+    color: var(--colortext);	/* InfraS change 3.7.0 : jeton */
     margin-left: 60px;
     margin-right: 0px;
     padding: 0;
@@ -61,13 +68,13 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
 }
 
 .timeline > li.timeline-code-ticket_msg_private  > .timeline-item {
-		background: #fffbe5;
-        border-color: #d0cfc0;
+		background: var(--colorTimelinePrivateBg);	/* InfraS change 3.7.0 : jeton */
+        border-color: var(--oblyon-border-strong);	/* InfraS change 3.7.0 : jeton */
 }
 
 
 .timeline > li > .timeline-item > .time{
-    color: #6f6f6f;
+    color: var(--oblyon-muted-text);	/* InfraS change 3.7.0 : jeton */
     float: right;
     padding: 10px;
     font-size: 12px;
@@ -75,7 +82,7 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
 
 
 .timeline > li > .timeline-item > .timeline-header-action{
-    color: #6f6f6f;
+    color: var(--oblyon-muted-text);	/* InfraS change 3.7.0 : jeton */
     float: right;
     padding: 7px;
     font-size: 12px;
@@ -103,30 +110,30 @@ a.timeline-btn:active
     user-select: none;
     background-image: none;
     text-decoration: none;
-    background-color: #f4f4f4;
-    color: #444;
-    border: 1px solid #ddd;
+    background-color: var(--oblyon-neutral-bg);	/* InfraS change 3.7.0 : jeton */
+    color: var(--colortext);	/* InfraS change 3.7.0 : jeton */
+    border: 1px solid var(--oblyon-border);	/* InfraS change 3.7.0 : jeton */
 }
 
 a.timeline-btn:hover
 {
-    background-color: #e7e7e7;
-    color: #333;
-    border-color: #adadad;;
+    background-color: var(--colorbline_hover);	/* InfraS change 3.7.0 : jeton */
+    color: var(--colortext);	/* InfraS change 3.7.0 : jeton */
+    border-color: var(--oblyon-border-strong);	/* InfraS change 3.7.0 : jeton */
 }
 
 
 .timeline > li > .timeline-item > .timeline-header {
     margin: 0;
-    color: #333;
-    border-bottom: 1px solid #f4f4f4;
+    color: var(--colortext);	/* InfraS change 3.7.0 : jeton */
+    border-bottom: 1px solid var(--oblyon-border);	/* InfraS change 3.7.0 : jeton */
     padding: 10px;
     font-size: 14px;
     font-weight: normal;
     line-height: 1.1;
 }
 .timeline > li.timeline-code-ticket_msg_private  > .timeline-item > .timeline-header {
-    border-color: #ecebda;
+    border-color: var(--oblyon-border-strong);	/* InfraS change 3.7.0 : jeton */
 }
 
 .timeline > li > .timeline-item > .timeline-header > a {
@@ -144,8 +151,8 @@ a.timeline-btn:hover
     font-size: 15px;
     line-height: 30px;
     position: absolute;
-    color: #666;
-    background: #d2d6de;
+    color: var(--oblyon-muted-text);	/* InfraS change 3.7.0 : jeton */
+    background: var(--oblyon-neutral-bg);	/* InfraS change 3.7.0 : jeton */
     border-radius: 50%;
     text-align: center;
     left: 18px;
@@ -155,17 +162,17 @@ a.timeline-btn:hover
     font-weight: 600;
     padding: 5px;
     display: inline-block;
-    background-color: #fff;
+    background-color: var(--colorTimelineBg);	/* InfraS change 3.7.0 : jeton */
     border-radius: 4px;
 }
 .timeline-inverse > li > .timeline-item {
-    background: #f0f0f0;
-    border: 1px solid #ddd;
+    background: var(--oblyon-neutral-bg);	/* InfraS change 3.7.0 : jeton */
+    border: 1px solid var(--oblyon-border);	/* InfraS change 3.7.0 : jeton */
     -webkit-box-shadow: none;
     box-shadow: none;
 }
 .timeline-inverse > li > .timeline-item > .timeline-header {
-    border-bottom-color: #ddd;
+    border-bottom-color: var(--oblyon-border);	/* InfraS change 3.7.0 : jeton */
 }
 
 .timeline-icon-todo,
@@ -180,18 +187,18 @@ a.timeline-btn:hover
 }
 
 .timeline-icon-todo{
-    background-color: #dd4b39 !important;
+    background-color: var(--colorstatusdanger) !important;
 }
 
 .timeline-icon-in-progress{
-    background-color: #00c0ef !important;
+    background-color: var(--colorstatusinfo) !important;
 }
 .timeline-icon-done{
-    background-color: #00a65a !important;
+    background-color: var(--colorstatussuccess) !important;
 }
 
 
 .timeline-badge-date{
-    background-color: #0073b7 !important;
+    background-color: var(--colortimelineitem) !important;
     color: #fff !important;
 }

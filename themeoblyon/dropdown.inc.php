@@ -2,6 +2,13 @@
 if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
 
 /* <style type="text/css" > dont remove this line it's an ide hack */
+/* ================================================================================================
+   oblyon/themeoblyon/dropdown.inc.php
+   Role      : Menus deroulants de la barre du haut : recherche, ajout rapide, favoris, connexion
+   Inclus par : global.inc.php | Garde : ISLOADEDBYSTEELSHEET | Variables PHP : portee de style.css.php / theme_vars.inc.php
+   Regle     : une regle, un endroit (pas de copie d'un selecteur present dans un autre fichier ; verifier avec dev/csscompare.php)
+   ================================================================================================ */
+
 /*
  * Dropdown
  */
@@ -19,16 +26,17 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
     float: left;
     min-width: 160px;
     margin: 2px 0 0;
-    font-size: 14px;
+    font-size: var(--fontsize);	/* InfraS change */
     text-align: left;
     list-style: none;
-    background-color: <?php print (isset($bgcolor)) ? $bgcolor : '#fff' ?>;
+    background-color: var(--bgcolor);
     -webkit-background-clip: padding-box;
     background-clip: padding-box;
-	border: 1px solid var(--colorboxstatsborder);
-    border-radius: 4px;
-    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
-    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+	/* InfraS change begin : jetons de design */
+	border: 1px solid var(--oblyon-border);
+    border-radius: var(--oblyon-radius);
+    box-shadow: var(--oblyon-shadow-lg);
+	/* InfraS change end */
 }
 
 .dropdown-toggle{
@@ -87,8 +95,6 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
 	color: var(--colortextlink);
 }
 .side-nav-vert .user-menu .dropdown-menu {
-    border-top-right-radius: 0;
-    border-top-left-radius: 0;
     padding: 1px 0 0 0;
     border-top-width: 0;
     width: 300px;
@@ -126,9 +132,9 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
 
 .dropdown-menu > .user-header{
 <?php if (getDolGlobalString('MAIN_MENU_INVERT')) { ?>
-	background-color: <?php print $bgnavtop_hover; ?>;
+	background-color: var(--bgnavtop_hover);
 <?php } else { ?>
-	background-color: <?php print $bgnavleft_hover; ?>;
+	background-color: var(--bgnavleft_hover);
 <?php } ?>
 }
 
@@ -138,9 +144,9 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
 
 .dropdown-menu > .user-footer {
 <?php if (getDolGlobalString('MAIN_MENU_INVERT')) { ?>
-	background-color: <?php print $bgnavtop_hover; ?>;
+	background-color: var(--bgnavtop_hover);
 <?php } else { ?>
-	background-color: <?php print $bgnavleft_hover; ?>;
+	background-color: var(--bgnavleft_hover);
 <?php } ?>
     padding: 10px;
 }
@@ -179,9 +185,9 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
     -webkit-border-radius: 0;
     border-radius: 0;
 <?php if (getDolGlobalString('MAIN_MENU_INVERT')) { ?>
-    background-color: <?php print $bgnavtop; ?>;
+    background-color: var(--bgnavtop);
 <?php } else { ?>
-    background-color: <?php print $bgnavleft; ?>;
+    background-color: var(--bgnavleft);
 <?php } ?>
 }
 .dropdown-body::-webkit-scrollbar-track {
@@ -234,33 +240,188 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
 }
 
 	.user-footer .pull-left .button-top-menu-dropdown {
-		background-color: <?php print $colorButtonAction1; ?>;
+		background-color: var(--colorButtonAction1);
 		color: #fff;
 	}
 
 	.user-footer .pull-left .button-top-menu-dropdown:hover, .user-footer .pull-left .button-top-menu-dropdown:focus {
-		background-color: <?php print $colorButtonAction2; ?>;
-		border-color: <?php print $colorButtonAction2; ?>;
+		background-color: var(--colorButtonAction2);
+		border-color: var(--colorButtonAction2);
 		box-shadow: inset 0 1px 0 rgba(235,235,235, .6);
 		-webkit-box-shadow: inset 0 1px 0 rgba(235,235,235, .6);
 		color: #fff;
 	}
 
 	.user-footer .pull-right .button-top-menu-dropdown {
-		background-color: <?php print $colorButtonDelete1; ?>;
+		background-color: var(--colorButtonDelete1);
 		color: #fff;
 	}
 
 	.user-footer .pull-right .button-top-menu-dropdown:hover, .user-footer .pull-left .button-top-menu-dropdown:focus {
-		background-color: <?php print $colorButtonDelete2; ?>;
-		border-color: <?php print $colorButtonDelete2; ?>;
+		background-color: var(--colorButtonDelete2);
+		border-color: var(--colorButtonDelete2);
 		box-shadow: inset 0 1px 0 rgba(235,235,235, .6);
 		-webkit-box-shadow: inset 0 1px 0 rgba(235,235,235, .6);
 		color: #fff;
 	}
+<?php if ($oblyon_user_block != 'default') { ?>
+/* menu deroulant utilisateur redessine (OBLYON_USER_BLOCK = initials / photo, variable de style.css.php) : carte flottante sur les jetons
+   du theme (fond flottant, bordure, rayon, ombre), en-tete centre sur la teinte d'accent avec la photo ou l'avatar cercle de la couleur principale, nom en 600 et
+   dates de connexion attenuees, corps avec les deux liens "Afficher..." du core en lignes cliquables (fond neutre au survol), pied en flex avec les boutons Fiche /
+   Deconnexion sur les jetons de boutons (--oblyon-btn-action-* / --oblyon-btn-delete-*, donc le style de boutons choisi). Le balisage du core (top_menu_user())
+   n'est pas modifie ; les selecteurs portent #topmenu-login-dropdown pour passer devant les regles .side-nav-vert ci-dessus */
+.login_block #topmenu-login-dropdown .dropdown-menu {
+	width: 320px;
+	max-width: calc(100vw - 16px);
+	margin-top: 6px;
+	padding: 0;
+	overflow: hidden;
+	background: var(--colorOverlayBg);
+	color: var(--colortext);
+	border: 1px solid var(--oblyon-border);
+	border-radius: var(--oblyon-radius);
+	box-shadow: var(--oblyon-shadow-lg);
+	line-height: 1.45;
+}
+.login_block #topmenu-login-dropdown .dropdown-menu > .user-header {
+	min-height: 0;
+	padding: 20px 16px 14px;
+	text-align: center;
+	white-space: normal;
+	background: var(--oblyon-accent-tint);
+	border-bottom: 1px solid var(--oblyon-border);
+}
+.login_block #topmenu-login-dropdown .user-header img.dropdown-user-image,
+.login_block #topmenu-login-dropdown .user-header .oblyon-avatar {
+	width: 72px;
+	height: 72px;
+	border: 3px solid var(--colorOverlayBg);
+	box-shadow: 0 0 0 2px var(--maincolor);
+	background-color: var(--colorOverlayBg);
+}
+.login_block #topmenu-login-dropdown .user-header .oblyon-avatar {
+	font-size: 24px;
+	background-color: var(--maincolor);
+}
+.login_block #topmenu-login-dropdown .user-header p {
+	margin: 10px 0 0;
+	color: var(--colortext);
+	font-size: 1.05em;
+	font-weight: 600;
+}
+.login_block #topmenu-login-dropdown .user-header p small {
+	font-size: .82em;
+	font-weight: 400;
+	color: var(--oblyon-muted-text);
+}
+.login_block #topmenu-login-dropdown .user-header p .fa-star {
+	color: var(--maincolor);
+}
+.login_block #topmenu-login-dropdown .dropdown-menu > .user-body {
+	padding: 8px 10px;
+	border: 0;
+	color: var(--colortext);
+}
+.login_block #topmenu-login-dropdown .user-body > br {
+	display: none;	/* le core separe les deux liens par un saut de ligne : les lignes cliquables portent leur propre espacement */
+}
+.login_block #topmenu-login-dropdown #topmenuloginmoreinfo-btn,
+.login_block #topmenu-login-dropdown #topmenulogincompanyinfo-btn {
+	text-align: <?php print $left; ?>;
+	padding: 8px 10px;
+	border-radius: var(--oblyon-radius-sm);
+	color: var(--colortext);
+	font-weight: 500;
+	transition: background-color var(--oblyon-transition), color var(--oblyon-transition);
+}
+.login_block #topmenu-login-dropdown #topmenuloginmoreinfo-btn:hover,
+.login_block #topmenu-login-dropdown #topmenulogincompanyinfo-btn:hover {
+	background: var(--oblyon-neutral-bg);
+	color: var(--maincolor);
+}
+.login_block #topmenu-login-dropdown #topmenuloginmoreinfo-btn i,
+.login_block #topmenu-login-dropdown #topmenulogincompanyinfo-btn i {
+	width: 1em;
+	margin-<?php print $right; ?>: 4px;
+	text-align: center;
+	color: var(--oblyon-muted-text);
+}
+.login_block #topmenu-login-dropdown #topmenuloginmoreinfo,
+.login_block #topmenu-login-dropdown #topmenulogincompanyinfo {
+	padding: 2px 10px 10px 24px;
+	font-size: .92em;
+	line-height: 1.6;
+	color: var(--colortext);
+}
+.login_block #topmenu-login-dropdown #topmenuloginmoreinfo > br:first-child,
+.login_block #topmenu-login-dropdown #topmenulogincompanyinfo > br:first-child {
+	display: none;	/* le core ouvre chaque bloc d'informations par un saut de ligne : le padding du bloc suffit */
+}
+.login_block #topmenu-login-dropdown #topmenuloginmoreinfo b,
+.login_block #topmenu-login-dropdown #topmenulogincompanyinfo b {
+	font-weight: 600;
+}
+.login_block #topmenu-login-dropdown #topmenuloginmoreinfo u {
+	text-decoration: none;
+	font-weight: 600;
+	color: var(--maincolor);
+}
+.login_block #topmenu-login-dropdown .dropdown-menu > .user-footer {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 12px 16px;
+	background: var(--oblyon-neutral-bg);
+	border-top: 1px solid var(--oblyon-border);
+}
+.login_block #topmenu-login-dropdown .user-footer .pull-left,
+.login_block #topmenu-login-dropdown .user-footer .pull-right {
+	float: none;
+}
+.login_block #topmenu-login-dropdown .user-footer .pull-right {
+	margin-<?php print $left; ?>: auto;
+}
+.login_block #topmenu-login-dropdown .user-footer .clearboth {
+	display: none;
+}
+.login_block #topmenu-login-dropdown .user-footer .button-top-menu-dropdown {
+	padding: 7px 12px;
+	font-size: var(--fontsize);
+	font-weight: 500;
+	line-height: 1.3;
+	border: 1px solid transparent;
+	border-radius: var(--oblyon-radius-sm);
+	box-shadow: none;
+	transition: background-color var(--oblyon-transition), color var(--oblyon-transition), border-color var(--oblyon-transition);
+}
+.login_block #topmenu-login-dropdown .user-footer .pull-left .button-top-menu-dropdown {
+	background-color: var(--oblyon-btn-action-bg);
+	color: var(--oblyon-btn-action-txt);
+	border-color: var(--oblyon-btn-action-border);
+}
+.login_block #topmenu-login-dropdown .user-footer .pull-left .button-top-menu-dropdown:hover,
+.login_block #topmenu-login-dropdown .user-footer .pull-left .button-top-menu-dropdown:focus {
+	background-color: var(--oblyon-btn-action-bg-hover);
+	color: var(--oblyon-btn-action-txt-hover);
+	border-color: var(--oblyon-btn-action-bg-hover);
+	box-shadow: none;
+}
+.login_block #topmenu-login-dropdown .user-footer .pull-right .button-top-menu-dropdown {
+	background-color: var(--oblyon-btn-delete-bg);
+	color: var(--oblyon-btn-delete-txt);
+	border-color: var(--oblyon-btn-delete-border);
+}
+.login_block #topmenu-login-dropdown .user-footer .pull-right .button-top-menu-dropdown:hover,
+.login_block #topmenu-login-dropdown .user-footer .pull-right .button-top-menu-dropdown:focus {
+	background-color: var(--oblyon-btn-delete-bg-hover);
+	color: var(--oblyon-btn-delete-txt-hover);
+	border-color: var(--oblyon-btn-delete-bg-hover);
+	box-shadow: none;
+}
+<?php } ?>
 
     .dropdown-menu a.top-menu-dropdown-link {
-        color: <?php echo (isset($colorfline)) ? $colorfline : '#212529' ?> !important;
+        color: var(--colorfline) !important;
         -webkit-box-shadow: none;
         -moz-box-shadow: none;
         box-shadow: none;
@@ -274,7 +435,7 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
         padding: .25rem 1.5rem .25rem 1rem;
         clear: both;
         font-weight: 400;
-        color: <?php echo (isset($colorfline)) ? $colorfline : '#212529' ?> !important;
+        color: var(--colorfline) !important;
         text-align: inherit;
         background-color: transparent;
         border: 0;
@@ -300,11 +461,11 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
     .dropdown-item.active, .dropdown-item:hover, .dropdown-item:focus, .dropdown-menu a.top-menu-dropdown-link:hover   {
         text-decoration: none;
 <?php if (getDolGlobalString('MAIN_MENU_INVERT')) { ?>
-    background-color: <?php print $bgnavtop; ?>;
-    color: <?php echo (isset($bgnavtop_txt)) ? $bgnavtop_txt : 'white' ?> !important;
+    background-color: var(--bgnavtop);
+    color: var(--bgnavtop_txt) !important;
 <?php } else { ?>
-    background-color: <?php print $bgnavleft; ?>;
-    color: <?php echo (isset($bgnavleft_txt)) ? $bgnavleft_txt : 'white' ?> !important;
+    background-color: var(--bgnavleft);
+    color: var(--bgnavleft_txt) !important;
 <?php } ?>
     }
     /*
@@ -317,7 +478,7 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
         font-size: 14px;
         line-height: 16px;
         box-sizing: border-box;
-        color: <?php echo (isset($colorfline)) ? $colorfline : '#575756' ?>;
+        color: var(--colorfline);
         background-color: transparent;
         background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3C/svg%3E");
         background-repeat: no-repeat;
@@ -330,7 +491,7 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
         transform-style: preserve-3d;
     }
     .dropdown-search-input::placeholder {
-        color: color(<?php echo (isset($colorfline)) ? $colorfline : '#575756' ?> a(0.8));
+        color: color(var(--colorfline) a(0.8));
         letter-spacing: 1.5px;
     }
     .hidden-search-result{
@@ -342,11 +503,11 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
      */
     #topmenu-quickadd-dropdown .dropdown-menu {
         width: 335px !important;
-        color: #444;
+        color: var(--colortext);	/* InfraS change 3.7.0 : texte courant (etait #444 sur le fond de page du preset) */
     }
 
     .quickadd-header {
-        color: #444 !important;
+        color: var(--colortext) !important;	/* InfraS change 3.7.0 */
     }
 
     div.quickadd {
@@ -371,13 +532,13 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
     }
 
     div.quickadd a {
-        color: #444;
+        color: var(--colortext);	/* InfraS change 3.7.0 */
 		height: 60px;
 		width: 110px;
     }
 
     div.quickadd a:hover, div.quickadd a:active {
-        color: <?php print $bgnavtop_txt; ?>;
+        color: var(--bgnavtop_txt);
     }
 
     div.quickaddblock {
@@ -388,11 +549,11 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
     div.quickaddblock:hover,
     div.quickaddblock:active,
     div.quickaddblock:focus {
-        background: <?php print $maincolor; ?>;
+        background: var(--maincolor);
     }
 
     /* for the dropdown on action buttons */
-    dropdown-holder {
+    .dropdown-holder { /* InfraS change: added missing leading dot, selector never matched .dropdown-holder */
         position: relative;
         display: inline-block;
     }
@@ -400,14 +561,20 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
     .dropdown-content {
         display: none;
         position: absolute;
-        z-index: 1;
+        z-index: 5; /* InfraS change: aligned with eldy so the menu stacks above surrounding page content */
         width: 300px;
         right:10px;	/* will be set with js */
-        background: #fff;
-        border: 1px solid #bbb;
-        text-align: <?php echo $left; ?>;
-        -webkit-box-shadow: 5px 5px 0px rgba(0,0,0,0.1);
-        box-shadow: 5px 5px 0px rgba(0,0,0,0.1);
+        /* InfraS add begin: default anchor below the button, aligned with eldy */
+        bottom: 0;
+        transform: translateY(100%);
+        /* InfraS add end */
+        /* InfraS change begin : jetons de design (plus d'ombre decalee sans flou) */
+        background: var(--colorbline);
+        border: 1px solid var(--oblyon-border);
+        text-align: var(--left);
+        border-radius: var(--oblyon-radius);
+        box-shadow: var(--oblyon-shadow-lg);
+        /* InfraS change end */
     }
 
     .dropdown-content a {
@@ -416,15 +583,22 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
     }
     .dropdown-content .butAction {
         background: none;
-        color: #000 !important;
+        color: var(--colortext) !important;
     }
     .dropdown-content a.butAction {
         display: flex;
         background-color: unset !important;
     }
-    .dropdown-content .butAction:hover {
+    .dropdown-content .butAction:hover, .dropdown-content a.butAction:hover {
         box-shadow: none;
-        text-decoration: underline;
+        text-decoration: none;
+    <?php if (getDolGlobalString('MAIN_MENU_INVERT')) { ?>
+            background-color: var(--bgnavtop_hover) !important;
+            color: var(--bgnavtop_txt) !important;
+    <?php } else { ?>
+            background-color: var(--bgnavleft_hover) !important;
+            color: var(--bgnavleft_txt) !important;
+    <?php } ?>
     }
     .dropdown-content .butActionRefused {
         margin-left: 0;
@@ -434,6 +608,21 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
 
     .dropdown-holder.open .dropdown-content {
         display: block;
+        background-color: var(--bgcolor) !important;
+        color: var(--colortext) !important;
+    }
+
+    /* dropdown --up variant */
+    .dropdown-holder.--up .dropdown-content {
+        bottom: auto;
+        top: 0;
+        transform: translateY(-100%);
+    }
+
+    /* dropdown --left variant */
+    .dropdown-holder.--left .dropdown-content {
+        right: auto;
+        left: 12px;
     }
 
     /** dropdown arrow used to clearly identify parent button of dropdown*/
@@ -447,8 +636,22 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
         height: 0px;
         border-style: solid;
         border-width: 0 var(--triangleBorderSize) var(--triangleBorderSize) var(--triangleBorderSize);
-        border-color: transparent transparent #ffff transparent;
+        border-color: transparent transparent var(--colorbline) transparent;	/* InfraS change : valeur #ffff invalide */
         transform: rotate(0deg);
+    }
+
+    /* dropdown --up arrow variant */
+    .dropdown-holder.--up.open .dropdown-content::before {
+        top: auto;
+        bottom: calc(var(--triangleBorderSize) * -1);
+        border-width: 0 var(--triangleBorderSize) var(--triangleBorderSize) var(--triangleBorderSize);
+        transform: rotate(180deg);
+    }
+
+    /* dropdown --left arrow variant */
+    .dropdown-holder.--left.open .dropdown-content::before {
+        right: auto;
+        left: 12px;
     }
 
     /*

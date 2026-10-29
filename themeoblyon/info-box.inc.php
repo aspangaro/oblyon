@@ -1,5 +1,6 @@
 <?php
 /* Copyright (C) 2025       Alexandre Spangaro          <alexandre@inovea-conseil.com>
+/* Copyright (C) 2022-2026  Sylvain Legrand      <contact@infras.fr>
  */
 if (!defined('ISLOADEDBYSTEELSHEET')) {
 	die('Must be call by steelsheet');
@@ -15,6 +16,13 @@ if (!defined('ISLOADEDBYSTEELSHEET')) {
 @phan-var-force string $left
 ';
 ?>
+/* ================================================================================================
+   oblyon/themeoblyon/info-box.inc.php
+   Role      : Tuiles du tableau de bord (infobox) : couleurs par module, ratio d'agressivite
+   Inclus par : global.inc.php | Garde : ISLOADEDBYSTEELSHEET | Variables PHP : portee de style.css.php / theme_vars.inc.php
+   Regle     : une regle, un endroit (pas de copie d'un selecteur present dans un autre fichier ; verifier avec dev/csscompare.php)
+   ================================================================================================ */
+
 /* IDE Hack <style type="text/css"> */
 
 /*
@@ -27,31 +35,40 @@ if (!defined('ISLOADEDBYSTEELSHEET')) {
 }
 
 .info-box-module.--external.--need-update span.info-box-icon-version{
-	background: #bc9525;
+	background: var(--colorinfoboxupdate);
 }
 
 .info-box {
 	display: block;
 	position: relative;
-	min-height: 94px;
-	background: #fff;
-    <?php if(getDolGlobalString('OBLYON_INFOXBOX_BACKGROUND')) { ?>
-        background: <?php print getDolGlobalString('OBLYON_INFOXBOX_BACKGROUND'); ?> !important;
+	min-height: 96px;
+    <?php if(oblyon_color_setting('OBLYON_INFOXBOX_BACKGROUND')) { // InfraS change ?>
+        background: <?php print oblyon_color_setting('OBLYON_INFOXBOX_BACKGROUND'); ?> !important;	/* InfraS change */
+    <?php } else { ?>
+		background: var(--colorbline);	/* InfraS change */
     <?php } ?>
 	width: 100%;
-	box-shadow: 1px 1px 20px rgba(192, 192, 192, 0.2);
-	border-radius: 2px;
-	border: 1px solid #e9e9e9;
-	/* border: 1px solid var(--colorbacktitle1); */
+	/* InfraS change begin : vignette = carte des jetons (rayon, ombre legere, cadre neutre) */
+	box-shadow: var(--oblyon-shadow-sm);
+	border-radius: var(--oblyon-radius);
+	border: 1px solid var(--oblyon-border);
+	transition: box-shadow var(--oblyon-transition);
+	/* InfraS change end */
 	margin-bottom: 15px;
+}
+.info-box:hover {
+	box-shadow: var(--oblyon-shadow-md);	/* InfraS add */
 }
 .info-box.info-box-sm {
 	min-height: 80px;
 	margin-bottom: 10px;
 	/* background: #fff; */
 }
-.opened-dash-board-wrap .info-box, .opened-dash-board-wrap .info-box .info-box-icon  {
-	border-radius: 0 0 0 15px;
+.opened-dash-board-wrap .info-box {
+	border-radius: var(--oblyon-radius);	/* InfraS change : plus de coin unique arrondi */
+}
+.opened-dash-board-wrap .info-box .info-box-icon {
+	border-radius: var(--oblyon-radius) 0 0 var(--oblyon-radius);	/* InfraS change */
 }
 /*.opened-dash-board-wrap .box-flex-item {
 	border-radius: 10px;
@@ -85,17 +102,14 @@ if (!defined('ISLOADEDBYSTEELSHEET')) {
 	line-height: 20px;
 	color: #fff;
 	text-align: center;
-	background-color: #337ab7;
+	background-color: var(--colorstatusprimary);
 	box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);
 	-webkit-transition: width .6s ease;
 	-o-transition: width .6s ease;
 	transition: width .6s ease;
 }
 .info-box-icon {
-	border-top-left-radius: 2px;
-	border-top-right-radius: 0;
-	border-bottom-right-radius: 0;
-	border-bottom-left-radius: 2px;
+	border-radius: var(--oblyon-radius) 0 0 var(--oblyon-radius);	/* InfraS change */
 	display: block;
 	overflow: hidden;
 	float: left;
@@ -118,10 +132,7 @@ if (!defined('ISLOADEDBYSTEELSHEET')) {
 	line-height: 92px;
 }
 .info-box-order {
-	border-top-left-radius: 2px;
-	border-top-right-radius: 0;
-	border-bottom-right-radius: 0;
-	border-bottom-left-radius: 2px;
+	border-radius: var(--oblyon-radius) 0 0 var(--oblyon-radius);	/* InfraS change */
 	display: block;
 	overflow: hidden;
 	float: left;
@@ -137,7 +148,7 @@ if (!defined('ISLOADEDBYSTEELSHEET')) {
 	font-size: 2em;
 }
 .opened-dash-board-wrap .info-box-sm .info-box-icon {
-	border-radius: 0 0 0 20px;
+	border-radius: var(--oblyon-radius) 0 0 var(--oblyon-radius);	/* InfraS change */
 	line-height: 80px;
 }
 .info-box-module .info-box-icon {
@@ -150,22 +161,43 @@ if (!defined('ISLOADEDBYSTEELSHEET')) {
 	max-width: 60%;
 }
 
-a.info-box-text.info-box-text-a {
+a.info-box-text.info-box-text-a,
+span.info-box-text.info-box-text-a {	/* InfraS change : le span "displaycontents" du badge de retard prenait display:block (regle .info-box-text) et passait a la ligne */
 	/* display: table-cell; */
 	display: contents;
+}
+.displaycontents {	/* InfraS add : classe utilitaire du core (presente dans eldy, absente d'Oblyon) */
+	display: contents !important;
 }
 a.info-box-text-a i.fa.fa-exclamation-triangle, span.badge i.fa.fa-exclamation-triangle {
 	font-size: 0.9em;
 }
 
+/* InfraS change begin : ligne de vignette en flex : libelle tronque, badges toujours sur la meme ligne (la largeur fixe calc(100% - 92px)
+   laissait le badge "en retard", place dans un second inline-block par le core, passer a la ligne et grandir la vignette) */
 .info-box-line {
 	line-height: 1.35em;
+	display: flex;
+	align-items: center;
+	column-gap: 4px;
+	white-space: nowrap;
+}
+.info-box-line > div.inline-block {
+	flex: 0 0 auto;
+	white-space: nowrap;
+}
+.info-box-line .badge {
+	padding-left: .4em;
+	padding-right: .4em;
 }
 .info-box-line-text {
+	flex: 1 1 auto;
+	min-width: 0;
 	overflow: hidden;
-	width: calc(100% - 92px);
-	max-width: calc(100% - 82px);
+	width: auto;
+	max-width: none;
 	text-overflow: ellipsis;
+/* InfraS change end */
 }
 
 .info-box-icon-text {
@@ -204,10 +236,6 @@ a.info-box-text-a i.fa.fa-exclamation-triangle, span.badge i.fa.fa-exclamation-t
 	opacity: 1;
 	-webkit-transition: opacity 0.5s, visibility 0s 0.5s;
 	transition: opacity 0.5s, visibility 0s 0.5s;
-}
-
-.box-flex-item.info-box-module.--disabled {
-	/* opacity: 0.6; */
 }
 
 .info-box-actions {
@@ -270,7 +298,7 @@ a.info-box-text-a i.fa.fa-exclamation-triangle, span.badge i.fa.fa-exclamation-t
 	background: linear-gradient(0.35turn, var(--color1BckgrdInfobox), var(--color1BckgrdInfobox), var(--color2BckgrdInfobox), var(--color2BckgrdInfobox));
 }
 .info-box-content-warning span.font-status4 {
-	color: #bc9526 !important;
+	color: var(--colorweatherlevel1) !important;
 }
 
 .info-box-number {
@@ -310,14 +338,12 @@ a.info-box-text-a i.fa.fa-exclamation-triangle, span.badge i.fa.fa-exclamation-t
 .info-box-text:first-letter{text-transform: uppercase}
 a.info-box-text{ text-decoration: none;}
 
-
 .info-box-more {
 	display: block;
 }
 .progress-description {
 	margin: 0;
 }
-
 
 /* customize section for home box link */
 .infobox-haslink .info-box-icon i {
@@ -347,7 +373,6 @@ a.info-box-text{ text-decoration: none;}
 	margin:auto;
 }
 
-
 /* ICONS INFO BOX */
 <?php
 include_once DOL_DOCUMENT_ROOT.'/core/lib/functions2.lib.php';
@@ -356,13 +381,16 @@ $prefix = '';
 if (getDolGlobalString('THEME_INFOBOX_COLOR_ON_BACKGROUND')) {
 	$prefix = 'background-';
 }
-$conf->global->THEME_AGRESSIVENESS_RATIO = GETPOSTISSET('THEME_AGRESSIVENESS_RATIO') ? GETPOST('THEME_AGRESSIVENESS_RATIO', 'int') : -50;
+// InfraS change begin : le ratio enregistre (onglet Tableau de bord, presets) est lu en base ; -50 n'est plus qu'un repli quand la constante est vide
+$oblyon_agressiveness = getDolGlobalString('THEME_AGRESSIVENESS_RATIO');
+$conf->global->THEME_AGRESSIVENESS_RATIO = GETPOSTISSET('THEME_AGRESSIVENESS_RATIO') ? GETPOST('THEME_AGRESSIVENESS_RATIO', 'int') : ($oblyon_agressiveness !== '' ? $oblyon_agressiveness : -50);
+// InfraS change end
 ?>
 .info-box-icon {
 	<?php if ($prefix) { ?>
 	color: #fff !important;
 	<?php } else { ?>
-	background-color: #fff !important;
+	background-color: var(--colorbline) !important;	/* InfraS change */
 	<?php } ?>
     opacity: 0.95;
     <?php if (GETPOSTISSET('THEME_AGRESSIVENESS_RATIO')) { ?>
@@ -377,32 +405,32 @@ $conf->global->THEME_AGRESSIVENESS_RATIO = GETPOSTISSET('THEME_AGRESSIVENESS_RAT
 }
 
 .nonature-back {
-	background-color: #EEE;
+	background-color: var(--inputbackgroundcolor);/*#EEE;*/
 }
 .prospect-back {
-	background-color: #a7c5b0 !important;
-	color: #FFF !important;
+	background-color: var(--prospectback) !important;/*#a7c5b0 !important;*/
+	color: var(--colornature) !important;/*#FFF !important;*/
 }
 .customer-back {
-	background-color: #55955d !important;
-	color: #FFF !important;
+	background-color: var(--customerback) !important;/*#55955d !important;*/
+	color: var(--colornature) !important;/*#FFF !important;*/
 }
 .vendor-back {
-	background-color: #599caf !important;
-	color: #FFF !important;
+	background-color: var(--vendorback) !important;/*#599caf !important;*/
+	color: var(--colornature) !important;/*#FFF !important;*/
 }
 .user-back {
-	background-color: #79633f !important;
-	color: #FFF !important;
+	background-color: var(--userback) !important;/*#79633f !important;*/
+	color: var(--colornature) !important;/*#FFF !important;*/
 }
 .member-company-back {
-	background-color: #e4e4e4;
-	color: #666;
+	background-color: var(--member_companyback);/*#e4e4e4;*/
+	color: var(--colormember);/*#666;*/
 	white-space: nowrap;
 }
 .member-individual-back {
-	background-color: #e4e4e4;
-	color: #666;
+	background-color: var(--member_individualback);/*#e4e4e4;*/
+	color: var(--colormember);/*#666;*/
 	white-space: nowrap;
 }
 .nonature-back, .prospect-back, .customer-back, .vendor-back, .user-back, .member-company-back, .member-individual-back {
@@ -411,52 +439,51 @@ $conf->global->THEME_AGRESSIVENESS_RATIO = GETPOSTISSET('THEME_AGRESSIVENESS_RAT
 	border-radius: 5px;
 }
 
-.bg-infobox-action {
-    <?php echo $prefix; ?>color: <?php print colorAgressiveness(getDolGlobalString('OBLYON_INFOXBOX_ACTION_COLOR'), getDolGlobalString('THEME_AGRESSIVENESS_RATIO')); ?> !important;
+.bg-infobox-action {	/* InfraS change begin : couleurs par utilisateur (3.6.0) */
+    <?php echo $prefix; ?>color: <?php print colorAgressiveness(oblyon_color_setting('OBLYON_INFOXBOX_ACTION_COLOR'), getDolGlobalString('THEME_AGRESSIVENESS_RATIO')); ?> !important;
 }
 .bg-infobox-project {
-    <?php echo $prefix; ?>color: <?php print colorAgressiveness(getDolGlobalString('OBLYON_INFOXBOX_PROJECT_COLOR'), getDolGlobalString('THEME_AGRESSIVENESS_RATIO')); ?> !important;
+    <?php echo $prefix; ?>color: <?php print colorAgressiveness(oblyon_color_setting('OBLYON_INFOXBOX_PROJECT_COLOR'), getDolGlobalString('THEME_AGRESSIVENESS_RATIO')); ?> !important;
 }
 .bg-infobox-propal {
-    <?php echo $prefix; ?>color: <?php print colorAgressiveness(getDolGlobalString('OBLYON_INFOXBOX_CUSTOMER_PROPAL_COLOR'), getDolGlobalString('THEME_AGRESSIVENESS_RATIO')); ?>  !important;
+    <?php echo $prefix; ?>color: <?php print colorAgressiveness(oblyon_color_setting('OBLYON_INFOXBOX_CUSTOMER_PROPAL_COLOR'), getDolGlobalString('THEME_AGRESSIVENESS_RATIO')); ?>  !important;
 }
 .bg-infobox-facture {
-    <?php echo $prefix; ?>color: <?php print colorAgressiveness(getDolGlobalString('OBLYON_INFOXBOX_CUSTOMER_INVOICE_COLOR'), getDolGlobalString('THEME_AGRESSIVENESS_RATIO')); ?>  !important;
+    <?php echo $prefix; ?>color: <?php print colorAgressiveness(oblyon_color_setting('OBLYON_INFOXBOX_CUSTOMER_INVOICE_COLOR'), getDolGlobalString('THEME_AGRESSIVENESS_RATIO')); ?>  !important;
 }
 .bg-infobox-commande {
-    <?php echo $prefix; ?>color: <?php print colorAgressiveness(getDolGlobalString('OBLYON_INFOXBOX_CUSTOMER_ORDER_COLOR'), getDolGlobalString('THEME_AGRESSIVENESS_RATIO')); ?>  !important;
+    <?php echo $prefix; ?>color: <?php print colorAgressiveness(oblyon_color_setting('OBLYON_INFOXBOX_CUSTOMER_ORDER_COLOR'), getDolGlobalString('THEME_AGRESSIVENESS_RATIO')); ?>  !important;
 }
 .bg-infobox-supplier_proposal {
-    <?php echo $prefix; ?>color: <?php print colorAgressiveness(getDolGlobalString('OBLYON_INFOXBOX_SUPPLIER_PROPAL_COLOR'), getDolGlobalString('THEME_AGRESSIVENESS_RATIO')); ?>  !important;
+    <?php echo $prefix; ?>color: <?php print colorAgressiveness(oblyon_color_setting('OBLYON_INFOXBOX_SUPPLIER_PROPAL_COLOR'), getDolGlobalString('THEME_AGRESSIVENESS_RATIO')); ?>  !important;
 }
 .bg-infobox-invoice_supplier {
-    <?php echo $prefix; ?>color: <?php print colorAgressiveness(getDolGlobalString('OBLYON_INFOXBOX_SUPPLIER_INVOICE_COLOR'), getDolGlobalString('THEME_AGRESSIVENESS_RATIO')); ?>  !important;
+    <?php echo $prefix; ?>color: <?php print colorAgressiveness(oblyon_color_setting('OBLYON_INFOXBOX_SUPPLIER_INVOICE_COLOR'), getDolGlobalString('THEME_AGRESSIVENESS_RATIO')); ?>  !important;
 }
 .bg-infobox-order_supplier {
-	<?php echo $prefix; ?>color: <?php print colorAgressiveness(getDolGlobalString('OBLYON_INFOXBOX_SUPPLIER_ORDER_COLOR'), getDolGlobalString('THEME_AGRESSIVENESS_RATIO')); ?>  !important;
+	<?php echo $prefix; ?>color: <?php print colorAgressiveness(oblyon_color_setting('OBLYON_INFOXBOX_SUPPLIER_ORDER_COLOR'), getDolGlobalString('THEME_AGRESSIVENESS_RATIO')); ?>  !important;
 }
 .bg-infobox-contrat {
-	<?php echo $prefix; ?>color: <?php print colorAgressiveness(getDolGlobalString('OBLYON_INFOXBOX_CONTRAT_COLOR'), getDolGlobalString('THEME_AGRESSIVENESS_RATIO')); ?>  !important;
+	<?php echo $prefix; ?>color: <?php print colorAgressiveness(oblyon_color_setting('OBLYON_INFOXBOX_CONTRAT_COLOR'), getDolGlobalString('THEME_AGRESSIVENESS_RATIO')); ?>  !important;
 }
 .bg-infobox-bank_account {
-	<?php echo $prefix; ?>color: <?php print colorAgressiveness(getDolGlobalString('OBLYON_INFOXBOX_BANK_COLOR'), getDolGlobalString('THEME_AGRESSIVENESS_RATIO')); ?>  !important;
+	<?php echo $prefix; ?>color: <?php print colorAgressiveness(oblyon_color_setting('OBLYON_INFOXBOX_BANK_COLOR'), getDolGlobalString('THEME_AGRESSIVENESS_RATIO')); ?>  !important;
 }
 .bg-infobox-member {
-	<?php echo $prefix; ?>color: <?php print colorAgressiveness(getDolGlobalString('OBLYON_INFOXBOX_ADHERENT_COLOR'), getDolGlobalString('THEME_AGRESSIVENESS_RATIO')); ?>  !important;
+	<?php echo $prefix; ?>color: <?php print colorAgressiveness(oblyon_color_setting('OBLYON_INFOXBOX_ADHERENT_COLOR'), getDolGlobalString('THEME_AGRESSIVENESS_RATIO')); ?>  !important;
 }
 .bg-infobox-expensereport {
-	<?php echo $prefix; ?>color: <?php print colorAgressiveness(getDolGlobalString('OBLYON_INFOXBOX_EXPENSEREPORT_COLOR'), getDolGlobalString('THEME_AGRESSIVENESS_RATIO')); ?>  !important;
+	<?php echo $prefix; ?>color: <?php print colorAgressiveness(oblyon_color_setting('OBLYON_INFOXBOX_EXPENSEREPORT_COLOR'), getDolGlobalString('THEME_AGRESSIVENESS_RATIO')); ?>  !important;
 }
 .bg-infobox-holiday {
-	<?php echo $prefix; ?>color: <?php print colorAgressiveness(getDolGlobalString('OBLYON_INFOXBOX_HOLIDAY_COLOR'), getDolGlobalString('THEME_AGRESSIVENESS_RATIO')); ?>  !important;
+	<?php echo $prefix; ?>color: <?php print colorAgressiveness(oblyon_color_setting('OBLYON_INFOXBOX_HOLIDAY_COLOR'), getDolGlobalString('THEME_AGRESSIVENESS_RATIO')); ?>  !important;
 }
 .bg-infobox-ticket {
-    <?php echo $prefix; ?>color: <?php print colorAgressiveness(getDolGlobalString('OBLYON_INFOXBOX_TICKET_COLOR'), getDolGlobalString('THEME_AGRESSIVENESS_RATIO')); ?>  !important;
+    <?php echo $prefix; ?>color: <?php print colorAgressiveness(oblyon_color_setting('OBLYON_INFOXBOX_TICKET_COLOR'), getDolGlobalString('THEME_AGRESSIVENESS_RATIO')); ?>  !important;
 }
 .bg-infobox-cubes {
-	<?php echo $prefix; ?>color: <?php print colorAgressiveness(getDolGlobalString('OBLYON_INFOXBOX_MRP_COLOR'), getDolGlobalString('THEME_AGRESSIVENESS_RATIO')); ?>  !important;
-}
-
+	<?php echo $prefix; ?>color: <?php print colorAgressiveness(oblyon_color_setting('OBLYON_INFOXBOX_MRP_COLOR'), getDolGlobalString('THEME_AGRESSIVENESS_RATIO')); ?>  !important;
+}	/* InfraS change end */
 
 .fa-dol-action:before {
 	content: "\f073";
@@ -479,9 +506,6 @@ $conf->global->THEME_AGRESSIVENESS_RATIO = GETPOSTISSET('THEME_AGRESSIVENESS_RAT
 .fa-dol-contrat:before {
 	content: "\f0f2";
 }
-.fa-dol-ticket:before {
-	content: "\f3ff";
-}
 .fa-dol-bank_account:before {
 	content: "\f19c";
 }
@@ -501,32 +525,30 @@ $conf->global->THEME_AGRESSIVENESS_RATIO = GETPOSTISSET('THEME_AGRESSIVENESS_RAT
 	content: "\f1b3";
 }
 
-
 /* USING FONTAWESOME FOR WEATHER */
 .info-box-weather .info-box-icon{
-	background: <?php print getDolGlobalString('OBLYON_INFOXBOX_WEATHER_COLOR'); ?> !important;
+	background: <?php print oblyon_color_setting('OBLYON_INFOXBOX_WEATHER_COLOR'); ?> !important;	/* InfraS change */
 }
 .fa-weather-level0:before{
 	content: "\f185";
-	color : #cfbf00;
+	color : var(--colorweatherlevel0);
 }
 .fa-weather-level1:before{
 	content: "\f6c4";
-	color : #bc9526;
+	color : var(--colorweatherlevel1);
 }
 .fa-weather-level2:before{
 	content: "\f743";
-	color : #b16000;
+	color : var(--colorweatherlevel2);
 }
 .fa-weather-level3:before{
 	content: "\f740";
-	color : #b04000;
+	color : var(--colorweatherlevel3);
 }
 .fa-weather-level4:before{
 	content: "\f0e7";
-	color : #993013;
+	color : var(--colorweatherlevel4);
 }
-
 
 .box-flex-container{
 	display: flex; /* or inline-flex */
@@ -608,7 +630,6 @@ $conf->global->THEME_AGRESSIVENESS_RATIO = GETPOSTISSET('THEME_AGRESSIVENESS_RAT
 	display: none;
 }
 
-
 .info-box-title {
 	width: calc(100% - 20px);
 }
@@ -650,9 +671,6 @@ $conf->global->THEME_AGRESSIVENESS_RATIO = GETPOSTISSET('THEME_AGRESSIVENESS_RAT
 		width: 250px;
 	}
 }
-
-
-
 
 .info-box-module .info-box-content {
 	height: 98px;

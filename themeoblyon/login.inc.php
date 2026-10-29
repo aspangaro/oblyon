@@ -1,12 +1,19 @@
 <?php
 if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
 /* <style type="text/css" > */
+/* ================================================================================================
+   oblyon/themeoblyon/login.inc.php
+   Role      : Page de connexion (.bodylogin, .login_table) ; les regles de la barre du haut sont dans layout.inc.php
+   Inclus par : cards.inc.php | Garde : ISLOADEDBYSTEELSHEET | Variables PHP : portee de style.css.php / theme_vars.inc.php
+   Regle     : une regle, un endroit (pas de copie d'un selecteur present dans un autre fichier ; verifier avec dev/csscompare.php)
+   ================================================================================================ */
+
 
     /* Login */
 
     .bodylogin
     {
-		background: <?php echo $colorbtitle; ?>;
+		background: var(--login_bgcolor);	/* InfraS change : couleur "fond de la page de connexion" (OBLYON_COLOR_LOGIN_BCKGRD), jusqu'ici sans effet */
         display: table;
         position: absolute;
         height: 100%;
@@ -14,10 +21,14 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
         font-size: 1em;
     }
     .login_center {
-		margin-top: 30vw;
 <?php if (!getDolGlobalString('MAIN_LOGIN_RIGHT')) { ?>
+		/* InfraS change : plus de margin-top 30vw, la carte est centree verticalement par la cellule */
 		display: table-cell;
 		vertical-align: middle;
+<?php } else { ?>
+		/* InfraS change : meme position que l'ancien margin-top 30vw (carte sous le milieu) mais calculee sur la hauteur de l'ecran (30vw = 55vh en 16:9),
+		   plafonnee pour laisser 420px a la carte : plus jamais hors ecran sur une fenetre basse */
+		padding-top: min(55vh, calc(100vh - 420px));
 <?php } ?>
     }
     .login_vertical_align {
@@ -37,50 +48,55 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
 		width: 530px;
 <?php } ?>
 		max-width: <?php echo !getDolGlobalString('MAIN_LOGIN_RIGHT') ? '530px' : 'calc(50vw - 70px)'; ?>;
-		color: <?php print $bgnavtop_txt; ?> !important;
+		color: var(--login_txtcolor) !important;	/* InfraS change : couleur du titre choisie selon la clarte du fond de la page */
 		padding-bottom: 10px;
     }
 	.login_table_title a {
 		margin: auto;
 	}
     .login_table label {
-        text-shadow: 1px 1px 1px #FFF;
+        text-shadow: none;	/* InfraS change */
     }
+    /* InfraS change begin : carte de connexion sur les jetons (ombre douce, rayon du theme, fond des lignes) */
     .login_table {
 		margin: <?php echo !getDolGlobalString('MAIN_LOGIN_RIGHT') ? '0px auto' : '0px calc((50vw - 600px) / 2) 0px auto'; ?>;
 
-		padding: 4px;
+		padding: 12px;
 		width: 600px;
 		max-width: <?php echo !getDolGlobalString('MAIN_LOGIN_RIGHT') ? '600px' : '50vw'; ?>;
 <?php if (getDolGlobalString('MAIN_LOGIN_RIGHT')) { ?>
 		width: 600px;
 <?php } ?>
-		-webkit-box-shadow: 12px 12px 25px 1px rgba(0, 0, 0, 0.2), 0 2px 6px rgba(60,60,60,0.15);
-		box-shadow: 12px 12px 25px 1px rgba(0, 0, 0, 0.2), 0 2px 6px rgba(60,60,60,0.15);
+		box-shadow: var(--oblyon-shadow-lg);
         <?php
             if (getDolGlobalString('MAIN_LOGIN_BACKGROUND')) {
-				print '	background-color: '.$colorbtitle.';';
+				print '	background-color: var(--colorbtitle);';
             } else {
-                print '	background-color: #FFFFFF;';
+                print '	background-color: var(--colorbline);';
             }
         ?>
-		border-radius: 4px;
-        /*border-top:solid 1px rgba(180,180,180,.4);
-        border-left:solid 1px rgba(180,180,180,.4);
-        border-right:solid 1px rgba(180,180,180,.4);
-        border-bottom:solid 1px rgba(180,180,180,.4);*/
+		border-radius: var(--oblyon-radius);
+		border: 1px solid var(--oblyon-border);
     }
     .login_table input#username, .login_table input#password, .login_table input#securitycode {
-        border: none;
-        border-bottom: solid 1px rgba(180,180,180,.4);
-        padding: 5px;
+        border: 1px solid var(--oblyon-input-border);
+        border-radius: var(--oblyon-radius-sm);
+        padding: 8px 10px;
         margin-left: 10px;
         margin-top: 5px;
         margin-bottom: 5px;
+        transition: border-color var(--oblyon-transition), box-shadow var(--oblyon-transition);
     }
     .login_table input#username:focus, .login_table input#password:focus, .login_table input#securitycode:focus {
-        outline: none !important;
+        outline: none;
+        border-color: var(--oblyon-focus);
+        box-shadow: 0 0 0 2px <?php print colorHexToRgb($maincolor, 0.18); ?>;
     }
+    .login_table input#username:focus-visible, .login_table input#password:focus-visible, .login_table input#securitycode:focus-visible {
+        outline: 2px solid var(--oblyon-focus);
+        outline-offset: 1px;
+    }
+    /* InfraS change end */
     .login_table .trinputlogin {
         font-size: 1.2em;
         margin: 8px;
@@ -89,7 +105,7 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
         background-color: transparent;
         /* border: 2px solid #ccc; */
         min-width: 220px;
-        border-radius: 2px;
+        border-radius: var(--oblyon-radius-sm);	/* InfraS change */
     }
     .login_table .tdinputlogin .fa {
         padding-left: 10px;
@@ -115,12 +131,8 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
     }
     div#login_left, div#login_right {
         display: inline-block;
-        min-width: 245px;
         padding-top: 10px;
-        padding-left: 16px;
-        padding-right: 16px;
         text-align: center;
-        vertical-align: middle;
     }
     div#login_right select#entity {
         margin-top: 10px;
@@ -148,49 +160,12 @@ if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
     }
 
     div.backgroundsemitransparent {
-		background: <?php echo $colorbtitle; ?>;
+		background: var(--colorbtitle);
         padding-left: 10px;
         padding-right: 10px;
-		color: <?php echo $colorftitle; ?>;
+		color: var(--colortexttitle);
     }
-    div.login_block {
-        position: absolute;
-        text-align: <?php print $right; ?>;
-    <?php print $right; ?>: 0;
-        top: <?php print $disableimages?'4px':'0'; ?>;
-        line-height: 10px;
-    <?php // echo (empty($disableimages) && $maxwidthloginblock)?'max-width: '.$maxwidthloginblock.'px;':''; ?>
-    <?php if (GETPOST('optioncss', 'aZ09') == 'print') { ?>
-        display: none;
-    <?php } ?>
-    }
-    div.login_block a {
-        color: <?php echo $bgnavleft_txt; ?>;
-        display: inline-block;
-    }
-    div.login_block span.aversion {
-    <?php if (getDolGlobalString('MAIN_MENU_INVERT')) { ?>
-        color: <?php echo $bgnavleft_txt; ?>;
-    <?php } else { ?>
-        color: <?php echo $bgnavtop_txt; ?>;
-    <?php } ?>
-    }
-    div.login_block table {
-        display: inline;
-    }
-    div.login {
-        white-space:nowrap;
-        font-weight: bold;
-        float: right;
-    }
-    div.login a {
-        color: <?php echo $bgnavleft_txt; ?>;
-    }
-    div.login a:hover {
-        color: <?php echo $bgnavleft_txt; ?>;
-        text-decoration:underline;
-    }
-
+/* InfraS change 3.7.0 : la copie de la section "bloc de connexion / barre du haut" (250 lignes, doublon perime de global.inc.php qui gagnait la cascade) est retiree ; les 8 regles sans equivalent sont deplacees dans global.inc.php */
 /*------------------------------------------------------------------
 [ Responsive ]*/
 

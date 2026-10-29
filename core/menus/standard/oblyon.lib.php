@@ -2,6 +2,7 @@
 /**
  * Copyright (C) 2013-2016  Nicolas Rivera	  <nrivera.pro@gmail.com>
  * Copyright (C) 2015-2025  Alexandre Spangaro  <alexandre@inovea-conseil.com>
+ * Copyright (C) 2022-2026  Sylvain Legrand      <contact@infras.fr>
  *
  * Copyright (C) 2010-2013  Laurent Destailleur <eldy@users.sourceforge.net>
  * Copyright (C) 2010	   Regis Houssin	   <regis.houssin@capnetworks.com>
@@ -73,6 +74,14 @@ function print_oblyon_menu($db, $atarget, $type_user = 0, &$tabMenu, &$menu, $no
 
 	$menu_invert = getDolGlobalInt('MAIN_MENU_INVERT');
 
+	// InfraS add begin : arbres de sous-menus (volets sur bureau, tiroir sur mobile) : contexte necessaire a print_oblyon_flyout() (appelee par print_text_menu_entry())
+	if (empty($noout) && oblyon_flyout_tree_enabled()) {
+		oblyon_flyout_context(array('tabMenu' => $tabMenu, 'type_user' => $type_user));
+	}
+	// Bouton du tiroir mobile : menus classiques, cette fonction imprime la barre du haut (menus inverses : voir print_left_oblyon_menu())
+	if (empty($noout) && empty($menu_invert) && oblyon_mobile_nav_enabled()) print oblyon_mobile_nav_button();
+	// InfraS add end
+
 	if (empty($noout)) print_start_menu_array();
 
 	// Show logo company
@@ -124,7 +133,7 @@ function print_oblyon_menu($db, $atarget, $type_user = 0, &$tabMenu, &$menu, $no
 		print "<!-- End Bookmarks -->\n";
 	}
 
-	if ( empty($menu_invert) && (getDolGlobalInt('OBLYON_HIDE_LEFTMENU') || $conf->dol_optimize_smallscreen) && empty($noout) ) {
+	if ( empty($menu_invert) && (getDolGlobalInt('OBLYON_HIDE_LEFTMENU') || ($conf->dol_optimize_smallscreen && ! oblyon_mobile_nav_enabled())) && empty($noout) ) {	// InfraS change : idem, la disposition mobile ignore l'agent utilisateur
 		print '<div class="pushy-btn" title="'.$langs->trans("ShowLeftMenu").'">&#8801;</div>';
 	}
 
@@ -567,8 +576,202 @@ function print_oblyon_menu($db, $atarget, $type_user = 0, &$tabMenu, &$menu, $no
 
 	if (empty($noout)) print_end_menu_array();
 
+	oblyon_flyout_context(false);	// InfraS add : fin du contexte des volets
+
 	return 0;
 }
+
+// InfraS add begin : mode "sous-menus en volets" (OBLYON_EFFECT_REDUCE_LEFTMENU = flyout, menus inverses + menu gauche reduit)
+/**
+ * Is the flyout sub-menus mode active ? Third opening effect of the reduced left menu (OBLYON_EFFECT_REDUCE_LEFTMENU = 'flyout'),
+ * inverted menus only, never on small screens nor when the left menu is hidden (no side bar to hover)
+ *
+ * @return	bool
+ */
+function oblyon_flyout_enabled()
+{
+	global $conf;
+
+	return getDolGlobalInt('MAIN_MENU_INVERT') && getDolGlobalInt('OBLYON_REDUCE_LEFTMENU') && getDolGlobalString('OBLYON_EFFECT_REDUCE_LEFTMENU') == 'flyout' && !getDolGlobalInt('OBLYON_HIDE_LEFTMENU') && (empty($conf->dol_optimize_smallscreen) || oblyon_mobile_nav_enabled());	// InfraS change : avec la disposition mobile, l'agent utilisateur ne compte plus (la largeur decide)
+}
+
+/**
+ * Is the mobile layout active ? (OBLYON_MOBILE_LAYOUT, on by default). The main menu then carries the whole sub-menu tree of every
+ * module (see print_oblyon_flyout()) plus a drawer button and a drawer header : the CSS of themeoblyon/mobile.inc.php only uses them
+ * below the phone breakpoint (the screen width decides, not the user agent) and js/oblyon.js drives the drawer.
+ *
+ * @return	bool
+ */
+function oblyon_mobile_nav_enabled()
+{
+	return getDolGlobalInt('OBLYON_MOBILE_LAYOUT', 1) && GETPOST('optioncss', 'aZ09') != 'print';
+}
+
+/**
+ * Must the sub-menu trees (ul.oblyon-flyout) be printed in the main menu ? Desktop flyout effect or mobile layout
+ *
+ * @return	bool
+ */
+function oblyon_flyout_tree_enabled()
+{
+	return oblyon_flyout_enabled() || oblyon_mobile_nav_enabled();
+}
+
+/**
+ * HTML of the drawer button of the mobile layout (printed in the top bar, hidden by the CSS above the phone breakpoint)
+ *
+ * @return	string
+ */
+function oblyon_mobile_nav_button()
+{
+	global $langs;
+
+	$langs->load('oblyon@oblyon');
+	return '<button type="button" class="oblyon-mnav-btn" aria-label="'.dol_escape_htmltag($langs->trans('OblyonMobileMenu')).'" aria-controls="oblyon-mnav" aria-expanded="false"><span class="fa fa-bars" aria-hidden="true"></span></button>';
+}
+
+/**
+ * HTML of the drawer header of the mobile layout (company name + close button, printed at the top of the main menu, hidden by the CSS above the phone breakpoint)
+ *
+ * @return	string
+ */
+function oblyon_mobile_nav_head()
+{
+	global $langs;
+
+	$langs->load('oblyon@oblyon');
+	$title	= getDolGlobalString('MAIN_INFO_SOCIETE_NOM', $langs->trans('OblyonMobileMenu'));
+	return '<div class="oblyon-mnav-head"><span class="oblyon-mnav-title">'.dol_escape_htmltag($title).'</span><button type="button" class="oblyon-mnav-close" aria-label="'.dol_escape_htmltag($langs->trans('OblyonMobileMenuClose')).'"><span class="fa fa-times" aria-hidden="true"></span></button></div>';
+}
+
+/**
+ * HTML of the fold / unfold button of an entry with children in the mobile drawer (accordion), empty when the mobile layout is off ; hidden by the CSS above the phone breakpoint
+ *
+ * @return	string
+ */
+function oblyon_mobile_nav_toggle()
+{
+	if (! oblyon_mobile_nav_enabled()) return '';
+	return '<button type="button" class="oblyon-mnav-toggle" aria-expanded="false"><span class="fa fa-chevron-down" aria-hidden="true"></span></button>';
+}
+
+/**
+ * Store / read the context needed to build the flyouts while the main menu is printed (tabMenu and type_user are not available in print_text_menu_entry())
+ *
+ * @param	array|false|null	$set	Array to store the context, false to clear it, null to read it
+ * @return	array|null					Current context
+ */
+function oblyon_flyout_context($set = null)
+{
+	static $context = null;
+
+	if ($set === false) {
+		$context = null;
+	} elseif (is_array($set)) {
+		$context = $set;
+	}
+	return $context;
+}
+
+/**
+ * Build the URL of a sub-menu entry (same rules as the left menu output : mainmenu/leftmenu parameters, __LOGIN__ / __USERID__ substitutions)
+ *
+ * @param	array	$entry	Entry of Menu->liste
+ * @return	string			URL
+ */
+function oblyon_flyout_build_url($entry)
+{
+	global $user;
+
+	$tmp	= explode('?', $entry['url'], 2);
+	$url	= $tmp[0];
+	$param	= (isset($tmp[1]) ? $tmp[1] : '');
+	if ((! preg_match('/mainmenu/i', $param)) && (! preg_match('/leftmenu/i', $param)) && ! empty($entry['mainmenu'])) {
+		$param	.= ($param ? '&' : '').'mainmenu='.$entry['mainmenu'].'&leftmenu=';
+	}
+	if ((! preg_match('/mainmenu/i', $param)) && (! preg_match('/leftmenu/i', $param)) && empty($entry['mainmenu'])) {
+		$param	.= ($param ? '&' : '').'leftmenu=';
+	}
+	$url	= dol_buildpath($url, 1).($param ? '?'.$param : '');
+	$url	= preg_replace('/__LOGIN__/', $user->login, $url);
+	$url	= preg_replace('/__USERID__/', $user->id, $url);
+	return $url;
+}
+
+/**
+ * Print the flyout panel of a main menu entry : the whole sub-menu tree of the module (all levels), as nested lists.
+ * The tree is built by print_left_oblyon_menu() in silent mode for the given mainmenu (single source of truth : hard coded entries, llx_menu entries, hooks, permissions).
+ *
+ * @param	string	$idsel		Main menu key (home, companies, ...)
+ * @return	void
+ */
+function print_oblyon_flyout($idsel)
+{
+	global $db, $langs;
+
+	if (! oblyon_flyout_tree_enabled()) return;	// InfraS change : volets (bureau) ou tiroir (mobile)
+	$context	= oblyon_flyout_context();
+	if ($context === null || empty($idsel) || $idsel == 'none') return;
+
+	require_once DOL_DOCUMENT_ROOT.'/core/class/menu.class.php';
+	$submenu	= new Menu();
+	$tabMenu	= $context['tabMenu'];
+	ob_start();	// safety net : nothing must be printed by the silent build (a hook could print something)
+	print_left_oblyon_menu($db, array(), array(), $tabMenu, $submenu, 1, $idsel, 'all', null, $context['type_user']);
+	ob_end_clean();
+
+	$hideunauthorized	= getDolGlobalString('MAIN_MENU_HIDE_UNAUTHORIZED');
+	$items				= array();
+	foreach ($submenu->liste as $entry) {
+		if (empty($entry['enabled']) && $hideunauthorized) continue;
+		$items[]	= $entry;
+	}
+	if (empty($items)) return;
+
+	// Current entry (same rule as the side bar : mainmenu + leftmenu stored in session)
+	$currentmainmenu	= (empty($_SESSION['mainmenu']) ? '' : $_SESSION['mainmenu']);
+	$currentleftmenu	= (empty($_SESSION['leftmenu']) ? '' : $_SESSION['leftmenu']);
+
+	print oblyon_mobile_nav_toggle();	// InfraS add : chevron de l'accordeon du tiroir mobile (vide si disposition mobile inactive)
+	print "\n".'<ul class="oblyon-flyout" data-mainmenu="'.dol_escape_htmltag($idsel).'">'."\n";
+	$depth	= 0;	// number of nested lists currently open
+	$num	= count($items);
+	for ($i = 0; $i < $num; $i++) {
+		$entry			= $items[$i];
+		$level			= (int) $entry['level'];
+		$nextlevel		= ($i + 1 < $num) ? (int) $items[$i + 1]['level'] : -1;
+		$haschildren	= ($nextlevel > $level);
+		$isactive		= ($idsel == $currentmainmenu && $currentleftmenu !== '' && ! empty($entry['leftmenu']) && $entry['leftmenu'] == $currentleftmenu);
+		print '<li class="oblyon-flyout__item item-level'.$level.($haschildren ? ' has-children' : '').($isactive ? ' is-active' : '').(empty($entry['enabled']) ? ' is-disabled' : '').'">';
+		if (! empty($entry['enabled']) && ! empty($entry['url'])) {
+			print '<a class="oblyon-flyout__link" href="'.oblyon_flyout_build_url($entry).'"'.($entry['target'] ? ' target="'.$entry['target'].'"' : '').'>'.$entry['titre'].'</a>';
+		} elseif (! empty($entry['enabled'])) {
+			print '<span class="oblyon-flyout__link">'.$entry['titre'].'</span>';
+		} else {
+			print '<a class="oblyon-flyout__link is-disabled" href="#" title="'.dol_escape_htmltag($langs->trans("NotAllowed")).'">'.$entry['titre'].'</a>';
+		}
+		if ($haschildren) {
+			print oblyon_mobile_nav_toggle();	// InfraS add : chevron de l'accordeon du tiroir mobile
+			print '<ul class="oblyon-flyout__sub">'."\n";
+			$depth++;
+		} else {
+			print '</li>'."\n";
+			if ($nextlevel < $level) {	// going back up : close as many lists as levels left (bounded by the lists really open)
+				$closes	= min($level - max($nextlevel, 0), $depth);
+				for ($c = 0; $c < $closes; $c++) {
+					print '</ul></li>'."\n";
+					$depth--;
+				}
+			}
+		}
+	}
+	while ($depth > 0) {
+		print '</ul></li>'."\n";
+		$depth--;
+	}
+	print '</ul>'."\n";
+}
+// InfraS add end
 
 
 /**
@@ -581,7 +784,8 @@ function print_start_menu_array() {
 
 	$menu_invert = getDolGlobalInt('MAIN_MENU_INVERT');
 
-	print '<nav class="tmenudiv db-nav main-nav'.(empty($menu_invert)?'':' is-inverted').'">';
+	print '<nav class="tmenudiv db-nav main-nav'.(empty($menu_invert)?'':' is-inverted').'"'.(oblyon_mobile_nav_enabled() ? ' id="oblyon-mnav"' : '').'>';	// InfraS change : id cible du bouton du tiroir mobile
+	if (oblyon_mobile_nav_enabled()) print oblyon_mobile_nav_head();	// InfraS add : en-tete du tiroir mobile (nom de l'entreprise + fermeture), masque par le CSS sur bureau
 	print '<ul role="navigation" class="tmenu main-nav__list">';
 }
 
@@ -623,6 +827,7 @@ function print_text_menu_entry($text, $showmode, $url, $id, $idsel, $atarget)
 		print '<span class="mainmenuaspan">'.$text.'</span>'; // for myfield label and link
 		print '</a>';
 		print '</div>';
+		print_oblyon_flyout($idsel);	// InfraS add : volet des sous-menus (ne fait rien hors effet "flyout" du menu reduit)
 	}
 	if ($showmode == 2)
 	{
@@ -676,9 +881,10 @@ function print_end_menu_array() {
  * @param	string		$forceleftmenu		'all'=Force leftmenu to '' (= all). If value come being '', we change it to value in session and 'none' if not defined in session.
  * @param	array		$moredata			An array with more data to output
  * @param 	int			$type_user	 		0=Menu for backoffice, 1=Menu for front office
+ * @param	int			$onlyheader			1=Print only the header (logo, search form, bookmarks), no menu entry (flyout mode)
  * @return	int								Nb of menu entries
  */
-function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$tabMenu, &$menu, $noout = 0, $forcemainmenu = '', $forceleftmenu = '', $moredata = null, $type_user = 0)
+function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$tabMenu, &$menu, $noout = 0, $forcemainmenu = '', $forceleftmenu = '', $moredata = null, $type_user = 0, $onlyheader = 0)	// InfraS change : parametre $onlyheader
 {
 	global $user, $conf, $langs, $dolibarr_main_db_name, $mysoc, $hookmanager;
 
@@ -686,14 +892,18 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 
 	$newmenu = $menu;
 
-	$mainmenu = ($forcemainmenu ? $forcemainmenu : $_SESSION["mainmenu"]);
+	$mainmenu = ($forcemainmenu ? $forcemainmenu : (!empty($_SESSION["mainmenu"]) ? $_SESSION["mainmenu"] : GETPOST('mainmenu', 'aZ09')));
 	$leftmenu = ($forceleftmenu ? '' : (empty($_SESSION["leftmenu"]) ? 'none' : $_SESSION["leftmenu"]));
 
 	$menu_invert = getDolGlobalInt('MAIN_MENU_INVERT');
 
-	$usemenuhider = !empty($menu_invert) && (getDolGlobalInt('OBLYON_HIDE_LEFTMENU') || $conf->dol_optimize_smallscreen);
+	$usemenuhider = !empty($menu_invert) && (getDolGlobalInt('OBLYON_HIDE_LEFTMENU') || ($conf->dol_optimize_smallscreen && ! oblyon_mobile_nav_enabled()));	// InfraS change : avec la disposition mobile, l'agent utilisateur ne declenche plus le menu glissant (la largeur decide)
 
-	if ( $usemenuhider ) {
+	// InfraS add begin : bouton du tiroir mobile : menus inverses, cette fonction imprime la barre du haut (menus classiques : voir print_oblyon_menu())
+	if (! empty($menu_invert) && empty($noout) && oblyon_mobile_nav_enabled()) print oblyon_mobile_nav_button();
+	// InfraS add end
+
+	if ( $usemenuhider && empty($noout) ) {	// InfraS change : rien n'est imprime en mode silencieux ($noout)
 		print '<div class="pushy-btn" title="'.$langs->trans("ShowLeftMenu").'">&#8801;</div>';
 	}
 
@@ -729,7 +939,7 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 		print '</div>'."\n";
 	}
 
-	if (getDolGlobalInt('OBLYON_SHOW_COMPNAME') && getDolGlobalString('MAIN_INFO_SOCIETE_NOM')) {
+	if (getDolGlobalInt('OBLYON_SHOW_COMPNAME') && getDolGlobalString('MAIN_INFO_SOCIETE_NOM') && empty($noout)) {	// InfraS change : rien n'est imprime en mode silencieux ($noout)
 		if (! $menu_invert) {
 			print '<div class="blockvmenusocietyname">'."\n";
 			print '<span>'. getDolGlobalString('MAIN_INFO_SOCIETE_NOM') .'</span>'."\n";
@@ -754,6 +964,12 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 		print '</div>'."\n";
 		print "<!-- End Bookmarks -->\n";
 	}
+
+	// InfraS add begin : mode "sous-menus en volets" : la barre du haut ne contient que l'en-tete (logo, recherche, favoris), pas d'entrees de menu
+	if (!empty($onlyheader)) {
+		return 0;
+	}
+	// InfraS add end
 
 	$substitarray = getCommonSubstitutionArray($langs, 0, null, null);
 
@@ -870,7 +1086,7 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 				if ($usemenuhider || empty($leftmenu) || $leftmenu=="users")
 				{
 					$newmenu->add("/user/list.php?leftmenu=users", $langs->trans("Users"), 1, $user->hasRight('user', 'user', 'lire') || $user->admin);
-					$newmenu->add("/user/card.php?leftmenu=users&action=create", $langs->trans("NewUser"), 2, ($user->hasRight('user', 'user', 'creer') || $user->admin) && !(!empty($conf->multicompany->enabled) && !empty($user->entity) && getDolGlobalString('MULTICOMPANY_TRANSVERSE_MODE')), '', 'home');
+					$newmenu->add("/user/card.php?leftmenu=users&action=create", $langs->trans("NewUser"), 2, ($user->hasRight('user', 'user', 'creer') || $user->admin) && !(isModEnabled('multicompany') && !empty($user->entity) && getDolGlobalString('MULTICOMPANY_TRANSVERSE_MODE')), '', 'home');
 					$newmenu->add("/user/list.php?leftmenu=users", $langs->trans("ListOfUsers"), 2, $user->hasRight('user', 'user', 'lire') || $user->admin);
 					$newmenu->add("/user/hierarchy.php?leftmenu=users", $langs->trans("HierarchicView"), 2, $user->hasRight('user', 'user', 'lire') || $user->admin);
 					if ((float) DOL_VERSION < 22.0 || getDolGlobalString('CATEGORY_EDIT_IN_MENU_NOT_IN_POPUP')) {
@@ -879,8 +1095,8 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 							$newmenu->add("/categories/index.php?leftmenu=users&type=7", $langs->trans("UsersCategoriesShort"), 2, $user->hasRight('categorie', 'lire'), '', $mainmenu, 'cat');
 						}
 					}
-					$newmenu->add("/user/group/list.php?leftmenu=users", $langs->trans("Groups"), 1, ($user->hasRight('user', 'user', 'lire') || $user->admin) && !(!empty($conf->multicompany->enabled) && !empty($user->entity) && getDolGlobalString('MULTICOMPANY_TRANSVERSE_MODE')));
-					$newmenu->add("/user/group/card.php?leftmenu=users&action=create", $langs->trans("NewGroup"), 2, ((getDolGlobalString('MAIN_USE_ADVANCED_PERMS') ? $user->hasRight('user', 'group_advance', 'write') : $user->hasRight('user', 'user', 'creer')) || $user->admin) && !(!empty($conf->multicompany->enabled) && !empty($user->entity) && getDolGlobalString('MULTICOMPANY_TRANSVERSE_MODE')));
+					$newmenu->add("/user/group/list.php?leftmenu=users", $langs->trans("Groups"), 1, ($user->hasRight('user', 'user', 'lire') || $user->admin) && !(isModEnabled('multicompany') && !empty($user->entity) && getDolGlobalString('MULTICOMPANY_TRANSVERSE_MODE')));
+					$newmenu->add("/user/group/card.php?leftmenu=users&action=create", $langs->trans("NewGroup"), 2, ((getDolGlobalString('MAIN_USE_ADVANCED_PERMS') ? $user->hasRight('user', 'group_advance', 'write') : $user->hasRight('user', 'user', 'creer')) || $user->admin) && !(isModEnabled('multicompany') && !empty($user->entity) && getDolGlobalString('MULTICOMPANY_TRANSVERSE_MODE')));
 					$newmenu->add("/user/group/list.php?leftmenu=users", $langs->trans("ListOfGroups"), 2, ((getDolGlobalString('MAIN_USE_ADVANCED_PERMS') ? $user->hasRight('user', 'group_advance', 'read'): $user->hasRight('user', 'user', 'lire')) || $user->admin));
 				}
 			}
@@ -2117,7 +2333,7 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 				$newmenu->add("/comm/mailing/list.php?leftmenu=mailing", $titlelist, 1, $user->hasRight('mailing', 'lire'));
 			}
 
-			if ((float) DOL_VERSION >= 23.0) {
+			if ((float) DOL_VERSION >= 22.0) {	// InfraS change : la page exports/index.php n'existe plus depuis Dolibarr 22 (Import et Export fusionnes dans imports/index.php), pas 23
 				$title = "ImportExportArea";
 				if (isModEnabled('import') && !isModEnabled('export')) {
 					$title = "FormatedImport";
@@ -2292,10 +2508,10 @@ function print_left_oblyon_menu($db, $menu_array_before, $menu_array_after, &$ta
 	$reshook = $hookmanager->executeHooks('menuLeftMenuItems', $parameters, $hook_items); // Note that $action and $object may have been modified by some hooks
 
 	if (is_numeric($reshook)) {
-		if ($reshook == 0 && !empty($hookmanager->results)) {
-			$menu_array[] = $hookmanager->results; // add
+		if ($reshook == 0 && !empty($hookmanager->resArray)) {
+			$menu_array[] = $hookmanager->resArray; // add
 		} elseif ($reshook == 1) {
-			$menu_array = $hookmanager->results; // replace
+			$menu_array = $hookmanager->resArray; // replace
 		}
 	}
 

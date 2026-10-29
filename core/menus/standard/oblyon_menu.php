@@ -3,6 +3,7 @@
  * Copyright (C) 2007-2009  Regis Houssin       <regis.houssin@capnetworks.com>
  * Copyright (C) 2013-2015  Nicolas Rivera      <nrivera.pro@gmail.com>
  * Copyright (C) 2015-2024  Alexandre Spangaro  <alexandre@inovea-conseil.com>
+ * Copyright (C) 2022-2026  Sylvain Legrand      <contact@infras.fr>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -58,44 +59,48 @@ class MenuManager {
    * @return	void
    */
   function loadMenu($forcemainmenu='',$forceleftmenu='') {
-    // On sauve en session le menu principal choisi
-    if (isset($_GET["mainmenu"])) $_SESSION["mainmenu"]=$_GET["mainmenu"];
-    if (isset($_GET["idmenu"]))   $_SESSION["idmenu"]=$_GET["idmenu"];
+    // We save into session the main menu selected
+    if (GETPOSTISSET("mainmenu")) {
+      $_SESSION["mainmenu"] = GETPOST("mainmenu", 'aZ09');
+    }
+    if (GETPOSTISSET("idmenu")) {
+      $_SESSION["idmenu"] = GETPOSTINT("idmenu");
+    }
 
     // Read mainmenu and leftmenu that define which menu to show
-    if (isset($_GET["mainmenu"])) {
+    if (GETPOSTISSET("mainmenu")) {
       // On sauve en session le menu principal choisi
-      $mainmenu=$_GET["mainmenu"];
-      $_SESSION["mainmenu"]=$mainmenu;
-      $_SESSION["leftmenuopened"]="";
+      $mainmenu = GETPOST("mainmenu", 'aZ09');
+      $_SESSION["mainmenu"] = $mainmenu;
+      $_SESSION["leftmenuopened"] = "";
     } else {
       // On va le chercher en session si non defini par le lien
-      $mainmenu=isset($_SESSION["mainmenu"])?$_SESSION["mainmenu"]:'';
+      $mainmenu = isset($_SESSION["mainmenu"]) ? $_SESSION["mainmenu"] : '';
     }
-    if (! empty($forcemainmenu)) $mainmenu=$forcemainmenu;
+    if (!empty($forcemainmenu)) $mainmenu = $forcemainmenu;
 
-    if (isset($_GET["leftmenu"])) {
+    if (GETPOSTISSET("leftmenu")) {
       // On sauve en session le menu principal choisi
-      $leftmenu=$_GET["leftmenu"];
-      $_SESSION["leftmenu"]=$leftmenu;
+      $leftmenu = GETPOST("leftmenu", 'aZ09');
+      $_SESSION["leftmenu"] = $leftmenu;
 
-      if ($_SESSION["leftmenuopened"]==$leftmenu) {	// To collapse
+      if ($_SESSION["leftmenuopened"] == $leftmenu) {	// To collapse
         //$leftmenu="";
-        $_SESSION["leftmenuopened"]="";
+        $_SESSION["leftmenuopened"] = "";
       } else {
-        $_SESSION["leftmenuopened"]=$leftmenu;
+        $_SESSION["leftmenuopened"] = $leftmenu;
       }
     } else {
       // On va le chercher en session si non defini par le lien
-      $leftmenu=isset($_SESSION["leftmenu"])?$_SESSION["leftmenu"]:'';
+      $leftmenu = isset($_SESSION["leftmenu"]) ? $_SESSION["leftmenu"] : '';
     }
-    if (! empty($forceleftmenu)) $leftmenu=$forceleftmenu;
+    if (!empty($forceleftmenu)) $leftmenu = $forceleftmenu;
 
     require_once DOL_DOCUMENT_ROOT.'/core/class/menubase.class.php';
-    $tabMenu=array();
-    $menuArbo = new Menubase($this->db,'oblyon');
+    $tabMenu = array();
+    $menuArbo = new Menubase($this->db, 'oblyon');
     $menuArbo->menuLoad($mainmenu, $leftmenu, $this->type_user, 'oblyon', $tabMenu);
-    $this->tabMenu=$tabMenu;
+    $this->tabMenu = $tabMenu;
   }
 
 
@@ -129,11 +134,14 @@ class MenuManager {
             if ($mode == 'left') {
                 print_left_oblyon_menu($this->db, $this->menu_array, $this->menu_array_after, $this->tabMenu, $this->menu, 0, '', '', $moredata, $this->type_user);
             }
+            if ($mode == 'leftdropdown') {
+                print_left_oblyon_menu($this->db, $this->menu_array, $this->menu_array_after, $this->tabMenu, $this->menu, 1, '', '', $moredata, $this->type_user);
+            }
 		}
 		else
 		{
 			if ($mode == 'top') {
-                print_left_oblyon_menu($this->db, $this->menu_array, $this->menu_array_after, $this->tabMenu, $this->menu, 0, '', '', $moredata, $this->type_user);
+                print_left_oblyon_menu($this->db, $this->menu_array, $this->menu_array_after, $this->tabMenu, $this->menu, 0, '', '', $moredata, $this->type_user, (oblyon_flyout_enabled() ? 1 : 0));	// InfraS change : en mode volets, la barre du haut ne recoit que l'en-tete
             }
 			if ($mode == 'left') {
                 print_oblyon_menu($this->db, $this->atarget, $this->type_user, $this->tabMenu, $this->menu, 0, $mode, '', $moredata);

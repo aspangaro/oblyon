@@ -1,7 +1,7 @@
 <?php
 /************************************************
 	* Copyright (C) 2015-2022  Alexandre Spangaro   <alexandre@inovea-conseil.com>
-	* Copyright (C) 2022-2025  Sylvain Legrand      <contact@infras.fr>
+	* Copyright (C) 2022-2026  Sylvain Legrand      <contact@infras.fr>
 	*
 	* This program is free software: you can redistribute it and/or modify
 	* it under the terms of the GNU General Public License as published by
@@ -59,11 +59,13 @@ if ($action == 'restoreParams')	$result	= oblyon_restore_module ('oblyon');
 // On / Off management
 if (preg_match('/set_(.*)/', $action, $reg)) {
 	$confkey	= $reg[1];
-	$result		= dolibarr_set_const($db, $confkey, GETPOST('value'), 'chaine', 0, 'Oblyon module', $conf->entity);
+	if (preg_match('/^(OBLYON_|THEME_|MAIN_|FIX_|DISABLE_)/', $confkey)) {
+		$result		= dolibarr_set_const($db, $confkey, GETPOST('value', 'alphanohtml'), 'chaine', 0, 'Oblyon module', $conf->entity);
+	}
 }
 // Update buttons management
 if (preg_match('/update_(.*)/', $action, $reg)) {
-	$list									= array ('Gen' => array('OBLYON_EFFECT_LEFTMENU', 'OBLYON_EFFECT_REDUCE_LEFTMENU'));
+	$list									= array ('Gen' => array('OBLYON_EFFECT_LEFTMENU', 'OBLYON_EFFECT_REDUCE_LEFTMENU', 'OBLYON_USER_BLOCK'));
 	$confkey								= $reg[1];
 	$error									= 0;
 	foreach ($list[$confkey] as $constname)	$result	= dolibarr_set_const($db, $constname, GETPOST($constname, 'alpha'), 'chaine', 0, 'Oblyon module', $conf->entity);
@@ -78,6 +80,7 @@ $result = getDolGlobalString('MAIN_MENU_INVERT') && (/*getDolGlobalString('OBLYO
 $result	= getDolGlobalString('OBLYON_HIDE_LEFTMENU') && !getDolGlobalString('OBLYON_EFFECT_LEFTMENU') ? dolibarr_set_const($db, 'OBLYON_EFFECT_LEFTMENU', 'slide', 'chaine', 0, 'Oblyon module', $conf->entity) : '';
 $result	= getDolGlobalString('MAIN_MENU_INVERT') && getDolGlobalString('OBLYON_REDUCE_LEFTMENU') ? dolibarr_set_const($db, 'OBLYON_HIDE_LEFTICONS', 0, 'chaine', 0, 'Oblyon module', $conf->entity) : '';
 $result	= getDolGlobalString('OBLYON_REDUCE_LEFTMENU') && !getDolGlobalString('OBLYON_EFFECT_REDUCE_LEFTMENU') ? dolibarr_set_const($db, 'OBLYON_EFFECT_REDUCE_LEFTMENU', 'hover', 'chaine', 0, 'Oblyon module', $conf->entity) : '';
+$result	= getDolGlobalString('OBLYON_MOBILE_LAYOUT') === '' ? dolibarr_set_const($db, 'OBLYON_MOBILE_LAYOUT', 1, 'chaine', 0, 'Oblyon module', $conf->entity) : '';	// InfraS add : disposition mobile active par defaut (3.5.0) : constante semee a la premiere visite pour que l'interrupteur reflete l'etat reel
 
 // View *****************************************
 $page_name = $langs->trans('OblyonMenusTitle');
@@ -105,7 +108,7 @@ print '<script type = "text/javascript">
 						});
 					});
 				</script>
-				<form action = "'.$_SERVER['PHP_SELF'].'" method = "POST">
+				<form action = "'.dol_escape_htmltag($_SERVER['PHP_SELF']).'" method = "POST">
 				<input type="hidden" name="token" value="'.newToken().'" />
 				<input type="hidden" name="action" value="update">
 				<input type="hidden" name="page_y" value="">
@@ -133,11 +136,18 @@ if (getDolGlobalString('MAIN_MENU_INVERT')) {
 }
 $metas		= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'menus');
 oblyon_print_input('MAIN_SHOW_LOGO', 'on_off', $langs->trans('OblyonEnableShowLogo'), '', $metas, 2, 1);	// Show Company Logo
-$warning	= getDolGlobalString('OBLYON_STICKY_TOPBAR') ? '<br><span class = "warning">'.$langs->trans('StickyTopBarWarning').'</span>'.(getDolGlobalString('MAIN_MENU_INVERT') ? '<br><span class = "warning">'.$langs->trans('StickyTopBarInvertedWarning').'</span>' : '') : '';
+$warning	= getDolGlobalString('THEME_STICKY_TOPMENU') ? '<br><span class = "warning">'.$langs->trans('StickyTopBarWarning').'</span>'.(getDolGlobalString('MAIN_MENU_INVERT') ? '<br><span class = "warning">'.$langs->trans('StickyTopBarInvertedWarning').'</span>' : '') : '';
 $metas		= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'menus');
-oblyon_print_input('OBLYON_STICKY_TOPBAR', 'on_off', $langs->trans('StickyTopBar').$warning, '', $metas, 2, 1);	// Sticky top bar
+oblyon_print_input('THEME_STICKY_TOPMENU', 'on_off', $langs->trans('StickyTopBar').' (thème Eldy)'.$warning, '', $metas, 2, 1);	// Sticky top bar
 $metas		= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'menus');
 oblyon_print_input('OBLYON_HIDE_TOPICONS', 'on_off', $langs->trans('HideTopIcons'), '', $metas, 2, 1);	// Hide top icons
+// bloc utilisateur (3.8.0) : par defaut (rendu d'origine) / initiales / photo sinon initiales ; les deux nouvelles valeurs redessinent aussi le menu deroulant utilisateur
+$formub		= new Form($db);
+$ub_options	= array('default' => $langs->trans('OblyonUserBlockDefault'), 'initials' => $langs->trans('OblyonUserBlockInitials'), 'photo' => $langs->trans('OblyonUserBlockPhoto'));
+$metas		= $formub->selectarray('OBLYON_USER_BLOCK', $ub_options, getDolGlobalString('OBLYON_USER_BLOCK', 'default'), 0, 0, 0, 'class = "fontsizeinherit nopadding cursorpointer"', 0, 0, 0, '', 'maxwidth200');
+oblyon_print_input('OBLYON_USER_BLOCK', 'select', $langs->trans('OblyonUserBlock'), 'OblyonUserBlockHelp', $metas, 2, 1);	// User block
+$metas		= array(array(), $conf->entity, 0, 0, 1, 0, 0, 1, '', 'menus');
+oblyon_print_input('THEME_MENU_COLORLOGO', 'on_off', $langs->trans('ThemeMenuColorLogo').' (thème Eldy)', '', $metas, 2, 1);
 // Left menu
 $metas		= array(array(3), 'LeftMenu');
 oblyon_print_liste_titre($metas);
@@ -171,16 +181,27 @@ if (getDolGlobalString('MAIN_MENU_INVERT')) {
 	oblyon_print_input('OBLYON_REDUCE_LEFTMENU', 'on_off', $langs->trans('ReduceLeftMenu').$warning, '', $metas, 2, 1);	// Micro left menu
 	// Effect hover leftmenu
 	if (getDolGlobalInt('OBLYON_REDUCE_LEFTMENU')) {
+		// libelle propre au menu reduit (OpenEffectReduce) + 3e effet "volets de sous-menus" (flyout) ; aide en infobulle sur le libelle (3.8.0)
+		$formhelp	= new Form($db);
 		print '			<tr class = "oddeven">
-							<td colspan = "2">'.$langs->trans('OpenEffect').'</td>
+							<td colspan = "2">'.$formhelp->textwithtooltip($langs->trans('OpenEffectReduce'), $langs->trans('EffectMicroMenuFlyoutHelp'), 2, 1, img_help(1, '')).(getDolGlobalString('OBLYON_EFFECT_REDUCE_LEFTMENU') == 'flyout' && getDolGlobalString('OBLYON_HIDE_LEFTMENU') ? '<br><span class = "warning">'.$langs->trans('EffectMicroMenuFlyoutHideWarning').'</span>' : '').'</td>
 							<td class = "center">
 								<input type = "radio" value = "hover" id = "hover" class = "flat action" name = "OBLYON_EFFECT_REDUCE_LEFTMENU" '.(getDolGlobalString('OBLYON_EFFECT_REDUCE_LEFTMENU') == "hover" ? ' checked = "checked"' : '').'">&nbsp;<label for = "hover">'.$langs->trans('EffectMicroMenuHover').'</label>
 							<br/>
 								<input type = "radio" value = "only" id = "only" class = "flat action" name = "OBLYON_EFFECT_REDUCE_LEFTMENU" '.(getDolGlobalString('OBLYON_EFFECT_REDUCE_LEFTMENU') == "only" ? ' checked = "checked"' : '').'">&nbsp;<label for = "only">'.$langs->trans('EffectMicroMenuOnly').'</label>
+							<br/>
+								<input type = "radio" value = "flyout" id = "flyout" class = "flat action" name = "OBLYON_EFFECT_REDUCE_LEFTMENU" '.(getDolGlobalString('OBLYON_EFFECT_REDUCE_LEFTMENU') == "flyout" ? ' checked = "checked"' : '').'">&nbsp;<label for = "flyout">'.$langs->trans('EffectMicroMenuFlyout').'</label>
 							</td>
 						</tr>';
+		// InfraS change end
 	}
 }
+$metas		= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'menus');
+oblyon_print_input('OBLYON_TOUCH_MENU', 'on_off', $langs->trans('TouchMenu'), 'TouchMenuHelp', $metas, 2, 1);	// Touch screen menu mode ; aide en infobulle
+// InfraS add begin : disposition mobile (3.5.0)
+$metas		= array(array(), $conf->entity, 0, 0, 1, 0, 0, 0, '', 'menus');
+oblyon_print_input('OBLYON_MOBILE_LAYOUT', 'on_off', $langs->trans('OblyonMobileLayout'), 'OblyonMobileLayoutHelp', $metas, 2, 1);	// Mobile layout ; aide en infobulle (3.8.0)
+// InfraS add end
 print '				</table>
 				</div>';
 print dol_get_fiche_end();

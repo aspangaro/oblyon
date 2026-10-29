@@ -81,3 +81,302 @@
 .range-sliders .input-slider {
 	width: 30px;
 }
+/* InfraS add : presets JSON (3.6.0) - cartes, formulaires "enregistrer sous" et "importer" (onglet Couleurs) */
+.oblyon-presets {
+	margin: 0 0 18px 0;
+}
+.oblyon-presets__title {
+	margin: 0 0 8px 0;
+	font-weight: 600;
+}
+.oblyon-presets__help {
+	margin: -4px 0 8px 0;
+}
+.oblyon-presets__grid {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+}
+.oblyon-preset {
+	display: flex;
+	flex-direction: column;
+	width: 216px;
+	margin: 0;
+	background: var(--colorbline);
+	border: 1px solid var(--oblyon-border);
+	border-radius: var(--oblyon-radius);
+	box-shadow: var(--oblyon-shadow-sm);
+	overflow: hidden;
+	transition: box-shadow var(--oblyon-transition), border-color var(--oblyon-transition);
+}
+.oblyon-preset:hover {
+	box-shadow: var(--oblyon-shadow-md);
+}
+.oblyon-preset.is-current {
+	border-color: var(--maincolor);
+	box-shadow: 0 0 0 2px var(--maincolor), var(--oblyon-shadow-sm);
+}
+.oblyon-preset__preview {
+	position: relative;
+	height: 96px;
+	overflow: hidden;
+}
+.oblyon-preset__preview--img {
+	height: 130px;
+}
+.oblyon-preset__preview--img img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: left top;
+}
+.oblyon-preset__top {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 14px;
+}
+.oblyon-preset__top i {
+	position: absolute;
+	right: 8px;
+	top: 4px;
+	width: 22px;
+	height: 6px;
+	border-radius: 3px;
+}
+.oblyon-preset__left {
+	position: absolute;
+	top: 14px;
+	bottom: 0;
+	left: 0;
+	width: 22px;
+}
+.oblyon-preset__page {
+	position: absolute;
+	top: 22px;
+	left: 30px;
+	right: 8px;
+	bottom: 8px;
+}
+.oblyon-preset__band {
+	height: 12px;
+	border-radius: 3px 3px 0 0;
+}
+.oblyon-preset__band i,
+.oblyon-preset__row i {
+	display: block;
+	height: 4px;
+	width: 45%;
+	margin: 4px 0 0 6px;
+	border-radius: 2px;
+	opacity: .85;
+}
+.oblyon-preset__row {
+	height: 14px;
+	border-bottom: 1px solid rgba(0, 0, 0, .06);
+}
+.oblyon-preset__row i {
+	width: 70%;
+	margin-top: 5px;
+}
+.oblyon-preset__row + .oblyon-preset__row i {
+	width: 40%;
+}
+.oblyon-preset__btn {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	width: 36px;
+	height: 12px;
+	border-radius: 3px;
+}
+.oblyon-preset__head {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 6px;
+	flex: 1 1 auto;
+	padding: 8px 8px 2px 10px;
+	line-height: 1.35;
+}
+.oblyon-preset__name {
+	font-weight: 600;
+	cursor: help;
+}
+.oblyon-preset__name .badge {
+	margin-left: 4px;
+	vertical-align: middle;
+}
+.oblyon-preset__icons {
+	display: flex;
+	flex: 0 0 auto;
+	gap: 2px;
+}
+.oblyon-preset__icon,
+.oblyon-preset__icon:link,
+.oblyon-preset__icon:visited {
+	display: inline-block;
+	margin: 0;
+	padding: 2px 4px;
+	border: none;
+	border-radius: var(--oblyon-radius-sm);
+	background: none;
+	color: var(--oblyon-muted-text);
+	font-size: .95em;
+	line-height: 1;
+	cursor: pointer;
+	text-decoration: none;
+}
+.oblyon-preset__icon:hover {
+	background: var(--oblyon-neutral-bg);
+	color: var(--maincolor);
+}
+.oblyon-preset__icon--warn {
+	color: var(--colorstatuswarning);
+	cursor: help;
+}
+.oblyon-preset__icon--warn:hover {
+	color: var(--colorstatuswarning);
+}
+.oblyon-preset__icon--delete:hover {
+	color: var(--colorButtonDelete1);
+}
+.oblyon-preset__actions {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 6px;
+	padding: 4px 10px 10px 10px;
+}
+.oblyon-preset__actions .butAction,
+.oblyon-presets__form .butAction {
+	margin: 0 !important;
+	padding: .35em .7em;
+	font-size: .9em;
+}
+.oblyon-preset__apply {
+	width: 100%;
+	text-align: center;
+}
+.oblyon-preset__row-btn {
+	display: flex;
+	gap: 6px;
+	width: 100%;
+}
+.oblyon-preset__row-btn .butAction,
+.oblyon-preset__row-btn .butActionDelete {
+	flex: 1 1 0;
+	min-width: 0;
+	margin: 0 !important;
+	padding: .35em .3em;
+	font-size: .9em;
+	text-align: center;
+	white-space: nowrap;
+}
+.oblyon-preset__actions .butActionDelete {
+	color: #fff;
+}
+.oblyon-preset__sections {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 2px 10px;
+	width: 100%;
+	margin-bottom: 4px;
+	font-size: .85em;
+}
+.oblyon-preset__sections label {
+	white-space: nowrap;
+	cursor: pointer;
+}
+.oblyon-presets--forms {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+}
+.oblyon-presets__form {
+	flex: 1 1 320px;
+	align-self: flex-start;
+	margin: 0;
+	padding: 0 12px;
+	background: var(--colorbline);
+	border: 1px solid var(--oblyon-border);
+	border-radius: var(--oblyon-radius);
+}
+.oblyon-presets__form > summary {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin: 0;
+	padding: 10px 0;
+	list-style: none;
+	cursor: pointer;
+	user-select: none;
+}
+.oblyon-presets__form > summary::-webkit-details-marker {
+	display: none;
+}
+.oblyon-presets__form > summary::before {
+	content: "";
+	flex: 0 0 auto;
+	width: 7px;
+	height: 7px;
+	border-right: 2px solid var(--oblyon-muted-text);
+	border-bottom: 2px solid var(--oblyon-muted-text);
+	transform: rotate(-45deg);
+	transition: transform var(--oblyon-transition);
+}
+.oblyon-presets__form[open] > summary::before {
+	transform: rotate(45deg);
+}
+.oblyon-presets__form > form {
+	padding: 0 0 10px 0;
+}
+.oblyon-presets__fields {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	margin: 8px 0;
+}
+.oblyon-presets__field {
+	display: flex;
+	flex: 1 1 140px;
+	min-width: 0;
+	flex-direction: column;
+	gap: 2px;
+	font-size: .9em;
+}
+.oblyon-presets__field--wide {
+	flex-basis: 220px;
+}
+.oblyon-presets__field--full {
+	flex-basis: 100%;
+}
+.oblyon-presets__field > span {
+	color: var(--oblyon-muted-text);
+}
+.oblyon-presets__field input[type=text] {
+	width: 100%;
+	box-sizing: border-box;
+}
+
+
+/* User tab "Colors" (3.6.0) */
+.oblyon-color-swatch {
+	display: inline-block;
+	width: 1.2em;
+	height: 1.2em;
+	border: 1px solid var(--oblyon-border-strong);
+	border-radius: var(--oblyon-radius-sm);
+	vertical-align: middle;
+}
+table.oblyon-user-colors input.oblyon-user-color {
+	width: 7em;
+}
+table.oblyon-user-colors input.oblyon-user-color:disabled {
+	cursor: not-allowed;
+}
+.oblyon-user-presets .oblyon-presets__grid + .oblyon-presets__help {
+	margin-top: 8px;
+}
