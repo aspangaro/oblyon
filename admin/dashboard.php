@@ -1,7 +1,7 @@
 <?php
 /************************************************
 * Copyright (C) 2015-2025  Alexandre Spangaro   <alexandre@inovea-conseil.com>
-* Copyright (C) 2022-2025  Sylvain Legrand	  <contact@infras.fr>
+* Copyright (C) 2022-2026  Sylvain Legrand	  <contact@infras.fr>
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -79,12 +79,14 @@ if ($action == 'restoreParams')	$result	= oblyon_restore_module ('oblyon');
 // On / Off management
 if (preg_match('/set_(.*)/', $action, $reg)) {
 	$confkey	= $reg[1];
-	$result		= dolibarr_set_const($db, $confkey, GETPOST('value'), 'chaine', 0, 'Oblyon module', $conf->entity);
+	if (preg_match('/^(OBLYON_|THEME_|MAIN_|FIX_|DISABLE_)/', $confkey)) {
+		$result		= dolibarr_set_const($db, $confkey, GETPOST('value', 'alphanohtml'), 'chaine', 0, 'Oblyon module', $conf->entity);
+	}
 }
 
 // Update buttons management
 if (preg_match('/update_(.*)/', $action, $reg)) {
-	$list									= array ('Gen'	=> array('THEME_AGRESSIVENESS_RATIO'));
+	$list									= array ('Gen'	=> array('THEME_AGRESSIVENESS_RATIO', 'THEME_SATURATE_RATIO'));
 	$confkey								= $reg[1];
 	$error									= 0;
 	foreach ($list[$confkey] as $constname)	$result	= dolibarr_set_const($db, $constname, GETPOST($constname, 'alpha'),		'chaine', 0, 'Oblyon module', $conf->entity);
@@ -117,7 +119,7 @@ print '	<script type = "text/javascript">
 			});
 		</script>';
 
-print '<form action = "'.$_SERVER['PHP_SELF'].'" method = "POST" enctype = "multipart/form-data">';
+print '<form action = "'.dol_escape_htmltag($_SERVER['PHP_SELF']).'" method = "POST" enctype = "multipart/form-data">';
 print '<input type="hidden" name="token" value="'.newToken().'" />';
 print '<input type="hidden" name="action" value="update">';
 print '<input type="hidden" name="page_y" value="">';
@@ -175,6 +177,9 @@ $metas	= '	<div class = "range-sliders" id = "range-sliders">
 				<script src = "../js/range-slider.js"></script>
 			</div>';
 oblyon_print_input('', 'range', $langs->trans('ColorIntensityDesc', getDolGlobalString('THEME_AGRESSIVENESS_RATIO')), '', $metas, 1, 2);
+// Saturation des icônes (thème Eldy)
+$metas = array('type' => 'number', 'class' => 'flat quatrevingtpercent right action', 'dir' => 'rtl', 'min' => '0', 'max' => '1', 'step' => '0.1');
+oblyon_print_input('THEME_SATURATE_RATIO', 'input', $langs->trans('ThemeSaturateRatio') . ' (thème Eldy)', '', $metas, 2, 1);	// A8
 // Colors
 $metas		= array(array(3), 'Colors');
 oblyon_print_liste_titre($metas);

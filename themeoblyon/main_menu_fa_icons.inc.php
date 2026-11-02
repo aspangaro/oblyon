@@ -1,5 +1,12 @@
 <?php if (! defined('ISLOADEDBYSTEELSHEET')) die('Must be call by steelsheet'); ?>
 /* <style type="text/css" > */
+/* ================================================================================================
+   oblyon/themeoblyon/main_menu_fa_icons.inc.php
+   Role      : Pictos FontAwesome des menus et pictos secondaires (jeton OBLYON_COLOR_ICON_TEXT)
+   Inclus par : cards.inc.php | Garde : ISLOADEDBYSTEELSHEET | Variables PHP : portee de style.css.php / theme_vars.inc.php
+   Regle     : une regle, un endroit (pas de copie d'un selecteur present dans un autre fichier ; verifier avec dev/csscompare.php)
+   ================================================================================================ */
+
 
 .icon {
     /* use !important to prevent issues with browser extensions that change fonts */
@@ -332,11 +339,13 @@ icon--blockedlogbrowser:before {
     font-variant: normal;
     text-rendering: auto;
     line-height: 26px;
-	font-size: <?php echo $topMenuFontSize; ?>;
+	font-size: var(--topMenuFontSize);
     -webkit-font-smoothing: antialiased;
     text-align:center;
 	text-decoration:none;
-	color: #<?php echo $colortextbackhmenu; ?>;
+<?php if (!getDolGlobalString('THEME_MENU_COLORLOGO')) { ?>
+	color: var(--colortextbackhmenu);
+<?php } ?>
 }
 
 
@@ -427,26 +436,28 @@ div.mainmenu.website::before {
 
 /* Define color of some picto */
 
+/* InfraS change begin : pictos secondaires sur le jeton OBLYON_COLOR_ICON_TEXT (3.7.0), etaient #440 / #304 / #666 / #444 / #555, invisibles sur un fond sombre ; corbeille survolee = couleur de statut danger */
 .fa-phone, .fa-mobile-alt, .fa-fax {
     opacity: 0.7;
-    color: #440;
+    color: var(--colorIconText);
 }
 .fa-at, .fa-external-link-alt, .fa-share-alt {
     opacity: 0.7;
-    color: #304;
+    color: var(--colorIconText);
 }
 .fa-trash {
-    color: #666;
+    color: var(--colorIconText);
 }
 .fa-trash:hover:before {
-    color: #800;
+    color: var(--colorstatusdanger);
 }
 .fa-play {
-    color: #444;
+    color: var(--colorIconText);
 }
 .fa-link, .fa-unlink {
-    color: #555;
+    color: var(--colorIconText);
 }
+/* InfraS change end */
 
 /* Define square Dolibarr logo in pure CSS */
 

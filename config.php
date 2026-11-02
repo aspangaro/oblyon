@@ -1,7 +1,7 @@
 <?php
 	/************************************************
 	* Copyright (C) 2015-2022  Alexandre Spangaro   <alexandre@inovea-conseil.com>
-	* Copyright (C) 2022-2025  Sylvain Legrand      <contact@infras.fr>
+	* Copyright (C) 2022-2026  Sylvain Legrand      <contact@infras.fr>
 	*
 	* This program is free software: you can redistribute it and/or modify
 	* it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@
 	************************************************/
 
 	// Dolibarr environment *************************
-	$res															= 0;
+	$res	= 0;
 	// Try main.inc.php into web root known defined into CONTEXT_DOCUMENT_ROOT (not always defined)
 	if (empty($res) && !empty($_SERVER['CONTEXT_DOCUMENT_ROOT'])) {
 		$res	= @include $_SERVER['CONTEXT_DOCUMENT_ROOT'].'/main.inc.php';

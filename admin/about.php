@@ -1,7 +1,7 @@
 <?php
 /* Copyright (C) 2015       Nicolas Rivera      <nrivera.pro@gmail.com>
  * Copyright (C) 2015-2024  Alexandre Spangaro  <alexandre@inovea-conseil.com>
- * Copyright (C) 2023-2025  Sylvain Legrand		<contact@infras.fr>
+ * Copyright (C) 2023-2026  Sylvain Legrand		<contact@infras.fr>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
